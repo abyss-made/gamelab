@@ -38,6 +38,11 @@ jobs:
             exit 1
           fi
 
+          if [[ "$ROUTINE_URL" != https://api.anthropic.com/v1/claude_code/routines/*/fire ]]; then
+            echo "::error::Invalid Claude Routine URL format"
+            exit 1
+          fi
+
           python3 - <<'PY' > payload.json
           import json
           import os
@@ -55,14 +60,44 @@ jobs:
           print(json.dumps({"text": message}))
           PY
 
-          curl --fail-with-body --silent --show-error \
+          echo "Sending request to Claude Routine..."
+
+          HTTP_CODE=$(curl \
+            --silent \
+            --show-error \
             --retry 0 \
             --request POST "$ROUTINE_URL" \
             --header "Authorization: Bearer $ROUTINE_TOKEN" \
             --header "anthropic-version: 2023-06-01" \
             --header "Content-Type: application/json" \
             --data-binary @payload.json \
-            --output response.json
+            --output response.json \
+            --write-out "%{http_code}")
+
+          echo "Claude API HTTP status: $HTTP_CODE"
+
+          if [[ "$HTTP_CODE" -lt 200 || "$HTTP_CODE" -ge 300 ]]; then
+            python3 - <<'PY'
+          import json
+
+          try:
+              with open("response.json") as f:
+                  response = json.load(f)
+
+              error = response.get("error", {})
+              if isinstance(error, dict):
+                  print("API error type:", error.get("type", "unknown"))
+                  print("API error message:", error.get("message", "Unknown error"))
+              else:
+                  print("API error:", str(error))
+
+          except (OSError, ValueError) as exc:
+              print("Could not parse API error response:", type(exc).__name__)
+          PY
+
+            echo "::error::Claude Routine request failed (HTTP $HTTP_CODE)"
+            exit 1
+          fi
 
           python3 - <<'PY'
           import json
@@ -70,9 +105,11 @@ jobs:
           with open("response.json") as f:
               result = json.load(f)
 
-          if result.get("type") != "routine_fire":
-              raise SystemExit("Unexpected Claude response")
+          print("Claude Routine API request succeeded.")
 
-          print("Claude Routine started successfully")
-          print("Session:", result.get("claude_code_session_url"))
+          session = result.get("claude_code_session_url")
+          if session:
+              print("Claude session:", session)
+          else:
+              print("No session URL returned. Check the Routine dashboard.")
           PY
