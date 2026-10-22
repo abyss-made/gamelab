@@ -7,8 +7,8 @@ module.exports = {
   AVATAR_EMOJIS: 24,
   AVATAR_COLORS: 10,
 
-  DISCONNECT_GRACE_MS: 20000, // a refresh within this time keeps your seat
-  EMPTY_ROOM_TTL_MS: 120000,  // empty lobbies are deleted after 2 minutes
+  DISCONNECT_GRACE_MS: Number(process.env.DISCONNECT_GRACE_MS) || 20000, // a refresh within this time keeps your seat
+  EMPTY_ROOM_TTL_MS: Number(process.env.EMPTY_ROOM_TTL_MS) || 120000, // empty lobbies are deleted after 2 minutes
   AUTOSTART_MS: 12000,        // public lobbies start on their own after this
   MAX_ROOMS: 5000,
 };
