@@ -69,6 +69,14 @@ const leaks = (c, word) => JSON.stringify(c.events).toLowerCase().includes(word.
     const rc = await h.emit('joinRoom', { code: code1, token: tok(), profile: h.profile });
     ok(rc.error === 'closed', 'ghost: stale room is deleted after the grace period and TTL');
 
+    // identity swap on a full lobby: the new identity inherits the freed seat
+    const sw = mk('Swap');
+    const rsw = await sw.emit('createRoom', { game: 'fourrow', token: tok(), profile: sw.profile });
+    const sw2 = mk('Swap2');
+    await sw2.emit('joinRoom', { code: rsw.code, token: sw2.token, profile: sw2.profile }); // both seats full
+    const rsw3 = await sw.emit('joinRoom', { code: rsw.code, token: tok(), profile: sw.profile });
+    ok(rsw3.ok && rsw3.role === 'player', 'ghost: identity swap on a full lobby takes the freed seat');
+
     // legit reconnect keeps identity
     const p = mk('Perm');
     const rp = await p.emit('createRoom', { game: 'drawguess', token: p.token, profile: p.profile });

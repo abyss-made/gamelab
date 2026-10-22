@@ -209,9 +209,14 @@ function joinRoom(socket, room, profile, token) {
 
   const G = gameOf(room);
   const cap = seatCap(room);
+  // If this socket is swapping identities in this room, its old member is released on
+  // attach, so don't count that member's seat against the newcomer.
+  const prev = socket.data.code === room.code ? socket.data.memberId : null;
+  const seatsUsed = room.seats.length - (prev && room.seats.includes(prev) ? 1 : 0);
+  const specsUsed = room.specs.length - (prev && room.specs.includes(prev) ? 1 : 0);
   let role;
-  if (room.seats.length < cap && (room.phase === 'lobby' || G.meta.midJoin)) role = 'player';
-  else if (room.spectatorsOn && room.specs.length < room.maxSpectators) role = 'spectator';
+  if (seatsUsed < cap && (room.phase === 'lobby' || G.meta.midJoin)) role = 'player';
+  else if (room.spectatorsOn && specsUsed < room.maxSpectators) role = 'spectator';
   else return { error: 'full', ...roomInfo(room) };
 
   const p = cleanProfile(profile);
