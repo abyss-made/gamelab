@@ -1,0 +1,78 @@
+
+name: Trigger Claude on Approved Issue
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: claude-issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  trigger-claude:
+    if: >-
+      github.event.label.name == 'claude-ready' &&
+      github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Start Claude Routine
+        env:
+          ROUTINE_URL: ${{ secrets.CLAUDE_ROUTINE_URL }}
+          ROUTINE_TOKEN: ${{ secrets.CLAUDE_ROUTINE_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "$ROUTINE_URL" || -z "$ROUTINE_TOKEN" ]]; then
+            echo "::error::Claude Routine secrets are missing"
+            exit 1
+          fi
+
+          python3 - <<'PY' > payload.json
+          import json
+          import os
+
+          message = (
+              "Approved implementation task.\n"
+              f"Repository: {os.environ['REPOSITORY']}\n"
+              f"Issue number: {os.environ['ISSUE_NUMBER']}\n"
+              f"Issue URL: {os.environ['ISSUE_URL']}\n"
+              "The repository owner applied the claude-ready label. "
+              "Read the issue and implement only its approved scope. "
+              "Do not merge or deploy."
+          )
+
+          print(json.dumps({"text": message}))
+          PY
+
+          curl --fail-with-body --silent --show-error \
+            --retry 0 \
+            --request POST "$ROUTINE_URL" \
+            --header "Authorization: Bearer $ROUTINE_TOKEN" \
+            --header "anthropic-version: 2023-06-01" \
+            --header "Content-Type: application/json" \
+            --data-binary @payload.json \
+            --output response.json
+
+          python3 - <<'PY'
+          import json
+
+          with open("response.json") as f:
+              result = json.load(f)
+
+          if result.get("type") != "routine_fire":
+              raise SystemExit("Unexpected Claude response")
+
+          print("Claude Routine started successfully")
+          print("Session:", result.get("claude_code_session_url"))
+          PY
