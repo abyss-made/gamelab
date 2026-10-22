@@ -1,6 +1,6 @@
 // Draw & Guess: one player draws, everyone else races to guess in chat.
 const WORDS = require('../data/words.json');
-const { clampInt } = require('../util');
+const { clampInt, Bucket } = require('../util');
 
 const meta = {
   id: 'drawguess',
@@ -113,6 +113,7 @@ function create(settings) {
     history: [],
     historyPts: 0,
     cur: null,
+    resetBucket: null,
     used: new Set(),
     turnId: 0,
     turnResult: null,
@@ -151,6 +152,7 @@ function nextTurn(st, api) {
   st.history = [];
   st.historyPts = 0;
   st.cur = null;
+  st.resetBucket = new Bucket(2, 6); // undo/clear each resend the whole canvas to the room
   st.turnResult = null;
   api.toRoom('canvas', { turnId: st.turnId, history: [] });
   api.changed();
@@ -252,11 +254,13 @@ function onChat(st, m, text, api) {
   }
 
   // Spectators and players who already guessed talk in a hidden channel
-  // so they can't give the answer away.
+  // so they can't give the answer away. Spectators never see the word, so
+  // what players who know it say is kept away from them.
   if (m.role !== 'player' || st.guessed.has(m.id)) {
+    const fromSpec = m.role === 'spectator';
     api.chat(
-      { kind: 'msg', id: m.id, name: m.name, text, hidden: true, spectator: m.role === 'spectator' },
-      (x) => x.id === st.drawerId || st.guessed.has(x.id) || x.role === 'spectator'
+      { kind: 'msg', id: m.id, name: m.name, text, hidden: true, spectator: fromSpec },
+      (x) => x.id === st.drawerId || st.guessed.has(x.id) || (fromSpec && x.role === 'spectator')
     );
     return true;
   }
@@ -332,12 +336,14 @@ function onDraw(st, m, d, api) {
       return { op: 'fill', color: c, x, y };
     }
     case 'undo':
+      if (!st.resetBucket.take()) return null;
       st.cur = null;
       st.history.pop();
       st.historyPts = st.history.reduce((s, h) => s + (h.p ? h.p.length / 2 : 1), 0);
       api.toRoom('canvas', { turnId: st.turnId, history: st.history });
       return null;
     case 'clear':
+      if (!st.resetBucket.take()) return null;
       st.cur = null;
       st.history = [];
       st.historyPts = 0;
@@ -371,7 +377,7 @@ function syncFor(st, m, emit) {
 
 function view(st, m, now) {
   const isDrawer = m.id === st.drawerId;
-  const seeWord = isDrawer || st.guessed.has(m.id) || m.role === 'spectator' || st.phase === 'reveal';
+  const seeWord = isDrawer || st.guessed.has(m.id) || st.phase === 'reveal';
   return {
     round: st.round,
     rounds: st.settings.rounds,

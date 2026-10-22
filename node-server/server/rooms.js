@@ -37,6 +37,10 @@ const seatCap = (room) => Math.min(gameOf(room).meta.maxPlayers, room.maxPlayers
 const member = (room, id) => room.members.get(id);
 const seated = (room) => room.seats.map((id) => room.members.get(id)).filter(Boolean);
 
+// Lobby actions that post system chat (seat changes, vote-kick, lock) share one
+// bucket per member, so reconnecting doesn't reset it.
+const lobbyLimited = (m) => !(m.lobbyBucket || (m.lobbyBucket = new Bucket(0.5, 4))).take();
+
 // ---------- sending ----------
 function emitTo(room, m, ev, data) {
   if (m && m.socketId) io.to(m.socketId).emit(ev, data);
@@ -162,7 +166,9 @@ function createRoom(opts) {
 }
 
 function attachSocket(socket, room, m) {
-  if (socket.data.code && socket.data.code !== room.code) leaveBySocket(socket);
+  // A socket owns one seat. If it was already attached to another room or to a
+  // different member of this room, release that one so it can't stay "connected" forever.
+  if (socket.data.code && (socket.data.code !== room.code || socket.data.memberId !== m.id)) leaveBySocket(socket);
   if (m.socketId && m.socketId !== socket.id) {
     const old = io.sockets.sockets.get(m.socketId);
     if (old) {
@@ -453,6 +459,7 @@ function attach(ioServer) {
       const c = ctx();
       if (!c || c.m.role !== 'spectator') return;
       const { room, m } = c;
+      if (lobbyLimited(m)) return;
       const G = gameOf(room);
       if (room.seats.length >= seatCap(room)) return socket.emit('notice', 'No seat is open right now.');
       if (room.phase !== 'lobby' && !G.meta.midJoin) return socket.emit('notice', 'Wait for this match to end.');
@@ -468,6 +475,7 @@ function attach(ioServer) {
       const c = ctx();
       if (!c || c.m.role !== 'player' || c.room.phase !== 'lobby') return;
       const { room, m } = c;
+      if (lobbyLimited(m)) return;
       room.seats = room.seats.filter((x) => x !== m.id);
       room.specs.push(m.id);
       m.role = 'spectator';
@@ -482,7 +490,7 @@ function attach(ioServer) {
       const { room } = c;
       const G = gameOf(room);
       if ('isPublic' in patch) room.isPublic = !!patch.isPublic;
-      if ('locked' in patch) {
+      if ('locked' in patch && !!patch.locked !== room.locked && !lobbyLimited(c.m)) {
         room.locked = !!patch.locked;
         sys(room, room.locked ? 'The host locked the lobby. No new people can join.' : 'The host unlocked the lobby.', 'accent');
       }
@@ -565,6 +573,8 @@ function attach(ioServer) {
       const { room, m } = c;
       const target = room.members.get(id);
       if (!target) return;
+      if (room.votes.get(id) && room.votes.get(id).has(m.id)) return;
+      if (lobbyLimited(m)) return;
       const voters = [...room.members.values()].filter((x) => x.connected && x.id !== id);
       if (voters.length < 2) return socket.emit('notice', 'Not enough people here for a vote kick.');
       const needed = Math.floor(voters.length / 2) + 1;
