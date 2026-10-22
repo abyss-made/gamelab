@@ -1,0 +1,19 @@
+{
+  "name": "party-games-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Browser party games with lobbies: Draw & Guess and 4 in a Row",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node test/smoke.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.1"
+  }
+}

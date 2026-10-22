@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>%TITLE%</title>
+  <meta name="description" content="%DESC%">
+  <meta property="og:title" content="%TITLE%">
+  <meta property="og:description" content="%DESC%">
+  <meta name="theme-color" content="#4b3bd6">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <!-- AD NETWORK: paste your AdSense (or other network) <script> tag here once approved. -->
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="/" data-nav="/"><span class="logo-mark">✏️</span>%SITE%</a>
+    <div class="topbar-right">
+      <button class="icon-btn" id="sound-btn" title="Sound on/off" aria-label="Sound on/off">🔊</button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="screen-home" class="screen" hidden>
+    <section class="hero">
+      <div class="card profile-card">
+        <h2 class="card-title">Who are you?</h2>
+        <div class="profile" data-profile></div>
+      </div>
+      <div class="hero-copy">
+        <h1>Party games with friends.<br><span>No account. Just a link.</span></h1>
+        <p>Pick a game, make a lobby, send the link. Your friends are in before you finish typing.</p>
+        <form class="code-form" id="code-form">
+          <input id="code-input" placeholder="Have a code? e.g. K7X2QP" maxlength="8" autocomplete="off" aria-label="Lobby code">
+          <button class="btn btn-ghost" type="submit">Join</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="games" id="games"></section>
+
+    <section class="card browser">
+      <div class="browser-head">
+        <h2 class="card-title">Public lobbies</h2>
+        <button class="btn btn-small btn-ghost" id="refresh-btn">Refresh</button>
+      </div>
+      <div id="lobby-list" class="lobby-list"></div>
+    </section>
+
+    <div class="ad-slot ad-wide" data-slot="home-bottom">Ad space</div>
+
+    <footer class="footer">
+      <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <span>%SITE%</span>
+    </footer>
+  </main>
+
+  <!-- JOIN BY LINK -->
+  <main id="screen-join" class="screen" hidden>
+    <div class="card join-card">
+      <p class="eyebrow">You've been invited to lobby <b id="join-code"></b></p>
+      <h2 class="card-title">Pick a name and jump in</h2>
+      <div class="profile" data-profile></div>
+      <button class="btn btn-big" id="join-btn">Join lobby</button>
+      <a class="muted-link" href="/" data-nav="/">Back to home</a>
+    </div>
+  </main>
+
+  <!-- MESSAGE (closed, full, locked, kicked) -->
+  <main id="screen-message" class="screen" hidden>
+    <div class="card message-card">
+      <div class="message-icon" id="msg-icon">🚪</div>
+      <h2 class="card-title" id="msg-title"></h2>
+      <p id="msg-text"></p>
+      <div class="message-actions" id="msg-actions"></div>
+    </div>
+  </main>
+
+  <!-- ROOM -->
+  <main id="screen-room" class="screen room" hidden>
+    <div class="room-bar card">
+      <div class="room-bar-left">
+        <span class="game-pill" id="room-game"></span>
+        <span class="badge" id="room-vis"></span>
+        <span class="badge badge-warn" id="room-lock" hidden>🔒 Locked</span>
+      </div>
+      <div class="room-bar-right">
+        <button class="btn btn-small" id="copy-link">🔗 Copy link</button>
+        <button class="btn btn-small btn-ghost" id="share-link">Share</button>
+        <button class="btn btn-small btn-ghost" id="end-btn" hidden>End game</button>
+        <button class="btn btn-small btn-ghost" id="leave-btn">Leave</button>
+      </div>
+    </div>
+
+    <aside class="side card" id="side">
+      <div class="side-head">
+        <h3>Players <span id="player-count"></span></h3>
+      </div>
+      <ul class="people" id="player-list"></ul>
+      <div id="seat-action"></div>
+      <div class="side-head side-sub">
+        <h3>Watching <span id="spec-count"></span></h3>
+      </div>
+      <ul class="people people-small" id="spec-list"></ul>
+      <div class="ad-slot ad-side" data-slot="room-side">Ad space</div>
+    </aside>
+
+    <section class="stage" id="stage"></section>
+
+    <section class="chat card">
+      <div class="chat-log" id="chat-log" aria-live="polite"></div>
+      <form class="chat-form" id="chat-form">
+        <input id="chat-input" maxlength="120" autocomplete="off" placeholder="Say something...">
+      </form>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-back" id="modal" hidden>
+    <div class="modal card" role="dialog" aria-modal="true" id="modal-body"></div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script>window.PAGE = { game: "%GAME%", site: "%SITE%" };</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/sound.js"></script>
+  <script src="/js/games/drawguess.js"></script>
+  <script src="/js/games/fourrow.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

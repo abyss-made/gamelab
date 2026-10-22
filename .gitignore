@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated build output (rebuild with playgrid/build.py)
+playgrid/playgrid.html
+playgrid/site/*
+!playgrid/site/.gitkeep
+
+# Test screenshots
+playgrid/pshots/*
+!playgrid/pshots/.gitkeep
+
+# Logs, caches, OS and editor files
+*.log
+npm-debug.log*
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.zip
