@@ -1,6 +1,6 @@
 // Site-wide settings. Change SITE_NAME once you pick a name.
 module.exports = {
-  SITE_NAME: process.env.SITE_NAME || 'PartyPad',
+  SITE_NAME: process.env.SITE_NAME || 'Playgrid',
   PORT: Number(process.env.PORT) || 3000,
 
   // Must match the EMOJIS and COLORS arrays in public/js/main.js

@@ -22,6 +22,8 @@
     },
   };
 
+  const SOON = [['Chess', '2 players'], ['Checkers', '2 players'], ['Imposter', '4-10 players'], ['Word Bomb', '2-12 players'], ['Crazy Eights', '2-6 players'], ['Sea Battle', '2 players'], ['Ludo', '2-4 players'], ['Reversi', '2 players'], ['Mancala', '2 players'], ['Dots & Boxes', '2-4 players']];
+
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -128,9 +130,14 @@
   };
   window.App = app;
 
+  const connEl = $('#conn');
+  const setConn = (up) => { connEl.hidden = up; connEl.className = 'conn' + (up ? '' : ' off'); };
   socket.on('connect', () => {
+    setConn(true);
     if (currentCode) join(currentCode, { silent: true });
   });
+  socket.on('disconnect', () => setConn(false));
+  socket.io.on('reconnect_attempt', () => setConn(false));
   socket.on('state', (s) => {
     if (!currentCode || s.code !== currentCode) return;
     S = s;
@@ -175,6 +182,8 @@
     showScreen('home');
     renderProfiles();
     renderGames();
+    $('#soon-grid').innerHTML = SOON.map(([n, p]) => `<div class="soon"><b>${n}</b><small>${p} · Soon</small></div>`).join('');
+    $('#lobby-list').innerHTML = '<p class="empty-state">Loading lobbies...</p>';
     loadLobbies();
     clearInterval(lobbyTimer);
     lobbyTimer = setInterval(() => { if (document.body.dataset.screen === 'home') loadLobbies(); }, 6000);
@@ -212,7 +221,7 @@
     try {
       const list = await (await fetch('/api/rooms')).json();
       if (!list.length) {
-        el.innerHTML = '<p class="empty">No public lobbies right now. Hit Quick Play to start one, or create a private lobby for your friends.</p>';
+        el.innerHTML = '<p class="empty-state">No public lobbies right now. Hit Quick Play to start one, or create a private lobby for your friends.</p>';
         return;
       }
       el.innerHTML = `<table class="lobby-table"><thead><tr><th>Game</th><th>Host</th><th>Players</th><th>Watching</th><th>Status</th><th></th></tr></thead><tbody>${list.map((r) => {
@@ -225,7 +234,7 @@
         return `<tr><td><span class="game-pill small">${esc(r.gameName)}</span></td><td>${esc(r.host)}</td><td>${r.players}/${r.max}</td><td>${r.spectators}</td><td>${r.phase === 'game' ? 'Playing' : 'In lobby'}</td><td>${btn}</td></tr>`;
       }).join('')}</tbody></table>`;
     } catch (e) {
-      el.innerHTML = '<p class="empty">Could not load lobbies.</p>';
+      el.innerHTML = '<p class="empty-state">Could not load lobbies. Check your connection and hit Refresh.</p>';
     }
   }
   $('#refresh-btn').addEventListener('click', loadLobbies);
@@ -418,7 +427,15 @@
       prompt('Copy this link:', roomLink());
     }
   }
-  $('#copy-link').addEventListener('click', copyLink);
+  $('#copy-link').addEventListener('click', async () => {
+    const b = $('#copy-link'), t = b.textContent;
+    await copyLink();
+    b.textContent = '✓ Copied';
+    setTimeout(() => { b.textContent = t; }, 1500);
+  });
+  $('#room-code').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(currentCode); toast('Room code ' + currentCode + ' copied'); } catch (e) { toast('Room code: ' + currentCode); }
+  });
   $('#share-link').addEventListener('click', async () => {
     const text = `Come play ${S ? GAMES[S.gameId].name : 'with me'}!`;
     if (navigator.share) {
@@ -449,6 +466,7 @@
     $('#room-game').textContent = G.name;
     $('#room-vis').textContent = S.isPublic ? 'Public' : 'Private';
     $('#room-lock').hidden = !S.locked;
+    $('#room-code').textContent = S.code;
     $('#end-btn').hidden = !(isHost() && S.phase === 'game');
     document.title = `${G.name} lobby | ${window.PAGE.site}`;
     renderPeople();
