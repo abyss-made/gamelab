@@ -1,4 +1,4 @@
-# PartyPad (placeholder name)
+# Playgrid (placeholder name)
 
 Browser party games with lobbies. No accounts, no database. Version 1 has two games:
 
@@ -77,7 +77,7 @@ Then on the server:
 ```bash
 cd /opt/partygames
 npm install --omit=dev
-SITE_NAME="PartyPad" PORT=3000 pm2 start server/index.js --name partygames
+SITE_NAME="Playgrid" PORT=3000 pm2 start server/index.js --name partygames
 pm2 save
 pm2 startup        # run the command it prints so the app restarts after a reboot
 ```
