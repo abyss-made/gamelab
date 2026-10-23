@@ -5,11 +5,24 @@ const express = require('express');
 const { Server } = require('socket.io');
 const config = require('./config');
 const rooms = require('./rooms');
+const alpha = require('./alpha');
+
+// Throws (and the process exits) if alpha mode is on without a usable secret.
+const alphaCfg = alpha.readConfig();
+const gate = alphaCfg.enabled ? alpha.createGate(alphaCfg.secret) : null;
 
 const app = express();
 app.disable('x-powered-by');
+if (gate) {
+  app.set('trust proxy', 1); // host terminates HTTPS; needed for req.secure and per-IP limits
+  app.use(express.urlencoded({ extended: false, limit: '1kb' }));
+  app.use(gate.middleware);
+}
 const server = http.createServer(app);
-const io = new Server(server, { maxHttpBufferSize: 64 * 1024 });
+const io = new Server(server, {
+  maxHttpBufferSize: 64 * 1024,
+  ...(gate ? { allowRequest: gate.allowRequest } : {}),
+});
 
 const PUBLIC = path.join(__dirname, '..', 'public');
 const template = fs.readFileSync(path.join(PUBLIC, 'index.html'), 'utf8');
