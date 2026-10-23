@@ -1,6 +1,6 @@
 // Draw & Guess: one player draws, everyone else races to guess in chat.
-const WORDS = require('../data/words.json');
-const { clampInt, Bucket } = require('../util');
+const WORD_BANK = require('../data/words.json'); // { easy: [], medium: [], hard: [] }, kept server-side only
+const { clampInt, shuffle, Bucket } = require('../util');
 
 const meta = {
   id: 'drawguess',
@@ -12,8 +12,13 @@ const meta = {
   scoreLabel: 'pts',
 };
 
-const defaults = { rounds: 3, drawTime: 80, hints: true, customWords: '', customOnly: false };
+const DIFFICULTIES = ['easy', 'medium', 'hard', 'mixed'];
+const DRAW_TIMES = [30, 45, 60, 80, 100, 120, 150, 180, 240, 300];
+const defaults = { rounds: 3, drawTime: 80, hints: true, difficulty: 'medium', customWords: '', customOnly: false };
 
+const CHOICE_COUNT = 6;
+const MIN_CUSTOM_ONLY = CHOICE_COUNT; // custom-only needs enough words to fill a choice set
+const MAX_FILLS = 100; // flood fills are the costly op to replay, so cap them per turn
 const CHOOSE_MS = 15000;
 const REVEAL_MS = 6000;
 const W = 800;
@@ -24,10 +29,13 @@ function sanitizeSettings(s, prev) {
   const o = { ...prev };
   if (!s || typeof s !== 'object') return o;
   if (s.rounds !== undefined) o.rounds = clampInt(s.rounds, 1, 10, prev.rounds);
-  if (s.drawTime !== undefined) o.drawTime = clampInt(s.drawTime, 30, 180, prev.drawTime);
+  if (DRAW_TIMES.includes(s.drawTime)) o.drawTime = s.drawTime;
   if (s.hints !== undefined) o.hints = !!s.hints;
+  if (DIFFICULTIES.includes(s.difficulty)) o.difficulty = s.difficulty;
   if (typeof s.customWords === 'string') o.customWords = s.customWords.slice(0, 3000);
   if (s.customOnly !== undefined) o.customOnly = !!s.customOnly;
+  // Custom-only never falls back to built-in words, so it can't be on without enough custom words.
+  if (o.customOnly && customList(o).length < MIN_CUSTOM_ONLY) o.customOnly = false;
   return o;
 }
 
@@ -66,19 +74,35 @@ function customList(settings) {
   ];
 }
 
+// Built-in words by difficulty. Mixed spreads picks evenly across the three tiers.
+function builtinTiers(difficulty) {
+  return difficulty === 'mixed' ? ['easy', 'medium', 'hard'] : [DIFFICULTIES.includes(difficulty) ? difficulty : 'medium'];
+}
+
+// Picks n distinct words. Words already played this game are skipped until a pool runs dry,
+// then they may repeat (never within one choice set). Custom words are their own pool, not
+// tied to a difficulty; with custom-only on, built-in words are never used.
 function pickWords(st, n) {
   const custom = customList(st.settings);
-  const onlyCustom = st.settings.customOnly && custom.length >= n;
+  const customOnly = st.settings.customOnly;
+  const tiers = builtinTiers(st.settings.difficulty).map((t) => WORD_BANK[t]);
   const out = [];
-  for (let tries = 0; out.length < n && tries < 300; tries++) {
-    const useCustom = onlyCustom || (custom.length > 0 && Math.random() < 0.5);
-    const pool = useCustom ? custom : WORDS;
-    const w = pool[Math.floor(Math.random() * pool.length)];
-    if (out.includes(w)) continue;
-    if (st.used.has(w) && tries < 200) continue;
+  const taken = new Set();
+  const fresh = (pool) => pool.filter((w) => !taken.has(norm(w)) && !st.used.has(w));
+  const stale = (pool) => pool.filter((w) => !taken.has(norm(w)));
+  while (out.length < n) {
+    const sources = customOnly ? [custom] : custom.length && Math.random() < 0.5 ? [custom] : [tiers[out.length % tiers.length]];
+    // Fall back through every pool before reusing a played word.
+    const all = customOnly ? [custom] : [...sources, ...tiers, custom];
+    let cand = [];
+    for (const pool of all) if ((cand = fresh(pool)).length) break;
+    if (!cand.length) for (const pool of all) if ((cand = stale(pool)).length) break;
+    if (!cand.length) break;
+    const w = cand[Math.floor(Math.random() * cand.length)];
+    taken.add(norm(w));
     out.push(w);
   }
-  return out;
+  return shuffle(out);
 }
 
 const isLetter = (c) => /[a-z0-9]/i.test(c);
@@ -141,7 +165,7 @@ function nextTurn(st, api) {
   }
   st.drawerId = st.order[st.turnIdx];
   st.phase = 'choose';
-  st.choices = pickWords(st, 3);
+  st.choices = pickWords(st, CHOICE_COUNT);
   st.deadline = api.now() + CHOOSE_MS;
   st.turnId++;
   st.word = '';
@@ -330,7 +354,7 @@ function onDraw(st, m, d, api) {
       const c = color(d.color);
       const x = num(d.x, W);
       const y = num(d.y, H);
-      if (!c || x === null || y === null || st.history.length > 3000) return null;
+      if (!c || x === null || y === null || st.history.length > 3000 || st.history.filter((h) => h.t === 'f').length >= MAX_FILLS) return null;
       st.cur = null;
       st.history.push({ t: 'f', c, x, y });
       return { op: 'fill', color: c, x, y };
@@ -395,5 +419,5 @@ function view(st, m, now) {
 }
 
 module.exports = {
-  meta, defaults, sanitizeSettings, create, start, tick, onAction, onChat, onDraw, onJoin, onLeave, syncFor, view,
+  meta, defaults, DRAW_TIMES, DIFFICULTIES, CHOICE_COUNT, WORD_BANK, pickWords, sanitizeSettings, create, start, tick, onAction, onChat, onDraw, onJoin, onLeave, syncFor, view,
 };

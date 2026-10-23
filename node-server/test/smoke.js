@@ -66,7 +66,7 @@ async function waitFor(fn, ms = 4000, label = '') {
 
     const drawer = a.state.game.drawerId === a.state.you ? a : b;
     const guesser = drawer === a ? b : a;
-    ok(Array.isArray(drawer.state.game.choices) && drawer.state.game.choices.length === 3, 'drawer gets 3 word choices');
+    ok(Array.isArray(drawer.state.game.choices) && drawer.state.game.choices.length === 6 && new Set(drawer.state.game.choices).size === 6, 'drawer gets 6 distinct word choices');
     ok(guesser.state.game.choices === null, 'guesser does not see choices');
     const word = drawer.state.game.choices[1];
     drawer.s.emit('action', { type: 'choose', index: 1 });

@@ -53,53 +53,9 @@ GameUI.drawguess = (() => {
     ctx.lineTo(x1, y1);
     ctx.stroke();
   }
-  const rgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
-
   function flood(x0, y0, hex) {
-    const x = Math.floor(x0);
-    const y = Math.floor(y0);
-    if (x < 0 || y < 0 || x >= W || y >= H) return;
     const img = ctx.getImageData(0, 0, W, H);
-    const d = img.data;
-    const s0 = (y * W + x) * 4;
-    const tr = d[s0];
-    const tg = d[s0 + 1];
-    const tb = d[s0 + 2];
-    const [r, g, b] = rgb(hex);
-    if (Math.abs(tr - r) < 4 && Math.abs(tg - g) < 4 && Math.abs(tb - b) < 4) return;
-    const TOL = 60;
-    const seen = new Uint8Array(W * H);
-    const ok = (p) => !seen[p] && Math.abs(d[p * 4] - tr) <= TOL && Math.abs(d[p * 4 + 1] - tg) <= TOL && Math.abs(d[p * 4 + 2] - tb) <= TOL;
-    const stack = [x, y];
-    while (stack.length) {
-      const cy = stack.pop();
-      const cx = stack.pop();
-      let lx = cx;
-      while (lx >= 0 && ok(cy * W + lx)) lx--;
-      lx++;
-      let rx = cx;
-      while (rx < W && ok(cy * W + rx)) rx++;
-      rx--;
-      if (lx > rx) continue;
-      let upRun = false;
-      let downRun = false;
-      for (let xx = lx; xx <= rx; xx++) {
-        const p = cy * W + xx;
-        seen[p] = 1;
-        d[p * 4] = r; d[p * 4 + 1] = g; d[p * 4 + 2] = b; d[p * 4 + 3] = 255;
-        if (cy > 0) {
-          const q = ok(p - W);
-          if (q && !upRun) stack.push(xx, cy - 1);
-          upRun = q;
-        }
-        if (cy < H - 1) {
-          const q = ok(p + W);
-          if (q && !downRun) stack.push(xx, cy + 1);
-          downRun = q;
-        }
-      }
-    }
-    ctx.putImageData(img, 0, 0);
+    if (GameUI.fill.floodFill(img.data, W, H, x0, y0, hex)) ctx.putImageData(img, 0, 0);
   }
 
   function replay(history) {
@@ -217,16 +173,33 @@ GameUI.drawguess = (() => {
         <div class="dg-round" id="dg-round"></div>
       </div>
       <div class="dg-board card">
+        <div class="dg-boardbar"><button type="button" class="btn btn-small btn-ghost" id="dg-expand" aria-pressed="false">⤢ Enlarge canvas</button></div>
         <div class="dg-wrap" id="dg-wrap"><div class="dg-overlay" id="dg-overlay" hidden></div></div>
       </div>
       <div class="dg-tools card" id="dg-tools" hidden>${toolsHTML()}</div>`;
     $('#dg-wrap').prepend(canvas);
     stage.appendChild(root);
     root.addEventListener('click', onClick);
+    $('#dg-expand').addEventListener('click', () => setBig(!big));
+    document.addEventListener('keydown', onKey);
     clock = setInterval(tickClock, 200);
   }
 
   const $ = (s) => root.querySelector(s);
+
+  // Enlarged canvas: on wide screens the side list is hidden and the stage grows (chat stays);
+  // on phones the drawing area fills the screen. Same canvas element, so nothing is lost.
+  let big = false;
+  function setBig(on) {
+    big = !!on;
+    if (!root) return;
+    root.classList.toggle('big', big);
+    document.body.classList.toggle('dg-big', big);
+    const b = $('#dg-expand');
+    b.textContent = big ? '⤡ Restore size' : '⤢ Enlarge canvas';
+    b.setAttribute('aria-pressed', String(big));
+  }
+  function onKey(e) { if (e.key === 'Escape' && big) setBig(false); }
 
   function onClick(e) {
     const c = e.target.closest('[data-color]');
@@ -315,6 +288,8 @@ GameUI.drawguess = (() => {
     clearInterval(clock);
     clock = null;
     stop();
+    setBig(false);
+    document.removeEventListener('keydown', onKey);
     if (root) root.remove();
     root = null;
     lastKey = '';
