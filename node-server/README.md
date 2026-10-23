@@ -135,6 +135,15 @@ Restarting closes all open lobbies (they live in memory), so update when it's qu
 - [ ] After AdSense approval: paste its `<script>` where `index.html` says `AD NETWORK`, swap each `<div class="ad-slot">` for an ad unit, and put your line in `public/ads.txt`.
 - [ ] Check AdSense's rules for child-directed content if many players are under 13.
 
+## Draw & Guess options
+
+- **Word difficulty** (host, lobby only): Easy / Medium / Hard / Mixed. Default is Medium. Mixed draws from all three tiers, so a choice set normally has easy, medium and hard words. The tiers live in `server/data/words.json` (~860 words) and never leave the server; clients only get the drawer's six choices.
+- **Six choices**: the drawer picks from 6 distinct words (2 columns on phones). If nobody picks within 15 seconds the first one is used. Words already played this game are avoided until a pool runs out, then they can come back (never twice in one choice set).
+- **Custom words** are a separate pool, not classified by difficulty. They are mixed in alongside the chosen difficulty. **Use only custom words** needs at least 6 custom words; the server turns it off (and the checkbox unchecks) if there are fewer, so built-in words are never substituted silently.
+- **Draw time**: 30, 45, 60, 80 (default), 100, 120, 150, 180, 240 or 300 seconds. Other values are rejected by the server.
+- **Paint bucket**: fills the clicked area (colors within 40 per channel), then tints up to 2px of anti-aliased line edges so no white halo is left. It never fills past a line pixel, so an outline with a gap leaks. Every client runs the same integer-only routine over the same drawing history, so replay and undo match. At most 100 fills are kept per turn. Different browsers can anti-alias lines slightly differently, so fills near soft edges can differ by a few pixels between browsers.
+- **Enlarge canvas** (button above the canvas, `Esc` to leave): on desktop the player list is hidden and the canvas grows next to the chat; on phones the drawing area fills the screen and the chat is hidden until you restore it.
+
 ## Where things are
 
 ```
@@ -144,7 +153,7 @@ server/
   config.js       site name, timings, limits
   filter.js       bad-word list for names and chat (add words here)
   games/          one file per game (drawguess.js, fourrow.js) + index.js to register them
-  data/words.json Draw & Guess word list
+  data/words.json Draw & Guess word bank, grouped as easy / medium / hard (server-side only)
 public/
   index.html, style.css
   js/main.js      home, lobby browser, create/join, lobby screen, chat

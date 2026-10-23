@@ -246,10 +246,11 @@
     if (gameId === 'drawguess') {
       return `
         <label class="field"><span>Rounds</span><select data-setting="rounds">${[1, 2, 3, 4, 5, 6, 8, 10].map((v) => opt(v, s.rounds)).join('')}</select></label>
-        <label class="field"><span>Draw time</span><select data-setting="drawTime">${[30, 45, 60, 80, 100, 120, 150, 180].map((v) => opt(v, s.drawTime, v + 's')).join('')}</select></label>
+        <label class="field"><span>Draw time</span><select data-setting="drawTime">${[30, 45, 60, 80, 100, 120, 150, 180, 240, 300].map((v) => opt(v, s.drawTime, v + 's')).join('')}</select></label>
+        <label class="field"><span>Word difficulty</span><select data-setting="difficulty">${[['easy', 'Easy'], ['medium', 'Medium'], ['hard', 'Hard'], ['mixed', 'Mixed']].map(([v, l]) => opt(v, s.difficulty, l)).join('')}</select></label>
         <label class="check"><input type="checkbox" data-setting="hints" ${s.hints ? 'checked' : ''}><span>Letter hints</span></label>
         <label class="field field-wide"><span>Custom words <small>(comma separated)</small></span><textarea data-setting="customWords" rows="2" maxlength="3000" placeholder="inside joke, your teacher, pizza party">${esc(s.customWords)}</textarea></label>
-        <label class="check"><input type="checkbox" data-setting="customOnly" ${s.customOnly ? 'checked' : ''}><span>Use only custom words <small>(needs 3+)</small></span></label>`;
+        <label class="check"><input type="checkbox" data-setting="customOnly" ${s.customOnly ? 'checked' : ''}><span>Use only custom words <small>(needs 6+ words)</small></span></label>`;
     }
     return `
       <label class="field"><span>Turn timer</span><select data-setting="turnTime">${[[0, 'Off'], [15, '15s'], [30, '30s'], [60, '60s']].map(([v, l]) => opt(v, s.turnTime, l)).join('')}</select></label>
@@ -259,12 +260,12 @@
     const out = {};
     $$('[data-setting]', el).forEach((i) => {
       const k = i.dataset.setting;
-      out[k] = i.type === 'checkbox' ? i.checked : i.tagName === 'SELECT' ? Number(i.value) : i.value;
+      out[k] = i.type === 'checkbox' ? i.checked : i.tagName === 'SELECT' && k !== 'difficulty' ? Number(i.value) : i.value;
     });
     return out;
   }
   const DEFAULTS = {
-    drawguess: { rounds: 3, drawTime: 80, hints: true, customWords: '', customOnly: false },
+    drawguess: { rounds: 3, drawTime: 80, hints: true, difficulty: 'medium', customWords: '', customOnly: false },
     fourrow: { turnTime: 30, winnerStays: true },
   };
 
@@ -618,7 +619,7 @@
       else i.value = typeof v === 'boolean' ? (v ? 1 : 0) : v;
     });
     $$('[data-setting]', panel).forEach((i) => {
-      if (document.activeElement === i) return;
+      if (document.activeElement === i && i.type !== 'checkbox') return; // the server may refuse a checkbox (custom-only without 6 words)
       const v = S.settings[i.dataset.setting];
       if (i.type === 'checkbox') i.checked = !!v;
       else i.value = v;
@@ -637,7 +638,7 @@
       if (t.dataset.host === 'isPublic') v = !!v;
       socket.emit('hostUpdate', { [t.dataset.host]: v });
     } else if (t.dataset.setting && t.closest('#host-panel')) {
-      const v = t.type === 'checkbox' ? t.checked : t.tagName === 'SELECT' ? Number(t.value) : t.value;
+      const v = t.type === 'checkbox' ? t.checked : t.tagName === 'SELECT' && t.dataset.setting !== 'difficulty' ? Number(t.value) : t.value;
       socket.emit('hostUpdate', { settings: { [t.dataset.setting]: v } });
     }
   });
