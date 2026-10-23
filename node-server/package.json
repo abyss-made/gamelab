@@ -6,7 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "test": "node test/smoke.js && node test/safety.js"
+    "test": "node test/smoke.js && node test/safety.js && node test/alpha.js"
   },
   "engines": { "node": ">=18" },
   "dependencies": {

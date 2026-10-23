@@ -18,7 +18,38 @@ npm start
 
 Open http://localhost:3000. To test multiplayer by yourself, open a second **tab** (each tab is its own player) or another browser.
 
-`npm test` starts the server and plays both games with fake players (49 checks).
+`npm test` starts the server and plays both games with fake players (smoke, safety and private-alpha gate checks).
+
+## Private alpha on Render (preparation only)
+
+This repo is ready for a password-protected test service, but **nothing is deployed**. Creating the service is a separate manual action by the repository owner after this change is merged.
+
+### How the access gate works
+
+Set `ALPHA_ENABLED=true` and `ALPHA_SECRET=<long random string>` (16+ characters) in the host's environment. Then:
+
+- Every page, static file and API route needs an access cookie, except `/healthz` (returns just `ok`, no room or player data).
+- Visitors without the cookie see a password page. Posting the right password to `/alpha-login` sets an `HttpOnly`, `SameSite=Lax` cookie (`Secure` over HTTPS) valid for 7 days. The password is never put in a URL.
+- Socket.IO checks the same cookie on every connection (polling and WebSocket upgrade), so unauthorized clients cannot join rooms.
+- Wrong passwords are rate limited per IP (8 per 10 minutes, in memory).
+- If `ALPHA_ENABLED` is on and the secret is missing or too short, the server exits at startup instead of running open.
+- With `ALPHA_ENABLED` unset, nothing changes: the site is fully open as before.
+
+Limits: it is one shared password, not per-user accounts. The cookie value is derived from the secret, so anyone holding the cookie has access until you change the secret (changing it logs everyone out). Pages are marked `noindex`. **The GitHub repository is public**, so the code is visible to everyone even though the running service is gated. Do not rely on this for anything sensitive.
+
+### Manual steps on Render
+
+1. In Render, create a **new, separate** web service for the alpha (do not reuse a public service). Either use *New > Blueprint* and pick this repo (`render.yaml` at the repo root), or create a Web Service by hand with root directory `node-server`, build command `npm ci --omit=dev`, start command `npm start`, health check path `/healthz`, and the Free plan if available.
+2. Set environment variables in the Render dashboard: `ALPHA_ENABLED=true` and `ALPHA_SECRET` (generate one, e.g. `openssl rand -base64 24`). Optionally `SITE_NAME`. Render provides `PORT` and HTTPS; WebSockets work without extra settings.
+3. Deploy. Check the service logs show it started (a missing secret makes it exit with an error).
+4. Test on desktop: open the `onrender.com` URL, confirm the password page, enter the password, create a room. Test on a phone (different network if possible): open the same URL, enter the password, join the room by code or `/r/CODE` link. Confirm that an incognito window without the password cannot load the game.
+5. To stop: suspend or delete the service in Render. To lock everyone out without stopping it, change `ALPHA_SECRET`.
+
+### Free-tier things to know
+
+- Free web services sleep after a period of inactivity; the first visit afterwards takes about a minute to wake up. Check Render's current pricing and limits before relying on this.
+- Rooms live in memory. Every sleep, restart or redeploy ends all rooms and games.
+- Free services run a single instance, which is what this in-memory design needs; do not scale it to more than one.
 
 ## Put it on a VPS (Ubuntu 22.04/24.04)
 

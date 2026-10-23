@@ -1,0 +1,21 @@
+# Render Blueprint for a SEPARATE private-alpha service. Nothing is created until the
+# owner manually applies this Blueprint in Render (see node-server/README.md).
+services:
+  - type: web
+    name: playgrid-alpha
+    runtime: node
+    plan: free
+    rootDir: node-server
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: false
+    envVars:
+      - key: ALPHA_ENABLED
+        value: "true"
+      - key: ALPHA_SECRET
+        sync: false   # you type this in the Render dashboard; never commit it
+      - key: SITE_NAME
+        value: Playgrid
+      - key: NODE_VERSION
+        value: "22"
