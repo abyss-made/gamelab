@@ -582,7 +582,7 @@ input::placeholder, textarea::placeholder { color: #6b788a; }
 /* mobile polish */
 @media (max-width: 760px) {
   .topbar { padding: 8px 12px; }
-  .hero { margin-top: 10px; }
+  .hero { margin-top: 10px; grid-template-columns: minmax(0, 1fr); }
   .room-bar { top: 54px; padding: 8px 10px; }
   .room-bar-right { width: 100%; }
   .room-bar-right .btn { flex: 1; white-space: nowrap; padding-left: 8px; padding-right: 8px; }

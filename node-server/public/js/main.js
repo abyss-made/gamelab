@@ -434,7 +434,7 @@
     setTimeout(() => { b.textContent = t; }, 1500);
   });
   $('#room-code').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(currentCode); toast('Room code ' + currentCode + ' copied'); } catch (e) { toast('Room code: ' + currentCode); }
+    try { await navigator.clipboard.writeText(currentCode); toast('Room code ' + currentCode + ' copied'); } catch (e) { prompt('Copy this room code:', currentCode); }
   });
   $('#share-link').addEventListener('click', async () => {
     const text = `Come play ${S ? GAMES[S.gameId].name : 'with me'}!`;
