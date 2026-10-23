@@ -64,6 +64,10 @@ function tryConnect(url, opts) {
     }
     const hz = await fetch(URL + '/healthz');
     ok(hz.status === 200 && (await hz.text()) === 'ok', '/healthz open and exposes nothing');
+    for (const method of ['POST', 'PUT', 'DELETE']) {
+      const r = await fetch(URL + '/healthz', { method, redirect: 'manual' });
+      ok(r.status === 401 && !(await r.text()).includes('<html'), `unauthenticated ${method} /healthz -> 401 without content`);
+    }
     ok((await fetch(URL + '/healthz', html)).headers.get('x-robots-tag')?.includes('noindex'), 'noindex header set');
 
     const lp = await fetch(URL + '/', html);

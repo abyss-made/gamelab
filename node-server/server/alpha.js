@@ -73,7 +73,7 @@ button{background:#b6f03c;color:#0b1530;font-weight:700}p{margin:0;color:#ffb4b4
 
   function middleware(req, res, next) {
     res.set('X-Robots-Tag', 'noindex, nofollow');
-    if (req.path === '/healthz') return next();
+    if (req.path === '/healthz' && (req.method === 'GET' || req.method === 'HEAD')) return next();
     if (req.path === '/alpha-login' && req.method === 'POST') return login(req, res);
     if (hasAccess(req)) return next();
     res.set('Cache-Control', 'no-store');
