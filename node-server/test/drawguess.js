@@ -35,7 +35,7 @@ ok(san({ customOnly: true, customWords: 'foo bar, foo-bar, Foo  Bar, foo_bar, fo
 ok(san({ customWords: 'aa' }, san({ customOnly: true, customWords: 'aa, bb, cc, dd, ee, ff' })).customOnly === false, 'custom-only switches off when custom words drop below 6');
 
 // ---------- picking ----------
-const stFor = (settings, used = []) => ({ settings: { ...base, ...settings }, used: new Set(used) });
+const stFor = (settings, used = []) => ({ settings: { ...base, ...settings }, used: new Set(used.map(norm)) });
 const inTier = (w, t) => bank[t].includes(w);
 for (const t of tiers) {
   let good = true;
@@ -86,6 +86,29 @@ for (const t of tiers) {
   ok(c.length === 6 && new Set(c).size === 6 && keep.every((w) => c.includes(w)), 'near exhaustion: unplayed words first, then repeats, never duplicates');
   const c2 = dg.pickWords(stFor({ difficulty: 'hard' }, bank.hard), 6);
   ok(c2.length === 6 && new Set(c2).size === 6, 'fully exhausted tier still yields 6 distinct words');
+}
+
+{
+  // A custom word that normalizes like a built-in one counts as already played.
+  const builtin = bank.easy.find((w) => w.includes(' ')) || bank.medium.find((w) => w.includes(' '));
+  const st = stFor({ difficulty: 'mixed' }, [builtin.replace(/ /g, '-')]);
+  let seenAgain = false;
+  for (let i = 0; i < 300; i++) if (dg.pickWords(st, 6).includes(builtin)) seenAgain = true;
+  ok(!seenAgain, 'played words are matched by normalized form');
+}
+
+// ---------- fill cap resync ----------
+{
+  const sent = [];
+  const api = { toMember: (id, ev, d) => sent.push([id, ev, d]), toRoom() {} };
+  const st = dg.create(san({}));
+  st.phase = 'draw';
+  st.drawerId = 'd';
+  st.resetBucket = { take: () => true };
+  let accepted = 0;
+  for (let i = 0; i < 105; i++) if (dg.onDraw(st, { id: 'd' }, { op: 'fill', x: 1, y: 1, color: '#ff0000' }, api)) accepted++;
+  ok(accepted === 100 && st.history.length === 100, 'fills are capped at 100 per turn');
+  ok(sent.length === 5 && sent.every(([id, ev, d]) => id === 'd' && ev === 'canvas' && d.history.length === 100), 'rejected fills send the real canvas back to the drawer only');
 }
 
 // ---------- timers via game state ----------

@@ -93,7 +93,7 @@ function pickWords(st, n) {
   const tiers = builtinTiers(st.settings.difficulty).map((t) => WORD_BANK[t]);
   const out = [];
   const taken = new Set();
-  const fresh = (pool) => pool.filter((w) => !taken.has(norm(w)) && !st.used.has(w));
+  const fresh = (pool) => pool.filter((w) => !taken.has(norm(w)) && !st.used.has(norm(w)));
   const stale = (pool) => pool.filter((w) => !taken.has(norm(w)));
   while (out.length < n) {
     const sources = customOnly ? [custom] : custom.length && Math.random() < 0.5 ? [custom] : [tiers[out.length % tiers.length]];
@@ -189,7 +189,7 @@ function nextTurn(st, api) {
 
 function startDrawing(st, api, word) {
   st.word = word;
-  st.used.add(word);
+  st.used.add(norm(word)); // normalized, so a custom 'ice-cream' and built-in 'ice cream' count as the same word
   st.phase = 'draw';
   st.total = st.settings.drawTime * 1000;
   const now = api.now();
@@ -359,7 +359,12 @@ function onDraw(st, m, d, api) {
       const c = color(d.color);
       const x = num(d.x, W);
       const y = num(d.y, H);
-      if (!c || x === null || y === null || st.history.length > 3000 || st.history.filter((h) => h.t === 'f').length >= MAX_FILLS) return null;
+      if (!c || x === null || y === null) return null;
+      if (st.history.length > 3000 || st.history.filter((h) => h.t === 'f').length >= MAX_FILLS) {
+        // The drawer already painted it locally, so send them the real canvas back.
+        if (st.resetBucket.take()) api.toMember(m.id, 'canvas', { turnId: st.turnId, history: st.history });
+        return null;
+      }
       st.cur = null;
       st.history.push({ t: 'f', c, x, y });
       return { op: 'fill', color: c, x, y };
