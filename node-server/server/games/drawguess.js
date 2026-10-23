@@ -63,15 +63,20 @@ function lev(a, b) {
   return d[a.length][b.length];
 }
 
+// Distinct custom words. Entries that normalize the same (punctuation, accents, case) count once,
+// so the count used for custom-only matches what the picker can actually offer.
 function customList(settings) {
-  return [
-    ...new Set(
-      settings.customWords
-        .split(/[,\n]/)
-        .map((w) => w.trim().toLowerCase().replace(/\s+/g, ' '))
-        .filter((w) => w.length >= 2 && w.length <= 30 && /[a-z0-9]/i.test(w))
-    ),
-  ];
+  const seen = new Set();
+  return settings.customWords
+    .split(/[,\n]/)
+    .map((w) => w.trim().toLowerCase().replace(/\s+/g, ' '))
+    .filter((w) => w.length >= 2 && w.length <= 30 && /[a-z0-9]/i.test(w))
+    .filter((w) => {
+      const k = norm(w);
+      if (!k || seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
 }
 
 // Built-in words by difficulty. Mixed spreads picks evenly across the three tiers.

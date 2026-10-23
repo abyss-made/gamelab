@@ -31,6 +31,7 @@ for (const bad of ['EASY', 'extreme', '', null, 1, {}, ['hard']]) ok(san({ diffi
 ok(san({ customOnly: true }).customOnly === false, 'custom-only refused with no custom words');
 ok(san({ customOnly: true, customWords: 'a1, b2, c3, d4, e5' }).customOnly === false, 'custom-only refused with 5 custom words');
 ok(san({ customOnly: true, customWords: 'aa, bb, cc, dd, ee, ff' }).customOnly === true, 'custom-only accepted with 6 custom words');
+ok(san({ customOnly: true, customWords: 'foo bar, foo-bar, Foo  Bar, foo_bar, foo.bar, FOO BAR' }).customOnly === false, 'custom-only counts normalized duplicates once');
 ok(san({ customWords: 'aa' }, san({ customOnly: true, customWords: 'aa, bb, cc, dd, ee, ff' })).customOnly === false, 'custom-only switches off when custom words drop below 6');
 
 // ---------- picking ----------
