@@ -266,7 +266,8 @@ GameUI.drawguess = (() => {
     const meIsDrawer = g.drawerId === S.you;
     deadline = performance.now() + g.timeLeft;
     total = g.totalTime || 1;
-    $('#dg-round').textContent = `Round ${Math.min(g.round, g.rounds)} of ${g.rounds}`;
+    const dif = S.settings && S.settings.difficulty;
+    $('#dg-round').textContent = `Round ${Math.min(g.round, g.rounds)} of ${g.rounds}` + (dif ? ` · ${dif[0].toUpperCase() + dif.slice(1)}` : '');
     $('#dg-word').innerHTML = wordHTML(g, meIsDrawer);
     const ov = overlayHTML(g, meIsDrawer);
     const overlay = $('#dg-overlay');

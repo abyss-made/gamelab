@@ -177,12 +177,19 @@
   });
 
   // ---------- home ----------
+  const goCode = (v) => { const c = String(v || '').trim().toUpperCase(); if (c) nav('/r/' + c); };
+  $('#nav-code-form').addEventListener('submit', (e) => { e.preventDefault(); goCode($('#nav-code').value); });
+  $('#hero-create').addEventListener('click', () => openCreate('drawguess'));
+  $('#play-now').addEventListener('click', () => { if (document.body.dataset.screen === 'home') $('#games').scrollIntoView({ behavior: 'smooth' }); else nav('/'); });
+  $('#hero-join').addEventListener('click', () => { $('#join-side').scrollIntoView({ behavior: 'smooth', block: 'center' }); $('#code-input').focus(); });
+  $$('.topnav [data-scroll]').forEach((a) => a.addEventListener('click', () => setTimeout(() => { const t = $(a.dataset.scroll); if (t) t.scrollIntoView({ behavior: 'smooth' }); }, 50)));
+
   let lobbyTimer = null;
   function showHome() {
     showScreen('home');
     renderProfiles();
     renderGames();
-    $('#soon-grid').innerHTML = SOON.map(([n, p]) => `<div class="soon"><b>${n}</b><small>${p} · Soon</small></div>`).join('');
+    $('#soon-grid').innerHTML = SOON.map(([n, p]) => `<span class="soon" aria-disabled="true"><b>${n}</b><small>${p}</small></span>`).join('');
     $('#lobby-list').innerHTML = '<p class="empty-state">Loading lobbies...</p>';
     loadLobbies();
     clearInterval(lobbyTimer);
@@ -195,7 +202,7 @@
   }
 
   function renderGames() {
-    $('#games').innerHTML = Object.entries(GAMES).map(([id, g]) => `
+    $('#games-list').innerHTML = Object.entries(GAMES).map(([id, g]) => `
       <article class="card game-card" data-game="${id}">
         <div class="game-art">${g.art}</div>
         <div class="game-info">
@@ -209,7 +216,7 @@
         </div>
       </article>`).join('');
   }
-  $('#games').addEventListener('click', (e) => {
+  $('#games-list').addEventListener('click', (e) => {
     const q = e.target.closest('[data-quick]');
     const c = e.target.closest('[data-create]');
     if (q) quickPlay(q.dataset.quick);
