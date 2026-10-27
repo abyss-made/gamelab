@@ -1,4 +1,4 @@
-# PartyPad (placeholder name)
+# Playgrid
 
 Browser party games with lobbies. No accounts, no database. Version 1 has two games:
 
@@ -6,6 +6,10 @@ Browser party games with lobbies. No accounts, no database. Version 1 has two ga
 - **4 in a Row** (2 players + spectators).
 
 What's in it: create lobby, Quick Play, public lobby browser, one share link per lobby, host controls (public/private, lock, max players, spectators, game settings, switch game, kick, end game), spectators with Take Seat, winner-stays, vote-kick in public lobbies, chat filter and rate limits, reconnect on refresh, auto start in public lobbies, sounds, mobile layout, ad slot placeholders, and one page per game for Google.
+
+## Playgrid 2.0 frontend
+
+The standalone site now implements the seven-screen Playgrid redesign. See [visual review, actual screenshots, known differences and browser QA](../docs/playgrid-2.md). No additional application dependencies are required.
 
 ## Run it on your computer
 
