@@ -3916,3 +3916,239 @@ body[data-screen="room"][data-phase="game"] .topbar-right {
     max-height: 190px;
   }
 }
+
+/* ---------- Phone focus drawing mode (Expand Canvas on small screens) ----------
+   The shared canvas element is reused untouched (800x600 backing store); only its
+   CSS box changes, always at 4:3, so pointer mapping stays exact. */
+@media (max-width: 600px), (max-height: 500px) and (orientation: landscape) {
+  body.dg-big .dg {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: var(--bg);
+    height: 100vh;
+    height: 100dvh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    display: grid;
+    gap: 4px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    overflow: hidden;
+  }
+  body.dg-big .dg-round {
+    display: none;
+  }
+  body.dg-big .dg-top {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 56px 4px 8px;
+    min-height: 36px;
+  }
+  body.dg-big .dg-board {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 0;
+    border-radius: 0;
+    align-self: start;
+    justify-content: center;
+    min-height: 0;
+    box-shadow: none;
+    background: var(--bg);
+  }
+  body.dg-big .dg-wrap {
+    width: min(100%, calc((100dvh - 190px) * 4 / 3));
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto;
+  }
+  body.dg-big .dg-boardbar {
+    position: fixed;
+    top: calc(env(safe-area-inset-top) + 4px);
+    right: calc(env(safe-area-inset-right) + 6px);
+    bottom: auto;
+    z-index: 70;
+  }
+  body.dg-big .dg-boardbar .btn {
+    min-height: 36px;
+    min-width: 44px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  body.dg-big .dg-tools {
+    grid-column: 1;
+    grid-row: 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    padding: 8px;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 0;
+    align-self: stretch;
+    align-content: flex-start;
+    min-height: 0;
+  }
+  body.dg-big .dg-tools > * {
+    flex-shrink: 0;
+  }
+  body.dg-big .dg-tools .tools-title,
+  body.dg-big .dg-tools .tool-caption {
+    display: none;
+  }
+  body.dg-big .dg-tools .tool-picks,
+  body.dg-big .dg-tools .dg-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  body.dg-big .dg-tools .tool {
+    width: 44px;
+    height: 44px;
+  }
+  body.dg-big .dg-tools .tool-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+  }
+  body.dg-big .dg-tools input[type="range"] {
+    width: 110px;
+  }
+  body.dg-big .dg-tools .tool-field:has(.dg-palette) {
+    flex-basis: 100%;
+  }
+  body.dg-big .dg-tools .tool-field:has(.dg-palette) > span {
+    display: none;
+  }
+  body.dg-big .dg-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-height: none;
+    overflow: visible;
+  }
+  body.dg-big .dg-tools .swatch {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  body.dg-big .site-footer,
+  body.dg-big .footer {
+    display: none;
+  }
+}
+/* Landscape phones: tools in a side column so the canvas gets the full height. */
+@media (max-height: 500px) and (orientation: landscape) {
+  body.dg-big .dg {
+    grid-template-columns: 150px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  body.dg-big .dg-top {
+    grid-column: 1 / -1;
+    min-height: 0;
+    padding: 2px 120px 2px 8px;
+  }
+  body.dg-big .dg-top .dg-word {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 13px;
+  }
+  body.dg-big .dg-top .dg-timer {
+    width: 28px;
+    height: 28px;
+  }
+  body.dg-big .dg-tools {
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 8px;
+    padding: 6px;
+  }
+  body.dg-big .dg-tools .swatch {
+    width: 26px;
+    height: 26px;
+  }
+  body.dg-big .dg-tools .tool {
+    width: 40px;
+    height: 40px;
+  }
+  body.dg-big .dg-palette {
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  body.dg-big .dg-tools {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  body.dg-big .dg-tools .tool-picks,
+  body.dg-big .dg-tools .dg-actions {
+    flex-wrap: wrap;
+  }
+  body.dg-big .dg-palette {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  body.dg-big .dg-tools .tool-field:has(.dg-palette) {
+    align-items: stretch;
+    flex-basis: auto;
+    min-width: 0;
+  }
+  body.dg-big .dg-tools .tool-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  body.dg-big .dg-tools input[type="range"] {
+    width: 100%;
+  }
+  body.dg-big .dg-board {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: stretch;
+    align-items: center;
+    max-width: none;
+  }
+  body.dg-big .dg-wrap {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+}
+
+/* Capacity notes + post-game actions (functional additions, Sol palette unchanged) */
+.cap-note {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted, #8fa3b3);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.result-actions p {
+  flex-basis: 100%;
+  margin: 0;
+}
+.result-actions .btn {
+  min-height: 44px;
+}

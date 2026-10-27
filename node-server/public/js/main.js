@@ -23,7 +23,8 @@
       slug: "draw-and-guess",
       min: 2,
       max: 12,
-      players: "2–12 players",
+      players: "2–12 active players",
+      overflow: "Extra people in the room spectate",
       blurb: "Draw, guess, and have fun together",
       art: '<img src="/assets/draw-guess.svg" alt="A paintbrush over a splash of lime paint" width="180" height="180">',
     },
@@ -32,7 +33,8 @@
       slug: "four-in-a-row",
       min: 2,
       max: 2,
-      players: "2 players",
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
       blurb: "Classic game, multiplayer style",
       art: '<img src="/assets/four-row.svg" alt="A blue board with red and yellow game pieces" width="180" height="180">',
     },
@@ -379,7 +381,7 @@
         .map(
           ([id, g], i) => `
       <article class="card game-card ${!i ? "featured" : ""}" data-game="${id}">
-        <div class="game-art">${g.art}</div><div class="game-info"><h2><a href="/${g.slug}" data-nav="/${g.slug}">${g.name}</a></h2><p>${g.blurb}</p></div>
+        <div class="game-art">${g.art}</div><div class="game-info"><h2><a href="/${g.slug}" data-nav="/${g.slug}">${g.name}</a></h2><p>${g.blurb}</p><small class="cap-note">${g.overflow}</small></div>
         <div class="game-card-bottom"><span class="game-players">${icon("people")}${g.players}</span><button class="btn btn-small" data-create="${id}">Play</button></div>
         <button class="quick-link" data-quick="${id}">Quick Play ${icon("arrow")}</button>
       </article>`,
@@ -939,7 +941,11 @@
       seat =
         '<button class="link-btn" id="just-watch">Just watch instead</button>';
     }
-    $("#seat-action").innerHTML = seat;
+    const specText = !S.spectatorsOn
+      ? "Spectators are off"
+      : `Watching ${S.spectators.length}/${S.maxSpectators}`;
+    const cap = `<p class="cap-note">Active seats ${S.players.length}/${S.maxPlayers} · ${specText}. Everyone stays in this room; people without a seat spectate.</p>`;
+    $("#seat-action").innerHTML = seat + cap;
   }
   $("#seat-action").addEventListener("click", (e) => {
     if (e.target.id === "take-seat") socket.emit("takeSeat");
@@ -986,6 +992,17 @@
     else GameUI[S.gameId].update(S, app);
   }
 
+  // Host-only post-game controls; everyone else sees who they are waiting on.
+  function resultActionsHTML() {
+    const G = GAMES[S.gameId];
+    if (!isHost()) {
+      const host = app.member(S.hostId);
+      return `<div class="result-actions" role="status"><p class="muted center">Waiting for ${esc(host ? host.name : "the host")} to play again or pick another game.</p></div>`;
+    }
+    const short = S.players.length < G.min;
+    return `<div class="result-actions"><button class="btn" id="result-again" ${short ? "disabled" : ""}>Play Again</button><button class="btn btn-ghost" id="result-choose">Choose Another Game</button>${short ? `<p class="muted center">Need ${G.min} active players to play ${esc(G.name)} again.</p>` : ""}</div>`;
+  }
+
   let autoTimer = null;
   function renderLobby() {
     const G = GAMES[S.gameId];
@@ -995,7 +1012,7 @@
       top += `<div class="banner">Next game starts in <b id="auto-n">${Math.ceil(S.autoStartIn / 1000)}</b>s${isHost() ? " (or start it now)" : ""}</div>`;
     }
     if (S.lastResult) {
-      top += `<div class="card result-card">${GameUI[S.lastResult.type].renderResult(S.lastResult, S, app)}</div>`;
+      top += `<div class="card result-card">${GameUI[S.lastResult.type].renderResult(S.lastResult, S, app)}${resultActionsHTML()}</div>`;
     }
 
     $("#lobby-top").innerHTML = top;
@@ -1116,11 +1133,38 @@
     }
   });
   $("#stage").addEventListener("click", (e) => {
-    if (e.target.closest("#start-btn")) socket.emit("startGame");
+    if (e.target.closest("#start-btn") || e.target.closest("#result-again"))
+      socket.emit("startGame");
+    if (e.target.closest("#result-choose")) chooseGame();
     const sw = e.target.closest("[data-switch]");
     if (sw && isHost() && sw.dataset.switch !== S.gameId)
       switchGame(sw.dataset.switch);
   });
+
+  function chooseGame() {
+    openModal(`
+      <h2 class="card-title">Choose another game</h2>
+      <p class="muted">Same room, same people, same chat.</p>
+      <div class="pick-list">${Object.entries(GAMES)
+        .map(
+          ([id, x]) =>
+            `<button type="button" class="btn ${id === S.gameId ? "btn-ghost" : ""}" data-pickgame="${id}">${esc(x.name)}<small> · ${esc(x.players)}${
+              S.players.length + S.spectators.length > x.max
+                ? ` · ${S.players.length + S.spectators.length - x.max} will spectate`
+                : ""
+            }</small></button>`,
+        )
+        .join("")}</div>
+      <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancel</button></div>`);
+    $$("[data-pickgame]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const id = b.dataset.pickgame;
+        closeModal();
+        if (id === S.gameId) return socket.emit("startGame");
+        switchGame(id);
+      }),
+    );
+  }
 
   function switchGame(gameId) {
     const G = GAMES[gameId];
@@ -1129,7 +1173,7 @@
     const total = S.players.length + S.spectators.length;
     openModal(`
       <h2 class="card-title">${G.name} is ${G.max} players max</h2>
-      <p>There are ${total} people here. ${G.max} will play and ${total - G.max} will spectate. Pick who plays:</p>
+      <p>There are ${total} people here. ${G.max} will play and ${total - G.max} will spectate. Nobody is removed from the room, and spectators can take a seat when one opens. Pick who plays:</p>
       <div class="pick-list">${S.players.map((p) => `<label class="pick"><input type="checkbox" value="${p.id}">${avatarHTML(p.avatar)} ${esc(p.name)}</label>`).join("")}</div>
       <p class="muted" id="pick-count">0/${G.max} picked</p>
       <div class="modal-actions">
