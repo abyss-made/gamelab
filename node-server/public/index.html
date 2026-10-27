@@ -7,42 +7,89 @@
   <meta name="description" content="%DESC%">
   <meta property="og:title" content="%TITLE%">
   <meta property="og:description" content="%DESC%">
-  <meta name="theme-color" content="#4b3bd6">
+  <meta name="theme-color" content="#101722">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
   <!-- AD NETWORK: paste your AdSense (or other network) <script> tag here once approved. -->
 </head>
 <body>
   <header class="topbar">
-    <a class="logo" href="/" data-nav="/"><span class="logo-mark">✏️</span>%SITE%</a>
+    <a class="logo" href="/" data-nav="/"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 3l17 9-17 9 4-9z" fill="currentColor"/></svg></span>%SITE%</a>
+    <nav class="topnav" aria-label="Main">
+      <a href="/" data-nav="/" data-scroll="#hero">Play</a>
+      <a href="/" data-nav="/" data-scroll="#games">Games</a>
+      <a href="/" data-nav="/" data-scroll="#lobbies">Lobbies</a>
+    </nav>
     <div class="topbar-right">
+      <span class="conn" id="conn" role="status" hidden>Reconnecting...</span>
+      <form class="nav-code" id="nav-code-form">
+        <input id="nav-code" placeholder="Room code" maxlength="8" autocomplete="off" aria-label="Room code">
+        <button class="btn btn-small btn-ghost" type="submit">Join</button>
+      </form>
+      <button class="btn btn-small nav-play" id="play-now" type="button">Play Now</button>
       <button class="icon-btn" id="sound-btn" title="Sound on/off" aria-label="Sound on/off">🔊</button>
     </div>
   </header>
 
   <!-- HOME -->
   <main id="screen-home" class="screen" hidden>
-    <section class="hero">
-      <div class="card profile-card">
-        <h2 class="card-title">Who are you?</h2>
-        <div class="profile" data-profile></div>
-      </div>
+    <section class="hero" id="hero">
       <div class="hero-copy">
-        <h1>Party games with friends.<br><span>No account. Just a link.</span></h1>
-        <p>Pick a game, make a lobby, send the link. Your friends are in before you finish typing.</p>
-        <form class="code-form" id="code-form">
-          <input id="code-input" placeholder="Have a code? e.g. K7X2QP" maxlength="8" autocomplete="off" aria-label="Lobby code">
-          <button class="btn btn-ghost" type="submit">Join</button>
-        </form>
+        <h1><span class="hl-w">Play</span><span class="hl-w">Together</span><span class="hl-w accent">Anywhere</span></h1>
+        <p>Multiplayer party games for you and your friends. No downloads. Just share a link and play.</p>
+        <div class="hero-cta">
+          <button class="btn btn-big" id="hero-create" type="button">Create Room</button>
+          <button class="btn btn-big btn-outline" id="hero-join" type="button">Join Room</button>
+        </div>
+        <ul class="trust">
+          <li>No account needed</li>
+          <li>Nothing to download</li>
+          <li>Invite with one link</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <!-- Temporary vector placeholder for the hoodie character / robot / cat trio. Final artwork pending owner approval. -->
+        <svg viewBox="0 0 420 320" role="img" aria-label="">
+          <defs><linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9FF18" stop-opacity=".25"/><stop offset="1" stop-color="#7a5cff" stop-opacity=".12"/></linearGradient></defs>
+          <rect x="10" y="10" width="400" height="300" rx="28" fill="url(#gl)" stroke="#20364C"/>
+          <g><rect x="40" y="110" width="110" height="170" rx="30" fill="#7a5cff"/><circle cx="95" cy="90" r="46" fill="#ffcfa8"/><path d="M45 82a50 50 0 0 1 100 0v10H45z" fill="#4a3aa8"/><rect x="62" y="84" width="66" height="18" rx="9" fill="#050F1B"/></g>
+          <g><rect x="170" y="150" width="90" height="120" rx="22" fill="#0B1B2D" stroke="#9AAFC3"/><rect x="180" y="95" width="70" height="60" rx="16" fill="#9AAFC3"/><circle cx="200" cy="124" r="8" fill="#A9FF18"/><circle cx="230" cy="124" r="8" fill="#A9FF18"/><path d="M215 95V78" stroke="#9AAFC3" stroke-width="4"/><circle cx="215" cy="74" r="6" fill="#A9FF18"/></g>
+          <g><ellipse cx="335" cy="220" rx="52" ry="58" fill="#ffb36b"/><path d="M293 180l8-34 24 22zM377 180l-8-34-24 22z" fill="#ffb36b"/><circle cx="335" cy="170" r="40" fill="#ffb36b"/><rect x="304" y="160" width="62" height="16" rx="8" fill="#050F1B"/></g>
+        </svg>
       </div>
     </section>
 
-    <section class="games" id="games"></section>
+    <section class="select" id="games">
+      <div class="select-head"><h2>Quick Play</h2><p class="muted">Pick a game, make a room, send the link.</p></div>
+      <div class="select-grid">
+        <div class="select-games">
+          <div class="games" id="games-list"></div>
+          <article class="card soon-card" aria-disabled="true">
+            <div class="soon-head"><h3>More games</h3><span class="badge">Coming soon</span></div>
+            <p class="muted">Not playable yet.</p>
+            <div class="soon-grid" id="soon-grid"></div>
+          </article>
+        </div>
+        <aside class="select-side">
+          <div class="card join-side" id="join-side">
+            <h3>Join with a code</h3>
+            <form class="code-form" id="code-form">
+              <input id="code-input" placeholder="e.g. K7X2QP" maxlength="8" autocomplete="off" aria-label="Lobby code">
+              <button class="btn" type="submit">Join Room</button>
+            </form>
+          </div>
+          <div class="card profile-card">
+            <h3>Who are you?</h3>
+            <div class="profile" data-profile></div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-    <section class="card browser">
+    <section class="card browser" id="lobbies">
       <div class="browser-head">
         <h2 class="card-title">Public lobbies</h2>
         <button class="btn btn-small btn-ghost" id="refresh-btn">Refresh</button>
@@ -84,6 +131,7 @@
       <div class="room-bar-left">
         <span class="game-pill" id="room-game"></span>
         <span class="badge" id="room-vis"></span>
+        <button class="room-code" id="room-code" title="Copy room code" aria-label="Copy room code"></button>
         <span class="badge badge-warn" id="room-lock" hidden>🔒 Locked</span>
       </div>
       <div class="room-bar-right">
