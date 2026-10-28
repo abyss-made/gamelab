@@ -1708,23 +1708,6 @@ body[data-screen="room"][data-phase="game"] .game-hud {
 .hurry #dg-time {
   color: #ff785e;
 }
-.dg-big .room[data-phase="game"] {
-  grid-template-columns: minmax(0, 1fr) 270px;
-}
-.dg-big .side {
-  display: none !important;
-}
-.dg-big .room[data-phase="game"] {
-  grid-template-areas: "bar bar" "stage word" "stage chat";
-}
-.dg-big .dg-board {
-  align-self: stretch;
-}
-.dg-big .dg-wrap {
-  height: 100%;
-  min-height: 450px;
-  aspect-ratio: 4/3;
-}
 /* Results: real standings, original podium, restrained confetti. */
 .room[data-phase="results"] {
   grid-template-areas: "bar bar" "result result" "settings chat";
@@ -3445,24 +3428,6 @@ body[data-game="fourrow"] .room[data-phase="game"] {
     width: 16px;
     height: 16px;
   }
-  .dg-big .room[data-phase="game"] {
-    grid-template-columns: 1fr;
-    grid-template-areas: "bar" "word" "stage";
-  }
-  .dg-big .chat {
-    display: none !important;
-  }
-  .dg-big .dg-tools {
-    max-height: 75dvh;
-    overflow-y: auto;
-  }
-  .dg-big .dg-wrap {
-    min-height: 0;
-    aspect-ratio: 4/3;
-  }
-  .dg-big .dg-board {
-    align-self: start;
-  }
   body[data-game="fourrow"] .room[data-phase="game"] {
     grid-template-columns: 1fr;
     grid-template-areas: "bar" "stage" "side" "chat";
@@ -3917,83 +3882,199 @@ body[data-screen="room"][data-phase="game"] .topbar-right {
   }
 }
 
-/* ---------- Phone focus drawing mode (Expand Canvas on small screens) ----------
-   The shared canvas element is reused untouched (800x600 backing store); only its
-   CSS box changes, always at 4:3, so pointer mapping stays exact. */
-@media (max-width: 600px), (max-height: 500px) and (orientation: landscape) {
+/* Capacity notes + post-game actions (functional additions, Sol palette unchanged) */
+.cap-note {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted, #8fa3b3);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.result-actions p {
+  flex-basis: 100%;
+  margin: 0;
+}
+.result-actions .btn {
+  min-height: 44px;
+}
+
+/* ---------- Phase 1.5: focus mode (Expand Canvas) on every screen size ----------
+   The shared canvas keeps its 800x600 backing store; only its CSS box changes (always 4:3), so pointer
+   mapping is unchanged. The chat panel is moved into this layout by drawguess.js and toggled with the
+   Chat button, so it never covers the canvas. --vv-h/--vv-top follow the visual viewport (iOS toolbars,
+   on-screen keyboard); 100dvh is the fallback. */
+body.dg-big .dg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--vv-top, 0px);
+  height: var(--vv-h, 100dvh);
+  z-index: 60;
+  background: var(--bg);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas: "top top top" "tools board chat";
+  overflow: hidden;
+}
+body.dg-big .footer,
+body.dg-big .site-footer,
+body.dg-big .return-bar {
+  display: none;
+}
+body.dg-big .dg-round {
+  display: none;
+}
+body.dg-big .dg-top {
+  display: flex;
+  grid-area: top;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 210px 4px 10px;
+  min-height: 40px;
+  min-width: 0;
+}
+body.dg-big .dg-top .dg-word {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  min-width: 0;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+body.dg-big .dg-top .dg-timer {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+body.dg-big .dg-board {
+  grid-area: board;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--bg);
+  align-self: stretch;
+}
+body.dg-big .dg-wrap {
+  width: min(100cqw, calc(100cqh * 4 / 3));
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+}
+body.dg-big .dg-boardbar {
+  position: fixed;
+  bottom: auto;
+  top: calc(env(safe-area-inset-top) + 4px);
+  right: calc(env(safe-area-inset-right) + 6px);
+  z-index: 70;
+  display: flex;
+  gap: 6px;
+}
+body.dg-big .dg-boardbar .btn {
+  min-height: 36px;
+  min-width: 44px;
+  font-size: 11px;
+  padding: 8px 12px;
+}
+.dg-chat-toggle {
+  position: relative;
+}
+.dg-chat-toggle[hidden] {
+  display: none;
+}
+.dg-unread {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--lime);
+  color: #071100;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+}
+.dg-unread[hidden] {
+  display: none;
+}
+body.dg-big .dg-tools {
+  grid-area: tools;
+  width: 168px;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  align-self: stretch;
+  border-radius: 0;
+}
+body.dg-big .dg-tools[hidden] {
+  display: none;
+}
+body.dg-big .dg-tools .dg-palette {
+  max-height: none;
+  overflow: visible;
+}
+body.dg-big .dg .chat {
+  grid-area: chat;
+  display: none;
+  flex-direction: column;
+  width: clamp(240px, 26vw, 340px);
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  border-radius: 0;
+}
+body.dg-big .dg.chat-open .chat {
+  display: flex;
+}
+body.dg-big .dg .chat-log {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+}
+body.dg-big .dg .chat-form input {
+  font-size: 16px; /* 16px stops iOS Safari zooming the page on focus */
+}
+/* Portrait: canvas on top, tools under it, chat as the bottom panel. */
+@media (orientation: portrait) and (max-width: 900px) {
   body.dg-big .dg {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    background: var(--bg);
-    height: 100vh;
-    height: 100dvh;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    display: grid;
-    gap: 4px;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto minmax(0, 1fr);
-    overflow: hidden;
-  }
-  body.dg-big .dg-round {
-    display: none;
-  }
-  body.dg-big .dg-top {
-    display: flex;
-    grid-column: 1;
-    grid-row: 1;
-    align-items: center;
-    gap: 8px;
-    padding: 4px 56px 4px 8px;
-    min-height: 36px;
-  }
-  body.dg-big .dg-board {
-    grid-column: 1;
-    grid-row: 2;
-    padding: 0;
-    border-radius: 0;
-    align-self: start;
-    justify-content: center;
-    min-height: 0;
-    box-shadow: none;
-    background: var(--bg);
-  }
-  body.dg-big .dg-wrap {
-    width: min(100%, calc((100dvh - 190px) * 4 / 3));
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 4 / 3;
-    margin: 0 auto;
-  }
-  body.dg-big .dg-boardbar {
-    position: fixed;
-    top: calc(env(safe-area-inset-top) + 4px);
-    right: calc(env(safe-area-inset-right) + 6px);
-    bottom: auto;
-    z-index: 70;
-  }
-  body.dg-big .dg-boardbar .btn {
-    min-height: 36px;
-    min-width: 44px;
-    font-size: 11px;
-    padding: 8px 12px;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "top" "board" "tools" "chat";
   }
   body.dg-big .dg-tools {
-    grid-column: 1;
-    grid-row: 3;
+    width: auto;
+    max-height: 40dvh;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 8px 12px;
     padding: 8px;
-    max-height: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border-radius: 0;
-    align-self: stretch;
     align-content: flex-start;
-    min-height: 0;
+  }
+  body.dg-big .dg-tools[hidden] {
+    display: none;
   }
   body.dg-big .dg-tools > * {
     flex-shrink: 0;
@@ -4032,123 +4113,266 @@ body[data-screen="room"][data-phase="game"] .topbar-right {
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px;
-    max-height: none;
-    overflow: visible;
   }
   body.dg-big .dg-tools .swatch {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
   }
-  body.dg-big .site-footer,
-  body.dg-big .footer {
+  body.dg-big .dg .chat {
+    width: auto;
+    height: min(34dvh, 260px);
+  }
+  /* With the keyboard up, give the room to the chat instead of the tools. */
+  body.dg-big .dg:has(#chat-input:focus) .dg-tools {
     display: none;
   }
 }
-/* Landscape phones: tools in a side column so the canvas gets the full height. */
+/* Short landscape phones: compact tool column. */
 @media (max-height: 500px) and (orientation: landscape) {
-  body.dg-big .dg {
-    grid-template-columns: 150px minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr);
-  }
   body.dg-big .dg-top {
-    grid-column: 1 / -1;
-    min-height: 0;
-    padding: 2px 120px 2px 8px;
-  }
-  body.dg-big .dg-top .dg-word {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 8px;
-    font-size: 13px;
-  }
-  body.dg-big .dg-top .dg-timer {
-    width: 28px;
-    height: 28px;
+    min-height: 32px;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
   body.dg-big .dg-tools {
-    justify-content: flex-start;
-    align-content: flex-start;
-    gap: 8px;
+    width: 140px;
     padding: 6px;
+    gap: 8px;
   }
   body.dg-big .dg-tools .swatch {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
   body.dg-big .dg-tools .tool {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
-  body.dg-big .dg-palette {
-    justify-content: flex-start;
-    gap: 4px;
+  body.dg-big .dg-tools .tool-caption,
+  body.dg-big .dg-tools .tools-title {
+    display: none;
   }
-  body.dg-big .dg-tools {
-    grid-column: 1;
-    grid-row: 2;
+  body.dg-big .dg .chat {
+    width: min(240px, 34vw);
+  }
+}
+
+/* ---------- Phase 1.5: the app fills the viewport ---------- */
+html {
+  min-height: 100%;
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.site-shell {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-width: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.site-shell > .screen {
+  flex: 1 0 auto;
+}
+.footer {
+  flex: none;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 18px clamp(20px, 4vw, 56px);
+  border-top: 1px solid #142330;
+}
+#screen-home {
+  display: flex;
+  flex-direction: column;
+}
+#screen-home[hidden] {
+  display: none;
+}
+.hero {
+  flex: 1 1 auto;
+  min-height: 440px;
+}
+@media (min-width: 801px) {
+  .hero-copy {
+    width: 54%;
+    padding-left: clamp(60px, 7vw, 170px);
+    padding-top: clamp(40px, 7dvh, 120px);
+    padding-bottom: clamp(24px, 4dvh, 80px);
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    overflow-x: hidden;
-    overflow-y: auto;
+    justify-content: center;
+    height: 100%;
   }
-  body.dg-big .dg-tools .tool-picks,
-  body.dg-big .dg-tools .dg-actions {
-    flex-wrap: wrap;
+  .hero h1 {
+    font-size: clamp(54px, min(6.2vw, 11.5dvh), 128px);
   }
-  body.dg-big .dg-palette {
-    flex-wrap: wrap;
-    width: 100%;
+  .hero-copy p {
+    font-size: clamp(14px, min(1.25vw, 2.4dvh), 21px);
   }
-  body.dg-big .dg-tools .tool-field:has(.dg-palette) {
-    align-items: stretch;
-    flex-basis: auto;
-    min-width: 0;
-  }
-  body.dg-big .dg-tools .tool-field {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  body.dg-big .dg-tools input[type="range"] {
-    width: 100%;
-  }
-  body.dg-big .dg-board {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: stretch;
-    align-items: center;
+}
+/* Lobby and game screens use the width instead of floating in a small card. */
+.room {
+  padding: clamp(10px, 1.6vw, 28px);
+  gap: clamp(12px, 1.4vw, 22px);
+}
+
+/* ---------- Phase 1.5: return-to-room indicator ---------- */
+.return-bar {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border: 1px solid #b4ff19;
+  border-radius: 14px;
+  background: #0b1f12;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 10px 40px #000a, 0 0 18px #a8ff0030;
+}
+.return-bar[hidden] {
+  display: none;
+}
+.return-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 10px var(--lime);
+}
+.return-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.return-text small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.return-go {
+  margin-left: auto;
+  color: var(--lime);
+  font-size: 22px;
+  line-height: 1;
+}
+body.has-return {
+  padding-bottom: 84px;
+}
+.join-switch-note {
+  margin: 0 0 12px;
+  color: #ffc676;
+}
+@media (max-width: 600px) {
+  .return-bar {
+    left: max(10px, env(safe-area-inset-left));
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
     max-width: none;
   }
-  body.dg-big .dg-wrap {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 4 / 3;
-  }
-
 }
 
-/* Capacity notes + post-game actions (functional additions, Sol palette unchanged) */
-.cap-note {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted, #8fa3b3);
-  font-size: 11px;
-  line-height: 1.35;
+/* ---------- Phase 1.5: dialogs fit and scroll at every size ---------- */
+.modal-back {
+  height: var(--vv-h, 100dvh);
+  top: var(--vv-top, 0);
+  bottom: auto;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
 }
-.result-actions {
-  display: flex;
+.modal {
+  max-height: 100%;
+  overscroll-behavior: contain;
+}
+.modal-actions {
+  position: sticky;
+  bottom: -28px;
+  z-index: 2;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
+  margin: 24px -28px -28px;
+  padding: 14px 28px calc(14px + env(safe-area-inset-bottom));
+  background: var(--card);
+  border-top: 1px solid var(--line);
 }
-.result-actions p {
-  flex-basis: 100%;
-  margin: 0;
+.modal-actions .btn {
+  flex: 0 1 auto;
 }
-.result-actions .btn {
-  min-height: 44px;
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+}
+.segmented button {
+  min-height: 38px;
+  padding: 7px 10px;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+.check span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.field select,
+.field input,
+.field textarea {
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .modal {
+    padding: 22px 16px;
+  }
+  .modal-actions {
+    bottom: -22px;
+    margin: 20px -16px -22px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .modal-actions .btn {
+    flex: 1 1 120px;
+  }
+  .modal .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tiles {
+    flex-wrap: wrap;
+  }
+  .tile {
+    flex: 1 1 130px;
+  }
+}
+body.dg-big .dg-timer {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+body.dg-big .dg-timer svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  fill: none;
+}
+body.dg-big .dg-timer .track {
+  stroke: #203747;
+  stroke-width: 3;
+}
+body.dg-big .dg-timer .bar {
+  stroke: var(--lime);
+  stroke-width: 3;
+  stroke-dasharray: 94.25;
+  stroke-linecap: round;
+}
+body.dg-big .dg-timer #dg-time {
+  position: relative;
+  font-size: 11px;
+  font-weight: 700;
 }

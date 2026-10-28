@@ -222,7 +222,9 @@
       if (el.dataset.tab === name) el.setAttribute("aria-current", "page");
       else el.removeAttribute("aria-current");
     });
+    if (name !== "room") GameUI.drawguess?.exitBig?.();
     window.scrollTo(0, 0);
+    if (typeof syncReturn === "function") syncReturn();
   }
 
   const soundBtn = $("#sound-btn");
@@ -280,6 +282,27 @@
   }
   $("#settings-btn").onclick = () => (S ? openGameSettings() : openProfile());
 
+  // Track the visual viewport (iOS toolbars, on-screen keyboard) for fixed layers.
+  (() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const root = document.documentElement.style;
+    const sync = () => {
+      // Only override the CSS fallback (100dvh) when something such as the
+      // on-screen keyboard really shrinks the visual viewport.
+      if (Math.abs(window.innerHeight - vv.height) < 60) {
+        root.removeProperty("--vv-h");
+        root.removeProperty("--vv-top");
+        return;
+      }
+      root.setProperty("--vv-h", Math.round(vv.height) + "px");
+      root.setProperty("--vv-top", Math.round(vv.offsetTop) + "px");
+    };
+    vv.addEventListener("resize", sync);
+    vv.addEventListener("scroll", sync);
+    sync();
+  })();
+
   // ---------- socket ----------
   const socket = io();
   let S = null; // latest lobby state from the server
@@ -313,6 +336,7 @@
     if (!currentCode || s.code !== currentCode) return;
     S = s;
     renderRoom();
+    syncReturn();
   });
   socket.on("chat", addChat);
   socket.on("chatHistory", (list) => {
@@ -341,10 +365,9 @@
     if (m) {
       const code = m[1].toUpperCase();
       if (currentCode === code) return showScreen("room");
-      if (currentCode) leaveRoom();
       return showJoin(code);
     }
-    if (currentCode) leaveRoom();
+    // Navigating elsewhere never leaves the room; only Leave Lobby does.
     showHome();
   }
   window.addEventListener("popstate", route);
@@ -585,6 +608,7 @@
           profile,
           token,
         };
+        if (!leaveForOtherRoom()) return;
         socket.emit("createRoom", opts, (res) => {
           closeModal();
           handleJoin(res);
@@ -595,6 +619,7 @@
   }
 
   function quickPlay(gameId) {
+    if (!leaveForOtherRoom()) return;
     socket.emit("quickPlay", { game: gameId, profile, token }, handleJoin);
   }
 
@@ -603,10 +628,40 @@
     showScreen("join");
     $("#join-code").textContent = code;
     renderProfiles();
+    const other = currentCode && currentCode !== code;
+    $("#join-switch-note").hidden = !other;
+    if (other)
+      $("#join-switch-note").textContent =
+        `You are in lobby ${currentCode}. Joining ${code} will leave it.`;
     $("#join-btn").onclick = () => join(code);
   }
 
+  // Leaving is deliberate: confirm when the game or hosting would be disrupted.
+  function confirmLeave(text) {
+    if (!S) return true;
+    const live = S.phase === "game";
+    const host = S.hostId === S.you && S.players.length + S.spectators.length > 1;
+    if (!live && !host) return true;
+    return confirm(
+      text +
+        (live ? " The game is in progress." : "") +
+        (host ? " You are the host; hosting will pass to someone else." : ""),
+    );
+  }
+  // Confirmation only: the server releases the old seat once the new room accepts
+  // us, and handleJoin() unmounts the old game, so a failed join loses nothing.
+  function leaveForOtherRoom() {
+    if (!currentCode) return true;
+    return confirmLeave(`You are in lobby ${currentCode}. Leave it?`);
+  }
+
   function join(code, { silent } = {}) {
+    if (!silent && currentCode === code) {
+      nav("/r/" + code);
+      return;
+    }
+    // Every deliberate join to a different room goes through the leave guard.
+    if (!silent && !leaveForOtherRoom()) return;
     socket.emit("joinRoom", { code, profile, token }, (res) =>
       handleJoin(res, silent),
     );
@@ -619,9 +674,12 @@
     }
     const fresh = currentCode !== res.code;
     currentCode = res.code;
-    if (location.pathname !== "/r/" + res.code)
+    // A silent reconnect must not drag the user back from another view.
+    const onRoomView = document.body.dataset.screen === "room";
+    if (!silent && location.pathname !== "/r/" + res.code)
       history.pushState({}, "", "/r/" + res.code);
     if (fresh) {
+      unmountStage();
       S = null;
       mounted = null;
       lastResultKey = null;
@@ -629,12 +687,14 @@
         '<div class="card loading">Loading lobby...</div>';
       if (!res.rejoined) $("#chat-log").innerHTML = "";
     }
-    showScreen("room");
+    if (!silent || onRoomView) showScreen("room");
+    else syncReturn();
     if (res.notice) toast(res.notice);
   }
 
   function leaveLocal() {
     currentCode = null;
+    syncReturn();
     unmountStage();
     S = null;
     delete document.body.dataset.phase;
@@ -645,8 +705,33 @@
     leaveLocal();
   }
   $("#leave-btn").addEventListener("click", () => {
+    nav("/?view=games");
+  });
+  $("#leave-lobby-btn").addEventListener("click", () => {
+    if (!confirmLeave("Leave this lobby?")) return;
     leaveRoom();
     nav("/");
+  });
+  const returnBar = $("#return-bar");
+  function syncReturn() {
+    const show = !!currentCode && document.body.dataset.screen !== "room";
+    returnBar.hidden = !show;
+    document.body.classList.toggle("has-return", show);
+    if (!show) return;
+    const playing = S && S.phase === "game";
+    $("#return-label").textContent = playing
+      ? "Return to Game"
+      : "Return to Lobby";
+    $("#return-code").textContent = currentCode;
+    $("#return-status").textContent = S
+      ? playing
+        ? "Game in progress"
+        : "Waiting in lobby"
+      : "Connecting";
+  }
+  returnBar.addEventListener("click", () => {
+    closeModal();
+    nav("/r/" + currentCode);
   });
   $("#end-btn").addEventListener("click", () => {
     if (confirm("End the game for everyone and go back to the lobby?"))
@@ -810,7 +895,6 @@
 
   function renderRoom() {
     if (!S) return;
-    if (document.body.dataset.screen !== "room") showScreen("room");
     const G = GAMES[S.gameId];
     const phase =
       S.phase === "game" ? "game" : S.lastResult ? "results" : "lobby";
