@@ -18,6 +18,11 @@ const list = [
   require('./impostor'),
   require('./liarsdice'),
   require('./hotpotato'),
+  require('./battleship'),
+  require('./checkers'),
+  require('./reversi'),
+  require('./ludo'),
+  require('./chess'),
 ];
 
 const GAMES = {};
