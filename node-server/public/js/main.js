@@ -188,6 +188,56 @@
       blurb: "Answer fast and pass the bomb",
       art: '<img src="/assets/hot-potato.svg" alt="A round bomb with a lit fuse" width="180" height="180">',
     },
+    battleship: {
+      name: "Battleship",
+      slug: "battleship",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "Hide your fleet and sink theirs",
+      art: '<img src="/assets/battleship.svg" alt="A battleship and radar rings" width="180" height="180">',
+    },
+    checkers: {
+      name: "Checkers",
+      slug: "checkers",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "Jump, capture and crown your kings",
+      art: '<img src="/assets/checkers.svg" alt="Checkers pieces on a board" width="180" height="180">',
+    },
+    reversi: {
+      name: "Reversi",
+      slug: "reversi",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "Flank discs and flip the board",
+      art: '<img src="/assets/reversi.svg" alt="Black and white discs" width="180" height="180">',
+    },
+    ludo: {
+      name: "Ludo",
+      slug: "ludo",
+      min: 2,
+      max: 4,
+      players: "2–4 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Race your tokens home and send rivals back",
+      art: '<img src="/assets/ludo.svg" alt="A Ludo board with four coloured tokens" width="180" height="180">',
+    },
+    chess: {
+      name: "Chess",
+      slug: "chess",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "The classic game of kings, with clocks",
+      art: '<img src="/assets/chess.svg" alt="A chess knight" width="180" height="180">',
+    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -668,6 +718,14 @@
       return sel("dice", "Dice Each", [3, 5], s.dice) + sel("turnTime", "Turn Timer", [20, 30, 60], s.turnTime, (v) => v + " seconds") + `<label class="check"><span>Ones Are Wild <small>Ones count as any face except ones</small></span><input type="checkbox" data-setting="wild" ${s.wild ? "checked" : ""}></label>`;
     if (gameId === "hotpotato")
       return sel("lives", "Lives", [1, 2, 3], s.lives) + `<label class="field"><span>Fuse Length</span><select data-setting="fuse">${[["short", "Short"], ["medium", "Medium"], ["long", "Long"]].map(([v, l]) => opt(v, s.fuse, l)).join("")}</select></label>`;
+    const turnOpt = (vals) => sel("turnTime", "Turn Timer", vals, s.turnTime, (v) => (v ? v + " seconds" : "Off"));
+    const stays = `<label class="check"><span>Winner Stays <small>Next spectator takes the other seat</small></span><input type="checkbox" data-setting="winnerStays" ${s.winnerStays ? "checked" : ""}></label>`;
+    if (gameId === "battleship")
+      return sel("placeTime", "Time To Place Fleet", [60, 90, 120], s.placeTime, (v) => v + " seconds") + turnOpt([0, 20, 30, 60]) + `<label class="check"><span>Hit Again <small>A hit earns another shot</small></span><input type="checkbox" data-setting="hitAgain" ${s.hitAgain ? "checked" : ""}></label>` + stays;
+    if (gameId === "checkers" || gameId === "reversi") return turnOpt([0, 20, 30, 60]) + stays;
+    if (gameId === "ludo") return sel("turnTime", "Turn Timer", [15, 25, 40], s.turnTime, (v) => v + " seconds");
+    if (gameId === "chess")
+      return sel("clock", "Clock Per Player", [0, 3, 5, 10, 15], s.clock, (v) => (v ? v + " minutes" : "Off")) + sel("increment", "Bonus Per Move", [0, 2, 5], s.increment, (v) => (v ? "+" + v + " seconds" : "None")) + stays;
     if (gameId === "colorstack" || gameId === "gofish")
       return sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
     return `<label class="field"><span>Turn Timer</span><select data-setting="turnTime">${[
@@ -773,6 +831,11 @@
     impostor: { rounds: 3, clueRounds: 2, clueTime: 30, discussTime: 60 },
     liarsdice: { dice: 5, turnTime: 30, wild: true },
     hotpotato: { lives: 2, fuse: "medium" },
+    battleship: { placeTime: 90, turnTime: 30, hitAgain: false, winnerStays: true },
+    checkers: { turnTime: 30, winnerStays: true },
+    reversi: { turnTime: 30, winnerStays: true },
+    ludo: { turnTime: 25 },
+    chess: { clock: 10, increment: 0, winnerStays: true },
   };
 
   // ---------- create lobby ----------

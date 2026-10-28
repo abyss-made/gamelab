@@ -58,7 +58,7 @@ async function createRoom(page, game) {
       await page.waitForSelector('.game-card');
       const ids = await page.$$eval('.game-card[data-game]', (els) => els.map((e) => e.dataset.game));
       for (const g of ['tictactoe', 'rps', 'dotsboxes', 'wordscramble', 'trivia']) ok(ids.includes(g), `catalog lists ${g}`);
-      ok(ids.length === 17, 'catalog lists 17 playable games (2 existing + 15 new)');
+      ok(ids.length === 22, 'catalog lists 22 playable games (2 existing + 20 new)');
       ok((await page.$$('.game-card.coming-soon')).length >= 1, 'Coming Soon tile still present and not counted');
       ok((await page.$$eval('.game-card img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length)) === 0, 'all game card artwork loads');
       // settings render for each new game in the create dialog without errors
