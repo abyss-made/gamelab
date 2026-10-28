@@ -8,6 +8,11 @@ const list = [
   require('./higherlower'),
   require('./colorstack'),
   require('./gofish'),
+  require('./tictactoe'),
+  require('./rps'),
+  require('./dotsboxes'),
+  require('./wordscramble'),
+  require('./trivia'),
 ];
 
 const GAMES = {};
