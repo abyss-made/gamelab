@@ -19,7 +19,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="/style.css?v=phase1-20261028" />
+    <link rel="stylesheet" href="/style.css?v=phase15-20261028" />
   </head>
   <body data-screen="home">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -181,6 +181,7 @@
           <p>
             Join room <b id="join-code"></b>. Pick your player name and avatar.
           </p>
+          <p class="muted join-switch-note" id="join-switch-note" role="status" hidden></p>
           <div class="profile" data-profile></div>
           <button class="btn btn-big" id="join-btn">Join Room</button
           ><a class="muted-link" href="/" data-nav="/">Back to games</a>
@@ -216,7 +217,9 @@
               aria-label="Share room link"
             ></button
             ><button class="btn btn-small btn-ghost" id="end-btn" hidden>
-              End Game
+              End Game</button
+            ><button class="btn btn-small btn-ghost" id="leave-lobby-btn">
+              Leave Lobby
             </button>
           </div>
         </div>
@@ -250,7 +253,7 @@
           </div>
         </aside>
         <section class="stage" id="stage" aria-label="Game area"></section>
-        <section class="chat card" aria-label="Room chat">
+        <section class="chat card" id="room-chat" aria-label="Room chat">
           <div
             class="chat-log"
             id="chat-log"
@@ -283,6 +286,17 @@
         ><span>PLAYGRID</span>
       </div>
     </footer>
+    <button class="return-bar" id="return-bar" type="button" hidden>
+      <span class="return-dot" aria-hidden="true"></span>
+      <span class="return-text"
+        ><b id="return-label">Return to Lobby</b>
+        <small
+          >Room <span id="return-code"></span> ·
+          <span id="return-status"></span></small
+        ></span
+      >
+      <span class="return-go" aria-hidden="true">&rsaquo;</span>
+    </button>
     <div class="modal-back" id="modal" hidden>
       <div
         class="modal card"
@@ -298,11 +312,11 @@
       window.PAGE = { game: "%GAME%", site: "%SITE%" };
     </script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/ui.js?v=phase1-20261028"></script>
-    <script src="/js/sound.js?v=phase1-20261028"></script>
-    <script src="/js/games/fill.js?v=phase1-20261028"></script>
-    <script src="/js/games/drawguess.js?v=phase1-20261028"></script>
-    <script src="/js/games/fourrow.js?v=phase1-20261028"></script>
-    <script src="/js/main.js?v=phase1-20261028"></script>
+    <script src="/js/ui.js?v=phase15-20261028"></script>
+    <script src="/js/sound.js?v=phase15-20261028"></script>
+    <script src="/js/games/fill.js?v=phase15-20261028"></script>
+    <script src="/js/games/drawguess.js?v=phase15-20261028"></script>
+    <script src="/js/games/fourrow.js?v=phase15-20261028"></script>
+    <script src="/js/main.js?v=phase15-20261028"></script>
   </body>
 </html>

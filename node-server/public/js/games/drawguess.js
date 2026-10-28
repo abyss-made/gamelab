@@ -200,7 +200,7 @@ GameUI.drawguess = (() => {
         <div class="dg-round" id="dg-round"></div>
       </div>
       <div class="dg-board card">
-        <div class="dg-boardbar"><button type="button" class="btn btn-small btn-ghost" id="dg-expand" aria-pressed="false">${icon("expand")}<span>Expand Canvas</span></button></div>
+        <div class="dg-boardbar"><button type="button" class="btn btn-small btn-ghost dg-chat-toggle" id="dg-chat-toggle" aria-pressed="false" aria-controls="room-chat" hidden><span>Chat</span><b class="dg-unread" id="dg-unread" hidden></b></button><button type="button" class="btn btn-small btn-ghost" id="dg-expand" aria-pressed="false">${icon("expand")}<span>Expand Canvas</span></button></div>
         <div class="dg-wrap" id="dg-wrap"><div class="dg-overlay" id="dg-overlay" hidden></div></div>
       </div>
       <div class="dg-tools card" id="dg-tools" tabindex="0" role="group" aria-label="Drawing tools" hidden>${toolsHTML()}</div>`;
@@ -211,17 +211,72 @@ GameUI.drawguess = (() => {
       if (e.target.id === "brush-size") sizes[sizeTool()] = Number(e.target.value);
     });
     $("#dg-expand").addEventListener("click", () => setBig(!big));
+    $("#dg-chat-toggle").addEventListener("click", () => setChat(!chatOpen));
     document.addEventListener("keydown", onKey);
     clock = setInterval(tickClock, 200);
   }
 
   const $ = (s) => root.querySelector(s);
 
-  // Enlarged canvas: on wide screens the side list is hidden and the stage grows (chat stays);
-  // on phones the drawing area fills the screen. Same canvas element, so nothing is lost.
+  // Enlarged canvas ("focus mode"): the drawing area fills the visual viewport on every screen size.
+  // The chat panel is moved (not cloned) into the focus layout, so messages, scroll position and any
+  // half-typed guess survive opening and closing it. It is a collapsible panel with an unread badge.
   let big = false;
+  let chatOpen = false;
+  let unread = 0;
+  let chatHome = null; // placeholder marking where the chat lives outside focus mode
+  let chatObserver = null;
   const isPhone = () =>
     window.matchMedia("(max-width: 600px), (max-height: 500px) and (orientation: landscape)").matches;
+  const isWide = () => window.matchMedia("(min-width: 901px) and (min-height: 501px)").matches;
+  function setChat(on) {
+    chatOpen = !!on;
+    if (!root) return;
+    root.classList.toggle("chat-open", chatOpen);
+    const t = $("#dg-chat-toggle");
+    t.setAttribute("aria-pressed", String(chatOpen));
+    if (chatOpen) {
+      unread = 0;
+      const log = document.getElementById("chat-log");
+      if (log) log.scrollTop = log.scrollHeight;
+    }
+    renderUnread();
+  }
+  function renderUnread() {
+    const b = $("#dg-unread");
+    if (!b) return;
+    b.hidden = !unread;
+    b.textContent = unread > 9 ? "9+" : String(unread);
+    $("#dg-chat-toggle").setAttribute(
+      "aria-label",
+      unread ? `Chat, ${unread} unread` : "Chat",
+    );
+  }
+  function adoptChat() {
+    const chat = document.getElementById("room-chat");
+    if (!chat || chatHome) return;
+    chatHome = document.createComment("chat-home");
+    chat.before(chatHome);
+    root.appendChild(chat);
+    const log = document.getElementById("chat-log");
+    chatObserver = new MutationObserver((list) => {
+      if (chatOpen) return;
+      for (const m of list)
+        for (const n of m.addedNodes)
+          if (n.classList && !n.classList.contains("sys") && !n.classList.contains("msg-me")) unread++;
+      renderUnread();
+    });
+    chatObserver.observe(log, { childList: true });
+  }
+  function releaseChat() {
+    if (chatObserver) chatObserver.disconnect();
+    chatObserver = null;
+    const chat = document.getElementById("room-chat");
+    if (chatHome && chat) {
+      chatHome.replaceWith(chat);
+    }
+    chatHome = null;
+  }
   function setBig(on) {
     big = !!on;
     if (!root) return;
@@ -234,6 +289,16 @@ GameUI.drawguess = (() => {
       (big ? (isPhone() ? "Close" : "Restore Size") : "Expand Canvas") +
       "</span>";
     b.setAttribute("aria-pressed", String(big));
+    $("#dg-chat-toggle").hidden = !big;
+    if (big) {
+      adoptChat();
+      unread = 0;
+      // Guessers need the chat to guess; drawers get the pixels until they ask for it.
+      setChat(isWide() && !canDraw());
+    } else {
+      releaseChat();
+      root.classList.remove("chat-open");
+    }
   }
   function onKey(e) {
     if (e.key === "Escape" && big) setBig(false);
@@ -433,6 +498,7 @@ GameUI.drawguess = (() => {
     unmount,
     onDraw,
     onCanvas,
+    exitBig: () => setBig(false),
     renderResult,
     resultSound,
     chatPlaceholder,
