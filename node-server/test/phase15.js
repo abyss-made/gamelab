@@ -86,6 +86,15 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       };
       await roundTrip('Games tab (lobby)', () => page.click('.main-nav [data-view="selection"]'), 'Return to Lobby');
       await roundTrip('Rooms tab (lobby)', () => page.click('.main-nav [data-view="rooms"]'), 'Return to Lobby');
+      // background room updates must not pull the user back into the room view
+      const joiner = fake('Joiner');
+      fakes.push(joiner);
+      await joiner.emit('joinRoom', { code, token: joiner.token, profile: joiner.profile });
+      await until(() => f.state.players.length + f.state.spectators.length === 3);
+      await sleep(300);
+      ok((await screenOf(page)) !== 'room' && (await vis(page, '#return-bar')), 'a room state update while browsing does not switch the view back to the room');
+      joiner.s.emit('leaveRoom');
+      await until(() => f.state.players.length + f.state.spectators.length === 2);
       await roundTrip('Play tab (lobby)', () => page.click('.main-nav [data-tab="home"]'), 'Return to Lobby');
       await page.click('#return-bar');
       await page.evaluate(() => document.getElementById('lobby-start').click());

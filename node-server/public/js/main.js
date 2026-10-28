@@ -894,7 +894,6 @@
 
   function renderRoom() {
     if (!S) return;
-    if (document.body.dataset.screen !== "room") showScreen("room");
     const G = GAMES[S.gameId];
     const phase =
       S.phase === "game" ? "game" : S.lastResult ? "results" : "lobby";
