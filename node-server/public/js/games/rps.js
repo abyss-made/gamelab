@@ -59,9 +59,12 @@ GameUI.rps = (() => {
     clock.set(g.timeLeft);
     const rname = g.round === g.roundsTotal - 1 ? "Final" : "Round " + (g.round + 1) + " of " + g.roundsTotal;
     root.querySelector("#rps-round").innerHTML = `${rname} · best of ${g.bestOf} <span class="fr-timer" data-timer></span>`;
-    const mine = g.bracket[g.round].find((m) => !m.winner && (m.a === S.you || m.b === S.you));
     const duel = root.querySelector("#rps-duel");
     const revealed = g.phase === "reveal" && g.reveal;
+    // During a reveal keep the match that was just played visible, even if this throw decided it.
+    const mine = revealed
+      ? g.bracket[g.round].find((m) => (m.a === S.you || m.b === S.you) && g.reveal.results.some((x) => x.a === m.a && x.b === m.b))
+      : g.bracket[g.round].find((m) => !m.winner && (m.a === S.you || m.b === S.you));
     let status;
     if (mine) {
       const meA = mine.a === S.you;
@@ -85,7 +88,7 @@ GameUI.rps = (() => {
     }
     root.querySelector("#rps-status").textContent = status;
     root.querySelectorAll("[data-move]").forEach((b) => {
-      b.disabled = !(mine && g.phase === "pick" && !g.myPick);
+      b.disabled = !(mine && g.phase === "pick" && !g.myPick && !mine.winner);
       b.setAttribute("aria-pressed", String(g.myPick === b.dataset.move));
       b.classList.toggle("picked", g.myPick === b.dataset.move);
     });

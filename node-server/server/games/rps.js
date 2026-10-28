@@ -62,7 +62,7 @@ function start(st, api) {
 }
 
 const need = (st) => Math.ceil(st.settings.bestOf / 2);
-const liveMatches = (st) => st.rounds[st.round].filter((m) => !m.winner);
+const liveMatches = (st) => st.rounds[st.round].filter((m) => !m.winner && !m.dead);
 
 function setScore(st, api, p) {
   const mem = api.member(p.id);
@@ -86,13 +86,13 @@ function decide(st, api, match, side, forfeit) {
 // Byes and matches whose opponent has left resolve immediately.
 function settleByes(st, api) {
   for (const m of st.rounds[st.round]) {
-    if (m.winner) continue;
+    if (m.winner || m.dead) continue;
     const a = m.a && P(st, m.a);
     const b = m.b && P(st, m.b);
     const aGone = !a || a.left;
     const bGone = !b || b.left;
     if (aGone && bGone) {
-      m.winner = '';
+      m.dead = true; // both sides gone: explicitly resolved, never played or advanced
       m.bye = true;
     } else if (!m.b || bGone) {
       m.bye = !m.b;
@@ -148,7 +148,10 @@ function resolveThrow(st, api) {
 function nextAfterReveal(st, api) {
   if (liveMatches(st).length) {
     settleByes(st, api); // an opponent may have left during the reveal
-    if (liveMatches(st).length) return beginThrow(st, api);
+    if (liveMatches(st).length) {
+      beginThrow(st, api);
+      return api.changed(); // clients are still showing the reveal until this is broadcast
+    }
   }
   advanceRound(st, api);
 }
@@ -205,7 +208,7 @@ function onLeave(st, id, api) {
   if (!p || p.left) return;
   p.left = true;
   api.sys(`${p.name} left.`, 'warn');
-  const match = st.rounds[st.round].find((x) => !x.winner && (x.a === id || x.b === id));
+  const match = st.rounds[st.round].find((x) => !x.winner && !x.dead && (x.a === id || x.b === id));
   if (match) {
     decide(st, api, match, match.a === id ? 'b' : 'a', true);
     p.out = true;
@@ -234,7 +237,7 @@ function bracketView(st) {
 }
 
 function view(st, m, now) {
-  const mine = st.rounds[st.round].find((x) => !x.winner && (x.a === m.id || x.b === m.id));
+  const mine = st.rounds[st.round].find((x) => !x.winner && !x.dead && (x.a === m.id || x.b === m.id));
   const side = mine ? (mine.a === m.id ? 'a' : 'b') : null;
   return {
     players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, out: p.out, left: p.left, wins: p.matchWins })),

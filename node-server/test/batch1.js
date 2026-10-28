@@ -185,6 +185,30 @@ function fakeRoom(names, gameId, settings, gameCount = 1) {
   const lv2 = fakeRoom(['A', 'B'], 'rps', {});
   lv2.leave(0);
   ok(lv2.log.ended && lv2.log.ended.winnerId === 'p1', 'RPS: last player standing wins if the other leaves');
+  // review regressions (Codex, PR #27)
+  {
+    // 1) the start of the next throw after a tie must be broadcast, or clients stay on the reveal
+    const t2 = fakeRoom(['A', 'B'], 'rps', { bestOf: 3, pickTime: 8 });
+    t2.act(0, { type: 'pick', move: 'rock' }); t2.act(1, { type: 'pick', move: 'rock' });
+    const before = t2.log.changed;
+    t2.adv(2600);
+    ok(t2.st.phase === 'pick' && t2.log.changed > before, 'RPS: the next throw after a tie is broadcast to clients');
+    // 2) a deciding throw stays visible in the reveal for the participants
+    const d2 = fakeRoom(['A', 'B'], 'rps', { bestOf: 1, pickTime: 8 });
+    d2.act(0, { type: 'pick', move: 'rock' }); d2.act(1, { type: 'pick', move: 'scissors' });
+    const vv = d2.view(1);
+    ok(vv.phase === 'reveal' && vv.bracket[0][0].winner && vv.reveal.results.some((x) => x.pickA && x.pickB), 'RPS: a match-deciding throw still carries both picks in the reveal');
+    // 3) both semifinal winners leave during the reveal: the dead final is never played
+    const d3 = fakeRoom(['A', 'B', 'C', 'D'], 'rps', { bestOf: 1, pickTime: 8 });
+    for (const m of d3.st.rounds[0]) {
+      d3.act(d3.members.findIndex((x) => x.id === m.a), { type: 'pick', move: 'rock' });
+      d3.act(d3.members.findIndex((x) => x.id === m.b), { type: 'pick', move: 'scissors' });
+    }
+    ok(d3.st.phase === 'reveal', 'RPS: both semifinals decided');
+    for (const m of d3.st.rounds[0]) d3.leave(d3.members.findIndex((x) => x.id === m.winner));
+    d3.adv(2600);
+    ok(d3.log.ended && d3.log.ended.winnerId === null && d3.st.phase !== 'pick', 'RPS: a final between two departed players is resolved without throws and crowns nobody');
+  }
   // spectator action ignored
   const sp = fakeRoom(['A', 'B', 'C', 'D', 'E'], 'rps', { bestOf: 1 });
   const byeHolder = sp.st.rounds[0].find((x) => x.bye).a;
