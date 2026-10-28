@@ -138,6 +138,56 @@
       blurb: "Fast questions, faster fingers",
       art: '<img src="/assets/trivia.svg" alt="A question mark in a speech bubble" width="180" height="180">',
     },
+    telephone: {
+      name: "Drawing Telephone",
+      slug: "drawing-telephone",
+      min: 3,
+      max: 8,
+      players: "3–8 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Draw it, describe it, watch it go wrong",
+      art: '<img src="/assets/telephone.svg" alt="A pencil and a speech bubble" width="180" height="180">',
+    },
+    bluff: {
+      name: "Bluff Battle",
+      slug: "bluff-battle",
+      min: 3,
+      max: 10,
+      players: "3–10 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Invent fake answers and fool your friends",
+      art: '<img src="/assets/bluff.svg" alt="A masked face" width="180" height="180">',
+    },
+    impostor: {
+      name: "The Impostor",
+      slug: "the-impostor",
+      min: 3,
+      max: 10,
+      players: "3–10 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "One of you doesn't know the secret word",
+      art: '<img src="/assets/impostor.svg" alt="A hooded figure with a question mark" width="180" height="180">',
+    },
+    liarsdice: {
+      name: "Liar's Dice",
+      slug: "liars-dice",
+      min: 2,
+      max: 8,
+      players: "2–8 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Bid on hidden dice or call the bluff",
+      art: '<img src="/assets/liars-dice.svg" alt="Two dice" width="180" height="180">',
+    },
+    hotpotato: {
+      name: "Hot Potato",
+      slug: "hot-potato",
+      min: 2,
+      max: 10,
+      players: "2–10 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Answer fast and pass the bomb",
+      art: '<img src="/assets/hot-potato.svg" alt="A round bomb with a lit fuse" width="180" height="180">',
+    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -603,6 +653,21 @@
         sel("answerTime", "Time To Answer", [10, 15, 20], s.answerTime, (v) => v + " seconds") +
         `<label class="field"><span>Category</span><select data-setting="category">${["mixed", "Science", "Geography", "History", "Entertainment", "Sports", "Food"].map((v) => opt(v, s.category, v === "mixed" ? "Mixed" : v)).join("")}</select></label>`
       );
+    if (gameId === "telephone")
+      return sel("drawTime", "Drawing Time", [45, 60, 90], s.drawTime, (v) => v + " seconds") + sel("writeTime", "Writing Time", [20, 30, 45], s.writeTime, (v) => v + " seconds");
+    if (gameId === "bluff")
+      return sel("rounds", "Questions", [3, 5, 8], s.rounds) + sel("bluffTime", "Time To Bluff", [30, 45, 60], s.bluffTime, (v) => v + " seconds") + sel("voteTime", "Time To Vote", [15, 20, 30], s.voteTime, (v) => v + " seconds");
+    if (gameId === "impostor")
+      return (
+        sel("rounds", "Rounds", [1, 3, 5], s.rounds) +
+        sel("clueRounds", "Clues Per Player", [1, 2, 3], s.clueRounds) +
+        sel("clueTime", "Time Per Clue", [20, 30, 45], s.clueTime, (v) => v + " seconds") +
+        sel("discussTime", "Discussion Time", [30, 60, 90], s.discussTime, (v) => v + " seconds")
+      );
+    if (gameId === "liarsdice")
+      return sel("dice", "Dice Each", [3, 5], s.dice) + sel("turnTime", "Turn Timer", [20, 30, 60], s.turnTime, (v) => v + " seconds") + `<label class="check"><span>Ones Are Wild <small>Ones count as any face except ones</small></span><input type="checkbox" data-setting="wild" ${s.wild ? "checked" : ""}></label>`;
+    if (gameId === "hotpotato")
+      return sel("lives", "Lives", [1, 2, 3], s.lives) + `<label class="field"><span>Fuse Length</span><select data-setting="fuse">${[["short", "Short"], ["medium", "Medium"], ["long", "Long"]].map(([v, l]) => opt(v, s.fuse, l)).join("")}</select></label>`;
     if (gameId === "colorstack" || gameId === "gofish")
       return sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
     return `<label class="field"><span>Turn Timer</span><select data-setting="turnTime">${[
@@ -703,6 +768,11 @@
     dotsboxes: { size: 4, turnTime: 30 },
     wordscramble: { rounds: 8, roundTime: 30, difficulty: "medium" },
     trivia: { questions: 10, answerTime: 15, category: "mixed" },
+    telephone: { drawTime: 60, writeTime: 30 },
+    bluff: { rounds: 5, bluffTime: 45, voteTime: 20 },
+    impostor: { rounds: 3, clueRounds: 2, clueTime: 30, discussTime: 60 },
+    liarsdice: { dice: 5, turnTime: 30, wild: true },
+    hotpotato: { lives: 2, fuse: "medium" },
   };
 
   // ---------- create lobby ----------

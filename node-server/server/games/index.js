@@ -13,6 +13,11 @@ const list = [
   require('./dotsboxes'),
   require('./wordscramble'),
   require('./trivia'),
+  require('./telephone'),
+  require('./bluff'),
+  require('./impostor'),
+  require('./liarsdice'),
+  require('./hotpotato'),
 ];
 
 const GAMES = {};
