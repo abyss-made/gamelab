@@ -226,7 +226,7 @@ function fakeRoom(names, gameId, settings) {
   r.st.turn = 1; r.st.drawn = null; r.st.color = 'y'; r.st.discard.push({ id: 907, c: 'y', v: '9' });
   P[1].hand = [{ id: 950, c: 'y', v: '4' }];
   P[0].hand = [{ id: 951, c: 'r', v: '5' }];
-  P[2].hand = [{ id: 952, c: 'w', v: '4' }];
+  P[2].hand = [{ id: 952, c: 'w', v: 'P' }];
   r.act(idx(1), { type: 'play', card: 950 });
   ok(r.log.ended && r.log.ended.winnerId === P[1].id && r.log.ended.pts === 5 + 50, 'Color Stack: emptying your hand wins and scores opponents\' card values');
   // timeouts: auto-draw, then removed after repeated idling
@@ -333,6 +333,45 @@ function fakeRoom(names, gameId, settings) {
   let k = 0;
   while (!ri.log.ended && k++ < 10) ri.adv(21000);
   ok(ri.log.ended, 'Go Fish: nobody acting eventually removes idle players and ends the game');
+})();
+
+
+// ---------------- Review regressions (Codex findings on PR #26) ----------------
+(function regressions() {
+  // numeric fours are not Wild Draw Four
+  const r = fakeRoom(['A', 'B', 'C'], 'colorstack', {});
+  const P = r.st.players;
+  const idx = (i) => r.members.findIndex((m) => m.id === P[i].id);
+  r.st.discard = [{ id: 900, c: 'r', v: '9' }]; r.st.color = 'r'; r.st.turn = 0;
+  P[0].hand = [{ id: 901, c: 'r', v: '4' }, { id: 902, c: 'b', v: '1' }];
+  const n1 = P[1].hand.length;
+  r.act(idx(0), { type: 'play', card: 901 });
+  ok(P[1].hand.length === n1 && r.st.turn === 1, 'Color Stack: a numeric 4 has no draw effect and does not skip');
+  r.st.discard = [{ id: 910, c: 'w', v: 'P' }]; r.st.color = 'g'; r.st.turn = 1; r.st.drawn = null;
+  P[1].hand = [{ id: 911, c: 'r', v: '4' }, { id: 912, c: 'g', v: '2' }];
+  r.act(idx(1), { type: 'play', card: 911 });
+  ok(P[1].hand.length === 2, 'Color Stack: a numeric 4 cannot be played on a Wild Draw Four of another color');
+  P[1].hand = [{ id: 913, c: 'w', v: 'P' }, { id: 914, c: 'g', v: '2' }];
+  const n2 = P[2].hand.length;
+  r.act(idx(1), { type: 'play', card: 913, color: 'b' });
+  ok(P[2].hand.length === n2 + 4, 'Color Stack: Wild Draw Four still makes the next player draw 4');
+  // Higher or Lower: reveal keeps the previous card
+  const h = fakeRoom(['A', 'B'], 'higherlower', { rounds: 5 });
+  h.st.current = { r: 9, s: 'H' }; h.st.next = { r: 3, s: 'S' };
+  h.act(0, { type: 'guess', dir: 'lower' }); h.act(1, { type: 'guess', dir: 'lower' });
+  const rv = h.view(0);
+  ok(rv.current.r === 9 && rv.reveal.card.r === 3, 'Higher or Lower: reveal shows the previous card and the new card');
+  h.adv(3500);
+  ok(h.view(0).current.r === 3 && h.view(0).reveal === null, 'Higher or Lower: revealed card becomes the current card next round');
+  // forfeits: departed leader can't win (Higher or Lower and Categories)
+  const h2 = fakeRoom(['A', 'B'], 'higherlower', { rounds: 5 });
+  h2.st.players[0].points = 10; h2.st.players[1].points = 2;
+  h2.leaveId(h2.st.players[0].id);
+  ok(h2.log.ended && h2.log.ended.winnerId === h2.st.players[1].id && h2.log.ended.standings.length === 2, 'Higher or Lower: the player left standing wins a forfeit even with fewer points');
+  const c2 = fakeRoom(['A', 'B'], 'categories', { rounds: 3 });
+  c2.st.players[0].points = 10; c2.st.players[1].points = 2;
+  c2.leaveId(c2.st.players[0].id);
+  ok(c2.log.ended && c2.log.ended.winnerId === c2.st.players[1].id, 'Categories: the player left standing wins a forfeit even with fewer points');
 })();
 
 // ---------------- Real clients: persistence, switching, privacy ----------------

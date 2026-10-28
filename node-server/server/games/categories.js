@@ -156,10 +156,12 @@ function onAction(st, m, a, api) {
 function finish(st, api, forfeit) {
   if (st.over) return;
   st.over = true;
-  const standings = st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, points: p.points })).sort((x, y) => y.points - x.points);
-  const top = standings[0] ? standings[0].points : 0;
-  const winners = standings.filter((s) => s.points === top).map((s) => s.id);
-  api.sys(winners.length > 1 ? 'It ends in a tie!' : `${standings[0].name} wins!`, 'good');
+  const standings = st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, points: p.points, out: p.out })).sort((x, y) => y.points - x.points);
+  // Players who left or were dropped stay in the standings but can't win.
+  const eligible = standings.filter((s) => !s.out);
+  const top = eligible[0] ? eligible[0].points : 0;
+  const winners = eligible.filter((s) => s.points === top).map((s) => s.id);
+  api.sys(winners.length > 1 ? 'It ends in a tie!' : `${eligible[0].name} wins!`, 'good');
   api.end({ type: 'categories', winnerId: winners[0] || null, winners, tie: winners.length > 1, standings, forfeit: !!forfeit });
 }
 

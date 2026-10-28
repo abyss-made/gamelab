@@ -97,7 +97,7 @@ function resolve(st, api) {
   st.reveal = { card: nxt, results };
   st.phase = 'reveal';
   st.deadline = api.now() + REVEAL_MS;
-  st.current = nxt;
+  // st.current stays the card that was guessed against; it is promoted when the next round is dealt.
   api.changed();
 }
 
@@ -114,10 +114,12 @@ function onAction(st, m, a, api) {
 function finish(st, api, forfeit) {
   if (st.over) return;
   st.over = true;
-  const standings = st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, points: p.points, best: p.best, correct: p.correct })).sort((x, y) => y.points - x.points);
-  const top = standings[0] ? standings[0].points : 0;
-  const winners = standings.filter((s) => s.points === top).map((s) => s.id);
-  api.sys(winners.length > 1 ? 'It ends in a tie!' : `${standings[0].name} wins!`, 'good');
+  const standings = st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, points: p.points, best: p.best, correct: p.correct, out: p.out })).sort((x, y) => y.points - x.points);
+  // Players who left or were dropped stay in the standings but can't win.
+  const eligible = standings.filter((s) => !s.out);
+  const top = eligible[0] ? eligible[0].points : 0;
+  const winners = eligible.filter((s) => s.points === top).map((s) => s.id);
+  api.sys(winners.length > 1 ? 'It ends in a tie!' : `${eligible[0].name} wins!`, 'good');
   api.end({ type: 'higherlower', winnerId: winners[0] || null, winners, tie: winners.length > 1, standings, rounds: st.round, forfeit: !!forfeit });
 }
 
@@ -125,6 +127,7 @@ function tick(st, api, now) {
   if (st.over || now < st.deadline) return;
   if (st.phase === 'guess') return resolve(st, api);
   if (st.round >= st.settings.rounds || activeP(st).length < 2) return finish(st, api);
+  st.current = st.next;
   deal(st, api);
   api.changed();
 }

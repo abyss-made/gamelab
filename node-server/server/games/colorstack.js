@@ -18,7 +18,7 @@ const defaults = { turnTime: 30 };
 const COLORS = ['r', 'b', 'g', 'y'];
 const HAND = 7;
 const IDLE_LIMIT = 3;
-// Card values: '0'-'9' numbers, 'S' skip, 'F' flip (reverse), 'D' draw two, 'W' wild, '4' wild draw four.
+// Card values: '0'-'9' numbers, 'S' skip, 'F' flip (reverse), 'D' draw two, 'W' wild, 'P' wild draw four.
 
 function sanitizeSettings(s, prev) {
   const o = { ...prev };
@@ -43,7 +43,7 @@ function buildDeck() {
   }
   for (let i = 0; i < 4; i++) {
     add('w', 'W');
-    add('w', '4');
+    add('w', 'P');
   }
   return cards;
 }
@@ -157,7 +157,7 @@ function play(st, p, a, api) {
     else st.dir = -st.dir;
   } else if (card.v === 'S') {
     skip = 1;
-  } else if (card.v === 'D' || card.v === '4') {
+  } else if (card.v === 'D' || card.v === 'P') {
     const victim = st.players[step(st, st.turn, 1)];
     const n = card.v === 'D' ? 2 : 4;
     drawCards(st, victim, n);

@@ -3,7 +3,7 @@ window.GameUI = window.GameUI || {};
 GameUI.colorstack = (() => {
   const C = GameUI.common;
   const NAMES = { r: "Red", b: "Blue", g: "Green", y: "Yellow", w: "Wild" };
-  const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", 4: "+4" };
+  const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", P: "+4" };
   let root = null;
   let app = null;
   let clock = null;

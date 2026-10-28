@@ -53,7 +53,7 @@ GameUI.categories = (() => {
       if (key !== roundKey) {
         roundKey = key;
         body.innerHTML = `<div class="cr-grid">${g.cats
-          .map((c, i) => `<label class="cr-cell"><span>${app.esc(c)}</span><input data-cat="${i}" type="text" maxlength="30" autocomplete="off" autocapitalize="words" placeholder="${g.letter}…" ${g.myIndex < 0 ? "disabled" : ""}></label>`)
+          .map((c, i) => `<label class="cr-cell"><span>${app.esc(c)}</span><input data-cat="${i}" type="text" maxlength="30" autocomplete="off" autocapitalize="words" placeholder="${g.letter}…" value="${app.esc((g.myAnswers && g.myAnswers[i]) || "")}" ${g.myIndex < 0 ? "disabled" : ""}></label>`)
           .join("")}</div>
           <div class="cr-actions"><p class="muted" id="cr-note"></p><button class="btn" id="cr-done" ${g.myIndex < 0 ? "disabled" : ""}>I'm done</button></div>`;
         const first = body.querySelector("input");
