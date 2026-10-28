@@ -26,26 +26,35 @@ GameUI.telephone = (() => {
   let size = 10;
   let cur = null;
 
+  const paintDot = (x, h) => {
+    x.fillStyle = h.c;
+    x.beginPath();
+    x.arc(h.p[0], h.p[1], h.s / 2, 0, 7);
+    x.fill();
+  };
+  const paintSeg = (x, h, x0, y0, x1, y1) => {
+    x.strokeStyle = h.c;
+    x.lineWidth = h.s;
+    x.lineCap = x.lineJoin = "round";
+    x.beginPath();
+    x.moveTo(x0, y0);
+    x.lineTo(x1, y1);
+    x.stroke();
+  };
+  const paintFill = (x, h) => {
+    const img = x.getImageData(0, 0, W, H);
+    if (GameUI.fill.floodFill(img.data, W, H, h.x, h.y, h.c)) x.putImageData(img, 0, 0);
+  };
+  // Full redraw: only for undo/clear and for showing finished drawings.
   const replay = (c, hist) => {
     const x = c.getContext("2d", { willReadFrequently: true });
     x.fillStyle = "#fff";
     x.fillRect(0, 0, W, H);
-    x.lineCap = x.lineJoin = "round";
     for (const h of hist || []) {
       if (h.t === "s") {
-        x.strokeStyle = x.fillStyle = h.c;
-        x.lineWidth = h.s;
-        x.beginPath();
-        x.arc(h.p[0], h.p[1], h.s / 2, 0, 7);
-        x.fill();
-        x.beginPath();
-        x.moveTo(h.p[0], h.p[1]);
-        for (let i = 2; i < h.p.length; i += 2) x.lineTo(h.p[i], h.p[i + 1]);
-        x.stroke();
-      } else if (h.t === "f") {
-        const img = x.getImageData(0, 0, W, H);
-        if (GameUI.fill.floodFill(img.data, W, H, h.x, h.y, h.c)) x.putImageData(img, 0, 0);
-      }
+        paintDot(x, h);
+        for (let i = 2; i < h.p.length; i += 2) paintSeg(x, h, h.p[i - 2], h.p[i - 1], h.p[i], h.p[i + 1]);
+      } else if (h.t === "f") paintFill(x, h);
     }
   };
   const thumb = (strokes, label) => {
@@ -105,15 +114,16 @@ GameUI.telephone = (() => {
       const u = usage();
       if (u.strokes >= MAX_STROKES || u.points >= MAX_POINTS - 50 || (tool === "fill" && u.fills >= MAX_FILLS)) return showLimit();
       if (tool === "fill") {
-        history.push({ t: "f", x, y, c: color });
-        replay(cv, history);
+        const f = { t: "f", x, y, c: color };
+        history.push(f);
+        paintFill(cv.getContext("2d", { willReadFrequently: true }), f);
         showLimit();
         return;
       }
       cv.setPointerCapture(e.pointerId);
       cur = { t: "s", c: tool === "eraser" ? "#ffffff" : color, s: size, p: [x, y] };
       history.push(cur);
-      replay(cv, history);
+      paintDot(cv.getContext("2d"), cur);
     });
     cv.addEventListener("pointermove", (e) => {
       if (!cur) return;
@@ -122,7 +132,7 @@ GameUI.telephone = (() => {
       if (Math.abs(cur.p[n - 2] - x) + Math.abs(cur.p[n - 1] - y) < 2) return;
       if (usage().points >= MAX_POINTS - 50) return showLimit();
       cur.p.push(x, y);
-      replay(cv, history);
+      paintSeg(cv.getContext("2d"), cur, cur.p[n - 2], cur.p[n - 1], x, y);
     });
     const up = () => {
       cur = null;

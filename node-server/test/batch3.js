@@ -385,6 +385,14 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   ok(r.log.ended && r.log.ended.type === 'hotpotato' && r.log.ended.winnerId && r.log.ended.standings.length === 3, 'Hot Potato: the last player with lives wins');
   ok(r.log.ended.standings.filter((s) => !s.out).length === 1, 'Hot Potato: exactly one player is left standing');
 
+  // a pass arriving after expiry but before the next tick must not dodge or shift the penalty
+  const late = fakeRoom(['A', 'B', 'C'], 'hotpotato', { lives: 2, fuse: 'short' });
+  const xh = late.idx(late.view(0).holderId);
+  const xt = (xh + 1) % 3;
+  late.api.now = () => late.st.holdUntil + 1; // hold limit expired, tick not yet run
+  late.G.onAction(late.st, late.members[xh], { type: 'pass', to: late.members[xt].id, answer: 'late' }, late.api);
+  ok(late.st.phase === 'boom' && late.st.boom.id === late.members[xh].id && late.st.players[xt].lives === 2, 'Hot Potato: a pass that arrives after the hold limit expired explodes on the holder, not the recipient');
+
   const d = fakeRoom(['A', 'B', 'C'], 'hotpotato', { lives: 1 });
   const dh = d.idx(d.view(0).holderId);
   d.leave(dh);

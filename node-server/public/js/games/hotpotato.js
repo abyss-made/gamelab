@@ -57,9 +57,11 @@ GameUI.hotpotato = (() => {
     root.querySelector("#hp-prompt").textContent = g.prompt + "!";
     root.querySelector("#hp-last").textContent = g.lastAnswer ? `${(g.players.find((p) => p.id === g.lastAnswer.by) || {}).name || "Someone"} said “${g.lastAnswer.text}”` : "";
     const holding = g.phase === "play" && g.holderId === S.you;
-    if (!holding) target = null;
+    const eligible = g.players.filter((p) => !p.out && p.id !== S.you).map((p) => p.id);
+    // A recipient who left (or can no longer be picked) must not stay selected.
+    if (!holding || !eligible.includes(target)) target = null;
     const body = root.querySelector("#hp-body");
-    const k = [g.round, g.phase, holding, g.holderId, target, g.used].join("|");
+    const k = [g.round, g.phase, holding, g.holderId, g.fromId, target, g.used, eligible.join(",")].join("|");
     if (k !== key) {
       key = k;
       // Re-rendering (e.g. choosing a recipient) must not wipe a half-typed answer.

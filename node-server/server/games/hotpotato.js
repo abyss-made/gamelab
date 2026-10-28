@@ -63,6 +63,11 @@ function syncScores(st, api) {
 
 function onAction(st, m, a, api) {
   if (st.over || st.phase !== 'play' || !a || a.type !== 'pass') return;
+  // A pass that arrives after the fuse or hold limit ran out is too late: the bomb goes off on the holder first.
+  if (api.now() >= st.deadline) {
+    tick(st, api, api.now());
+    return;
+  }
   const i = st.players.findIndex((p) => p.id === m.id);
   if (i < 0 || i !== st.holder) return; // only the holder can pass
   const target = st.players.findIndex((p) => p.id === a.to);
