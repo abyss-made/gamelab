@@ -662,6 +662,12 @@
   }
 
   function join(code, { silent } = {}) {
+    if (!silent && currentCode === code) {
+      nav("/r/" + code);
+      return;
+    }
+    // Every deliberate join to a different room goes through the leave guard.
+    if (!silent && !leaveForOtherRoom()) return;
     socket.emit("joinRoom", { code, profile, token }, (res) =>
       handleJoin(res, silent),
     );
@@ -679,6 +685,7 @@
     if (!silent && location.pathname !== "/r/" + res.code)
       history.pushState({}, "", "/r/" + res.code);
     if (fresh) {
+      unmountStage();
       S = null;
       mounted = null;
       lastResultKey = null;

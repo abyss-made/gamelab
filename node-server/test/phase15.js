@@ -128,6 +128,20 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       ok(/will leave it/.test(await page.textContent('#join-switch-note')), 'deep link to another room warns before leaving the current one');
       ok(f.state.players.length === 2 && other.state.players.length === 1, 'merely opening another invite does not join it or leave the first room');
 
+      // joining another room by code while in a game asks first, then leaves the old room
+      const msgs = [];
+      const onDlg = (d) => { msgs.push(d.message()); return d.dismiss(); };
+      page.removeAllListeners('dialog');
+      page.on('dialog', onDlg);
+      await page.click('.main-nav [data-view="selection"]');
+      await page.waitForSelector('#code-input');
+      await page.fill('#code-input', r2.code);
+      await page.press('#code-input', 'Enter');
+      await sleep(400);
+      ok(msgs.length === 1 && /in progress/.test(msgs[0]), 'joining another room by code asks for confirmation while a game is running');
+      ok(f.state.players.length === 2 && other.state.players.length === 1, 'declining the confirmation keeps the first room and does not join the second');
+      page.removeListener('dialog', onDlg);
+      page.on('dialog', (d) => d.accept());
       // explicit leave: host passes on, indicator disappears
       await page.click('#return-bar').catch(() => {});
       await page.evaluate((c) => { history.pushState({}, '', '/r/' + c); window.dispatchEvent(new PopStateEvent('popstate')); }, code);
