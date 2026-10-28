@@ -57,11 +57,13 @@ function render(page) {
 const rendered = {};
 for (const [p, page] of Object.entries(PAGES)) rendered[p] = render(page);
 
-for (const p of Object.keys(PAGES)) app.get(p, (req, res) => res.type('html').send(rendered[p]));
-app.get('/r/:code', (req, res) => res.type('html').send(rendered['/']));
+for (const p of Object.keys(PAGES)) app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered[p]));
+app.get('/r/:code', (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/api/rooms', (req, res) => res.json(rooms.listPublic()));
 app.get('/healthz', (req, res) => res.send('ok'));
-app.use(express.static(PUBLIC, { index: false, maxAge: '1h' }));
+app.use(express.static(PUBLIC, { index: false, maxAge: '1h', setHeaders(res, filePath) {
+  if (/\.(?:js|css)$/i.test(filePath)) res.setHeader('Cache-Control', 'no-store');
+} }));
 app.use((req, res) => res.status(404).type('html').send(rendered['/']));
 
 rooms.attach(io);
