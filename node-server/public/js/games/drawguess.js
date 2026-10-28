@@ -46,7 +46,10 @@ GameUI.drawguess = (() => {
 
   let tool = "brush";
   let color = "#000000";
-  let size = 10;
+  // Brush and eraser remember their own sizes; fill has no size.
+  const sizes = { brush: 10, eraser: 10 };
+  const sizeTool = () => (tool === "eraser" ? "eraser" : "brush");
+  const curSize = () => sizes[sizeTool()];
   let remote = null;
   let local = null;
   let pending = [];
@@ -147,6 +150,7 @@ GameUI.drawguess = (() => {
     }
     canvas.setPointerCapture(e.pointerId);
     const c = tool === "eraser" ? "#ffffff" : color;
+    const size = curSize();
     local = { x, y, c, s: size };
     dot(x, y, c, size);
     app.socket.emit("draw", { op: "begin", x, y, color: c, size });
@@ -181,7 +185,7 @@ GameUI.drawguess = (() => {
       <button class="tool ${tool === "brush" ? "on" : ""}" data-tool="brush" title="Brush" aria-label="Brush" aria-pressed="${tool === "brush"}">${icon("brush")}</button>
       <button class="tool ${tool === "eraser" ? "on" : ""}" data-tool="eraser" title="Eraser" aria-label="Eraser" aria-pressed="${tool === "eraser"}">${icon("eraser")}</button>
       <button class="tool ${tool === "fill" ? "on" : ""}" data-tool="fill" title="Paint bucket" aria-label="Paint bucket" aria-pressed="${tool === "fill"}">${icon("fill")}</button>
-      </div><label class="tool-field">Size<input id="brush-size" type="range" min="4" max="38" step="2" value="${size}" aria-label="Brush size"></label>
+      </div><label class="tool-field">${tool === "eraser" ? "Eraser size" : "Brush size"}<input id="brush-size" type="range" min="4" max="38" step="2" value="${curSize()}" aria-label="${tool === "eraser" ? "Eraser size" : "Brush size"}"></label>
       <div class="tool-field"><span>Color</span><div class="dg-palette">${PALETTE.map((c) => `<button class="swatch ${c === color ? "on" : ""}" style="--sw:${c}" data-color="${c}" title="${c}" aria-label="Color ${c}" aria-pressed="${c === color}"></button>`).join("")}</div></div>
       <div class="dg-actions"><button class="tool" data-do="undo" title="Undo" aria-label="Undo last stroke">${icon("undo")}</button><button class="tool" data-do="clear" title="Clear" aria-label="Clear drawing">${icon("trash")}</button></div><span class="tool-caption">Only the drawer can draw</span>`;
   }
@@ -204,7 +208,7 @@ GameUI.drawguess = (() => {
     stage.appendChild(root);
     root.addEventListener("click", onClick);
     root.addEventListener("input", (e) => {
-      if (e.target.id === "brush-size") size = Number(e.target.value);
+      if (e.target.id === "brush-size") sizes[sizeTool()] = Number(e.target.value);
     });
     $("#dg-expand").addEventListener("click", () => setBig(!big));
     document.addEventListener("keydown", onKey);
@@ -216,6 +220,8 @@ GameUI.drawguess = (() => {
   // Enlarged canvas: on wide screens the side list is hidden and the stage grows (chat stays);
   // on phones the drawing area fills the screen. Same canvas element, so nothing is lost.
   let big = false;
+  const isPhone = () =>
+    window.matchMedia("(max-width: 600px), (max-height: 500px) and (orientation: landscape)").matches;
   function setBig(on) {
     big = !!on;
     if (!root) return;
@@ -225,7 +231,7 @@ GameUI.drawguess = (() => {
     b.innerHTML =
       icon("expand") +
       "<span>" +
-      (big ? "Restore Size" : "Expand Canvas") +
+      (big ? (isPhone() ? "Close" : "Restore Size") : "Expand Canvas") +
       "</span>";
     b.setAttribute("aria-pressed", String(big));
   }
@@ -243,7 +249,7 @@ GameUI.drawguess = (() => {
       color = c.dataset.color;
       if (tool === "eraser") tool = "brush";
     }
-    if (s) size = Number(s.dataset.size);
+    if (s) sizes[sizeTool()] = Number(s.dataset.size);
     if (t) tool = t.dataset.tool;
     if (d && canDraw()) {
       if (d.dataset.do === "clear" && !confirm("Clear the whole drawing?"))
