@@ -44,6 +44,31 @@ const PAGES = {
     desc: 'Play 4 in a Row online against a friend. Send a link and play in seconds. Free, no download, no account.',
     game: 'fourrow',
   },
+  '/word-chain': {
+    title: `Word Chain - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Chain words by their last letter. Each word must start with the last letter of the one before. Free, no account.',
+    game: 'wordchain',
+  },
+  '/categories-rush': {
+    title: `Categories Rush - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Fill in categories for a letter before time runs out. Unique answers score more. Free, no account.',
+    game: 'categories',
+  },
+  '/higher-or-lower': {
+    title: `Higher or Lower - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Guess whether the next card is higher or lower and build a streak. Free multiplayer, no account.',
+    game: 'higherlower',
+  },
+  '/color-stack': {
+    title: `Color Stack - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Match colors and numbers and be first to empty your hand. Free multiplayer card game, no account.',
+    game: 'colorstack',
+  },
+  '/go-fish': {
+    title: `Go Fish - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Ask for ranks, fish from the deck and collect books. Free multiplayer card game, no account.',
+    game: 'gofish',
+  },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');

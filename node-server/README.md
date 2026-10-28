@@ -1,9 +1,16 @@
 # Playgrid
 
-Browser party games with lobbies. No accounts, no database. Version 1 has two games:
+Browser party games with lobbies. No accounts, no database. Seven games are playable:
 
 - **Draw & Guess** (2-12 players): one person draws, everyone else guesses in chat.
 - **4 in a Row** (2 players + spectators).
+- **Word Chain** (2-8): each word starts with the last letter of the previous one; no repeats; timeouts cost lives.
+- **Categories Rush** (2-12): fill in categories for a letter; unique answers score 2, matching answers 1.
+- **Higher or Lower** (2-8): server-managed deck; guess if the hidden next card is higher or lower; streak scoring.
+- **Color Stack** (2-8): original color/number matching and shedding-card game with action and wild cards.
+- **Go Fish** (2-6): ask for ranks, fish from the deck, make books.
+
+The five newer games are server-authoritative: decks, hands and hidden cards stay on the server, spectators never receive hands, and each player's view contains only their own cards. Rules, limits and manual QA notes are in [docs/issue-22-qa.md](../docs/issue-22-qa.md).
 
 What's in it: create lobby, Quick Play, public lobby browser, one share link per lobby, host controls (public/private, lock, max players, spectators, game settings, switch game, kick, end game), spectators with Take Seat, winner-stays, vote-kick in public lobbies, chat filter and rate limits, reconnect on refresh, auto start in public lobbies, sounds, mobile layout, ad slot placeholders, and one page per game for Google.
 

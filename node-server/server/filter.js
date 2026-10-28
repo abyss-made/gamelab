@@ -40,4 +40,4 @@ function cleanChat(text) {
   return mask(clean(text, 120));
 }
 
-module.exports = { cleanName, cleanChat, mask, clean };
+module.exports = { cleanName, cleanChat, mask, clean, hasBad };

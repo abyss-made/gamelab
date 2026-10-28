@@ -4376,3 +4376,569 @@ body.dg-big .dg-timer #dg-time {
   font-size: 11px;
   font-weight: 700;
 }
+
+/* ---------- Batch 2 games: Word Chain, Categories Rush, Higher or Lower, Color Stack, Go Fish ---------- */
+.b2 {
+  display: grid;
+  gap: 12px;
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+}
+.b2-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+}
+.b2-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  min-width: 0;
+}
+.b2-player.active {
+  background: #adff0010;
+  box-shadow: 0 0 0 1px #6f9c27;
+}
+.b2-player.offline {
+  opacity: 0.5;
+}
+.b2-player b {
+  font-size: 13px;
+}
+.b2-player .muted {
+  font-size: 11px;
+}
+.b2 .card {
+  padding: 14px;
+}
+.b2-podium {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.b2-podium li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+}
+.b2-podium li.me {
+  border-color: #6f9c27;
+}
+.b2-podium .rank {
+  font-weight: 800;
+  color: var(--lime);
+  min-width: 1.4em;
+}
+.b2-podium .pts {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+.b2 [data-timer].hurry {
+  color: #ff477b;
+}
+/* Word Chain */
+.wc-main {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+.wc-status,
+.cs-status {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+.wc-status.mine,
+.cs-status.mine {
+  color: var(--lime);
+}
+.wc-letter {
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--lime);
+}
+.wc-form {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+}
+.wc-form input {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: #06131d;
+}
+.wc-chain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.wc-chain li {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  display: grid;
+  line-height: 1.2;
+}
+.wc-chain li.new {
+  border-color: var(--lime);
+}
+.wc-chain u {
+  color: var(--lime);
+  text-decoration: none;
+}
+.wc-chain small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.wc-lives {
+  display: inline-flex;
+  gap: 3px;
+}
+.heart {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #203747;
+}
+.heart.on {
+  background: #ff477b;
+}
+/* Categories Rush */
+.cr-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.cr-letter {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--lime);
+  color: #06131d;
+  font-size: 34px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+}
+.cr-who {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.cr-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+}
+.cr-dot.done {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+.cr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+.cr-cell {
+  display: grid;
+  gap: 4px;
+}
+.cr-cell span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.cr-cell input {
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: #06131d;
+}
+.cr-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+.cr-table-wrap {
+  overflow-x: auto;
+}
+.cr-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+.cr-table th,
+.cr-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.cr-table thead th {
+  color: var(--muted);
+  font-weight: 600;
+}
+.cr-table td small {
+  display: block;
+  color: var(--lime);
+}
+.cr-table td.dup small {
+  color: var(--d2);
+}
+.cr-table td.invalid {
+  color: #ff7a7a;
+  text-decoration: line-through;
+}
+.cr-table tr.me {
+  background: #adff0010;
+}
+/* Higher or Lower and playing cards */
+.pc {
+  display: inline-grid;
+  place-items: center;
+  width: 54px;
+  height: 76px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid #030d17;
+  font-weight: 800;
+  line-height: 1;
+  grid-template-rows: auto auto;
+  align-content: center;
+  gap: 2px;
+  flex: none;
+}
+.pc b {
+  font-size: 20px;
+}
+.pc i {
+  font-style: normal;
+  font-size: 20px;
+}
+.pc.red {
+  color: #c30a40;
+}
+.pc.black {
+  color: #10131f;
+}
+.pc.back {
+  background: repeating-linear-gradient(45deg, #1c3091 0 6px, #2a45c4 6px 12px);
+  border-color: #6279d8;
+}
+.pc.big {
+  width: 92px;
+  height: 128px;
+}
+.pc.big b,
+.pc.big i {
+  font-size: 34px;
+}
+.hl-main {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+.hl-cards {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hl-arrow {
+  font-size: 28px;
+  color: var(--muted);
+}
+.hl-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hl-btns .picked {
+  outline: 2px solid var(--lime);
+}
+.hl-streak {
+  color: var(--lime);
+  font-weight: 800;
+}
+.hl-status {
+  min-height: 1.4em;
+  color: var(--muted);
+  text-align: center;
+}
+/* Color Stack */
+.cs-table {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+.cs-piles {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cs-deck {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  background: none;
+  border: 0;
+  padding: 4px;
+  color: var(--muted);
+}
+.cs-deck:not(:disabled):hover .pc {
+  border-color: var(--lime);
+}
+.cs-deck .pc {
+  width: 70px;
+  height: 98px;
+}
+.cs-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.cs-dir {
+  font-size: 22px;
+  color: var(--muted);
+}
+.cs-card {
+  --cc: #444;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  width: 62px;
+  height: 90px;
+  border-radius: 10px;
+  border: 3px solid #f6f8fb;
+  background: var(--cc);
+  color: #fff;
+  font-weight: 800;
+  flex: none;
+  padding: 0;
+}
+.cs-card b {
+  font-size: 22px;
+  text-shadow: 0 1px 2px #0008;
+}
+.cs-card small {
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.cs-card.big {
+  width: 84px;
+  height: 120px;
+}
+.cs-card.big b {
+  font-size: 30px;
+}
+.cs-card:disabled:not(.static) {
+  opacity: 0.45;
+  cursor: default;
+}
+.cs-card.playable {
+  box-shadow: 0 0 0 2px var(--lime);
+  transform: translateY(-6px);
+}
+.c-r {
+  --cc: #d1274b;
+}
+.c-b {
+  --cc: #2f6bff;
+}
+.c-g {
+  --cc: #17a34a;
+}
+.c-y {
+  --cc: #e0a800;
+  color: #10131f;
+}
+.c-w {
+  --cc: linear-gradient(135deg, #d1274b 25%, #2f6bff 25% 50%, #17a34a 50% 75%, #e0a800 75%);
+}
+.cs-card.c-y b {
+  text-shadow: none;
+}
+.cs-color {
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--cc);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.cs-color.c-y {
+  color: #10131f;
+}
+.cs-hand-wrap {
+  overflow-x: auto;
+}
+.cs-hand,
+.gf-hand {
+  display: flex;
+  gap: 8px;
+  padding: 10px 4px 4px;
+  min-height: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cs-count {
+  margin-left: auto;
+  font-weight: 800;
+  color: var(--lime);
+}
+.cs-picker {
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  background: #091925f2;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+.cs-picker[hidden] {
+  display: none;
+}
+.cs-picker p {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: center;
+}
+.cs-pick {
+  min-width: 80px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 2px solid #f6f8fb;
+  background: var(--cc);
+  color: #fff;
+  font-weight: 700;
+}
+.cs-pick.c-y {
+  color: #10131f;
+}
+/* Go Fish */
+.gf-table {
+  display: grid;
+  gap: 12px;
+}
+.gf-ask {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.gf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+.gf-chip {
+  min-width: 44px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--card2);
+  font-weight: 700;
+}
+.gf-chip.on {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+.gf-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: var(--muted);
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+.gf-books {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: auto;
+}
+.gf-books i {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--lime);
+  color: #06131d;
+}
+@media (max-width: 520px) {
+  .pc {
+    width: 46px;
+    height: 66px;
+  }
+  .pc b,
+  .pc i {
+    font-size: 17px;
+  }
+  .pc.big {
+    width: 76px;
+    height: 106px;
+  }
+  .cs-card {
+    width: 54px;
+    height: 80px;
+  }
+  .wc-letter {
+    font-size: 48px;
+  }
+}
+/* The create dialog now lists seven games, so tiles wrap and labels may take two lines. */
+.tiles {
+  flex-wrap: wrap;
+}
+.tile {
+  flex: 1 1 140px;
+  text-align: left;
+}
+.tile b {
+  white-space: normal;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
