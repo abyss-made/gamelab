@@ -142,6 +142,12 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       ok(f.state.players.length === 2 && other.state.players.length === 1, 'declining the confirmation keeps the first room and does not join the second');
       page.removeListener('dialog', onDlg);
       page.on('dialog', (d) => d.accept());
+      // a failed join (mistyped code) after confirming must not cost the current seat
+      await page.fill('#code-input', 'ZZZZZZ');
+      await page.press('#code-input', 'Enter');
+      await sleep(500);
+      ok(f.state.players.length === 2 && f.state.hostId === hostId, 'a failed join keeps the current seat, host and roster');
+      ok(await vis(page, '#return-bar'), 'return indicator remains after a failed join');
       // explicit leave: host passes on, indicator disappears
       await page.click('#return-bar').catch(() => {});
       await page.evaluate((c) => { history.pushState({}, '', '/r/' + c); window.dispatchEvent(new PopStateEvent('popstate')); }, code);

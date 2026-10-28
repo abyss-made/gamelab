@@ -633,12 +633,7 @@
     if (other)
       $("#join-switch-note").textContent =
         `You are in lobby ${currentCode}. Joining ${code} will leave it.`;
-    $("#join-btn").onclick = () => {
-      if (other && !confirmLeave(`Leave lobby ${currentCode} and join ${code}?`))
-        return;
-      if (other) leaveRoom();
-      join(code);
-    };
+    $("#join-btn").onclick = () => join(code);
   }
 
   // Leaving is deliberate: confirm when the game or hosting would be disrupted.
@@ -653,12 +648,11 @@
         (host ? " You are the host; hosting will pass to someone else." : ""),
     );
   }
+  // Confirmation only: the server releases the old seat once the new room accepts
+  // us, and handleJoin() unmounts the old game, so a failed join loses nothing.
   function leaveForOtherRoom() {
     if (!currentCode) return true;
-    if (!confirmLeave(`You are in lobby ${currentCode}. Leave it?`))
-      return false;
-    leaveRoom();
-    return true;
+    return confirmLeave(`You are in lobby ${currentCode}. Leave it?`);
   }
 
   function join(code, { silent } = {}) {
