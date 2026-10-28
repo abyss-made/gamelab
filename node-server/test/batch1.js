@@ -208,6 +208,17 @@ function fakeRoom(names, gameId, settings, gameCount = 1) {
     for (const m of d3.st.rounds[0]) d3.leave(d3.members.findIndex((x) => x.id === m.winner));
     d3.adv(2600);
     ok(d3.log.ended && d3.log.ended.winnerId === null && d3.st.phase !== 'pick', 'RPS: a final between two departed players is resolved without throws and crowns nobody');
+    // 4) an eliminated player is not crowned when every remaining contender leaves
+    const d4 = fakeRoom(['A', 'B', 'C', 'D'], 'rps', { bestOf: 1, pickTime: 8 });
+    for (const m of d4.st.rounds[0]) {
+      d4.act(d4.members.findIndex((x) => x.id === m.a), { type: 'pick', move: 'rock' });
+      d4.act(d4.members.findIndex((x) => x.id === m.b), { type: 'pick', move: 'scissors' });
+    }
+    const loser = d4.st.rounds[0][0].b;
+    d4.leave(d4.members.findIndex((x) => x.id === loser));
+    for (const m of d4.st.rounds[0]) d4.leave(d4.members.findIndex((x) => x.id === m.winner));
+    d4.adv(2600);
+    ok(d4.log.ended && d4.log.ended.winnerId === null && !d4.log.ended.standings.some((s) => s.champion), 'RPS: an eliminated player is never crowned champion by default');
   }
   // spectator action ignored
   const sp = fakeRoom(['A', 'B', 'C', 'D', 'E'], 'rps', { bestOf: 1 });

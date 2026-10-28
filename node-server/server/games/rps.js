@@ -213,10 +213,10 @@ function onLeave(st, id, api) {
     decide(st, api, match, match.a === id ? 'b' : 'a', true);
     p.out = true;
   }
-  if (st.players.filter((x) => !x.left).length < 2 && !st.over) {
-    const last = st.players.find((x) => !x.left);
-    return finish(st, api, last && last.id);
-  }
+  // Only players still in the tournament (not eliminated, not gone) can be crowned by default.
+  const contenders = st.players.filter((x) => !x.left && !x.out);
+  if (contenders.length < 2 && st.players.filter((x) => !x.left).length < 2 && !st.over) return finish(st, api, contenders[0] && contenders[0].id);
+  if (contenders.length === 0 && !st.over) return finish(st, api, undefined);
   if (st.phase === 'pick' && liveMatches(st).length && allPicked(st)) return resolveThrow(st, api);
   if (st.phase === 'pick' && !liveMatches(st).length) return advanceRound(st, api);
   api.changed();
