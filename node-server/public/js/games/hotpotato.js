@@ -8,6 +8,7 @@ GameUI.hotpotato = (() => {
   let S = null;
   let key = "";
   let target = null;
+  let lastHolder = null;
 
   function mount(stage, a) {
     app = a;
@@ -61,6 +62,9 @@ GameUI.hotpotato = (() => {
     const k = [g.round, g.phase, holding, g.holderId, target, g.used].join("|");
     if (k !== key) {
       key = k;
+      // Re-rendering (e.g. choosing a recipient) must not wipe a half-typed answer.
+      const old = body.querySelector("#hp-input");
+      const typed = old ? old.value : "";
       if (holding) {
         const options = g.players.filter((p) => !p.out && p.id !== S.you);
         body.innerHTML = `<div class="hp-targets" role="group" aria-label="Pass to">${options.map((p) => `<button class="btn btn-ghost ${target === p.id ? "picked" : ""}" data-to="${p.id}" aria-pressed="${target === p.id}" ${p.id === g.fromId && options.length > 1 ? "disabled" : ""}>${app.esc(p.name)}</button>`).join("")}</div>
@@ -72,7 +76,11 @@ GameUI.hotpotato = (() => {
           if (answer && to) app.socket.emit("action", { type: "pass", to, answer });
         });
         const i = body.querySelector("#hp-input");
-        if (i && matchMedia("(pointer:fine)").matches) i.focus();
+        if (i) {
+          if (typed && g.holderId === lastHolder) i.value = typed;
+          if (matchMedia("(pointer:fine)").matches) i.focus();
+        }
+        lastHolder = g.holderId;
       } else if (g.phase === "boom") {
         body.innerHTML = `<p class="hp-boom">💥 It blew up on <b>${nameOf(g, g.boom.id)}</b>${g.boom.out ? " who is out!" : "!"}</p>`;
         Sound.play(g.boom.id === S.you ? "lose" : "reveal");

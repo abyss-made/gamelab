@@ -6,6 +6,10 @@ GameUI.telephone = (() => {
   const H = 600;
   const COLORS = ["#000000", "#9a9a9a", "#ffffff", "#ef130b", "#ff7100", "#ffe400", "#00cc00", "#00b2ff", "#231fd3", "#a300ba", "#ff8fc8", "#a0522d"];
   const SIZES = [4, 10, 22];
+  // Same caps the server enforces, so a drawing is never rejected after the player has locked it in.
+  const MAX_STROKES = 250;
+  const MAX_POINTS = 4000;
+  const MAX_FILLS = 20;
   let root = null;
   let app = null;
   let clock = null;
@@ -71,11 +75,21 @@ GameUI.telephone = (() => {
     });
   }
 
+  // The lock only comes from the server (myDone), so a rejected submission can still be fixed and resent.
   function send(payload) {
     if (submitted) return;
-    submitted = true;
     clearTimeout(autoTimer);
     app.socket.emit("action", payload);
+  }
+  const usage = () => ({
+    strokes: history.length,
+    fills: history.filter((h) => h.t === "f").length,
+    points: history.reduce((n, h) => n + (h.t === "s" ? h.p.length / 2 : 0), 0),
+  });
+  const limitMsg = (u) => (u.strokes >= MAX_STROKES + MAX_FILLS || u.fills >= MAX_FILLS || u.points >= MAX_POINTS - 50 ? "Drawing limit reached. Undo or clear to keep drawing." : "");
+  function showLimit() {
+    const m = root && root.querySelector("#tp-limit");
+    if (m) m.textContent = limitMsg(usage());
   }
 
   // ---------- drawing tools ----------
@@ -85,12 +99,15 @@ GameUI.telephone = (() => {
   }
   function bindCanvas() {
     cv.addEventListener("pointerdown", (e) => {
-      if (submitted) return;
+      if (submitted || (S && S.game.myDone)) return;
       e.preventDefault();
       const [x, y] = pos(e);
+      const u = usage();
+      if (u.strokes >= MAX_STROKES || u.points >= MAX_POINTS - 50 || (tool === "fill" && u.fills >= MAX_FILLS)) return showLimit();
       if (tool === "fill") {
         history.push({ t: "f", x, y, c: color });
         replay(cv, history);
+        showLimit();
         return;
       }
       cv.setPointerCapture(e.pointerId);
@@ -103,10 +120,14 @@ GameUI.telephone = (() => {
       const [x, y] = pos(e);
       const n = cur.p.length;
       if (Math.abs(cur.p[n - 2] - x) + Math.abs(cur.p[n - 1] - y) < 2) return;
+      if (usage().points >= MAX_POINTS - 50) return showLimit();
       cur.p.push(x, y);
       replay(cv, history);
     });
-    const up = () => (cur = null);
+    const up = () => {
+      cur = null;
+      showLimit();
+    };
     cv.addEventListener("pointerup", up);
     cv.addEventListener("pointercancel", up);
   }
@@ -134,7 +155,7 @@ GameUI.telephone = (() => {
     replay(cv, history);
     bindCanvas();
     const src = g.source ? `<p class="tp-prompt">Draw: <b>${app.esc(g.source.text)}</b></p>` : "";
-    body.innerHTML = `${src}<div id="tp-cwrap"></div><div id="tp-tb">${toolsHTML()}</div><button class="btn btn-big" id="tp-done" type="button">Done</button>`;
+    body.innerHTML = `${src}<div id="tp-cwrap"></div><div id="tp-tb">${toolsHTML()}</div><p class="muted center" id="tp-limit" aria-live="polite"></p><button class="btn btn-big" id="tp-done" type="button">Done</button>`;
     body.querySelector("#tp-cwrap").appendChild(cv);
     body.addEventListener("click", toolClick);
     body.querySelector("#tp-done").addEventListener("click", () => send({ type: "draw", strokes: history }));
@@ -145,8 +166,8 @@ GameUI.telephone = (() => {
     if (b.dataset.color) { color = b.dataset.color; if (tool === "eraser") tool = "brush"; }
     else if (b.dataset.size) size = Number(b.dataset.size);
     else if (b.dataset.tool) tool = b.dataset.tool;
-    else if (b.dataset.act === "undo") { history.pop(); replay(cv, history); }
-    else if (b.dataset.act === "clear") { history = []; replay(cv, history); }
+    else if (b.dataset.act === "undo") { history.pop(); replay(cv, history); showLimit(); }
+    else if (b.dataset.act === "clear") { history = []; replay(cv, history); showLimit(); }
     else return;
     root.querySelector("#tp-tb").innerHTML = toolsHTML();
   }
@@ -223,7 +244,7 @@ GameUI.telephone = (() => {
           }, Math.max(0, g.timeLeft - 1500));
         } else nb.innerHTML = '<p class="muted center">You are watching this round.</p>';
       }
-      if (g.myDone && !submitted) submitted = true;
+      submitted = !!g.myDone;
       const nb = root.querySelector("#tp-body");
       nb.classList.toggle("locked", !!g.myDone);
       nb.querySelectorAll("input,button").forEach((el) => (el.disabled = !!g.myDone));
