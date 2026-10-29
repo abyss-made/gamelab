@@ -38,6 +38,56 @@
       blurb: "Classic game, multiplayer style",
       art: '<img src="/assets/four-row.svg" alt="A blue board with red and yellow game pieces" width="180" height="180">',
     },
+    wordchain: {
+      name: "Word Chain",
+      slug: "word-chain",
+      min: 2,
+      max: 8,
+      players: "2–8 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Chain words by their last letter",
+      art: '<img src="/assets/word-chain.svg" alt="Linked letter tiles" width="180" height="180">',
+    },
+    categories: {
+      name: "Categories Rush",
+      slug: "categories-rush",
+      min: 2,
+      max: 12,
+      players: "2–12 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Beat the clock and your friends' answers",
+      art: '<img src="/assets/categories-rush.svg" alt="A list with a stopwatch" width="180" height="180">',
+    },
+    higherlower: {
+      name: "Higher or Lower",
+      slug: "higher-or-lower",
+      min: 2,
+      max: 8,
+      players: "2–8 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Call the next card and build a streak",
+      art: '<img src="/assets/higher-lower.svg" alt="Two playing cards with arrows" width="180" height="180">',
+    },
+    colorstack: {
+      name: "Color Stack",
+      slug: "color-stack",
+      min: 2,
+      max: 8,
+      players: "2–8 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Match colors and be first out of cards",
+      art: '<img src="/assets/color-stack.svg" alt="A fan of colored cards" width="180" height="180">',
+    },
+    gofish: {
+      name: "Go Fish",
+      slug: "go-fish",
+      min: 2,
+      max: 6,
+      players: "2–6 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Ask for ranks and collect books",
+      art: '<img src="/assets/go-fish.svg" alt="A fish and playing cards" width="180" height="180">',
+    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -472,6 +522,21 @@
       <label class="field field-wide custom-field"><span>Custom Word List</span><textarea data-setting="customWords" rows="2" maxlength="3000" placeholder="Enter words separated by commas…">${esc(s.customWords)}</textarea><small>These words will be mixed with the selected difficulty.</small></label>
       <label class="check"><span>Letter Hints</span><input type="checkbox" data-setting="hints" ${s.hints ? "checked" : ""}></label>
       <label class="check"><span>Use Only Custom Words <small>6 distinct words minimum</small></span><input type="checkbox" data-setting="customOnly" ${s.customOnly ? "checked" : ""}></label>`;
+    const sel = (key, label, values, cur, fmt = (v) => v) =>
+      `<label class="field"><span>${label}</span><select data-setting="${key}">${values.map((v) => opt(v, cur, fmt(v))).join("")}</select></label>`;
+    if (gameId === "wordchain")
+      return (
+        sel("turnTime", "Time Per Word", [10, 15, 20, 30], s.turnTime, (v) => v + " seconds") +
+        sel("lives", "Lives", [1, 2, 3, 5], s.lives) +
+        sel("minLen", "Minimum Word Length", [2, 3, 4], s.minLen, (v) => v + " letters") +
+        `<label class="field"><span>Dictionary</span><select data-setting="dictionary">${opt("common", s.dictionary, "Common words only")}${opt("off", s.dictionary, "Off (any letters, no repeats)")}</select></label>`
+      );
+    if (gameId === "categories")
+      return sel("rounds", "Rounds", [3, 5, 8], s.rounds, (v) => v + " rounds") + sel("roundTime", "Round Time", [30, 45, 60, 90], s.roundTime, (v) => v + " seconds");
+    if (gameId === "higherlower")
+      return sel("rounds", "Cards", [5, 10, 15, 20], s.rounds) + sel("guessTime", "Time To Guess", [8, 12, 20], s.guessTime, (v) => v + " seconds");
+    if (gameId === "colorstack" || gameId === "gofish")
+      return sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
     return `<label class="field"><span>Turn Timer</span><select data-setting="turnTime">${[
       [0, "Off"],
       [15, "15 seconds"],
@@ -529,13 +594,14 @@
       const value =
         t.type === "checkbox"
           ? t.checked
-          : t.tagName === "SELECT" && t.dataset.setting !== "difficulty"
+          : t.tagName === "SELECT" && !STRING_SETTINGS.includes(t.dataset.setting)
             ? Number(t.value)
             : t.value;
       socket.emit("hostUpdate", { settings: { [t.dataset.setting]: value } });
     });
   }
 
+  const STRING_SETTINGS = ["difficulty", "dictionary"];
   function readSettings(el) {
     const out = {};
     $$("[data-setting]", el).forEach((i) => {
@@ -543,7 +609,7 @@
       out[k] =
         i.type === "checkbox"
           ? i.checked
-          : i.tagName === "SELECT" && k !== "difficulty"
+          : i.tagName === "SELECT" && !STRING_SETTINGS.includes(k)
             ? Number(i.value)
             : i.value;
     });
@@ -559,6 +625,11 @@
       customOnly: false,
     },
     fourrow: { turnTime: 30, winnerStays: true },
+    wordchain: { turnTime: 20, lives: 3, minLen: 3, dictionary: "common" },
+    categories: { rounds: 5, roundTime: 60 },
+    higherlower: { rounds: 10, guessTime: 12 },
+    colorstack: { turnTime: 30 },
+    gofish: { turnTime: 30 },
   };
 
   // ---------- create lobby ----------
@@ -1210,7 +1281,7 @@
       const v =
         t.type === "checkbox"
           ? t.checked
-          : t.tagName === "SELECT" && t.dataset.setting !== "difficulty"
+          : t.tagName === "SELECT" && !STRING_SETTINGS.includes(t.dataset.setting)
             ? Number(t.value)
             : t.value;
       socket.emit("hostUpdate", { settings: { [t.dataset.setting]: v } });
