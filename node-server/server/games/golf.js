@@ -153,6 +153,7 @@ function endHole(st, api, ms) {
   for (const p of st.players) p.scores[st.hole] = p.out && !p.holed ? p.scores[st.hole] : p.strokes;
   const hole = courseOf(st).holes[st.hole];
   st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par }));
+  api.changed();
 }
 
 function finishCourse(st, api, forfeit) {

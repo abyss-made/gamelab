@@ -536,6 +536,18 @@ function bfsPath(hole, maxDepth = 7) {
     ok(!!r.log.ended && r.log.ended.forfeit && r.log.ended.winners[0] === 'p1', 'Golf: the last player left wins by forfeit');
   }
   {
+    // an idle player removed after everyone else finished the hole still triggers a broadcast of the hole summary
+    const r = fakeRoom(['Ann', 'Bo', 'Cy'], 'golf', { course: 'meadow', maxStrokes: 8, turnTime: 30 });
+    r.st.players[1].holed = true; r.st.players[1].strokes = 2;
+    r.st.players[2].holed = true; r.st.players[2].strokes = 3;
+    r.st.turn = 0;
+    r.st.players[0].idle = 1;
+    r.st.deadline = r.now();
+    const c0 = r.log.changed;
+    r.adv(1);
+    ok(r.st.players[0].out && r.st.phase === 'between' && r.log.changed > c0, 'Golf: removing the last idle player of a hole broadcasts the hole summary');
+  }
+  {
     const r = fakeRoom(['Ann', 'Bo', 'Cy'], 'golf', { course: 'meadow', maxStrokes: 8, turnTime: 30 });
     r.leave(1);
     ok(r.st.players[1].out && !r.log.ended && r.st.players.filter((p) => !p.out).length === 2, 'Golf: one player leaving mid-hole does not end a 3-player game');
