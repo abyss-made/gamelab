@@ -60,7 +60,7 @@ async function createRoom(page, game) {
       await page.waitForSelector('.game-card');
       const ids = await page.$$eval('.game-card[data-game]', (els) => els.map((e) => e.dataset.game));
       for (const g of ['wordchain', 'categories', 'higherlower', 'colorstack', 'gofish']) ok(ids.includes(g), `catalog lists ${g}`);
-      ok(ids.length === 22, "catalog lists 22 playable games (2 existing + 5 batch 2 + 5 batch 1 + 5 batch 3 + 5 batch 4)");
+      ok(ids.length === 25, "catalog lists 25 playable games (2 existing + 5 batch 2 + 5 batch 1 + 5 batch 3 + 5 batch 4 + 3 batch 5)");
       ok((await page.$$('.game-card.coming-soon')).length >= 1, 'Coming Soon tile still present and not counted as a game');
       const broken = await page.$$eval('.game-card img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length);
       ok(broken === 0, 'all game card artwork loads');

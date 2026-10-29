@@ -62,7 +62,7 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
       await page.waitForSelector('.game-card');
       const ids = await page.$$eval('.game-card[data-game]', (els) => els.map((e) => e.dataset.game));
       for (const g of GAMES) ok(ids.includes(g), `catalog lists ${g}`);
-      ok(ids.length === 22, 'catalog lists 22 playable games');
+      ok(ids.length === 25, 'catalog lists 25 playable games');
       ok((await page.$$('.game-card.coming-soon')).length >= 1, 'Coming Soon tile still present and not counted');
       ok((await page.$$eval('.game-card img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length)) === 0, 'all game card artwork loads');
       for (const g of GAMES) {
