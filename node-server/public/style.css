@@ -5589,7 +5589,7 @@ body:not([data-screen="room"]) #focus-btn {
 body.focus-mode[data-screen="room"] .footer,
 body.focus-mode[data-screen="room"] .room-bar,
 body.focus-mode[data-screen="room"] .side,
-body.focus-mode[data-screen="room"] .chat,
+body.focus-mode[data-screen="room"]:not([data-game="drawguess"]):not([data-game="impostor"]):not([data-game="wordchain"]) .chat,
 body.focus-mode[data-screen="room"] .main-nav,
 body.focus-mode[data-screen="room"] #sound-btn ~ .nav-cta,
 body.focus-mode[data-screen="room"] .return-bar {
@@ -5641,4 +5641,23 @@ body.focus-mode[data-screen="room"] .room[data-phase="game"] {
   .room[data-phase="game"] .gf-wrap,
   .room[data-phase="game"] .pl-controls,
   .room[data-phase="game"] .gf-controls { width: min(100%, 1100px); }
+}
+/* Games that take guesses/answers through the chat box keep a compact input bar in focus mode. */
+body.focus-mode[data-screen="room"][data-game="drawguess"] .room[data-phase="game"],
+body.focus-mode[data-screen="room"][data-game="impostor"] .room[data-phase="game"],
+body.focus-mode[data-screen="room"][data-game="wordchain"] .room[data-phase="game"] {
+  grid-template-areas: "word" "stage" "chat";
+  grid-template-rows: auto 1fr auto;
+}
+body.focus-mode[data-screen="room"][data-game="drawguess"] .chat,
+body.focus-mode[data-screen="room"][data-game="impostor"] .chat,
+body.focus-mode[data-screen="room"][data-game="wordchain"] .chat {
+  display: block;
+  min-height: 0;
+  padding: 6px;
+}
+body.focus-mode[data-screen="room"][data-game="drawguess"] .chat-log,
+body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log,
+body.focus-mode[data-screen="room"][data-game="wordchain"] .chat-log {
+  display: none;
 }

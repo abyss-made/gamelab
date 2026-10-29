@@ -93,7 +93,8 @@ const tok = () => [...Array(32)].map(() => Math.floor(Math.random() * 16).toStri
         const focus = await stage();
         ok(await page.evaluate(() => document.body.classList.contains('focus-mode')) && (await page.getAttribute('#focus-btn', 'aria-pressed')) === 'true', `${T}: focus mode on`);
         ok(focus.w >= before.w - 1 && focus.ovf <= 0, `${T}: focus stage is not smaller (${Math.round(before.w)} -> ${Math.round(focus.w)}px) and has no overflow`);
-        ok(await page.isHidden('#side') && await page.isHidden('#room-chat'), `${T}: focus hides roster and chat`);
+        const chatInput = ['drawguess', 'impostor', 'wordchain'].includes(game);
+        ok(await page.isHidden('#side') && (chatInput ? await page.isVisible('#chat-input') : await page.isHidden('#room-chat')), `${T}: focus hides roster${chatInput ? ' but keeps the guess/answer input' : ' and chat'}`);
         if (SHOTS && SHOT_GAMES.includes(game)) await page.screenshot({ path: path.join(SHOTS, `${game}-${vp.t}-focus.png`) });
         await page.keyboard.press('Escape');
         ok(!(await page.evaluate(() => document.body.classList.contains('focus-mode'))), `${T}: Escape leaves focus mode`);
