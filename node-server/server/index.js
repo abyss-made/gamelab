@@ -94,6 +94,31 @@ const PAGES = {
     desc: 'Fast multiple-choice trivia across categories. Speed and accuracy score. Free multiplayer, no account.',
     game: 'trivia',
   },
+  '/drawing-telephone': {
+    title: `Drawing Telephone - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Write, draw and guess in a chain and watch the prompt change. Free multiplayer party game, no account.',
+    game: 'telephone',
+  },
+  '/bluff-battle': {
+    title: `Bluff Battle - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Invent fake answers, vote anonymously and spot the truth. Free multiplayer bluffing game, no account.',
+    game: 'bluff',
+  },
+  '/the-impostor': {
+    title: `The Impostor - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'One player does not know the secret word. Give clues, discuss and vote. Free social deduction game, no account.',
+    game: 'impostor',
+  },
+  '/liars-dice': {
+    title: `Liar's Dice - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Hidden dice, bold bids and bluffs. Last player with dice wins. Free multiplayer, no account.',
+    game: 'liarsdice',
+  },
+  '/hot-potato': {
+    title: `Hot Potato - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Answer fast to pass the bomb before it blows. Free multiplayer party game, no account.',
+    game: 'hotpotato',
+  },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
