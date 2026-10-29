@@ -88,6 +88,56 @@
       blurb: "Ask for ranks and collect books",
       art: '<img src="/assets/go-fish.svg" alt="A fish and playing cards" width="180" height="180">',
     },
+    tictactoe: {
+      name: "Tic Tac Toe",
+      slug: "tic-tac-toe",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "Three in a row wins the board",
+      art: '<img src="/assets/tic-tac-toe.svg" alt="A Tic Tac Toe board with X and O marks" width="180" height="180">',
+    },
+    rps: {
+      name: "Rock Paper Scissors",
+      slug: "rock-paper-scissors",
+      min: 2,
+      max: 16,
+      players: "2–16 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Win your bracket, one throw at a time",
+      art: '<img src="/assets/rps.svg" alt="A rock, paper and scissors in a bracket" width="180" height="180">',
+    },
+    dotsboxes: {
+      name: "Dots & Boxes",
+      slug: "dots-and-boxes",
+      min: 2,
+      max: 4,
+      players: "2–4 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Connect dots, claim boxes, take extra turns",
+      art: '<img src="/assets/dots-boxes.svg" alt="A grid of dots with some boxes filled in" width="180" height="180">',
+    },
+    wordscramble: {
+      name: "Word Scramble",
+      slug: "word-scramble",
+      min: 2,
+      max: 12,
+      players: "2–12 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Unscramble the word before anyone else",
+      art: '<img src="/assets/word-scramble.svg" alt="Jumbled letter tiles" width="180" height="180">',
+    },
+    trivia: {
+      name: "Trivia Blitz",
+      slug: "trivia-blitz",
+      min: 2,
+      max: 12,
+      players: "2–12 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Fast questions, faster fingers",
+      art: '<img src="/assets/trivia.svg" alt="A question mark in a speech bubble" width="180" height="180">',
+    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -535,6 +585,24 @@
       return sel("rounds", "Rounds", [3, 5, 8], s.rounds, (v) => v + " rounds") + sel("roundTime", "Round Time", [30, 45, 60, 90], s.roundTime, (v) => v + " seconds");
     if (gameId === "higherlower")
       return sel("rounds", "Cards", [5, 10, 15, 20], s.rounds) + sel("guessTime", "Time To Guess", [8, 12, 20], s.guessTime, (v) => v + " seconds");
+    if (gameId === "tictactoe")
+      return sel("turnTime", "Turn Timer", [0, 15, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off")) + `<label class="check"><span>Winner Stays <small>Next spectator takes the other seat</small></span><input type="checkbox" data-setting="winnerStays" ${s.winnerStays ? "checked" : ""}></label>`;
+    if (gameId === "rps")
+      return sel("bestOf", "Match Length", [1, 3, 5], s.bestOf, (v) => "Best of " + v) + sel("pickTime", "Time To Pick", [8, 12, 20], s.pickTime, (v) => v + " seconds");
+    if (gameId === "dotsboxes")
+      return sel("size", "Board Size", [3, 4, 5], s.size, (v) => v + " × " + v + " boxes") + sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
+    if (gameId === "wordscramble")
+      return (
+        `<label class="field"><span>Difficulty</span><select data-setting="difficulty">${["easy", "medium", "hard"].map((v) => opt(v, s.difficulty, v[0].toUpperCase() + v.slice(1))).join("")}</select></label>` +
+        sel("rounds", "Words", [5, 8, 12], s.rounds) +
+        sel("roundTime", "Time Per Word", [20, 30, 45], s.roundTime, (v) => v + " seconds")
+      );
+    if (gameId === "trivia")
+      return (
+        sel("questions", "Questions", [5, 10, 15], s.questions) +
+        sel("answerTime", "Time To Answer", [10, 15, 20], s.answerTime, (v) => v + " seconds") +
+        `<label class="field"><span>Category</span><select data-setting="category">${["mixed", "Science", "Geography", "History", "Entertainment", "Sports", "Food"].map((v) => opt(v, s.category, v === "mixed" ? "Mixed" : v)).join("")}</select></label>`
+      );
     if (gameId === "colorstack" || gameId === "gofish")
       return sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
     return `<label class="field"><span>Turn Timer</span><select data-setting="turnTime">${[
@@ -601,7 +669,7 @@
     });
   }
 
-  const STRING_SETTINGS = ["difficulty", "dictionary"];
+  const STRING_SETTINGS = ["difficulty", "dictionary", "category"];
   function readSettings(el) {
     const out = {};
     $$("[data-setting]", el).forEach((i) => {
@@ -630,6 +698,11 @@
     higherlower: { rounds: 10, guessTime: 12 },
     colorstack: { turnTime: 30 },
     gofish: { turnTime: 30 },
+    tictactoe: { turnTime: 30, winnerStays: true },
+    rps: { bestOf: 3, pickTime: 12 },
+    dotsboxes: { size: 4, turnTime: 30 },
+    wordscramble: { rounds: 8, roundTime: 30, difficulty: "medium" },
+    trivia: { questions: 10, answerTime: 15, category: "mixed" },
   };
 
   // ---------- create lobby ----------

@@ -69,6 +69,31 @@ const PAGES = {
     desc: 'Ask for ranks, fish from the deck and collect books. Free multiplayer card game, no account.',
     game: 'gofish',
   },
+  '/tic-tac-toe': {
+    title: `Tic Tac Toe - Play online with a friend | ${config.SITE_NAME}`,
+    desc: 'Classic Tic Tac Toe online. Send a link and play in seconds, with spectators and rematches. Free, no account.',
+    game: 'tictactoe',
+  },
+  '/rock-paper-scissors': {
+    title: `Rock Paper Scissors Tournament - Play online | ${config.SITE_NAME}`,
+    desc: 'Run a Rock Paper Scissors bracket with up to 16 friends. Private picks, byes and best-of rounds. Free, no account.',
+    game: 'rps',
+  },
+  '/dots-and-boxes': {
+    title: `Dots & Boxes - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Draw lines, claim boxes and take extra turns in Dots & Boxes for 2 to 4 players. Free, no account.',
+    game: 'dotsboxes',
+  },
+  '/word-scramble': {
+    title: `Word Scramble - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Race friends to unscramble words. Faster answers score more. Free multiplayer word game, no account.',
+    game: 'wordscramble',
+  },
+  '/trivia-blitz': {
+    title: `Trivia Blitz - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Fast multiple-choice trivia across categories. Speed and accuracy score. Free multiplayer, no account.',
+    game: 'trivia',
+  },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
