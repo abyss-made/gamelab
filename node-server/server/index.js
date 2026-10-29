@@ -144,6 +144,21 @@ const PAGES = {
     desc: 'Play Chess online with a friend, with clocks, draw offers and full rules. Free, no account.',
     game: 'chess',
   },
+  '/pool': {
+    title: `Pool - Play 8-ball online with friends | ${config.SITE_NAME}`,
+    desc: 'Aim, power up and clear your balls before your opponent in two-player 8-ball. Free online pool, no account.',
+    game: 'pool',
+  },
+  '/mini-golf': {
+    title: `Mini Golf - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Putt through 18 original mini golf holes with friends: bumpers, sand and water. Free multiplayer game, no account.',
+    game: 'golf',
+  },
+  '/property-tycoon': {
+    title: `Property Tycoon - Buy, trade and build with friends | ${config.SITE_NAME}`,
+    desc: 'Buy properties, trade with friends, build upgrades and bankrupt your rivals. Free property trading game for 2 to 6 players, no account.',
+    game: 'tycoon',
+  },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
