@@ -18,6 +18,7 @@ const P = require('../server/games/physics');
 const B = require('../server/games/tycoonboard');
 const COURSES = require('../server/games/golfcourses');
 const pool = GAMES.pool;
+const GR_early = () => GAMES.golf.rules;
 const golf = GAMES.golf;
 const tycoon = GAMES.tycoon;
 
@@ -61,6 +62,10 @@ function fakeRoom(names, gameId, settings, gameCount = 1) {
   const r2 = pool.rules.simulateShot(mk(), 0.03, 0.9);
   ok(JSON.stringify(r1.anim) === JSON.stringify(r2.anim) && JSON.stringify(r1.balls) === JSON.stringify(r2.balls), 'Physics: the same shot always gives the identical result (deterministic)');
 
+  // replay timestamps keep sub-frame precision so samples are not collapsed onto the same time
+  const g0 = COURSES.COURSES[0].holes[0];
+  const fr = GR_early().simulatePutt(g0, g0.tee[0], g0.tee[1], 0, 0.5).anim.frames;
+  ok(new Set(fr.slice(0, 20).map((f) => f[0])).size === Math.min(20, fr.length) && fr[1][0] > 0.01 && fr[1][0] < 0.02, 'Physics: replay timestamps are distinct per sample (1/60 s apart for golf)');
   // equal-mass head-on collision: the mover stops, the target takes the speed (momentum and energy kept, e=1)
   const a = { x: 0, y: 0, vx: 100, vy: 0, r: 10 };
   const b = { x: 19, y: 0, vx: 0, vy: 0, r: 10 };

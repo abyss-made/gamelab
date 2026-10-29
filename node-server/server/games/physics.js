@@ -89,7 +89,7 @@ function run(world) {
   } = world;
   const frames = [];
   const snap = (t) => {
-    const f = [r1(t)];
+    const f = [Math.round(t * 1000) / 1000]; // millisecond timestamps: samples are 1/30-1/60 s apart
     for (const b of balls) {
       if (b.gone) f.push(null, null);
       else f.push(r1(b.x), r1(b.y));
