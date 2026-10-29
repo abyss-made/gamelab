@@ -5661,3 +5661,11 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log,
 body.focus-mode[data-screen="room"][data-game="wordchain"] .chat-log {
   display: none;
 }
+/* Impostor discussion happens in chat, so its log stays readable (short, scrollable). */
+body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
+  display: block;
+  max-height: 28vh;
+  min-height: 72px;
+  overflow-y: auto;
+  margin-bottom: 6px;
+}
