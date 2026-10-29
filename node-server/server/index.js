@@ -119,6 +119,31 @@ const PAGES = {
     desc: 'Answer fast to pass the bomb before it blows. Free multiplayer party game, no account.',
     game: 'hotpotato',
   },
+  '/battleship': {
+    title: `Battleship - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Hide your fleet, call your shots and sink the enemy ships. Free two-player Battleship online, no account.',
+    game: 'battleship',
+  },
+  '/checkers': {
+    title: `Checkers - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Classic Checkers with forced captures, multi-jumps and kings. Free two-player game online, no account.',
+    game: 'checkers',
+  },
+  '/reversi': {
+    title: `Reversi - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Flank and flip discs in Reversi (Othello). Free two-player strategy game online, no account.',
+    game: 'reversi',
+  },
+  '/ludo': {
+    title: `Ludo - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Roll the dice, race four tokens home and send rivals back to the yard. Free Ludo for 2 to 4 players, no account.',
+    game: 'ludo',
+  },
+  '/chess': {
+    title: `Chess - Play online with friends | ${config.SITE_NAME}`,
+    desc: 'Play Chess online with a friend, with clocks, draw offers and full rules. Free, no account.',
+    game: 'chess',
+  },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
