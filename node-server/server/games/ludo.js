@@ -140,7 +140,7 @@ function roll(st, api) {
   api.changed();
 }
 
-function move(st, api, ti) {
+function move(st, api, ti, auto) {
   const p = st.players[st.turn];
   const d = st.dice;
   const from = p.tokens[ti];
@@ -156,7 +156,7 @@ function move(st, api, ti) {
     }
   }
   st.lastEvent = { kind: 'move', by: p.id, token: ti, from, to, captured: captured ? captured.id : null };
-  p.idle = 0;
+  if (!auto) p.idle = 0; // an automatic move on timeout must not count as activity
   syncScores(st, api);
   if (home(p) === 4) return finish(st, api, p);
   if (to === HOME) api.sys(`${p.name} got a token home.`, 'good');
@@ -236,7 +236,7 @@ function tick(st, api, now) {
     return roll(st, api);
   }
   api.sys(`${p.name} ran out of time, so a token was moved for them.`, 'warn');
-  move(st, api, autoPick(st, p));
+  move(st, api, autoPick(st, p), true);
 }
 
 function onLeave(st, id, api) {

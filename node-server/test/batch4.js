@@ -416,7 +416,7 @@ function fakeRoom(names, gameId, settings, gameCount = 1) {
   ok(sv.players[1].remaining === 4 && sv.players[1].shots.filter((v) => v === 2).length === 2, 'Battleship: remaining ships and hits tracked');
   const unsunk = r.st.players[1].ships[0].cells;
   ok(!JSON.stringify(sv).includes(JSON.stringify(unsunk)) && sv.myShips === null, 'Battleship: spectators never see unsunk ships');
-  ok(!JSON.stringify(r.view(0)).includes(JSON.stringify(unsunk)), 'Battleship: the shooter never sees the opponent\'s unsunk ships');
+  ok(!JSON.stringify(Object.assign({}, r.view(0), { myShips: null })).includes(JSON.stringify(unsunk)), 'Battleship: the shooter never sees the opponent\'s unsunk ships');
   ok(r.view(0).myShips.length === 5 && JSON.stringify(r.view(0).myShips.map((s) => s.cells)) === JSON.stringify(layoutCells(good)), 'Battleship: you see your own fleet');
   // win
   const turnNow = () => r.st.turn;
@@ -567,7 +567,12 @@ function fakeRoom(names, gameId, settings, gameCount = 1) {
   ok(r.st.rolls === 1 && r.log.sys.some((s) => /dice were rolled/.test(s)), 'Ludo: a timeout rolls automatically');
   r = fakeRoom(['A', 'B', 'C'], 'ludo', { turnTime: 15 });
   const away = r.st.players[r.st.turn];
+  // deterministic: every roll is a 1 and the idle player always has a token to auto-move
+  // (regression: the automatic move used to reset the idle counter, so they were never removed)
+  away.tokens[0] = 5;
+  queue = Array(200).fill(1);
   for (let k = 0; k < 40 && !away.out; k++) { r.adv(16000); }
+  queue = [];
   ok(away.out, 'Ludo: a player who stays idle for three turns is removed');
   ok(!r.log.ended && r.st.players.filter((q) => !q.out).length === 2, 'Ludo: the game continues with the others');
   // leaving
