@@ -238,6 +238,36 @@
       blurb: "The classic game of kings, with clocks",
       art: '<img src="/assets/chess.svg" alt="A chess knight" width="180" height="180">',
     },
+    pool: {
+      name: "Pool",
+      slug: "pool",
+      min: 2,
+      max: 2,
+      players: "2 active players",
+      overflow: "Everyone else in the room spectates",
+      blurb: "Aim, power up and clear the table",
+      art: '<img src="/assets/pool.svg" alt="A pool table with an 8-ball" width="180" height="180">',
+    },
+    golf: {
+      name: "Mini Golf",
+      slug: "mini-golf",
+      min: 2,
+      max: 6,
+      players: "2–6 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Putt through 18 holes of bumpers, sand and water",
+      art: '<img src="/assets/golf.svg" alt="A golf ball near a flag" width="180" height="180">',
+    },
+    tycoon: {
+      name: "Property Tycoon",
+      slug: "property-tycoon",
+      min: 2,
+      max: 6,
+      players: "2–6 active players",
+      overflow: "Extra people in the room spectate",
+      blurb: "Buy, trade and build your way to the top",
+      art: '<img src="/assets/tycoon.svg" alt="A city tower with a dollar sign" width="180" height="180">',
+    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -726,6 +756,19 @@
     if (gameId === "ludo") return sel("turnTime", "Turn Timer", [15, 25, 40], s.turnTime, (v) => v + " seconds");
     if (gameId === "chess")
       return sel("clock", "Clock Per Player", [0, 3, 5, 10, 15], s.clock, (v) => (v ? v + " minutes" : "Off")) + sel("increment", "Bonus Per Move", [0, 2, 5], s.increment, (v) => (v ? "+" + v + " seconds" : "None")) + stays;
+    if (gameId === "pool") return turnOpt([0, 30, 45, 60]) + stays;
+    if (gameId === "golf")
+      return (
+        `<label class="field"><span>Course</span><select data-setting="course">${[["meadow", "Meadow Mini (6 holes)"], ["canyon", "Canyon Run (6 holes)"], ["skyline", "Skyline Gauntlet (6 holes)"], ["tour", "Playgrid Open (all 18)"]].map(([v, l]) => opt(v, s.course, l)).join("")}</select></label>` +
+        sel("maxStrokes", "Stroke Limit Per Hole", [6, 8, 10], s.maxStrokes) +
+        sel("turnTime", "Turn Timer", [20, 30, 45, 60], s.turnTime, (v) => v + " seconds")
+      );
+    if (gameId === "tycoon")
+      return (
+        sel("rounds", "Game Length", [10, 15, 25, 0], s.rounds, (v) => (v ? v + " rounds (quick)" : "Classic (last player standing)")) +
+        sel("startCash", "Starting Cash", [1000, 1500, 2000], s.startCash, (v) => "$" + v) +
+        sel("turnTime", "Turn Timer", [30, 45, 60, 90], s.turnTime, (v) => v + " seconds")
+      );
     if (gameId === "colorstack" || gameId === "gofish")
       return sel("turnTime", "Turn Timer", [0, 20, 30, 60], s.turnTime, (v) => (v ? v + " seconds" : "Off"));
     return `<label class="field"><span>Turn Timer</span><select data-setting="turnTime">${[
@@ -792,7 +835,7 @@
     });
   }
 
-  const STRING_SETTINGS = ["difficulty", "dictionary", "category"];
+  const STRING_SETTINGS = ["difficulty", "dictionary", "category", "course"];
   function readSettings(el) {
     const out = {};
     $$("[data-setting]", el).forEach((i) => {
@@ -836,6 +879,9 @@
     reversi: { turnTime: 30, winnerStays: true },
     ludo: { turnTime: 25 },
     chess: { clock: 10, increment: 0, winnerStays: true },
+    pool: { turnTime: 45, winnerStays: true },
+    golf: { course: "meadow", maxStrokes: 8, turnTime: 45 },
+    tycoon: { rounds: 15, startCash: 1500, turnTime: 45 },
   };
 
   // ---------- create lobby ----------

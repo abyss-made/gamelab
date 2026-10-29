@@ -23,6 +23,9 @@ const list = [
   require('./reversi'),
   require('./ludo'),
   require('./chess'),
+  require('./pool'),
+  require('./golf'),
+  require('./tycoon'),
 ];
 
 const GAMES = {};
