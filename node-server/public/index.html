@@ -19,7 +19,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="/style.css?v=batch5-20261028" />
+    <link rel="stylesheet" href="/style.css?v=qol-20261029" />
   </head>
   <body data-screen="home">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -64,6 +64,22 @@
             hidden
             >Reconnecting…</span
           >
+          <button
+            class="icon-btn"
+            id="rules-btn"
+            title="Game rules"
+            aria-label="Show game rules"
+            aria-haspopup="dialog"
+            hidden
+          ></button>
+          <button
+            class="icon-btn"
+            id="focus-btn"
+            title="Focus mode: enlarge the game"
+            aria-label="Enter focus mode"
+            aria-pressed="false"
+            hidden
+          ></button>
           <button
             class="icon-btn"
             id="sound-btn"
@@ -216,6 +232,8 @@
               id="share-link"
               aria-label="Share room link"
             ></button
+            ><button class="btn btn-small btn-ghost" id="rules-link">
+              Rules</button
             ><button class="btn btn-small btn-ghost" id="end-btn" hidden>
               End Game</button
             ><button class="btn btn-small btn-ghost" id="leave-lobby-btn">
@@ -312,7 +330,7 @@
       window.PAGE = { game: "%GAME%", site: "%SITE%" };
     </script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/ui.js?v=phase15d-20261028"></script>
+    <script src="/js/ui.js?v=qol-20261029"></script>
     <script src="/js/sound.js?v=phase15d-20261028"></script>
     <script src="/js/games/fill.js?v=phase15d-20261028"></script>
     <script src="/js/games/drawguess.js?v=phase15d-20261028"></script>
@@ -341,6 +359,9 @@
     <script src="/js/games/pool.js?v=batch5-20261028"></script>
     <script src="/js/games/golf.js?v=batch5-20261028"></script>
     <script src="/js/games/tycoon.js?v=batch5-20261028"></script>
-    <script src="/js/main.js?v=phase15d-20261028"></script>
+    <script src="/js/rules/rules-a.js?v=qol-20261029"></script>
+    <script src="/js/rules/rules-b.js?v=qol-20261029"></script>
+    <script src="/js/rules/rules-c.js?v=qol-20261029"></script>
+    <script src="/js/main.js?v=qol-20261029"></script>
   </body>
 </html>

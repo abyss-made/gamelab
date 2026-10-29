@@ -5544,3 +5544,101 @@ body.dg-big .dg-timer #dg-time {
 .ty-chk.dis { opacity: .55; }
 .ty-log ol { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 3px; font-size: .88rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .ty-dice.roll .ty-die { animation: none; } }
+
+/* ---------- QoL: rules dialog, focus mode, larger gameplay (issue #33) ---------- */
+body:not([data-screen="room"]) #rules-btn,
+body:not([data-screen="room"]) #focus-btn {
+  display: none;
+}
+.rules-modal {
+  max-width: 640px;
+  width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  display: flex;
+  flex-direction: column;
+}
+.rules-modal .rules-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  min-height: 0;
+  flex: 1 1 auto;
+  line-height: 1.45;
+}
+.rules-modal .rules-body h3 {
+  margin: 14px 0 4px;
+  color: var(--lime);
+  font-size: 0.95rem;
+}
+.rules-modal .rules-body ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.rules-modal .rules-body li {
+  margin: 3px 0;
+}
+.rules-modal .rules-note {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+}
+#focus-btn[aria-pressed="true"] {
+  background: var(--lime);
+  color: #04131f;
+}
+/* Focus mode: only the game (plus the compact top bar with its Exit control) stays on screen. */
+body.focus-mode[data-screen="room"] .footer,
+body.focus-mode[data-screen="room"] .room-bar,
+body.focus-mode[data-screen="room"] .side,
+body.focus-mode[data-screen="room"] .chat,
+body.focus-mode[data-screen="room"] .main-nav,
+body.focus-mode[data-screen="room"] #sound-btn ~ .nav-cta,
+body.focus-mode[data-screen="room"] .return-bar {
+  display: none !important;
+}
+body.focus-mode[data-screen="room"] .site-shell {
+  margin: 0;
+  max-width: none;
+  border-radius: 0;
+}
+body.focus-mode[data-screen="room"] .topbar {
+  height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+body.focus-mode[data-screen="room"] .room[data-phase="game"] {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "word" "stage";
+  grid-template-rows: auto 1fr;
+  padding: 6px;
+  gap: 6px;
+}
+/* Larger boards: use the available height instead of a fixed 480-640px cap. */
+@media (min-width: 801px) {
+  .room[data-phase="game"] .rv-board,
+  .room[data-phase="game"] .ck-board,
+  .room[data-phase="game"] .ch-board,
+  .room[data-phase="game"] .ld2-board,
+  .room[data-phase="game"] .ty-board {
+    width: min(100%, max(480px, calc(100dvh - 250px)));
+  }
+  body.focus-mode .room[data-phase="game"] .rv-board,
+  body.focus-mode .room[data-phase="game"] .ck-board,
+  body.focus-mode .room[data-phase="game"] .ch-board,
+  body.focus-mode .room[data-phase="game"] .ld2-board,
+  body.focus-mode .room[data-phase="game"] .ty-board {
+    width: min(100%, max(480px, calc(100dvh - 190px)));
+  }
+  .room[data-phase="game"] .ch-layout {
+    grid-template-columns: minmax(0, max(520px, calc(100dvh - 250px))) minmax(220px, 1fr);
+  }
+  body.focus-mode .room[data-phase="game"] .ch-layout {
+    grid-template-columns: minmax(0, max(520px, calc(100dvh - 190px))) minmax(220px, 1fr);
+  }
+  .room[data-phase="game"] .bs-grid { max-width: 520px; }
+  body.focus-mode .room[data-phase="game"] .bs-grid { max-width: 600px; }
+  .room[data-phase="game"] .tp-canvas { max-width: 800px; }
+  .room[data-phase="game"] .pl-wrap,
+  .room[data-phase="game"] .gf-wrap,
+  .room[data-phase="game"] .pl-controls,
+  .room[data-phase="game"] .gf-controls { width: min(100%, 1100px); }
+}
