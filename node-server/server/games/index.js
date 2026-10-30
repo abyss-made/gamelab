@@ -31,4 +31,9 @@ const list = [
 const GAMES = {};
 for (const g of list) GAMES[g.meta.id] = g;
 
-module.exports = { GAMES };
+// Hidden games stay registered so a room already playing one keeps working, but nobody can
+// pick one for a new room, quick play, a game switch or a next-game vote.
+const HIDDEN = new Set(require('../config').HIDDEN_GAMES.filter((id) => GAMES[id]));
+const selectable = (id) => typeof id === 'string' && Object.hasOwn(GAMES, id) && !HIDDEN.has(id);
+
+module.exports = { GAMES, HIDDEN, selectable };

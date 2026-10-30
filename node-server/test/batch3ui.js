@@ -51,7 +51,7 @@ async function createRoom(page, game) {
 const GAMES = ['telephone', 'bluff', 'impostor', 'liarsdice', 'hotpotato'];
 
 (async () => {
-  const srv = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env: { ...process.env, PORT: String(PORT) }, stdio: ['ignore', 'pipe', 'inherit'] });
+  const srv = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env: { ...process.env, PORT: String(PORT), HIDDEN_GAMES: '' }, stdio: ['ignore', 'pipe', 'inherit'] });
   await new Promise((r) => srv.stdout.once('data', r));
   const browser = await chromium.launch();
   const fakes = [];

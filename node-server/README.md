@@ -14,6 +14,10 @@ The five newer games are server-authoritative: decks, hands and hidden cards sta
 
 What's in it: create lobby, Quick Play, public lobby browser, one share link per lobby, host controls (public/private, lock, max players, spectators, game settings, switch game, kick, end game), spectators with Take Seat, winner-stays, vote-kick in public lobbies, chat filter and rate limits, reconnect on refresh, auto start in public lobbies, sounds, mobile layout, ad slot placeholders, and one page per game for Google.
 
+## Hidden games and party lobbies
+
+Four games are hidden from players: Higher or Lower, Liar's Dice, Hot Potato and Reversi (21 selectable games). Their code, rules and tests stay in the repo. The list lives in `server/config.js` (`HIDDEN_GAMES`), and setting the environment variable `HIDDEN_GAMES=""` brings all 25 back. Rooms stay together across game switches, with a spectator queue, next-game votes, Back to Lobby and host transfer. Hosting moves to a connected member when the host drops (`HOST_GRACE_MS`, default 8 s) or sits idle in the lobby while others are active (`HOST_AFK_MS`, default 3 min). See [docs/issue-35-qa.md](../docs/issue-35-qa.md).
+
 ## Playgrid 2.0 frontend
 
 The standalone site now implements the seven-screen Playgrid redesign. See [visual review, actual screenshots, known differences and browser QA](../docs/playgrid-2.md). No additional application dependencies are required.

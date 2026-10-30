@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const config = require('./config');
 const rooms = require('./rooms');
 const alpha = require('./alpha');
+const { HIDDEN } = require('./games');
 
 // Throws (and the process exits) if alpha mode is on without a usable secret.
 const alphaCfg = alpha.readConfig();
@@ -167,12 +168,17 @@ function render(page) {
     .replace(/%TITLE%/g, esc(page.title))
     .replace(/%DESC%/g, esc(page.desc))
     .replace(/%SITE%/g, esc(config.SITE_NAME))
-    .replace(/%GAME%/g, page.game);
+    .replace(/%GAME%/g, page.game)
+    .replace(/%HIDDEN%/g, JSON.stringify([...HIDDEN]));
 }
 const rendered = {};
 for (const [p, page] of Object.entries(PAGES)) rendered[p] = render(page);
 
-for (const p of Object.keys(PAGES)) app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered[p]));
+for (const [p, page] of Object.entries(PAGES)) {
+  // Old links to a hidden game's page land on the catalog instead of a dead end.
+  if (HIDDEN.has(page.game)) app.get(p, (req, res) => res.redirect(302, '/?view=games'));
+  else app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered[p]));
+}
 app.get('/r/:code', (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/api/rooms', (req, res) => res.json(rooms.listPublic()));
 app.get('/healthz', (req, res) => res.send('ok'));
