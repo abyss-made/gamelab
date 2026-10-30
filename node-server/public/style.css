@@ -5669,3 +5669,19 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
   overflow-y: auto;
   margin-bottom: 6px;
 }
+
+/* Party controls (#35): host transfer, spectator queue, next-game vote. Existing palette only. */
+.kick.promote {
+  right: 22px;
+}
+.queue-note {
+  margin: 8px 0 6px;
+}
+.vote-field {
+  flex-basis: 100%;
+  max-width: 320px;
+  margin: 4px auto 0;
+}
+.vote-tally {
+  font-size: 13px;
+}
