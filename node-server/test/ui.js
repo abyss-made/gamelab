@@ -127,6 +127,7 @@ async function createRoom(page, game, setup) {
       fakes.push(f);
       await f.emit('joinRoom', { code, token: f.token, profile: f.profile });
       await until(() => f.state && f.state.players.length === 2);
+      await page.waitForFunction(() => { const b = document.getElementById('lobby-start'); return b && !b.hidden && !b.disabled; }); // a click on a disabled button is silently ignored
       await page.evaluate(() => document.getElementById('lobby-start').click());
       await page.waitForFunction(() => document.body.dataset.phase === 'game');
       const hostIsDrawer = await until(() => f.state.game && f.state.game.drawerId !== f.state.you, 3000);

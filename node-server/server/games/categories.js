@@ -161,7 +161,7 @@ function finish(st, api, forfeit) {
   const eligible = standings.filter((s) => !s.out);
   const top = eligible[0] ? eligible[0].points : 0;
   const winners = eligible.filter((s) => s.points === top).map((s) => s.id);
-  api.sys(winners.length > 1 ? 'It ends in a tie!' : `${eligible[0].name} wins!`, 'good');
+  api.sys(!winners.length ? 'Nobody is left, so there is no winner.' : winners.length > 1 ? 'It ends in a tie!' : `${eligible[0].name} wins!`, 'good');
   api.end({ type: 'categories', winnerId: winners[0] || null, winners, tie: winners.length > 1, standings, forfeit: !!forfeit });
 }
 

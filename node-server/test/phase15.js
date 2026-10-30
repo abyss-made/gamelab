@@ -97,6 +97,7 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       await until(() => f.state.players.length + f.state.spectators.length === 2);
       await roundTrip('Play tab (lobby)', () => page.click('.main-nav [data-tab="home"]'), 'Return to Lobby');
       await page.click('#return-bar');
+      await page.waitForFunction(() => { const b = document.getElementById('lobby-start'); return b && !b.hidden && !b.disabled; }); // a click on a disabled button is silently ignored
       await page.evaluate(() => document.getElementById('lobby-start').click());
       await page.waitForFunction(() => document.body.dataset.phase === 'game');
       await roundTrip('Back to Games (game)', () => page.click('#leave-btn'), 'Return to Game');
