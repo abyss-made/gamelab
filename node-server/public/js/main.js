@@ -400,7 +400,7 @@
   let modalOpener = null;
   function openModal(html) {
     if ($("#modal").hidden) modalOpener = document.activeElement;
-    $("#modal-body").classList.remove("settings-modal", "settings-readonly");
+    $("#modal-body").classList.remove("settings-modal", "settings-readonly", "rules-modal");
     $("#modal-body").innerHTML =
       `<button class="modal-close icon-btn small" data-close aria-label="Close dialog">${icon("close")}</button>` +
       html;
@@ -472,6 +472,62 @@
     syncSound();
   });
   $("#settings-btn").innerHTML = icon("settings");
+
+  // ---------- rules + focus mode (shared by all games) ----------
+  const RULE_SECTIONS = [
+    ["flow", "How a round works"],
+    ["controls", "Controls (mouse and touch)"],
+    ["scoring", "Scoring"],
+    ["special", "Special mechanics"],
+  ];
+  function rulesHTML(gameId) {
+    const G = GAMES[gameId];
+    const R = (window.GameRules || {})[gameId];
+    if (!R)
+      return `<h2 class="card-title">${icon("help")} ${esc(G.name)} rules</h2><p>Rules for this game are not available yet.</p>`;
+    const list = (a) => `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    return `<h2 class="card-title">${icon("help")} How to play ${esc(G.name)}</h2>
+      <div class="rules-body" tabindex="0" aria-label="${esc(G.name)} rules">
+        <p class="rules-goal"><b>Goal:</b> ${esc(R.goal)}</p>
+        <p><b>Players:</b> ${esc(R.players)}</p>
+        ${RULE_SECTIONS.filter(([k]) => R[k] && R[k].length)
+          .map(([k, t]) => `<h3>${t}</h3>${list(R[k])}`)
+          .join("")}
+        <h3>Timer</h3><p>${esc(R.timer)}</p>
+        <h3>Winning, losing and ties</h3><p>${esc(R.ending)}</p>
+      </div>
+      <p class="muted rules-note">Your game keeps running while you read. Press Esc or tap Close to return.</p>
+      <div class="modal-actions"><button class="btn" data-close>Close</button></div>`;
+  }
+  function openRules(gameId) {
+    if (!gameId || !GAMES[gameId]) return;
+    openModal(rulesHTML(gameId));
+    $("#modal-body").classList.add("rules-modal");
+  }
+  const rulesBtn = $("#rules-btn");
+  rulesBtn.innerHTML = icon("help");
+  rulesBtn.addEventListener("click", () => S && openRules(S.gameId));
+  $("#rules-link").addEventListener("click", () => S && openRules(S.gameId));
+
+  let focusMode = false;
+  const focusBtn = $("#focus-btn");
+  function setFocus(on) {
+    focusMode = !!on;
+    document.body.classList.toggle("focus-mode", focusMode);
+    focusBtn.setAttribute("aria-pressed", String(focusMode));
+    focusBtn.innerHTML = icon(focusMode ? "shrink" : "expand");
+    const label = focusMode ? "Exit focus mode" : "Enter focus mode";
+    focusBtn.setAttribute("aria-label", label);
+    focusBtn.title = focusMode
+      ? "Exit focus mode (Esc)"
+      : "Focus mode: enlarge the game";
+    window.dispatchEvent(new Event("resize"));
+  }
+  focusBtn.innerHTML = icon("expand");
+  focusBtn.addEventListener("click", () => setFocus(!focusMode));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && focusMode && $("#modal").hidden) setFocus(false);
+  });
   $("#refresh-btn").innerHTML = icon("refresh");
   $("#mobile-players-toggle").innerHTML = icon("people");
   $("#mobile-players-toggle").onclick = () => {
@@ -1022,6 +1078,9 @@
     S = null;
     delete document.body.dataset.phase;
     delete document.body.dataset.game;
+    rulesBtn.hidden = true;
+    focusBtn.hidden = true;
+    if (focusMode) setFocus(false);
   }
   function leaveRoom() {
     socket.emit("leaveRoom");
@@ -1244,6 +1303,9 @@
     $("#room-vis").textContent = S.isPublic ? "Public" : "Private";
     $("#room-lock").hidden = !S.locked;
     $("#end-btn").hidden = !(isHost() && S.phase === "game");
+    rulesBtn.hidden = false;
+    focusBtn.hidden = S.phase !== "game";
+    if (S.phase !== "game" && focusMode) setFocus(false);
     document.title = `${G.name} lobby | ${window.PAGE.site}`;
     renderPeople();
     renderStage();

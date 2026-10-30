@@ -23,7 +23,9 @@ GameUI.telephone = (() => {
   let history = [];
   let tool = "brush";
   let color = "#000000";
-  let size = 10;
+  // Brush and eraser remember their own sizes.
+  const sizes = { brush: 10, eraser: 10 };
+  const curSize = () => sizes[tool === "eraser" ? "eraser" : "brush"];
   let cur = null;
 
   const paintDot = (x, h) => {
@@ -121,7 +123,7 @@ GameUI.telephone = (() => {
         return;
       }
       cv.setPointerCapture(e.pointerId);
-      cur = { t: "s", c: tool === "eraser" ? "#ffffff" : color, s: size, p: [x, y] };
+      cur = { t: "s", c: tool === "eraser" ? "#ffffff" : color, s: curSize(), p: [x, y] };
       history.push(cur);
       paintDot(cv.getContext("2d"), cur);
     });
@@ -144,7 +146,7 @@ GameUI.telephone = (() => {
   const toolsHTML = () => `<div class="tp-tools" role="toolbar" aria-label="Drawing tools">
       ${COLORS.map((c) => `<button type="button" class="tp-sw ${c === color && tool !== "eraser" ? "on" : ""}" data-color="${c}" style="background:${c}" aria-label="Colour ${c}" aria-pressed="${c === color}"></button>`).join("")}
       <span class="tp-sep"></span>
-      ${SIZES.map((s) => `<button type="button" class="btn btn-small btn-ghost ${s === size ? "on" : ""}" data-size="${s}" aria-label="Brush size ${s}">${s === 4 ? "S" : s === 10 ? "M" : "L"}</button>`).join("")}
+      ${SIZES.map((s) => `<button type="button" class="btn btn-small btn-ghost ${s === curSize() ? "on" : ""}" data-size="${s}" aria-label="${tool === "eraser" ? "Eraser" : "Brush"} size ${s}">${s === 4 ? "S" : s === 10 ? "M" : "L"}</button>`).join("")}
       <span class="tp-sep"></span>
       <button type="button" class="btn btn-small btn-ghost ${tool === "brush" ? "on" : ""}" data-tool="brush">Brush</button>
       <button type="button" class="btn btn-small btn-ghost ${tool === "fill" ? "on" : ""}" data-tool="fill">Fill</button>
@@ -174,7 +176,7 @@ GameUI.telephone = (() => {
     const b = e.target.closest("button");
     if (!b || !cv || submitted) return;
     if (b.dataset.color) { color = b.dataset.color; if (tool === "eraser") tool = "brush"; }
-    else if (b.dataset.size) size = Number(b.dataset.size);
+    else if (b.dataset.size) sizes[tool === "eraser" ? "eraser" : "brush"] = Number(b.dataset.size);
     else if (b.dataset.tool) tool = b.dataset.tool;
     else if (b.dataset.act === "undo") { history.pop(); replay(cv, history); showLimit(); }
     else if (b.dataset.act === "clear") { history = []; replay(cv, history); showLimit(); }

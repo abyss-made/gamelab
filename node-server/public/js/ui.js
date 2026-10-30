@@ -33,6 +33,8 @@ window.Playgrid = (() => {
     refresh:
       "M21 3v7h-7M3 21v-7h7M4 8a9 9 0 0 1 15-3l2 5M3 14l2 5a9 9 0 0 0 15-3",
     lock: "M6 10V6a6 6 0 0 1 12 0v4M4 10h16v12H4V10Zm8 4v4",
+    help: "M9 9a3 3 0 1 1 4 2.8c-1 .5-1 1.2-1 2.2M12 18h.01M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z",
+    shrink: "M9 3v6H3m18 0h-6V3M3 15h6v6m6 0v-6h6",
     chat: "M21 15a4 4 0 0 1-4 4H8l-6 3 1-7V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v9Z",
   };
   const icon = (name, cls = "") =>
