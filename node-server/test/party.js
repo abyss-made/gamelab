@@ -376,6 +376,18 @@ async function winTicTacToe(cs) {
       ok(ids(zed.state).includes(yan.state.you), 'the idle host keeps their seat');
       cs.forEach((c) => c.emit('leaveRoom'));
     }
+    {
+      // The first candidate in seat order is idle too: hosting must skip them for the active member.
+      const { cs } = await party(B.url, 'golf', ['Dot', 'Eli', 'Fay']);
+      const [, , fay] = cs;
+      const end = Date.now() + 3000;
+      while (Date.now() < end && fay.state.hostId !== fay.state.you) {
+        fay.emit('chat', 'ready when you are');
+        await sleep(300);
+      }
+      ok(fay.state.hostId === fay.state.you, 'idle-host handover skips an idle member and picks the active one');
+      cs.forEach((c) => c.emit('leaveRoom'));
+    }
   } catch (err) {
     console.error(err);
     failures++;

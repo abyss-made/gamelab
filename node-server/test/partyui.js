@@ -135,11 +135,14 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       ok(/1 vote/.test(await host.textContent('[data-pickgame="chess"]')), `${T}: Choose Another Game shows vote counts`);
       await host.keyboard.press('Escape');
 
+      await spec.focus('#vote-next'); // an open vote picker must not pin stale results
       await host.click('#result-lobby');
       await until(() => !pal.state.lastResult);
       await host.waitForFunction(() => document.body.dataset.phase === 'lobby', null, { timeout: 3000 }).catch(() => {});
       ok((await host.evaluate(() => document.body.dataset.phase)) === 'lobby', `${T}: Back to Lobby returns the host view to the lobby`);
       ok((await spec.evaluate(() => document.body.dataset.phase)) === 'lobby', `${T}: and everyone else's view too`);
+      await spec.waitForFunction(() => !document.querySelector('.result-card'), null, { timeout: 3000 }).catch(() => {});
+      ok(!(await spec.$('.result-card')), `${T}: results card is replaced even while the vote picker was focused`);
 
       // host transfer from the roster
       if (T === 'phone') {

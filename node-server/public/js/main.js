@@ -1527,9 +1527,11 @@
       top += `<div class="card result-card">${GameUI[S.lastResult.type].renderResult(S.lastResult, S, app)}${resultActionsHTML()}</div>`;
     }
 
-    // Rebuild only on change, and never under an open vote picker.
+    // Rebuild only on change. An open vote picker is kept while the same results stay up;
+    // anything else (Back to Lobby, a game switch) replaces it.
     const topEl = $("#lobby-top");
-    if (topEl.dataset.html !== top && document.activeElement?.id !== "vote-next") {
+    const picking = document.activeElement?.id === "vote-next" && S.lastResult;
+    if (topEl.dataset.html !== top && !picking) {
       topEl.innerHTML = top;
       topEl.dataset.html = top;
     }
@@ -1629,6 +1631,11 @@
   }
   $("#lobby-start").addEventListener("click", () => socket.emit("startGame"));
 
+  // Catch up on any results update that arrived while the vote picker was open.
+  $("#stage").addEventListener("focusout", (e) => {
+    if (e.target.id === "vote-next" && S && mounted === "lobby")
+      setTimeout(() => S && mounted === "lobby" && renderLobby());
+  });
   $("#stage").addEventListener("change", (e) => {
     const t = e.target;
     if (t.id === "vote-next") {

@@ -43,10 +43,10 @@ const lobbyLimited = (m) => !(m.lobbyBucket || (m.lobbyBucket = new Bucket(0.5, 
 // Chat is limited per member too, so reconnecting a socket doesn't refill it.
 const chatLimited = (m) => !(m.chatBucket || (m.chatBucket = new Bucket(1, 5))).take();
 
-// Hosting goes to someone connected: seated players first, then spectators.
-function pickHost(room, exceptId) {
+// Hosting goes to someone connected (and passing `fits`): seated players first, then spectators.
+function pickHost(room, exceptId, fits = () => true) {
   const order = [...room.seats, ...room.specs].filter((id) => id !== exceptId).map((id) => room.members.get(id)).filter(Boolean);
-  return order.find((x) => x.connected) || null;
+  return order.find((x) => x.connected && fits(x)) || null;
 }
 function setHost(room, m, why) {
   if (!m || room.hostId === m.id) return;
@@ -417,8 +417,7 @@ function loop() {
       } else if (!host.connected && now - host.lastSeen > config.HOST_GRACE_MS) {
         setHost(room, pickHost(room, host.id), `${host.name} disconnected`);
       } else if (host.connected && room.phase === 'lobby' && now - Math.max(host.lastActive, room.lobbySince) > config.HOST_AFK_MS) {
-        const next = pickHost(room, host.id);
-        if (next && now - next.lastActive < config.HOST_AFK_MS) setHost(room, next, `${host.name} is away`);
+        setHost(room, pickHost(room, host.id, (x) => now - x.lastActive < config.HOST_AFK_MS), `${host.name} is away`);
       }
       // Public lobbies start by themselves so nobody waits on an idle host.
       const G = gameOf(room);
