@@ -19,7 +19,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="/style.css?v=qol-20261029" />
+    <link rel="stylesheet" href="/style.css?v=party3-20261031" />
   </head>
   <body data-screen="home">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -36,8 +36,8 @@
         >
         <nav class="main-nav" aria-label="Main navigation">
           <a href="/" data-nav="/" data-tab="home" class="active">Play</a>
-          <button data-view="selection" data-tab="selection">Games</button>
-          <button data-view="rooms">Rooms</button>
+          <a href="/games" data-nav="/games" data-view="selection" data-tab="selection">Games</a>
+          <a href="/rooms" data-nav="/rooms" data-view="rooms" data-tab="rooms">Rooms</a>
           <button data-view="profile">Profile</button>
         </nav>
         <div class="game-hud" aria-label="Game progress">
@@ -92,7 +92,7 @@
             title="Settings"
             aria-label="Open settings"
           ></button>
-          <button class="btn nav-cta" data-view="selection">Play Now</button>
+          <button class="btn nav-cta" data-nav="/games">Play Now</button>
         </div>
       </header>
 
@@ -148,46 +148,78 @@
         </section>
       </main>
 
-      <main id="screen-selection" class="screen selection-screen" hidden>
-        <section class="selection-main" aria-labelledby="games-title">
-          <div class="section-heading">
+      <main id="screen-selection" class="screen catalog-screen" hidden>
+        <section class="catalog" aria-labelledby="games-title">
+          <div class="catalog-head">
             <div>
-              <h1 id="games-title">Quick Play</h1>
-              <p>
-                Pick a game, create a room, and share the link with your
-                friends!
+              <p class="eyebrow">GAMES</p>
+              <h1 id="games-title">Small cards. More discovery.</h1>
+              <p class="muted">
+                Play opens your party first, then picks the game. Everyone
+                stays together between games.
               </p>
             </div>
           </div>
-          <div class="games" id="games"></div>
-        </section>
-        <aside class="selection-sidebar">
-          <section class="card join-room">
-            <h2>Join a Room</h2>
-            <form class="code-form" id="code-form">
-              <input
-                id="code-input"
-                placeholder="Enter room code"
-                maxlength="100"
+          <div class="catalog-tools">
+            <label class="search-field"
+              ><span class="sr-only">Search games</span
+              ><input
+                id="game-search"
+                type="search"
+                placeholder="Search games or categories…"
                 autocomplete="off"
-                aria-label="Room code or invitation link"
-                required
-              /><button class="btn" type="submit">Join</button>
-            </form>
-          </section>
-          <section class="card browser" id="rooms-browser">
+                aria-controls="games"
+            /></label>
+            <div class="chips" id="game-filters" role="group" aria-label="Filter games by category"></div>
+          </div>
+          <p class="sr-only" id="games-count" role="status" aria-live="polite"></p>
+          <div class="games compact-games" id="games"></div>
+          <div class="no-match" id="games-empty" hidden>
+            <h2>No matches</h2>
+            <p class="muted" id="games-empty-text"></p>
+            <button class="btn btn-ghost" type="button" id="games-clear">Clear Search</button>
+          </div>
+        </section>
+      </main>
+
+      <main id="screen-rooms" class="screen rooms-screen" hidden>
+        <div class="rooms-head">
+          <p class="eyebrow">ROOMS</p>
+          <h1>Your next gathering</h1>
+          <p class="muted">Join friends with a code, hop back into your party, or find a public one.</p>
+        </div>
+        <div class="rooms-grid">
+          <div class="rooms-side">
+            <section class="card join-room" aria-labelledby="join-title">
+              <h2 id="join-title">Join by code</h2>
+              <form class="code-form" id="code-form" novalidate>
+                <input
+                  id="code-input"
+                  placeholder="Enter party code"
+                  maxlength="100"
+                  autocomplete="off"
+                  aria-label="Party code or invitation link"
+                  aria-describedby="code-error"
+                  required
+                /><button class="btn" type="submit">Join</button>
+              </form>
+              <p class="field-error" id="code-error" role="alert" hidden></p>
+            </section>
+            <section class="card current-party" id="current-party" aria-labelledby="current-title" hidden></section>
+          </div>
+          <section class="card browser" id="rooms-browser" aria-labelledby="public-title">
             <div class="browser-head">
-              <h2>Live Rooms</h2>
+              <h2 id="public-title">Public parties</h2>
               <button
                 class="icon-btn small"
                 id="refresh-btn"
-                aria-label="Refresh public rooms"
+                aria-label="Refresh public parties"
               ></button>
             </div>
-            <p class="rooms-explainer">Live public rooms · join in or watch</p>
-            <div id="lobby-list" class="lobby-list"></div>
+            <p class="rooms-explainer">Live public parties · join in or watch</p>
+            <div id="lobby-list" class="lobby-list" aria-live="polite" aria-busy="false"></div>
           </section>
-        </aside>
+        </div>
       </main>
 
       <main id="screen-join" class="screen" hidden>
@@ -195,12 +227,12 @@
           <p class="eyebrow">YOU'RE INVITED</p>
           <h1>Make yourself at home.</h1>
           <p>
-            Join room <b id="join-code"></b>. Pick your player name and avatar.
+            Join party <b id="join-code"></b>. Pick your player name and avatar.
           </p>
           <p class="muted join-switch-note" id="join-switch-note" role="status" hidden></p>
           <div class="profile" data-profile></div>
-          <button class="btn btn-big" id="join-btn">Join Room</button
-          ><a class="muted-link" href="/" data-nav="/">Back to games</a>
+          <button class="btn btn-big" id="join-btn">Join Party</button
+          ><a class="muted-link" href="/rooms" data-nav="/rooms">Back to rooms</a>
         </div>
       </main>
       <main id="screen-message" class="screen" hidden>
@@ -213,6 +245,19 @@
       </main>
 
       <main id="screen-room" class="screen room" hidden>
+        <header class="party-head" id="party-head">
+          <div class="party-id">
+            <p class="eyebrow" id="party-eyebrow">YOUR PARTY</p>
+            <h1 id="party-name">Your party</h1>
+          </div>
+          <div class="party-head-actions">
+            <button class="btn btn-ghost party-code" id="party-code" type="button" aria-describedby="party-copied"></button>
+            <span class="sr-only" id="party-copied" role="status" aria-live="polite"></span>
+            <button class="btn btn-ghost" id="party-invite" type="button">Invite Friends</button>
+            <button class="btn btn-ghost" id="party-settings" type="button" aria-haspopup="dialog">Party Settings</button>
+            <button class="btn btn-ghost" id="party-leave" type="button">Leave Party</button>
+          </div>
+        </header>
         <div class="room-bar">
           <div class="room-bar-left">
             <button class="back-link" id="leave-btn"></button
@@ -258,8 +303,7 @@
               aria-label="Show player list"
               aria-expanded="false"
               aria-controls="player-list spec-list"
-            ></button
-            ><button class="btn" id="lobby-start" hidden>Start Game</button>
+            ></button>
           </div>
           <ul class="people" id="player-list"></ul>
           <div id="seat-action"></div>
@@ -271,6 +315,7 @@
           </div>
         </aside>
         <section class="stage" id="stage" aria-label="Game area"></section>
+        <aside class="card party-activity" id="party-activity" aria-labelledby="activity-title"></aside>
         <section class="chat card" id="room-chat" aria-label="Room chat">
           <div
             class="chat-log"
@@ -362,6 +407,6 @@
     <script src="/js/rules/rules-a.js?v=qol-20261029"></script>
     <script src="/js/rules/rules-b.js?v=qol-20261029"></script>
     <script src="/js/rules/rules-c.js?v=qol-20261029"></script>
-    <script src="/js/main.js?v=party-20261030"></script>
+    <script src="/js/main.js?v=party3-20261031"></script>
   </body>
 </html>

@@ -75,6 +75,12 @@ async function createRoom(page, game) {
         const errors = [];
         page.on('pageerror', (e) => errors.push(e.message));
         const code = await createRoom(page, game);
+        if (vp.tag === 'desktop') {
+          // Settings live in the lobby once a game is chosen (issue #38).
+          await page.click('#game-settings-btn');
+          ok((await page.$$('#modal-body .settings-fields [data-setting]')).length >= 1, `${game}: Game Settings dialog shows its settings`);
+          await page.keyboard.press('Escape');
+        }
         const f = fake('Friend');
         fakes.push(f);
         await f.emit('joinRoom', { code, token: f.token, profile: f.profile });

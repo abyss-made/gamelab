@@ -275,6 +275,47 @@
   const pickable = (keep) =>
     Object.entries(GAMES).filter(([id]) => !HIDDEN.has(id) || id === keep);
 
+  // One category per game, shared by the Games catalog, the picker and their filters.
+  const CATEGORY = {
+    drawguess: "Drawing",
+    telephone: "Drawing",
+    wordchain: "Words",
+    wordscramble: "Words",
+    categories: "Words",
+    trivia: "Social",
+    bluff: "Social",
+    impostor: "Social",
+    rps: "Social",
+    hotpotato: "Social",
+    colorstack: "Cards",
+    gofish: "Cards",
+    higherlower: "Cards",
+    fourrow: "Strategy",
+    tictactoe: "Strategy",
+    dotsboxes: "Strategy",
+    checkers: "Strategy",
+    reversi: "Strategy",
+    chess: "Strategy",
+    battleship: "Strategy",
+    ludo: "Board",
+    tycoon: "Board",
+    liarsdice: "Board",
+    pool: "Skill",
+    golf: "Skill",
+  };
+  for (const [id, g] of Object.entries(GAMES)) g.cat = CATEGORY[id] || "Party";
+  const rangeText = (g) =>
+    g.min === g.max ? `${g.max} players` : `${g.min}–${g.max} players`;
+  const categories = () => [
+    ...new Set(pickable().map(([, g]) => g.cat)),
+  ];
+  // Search matches the name, the category or the short description.
+  const matches = (g, q) =>
+    !q ||
+    [g.name, g.cat, g.blurb].some((t) =>
+      t.toLowerCase().includes(q.trim().toLowerCase()),
+    );
+
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s) =>
@@ -547,23 +588,20 @@
   $("#share-link").innerHTML = icon("link");
   $("#leave-btn").innerHTML = icon("back") + "<span>Back to Games</span>";
   $(".send-btn").innerHTML = icon("arrow");
-  $("#hero-create").innerHTML = icon("plus") + "Create Room";
-  $("#hero-join").innerHTML = icon("link") + "Join Room";
+  $("#hero-create").innerHTML = icon("plus") + "Create Party";
+  $("#hero-join").innerHTML = icon("link") + "Join Party";
   $$("[data-trust]").forEach((el) =>
     el.insertAdjacentHTML("afterbegin", icon(el.dataset.trust)),
   );
-  $("#hero-create").onclick = () => openCreate("drawguess");
+  $("#hero-create").onclick = () => openCreate();
   $("#hero-join").onclick = () => {
-    nav("/?view=games");
+    nav("/rooms");
     $("#code-input").focus();
   };
+  // Games and Rooms are real links (data-nav); only Profile opens a dialog.
   document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-view]");
-    if (!b) return;
-    if (b.dataset.view === "profile") return openProfile();
-    nav("/?view=" + (b.dataset.view === "rooms" ? "rooms" : "games"));
-    if (b.dataset.view === "rooms")
-      $("#rooms-browser").scrollIntoView({ block: "nearest" });
+    const b = e.target.closest('[data-view="profile"]');
+    if (b) openProfile();
   });
   function openProfile() {
     openModal(
@@ -571,7 +609,8 @@
     );
     renderProfiles();
   }
-  $("#settings-btn").onclick = () => (S ? openGameSettings() : openProfile());
+  $("#settings-btn").onclick = () =>
+    S ? (S.gameId ? openGameSettings() : openPartySettings()) : openProfile();
 
   // Track the visual viewport (iOS toolbars, on-screen keyboard) for fixed layers.
   (() => {
@@ -658,7 +697,9 @@
       if (currentCode === code) return showScreen("room");
       return showJoin(code);
     }
-    // Navigating elsewhere never leaves the room; only Leave Lobby does.
+    // Navigating elsewhere never leaves the room; only Leave Party does.
+    const view = new URLSearchParams(location.search).get("view");
+    if (location.pathname === "/rooms" || view === "rooms") return showRooms();
     showHome();
   }
   window.addEventListener("popstate", route);
@@ -670,80 +711,196 @@
     nav(a.dataset.nav);
   });
 
-  // ---------- home ----------
+  // ---------- home + Games catalog ----------
   let lobbyTimer = null;
   function showHome() {
+    clearInterval(lobbyTimer);
     const view = new URLSearchParams(location.search).get("view");
     const slugGame =
       pickable().map(([g]) => g).find(
         (g) => location.pathname === "/" + GAMES[g].slug,
       ) || (HIDDEN.has(window.PAGE.game) ? "" : window.PAGE.game);
-    showScreen(view || slugGame ? "selection" : "home");
+    const catalog = view || slugGame || location.pathname === "/games";
+    showScreen(catalog ? "selection" : "home");
     renderProfiles();
     renderGames();
-    loadLobbies();
-    clearInterval(lobbyTimer);
-    lobbyTimer = setInterval(() => {
-      if (document.body.dataset.screen === "selection") loadLobbies();
-    }, 6000);
     if (slugGame)
       $(`.game-card[data-game="${slugGame}"]`)?.classList.add("featured");
   }
+
+  const catalogFilter = { q: "", cat: "All" };
+  // "Fits our party" only means something once you're in one.
+  const partySize = () =>
+    S ? S.players.length + S.spectators.length : 0;
+  const fits = (g) => {
+    const n = partySize();
+    return n >= g.min && (n <= g.max || (S && S.spectatorsOn));
+  };
+  function chipsHTML(f, total) {
+    const chips = ["All", ...categories()];
+    if (S) chips.push("Fits");
+    return chips
+      .map(
+        (c) =>
+          `<button type="button" class="chip" data-filter="${c}" data-k="chip-${c}" aria-pressed="${f.cat === c}">${c === "All" ? `All · ${total}` : c === "Fits" ? "Fits our party" : c}</button>`,
+      )
+      .join("");
+  }
+  const filterGames = (f) =>
+    pickable().filter(
+      ([, g]) =>
+        matches(g, f.q) &&
+        (f.cat === "All" || (f.cat === "Fits" ? fits(g) : g.cat === f.cat)),
+    );
   function renderGames() {
+    const all = pickable();
+    if (catalogFilter.cat === "Fits" && !S) catalogFilter.cat = "All";
+    $("#game-filters").innerHTML = chipsHTML(catalogFilter, all.length);
+    const list = filterGames(catalogFilter);
+    const filtering = !!catalogFilter.q.trim() || catalogFilter.cat !== "All";
     $("#games").innerHTML =
-      pickable()
+      list
         .map(
-          ([id, g], i) => `
-      <article class="card game-card ${!i ? "featured" : ""}" data-game="${id}">
-        <div class="game-art">${g.art}</div><div class="game-info"><h2><a href="/${g.slug}" data-nav="/${g.slug}">${g.name}</a></h2><p>${g.blurb}</p><small class="cap-note">${g.overflow}</small></div>
-        <div class="game-card-bottom"><span class="game-players">${icon("people")}${g.players}</span><button class="btn btn-small" data-create="${id}">Play</button></div>
-        <button class="quick-link" data-quick="${id}">Quick Play ${icon("arrow")}</button>
+          ([id, g]) => `
+      <article class="card game-card" data-game="${id}">
+        <div class="game-art">${g.art}</div>
+        <div class="game-info"><h2><a href="/${g.slug}" data-nav="/${g.slug}">${g.name}</a></h2><p class="game-meta">${rangeText(g)} · ${g.cat}</p><p class="game-blurb">${g.blurb}</p></div>
+        <button class="btn btn-small btn-ghost game-play" data-create="${id}" aria-label="Play ${esc(g.name)}">Play</button>
       </article>`,
         )
         .join("") +
-      `<article class="card game-card coming-soon"><div class="game-art"><img src="/assets/coming-soon.svg" width="180" height="180" alt="An illustrated dice"></div><div class="game-info"><h2>Coming Soon</h2><p>More games on the way!</p></div><div class="game-card-bottom"><span class="btn btn-small btn-ghost soon-label">Soon</span></div></article>`;
+      (filtering
+        ? ""
+        : `<article class="card game-card coming-soon"><div class="game-art"><img src="/assets/coming-soon.svg" width="180" height="180" alt="An illustrated dice"></div><div class="game-info"><h2>Coming Soon</h2><p class="game-meta">More games on the way!</p></div><span class="soon-label">Soon</span></article>`);
+    $("#games-empty").hidden = list.length > 0;
+    $("#games-empty-text").textContent = catalogFilter.q.trim()
+      ? `No games match “${catalogFilter.q.trim()}”.`
+      : "No games in this filter yet.";
+    $("#games-count").textContent = `${list.length} game${list.length === 1 ? "" : "s"} shown`;
   }
+  $("#game-search").addEventListener("input", (e) => {
+    catalogFilter.q = e.target.value;
+    renderGames();
+  });
+  $("#game-filters").addEventListener("click", (e) => {
+    const c = e.target.closest("[data-filter]");
+    if (!c) return;
+    catalogFilter.cat = c.dataset.filter;
+    renderGames();
+    $(`#game-filters [data-filter="${c.dataset.filter}"]`)?.focus();
+  });
+  $("#games-clear").addEventListener("click", () => {
+    catalogFilter.q = "";
+    catalogFilter.cat = "All";
+    $("#game-search").value = "";
+    renderGames();
+    $("#game-search").focus();
+  });
   $("#games").addEventListener("click", (e) => {
-    const q = e.target.closest("[data-quick]"),
-      c = e.target.closest("[data-create]");
-    if (q) quickPlay(q.dataset.quick);
-    if (c) openCreate(c.dataset.create);
+    const c = e.target.closest("[data-create]");
+    if (c) playGame(c.dataset.create);
+  });
+  // Play always goes through a party: create one, or preselect the game in yours.
+  function playGame(gameId) {
+    if (!currentCode || !S) return openCreate(gameId);
+    nav("/r/" + currentCode);
+    openPicker(gameId);
+  }
+
+  // ---------- Rooms ----------
+  function showRooms() {
+    showScreen("rooms");
+    renderCurrentParty();
+    loadLobbies(true);
+    clearInterval(lobbyTimer);
+    lobbyTimer = setInterval(() => {
+      if (document.body.dataset.screen === "rooms") loadLobbies();
+    }, 6000);
+  }
+  function renderCurrentParty() {
+    const el = $("#current-party");
+    el.hidden = !currentCode;
+    if (!currentCode) return;
+    const G = S && S.gameId ? GAMES[S.gameId] : null;
+    const count = S ? S.players.length + S.spectators.length : 0;
+    el.innerHTML = `<h2 id="current-title">Your current party</h2><div class="current-row"><div><b>${esc(S ? S.name : "Your party")}</b><small>${S ? `${count} ${count === 1 ? "person" : "people"} · ${G ? esc(G.name) : "Choosing a game"}${S.phase === "game" ? " · playing now" : ""}` : "Connecting…"} · ${esc(currentCode)}</small></div><button class="btn btn-ghost btn-small" type="button" id="current-return">Return</button></div>`;
+  }
+  $("#current-party").addEventListener("click", (e) => {
+    if (e.target.closest("#current-return")) nav("/r/" + currentCode);
   });
 
-  async function loadLobbies() {
+  let lobbiesLoaded = false;
+  async function loadLobbies(first) {
     const el = $("#lobby-list");
+    if (first && !lobbiesLoaded) {
+      el.setAttribute("aria-busy", "true");
+      el.innerHTML = '<p class="empty">Loading public parties…</p>';
+    }
     try {
       const list = await (await fetch("/api/rooms")).json();
+      lobbiesLoaded = true;
+      el.setAttribute("aria-busy", "false");
       if (!list.length) {
         el.innerHTML =
-          '<p class="empty">No rooms yet. Create one and bring your friends, or use Quick Play to find your people.</p>';
+          '<div class="empty rooms-empty"><p>No public parties yet. Start one and invite your people.</p><button class="btn btn-small" type="button" data-room-create>Create Party</button></div>';
         return;
       }
       el.innerHTML = list
         .map((r) => {
+          const G = r.gameId ? GAMES[r.gameId] : null;
           const seatOpen =
             r.players < r.max &&
             (r.phase === "lobby" || r.gameId === "drawguess");
-          return `<div class="room-preview">${avatarHTML({ e: r.gameId === "fourrow" ? 3 : 0, c: 3 })}<div><b>${esc(r.code)}</b><small>${esc(r.gameName)} · ${r.players}/${r.max} players</small><span class="room-host">Hosted by ${esc(r.host)}</span></div><button class="btn btn-small ${!seatOpen ? "btn-ghost" : ""}" data-join="${esc(r.code)}" ${r.locked || (!seatOpen && !r.spectatorsOn) ? "disabled" : ""}>${r.locked ? "Locked" : seatOpen ? "Join" : r.spectatorsOn ? "Spectate" : "Full"}</button></div>`;
+          const art = G
+            ? `<span class="room-art">${G.art}</span>`
+            : `<span class="room-art room-art-empty" aria-hidden="true">${icon("people")}</span>`;
+          const label = r.locked
+            ? "Locked"
+            : seatOpen
+              ? "Join"
+              : r.spectatorsOn
+                ? "Spectate"
+                : "Full";
+          return `<div class="room-preview">${art}<div><b>${esc(r.name || r.code)}</b><small>${G ? esc(r.gameName) : "Choosing a game"} · ${r.players}/${r.max} players${r.phase === "game" ? " · playing" : ""}</small><span class="room-host">Hosted by ${esc(r.host)} · ${esc(r.code)}</span></div><button class="btn btn-small ${!seatOpen ? "btn-ghost" : ""}" data-join="${esc(r.code)}" aria-label="${label} ${esc(r.name || r.code)}" ${r.locked || (!seatOpen && !r.spectatorsOn) ? "disabled" : ""}>${label}</button></div>`;
         })
         .join("");
     } catch (e) {
-      el.innerHTML = '<p class="empty">Could not load lobbies.</p>';
+      el.setAttribute("aria-busy", "false");
+      el.innerHTML =
+        '<div class="empty rooms-empty"><p>Could not load public parties.</p><button class="btn btn-small btn-ghost" type="button" data-room-retry>Try Again</button></div>';
     }
   }
-  $("#refresh-btn").addEventListener("click", loadLobbies);
+  $("#refresh-btn").addEventListener("click", () => loadLobbies());
   $("#lobby-list").addEventListener("click", (e) => {
     const b = e.target.closest("[data-join]");
     if (b) join(b.dataset.join);
+    if (e.target.closest("[data-room-create]")) openCreate();
+    if (e.target.closest("[data-room-retry]")) loadLobbies(true);
   });
+  // Accepts a bare code, an invite link (/r/CODE) or #CODE.
+  function parseCode(raw) {
+    raw = raw.trim();
+    const code = (
+      raw.match(/\/r\/([a-z0-9]{4,8})(?:[/?#]|$)/i)?.[1] ||
+      raw.match(/^#([a-z0-9]{4,8})$/i)?.[1] ||
+      raw
+    ).toUpperCase();
+    return /^[A-Z0-9]{4,8}$/.test(code) ? code : null;
+  }
+  const codeError = (text) => {
+    $("#code-error").hidden = !text;
+    $("#code-error").textContent = text || "";
+    $("#code-input").setAttribute("aria-invalid", String(!!text));
+  };
+  $("#code-input").addEventListener("input", () => codeError(""));
   $("#code-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    const raw = $("#code-input").value.trim();
-    const code = (
-      raw.match(/\/r\/([a-z0-9]{4,8})(?:[/?#]|$)/i)?.[1] || raw
-    ).toUpperCase();
-    if (/^[A-Z0-9]{4,8}$/.test(code)) join(code);
-    else toast("That code does not look right.");
+    const raw = $("#code-input").value;
+    if (!raw.trim()) return codeError("Enter a party code or paste an invite link.");
+    const code = parseCode(raw);
+    if (!code) return codeError("That code does not look right. Codes are 6 letters and numbers.");
+    codeError("");
+    join(code, { inline: true });
   });
 
   // ---------- settings forms (used by Create Lobby and the host panel) ----------
@@ -857,42 +1014,56 @@
       ),
     );
   });
+  // Settings only exist once a game is chosen. Defaults first; every supported value under Advanced.
+  // Nothing is sent until Save, and participants see the same form read-only.
   function openGameSettings() {
+    if (!S || !S.gameId) return;
+    const G = GAMES[S.gameId];
     const editable = isHost() && S.phase === "lobby";
+    const seats =
+      G.min === G.max
+        ? ""
+        : `<label class="field"><span>Max Players</span><select data-host="maxPlayers">${Array.from(
+            { length: G.max - G.min + 1 },
+            (_, i) => G.min + i,
+          )
+            .map((v) => opt(v, S.maxPlayers))
+            .join("")}</select></label>`;
     openModal(
-      `<h2 class="card-title">${icon("controller")} Game Settings</h2><p class="settings-note">${editable ? "Changes are saved to your room instantly." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the room settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions"><button class="btn" data-close>Done</button></div>`,
+      `<h2 class="card-title">Game Settings</h2><p class="settings-note">${esc(G.name)} · ${editable ? "sensible defaults, fewer decisions." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the game settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions">${editable ? '<button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="settings-save" type="button">Save Settings</button>' : '<button class="btn" data-close>Close</button>'}</div>`,
     );
     $("#modal-body").classList.add("settings-modal");
     $("#modal-body").classList.toggle("settings-readonly", !editable);
     const fields = $(".settings-fields", $("#modal-body"));
+    const more = document.createElement("details");
+    more.className = "settings-more";
+    more.innerHTML =
+      '<summary>Advanced settings</summary><p class="muted settings-more-note">All supported timers, custom words, hints and seat limits live here.</p>';
     if (S.gameId === "drawguess") {
-      const more = document.createElement("details");
-      more.className = "settings-more";
-      more.innerHTML = "<summary>More Options</summary>";
       for (const [key, title, values] of [
-        ["drawTime", "Round Time", [60, 120, 180, 240, 300]],
-        ["rounds", "Rounds", [3, 5, 7, 10]],
+        ["drawTime", "Round time", [60, 80, 120]],
+        ["rounds", "Rounds", [3, 5, 7]],
       ]) {
         const native = fields.querySelector(`[data-setting="${key}"]`);
         const row = document.createElement("div");
         row.className = "field";
-        row.innerHTML = `<span>${title}</span><div class="segmented" role="group" aria-label="${title}">${values.map((v) => `<button type="button" data-choice="${key}" data-value="${v}" aria-pressed="${Number(native.value) === v}">${v}</button>`).join("")}</div>`;
+        row.innerHTML = `<span>${title}</span><div class="segmented" role="group" aria-label="${title}">${values.map((v) => `<button type="button" data-choice="${key}" data-value="${v}" aria-pressed="${Number(native.value) === v}">${key === "drawTime" ? v + "s" : v}</button>`).join("")}</div>`;
         native.closest(".field").before(row);
         more.append(native.closest(".field"));
       }
+      more.append(fields.querySelector(".custom-field"));
       fields.querySelectorAll(".check").forEach((el) => more.append(el));
-      fields.append(more);
     }
-    $(".settings-fields", $("#modal-body")).addEventListener("change", (e) => {
-      const t = e.target;
-      if (!t.dataset.setting || !editable) return;
-      const value =
-        t.type === "checkbox"
-          ? t.checked
-          : t.tagName === "SELECT" && !STRING_SETTINGS.includes(t.dataset.setting)
-            ? Number(t.value)
-            : t.value;
-      socket.emit("hostUpdate", { settings: { [t.dataset.setting]: value } });
+    if (seats) more.insertAdjacentHTML("beforeend", seats);
+    if (more.querySelector(".field, .check")) fields.append(more);
+    $("#settings-save")?.addEventListener("click", () => {
+      if (!isHost() || !S.gameId) return closeModal();
+      const patch = { settings: readSettings(fields) };
+      const max = fields.querySelector('[data-host="maxPlayers"]');
+      if (max) patch.maxPlayers = Number(max.value);
+      socket.emit("hostUpdate", patch);
+      closeModal();
+      toast("Game settings saved.");
     });
   }
 
@@ -910,102 +1081,60 @@
     });
     return out;
   }
-  const DEFAULTS = {
-    drawguess: {
-      rounds: 3,
-      drawTime: 80,
-      hints: true,
-      difficulty: "medium",
-      customWords: "",
-      customOnly: false,
-    },
-    fourrow: { turnTime: 30, winnerStays: true },
-    wordchain: { turnTime: 20, lives: 3, minLen: 3, dictionary: "common" },
-    categories: { rounds: 5, roundTime: 60 },
-    higherlower: { rounds: 10, guessTime: 12 },
-    colorstack: { turnTime: 30 },
-    gofish: { turnTime: 30 },
-    tictactoe: { turnTime: 30, winnerStays: true },
-    rps: { bestOf: 3, pickTime: 12 },
-    dotsboxes: { size: 4, turnTime: 30 },
-    wordscramble: { rounds: 8, roundTime: 30, difficulty: "medium" },
-    trivia: { questions: 10, answerTime: 15, category: "mixed" },
-    telephone: { drawTime: 60, writeTime: 30 },
-    bluff: { rounds: 5, bluffTime: 45, voteTime: 20 },
-    impostor: { rounds: 3, clueRounds: 2, clueTime: 30, discussTime: 60 },
-    liarsdice: { dice: 5, turnTime: 30, wild: true },
-    hotpotato: { lives: 2, fuse: "medium" },
-    battleship: { placeTime: 90, turnTime: 30, hitAgain: false, winnerStays: true },
-    checkers: { turnTime: 30, winnerStays: true },
-    reversi: { turnTime: 30, winnerStays: true },
-    ludo: { turnTime: 25 },
-    chess: { clock: 10, increment: 0, winnerStays: true },
-    pool: { turnTime: 45, winnerStays: true },
-    golf: { course: "meadow", maxStrokes: 8, turnTime: 45 },
-    tycoon: { rounds: 15, startCash: 1500, turnTime: 45 },
-  };
 
-  // ---------- create lobby ----------
+  // ---------- create party ----------
+  // Only two choices: who can join and whether people can watch. The game comes later,
+  // in the lobby. Play on a game card passes `gameId` so the new party starts with it.
   function openCreate(gameId) {
-    if (!GAMES[gameId] || HIDDEN.has(gameId)) gameId = "drawguess";
-    const draw = (g) => {
-      const G = GAMES[g];
-      openModal(`
-        <h2 class="card-title">Create a lobby</h2>
-        <div class="tiles">${pickable()
-          .map(
-            ([id, x]) =>
-              `<button type="button" class="tile ${id === g ? "on" : ""}" data-pick="${id}">${x.art}<b>${x.name}</b></button>`,
-          )
-          .join("")}</div>
-        <div class="form-grid" id="create-form">
-          <label class="field"><span>Who can join</span><select id="c-public">${opt(0, 0, "Private (link only)")}${opt(1, 0, "Public (listed)")}</select></label>
-          <label class="field"><span>Max players</span>${
-            G.min === G.max
-              ? `<select disabled><option>${G.max}</option></select>`
-              : `<select id="c-max">${Array.from(
-                  { length: G.max - G.min + 1 },
-                  (_, i) => G.min + i,
-                )
-                  .map((v) => opt(v, G.max))
-                  .join("")}</select>`
-          }</label>
-          <label class="check"><input type="checkbox" id="c-spec" checked><span>Allow spectators</span></label>
-          <label class="field"><span>Max spectators</span><select id="c-maxspec">${[5, 10, 20, 50].map((v) => opt(v, 20)).join("")}</select></label>
-          ${settingsHTML(g, DEFAULTS[g])}
-        </div>
-        <div class="modal-actions">
-          <button class="btn btn-ghost" data-close>Cancel</button>
-          <button class="btn btn-big" id="c-go">Create lobby</button>
-        </div>`);
-      $$("[data-pick]").forEach((b) =>
-        b.addEventListener("click", () => draw(b.dataset.pick)),
-      );
-      $("#c-go").addEventListener("click", () => {
-        const form = $("#create-form");
-        const opts = {
-          game: g,
-          isPublic: $("#c-public").value === "1",
-          maxPlayers: $("#c-max") ? Number($("#c-max").value) : G.max,
-          spectatorsOn: $("#c-spec").checked,
-          maxSpectators: Number($("#c-maxspec").value),
-          settings: readSettings(form),
-          profile,
-          token,
-        };
-        if (!leaveForOtherRoom()) return;
-        socket.emit("createRoom", opts, (res) => {
-          closeModal();
-          handleJoin(res);
-        });
+    if (gameId && (!GAMES[gameId] || HIDDEN.has(gameId))) gameId = null;
+    const G = gameId ? GAMES[gameId] : null;
+    openModal(`
+      <h2 class="card-title">Create a Party</h2>
+      <p class="muted">${G ? `You'll start with ${esc(G.name)} selected. You can change it in the lobby.` : "No game to choose yet. Get your people together first."}</p>
+      <div class="create-form" id="create-form">
+        <fieldset class="vis-choice"><legend class="sr-only">Who can join</legend>
+          <label class="vis-option"><input type="radio" name="c-vis" value="0" checked><span><b>Private</b><small>Only people with your invite can join.</small></span></label>
+          <label class="vis-option"><input type="radio" name="c-vis" value="1"><span><b>Public</b><small>Let others find your party in Rooms.</small></span></label>
+        </fieldset>
+        <label class="switch-row"><span>Allow spectators</span><input type="checkbox" role="switch" id="c-spec" checked></label>
+      </div>
+      <p class="field-error" id="c-error" role="alert" hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close>Cancel</button>
+        <button class="btn btn-big" id="c-go">Create Party</button>
+      </div>
+      <p class="muted create-next">Next: an inviteable lobby with “Choose a Game”. No name, game or advanced fields required.</p>`);
+    $("#modal-body").classList.add("create-modal");
+    $("#c-go").addEventListener("click", () => {
+      const go = $("#c-go");
+      const opts = {
+        game: gameId || null,
+        isPublic: $('[name="c-vis"]:checked').value === "1",
+        spectatorsOn: $("#c-spec").checked,
+        profile,
+        token,
+      };
+      if (!leaveForOtherRoom()) return;
+      go.disabled = true;
+      go.textContent = "Creating…";
+      $("#c-error").hidden = true;
+      socket.timeout(8000).emit("createRoom", opts, (err, res) => {
+        if (err || !res || res.error) {
+          // Keep the dialog and the choices; offer a retry.
+          if (!$("#c-go")) return;
+          go.disabled = false;
+          go.textContent = "Try Again";
+          $("#c-error").textContent =
+            res && res.error === "slow"
+              ? "Too many tries in a row. Wait a few seconds and try again."
+              : "Could not create the party. Check your connection and try again.";
+          $("#c-error").hidden = false;
+          return;
+        }
+        closeModal();
+        handleJoin(res);
       });
-    };
-    draw(gameId);
-  }
-
-  function quickPlay(gameId) {
-    if (!leaveForOtherRoom()) return;
-    socket.emit("quickPlay", { game: gameId, profile, token }, handleJoin);
+    });
   }
 
   // ---------- join ----------
@@ -1017,7 +1146,7 @@
     $("#join-switch-note").hidden = !other;
     if (other)
       $("#join-switch-note").textContent =
-        `You are in lobby ${currentCode}. Joining ${code} will leave it.`;
+        `You are in party ${currentCode}. Joining ${code} will leave it.`;
     $("#join-btn").onclick = () => join(code);
   }
 
@@ -1037,10 +1166,10 @@
   // us, and handleJoin() unmounts the old game, so a failed join loses nothing.
   function leaveForOtherRoom() {
     if (!currentCode) return true;
-    return confirmLeave(`You are in lobby ${currentCode}. Leave it?`);
+    return confirmLeave(`You are in party ${currentCode}. Leave it?`);
   }
 
-  function join(code, { silent } = {}) {
+  function join(code, { silent, inline } = {}) {
     if (!silent && currentCode === code) {
       nav("/r/" + code);
       return;
@@ -1048,14 +1177,26 @@
     // Every deliberate join to a different room goes through the leave guard.
     if (!silent && !leaveForOtherRoom()) return;
     socket.emit("joinRoom", { code, profile, token }, (res) =>
-      handleJoin(res, silent),
+      handleJoin(res, silent, inline),
     );
   }
 
-  function handleJoin(res, silent) {
+  // Joining from the Rooms code box explains a bad code right there instead of leaving the page.
+  const INLINE_ERRORS = {
+    closed: "No party with that code. It may have closed, or the code has a typo.",
+    locked: "That party is locked. Ask the host to unlock it.",
+    full: "That party is full and isn't taking spectators.",
+    kicked: "You were removed from that party.",
+    slow: "Too many tries in a row. Wait a few seconds and try again.",
+    busy: "The server is busy. Try again in a minute.",
+  };
+  function handleJoin(res, silent, inline) {
     if (!res || res.error) {
       if (silent && currentCode) leaveLocal();
-      return showMessage(res ? res.error : "closed", res);
+      const kind = res ? res.error : "closed";
+      if (inline && document.body.dataset.screen === "rooms")
+        return codeError(INLINE_ERRORS[kind] || INLINE_ERRORS.closed);
+      return showMessage(kind, res);
     }
     const fresh = currentCode !== res.code;
     currentCode = res.code;
@@ -1068,6 +1209,7 @@
       S = null;
       mounted = null;
       lastResultKey = null;
+      dismissedResult = null;
       $("#stage").innerHTML =
         '<div class="card loading">Loading lobby...</div>';
       if (!res.rejoined) $("#chat-log").innerHTML = "";
@@ -1093,13 +1235,9 @@
     leaveLocal();
   }
   $("#leave-btn").addEventListener("click", () => {
-    nav("/?view=games");
+    nav("/games");
   });
-  $("#leave-lobby-btn").addEventListener("click", () => {
-    if (!confirmLeave("Leave this lobby?")) return;
-    leaveRoom();
-    nav("/");
-  });
+  $("#leave-lobby-btn").addEventListener("click", () => leaveParty());
   const returnBar = $("#return-bar");
   function syncReturn() {
     const show = !!currentCode && document.body.dataset.screen !== "room";
@@ -1127,46 +1265,44 @@
   });
 
   function showMessage(kind, info = {}) {
-    const gname = info && info.gameName ? info.gameName : "game";
-    const gid = info && info.gameId;
     const M = {
       closed: [
         "exit",
-        "This lobby has closed",
-        "Everyone left, so the lobby was closed.",
+        "This party has closed",
+        "Everyone left, or the code is wrong, so there is no party here.",
         [
-          ["Start a new lobby", "create"],
-          ["Back home", "home"],
+          ["Start a new party", "create"],
+          ["Find another party", "rooms"],
         ],
       ],
       locked: [
         "lock",
-        "This lobby is locked",
+        "This party is locked",
         "The host locked it, so no new people can join right now.",
         [
-          ["Create your own lobby", "create"],
-          ["Find another lobby", "home"],
+          ["Create your own party", "create"],
+          ["Find another party", "rooms"],
         ],
       ],
       full: [
         "people",
-        "This lobby is full",
-        `This lobby is full (${info.players || 0}/${info.max || 0} players) and isn't taking spectators.`,
+        "This party is full",
+        `This party is full (${info.players || 0}/${info.max || 0} players) and isn't taking spectators.`,
         [
-          [`Create your own ${gname} lobby`, "create"],
-          ["Find another lobby", "home"],
+          ["Create your own party", "create"],
+          ["Find another party", "rooms"],
         ],
       ],
       kicked: [
         "exit",
         "You were removed",
-        "The host or the other players removed you from this lobby.",
+        "The host or the other players removed you from this party.",
         [["Back home", "home"]],
       ],
       replaced: [
         "monitor",
         "Opened somewhere else",
-        "This lobby was opened in another tab or window, so this one disconnected.",
+        "This party was opened in another tab or window, so this one disconnected.",
         [["Back home", "home"]],
       ],
       slow: [
@@ -1195,9 +1331,10 @@
     $("#msg-actions").onclick = (e) => {
       const b = e.target.closest("[data-act]");
       if (!b) return;
+      if (b.dataset.act === "rooms") return nav("/rooms");
       history.pushState({}, "", "/");
       showHome();
-      if (b.dataset.act === "create") openCreate(gid || "drawguess");
+      if (b.dataset.act === "create") openCreate();
     };
     showScreen("message");
   }
@@ -1249,8 +1386,12 @@
     }
   }
   $("#copy-link").addEventListener("click", copyLink);
-  $("#share-link").addEventListener("click", async () => {
-    const text = `Come play ${S ? GAMES[S.gameId].name : "with me"}!`;
+  $("#share-link").addEventListener("click", shareParty);
+  async function shareParty() {
+    const text =
+      S && S.gameId
+        ? `Come play ${GAMES[S.gameId].name} with me!`
+        : "Join my party!";
     if (navigator.share) {
       try {
         await navigator.share({
@@ -1275,65 +1416,91 @@
       <p class="muted">For Discord, copy the link and paste it in your server or DM.</p>
       <div class="modal-actions"><button class="btn" data-close>Done</button></div>`);
     $("#m-copy").addEventListener("click", copyLink);
-  });
+  }
 
   // ---------- room ----------
   const isHost = () => S && S.hostId === S.you;
   const me = () => app.member(S.you);
+  const gameOfS = () => (S && S.gameId ? GAMES[S.gameId] : null);
+  // A participant can put the results away for themselves; the host's Back to Lobby clears them for all.
+  let dismissedResult = null;
+  const resultKey = (r) =>
+    r ? JSON.stringify(r).length + ":" + (r.winnerId || "") + ":" + r.type : null;
+  const showingResult = () =>
+    !!S && !!S.lastResult && dismissedResult !== resultKey(S.lastResult);
+
+  // Replace a region only when its markup changed, and keep keyboard focus on the same control.
+  function patch(el, html) {
+    if (!el || el.dataset.html === html) return;
+    const a = document.activeElement;
+    const key = a && el.contains(a) ? a.dataset.k || (a.id ? "#" + a.id : null) : null;
+    el.innerHTML = html;
+    el.dataset.html = html;
+    if (!key) return;
+    const next = key.startsWith("#")
+      ? el.querySelector(key)
+      : el.querySelector(`[data-k="${CSS.escape(key)}"]`);
+    if (next) next.focus();
+  }
 
   function renderRoom() {
     if (!S) return;
-    const G = GAMES[S.gameId];
+    const G = gameOfS();
     const phase =
-      S.phase === "game" ? "game" : S.lastResult ? "results" : "lobby";
+      S.phase === "game" ? "game" : showingResult() ? "results" : "lobby";
     const previousPhase = document.body.dataset.phase;
     document.body.dataset.phase = phase;
-    document.body.dataset.game = S.gameId;
-    $("#screen-room").dataset.phase = phase;
+    if (S.gameId) document.body.dataset.game = S.gameId;
+    else delete document.body.dataset.game;
+    const room = $("#screen-room");
+    room.dataset.phase = phase;
+    room.classList.toggle("party-mode", phase !== "game");
     $("#room-code").textContent = S.code;
     $("#game-word-slot").hidden = !(
       S.phase === "game" && S.gameId === "drawguess"
     );
-    $("#lobby-start").hidden = !isHost() || S.phase === "game";
-    $("#lobby-start").disabled = S.players.length < G.min;
-    $("#lobby-start").textContent = S.lastResult ? "Play Again" : "Start Game";
     $("#header-round").textContent =
       S.gameId === "drawguess" && S.game
         ? `Round ${Math.min(S.game.round, S.game.rounds)}/${S.game.rounds}`
-        : G.name;
+        : G
+          ? G.name
+          : "Party";
     $("#header-difficulty").innerHTML =
       S.gameId === "drawguess"
         ? `Difficulty: <b class="difficulty-${esc(S.settings.difficulty)}">${esc(S.settings.difficulty[0].toUpperCase() + S.settings.difficulty.slice(1))}</b>`
         : "";
-    $("#room-game").textContent = G.name;
+    $("#room-game").textContent = G ? G.name : "Party";
     $("#room-vis").textContent = S.isPublic ? "Public" : "Private";
     $("#room-lock").hidden = !S.locked;
     $("#end-btn").hidden = !(isHost() && S.phase === "game");
-    rulesBtn.hidden = false;
+    rulesBtn.hidden = !G;
     focusBtn.hidden = S.phase !== "game";
     if (S.phase !== "game" && focusMode) setFocus(false);
-    document.title = `${G.name} lobby | ${window.PAGE.site}`;
-    renderPeople();
+    document.title = `${S.phase === "game" && G ? G.name : S.name || "Your party"} | ${window.PAGE.site}`;
+    renderPartyHead();
+    if (phase === "game") renderPeople();
     renderStage();
     if (previousPhase !== phase)
       requestAnimationFrame(() => {
         const log = $("#chat-log");
         log.scrollTop = log.scrollHeight;
       });
-    const ui = GameUI[S.gameId];
+    const ui = G && GameUI[S.gameId];
     const ph =
-      S.phase === "game" && ui.chatPlaceholder ? ui.chatPlaceholder(S) : null;
-    $("#chat-input").placeholder = ph || "Say something...";
+      S.phase === "game" && ui && ui.chatPlaceholder
+        ? ui.chatPlaceholder(S)
+        : null;
+    $("#chat-input").placeholder =
+      ph || (S.phase === "game" ? "Say something..." : "Message your party…");
+    if ($("#picker")) renderPicker();
+    if ($("#activity-sheet")) patch($("#activity-sheet"), activityHTML("sheet"));
+    if (document.body.dataset.screen === "rooms") renderCurrentParty();
 
     if (S.lastResult) {
-      const key =
-        JSON.stringify(S.lastResult).length +
-        ":" +
-        (S.lastResult.winnerId || "") +
-        ":" +
-        S.lastResult.type;
+      const key = resultKey(S.lastResult);
       if (key !== lastResultKey) {
         lastResultKey = key;
+        dismissedResult = null;
         const snd = GameUI[S.lastResult.type].resultSound(S.lastResult, S);
         if (snd) Sound.play(snd);
       }
@@ -1342,6 +1509,48 @@
     }
   }
 
+  // ----- party header: identity, invite code, settings or leave -----
+  let copiedTimer = null;
+  function renderPartyHead() {
+    $("#party-eyebrow").textContent =
+      `YOUR PARTY · ${S.isPublic ? "PUBLIC" : "PRIVATE"}${S.locked ? " · LOCKED" : ""}`;
+    $("#party-name").textContent = S.name || "Your party";
+    if (!copiedTimer)
+      $("#party-code").innerHTML = `<span>${esc(S.code)}</span>${icon("copy")}`;
+    $("#party-code").setAttribute(
+      "aria-label",
+      `Party code ${S.code}. Copy invite link`,
+    );
+    $("#party-settings").hidden = !isHost();
+    $("#party-leave").hidden = isHost();
+  }
+  $("#party-code").addEventListener("click", async () => {
+    const b = $("#party-code");
+    try {
+      await navigator.clipboard.writeText(roomLink());
+    } catch (e) {
+      return prompt("Copy this link:", roomLink());
+    }
+    $("#party-copied").textContent = "Invite link copied.";
+    b.innerHTML = `<span>Copied</span>${icon("check")}`;
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      copiedTimer = null;
+      $("#party-copied").textContent = "";
+      if (S) b.innerHTML = `<span>${esc(S.code)}</span>${icon("copy")}`;
+    }, 2000);
+  });
+  $("#party-invite").addEventListener("click", shareParty);
+  $("#party-settings").addEventListener("click", () => openPartySettings());
+  $("#party-leave").addEventListener("click", leaveParty);
+  function leaveParty() {
+    if (!confirmLeave("Leave this party?")) return;
+    closeModal();
+    leaveRoom();
+    nav("/");
+  }
+
+  // ----- game-phase roster (side panel) -----
   function personHTML(p, { spectator } = {}) {
     const g = S.game;
     const icons = [];
@@ -1358,23 +1567,26 @@
           `<span class="mini-disc d${i + 1}" title="${i ? "Yellow" : "Red"}"></span>`,
         );
     }
-    let kick = "";
-    if (p.id !== S.you) {
-      if (isHost())
-        kick =
-          `<button class="kick" data-kick="${p.id}" title="Kick ${esc(p.name)}" aria-label="Kick ${esc(p.name)}">${icon("close")}</button>` +
-          (p.connected
-            ? `<button class="kick promote" data-promote="${p.id}" title="Make ${esc(p.name)} the host" aria-label="Make ${esc(p.name)} the host">${icon("crown")}</button>`
-            : "");
-      else if (S.isPublic)
-        kick = `<button class="kick" data-vote="${p.id}" title="Vote to kick ${esc(p.name)}" aria-label="Vote kick">${icon("exit")}</button>`;
-    }
     const label = GameUI[S.gameId].scoreLabel;
     return `<li class="person ${p.connected ? "" : "offline"} ${p.id === S.you ? "me" : ""}">
       ${avatarHTML(p.avatar)}
       <div class="pmain"><div class="pname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}</div>
       ${spectator ? "" : `<div class="pscore"><span class="lobby-status">${p.id === S.hostId ? "(Host)" : p.connected ? "Connected" : "Reconnecting"}</span><span class="game-score">${p.score} ${p.score === 1 && label === "wins" ? "win" : label}</span></div>`}</div>
-      <div class="picons">${icons.join("")}${p.connected ? "" : '<span title="Reconnecting">…</span>'}</div>${kick}</li>`;
+      <div class="picons">${icons.join("")}${p.connected ? "" : '<span title="Reconnecting">…</span>'}</div>${memberTools(p)}</li>`;
+  }
+  // Host: remove or hand over hosting. Public parties: anyone can start a vote kick.
+  function memberTools(p) {
+    if (p.id === S.you) return "";
+    if (isHost())
+      return (
+        `<button class="kick" data-kick="${p.id}" data-k="kick-${p.id}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)} from the party">${icon("close")}</button>` +
+        (p.connected
+          ? `<button class="kick promote" data-promote="${p.id}" data-k="promote-${p.id}" title="Make ${esc(p.name)} the host" aria-label="Make ${esc(p.name)} the host">${icon("crown")}</button>`
+          : "")
+      );
+    if (S.isPublic)
+      return `<button class="kick" data-vote="${p.id}" data-k="vote-${p.id}" title="Vote to kick ${esc(p.name)}" aria-label="Vote to kick ${esc(p.name)}">${icon("exit")}</button>`;
+    return "";
   }
 
   function renderPeople() {
@@ -1383,78 +1595,59 @@
       ? `(${S.spectators.length})`
       : "";
     const sorted =
-      S.gameId === "drawguess" && (S.phase === "game" || S.lastResult)
+      S.gameId === "drawguess"
         ? [...S.players].sort((a, b) => b.score - a.score)
         : S.players;
     $("#player-list").innerHTML =
-      sorted.map((p) => personHTML(p)).join("") +
-        (S.phase === "lobby" && !S.lastResult
-          ? Array.from(
-              {
-                length: Math.max(
-                  0,
-                  Math.min(S.maxPlayers, 7) - S.players.length,
-                ),
-              },
-              () =>
-                `<li class="open-seat">${icon("plus")}<span>Open Slot</span></li>`,
-            ).join("")
-          : "") || '<li class="empty">Nobody seated</li>';
+      sorted.map((p) => personHTML(p)).join("") ||
+      '<li class="empty">Nobody seated</li>';
     $(".spectator-section").hidden = !S.spectators.length;
     $("#players-status").textContent =
-      S.phase === "game" && S.gameId === "drawguess" ? "Guessing…" : "";
+      S.gameId === "drawguess" ? "Guessing…" : "";
     $("#spec-list").innerHTML =
       S.spectators.map((p) => personHTML(p, { spectator: true })).join("") ||
       '<li class="empty">Nobody watching</li>';
-
-    const G = GAMES[S.gameId];
+    $("#seat-action").innerHTML = seatControlsHTML();
+  }
+  // Take a seat, line up for one, or step out to watch. Same rules in the lobby and in a game.
+  function seatControlsHTML() {
+    const G = gameOfS();
     const midJoin = S.gameId === "drawguess";
-    let seat = "";
     if (S.role === "spectator") {
       if (S.players.length < S.maxPlayers && (S.phase === "lobby" || midJoin))
-        seat =
-          '<button class="btn btn-small btn-wide" id="take-seat">Take a Seat</button>';
-      else
-        seat = `<p class="seat-note">You're watching. ${S.players.length >= S.maxPlayers ? `${G.name} is ${S.maxPlayers} players max. Join the queue to get the next open seat.` : "You can take a seat when this match ends."}</p>${queueHTML()}`;
-    } else if (S.phase === "lobby") {
-      seat =
-        '<button class="link-btn" id="just-watch">Just watch instead</button>';
+        return '<button class="btn btn-small btn-wide" data-seat="take" data-k="seat">Take a Seat</button>';
+      return `<p class="seat-note">You're watching. ${S.players.length >= S.maxPlayers ? `${G ? `${esc(G.name)} is ${S.maxPlayers} players max.` : "Every seat is taken."} Join the queue to get the next open seat.` : "You can take a seat when this match ends."}</p>${queueHTML()}`;
     }
-    const specText = !S.spectatorsOn
-      ? "Spectators are off"
-      : `Watching ${S.spectators.length}/${S.maxSpectators}`;
-    const cap = `<p class="cap-note">Active seats ${S.players.length}/${S.maxPlayers} · ${specText}. Everyone stays in this room; people without a seat spectate.</p>`;
-    $("#seat-action").innerHTML = seat + cap;
+    if (S.phase === "lobby")
+      return '<button class="link-btn" data-seat="watch" data-k="seat">Just watch instead</button>';
+    return "";
   }
   // Spectators line up for the next open seat; winner-stays games also rotate through this line.
   function queueHTML() {
     if (S.role !== "spectator") return "";
     const pos = S.queue.indexOf(S.you) + 1;
     return pos
-      ? `<p class="seat-note queue-note">You're #${pos} in line to play.</p><button class="btn btn-small btn-ghost btn-wide" data-queue="0">Leave the Queue</button>`
-      : `<button class="btn btn-small btn-wide" data-queue="1">Join the Queue</button>`;
+      ? `<p class="seat-note queue-note">You're #${pos} in line to play.</p><button class="btn btn-small btn-ghost btn-wide" data-queue="0" data-k="queue">Leave the Queue</button>`
+      : `<button class="btn btn-small btn-wide" data-queue="1" data-k="queue">Join the Queue</button>`;
   }
-  $("#seat-action").addEventListener("click", (e) => {
-    if (e.target.id === "take-seat") socket.emit("takeSeat");
-    if (e.target.id === "just-watch") socket.emit("watch");
-  });
   document.addEventListener("click", (e) => {
+    if (!S) return;
+    const seat = e.target.closest("[data-seat]");
+    if (seat) socket.emit(seat.dataset.seat === "take" ? "takeSeat" : "watch");
     const q = e.target.closest("[data-queue]");
-    if (q && S) socket.emit("queue", q.dataset.queue === "1");
-  });
-  $("#side").addEventListener("click", (e) => {
+    if (q) socket.emit("queue", q.dataset.queue === "1");
     const k = e.target.closest("[data-kick]");
     const v = e.target.closest("[data-vote]");
     const pr = e.target.closest("[data-promote]");
     if (pr) {
       const p = app.member(pr.dataset.promote);
-      if (p && confirm(`Make ${p.name} the host? You'll stay in the room.`))
+      if (p && confirm(`Make ${p.name} the host? You'll stay in the party.`))
         socket.emit("transferHost", p.id);
       return;
     }
     if (k) {
       const p = app.member(k.dataset.kick);
-      if (p && confirm(`Kick ${p.name} from the lobby?`))
+      if (p && confirm(`Remove ${p.name} from the party?`))
         socket.emit("kick", p.id);
     }
     if (v) {
@@ -1464,12 +1657,11 @@
     }
   });
 
-  // ---------- stage: lobby or game ----------
+  // ---------- stage: party hub or game ----------
   function unmountStage() {
     if (mounted && mounted.startsWith("game:"))
       GameUI[mounted.slice(5)].unmount();
     mounted = null;
-    hostKey = null;
   }
 
   function renderStage() {
@@ -1481,7 +1673,7 @@
       mounted = mode;
       if (mode === "lobby") {
         stage.innerHTML =
-          '<div class="lobby-stage"><div id="lobby-top"></div><div id="host-panel"></div></div>';
+          '<div class="lobby-stage"><div id="lobby-top"></div><div id="party-main"></div></div>';
       } else {
         GameUI[S.gameId].mount(stage, app);
       }
@@ -1490,53 +1682,190 @@
     else GameUI[S.gameId].update(S, app);
   }
 
-  // Host-only post-game controls; everyone else sees who they are waiting on.
-  // Next-game votes, most popular first: "Chess 2 · Pool 1".
-  function voteSummary() {
-    const list = Object.entries(S.nextVotes || {})
+  // Next-game votes, most popular first.
+  const voteList = () =>
+    Object.entries(S.nextVotes || {})
       .filter(([id]) => GAMES[id])
       .sort((a, b) => b[1] - a[1]);
-    return list.map(([id, n]) => `${esc(GAMES[id].name)} ${n}`).join(" · ");
+  function voteSummary() {
+    return voteList()
+      .map(([id, n]) => `${esc(GAMES[id].name)} ${n}`)
+      .join(" · ");
   }
+
+  const cap1 = (v) => String(v)[0].toUpperCase() + String(v).slice(1);
+  const SUMMARY = {
+    rounds: (v) => (v ? `${v} rounds` : "Classic"),
+    questions: (v) => `${v} questions`,
+    difficulty: cap1,
+    drawTime: (v) => `${v} seconds`,
+    roundTime: (v) => `${v}s per round`,
+    clock: (v) => (v ? `${v} min clock` : "No clock"),
+    bestOf: (v) => `Best of ${v}`,
+    lives: (v) => `${v} lives`,
+    size: (v) => `${v}×${v} board`,
+    course: cap1,
+    category: (v) => (v === "mixed" ? "Mixed topics" : v),
+    turnTime: (v) => (v ? `${v}s turns` : "No turn timer"),
+  };
+  // A short "3 rounds · Medium · 80 seconds" line from the real settings.
+  function settingsSummary() {
+    if (!S.settings) return "";
+    return Object.keys(SUMMARY)
+      .filter((k) => k in S.settings)
+      .slice(0, 3)
+      .map((k) => SUMMARY[k](S.settings[k]))
+      .join(" · ");
+  }
+
+  function rosterCardHTML(p) {
+    const status = [];
+    if (p.id === S.hostId) status.push("Host");
+    status.push(
+      !p.connected
+        ? "Reconnecting"
+        : p.ready
+          ? `${icon("check")}Ready`
+          : "Not ready",
+    );
+    return `<li class="roster-card ${p.id === S.you ? "me" : ""} ${p.connected ? "" : "offline"}">
+      ${avatarHTML(p.avatar, "av-roster")}
+      <b class="rname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}</b>
+      <span class="rstatus ${p.ready && p.connected ? "is-ready" : ""}">${status.join(" · ")}</span>
+      <span class="roster-tools">${memberTools(p)}</span></li>`;
+  }
+
+  function gameSlotHTML() {
+    const G = gameOfS();
+    const host = isHost();
+    if (!G)
+      return `<div class="game-slot empty"><span class="slot-art slot-empty" aria-hidden="true">${icon("controller")}</span>
+        <div class="slot-info"><b>No game yet</b><small>${host ? "Pick what to play once your people are here." : "The host picks the game. Suggest one meanwhile."}</small></div>
+        <button class="btn" id="slot-choose" type="button">${host ? "Choose a Game" : "Suggest a Game"}</button></div>`;
+    return `<div class="game-slot"><span class="slot-art">${G.art}</span>
+      <div class="slot-info"><b>${esc(G.name)}</b><small>${rangeText(G)} · ${G.cat}</small><small>${esc(settingsSummary())}</small></div>
+      <div class="slot-actions"><button class="btn btn-ghost btn-small" id="slot-rules" type="button">Rules</button><button class="btn btn-ghost" id="slot-change" type="button">${host ? "Change" : "Suggest"}</button></div></div>`;
+  }
+
+  // What the party is waiting on, in words.
+  function lobbyStatus() {
+    const G = gameOfS();
+    const hostP = app.member(S.hostId);
+    const hostName = hostP ? hostP.name : "the host";
+    if (!G)
+      return isHost()
+        ? "Invite your people, then choose a game together."
+        : `Waiting for ${esc(hostName)} to choose a game. Suggest one meanwhile.`;
+    const short = G.min - S.players.length;
+    if (short > 0)
+      return `${esc(G.name)} needs ${G.min} players. Invite ${short} more${S.spectators.length ? " or take a seat" : ""}.`;
+    const notReady = S.players.filter((p) => !p.ready);
+    const waiting = !notReady.length
+      ? "Everyone's ready."
+      : notReady.length === 1
+        ? `${esc(notReady[0].name)} is still getting ready.`
+        : `${notReady.length} people are still getting ready.`;
+    return isHost()
+      ? `${waiting}${notReady.length ? " Host can start with current players." : ""}`
+      : `${waiting} Waiting for ${esc(hostName)} to start.`;
+  }
+
+  function partyMainHTML(results) {
+    const G = gameOfS();
+    const mine = me();
+    const ready = S.players.filter((p) => p.ready && p.connected).length;
+    const buttons = [];
+    if (S.role === "player" && mine)
+      buttons.push(
+        `<button class="btn btn-ghost" id="ready-btn" type="button" aria-pressed="${!!mine.ready}">${mine.ready ? icon("check") + "Ready" : "I'm Ready"}</button>`,
+      );
+    if (G)
+      buttons.push(
+        `<button class="btn btn-ghost" id="game-settings-btn" type="button" aria-haspopup="dialog">Game Settings</button>`,
+      );
+    if (isHost())
+      buttons.push(
+        `<button class="btn" id="lobby-start" type="button" ${!G || S.players.length < G.min ? "disabled" : ""}>Start Game</button>`,
+      );
+    return `<section class="party-panel card" aria-labelledby="people-title">
+      <div class="panel-head"><h2 id="people-title">Your people <small>${S.players.length}/${S.maxPlayers}</small></h2><span class="ready-count">${ready} of ${S.players.length} ready</span></div>
+      <ul class="party-roster">${S.players.map(rosterCardHTML).join("") || '<li class="empty">Nobody seated yet</li>'}</ul>
+      ${gameSlotHTML()}
+      ${S.role === "spectator" ? `<div class="mobile-seat seat-controls">${seatControlsHTML()}</div>` : ""}
+      <div class="mobile-activity"><span>Watching · ${S.spectators.length}</span><button class="link-btn" id="open-activity" type="button" aria-haspopup="dialog">Queue &amp; votes ${icon("arrow")}</button></div>
+      ${results ? "" : `<div class="party-actions"><p class="party-status" role="status">${lobbyStatus()}</p><div class="party-buttons">${buttons.join("")}</div></div>`}
+    </section>`;
+  }
+
+  // Votes, the spectator queue and seat controls. Shown beside the lobby, or as a sheet on phones.
+  function activityHTML(where = "panel") {
+    const host = isHost();
+    const sfx = where === "panel" ? "" : "-" + where;
+    const votes = voteList();
+    const voteRows = votes
+      .map(([id, n]) => {
+        const G = GAMES[id];
+        const mineV = S.myVote === id;
+        return `<li><span class="vote-name"><b>${esc(G.name)}</b> <small>${n} vote${n === 1 ? "" : "s"}</small></span><span class="vote-tools">${
+          mineV
+            ? `<button class="link-btn voted" data-unvote data-k="unvote${sfx}" type="button" aria-label="Undo your vote for ${esc(G.name)}">${icon("check")}Voted <span class="undo">Undo</span></button>`
+            : `<button class="link-btn" data-vote-game="${id}" data-k="vote-${id}${sfx}" type="button" aria-label="Vote for ${esc(G.name)}">Vote</button>`
+        }${host && id !== S.gameId ? `<button class="btn btn-small" data-confirm-game="${id}" data-k="confirm-${id}${sfx}" type="button" aria-label="Choose ${esc(G.name)}">Choose</button>` : ""}</span></li>`;
+      })
+      .join("");
+    const watchers = S.spectators
+      .map((p) => {
+        const pos = S.queue.indexOf(p.id) + 1;
+        return `<li class="${p.connected ? "" : "offline"}">${avatarHTML(p.avatar)}<span><b>${esc(p.name)}</b>${p.id === S.you ? " <small>(you)</small>" : ""} <small>· ${pos ? `Queue #${pos}` : "Watching"}${p.connected ? "" : " · Reconnecting"}</small></span>${memberTools(p)}</li>`;
+      })
+      .join("");
+    return `<h2 id="activity-title${sfx}">Party activity</h2>
+      <p class="eyebrow">UP NEXT</p>
+      <h3>What should we play?</h3>
+      <p class="muted">Anyone can suggest. The host confirms the next game.</p>
+      <button class="btn btn-ghost btn-wide" data-suggest data-k="suggest${sfx}" type="button">${host ? "Choose a Game" : "Suggest a Game"}</button>
+      ${votes.length ? `<ul class="vote-list">${voteRows}</ul>` : '<p class="muted small-note">No suggestions yet.</p>'}
+      <h3 class="watch-title">Watching · ${S.spectators.length}</h3>
+      ${watchers ? `<ul class="watch-list">${watchers}</ul>` : `<p class="muted small-note">${S.spectatorsOn ? "Nobody is watching." : "Spectators are off for this party."}</p>`}
+      <div class="seat-controls">${S.phase === "lobby" ? seatControlsHTML() : ""}</div>
+      <p class="muted activity-foot">Same room, next game.<br>Your people and chat stay here.</p>`;
+  }
+
+  // Shared post-game action bar. Only the host launches or confirms a game.
   function resultActionsHTML() {
-    const G = GAMES[S.gameId];
+    const G = gameOfS();
     const votes = voteSummary();
     const voteLine = votes
       ? `<p class="muted center vote-tally">Next-game votes: ${votes}</p>`
       : "";
     if (!isHost()) {
       const host = app.member(S.hostId);
+      const mine = me();
       return `<div class="result-actions"><p class="muted center" role="status">Waiting for ${esc(host ? host.name : "the host")} to play again or pick another game.</p>
-        <label class="field vote-field"><span>Vote for the next game</span><select id="vote-next"><option value="">No vote</option>${pickable()
-          .map(([id, x]) => opt(id, S.myVote || "", x.name))
-          .join("")}</select></label>${voteLine}${S.role === "spectator" && S.players.length >= S.maxPlayers ? queueHTML() : ""}</div>`;
+        <div class="result-buttons"><button class="btn btn-ghost" id="result-dismiss" type="button">Back to Lobby</button><button class="btn btn-ghost" id="result-vote" type="button" aria-haspopup="dialog">Vote for Next Game</button>${
+          S.role === "player" && mine
+            ? `<button class="btn" id="result-ready" type="button" aria-pressed="${!!mine.ready}">${mine.ready ? icon("check") + "Ready for Rematch" : "Ready for Rematch"}</button>`
+            : ""
+        }</div>${voteLine}${S.role === "spectator" && S.players.length >= S.maxPlayers ? queueHTML() : ""}</div>`;
     }
-    const short = S.players.length < G.min;
-    return `<div class="result-actions"><button class="btn" id="result-again" ${short ? "disabled" : ""}>Play Again</button><button class="btn btn-ghost" id="result-choose">Choose Another Game</button><button class="btn btn-ghost" id="result-lobby">Back to Lobby</button>${short ? `<p class="muted center">Need ${G.min} active players to play ${esc(G.name)} again.</p>` : ""}${voteLine}</div>`;
+    const short = !G || S.players.length < G.min;
+    return `<div class="result-actions"><p class="muted center">You're still in ${esc(S.name || "your party")}. What's next?</p>
+      <div class="result-buttons"><button class="btn btn-ghost" id="result-lobby" type="button">Back to Lobby</button><button class="btn btn-ghost" id="result-choose" type="button" aria-haspopup="dialog">Choose Another Game</button><button class="btn" id="result-again" type="button" ${short ? "disabled" : ""}>Play Again</button></div>${short && G ? `<p class="muted center">Need ${G.min} active players to play ${esc(G.name)} again.</p>` : ""}${voteLine}</div>`;
   }
 
   let autoTimer = null;
   function renderLobby() {
-    const G = GAMES[S.gameId];
-    const host = app.member(S.hostId);
+    const results = showingResult();
     let top = "";
     if (S.autoStartIn !== null) {
       top += `<div class="banner">Next game starts in <b id="auto-n">${Math.ceil(S.autoStartIn / 1000)}</b>s${isHost() ? " (or start it now)" : ""}</div>`;
     }
-    if (S.lastResult) {
+    if (results) {
       top += `<div class="card result-card">${GameUI[S.lastResult.type].renderResult(S.lastResult, S, app)}${resultActionsHTML()}</div>`;
     }
-
-    // Rebuild only on change. An open vote picker is kept while the same results stay up;
-    // anything else (Back to Lobby, a game switch) replaces it.
-    const topEl = $("#lobby-top");
-    const picking = document.activeElement?.id === "vote-next" && S.lastResult;
-    if (topEl.dataset.html !== top && !picking) {
-      topEl.innerHTML = top;
-      topEl.dataset.html = top;
-    }
-    const n = $("[data-copy]", $("#lobby-top"));
-    if (n) n.onclick = copyLink;
+    patch($("#lobby-top"), top);
+    patch($("#party-main"), partyMainHTML(results));
+    patch($("#party-activity"), activityHTML());
     clearInterval(autoTimer);
     if (S.autoStartIn !== null) {
       const end = performance.now() + S.autoStartIn;
@@ -1549,153 +1878,170 @@
         );
       }, 250);
     }
-    renderHostPanel();
   }
 
-  let hostKey = null;
-  function renderHostPanel() {
-    const G = GAMES[S.gameId];
-    const key = S.gameId + ":" + isHost();
-    const panel = $("#host-panel");
-    if (key !== hostKey) {
-      hostKey = key;
-      panel.innerHTML = `<div class="card host-card"><h2>${icon("controller")} Game Settings</h2>
-        <fieldset class="form-grid settings-fields" ${isHost() ? "" : "disabled"}>
-          <label class="field"><span>Game Mode</span><select id="switch-game">${pickable(S.gameId)
-            .map(([id, x]) => opt(id, S.gameId, x.name))
-            .join("")}</select></label>
-          ${settingsHTML(S.gameId, S.settings)}
-          <label class="check"><span>Allow Spectators</span><input type="checkbox" data-host="spectatorsOn"></label>
-          <details class="advanced-settings"><summary>Room Options</summary>
-            <label class="field"><span>Who Can Join</span><select data-host="isPublic">${opt(0, 0, "Private (link only)")}${opt(1, 0, "Public (listed)")}</select></label>
-            <label class="field"><span>Max Players</span><select data-host="maxPlayers" ${G.min === G.max ? "disabled" : ""}>${Array.from(
-              { length: G.max - G.min + 1 },
-              (_, i) => G.min + i,
-            )
-              .map((v) => opt(v, 0))
-              .join("")}</select></label>
-            <label class="check"><span>Lock Room</span><input type="checkbox" data-host="locked"></label>
-            <label class="field"><span>Max Spectators</span><select data-host="maxSpectators">${[0, 5, 10, 20, 50].map((v) => opt(v, 0)).join("")}</select></label>
-          </details>
-        </fieldset><p class="host-note">${isHost() ? "Your room. Your rules." : "The host controls these settings."}</p>
-      </div>`;
-      if (S.gameId === "drawguess") {
-        const fields = panel.querySelector(".settings-fields");
-        const details = document.createElement("details");
-        details.className = "word-options";
-        details.innerHTML = "<summary>Custom Words & Hints</summary>";
-        const custom = fields.querySelector(".custom-field");
-        custom.before(details);
-        details.append(custom);
-        ["hints", "customOnly"].forEach((key) =>
-          details.append(
-            fields.querySelector(`[data-setting="${key}"]`).closest(".check"),
-          ),
-        );
-      }
-    }
-
-    // Keep inputs in step with the server without clobbering what's being edited.
-    $$("[data-host]", panel).forEach((i) => {
-      if (document.activeElement === i) return;
-      const v = S[i.dataset.host];
-      if (i.type === "checkbox") i.checked = !!v;
-      else i.value = typeof v === "boolean" ? (v ? 1 : 0) : v;
-    });
-    $$("[data-setting]", panel).forEach((i) => {
-      if (document.activeElement === i && i.type !== "checkbox") return; // the server may refuse a checkbox (custom-only without 6 words)
-      const v = S.settings[i.dataset.setting];
-      if (i.type === "checkbox") i.checked = !!v;
-      else i.value = v;
-    });
-    $$("[data-choice]", panel).forEach((b) =>
-      b.setAttribute(
-        "aria-pressed",
-        String(b.dataset.value === String(S.settings[b.dataset.choice])),
-      ),
-    );
-    if (!$("#modal").hidden && $(".settings-modal .settings-fields")) {
-      $$("[data-setting]", $("#modal-body")).forEach((i) => {
-        if (i === document.activeElement && i.type !== "checkbox") return;
-        const v = S.settings[i.dataset.setting];
-        if (i.type === "checkbox") i.checked = !!v;
-        else i.value = v;
-      });
-      $$("[data-choice]", $("#modal-body")).forEach((b) =>
-        b.setAttribute(
-          "aria-pressed",
-          String(b.dataset.value === String(S.settings[b.dataset.choice])),
-        ),
-      );
-    }
+  function openActivitySheet() {
+    openModal(`<div id="activity-sheet" class="party-activity">${activityHTML("sheet")}</div><div class="modal-actions"><button class="btn" data-close>Done</button></div>`);
+    $("#modal-body").classList.add("sheet-modal");
+    $("#activity-sheet").dataset.html = activityHTML("sheet");
   }
-  $("#lobby-start").addEventListener("click", () => socket.emit("startGame"));
 
-  // Catch up on any results update that arrived while the vote picker was open.
-  $("#stage").addEventListener("focusout", (e) => {
-    if (e.target.id === "vote-next" && S && mounted === "lobby")
-      setTimeout(() => S && mounted === "lobby" && renderLobby());
+  // One click handler for the hub, the activity panel and the activity sheet.
+  document.addEventListener("click", (e) => {
+    if (!S || !e.target.closest("#screen-room, #modal-body")) return;
+    const t = (sel) => e.target.closest(sel);
+    if (t("#lobby-start") || t("#result-again")) socket.emit("startGame");
+    else if (t("#ready-btn") || t("#result-ready")) {
+      const mine = me();
+      if (mine) socket.emit("setReady", !mine.ready);
+    } else if (t("#game-settings-btn")) openGameSettings();
+    else if (t("#slot-rules")) openRules(S.gameId);
+    else if (t("#slot-choose") || t("#slot-change") || t("[data-suggest]") || t("#result-choose") || t("#result-vote"))
+      openPicker();
+    else if (t("#open-activity")) openActivitySheet();
+    else if (t("#result-lobby")) socket.emit("backToLobby");
+    else if (t("#result-dismiss")) {
+      dismissedResult = resultKey(S.lastResult);
+      renderRoom();
+      $("#ready-btn")?.focus();
+    } else if (t("[data-unvote]")) socket.emit("voteNext", null);
+    else if (t("[data-vote-game]")) socket.emit("voteNext", t("[data-vote-game]").dataset.voteGame);
+    else if (t("[data-confirm-game]") && isHost()) {
+      const id = t("[data-confirm-game]").dataset.confirmGame;
+      if ($("#activity-sheet")) closeModal();
+      switchGame(id);
+    }
   });
-  $("#stage").addEventListener("change", (e) => {
-    const t = e.target;
-    if (t.id === "vote-next") {
-      socket.emit("voteNext", t.value || null);
-      t.blur();
+
+  // ---------- game picker: Choose a Game / Choose Another Game / Suggest a Game ----------
+  let picker = null;
+  function openPicker(preselect) {
+    if (!S) return;
+    const host = isHost();
+    const start =
+      preselect && GAMES[preselect] && !HIDDEN.has(preselect)
+        ? preselect
+        : host
+          ? S.gameId
+          : S.myVote;
+    picker = { sel: start || null, q: "", cat: "All", host };
+    const title = !host
+      ? "Suggest a Game"
+      : S.lastResult
+        ? "Choose Another Game"
+        : "Choose a Game";
+    const n = S.players.length;
+    const w = S.spectators.length;
+    openModal(`<div class="picker" id="picker">
+      <h2 class="card-title">${title}</h2>
+      <p class="muted">For your party · ${n} player${n === 1 ? "" : "s"}${w ? `, ${w} spectator${w === 1 ? "" : "s"}` : ""}. ${host ? "Same room, same people, same chat." : "Suggestions never replace the host's choice."}</p>
+      <label class="search-field"><span class="sr-only">Search games</span><input id="picker-search" type="search" placeholder="Search by name or category…" autocomplete="off" aria-controls="picker-grid"></label>
+      <div class="chips" id="picker-chips" role="group" aria-label="Filter games"></div>
+      <p class="sr-only" id="picker-count" role="status" aria-live="polite"></p>
+      <div class="pick-grid" id="picker-grid"></div>
+      <div class="no-match" id="picker-empty" hidden><h3>No matches</h3><p class="muted" id="picker-empty-text"></p><button class="btn btn-ghost" type="button" id="picker-clear">Clear Search</button></div>
+    </div>
+    <div class="modal-actions picker-actions"><button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="picker-go" type="button" disabled>Choose Game</button></div>`);
+    $("#modal-body").classList.add("picker-modal");
+    renderPicker();
+    $("#picker-search").addEventListener("input", (e) => {
+      picker.q = e.target.value;
+      renderPicker();
+    });
+    $("#picker-chips").addEventListener("click", (e) => {
+      const c = e.target.closest("[data-filter]");
+      if (!c) return;
+      picker.cat = c.dataset.filter;
+      renderPicker();
+    });
+    $("#picker-clear").addEventListener("click", () => {
+      picker.q = "";
+      picker.cat = "All";
+      $("#picker-search").value = "";
+      renderPicker();
+      $("#picker-search").focus();
+    });
+    $("#picker-grid").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-pickgame]");
+      if (!b || b.disabled) return;
+      picker.sel = b.dataset.pickgame;
+      renderPicker();
+    });
+    $("#picker-grid").addEventListener("dblclick", (e) => {
+      if (e.target.closest("[data-pickgame]:not(:disabled)")) confirmPick();
+    });
+    $("#picker-go").addEventListener("click", confirmPick);
+    const sel = $("#picker-grid .pick-card.on");
+    (sel || $("#picker-search")).focus();
+    if (sel) sel.scrollIntoView({ block: "nearest" });
+  }
+
+  // Why a game can or can't be chosen, in words (never colour alone).
+  function eligibility(g) {
+    const n = S.players.length + S.spectators.length;
+    if (n > g.max && !S.spectatorsOn)
+      return { ok: false, text: `Seats ${g.max}. Allow spectators to bring all ${n}.` };
+    if (n > g.max) return { ok: true, text: `${g.max} play, ${n - g.max} watch` };
+    if (n < g.min) return { ok: true, text: `Needs ${g.min}+ · invite ${g.min - n} more` };
+    return { ok: true, text: "" };
+  }
+  function renderPicker() {
+    if (!picker || !$("#picker")) return;
+    const all = pickable();
+    patch($("#picker-chips"), chipsHTML(picker, all.length));
+    const list = filterGames(picker);
+    const html = list
+      .map(([id, g]) => {
+        const el = eligibility(g);
+        const on = picker.sel === id;
+        const votes = S.nextVotes && S.nextVotes[id];
+        const notes = [
+          id === S.gameId ? "Current game" : "",
+          votes ? `${votes} vote${votes > 1 ? "s" : ""}` : "",
+          el.text,
+        ].filter(Boolean);
+        return `<button type="button" class="pick-card ${on ? "on" : ""}" data-pickgame="${id}" data-k="pick-${id}" aria-pressed="${on}" ${el.ok ? "" : "disabled"}>
+          <span class="pick-art">${g.art}</span>
+          <span class="pick-text"><b>${esc(g.name)}</b><small>${rangeText(g)} · ${g.cat}${notes.length ? " · " + notes.map(esc).join(" · ") : ""}</small></span>
+          <span class="pick-check" aria-hidden="true">${on ? icon("check") : ""}</span></button>`;
+      })
+      .join("");
+    patch($("#picker-grid"), html);
+    $("#picker-empty").hidden = list.length > 0;
+    $("#picker-empty-text").textContent = picker.q.trim()
+      ? `No games match “${picker.q.trim()}”.`
+      : "No games in this filter fit right now.";
+    $("#picker-count").textContent = `${list.length} game${list.length === 1 ? "" : "s"} shown`;
+    const G = picker.sel ? GAMES[picker.sel] : null;
+    const go = $("#picker-go");
+    const ok = G && eligibility(G).ok;
+    go.disabled = !ok || (picker.host && picker.sel === S.gameId && !S.lastResult);
+    go.textContent = !G
+      ? picker.host
+        ? "Choose Game"
+        : "Suggest to Party"
+      : picker.host
+        ? picker.sel === S.gameId
+          ? `Keep ${G.name}`
+          : `Choose ${G.name}`
+        : `Suggest ${G.name}`;
+  }
+  function confirmPick() {
+    if (!picker || !picker.sel || $("#picker-go").disabled) return;
+    const id = picker.sel;
+    const host = picker.host && isHost();
+    closeModal();
+    picker = null;
+    if (!host) {
+      socket.emit("voteNext", id);
+      return toast(`You suggested ${GAMES[id].name}. The host decides.`);
+    }
+    if (id === S.gameId) {
+      // Keeping the same game after a match just puts the results away.
+      if (S.lastResult) socket.emit("backToLobby");
       return;
     }
-    if (!isHost()) return;
-    if (t.id === "switch-game") return switchGame(t.value);
-    if (t.dataset.host) {
-      let v = t.type === "checkbox" ? t.checked : Number(t.value);
-      if (t.dataset.host === "isPublic") v = !!v;
-      socket.emit("hostUpdate", { [t.dataset.host]: v });
-    } else if (t.dataset.setting && t.closest("#host-panel")) {
-      const v =
-        t.type === "checkbox"
-          ? t.checked
-          : t.tagName === "SELECT" && !STRING_SETTINGS.includes(t.dataset.setting)
-            ? Number(t.value)
-            : t.value;
-      socket.emit("hostUpdate", { settings: { [t.dataset.setting]: v } });
-    }
-  });
-  $("#stage").addEventListener("click", (e) => {
-    if (e.target.closest("#start-btn") || e.target.closest("#result-again"))
-      socket.emit("startGame");
-    if (e.target.closest("#result-choose")) chooseGame();
-    if (e.target.closest("#result-lobby")) socket.emit("backToLobby");
-    const sw = e.target.closest("[data-switch]");
-    if (sw && isHost() && sw.dataset.switch !== S.gameId)
-      switchGame(sw.dataset.switch);
-  });
-
-  function chooseGame() {
-    openModal(`
-      <h2 class="card-title">Choose another game</h2>
-      <p class="muted">Same room, same people, same chat.${voteSummary() ? ` Votes: ${voteSummary()}.` : ""}</p>
-      <div class="pick-list">${pickable(S.gameId)
-        .map(
-          ([id, x]) =>
-            `<button type="button" class="btn ${id === S.gameId ? "btn-ghost" : ""}" data-pickgame="${id}">${esc(x.name)}<small> · ${esc(x.players)}${
-              S.nextVotes && S.nextVotes[id]
-                ? ` · ${S.nextVotes[id]} vote${S.nextVotes[id] > 1 ? "s" : ""}`
-                : ""
-            }${
-              S.players.length + S.spectators.length > x.max
-                ? ` · ${S.players.length + S.spectators.length - x.max} will spectate`
-                : ""
-            }</small></button>`,
-        )
-        .join("")}</div>
-      <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancel</button></div>`);
-    $$("[data-pickgame]").forEach((b) =>
-      b.addEventListener("click", () => {
-        const id = b.dataset.pickgame;
-        closeModal();
-        if (id === S.gameId) return socket.emit("startGame");
-        switchGame(id);
-      }),
-    );
+    switchGame(id);
   }
 
   function switchGame(gameId) {
@@ -1705,9 +2051,9 @@
     const total = S.players.length + S.spectators.length;
     openModal(`
       <h2 class="card-title">${G.name} is ${G.max} players max</h2>
-      <p>There are ${total} people here. ${G.max} will play and ${total - G.max} will spectate. Nobody is removed from the room, and spectators can take a seat when one opens. Pick who plays:</p>
+      <p>There are ${total} people here. ${G.max} will play and ${total - G.max} will spectate. Nobody is removed from the party, and spectators can take a seat when one opens. Pick who plays:</p>
       <div class="pick-list">${S.players.map((p) => `<label class="pick"><input type="checkbox" value="${p.id}">${avatarHTML(p.avatar)} ${esc(p.name)}</label>`).join("")}</div>
-      <p class="muted" id="pick-count">0/${G.max} picked</p>
+      <p class="muted" id="pick-count" role="status">0/${G.max} picked</p>
       <div class="modal-actions">
         <button class="btn btn-ghost" data-close>Cancel</button>
         <button class="btn btn-ghost" id="pick-random">${icon("dice")} Random</button>
@@ -1733,6 +2079,36 @@
         seats: boxes.filter((b) => b.checked).map((b) => b.value),
       });
       closeModal();
+    });
+  }
+
+  // ---------- party settings (host) ----------
+  function openPartySettings() {
+    if (!S) return;
+    const host = isHost();
+    openModal(`<h2 class="card-title">Party Settings</h2>
+      <p class="muted">${host ? "Who can join and who can watch. Your people and chat stay the same." : "Your host controls the party settings."}</p>
+      <fieldset class="create-form party-form" ${host ? "" : "disabled"}>
+        <fieldset class="vis-choice"><legend class="sr-only">Who can join</legend>
+          <label class="vis-option"><input type="radio" name="p-vis" value="0" ${S.isPublic ? "" : "checked"}><span><b>Private</b><small>Only people with your invite can join.</small></span></label>
+          <label class="vis-option"><input type="radio" name="p-vis" value="1" ${S.isPublic ? "checked" : ""}><span><b>Public</b><small>Let others find your party in Rooms.</small></span></label>
+        </fieldset>
+        <label class="switch-row"><span>Allow spectators</span><input type="checkbox" role="switch" id="p-spec" ${S.spectatorsOn ? "checked" : ""}></label>
+        <label class="field"><span>Max spectators</span><select id="p-maxspec">${[0, 5, 10, 20, 50].map((v) => opt(v, S.maxSpectators)).join("")}</select></label>
+        <label class="switch-row"><span>Lock party <small>No new people can join</small></span><input type="checkbox" role="switch" id="p-lock" ${S.locked ? "checked" : ""}></label>
+      </fieldset>
+      <div class="modal-actions"><button class="btn btn-ghost btn-danger" id="p-leave" type="button">Leave Party</button><span class="grow"></span><button class="btn btn-ghost" data-close>Cancel</button>${host ? '<button class="btn" id="p-save" type="button">Save</button>' : ""}</div>`);
+    $("#p-leave").addEventListener("click", leaveParty);
+    $("#p-save")?.addEventListener("click", () => {
+      if (!isHost()) return closeModal();
+      socket.emit("hostUpdate", {
+        isPublic: $('[name="p-vis"]:checked').value === "1",
+        spectatorsOn: $("#p-spec").checked,
+        maxSpectators: Number($("#p-maxspec").value),
+        locked: $("#p-lock").checked,
+      });
+      closeModal();
+      toast("Party settings saved.");
     });
   }
 

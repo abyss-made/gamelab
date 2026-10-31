@@ -69,7 +69,7 @@ const GAMES = ['pool', 'golf', 'tycoon'];
       ok((await page.$$eval('.game-card img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length)) === 0, 'all game card artwork loads');
       for (const g of GAMES) {
         await page.click(`[data-create="${g}"]`);
-        ok((await page.$$('#create-form [data-setting]')).length >= 1, `${g}: create dialog shows its settings`);
+        ok((await page.$$('#create-form [data-setting]')).length === 0 && (await page.isVisible('#c-go')), `${g}: Play opens Create Party with no game settings (issue #38)`);
         await page.keyboard.press('Escape');
         await page.evaluate(() => document.querySelector('[data-close]')?.click());
       }
@@ -84,6 +84,12 @@ const GAMES = ['pool', 'golf', 'tycoon'];
         page.on('pageerror', (e) => errors.push(e.message));
         page.on('console', (m) => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errors.push(m.text()); });
         const code = await createRoom(page, game);
+        if (vp.tag === 'desktop') {
+          // Settings live in the lobby once a game is chosen (issue #38).
+          await page.click('#game-settings-btn');
+          ok((await page.$$('#modal-body .settings-fields [data-setting]')).length >= 1, `${game}: Game Settings dialog shows its settings`);
+          await page.keyboard.press('Escape');
+        }
         const group = game === 'tycoon' ? [fake('Friend1'), fake('Friend2')] : [fake('Friend1')];
         fakes.push(...group);
         for (const f of group) await f.emit('joinRoom', { code, token: f.token, profile: f.profile });

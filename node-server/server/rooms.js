@@ -32,8 +32,11 @@ function cleanProfile(p) {
 }
 const validToken = (t) => typeof t === 'string' && /^[a-f0-9]{16,64}$/.test(t);
 
-const gameOf = (room) => GAMES[room.gameId];
-const seatCap = (room) => Math.min(gameOf(room).meta.maxPlayers, room.maxPlayers);
+// A party can exist before anyone picks a game: room.gameId is then null, nothing can start,
+// and everyone gets a seat up to PARTY_MAX. The host chooses the game later in the same room.
+const gameOf = (room) => (room.gameId ? GAMES[room.gameId] : null);
+const PARTY_MAX = Math.max(...Object.keys(GAMES).filter(selectable).map((id) => GAMES[id].meta.maxPlayers));
+const seatCap = (room) => (room.gameId ? Math.min(gameOf(room).meta.maxPlayers, room.maxPlayers) : room.maxPlayers);
 const member = (room, id) => room.members.get(id);
 const seated = (room) => room.seats.map((id) => room.members.get(id)).filter(Boolean);
 
@@ -100,7 +103,7 @@ function chat(room, msg, onlyFor) {
 const sys = (room, text, style = 'info') => chat(room, { kind: 'sys', text, style });
 
 function pub(m) {
-  return { id: m.id, name: m.name, avatar: m.avatar, connected: m.connected, score: m.score };
+  return { id: m.id, name: m.name, avatar: m.avatar, connected: m.connected, score: m.score, ready: !!m.ready };
 }
 
 function view(room, m) {
@@ -108,6 +111,7 @@ function view(room, m) {
   const now = Date.now();
   return {
     code: room.code,
+    name: room.name,
     you: m.id,
     role: m.role,
     hostId: room.hostId,
@@ -117,7 +121,7 @@ function view(room, m) {
     spectatorsOn: room.spectatorsOn,
     maxSpectators: room.maxSpectators,
     maxPlayers: seatCap(room),
-    settings: room.settings[room.gameId],
+    settings: room.gameId ? room.settings[room.gameId] : null,
     phase: room.phase,
     autoStartIn: room.autoStartAt ? Math.max(0, room.autoStartAt - now) : null,
     players: seated(room).map(pub),
@@ -125,7 +129,7 @@ function view(room, m) {
     queue: room.queue.slice(),
     nextVotes: voteTally(room),
     myVote: room.nextVotes.get(m.id) || null,
-    game: room.phase === 'game' && room.game ? G.view(room.game, m, now) : null,
+    game: room.phase === 'game' && room.game && G ? G.view(room.game, m, now) : null,
     lastResult: room.lastResult,
   };
 }
@@ -180,17 +184,19 @@ function makeApi(room) {
 function createRoom(opts) {
   if (rooms.size >= config.MAX_ROOMS) return null;
   opts = opts && typeof opts === 'object' ? opts : {};
-  const gameId = selectable(opts.game) ? opts.game : 'drawguess';
-  const G = GAMES[gameId];
+  // `game: null` asks for a party with no game yet. Older clients that omit `game` still get Draw & Guess.
+  const gameId = opts.game === null ? null : selectable(opts.game) ? opts.game : 'drawguess';
+  const G = gameId ? GAMES[gameId] : null;
   const room = {
     code: newCode(),
+    name: '',
     gameId,
     hostId: null,
     isPublic: !!opts.isPublic,
     locked: false,
     spectatorsOn: opts.spectatorsOn !== false,
     maxSpectators: clampInt(opts.maxSpectators, 0, 50, 20),
-    maxPlayers: clampInt(opts.maxPlayers, G.meta.minPlayers, G.meta.maxPlayers, G.meta.maxPlayers),
+    maxPlayers: G ? clampInt(opts.maxPlayers, G.meta.minPlayers, G.meta.maxPlayers, G.meta.maxPlayers) : PARTY_MAX,
     settings: {},
     members: new Map(),
     seats: [],
@@ -210,7 +216,7 @@ function createRoom(opts) {
     dirty: false,
   };
   for (const id of Object.keys(GAMES)) room.settings[id] = { ...GAMES[id].defaults };
-  room.settings[gameId] = G.sanitizeSettings(opts.settings, room.settings[gameId]);
+  if (G) room.settings[gameId] = G.sanitizeSettings(opts.settings, room.settings[gameId]);
   room.api = makeApi(room);
   rooms.set(room.code, room);
   return room;
@@ -245,7 +251,7 @@ function syncNewcomer(socket, room, m) {
 
 function roomInfo(room) {
   const G = gameOf(room);
-  return { gameId: room.gameId, gameName: G.meta.name, players: room.seats.length, max: seatCap(room) };
+  return { gameId: room.gameId, gameName: G ? G.meta.name : 'party', players: room.seats.length, max: seatCap(room) };
 }
 
 function joinRoom(socket, room, profile, token) {
@@ -267,7 +273,7 @@ function joinRoom(socket, room, profile, token) {
   const seatsUsed = room.seats.length - (prev && room.seats.includes(prev) ? 1 : 0);
   const specsUsed = room.specs.length - (prev && room.specs.includes(prev) ? 1 : 0);
   let role;
-  if (seatsUsed < cap && (room.phase === 'lobby' || G.meta.midJoin)) role = 'player';
+  if (seatsUsed < cap && (room.phase === 'lobby' || (G && G.meta.midJoin))) role = 'player';
   else if (room.spectatorsOn && specsUsed < room.maxSpectators) role = 'spectator';
   else return { error: 'full', ...roomInfo(room) };
 
@@ -276,6 +282,7 @@ function joinRoom(socket, room, profile, token) {
   room.members.set(m.id, m);
   (role === 'player' ? room.seats : room.specs).push(m.id);
   if (!room.hostId) room.hostId = m.id;
+  if (!room.name) room.name = `${m.name}'s Party`;
   room.emptySince = null;
   attachSocket(socket, room, m);
   if (role === 'player' && room.phase === 'game' && room.game && G.onJoin) G.onJoin(room.game, m, room.api);
@@ -284,7 +291,9 @@ function joinRoom(socket, room, profile, token) {
   broadcast(room);
 
   let notice = null;
-  if (role === 'spectator') {
+  if (role === 'spectator' && !G) {
+    notice = `This party is full (${cap} players), so you're spectating.`;
+  } else if (role === 'spectator') {
     if (room.seats.length >= cap) {
       const seatsText = cap === 2 ? 'Both seats are taken' : `All ${cap} seats are taken`;
       notice = `This lobby is playing ${G.meta.name} (max ${cap} players). ${seatsText}, so you're spectating.`;
@@ -336,8 +345,9 @@ function leaveBySocket(socket) {
 
 function startGame(room) {
   const G = gameOf(room);
-  if (room.phase !== 'lobby' || room.seats.length < G.meta.minPlayers) return false;
+  if (!G || room.phase !== 'lobby' || room.seats.length < G.meta.minPlayers) return false;
   if (G.meta.resetScores) for (const m of seated(room)) m.score = 0;
+  for (const m of room.members.values()) m.ready = false; // readiness is asked again for every rematch
   room.gameCount++;
   room.game = G.create(room.settings[room.gameId]);
   room.phase = 'game';
@@ -367,8 +377,9 @@ function listPublic() {
     const host = r.members.get(r.hostId);
     out.push({
       code: r.code,
+      name: r.name,
       gameId: r.gameId,
-      gameName: gameOf(r).meta.name,
+      gameName: r.gameId ? gameOf(r).meta.name : null,
       host: host ? host.name : '',
       players: r.seats.length,
       max: seatCap(r),
@@ -421,7 +432,7 @@ function loop() {
       }
       // Public lobbies start by themselves so nobody waits on an idle host.
       const G = gameOf(room);
-      const ready = room.isPublic && room.phase === 'lobby' && seated(room).filter((m) => m.connected).length >= G.meta.minPlayers;
+      const ready = !!G && room.isPublic && room.phase === 'lobby' && seated(room).filter((m) => m.connected).length >= G.meta.minPlayers;
       if (ready && !room.autoStartAt) {
         room.autoStartAt = now + config.AUTOSTART_MS;
         broadcast(room);
@@ -535,7 +546,7 @@ function attach(ioServer) {
       if (lobbyLimited(m)) return;
       const G = gameOf(room);
       if (room.seats.length >= seatCap(room)) return socket.emit('notice', 'No seat is open right now.');
-      if (room.phase !== 'lobby' && !G.meta.midJoin) return socket.emit('notice', 'Wait for this match to end.');
+      if (room.phase !== 'lobby' && !(G && G.meta.midJoin)) return socket.emit('notice', 'Wait for this match to end.');
       seatSpectator(room, m);
       if (room.phase === 'game' && room.game && G.onJoin) G.onJoin(room.game, m, room.api);
       sys(room, `${m.name} took a seat.`);
@@ -569,6 +580,16 @@ function attach(ioServer) {
       broadcast(room);
     });
 
+    // Readiness is advisory: it tells the host who is set, but never blocks or launches a game.
+    on('setReady', (want) => {
+      const c = ctx();
+      if (!c || c.room.phase !== 'lobby') return;
+      const { room, m } = c;
+      if (!!want === !!m.ready || lobbyLimited(m)) return;
+      m.ready = !!want;
+      broadcast(room);
+    });
+
     on('watch', () => {
       const c = ctx();
       if (!c || c.m.role !== 'player' || c.room.phase !== 'lobby') return;
@@ -595,12 +616,12 @@ function attach(ioServer) {
       }
       if ('spectatorsOn' in patch) room.spectatorsOn = !!patch.spectatorsOn;
       if ('maxSpectators' in patch) room.maxSpectators = clampInt(patch.maxSpectators, 0, 50, room.maxSpectators);
-      if ('maxPlayers' in patch) {
+      if ('maxPlayers' in patch && G) {
         const lowest = Math.max(G.meta.minPlayers, room.seats.length);
         room.maxPlayers = clampInt(patch.maxPlayers, lowest, G.meta.maxPlayers, room.maxPlayers);
         fillFromQueue(room);
       }
-      if ('settings' in patch && room.phase === 'lobby') {
+      if ('settings' in patch && room.phase === 'lobby' && G) {
         room.settings[room.gameId] = G.sanitizeSettings(patch.settings, room.settings[room.gameId]);
       }
       broadcast(room);
@@ -612,6 +633,10 @@ function attach(ioServer) {
       const { room } = c;
       if (room.phase !== 'lobby' || opts.game === room.gameId) return;
       const G2 = GAMES[opts.game];
+      // A party bigger than the game only fits if the extra people can watch.
+      if (room.seats.length > G2.meta.maxPlayers && !room.spectatorsOn) {
+        return socket.emit('notice', `${G2.meta.name} seats ${G2.meta.maxPlayers}. Allow spectators in Party Settings so everyone else can watch.`);
+      }
       room.gameId = opts.game;
       room.maxPlayers = G2.meta.maxPlayers;
       room.lastResult = null;
@@ -651,7 +676,9 @@ function attach(ioServer) {
     on('startGame', () => {
       const c = hostCtx();
       if (!c) return;
-      if (!startGame(c.room)) socket.emit('notice', `You need at least ${gameOf(c.room).meta.minPlayers} players to start.`);
+      const G = gameOf(c.room);
+      if (!G) return socket.emit('notice', 'Choose a game first.');
+      if (!startGame(c.room)) socket.emit('notice', `You need at least ${G.meta.minPlayers} players to start.`);
     });
 
     // Dismiss the results card so everyone is back in the lobby view.

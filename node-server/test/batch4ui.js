@@ -67,7 +67,7 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
       ok((await page.$$eval('.game-card img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length)) === 0, 'all game card artwork loads');
       for (const g of GAMES) {
         await page.click(`[data-create="${g}"]`);
-        ok((await page.$$('#create-form [data-setting]')).length >= 1, `${g}: create dialog shows its settings`);
+        ok((await page.$$('#create-form [data-setting]')).length === 0 && (await page.isVisible('#c-go')), `${g}: Play opens Create Party with no game settings (issue #38)`);
         await page.keyboard.press('Escape');
         await page.evaluate(() => document.querySelector('[data-close]')?.click());
       }
@@ -81,6 +81,12 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
         const errors = [];
         page.on('pageerror', (e) => errors.push(e.message));
         const code = await createRoom(page, game);
+        if (vp.tag === 'desktop') {
+          // Settings live in the lobby once a game is chosen (issue #38).
+          await page.click('#game-settings-btn');
+          ok((await page.$$('#modal-body .settings-fields [data-setting]')).length >= 1, `${game}: Game Settings dialog shows its settings`);
+          await page.keyboard.press('Escape');
+        }
         const f1 = fake('Friend1');
         const f2 = fake('Friend2');
         const group = game === 'ludo' ? [f1, f2] : [f1];

@@ -179,6 +179,8 @@ for (const [p, page] of Object.entries(PAGES)) {
   if (HIDDEN.has(page.game)) app.get(p, (req, res) => res.redirect(302, '/?view=games'));
   else app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered[p]));
 }
+// Games and Rooms are their own client-side views of the same page.
+for (const p of ['/games', '/rooms']) app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/r/:code', (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/api/rooms', (req, res) => res.json(rooms.listPublic()));
 app.get('/healthz', (req, res) => res.send('ok'));
