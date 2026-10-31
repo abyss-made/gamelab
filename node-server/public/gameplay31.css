@@ -158,6 +158,7 @@
 .bs-cell.miss { background: #0e2f45; }
 .bs-cell.miss::after { content: ""; display: block; width: 28%; height: 28%; border-radius: 50%; background: #8cceff; margin: auto; }
 .bs-cell.hit { background: #ff477b; font-weight: 800; }
+.bs-cell.sunk { background: #8a1038; color: #ffd7e2; }
 .bs-cell.aim { background: #14425f; outline: 3px solid #adff00; }
 
 /* Pool / Golf: honest-physics rails get legible numeric labels (values come from the live controls). */
