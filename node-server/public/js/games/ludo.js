@@ -32,6 +32,7 @@ GameUI.ludo = (() => {
   let clock = null;
   let lastRolls = -1;
   let animateMove = false;
+  let lastMoveKey = null; // identity of the last confirmed move event; null until the first state is seen
 
   const pos = (colour, tokenIdx, prog) => {
     if (prog === -1) return YARD[colour][tokenIdx];
@@ -144,7 +145,11 @@ GameUI.ludo = (() => {
       const me = g.players[g.myIndex];
       ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1} · ${g.dice} step${g.dice === 1 ? "" : "s"}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
     } else ctl.innerHTML = "";
-    animateMove = g.rolls !== lastRolls && lastRolls >= 0;
+    const ev = g.lastEvent;
+    const moveKey = ev && ev.kind === "move" ? `${ev.by}:${ev.token}:${ev.from}:${ev.to}` : "";
+    // Animate only when a new confirmed move arrives, never on a later roll that keeps the old event.
+    animateMove = lastMoveKey !== null && moveKey !== "" && moveKey !== lastMoveKey;
+    lastMoveKey = moveKey;
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");
     if (mine && g.phase === "roll" && lastRolls >= 0) Sound.play("yourturn");
@@ -156,6 +161,8 @@ GameUI.ludo = (() => {
     if (root) root.remove();
     root = null;
     lastRolls = -1;
+    lastMoveKey = null;
+    animateMove = false;
   }
 
   function renderResult(r, state, a) {

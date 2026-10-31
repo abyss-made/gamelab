@@ -102,6 +102,20 @@ async function start(browser, vp, game) {
           ok(info.pips === (info.dice || 0), `${T}: die shows ${info.pips} pips for server value ${info.dice || 'none yet'}`);
           ok(info.picks.every(([h, t]) => h >= 44 && /Token \d · \d steps?/.test(t)), `${T}: token pick buttons are >=44px and name the step count`);
         }
+        if (g === 'ludo') {
+          // Token motion follows confirmed move events, not dice rolls (client logic driven with synthetic states).
+          const seq = await page.evaluate(() => {
+            const base = JSON.parse(JSON.stringify(App.S));
+            const mk = (ev, rolls) => { const c = JSON.parse(JSON.stringify(base)); c.game.lastEvent = ev; c.game.rolls = rolls; return c; };
+            const count = (st) => { GameUI.ludo.update(st); return document.querySelectorAll('.ld2-tok.moved').length; };
+            const p0 = base.game.players[0];
+            const ev1 = { kind: 'move', by: p0.id, token: 0, from: -1, to: 0, captured: null };
+            const ev2 = { kind: 'move', by: p0.id, token: 0, from: 0, to: 4, captured: null };
+            const r = base.game.rolls;
+            return [count(mk(null, r)), count(mk(ev1, r)), count(mk(ev1, r + 1)), count(mk(ev1, r + 2)), count(mk(ev2, r + 3))];
+          });
+          ok(JSON.stringify(seq) === '[0,1,0,0,1]', `${T}: only a new confirmed move animates a token, not later rolls (${seq})`);
+        }
         if (g === 'colorstack') {
           const names = await page.$$eval('.cs-hand .cs-card', (els) => els.every((e) => e.querySelector('small') && e.getAttribute('aria-label')));
           ok(names, `${T}: every card shows its colour name`);
