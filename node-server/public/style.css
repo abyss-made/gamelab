@@ -4127,6 +4127,74 @@ body.dg-big .dg .chat-form input {
     display: none;
   }
 }
+/* Portrait phones outside focus mode: the canvas takes the full width and the tools sit under it
+   as one row plus the whole palette, instead of a narrow column with a clipped palette. Guessers
+   never use the tools, so they don't get them on a phone. */
+@media (max-width: 600px) and (orientation: portrait) {
+  body:not(.dg-big) .dg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body:not(.dg-big) .dg-board {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 4px;
+  }
+  body:not(.dg-big) .dg-tools {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    padding: 8px;
+  }
+  body:not(.dg-big) .dg:not(.drawing) .dg-tools {
+    display: none;
+  }
+  body:not(.dg-big) .dg-tools .tools-title,
+  body:not(.dg-big) .dg-tools .tool-caption {
+    display: none;
+  }
+  body:not(.dg-big) .dg-tools .tool-picks,
+  body:not(.dg-big) .dg-tools .dg-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  body:not(.dg-big) .dg-tools .tool,
+  body:not(.dg-big) .dg-actions .tool {
+    width: 44px;
+    height: 44px;
+  }
+  body:not(.dg-big) .dg-tools .tool-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+  }
+  body:not(.dg-big) .dg-tools input[type="range"] {
+    width: 110px;
+  }
+  body:not(.dg-big) .dg-tools .tool-field:has(.dg-palette) {
+    flex-basis: 100%;
+  }
+  body:not(.dg-big) .dg-tools .tool-field:has(.dg-palette) > span {
+    display: none;
+  }
+  body:not(.dg-big) .dg-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-height: none;
+  }
+  body:not(.dg-big) .dg-tools .swatch {
+    width: 30px;
+    height: 30px;
+  }
+}
 /* Short landscape phones: compact tool column. */
 @media (max-height: 500px) and (orientation: landscape) {
   body.dg-big .dg-top {
