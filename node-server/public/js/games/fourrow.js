@@ -11,7 +11,7 @@ GameUI.fourrow = (() => {
   let lastMoves = -1;
   let lastTurnKey = "";
 
-  function boardHTML(board, { last, winLine, playable }) {
+  function boardHTML(board, { last, winLine, playable, who = "" }) {
     const win = new Set((winLine || []).map(([r, c]) => r + "," + c));
     let html = "";
     for (let c = 0; c < COLS; c++) {
@@ -21,7 +21,7 @@ GameUI.fourrow = (() => {
           target = r;
           break;
         }
-      html += `<button class="fr-col" data-col="${c}" ${playable && target >= 0 ? "" : "disabled"} aria-label="Column ${c + 1}">`;
+      html += `<button class="fr-col" data-col="${c}" ${playable && target >= 0 ? "" : "disabled"} aria-label="${target < 0 ? `Column ${c + 1} is full` : playable ? `Drop ${who || "disc"} in column ${c + 1}` : `Column ${c + 1}`}"${target < 0 ? ' title="Column full"' : ""}>`;
       for (let r = 0; r < ROWS; r++) {
         const v = board[r][c];
         const cls = ["fr-cell"];
@@ -51,8 +51,9 @@ GameUI.fourrow = (() => {
     stage.appendChild(root);
     root.addEventListener("click", (e) => {
       const col = e.target.closest(".fr-col");
-      if (!col || col.disabled || !S || !S.game) return;
+      if (!S || !S.game) return;
       const g = S.game;
+      if (!col || col.disabled) return;
       if (g.myIndex !== g.turn) return;
       app.socket.emit("action", { type: "drop", col: Number(col.dataset.col) });
     });
@@ -114,7 +115,9 @@ GameUI.fourrow = (() => {
     board.innerHTML = boardHTML(g.board, {
       last: g.moves !== lastMoves ? g.last : null,
       playable: myTurn,
+      who: g.myIndex >= 0 ? COLOR_NAMES[g.myIndex] : "",
     });
+
     if (g.moves !== lastMoves && lastMoves >= 0) Sound.play("drop");
     lastMoves = g.moves;
     const tk = g.turn + ":" + g.moves;
