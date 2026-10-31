@@ -67,13 +67,15 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       ok((await host.$$('.game-card[data-game="reversi"]')).length === 0, `${T}: no reversi card after the redirect`);
 
       await host.click('[data-create="tictactoe"]');
-      const tiles = await host.$$eval('#modal-body [data-pick]', (els) => els.map((e) => e.dataset.pick));
-      ok(tiles.length === 21 && !tiles.some((g) => HIDDEN.includes(g)), `${T}: Create Lobby offers 21 games, none hidden`);
+      ok((await host.$$('#modal-body [data-pick], #modal-body [data-pickgame]')).length === 0 && /Tic Tac Toe/.test(await host.textContent('#modal-body')), `${T}: Create Party asks no game question and names the preselected game`);
       await host.click('#c-go');
       await host.waitForSelector('#screen-room', { state: 'visible' });
+      await host.waitForFunction(() => window.App && App.S);
       const code = (await host.textContent('#room-code')).trim();
-      const opts = await host.$$eval('#switch-game option', (els) => els.map((e) => e.value));
-      ok(opts.length === 21 && !opts.some((g) => HIDDEN.includes(g)), `${T}: host Game Mode list has 21 games, none hidden`);
+      await host.click('#slot-change');
+      const opts = await host.$$eval('#modal-body [data-pickgame]', (els) => els.map((e) => e.dataset.pickgame));
+      ok(opts.length === 21 && !opts.some((g) => HIDDEN.includes(g)), `${T}: host game picker has 21 games, none hidden`);
+      await host.keyboard.press('Escape');
 
       // ----- two more people: one plays, one (a phone page) spectates -----
       const pal = fake('Pal');
@@ -91,7 +93,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       await spec.click('[data-queue="1"]');
       await until(() => pal.state.queue.length === 1);
       await spec.waitForSelector('.queue-note', { timeout: 3000 }).catch(() => {});
-      ok(/#1 in line/.test(await spec.textContent('#seat-action')), `${T}: spectator sees their queue position`);
+      ok(/#1 in line/.test(await spec.textContent('#party-main')), `${T}: spectator sees their queue position`);
 
       // ----- play a game to the result -----
       await host.click('#lobby-start');
@@ -120,9 +122,13 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       await spec.waitForSelector('.result-card', { timeout: 5000 });
       const specRole = await spec.evaluate(() => App.S.role);
       ok(!(await spec.$('#result-again')), `${T}: non-host has no Play Again button`);
-      const voteOpts = await spec.$$eval('#vote-next option', (els) => els.map((e) => e.value).filter(Boolean));
+      await spec.click('#result-vote');
+      const voteOpts = await spec.$$eval('#modal-body [data-pickgame]', (els) => els.map((e) => e.dataset.pickgame));
       ok(voteOpts.length === 21 && !voteOpts.some((x) => HIDDEN.includes(x)), `${T}: vote picker lists 21 games, none hidden`);
-      await spec.selectOption('#vote-next', 'chess');
+      await spec.fill('#picker-search', 'chess');
+      await spec.click('[data-pickgame="chess"]');
+      ok(/Suggest Chess/.test(await spec.textContent('#picker-go')), `${T}: participant picker offers Suggest, not Choose`);
+      await spec.click('#picker-go');
       await until(() => pal.state.nextVotes.chess === 1);
       ok(pal.state.nextVotes.chess === 1, `${T}: a vote from the phone reaches the server`);
       await host.waitForFunction(() => /Chess 1/.test(document.querySelector('.vote-tally')?.textContent || ''), null, { timeout: 3000 }).catch(() => {});
@@ -135,14 +141,15 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       ok(/1 vote/.test(await host.textContent('[data-pickgame="chess"]')), `${T}: Choose Another Game shows vote counts`);
       await host.keyboard.press('Escape');
 
-      await spec.focus('#vote-next'); // an open vote picker must not pin stale results
+      await spec.click('#result-vote'); // an open vote picker must not pin stale results
       await host.click('#result-lobby');
       await until(() => !pal.state.lastResult);
       await host.waitForFunction(() => document.body.dataset.phase === 'lobby', null, { timeout: 3000 }).catch(() => {});
       ok((await host.evaluate(() => document.body.dataset.phase)) === 'lobby', `${T}: Back to Lobby returns the host view to the lobby`);
       ok((await spec.evaluate(() => document.body.dataset.phase)) === 'lobby', `${T}: and everyone else's view too`);
       await spec.waitForFunction(() => !document.querySelector('.result-card'), null, { timeout: 3000 }).catch(() => {});
-      ok(!(await spec.$('.result-card')), `${T}: results card is replaced even while the vote picker was focused`);
+      ok(!(await spec.$('.result-card')), `${T}: results card is replaced even while the vote picker was open`);
+      await spec.keyboard.press('Escape');
 
       // host transfer from the roster
       if (T === 'phone') {
@@ -152,7 +159,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       await host.$eval(promote, (b) => b.click());
       await until(() => pal.state.hostId === pal.state.you);
       ok(pal.state.hostId === pal.state.you, `${T}: host can hand hosting to another player from the roster`);
-      await until(async () => !(await host.$('#switch-game:not(:disabled)')) || (await host.evaluate(() => App.S.hostId !== App.S.you)));
+      await until(async () => (await host.evaluate(() => App.S.hostId !== App.S.you)) && !(await host.isVisible('#lobby-start')));
       ok(await host.evaluate(() => App.S.hostId !== App.S.you), `${T}: former host's view updates`);
 
       ok((await overflow(host)) <= 0 && (await overflow(spec)) <= 0, `${T}: no horizontal overflow`);

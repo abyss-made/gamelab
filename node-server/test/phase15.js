@@ -134,7 +134,7 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       const onDlg = (d) => { msgs.push(d.message()); return d.dismiss(); };
       page.removeAllListeners('dialog');
       page.on('dialog', onDlg);
-      await page.click('.main-nav [data-view="selection"]');
+      await page.click('.main-nav [data-view="rooms"]');
       await page.waitForSelector('#code-input');
       await page.fill('#code-input', r2.code);
       await page.press('#code-input', 'Enter');

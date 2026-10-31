@@ -61,7 +61,7 @@ const tok = () => [...Array(32)].map(() => Math.floor(Math.random() * 16).toStri
         await page.waitForSelector('#screen-room', { state: 'visible' });
         const code = (await page.textContent('#room-code')).trim();
         // Rules are reachable from the lobby, and closing them keeps the lobby intact.
-        await page.click(vp.t === 'phone' ? '#rules-btn' : '#rules-link');
+        await page.click(vp.t === 'phone' ? '#rules-btn' : '#slot-rules'); // the lobby's Rules button sits in the game slot (issue #38)
         ok(await page.isVisible('.rules-modal .rules-goal'), `${T}: Rules open from the lobby`);
         await page.keyboard.press('Escape');
         ok(await page.isHidden('#modal'), `${T}: Escape closes Rules`);

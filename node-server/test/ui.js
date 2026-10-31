@@ -61,8 +61,8 @@ async function createRoom(page, game, setup) {
       await page.goto(URL + '/?view=selection');
       await page.waitForSelector('.game-card');
       const text = await page.textContent('#games');
-      ok(/2–12 active players/.test(text) && /2 active players/.test(text), 'game cards show active player limits');
-      ok(/spectate/i.test(text), 'game cards explain that extra people spectate');
+      ok(/2–12 players · Drawing/.test(text) && /2 players · Strategy/.test(text), 'compact game cards show player range and category');
+      ok(await page.isVisible('#game-search') && (await page.$$('#game-filters [data-filter]')).length >= 3, 'catalog has search and category filters');
       ok(!/queue/i.test(text), 'no spectator queue is claimed');
       ok((await page.$$('.game-card.coming-soon')).length >= 1, 'Coming Soon tile still present');
       await page.close();
