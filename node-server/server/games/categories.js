@@ -141,7 +141,7 @@ function scoreRound(st, api) {
 function onAction(st, m, a, api) {
   if (st.over || st.phase !== 'answer' || !a) return;
   const p = st.players.find((x) => x.id === m.id);
-  if (!p || p.out) return;
+  if (!p || p.out || p.done) return; // "I'm done" locks the sheet, as the rules say
   if (a.type === 'answers' && Array.isArray(a.answers)) {
     // Replace the whole sheet. Each cell is trimmed and capped, so oversize input can't pile up.
     p.answers = Array.from({ length: PER_ROUND }, (_, i) => (typeof a.answers[i] === 'string' ? filter.clean(a.answers[i], MAX_ANSWER) : ''));

@@ -3444,7 +3444,8 @@ body[data-game="fourrow"] .room[data-phase="game"] {
     font-size: 10px;
   }
   .fr-player .mini-disc {
-    display: none;
+    width: 14px;
+    height: 14px;
   }
   .fr-head {
     gap: 4px;
@@ -4125,6 +4126,74 @@ body.dg-big .dg .chat-form input {
   /* With the keyboard up, give the room to the chat instead of the tools. */
   body.dg-big .dg:has(#chat-input:focus) .dg-tools {
     display: none;
+  }
+}
+/* Portrait phones outside focus mode: the canvas takes the full width and the tools sit under it
+   as one row plus the whole palette, instead of a narrow column with a clipped palette. Guessers
+   never use the tools, so they don't get them on a phone. */
+@media (max-width: 600px) and (orientation: portrait) {
+  body:not(.dg-big) .dg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body:not(.dg-big) .dg-board {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 4px;
+  }
+  body:not(.dg-big) .dg-tools {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    padding: 8px;
+  }
+  body:not(.dg-big) .dg:not(.drawing) .dg-tools {
+    display: none;
+  }
+  body:not(.dg-big) .dg-tools .tools-title,
+  body:not(.dg-big) .dg-tools .tool-caption {
+    display: none;
+  }
+  body:not(.dg-big) .dg-tools .tool-picks,
+  body:not(.dg-big) .dg-tools .dg-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  body:not(.dg-big) .dg-tools .tool,
+  body:not(.dg-big) .dg-actions .tool {
+    width: 44px;
+    height: 44px;
+  }
+  body:not(.dg-big) .dg-tools .tool-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+  }
+  body:not(.dg-big) .dg-tools input[type="range"] {
+    width: 110px;
+  }
+  body:not(.dg-big) .dg-tools .tool-field:has(.dg-palette) {
+    flex-basis: 100%;
+  }
+  body:not(.dg-big) .dg-tools .tool-field:has(.dg-palette) > span {
+    display: none;
+  }
+  body:not(.dg-big) .dg-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-height: none;
+  }
+  body:not(.dg-big) .dg-tools .swatch {
+    width: 30px;
+    height: 30px;
   }
 }
 /* Short landscape phones: compact tool column. */
@@ -5021,7 +5090,12 @@ body.dg-big .dg-timer #dg-time {
   display: grid;
   justify-items: center;
   gap: 4px;
-  min-width: 90px;
+  min-width: 0;
+  flex: 1;
+}
+.rps-side b {
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 .rps-hand {
   font-size: 48px;
@@ -5120,10 +5194,10 @@ body.dg-big .dg-timer #dg-time {
 .db-edge::after {
   content: "";
   position: absolute;
-  inset: -8px 0; /* bigger touch target */
+  inset: -14px 0; /* 40px touch target across the line; cells are at least 32px, so neighbours never overlap */
 }
 .db-edge.v::after {
-  inset: 0 -8px;
+  inset: 0 -14px;
 }
 .db-edge.h {
   height: var(--dot);
@@ -5284,6 +5358,8 @@ body.dg-big .dg-timer #dg-time {
 .im-card.impostor { background: #7a1030; }
 .im-card.crew { background: #12476a; }
 .im-clues { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.im-clues li { overflow-wrap: anywhere; }
+.im-main { min-width: 0; }
 .im-votes { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .ld-die { display: inline-grid; place-items: center; width: 52px; height: 52px; margin: 3px; border-radius: 10px; background: #f6f8fb; color: #030d17; font-size: 2.6rem; line-height: 1; position: relative; }
 .ld-die i { position: absolute; right: 4px; bottom: 0; font-size: .7rem; font-style: normal; font-weight: 800; }

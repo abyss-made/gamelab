@@ -167,8 +167,10 @@ async function createRoom(page, game, setup) {
         await sleep(200);
         const after = await page.locator('.dg-canvas').boundingBox();
         const area = (b) => b.width * b.height;
-        // Portrait gains width; landscape's old canvas overflowed the viewport, so there the bar is "fully visible and tall enough".
-        ok(vp.width < vp.height ? area(after) > area(before) * 1.1 : after.height >= 320, `${vp.name}: focus canvas is larger (${Math.round(before.width)}x${Math.round(before.height)} -> ${Math.round(after.width)}x${Math.round(after.height)})`);
+        // Portrait: since #40 the normal canvas already spans the phone width (tools sit below it), so focus
+        // mode must keep it at least that big and edge to edge. Landscape's old canvas overflowed the
+        // viewport, so there the bar is "fully visible and tall enough".
+        ok(vp.width < vp.height ? before.width >= vp.width * 0.9 && area(after) >= area(before) * 0.99 && after.width >= vp.width * 0.95 : after.height >= 320, `${vp.name}: canvas is phone-wide and focus keeps it at least as large (${Math.round(before.width)}x${Math.round(before.height)} -> ${Math.round(after.width)}x${Math.round(after.height)})`);
         ok(Math.abs(after.width / after.height - 4 / 3) < 0.02, `${vp.name}: canvas keeps 4:3 (no distortion)`);
         ok(after.x >= -1 && after.y >= -1 && after.x + after.width <= vp.width + 1 && after.y + after.height <= vp.height + 1, `${vp.name}: canvas fully on screen`);
         const toolsBox = await page.locator('#dg-tools').boundingBox();

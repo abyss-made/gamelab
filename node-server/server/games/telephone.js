@@ -104,7 +104,9 @@ function onAction(st, m, a, api) {
     if (a.type !== 'draw') return;
     const strokes = cleanStrokes(a.strokes);
     if (!strokes) return;
-    record(st, p, { kind: 'draw', strokes });
+    // A blank canvas (the client auto-sends whatever is drawn just before time runs out) is a skip:
+    // no point, same as a timed-out entry.
+    record(st, p, strokes.length ? { kind: 'draw', strokes } : { kind: 'draw', strokes, skipped: true });
   } else {
     if (a.type !== 'text') return;
     const text = cleanText(a.text, TEXT_MAX);

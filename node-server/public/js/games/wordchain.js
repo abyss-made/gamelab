@@ -7,6 +7,7 @@ GameUI.wordchain = (() => {
   let clock = null;
   let S = null;
   let lastLen = -1;
+  let lastTurn = null;
 
   function mount(stage, a) {
     app = a;
@@ -59,7 +60,9 @@ GameUI.wordchain = (() => {
     input.disabled = !canType;
     root.querySelector("#wc-send").disabled = !canType;
     input.placeholder = canType ? `Word starting with ${g.letter.toUpperCase()} (${g.minLen}+ letters)` : g.myIndex < 0 ? "You're watching" : me && me.lives <= 0 ? "You're out" : "Wait for your turn";
-    if (canType && lastLen !== g.chainLength) input.focus({ preventScroll: true });
+    // Focus on every new turn of mine, including one that comes from someone else timing out.
+    if (canType && (lastLen !== g.chainLength || lastTurn !== g.turnId)) input.focus({ preventScroll: true });
+    lastTurn = g.turnId;
     if (g.chainLength !== lastLen && lastLen >= 0) {
       input.value = "";
       Sound.play("drop");
@@ -78,6 +81,7 @@ GameUI.wordchain = (() => {
     if (root) root.remove();
     root = null;
     lastLen = -1;
+    lastTurn = null;
   }
 
   function renderResult(r, state, a) {

@@ -54,10 +54,13 @@ function create(settings) {
   return { settings: { ...settings }, players: [], round: 0, phase: 'play', word: '', letters: [], used: new Set(), deadline: 0, over: false, reveal: null, solveOrder: [] };
 }
 
+// The shown letters must not already spell an accepted answer (HARE for "hear"), or typing what
+// is on screen would score.
 function scramble(word) {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 50; i++) {
     const s = shuffle(word.split(''));
-    if (s.join('') !== word) return s;
+    const t = s.join('');
+    if (t !== word && !WORDS.has(t)) return s;
   }
   return word.split('').reverse();
 }
@@ -174,4 +177,4 @@ function view(st, m, now) {
   };
 }
 
-module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, _words: WORDS };
+module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, _words: WORDS, scramble };

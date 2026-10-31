@@ -124,7 +124,10 @@ function onAction(st, m, a, api) {
   const p = st.players[st.turn];
   if (!p || p.id !== m.id || p.out) return;
   if (a.type === 'play') return play(st, p, a, api);
-  if (a.type === 'draw') return doDraw(st, p, api);
+  if (a.type === 'draw') {
+    p.idle = 0; // drawing is a real move, so it counts as activity
+    return doDraw(st, p, api);
+  }
   if (a.type === 'pass') {
     if (st.drawn === null) return; // you can only pass after drawing
     p.idle = 0;
@@ -148,7 +151,11 @@ function play(st, p, a, api) {
   st.color = color;
   p.idle = 0;
   st.last = { by: p.id, card };
-  if (p.hand.length === 0) return finish(st, api, p);
+  if (p.hand.length === 0) {
+    // Going out on +2 / +4 still makes the next player draw, so those cards count in the score.
+    if (card.v === 'D' || card.v === 'P') drawCards(st, st.players[step(st, st.turn, 1)], card.v === 'D' ? 2 : 4);
+    return finish(st, api, p);
+  }
   if (p.hand.length === 1) api.sys(`${p.name} has one card left!`, 'accent');
   const players = activeP(st);
   let skip = 0;

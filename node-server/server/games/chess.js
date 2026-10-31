@@ -111,6 +111,8 @@ function onAction(st, m, a, api) {
     return finish(st, api, null, 'agreement');
   }
   if (a.type !== 'move' || me !== turn) return;
+  // A move that arrives after the flag fell (before the next tick) loses on time instead.
+  if (st.deadline && api.now() >= st.deadline) return tick(st, api, api.now());
   const { from, to } = a;
   if (!Number.isInteger(from) || !Number.isInteger(to) || from < 0 || from > 63 || to < 0 || to > 63) return;
   const promo = a.promo === undefined ? undefined : a.promo;

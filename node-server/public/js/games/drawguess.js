@@ -46,8 +46,28 @@ GameUI.drawguess = (() => {
 
   let tool = "brush";
   let color = "#000000";
-  // Brush and eraser remember their own sizes; fill has no size.
+  // Brush and eraser remember their own sizes, across turns and page reloads; fill has no size.
+  const SIZE_KEY = "pg_dg_sizes";
+  const SIZE_MIN = 4;
+  const SIZE_MAX = 38;
   const sizes = { brush: 10, eraser: 10 };
+  try {
+    const saved = JSON.parse(localStorage.getItem(SIZE_KEY) || "{}");
+    for (const k of ["brush", "eraser"]) {
+      const v = Number(saved && saved[k]);
+      if (Number.isFinite(v)) sizes[k] = Math.max(SIZE_MIN, Math.min(SIZE_MAX, Math.round(v)));
+    }
+  } catch (e) {
+    /* storage unavailable or corrupt: keep the defaults */
+  }
+  function setSize(v) {
+    sizes[sizeTool()] = Math.max(SIZE_MIN, Math.min(SIZE_MAX, Number(v) || 10));
+    try {
+      localStorage.setItem(SIZE_KEY, JSON.stringify(sizes));
+    } catch (e) {
+      /* private mode: the size still applies for this session */
+    }
+  }
   const sizeTool = () => (tool === "eraser" ? "eraser" : "brush");
   const curSize = () => sizes[sizeTool()];
   let remote = null;
@@ -86,18 +106,28 @@ GameUI.drawguess = (() => {
       ctx.putImageData(img, 0, 0);
   }
 
+  // Consecutive fills share one read/write of the pixels, so undo and late joins stay quick
+  // even when a turn has many fills.
   function replay(history) {
     blank();
+    let img = null;
+    const commit = () => {
+      if (img) ctx.putImageData(img, 0, 0);
+      img = null;
+    };
     for (const h of history) {
       if (h.t === "s") {
+        commit();
         const p = h.p;
         dot(p[0], p[1], h.c, h.s);
         for (let i = 2; i < p.length; i += 2)
           seg(p[i - 2], p[i - 1], p[i], p[i + 1], h.c, h.s);
       } else if (h.t === "f") {
-        flood(h.x, h.y, h.c);
+        if (!img) img = ctx.getImageData(0, 0, W, H);
+        GameUI.fill.floodFill(img.data, W, H, h.x, h.y, h.c);
       }
     }
+    commit();
   }
 
   // ---------- network in ----------
@@ -185,7 +215,7 @@ GameUI.drawguess = (() => {
       <button class="tool ${tool === "brush" ? "on" : ""}" data-tool="brush" title="Brush" aria-label="Brush" aria-pressed="${tool === "brush"}">${icon("brush")}</button>
       <button class="tool ${tool === "eraser" ? "on" : ""}" data-tool="eraser" title="Eraser" aria-label="Eraser" aria-pressed="${tool === "eraser"}">${icon("eraser")}</button>
       <button class="tool ${tool === "fill" ? "on" : ""}" data-tool="fill" title="Paint bucket" aria-label="Paint bucket" aria-pressed="${tool === "fill"}">${icon("fill")}</button>
-      </div><label class="tool-field">${tool === "eraser" ? "Eraser size" : "Brush size"}<input id="brush-size" type="range" min="4" max="38" step="2" value="${curSize()}" aria-label="${tool === "eraser" ? "Eraser size" : "Brush size"}"></label>
+      </div><label class="tool-field">${tool === "eraser" ? "Eraser size" : "Brush size"}<input id="brush-size" type="range" min="${SIZE_MIN}" max="${SIZE_MAX}" step="2" value="${curSize()}" aria-label="${tool === "eraser" ? "Eraser size" : "Brush size"}"></label>
       <div class="tool-field"><span>Color</span><div class="dg-palette">${PALETTE.map((c) => `<button class="swatch ${c === color ? "on" : ""}" style="--sw:${c}" data-color="${c}" title="${c}" aria-label="Color ${c}" aria-pressed="${c === color}"></button>`).join("")}</div></div>
       <div class="dg-actions"><button class="tool" data-do="undo" title="Undo" aria-label="Undo last stroke">${icon("undo")}</button><button class="tool" data-do="clear" title="Clear" aria-label="Clear drawing">${icon("trash")}</button></div><span class="tool-caption">Only the drawer can draw</span>`;
   }
@@ -208,7 +238,7 @@ GameUI.drawguess = (() => {
     stage.appendChild(root);
     root.addEventListener("click", onClick);
     root.addEventListener("input", (e) => {
-      if (e.target.id === "brush-size") sizes[sizeTool()] = Number(e.target.value);
+      if (e.target.id === "brush-size") setSize(e.target.value);
     });
     $("#dg-expand").addEventListener("click", () => setBig(!big));
     $("#dg-chat-toggle").addEventListener("click", () => setChat(!chatOpen));
@@ -314,7 +344,7 @@ GameUI.drawguess = (() => {
       color = c.dataset.color;
       if (tool === "eraser") tool = "brush";
     }
-    if (s) sizes[sizeTool()] = Number(s.dataset.size);
+    if (s) setSize(s.dataset.size);
     if (t) tool = t.dataset.tool;
     if (d && canDraw()) {
       if (d.dataset.do === "clear" && !confirm("Clear the whole drawing?"))

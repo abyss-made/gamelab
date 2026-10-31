@@ -206,7 +206,10 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       await page.click('#dg-expand');
       await sleep(250);
       const after = await box();
-      ok(after.w * after.h > before.w * before.h * (mobile && vp.w > vp.h ? 0.8 : 1.15), `${tag}: expanded canvas ${before.w}x${before.h} -> ${after.w}x${after.h}`);
+      // Portrait phones: since #40 the normal canvas is already phone-wide, so focus mode only has to keep
+      // it at least that large and edge to edge. Elsewhere it must grow as before.
+      const portraitPhone = mobile && vp.w < vp.h;
+      ok(portraitPhone ? before.w >= vp.w * 0.9 && after.w * after.h >= before.w * before.h * 0.99 && after.w >= vp.w * 0.95 : after.w * after.h > before.w * before.h * (mobile && vp.w > vp.h ? 0.8 : 1.15), `${tag}: expanded canvas ${before.w}x${before.h} -> ${after.w}x${after.h}`);
       ok(Math.abs(after.w / after.h - 4 / 3) < 0.02, `${tag}: expanded canvas keeps 4:3`);
       ok(after.x >= -1 && after.y >= -1 && after.x + after.w <= vp.w + 1 && after.y + after.h <= vp.h + 1, `${tag}: expanded canvas fully on screen`);
       ok(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `${tag}: no horizontal overflow while expanded`);
