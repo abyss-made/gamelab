@@ -31,6 +31,8 @@ GameUI.ludo = (() => {
   let S = null;
   let clock = null;
   let lastRolls = -1;
+  let animateMove = false;
+  let lastMoveKey = null; // identity of the last confirmed move event; null until the first state is seen
 
   const pos = (colour, tokenIdx, prog) => {
     if (prog === -1) return YARD[colour][tokenIdx];
@@ -72,7 +74,7 @@ GameUI.ludo = (() => {
           .map(({ p, ti, prog }) => {
             const can = p.id === S.you && g.movable.includes(ti);
             const label = `${p.colourName} token ${ti + 1}${prog === -1 ? " in the yard" : prog === 56 ? " home" : ""}${can ? ", can move" : ""}`;
-            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}" ${can ? `data-token="${ti}"` : "disabled"} aria-label="${label}">${ti + 1}</button>`;
+            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${animateMove && g.lastEvent && g.lastEvent.kind === "move" && g.lastEvent.by === p.id && g.lastEvent.token === ti ? " moved" : ""}" ${can ? `data-token="${ti}"` : "disabled"} aria-label="${label}">${ti + 1}</button>`;
           })
           .join("");
         const ev = g.lastEvent;
@@ -133,15 +135,21 @@ GameUI.ludo = (() => {
     else text = `Waiting for <b>${tName}</b>...`;
     root.querySelector("#ld2-status").innerHTML = text + (describe(g) ? `<div class="muted">${describe(g)}</div>` : "");
     const die = root.querySelector("#ld2-die");
-    die.textContent = g.dice ? PIPS[g.dice] : "🎲︎";
+    die.innerHTML = g.dice ? `<span class="sr-only">${g.dice}</span>` + GameUI.art.dieFace(g.dice) : '<span class="ld2-die-idle">?</span>';
+    die.dataset.value = g.dice || "";
     die.setAttribute("aria-label", g.dice ? "Dice shows " + g.dice : "Dice");
     die.classList.toggle("roll", g.rolls !== lastRolls && lastRolls >= 0);
     const ctl = root.querySelector("#ld2-ctl");
     if (mine && g.phase === "roll") ctl.innerHTML = '<button type="button" class="btn ld2-roll" data-roll="1">Roll dice</button>';
     else if (mine && g.phase === "move") {
       const me = g.players[g.myIndex];
-      ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
+      ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1} · ${g.dice} step${g.dice === 1 ? "" : "s"}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
     } else ctl.innerHTML = "";
+    const ev = g.lastEvent;
+    const moveKey = ev && ev.kind === "move" ? `${ev.by}:${ev.token}:${ev.from}:${ev.to}` : "";
+    // Animate only when a new confirmed move arrives, never on a later roll that keeps the old event.
+    animateMove = lastMoveKey !== null && moveKey !== "" && moveKey !== lastMoveKey;
+    lastMoveKey = moveKey;
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");
     if (mine && g.phase === "roll" && lastRolls >= 0) Sound.play("yourturn");
@@ -153,6 +161,8 @@ GameUI.ludo = (() => {
     if (root) root.remove();
     root = null;
     lastRolls = -1;
+    lastMoveKey = null;
+    animateMove = false;
   }
 
   function renderResult(r, state, a) {

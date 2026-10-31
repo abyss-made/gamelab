@@ -119,8 +119,9 @@ async function createRoom(page, game) {
             ok(await page.isDisabled('[data-move="paper"]'), `${t}: throw buttons lock after picking`);
             ok(!JSON.stringify(f.state.game).includes('"rock"'), `${t}: opponent state has no pending pick`);
             f.s.emit('action', { type: 'pick', move: 'scissors' });
-            await page.waitForFunction(() => document.querySelector('#rps-duel')?.textContent.includes('✌'), null, { timeout: 5000 });
+            await page.waitForFunction(() => !!document.querySelector('#rps-duel [data-throw="scissors"]'), null, { timeout: 5000 });
             ok(true, `${t}: both hands are revealed after both pick`);
+            ok(/Rock/.test(await page.textContent('#rps-duel')) && /Scissors/.test(await page.textContent('#rps-duel')), `${t}: revealed throws have accessible names`);
             ok((await page.textContent('#rps-bracket')).includes('HostUser'), `${t}: bracket lists players`);
           }
           if (game === 'dotsboxes') {

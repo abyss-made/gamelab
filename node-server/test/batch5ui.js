@@ -273,6 +273,8 @@ const GAMES = ['pool', 'golf', 'tycoon'];
               } else await page.click('[data-act="decline"]');
             } else if (g.phase === 'manage') {
               // try a trade from the UI: give $10 to Friend1
+              // Phone layout (3.1): trades live in the Properties & trades view.
+              if (await page.isVisible('[data-tyview="props"]')) await page.click('[data-tyview="props"]');
               await page.click('[data-trade-toggle]');
               ok(await page.isVisible('#tf-to'), `${t}: the trade form opens`);
               await page.fill('#tf-give', '10');

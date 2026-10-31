@@ -212,12 +212,12 @@ GameUI.drawguess = (() => {
   // ---------- screen ----------
   function toolsHTML() {
     return `<span class="tools-title">Tools</span><div class="tool-picks">
-      <button class="tool ${tool === "brush" ? "on" : ""}" data-tool="brush" title="Brush" aria-label="Brush" aria-pressed="${tool === "brush"}">${icon("brush")}</button>
-      <button class="tool ${tool === "eraser" ? "on" : ""}" data-tool="eraser" title="Eraser" aria-label="Eraser" aria-pressed="${tool === "eraser"}">${icon("eraser")}</button>
-      <button class="tool ${tool === "fill" ? "on" : ""}" data-tool="fill" title="Paint bucket" aria-label="Paint bucket" aria-pressed="${tool === "fill"}">${icon("fill")}</button>
-      </div><label class="tool-field">${tool === "eraser" ? "Eraser size" : "Brush size"}<input id="brush-size" type="range" min="${SIZE_MIN}" max="${SIZE_MAX}" step="2" value="${curSize()}" aria-label="${tool === "eraser" ? "Eraser size" : "Brush size"}"></label>
+      <button class="tool ${tool === "brush" ? "on" : ""}" data-tool="brush" title="Brush" aria-label="Brush" aria-pressed="${tool === "brush"}">${icon("brush")}<span class="tool-label">Brush</span></button>
+      <button class="tool ${tool === "eraser" ? "on" : ""}" data-tool="eraser" title="Eraser" aria-label="Eraser" aria-pressed="${tool === "eraser"}">${icon("eraser")}<span class="tool-label">Eraser</span></button>
+      <button class="tool ${tool === "fill" ? "on" : ""}" data-tool="fill" title="Paint bucket" aria-label="Paint bucket" aria-pressed="${tool === "fill"}">${icon("fill")}<span class="tool-label">Fill</span></button>
+      </div><label class="tool-field"><span class="size-line">${tool === "eraser" ? "Eraser" : "Brush"} size <output id="brush-size-val">${curSize()}</output></span><input id="brush-size" type="range" min="${SIZE_MIN}" max="${SIZE_MAX}" step="2" value="${curSize()}" aria-label="${tool === "eraser" ? "Eraser size" : "Brush size"}"></label>
       <div class="tool-field"><span>Color</span><div class="dg-palette">${PALETTE.map((c) => `<button class="swatch ${c === color ? "on" : ""}" style="--sw:${c}" data-color="${c}" title="${c}" aria-label="Color ${c}" aria-pressed="${c === color}"></button>`).join("")}</div></div>
-      <div class="dg-actions"><button class="tool" data-do="undo" title="Undo" aria-label="Undo last stroke">${icon("undo")}</button><button class="tool" data-do="clear" title="Clear" aria-label="Clear drawing">${icon("trash")}</button></div><span class="tool-caption">Only the drawer can draw</span>`;
+      <div class="dg-actions"><button class="tool" data-do="undo" title="Undo" aria-label="Undo last stroke">${icon("undo")}<span class="tool-label">Undo</span></button><button class="tool" data-do="clear" title="Clear" aria-label="Clear drawing">${icon("trash")}<span class="tool-label">Clear</span></button></div><span class="tool-caption">Only the drawer can draw</span>`;
   }
   function mount(stage, a) {
     app = a;
@@ -238,7 +238,11 @@ GameUI.drawguess = (() => {
     stage.appendChild(root);
     root.addEventListener("click", onClick);
     root.addEventListener("input", (e) => {
-      if (e.target.id === "brush-size") setSize(e.target.value);
+      if (e.target.id === "brush-size") {
+        setSize(e.target.value);
+        const o = $("#brush-size-val");
+        if (o) o.textContent = String(curSize());
+      }
     });
     $("#dg-expand").addEventListener("click", () => setBig(!big));
     $("#dg-chat-toggle").addEventListener("click", () => setChat(!chatOpen));

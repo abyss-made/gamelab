@@ -8,10 +8,11 @@ GameUI.checkers = (() => {
   let clock = null;
   let sel = -1;
   let lastMoves = -1;
+  let animatedMoves = -1;
 
   const name = (c) => "abcdefgh"[c & 7] + ((c >> 3) + 1);
 
-  function boardHTML(g, { flip = false, playable = false, selected = -1, label = "Checkers board" } = {}) {
+  function boardHTML(g, { flip = false, playable = false, selected = -1, label = "Checkers board", animate = false } = {}) {
     const legal = g.legal || {};
     const targets = new Set(selected >= 0 && legal[selected] ? legal[selected] : []);
     let html = `<div class="ck-board" role="group" aria-label="${label}">`;
@@ -25,7 +26,8 @@ GameUI.checkers = (() => {
         const movable = playable && legal[i];
         const isT = targets.has(i);
         const cls = ["ck-sq", dark ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? "target" : ""].join(" ");
-        const piece = p ? `<span class="ck-piece o${(p - 1) & 1} ${p >= 3 ? "king" : ""} ${movable ? "can" : ""}">${p >= 3 ? "♛︎" : ""}</span>` : isT ? '<span class="ck-dot"></span>' : "";
+        const slid = animate && p && g.last && g.last.to === i && g.last.from !== undefined;
+        const piece = p ? `<span class="ck-piece o${(p - 1) & 1} ${p >= 3 ? "king" : ""} ${movable ? "can" : ""}${slid ? " slid" : ""}"${slid ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${p >= 3 ? GameUI.art.crown() : ""}</span>` : isT ? '<span class="ck-dot"></span>' : "";
         const who = p ? `${(p - 1) & 1 ? "White" : "Lime"} ${p >= 3 ? "king" : "man"}` : "empty";
         html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${dark && playable && (movable || isT) ? "" : "disabled"}>${piece}</button>`;
       }
@@ -78,7 +80,8 @@ GameUI.checkers = (() => {
   function paint() {
     const g = S.game;
     const myTurn = g.myIndex === g.turn;
-    root.querySelector("#ck-board").innerHTML = boardHTML(g, { flip: g.myIndex === 1, playable: myTurn, selected: sel });
+    root.querySelector("#ck-board").innerHTML = boardHTML(g, { flip: g.myIndex === 1, playable: myTurn, selected: sel, animate: g.moves !== animatedMoves });
+    animatedMoves = g.moves;
   }
 
   function update(state) {
@@ -108,6 +111,7 @@ GameUI.checkers = (() => {
     root = null;
     sel = -1;
     lastMoves = -1;
+    animatedMoves = -1;
   }
 
   function renderResult(r, state, a) {

@@ -14,10 +14,11 @@ GameUI.chess = (() => {
   let stamp = 0;
   let tickTimer = null;
   let lastCount = -1;
+  let animatedCount = -1;
 
   const name = (s) => "abcdefgh"[s & 7] + ((s >> 3) + 1);
 
-  function boardHTML(g, { flip = false, playable = false, selected = -1, label = "Chess board" } = {}) {
+  function boardHTML(g, { flip = false, playable = false, selected = -1, label = "Chess board", animate = false } = {}) {
     const legal = g.legal || {};
     const targets = new Set(selected >= 0 && legal[selected] ? legal[selected] : []);
     let html = `<div class="ch-board" role="group" aria-label="${label}">`;
@@ -32,7 +33,7 @@ GameUI.chess = (() => {
         const cls = ["ch-sq", (r + f) % 2 === 0 ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? (p ? "cap" : "target") : "", g.check === i ? "check" : ""].join(" ");
         const who = p ? `${p[0] === "w" ? "White" : "Black"} ${WORD[p[1]]}` : "empty";
         const coord = (col === 0 ? `<i class="rk">${r + 1}</i>` : "") + (row === 7 ? `<i class="fl">${"abcdefgh"[f]}</i>` : "");
-        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}">${GLYPH[p[1]]}︎</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
+        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}${animate && g.last && g.last.to === i && g.last.from !== undefined ? " slid" : ""}"${animate && g.last && g.last.to === i && g.last.from !== undefined ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${GameUI.art.chessPiece(p[1])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
       }
     }
     return html + "</div>";
@@ -116,12 +117,13 @@ GameUI.chess = (() => {
   function showPromo(colour) {
     const el = root.querySelector("#ch-promo");
     el.hidden = false;
-    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GLYPH[t]}︎</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.art.chessPiece(t)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
   }
 
   function paint() {
     const g = S.game;
-    root.querySelector("#ch-board").innerHTML = boardHTML(g, { flip: g.myIndex === 1, playable: g.myIndex === g.turn, selected: sel });
+    root.querySelector("#ch-board").innerHTML = boardHTML(g, { flip: g.myIndex === 1, playable: g.myIndex === g.turn, selected: sel, animate: g.moves.length !== animatedCount });
+    animatedCount = g.moves.length;
   }
 
   function drawClocks() {
@@ -154,7 +156,7 @@ GameUI.chess = (() => {
       .join("");
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ch-status");
-    const chk = g.check >= 0 ? " <b>Check!</b>" : "";
+    const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">⚠ Check!</b>' : "";
     st.innerHTML = (g.myIndex < 0 ? `You're watching. <b>${turnName}</b> is up.` : myTurn ? "<b>Your turn!</b> Tap a piece, then a square." : `Waiting for <b>${turnName}</b>...`) + chk;
     st.className = "ttt-status" + (myTurn ? " mine" : "");
     paint();
@@ -179,6 +181,7 @@ GameUI.chess = (() => {
     sel = -1;
     pendingPromo = null;
     lastCount = -1;
+    animatedCount = -1;
   }
 
   function renderResult(r, state, a) {

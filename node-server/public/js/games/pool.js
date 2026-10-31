@@ -171,17 +171,17 @@ GameUI.pool = (() => {
     ctx.setTransform(k, 0, 0, k, 0, 0);
     ctx.clearRect(0, 0, w, h);
     // rail
-    ctx.fillStyle = "#5b3a1e";
+    ctx.fillStyle = "#1d1814";
     ctx.beginPath();
     ctx.roundRect ? ctx.roundRect(0, 0, w, h, 26) : ctx.rect(0, 0, w, h);
     ctx.fill();
-    ctx.strokeStyle = "#8a5a2c";
+    ctx.strokeStyle = "#3b2d22";
     ctx.lineWidth = 3;
     ctx.stroke();
     ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#1f8a4c";
+    ctx.fillStyle = "#0a4848";
     ctx.fillRect(0, 0, t.w, t.h);
-    ctx.strokeStyle = "#0f4f2b";
+    ctx.strokeStyle = "#175b58";
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, t.w, t.h);
     if (g.breakShot || (g.inHand && placing)) {
@@ -382,7 +382,7 @@ GameUI.pool = (() => {
     const turnName = app.esc(g.players[g.turn].name);
     const busy = performance.now() < busyUntil;
     let msg;
-    if (busy && g.last) msg = "Balls are rolling...";
+    if (busy && g.last) msg = "Shot in motion…";
     else if (me < 0) msg = `You're watching. <b>${turnName}</b> is up${g.inHand ? " with ball in hand" : ""}.`;
     else if (me === g.turn) msg = g.inHand ? (placing ? `<b>Ball in hand!</b> Drag the cue ball${g.breakShot ? " behind the line" : ""}, then tap Lock cue ball.` : "<b>Your shot!</b> Drag on the table to aim, set power, then Shoot.") : "<b>Your shot!</b> Drag on the table to aim, set power, then Shoot.";
     else msg = `Waiting for <b>${turnName}</b>...`;

@@ -2,7 +2,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.rps = (() => {
   const C = GameUI.common;
-  const ICON = { rock: "✊", paper: "✋", scissors: "✌️" };
+  const shown = (m) => ICON[m] + `<span class="sr-only">${LABEL[m]}</span>`;
+  const ICON = { rock: GameUI.art.throwIcon("rock"), paper: GameUI.art.throwIcon("paper"), scissors: GameUI.art.throwIcon("scissors") };
   const LABEL = { rock: "Rock", paper: "Paper", scissors: "Scissors" };
   let root = null;
   let app = null;
@@ -72,9 +73,9 @@ GameUI.rps = (() => {
       const rev = revealed ? g.reveal.results.find((x) => x.a === mine.a && x.b === mine.b) : null;
       const myMove = rev ? (meA ? rev.pickA : rev.pickB) : g.myPick;
       const oppMove = rev ? (meA ? rev.pickB : rev.pickA) : null;
-      duel.innerHTML = `<div class="rps-side"><b>${app.esc(nameOf(S.you))}</b><span class="rps-hand">${myMove ? ICON[myMove] : "❔"}</span><i>${meA ? mine.winsA : mine.winsB}</i></div>
+      duel.innerHTML = `<div class="rps-side"><b>${app.esc(nameOf(S.you))}</b><span class="rps-hand">${myMove ? shown(myMove) : '<span class="rps-unknown" aria-label="No throw yet">?</span>'}</span><i>${meA ? mine.winsA : mine.winsB}</i></div>
         <div class="hl-arrow" aria-hidden="true">vs</div>
-        <div class="rps-side"><b>${app.esc(nameOf(opp))}</b><span class="rps-hand">${rev ? (oppMove ? ICON[oppMove] : "💤") : g.locked.includes(opp) ? "✔" : "❔"}</span><i>${meA ? mine.winsB : mine.winsA}</i></div>`;
+        <div class="rps-side"><b>${app.esc(nameOf(opp))}</b><span class="rps-hand">${rev ? (oppMove ? shown(oppMove) : '<span class="rps-unknown">No throw</span>') : g.locked.includes(opp) ? '<span class="rps-locked">Locked ✓</span>' : '<span class="rps-unknown" aria-label="Hidden until reveal">?</span>'}</span><i>${meA ? mine.winsB : mine.winsA}</i></div>`;
       if (rev) {
         const o = rev.out;
         status = o === "tie" ? "Tie! Throw again." : o === "void" ? "Nobody picked. Throw again." : (o === "a") === meA ? "You win the throw!" : "You lose the throw.";
