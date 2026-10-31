@@ -132,6 +132,10 @@ async function start(browser, vp, game) {
             ok((await sect()) === 'none', `${T}: map view hides the property sheets`);
             await page.click('[data-tyview="props"]');
             ok((await sect()) !== 'none' && !(await page.isVisible('.ty-board')), `${T}: properties view shows sheets instead of the map`);
+            if (await page.$('.ty-link')) {
+              await page.click('.ty-link');
+              ok(await page.isVisible('#ty-info .ty-info'), `${T}: property details show in the properties view`);
+            }
           } else ok(vis === 'none', `${T}: switch hidden on desktop`);
         }
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, `${g}-${vp.t}.png`) });

@@ -341,11 +341,11 @@
 @media (max-width: 640px) {
   .ty-views { display: flex; }
   .ty[data-view="map"] .ty-sect { display: none; }
-  .ty[data-view="props"] #ty-boardwrap, .ty[data-view="props"] #ty-info { display: none; }
+  .ty[data-view="props"] #ty-boardwrap { display: none; }
 }
 
 /* ---------- Battleship: ship silhouettes read as hulls; aim crosshair, then explicit Fire ---------- */
-.bs-cell.ship { background: linear-gradient(#9db4c6, #6f8aa0); box-shadow: inset 0 0 0 1px #345; border-radius: 6px; }
+.bs-cell.ship:not(.hit):not(.sunk) { background: linear-gradient(#9db4c6, #6f8aa0); box-shadow: inset 0 0 0 1px #345; border-radius: 6px; }
 .bs-cell.aim::before { content: "+"; position: absolute; inset: 0; display: grid; place-items: center; color: #adff00; font-weight: 900; font-size: 18px; }
 .bs-cell { position: relative; }
 .bs-cell:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; z-index: 2; }
