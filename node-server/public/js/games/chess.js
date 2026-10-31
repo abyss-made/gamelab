@@ -32,7 +32,7 @@ GameUI.chess = (() => {
         const cls = ["ch-sq", (r + f) % 2 === 0 ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? (p ? "cap" : "target") : "", g.check === i ? "check" : ""].join(" ");
         const who = p ? `${p[0] === "w" ? "White" : "Black"} ${WORD[p[1]]}` : "empty";
         const coord = (col === 0 ? `<i class="rk">${r + 1}</i>` : "") + (row === 7 ? `<i class="fl">${"abcdefgh"[f]}</i>` : "");
-        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}">${GLYPH[p[1]]}︎</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
+        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}">${GameUI.art.chessPiece(p[1])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
       }
     }
     return html + "</div>";
@@ -116,7 +116,7 @@ GameUI.chess = (() => {
   function showPromo(colour) {
     const el = root.querySelector("#ch-promo");
     el.hidden = false;
-    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GLYPH[t]}︎</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.art.chessPiece(t)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
   }
 
   function paint() {
