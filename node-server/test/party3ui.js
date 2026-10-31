@@ -260,6 +260,51 @@ const screen = (page) => page.evaluate(() => document.body.dataset.screen);
       for (const f of [nova, kai, robin]) f.s.emit('leaveRoom');
       await ctx.close();
     }
+    // ----- a participant's Back to Lobby never hides the next match's results -----
+    {
+      const host = fake('Hostie');
+      fakes.push(host);
+      const r = await host.call('createRoom', { game: 'tictactoe', token: host.token, profile: host.profile });
+      const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+      const page = await ctx.newPage();
+      const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message));
+      await page.goto(URL + '/r/' + r.code);
+      await page.click('#join-btn');
+      await page.waitForFunction(() => window.App && App.S && App.S.role === 'player');
+      const me = await page.evaluate(() => App.S.you);
+      // The same moves give the same winner and an identical result, so the two results share a key.
+      const playOut = async () => {
+        host.s.emit('startGame');
+        await until(() => host.state.phase === 'game' && host.state.game);
+        const xs = host.state.game.players[0].id;
+        const mover = (id) => (id === me ? (c) => page.evaluate((cell) => App.socket.emit('action', { type: 'place', cell }), c) : (c) => host.s.emit('action', { type: 'place', cell: c }));
+        const X = mover(xs);
+        const O = mover(xs === me ? host.state.you : me);
+        for (const [f, c] of [[X, 0], [O, 3], [X, 1], [O, 4], [X, 2]]) {
+          const before = host.state.game ? host.state.game.moves : -1;
+          await f(c);
+          await until(() => host.state.phase !== 'game' || host.state.game.moves !== before);
+        }
+        await until(() => host.state.phase === 'lobby' && host.state.lastResult);
+      };
+      await playOut();
+      await page.waitForSelector('.result-card');
+      await page.click('#result-dismiss');
+      ok(!(await page.$('.result-card')), 'participant Back to Lobby hides the results for them');
+      // Replay through the app's own state handler: results cleared, then a result with the very
+      // same key (same length, winner and type). It must show at once, without another update.
+      const shown = await page.evaluate(() => {
+        const handler = App.socket.listeners('state')[0];
+        const res = App.S;
+        handler({ ...res, lastResult: null });
+        handler({ ...res, lastResult: JSON.parse(JSON.stringify(res.lastResult)) });
+        return !!document.querySelector('.result-card');
+      });
+      ok(shown, 'results with the same key show again at once after an earlier dismissal');
+      ok(errors.length === 0, `dismissal check: no page errors${errors.length ? ': ' + errors.join(' | ') : ''}`);
+      await ctx.close();
+    }
   } catch (err) {
     console.error(err);
     failures++;

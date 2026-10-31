@@ -1445,6 +1445,20 @@
 
   function renderRoom() {
     if (!S) return;
+    // A participant's "Back to Lobby" only hides the results it was pressed on. Any match
+    // starting, or any new results, shows results again. Settle that before choosing the layout.
+    if (S.phase === "game") dismissedResult = null;
+    if (S.lastResult) {
+      const key = resultKey(S.lastResult);
+      if (key !== lastResultKey) {
+        lastResultKey = key;
+        dismissedResult = null;
+        const snd = GameUI[S.lastResult.type].resultSound(S.lastResult, S);
+        if (snd) Sound.play(snd);
+      }
+    } else {
+      lastResultKey = null;
+    }
     const G = gameOfS();
     const phase =
       S.phase === "game" ? "game" : showingResult() ? "results" : "lobby";
@@ -1496,17 +1510,6 @@
     if ($("#activity-sheet")) patch($("#activity-sheet"), activityHTML("sheet"));
     if (document.body.dataset.screen === "rooms") renderCurrentParty();
 
-    if (S.lastResult) {
-      const key = resultKey(S.lastResult);
-      if (key !== lastResultKey) {
-        lastResultKey = key;
-        dismissedResult = null;
-        const snd = GameUI[S.lastResult.type].resultSound(S.lastResult, S);
-        if (snd) Sound.play(snd);
-      }
-    } else {
-      lastResultKey = null;
-    }
   }
 
   // ----- party header: identity, invite code, settings or leave -----
