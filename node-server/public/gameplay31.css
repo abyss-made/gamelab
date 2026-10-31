@@ -188,3 +188,167 @@
   .board-actions .btn, .ch-promo-btn, .cs-pick, .cs-deck { min-height: 44px; }
 }
 .pg31-low { color: var(--pg-warn); }
+
+/* ---------- Draw & Guess: paper and ink ---------- */
+.dg-board { border: 1px solid #cfd8df; box-shadow: 0 18px 50px #0004; border-radius: 12px; }
+.dg-wrap { border-radius: 8px; outline: 1px solid #cfd8df; }
+.dg-tools { background: #081723; border-color: #2a4455; }
+.dg-tools .tool { width: auto; min-width: 44px; min-height: 44px; height: auto; padding: 6px 8px; grid-auto-flow: row; gap: 2px; background: #102633; border: 1px solid #344f61; border-radius: 9px; font-size: 11px; font-weight: 650; }
+.dg-tools .tool .tool-label { font-size: 11px; line-height: 1.1; }
+.dg-tools .tool.on { background: #adff0014; border-color: #adff00; color: #d6ff8b; box-shadow: inset 0 0 0 1px #adff00; }
+.dg-tools .tool:focus-visible, .dg-tools .swatch:focus-visible, .dg-tools input:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 3px; }
+.dg-tools .swatch { border: 2px solid #ffffff55; }
+.dg-tools .swatch.on { outline: 3px solid #d6ff8b; outline-offset: 2px; }
+.dg-tools .tool-field { color: #b7cbd9; font-size: 12px; }
+.size-line { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.size-line output { font-variant-numeric: tabular-nums; color: #edf5fa; font-weight: 700; }
+.dg-tools .dg-actions { gap: 6px; }
+.dg-tools .dg-actions .tool { flex: 1; }
+.dg-tools .tool-caption { color: #a7bdcd; font-size: 12px; }
+.dg-top .dg-word .dg-answer { color: #d6ff8b; }
+.dg-top.card { border-radius: 14px; }
+.dg.hurry .dg-timer #dg-time { color: var(--pg-warn); }
+.dg-overlay .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.dg-overlay .choices .btn { min-height: 44px; }
+.dg-overlay .ov-box h3 { letter-spacing: -.02em; }
+.dg-overlay .turn-scores b.plus { color: #86d6b3; }
+@media (max-width: 640px) {
+  .dg-tools .tool-picks { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
+  .dg-tools .dg-actions .tool { min-width: 44px; }
+}
+.dg-tools .tool-picks .tool { padding: 6px 2px; }
+.dg-tools .tool .tool-label { font-size: 10.5px; }
+
+/* ---------- Confirmed-move motion (server state first, then 180ms slide; snaps under reduced motion) ---------- */
+@keyframes pgslide { from { transform: translate(calc(var(--dx, 0) * 122%), calc(var(--dy, 0) * 122%)); } to { transform: none; } }
+.ch-piece.slid, .ck-piece.slid { animation: pgslide var(--pg-std) var(--pg-ease); position: relative; z-index: 2; }
+@keyframes pgfall { 0% { transform: translateY(calc(var(--fall, 1) * -110%)); } 73% { transform: translateY(0); } 87% { transform: translateY(-3%); } 100% { transform: none; } }
+.disc.new { animation: pgfall 300ms var(--pg-ease); }
+.ch-check-banner { display: inline-block; margin-left: 8px; padding: 2px 10px; border: 1px solid #ff947d; border-radius: 999px; color: #ff947d; background: #ff947d1a; }
+@media (prefers-reduced-motion: reduce) {
+  .ch-piece.slid, .ck-piece.slid, .disc.new { animation: none !important; }
+}
+
+/* ---------- Pool / Mini Golf: one action rail (Aim | Power | Shoot) ---------- */
+.pl-controls, .gf-controls { padding: 14px 16px; border-radius: 14px; }
+.pl-slider span b { color: #edf5fa; font-variant-numeric: tabular-nums; }
+.pl-controls .board-actions .btn, .gf-controls .board-actions .btn { min-height: 44px; }
+@media (min-width: 820px) {
+  .pl-controls, .gf-controls { grid-template-columns: 1fr 1fr auto; align-items: end; gap: 20px; }
+  .pl-controls .board-actions, .gf-controls .board-actions { margin: 0; flex-wrap: nowrap; }
+}
+.pl-canvas, .gf-canvas { box-shadow: 0 18px 50px #0004; border: 2px solid #1d1814; }
+.gf-canvas { border-color: #2a5a3a; }
+.pl-help { color: #a7bdcd; }
+.warn-text { color: var(--pg-warn); }
+
+/* ---------- Ludo: confirmed token step (<=650ms total; never delays the server) ---------- */
+@keyframes pgstep { 0% { transform: scale(1.35) translateY(-30%); } 60% { transform: scale(.94); } 100% { transform: none; } }
+.ld2-tok.moved { animation: pgstep 280ms var(--pg-ease) !important; }
+.ld2-cell.star::after, .ld2-cell.track.safe::before { pointer-events: none; }
+.ld2-cell.track.safe { box-shadow: inset 0 0 0 2px #7a6a3c55; }
+@media (prefers-reduced-motion: reduce) { .ld2-tok.moved { animation: none !important; } }
+
+/* ---------- Rock Paper Scissors: original vector throws, equal-width duel ---------- */
+.rps-svg { width: 1.6em; height: 1.6em; fill: #f8f0de; stroke: #20384d; stroke-width: 2; stroke-linejoin: round; vertical-align: -.35em; }
+.rps-svg .ln { fill: none; stroke: #20384d; stroke-width: 2; stroke-linecap: round; }
+.rps-svg .ring { fill: none; stroke: #20384d; stroke-width: 3; }
+.rps-btn .rps-svg { width: 28px; height: 28px; margin-right: 6px; }
+.rps-hand { display: grid; place-items: center; min-height: 72px; }
+.rps-hand .rps-svg { width: 64px; height: 64px; fill: #edf5fa; stroke: #7fa4b8; filter: drop-shadow(0 3px 6px #0005); }
+.rps-hand .rps-svg .ln, .rps-hand .rps-svg .ring { stroke: #7fa4b8; }
+.rps-unknown { font-size: 40px; font-weight: 800; color: #a7bdcd; }
+.rps-unknown:not([aria-label]) { font-size: 14px; }
+.rps-locked { font-size: 14px; font-weight: 700; color: #86d6b3; }
+.rps-side { min-width: 0; flex: 1 1 0; }
+.rps-side b { overflow-wrap: anywhere; }
+
+/* ---------- Go Fish: ocean tray, cream cards ---------- */
+.gf-table { background: linear-gradient(160deg, #0b3550, #082638); border-color: #2a5878; }
+.gf-hand { overflow-x: auto; overscroll-behavior-x: contain; }
+.cs-hand-wrap .pc { box-shadow: 0 3px 8px #0004; }
+.gf-books .gf-chip { border-color: #4db8ff66; }
+.gf-ask { border-top: 1px solid #2a5878; padding-top: 10px; }
+.gf-log { color: #b7cbd9; }
+
+/* ---------- Word Chain: violet beacon ---------- */
+.wc-main { background: linear-gradient(160deg, #1b1740, #0d1a2b); border-color: #4a3f8a; }
+.wc-letter { color: #c9b8ff; text-shadow: 0 0 24px #8a6cff88; }
+.wc-form input { min-height: 48px; border-color: #5a4fa0; }
+.wc-form input:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; }
+.wc-lives .heart { color: #ff947d; }
+.wc-chain .chip { border-color: #4a3f8a; }
+
+/* ---------- Categories Rush: amber letter badge, stacked fields ---------- */
+.cr-letter { background: #ffcd2d; color: #2e2300; border-radius: 14px; box-shadow: 0 6px 18px #ffcd2d33; }
+.cr-head { border-color: #7a5d12; }
+.cr-cell input { min-height: 44px; border-radius: 10px; }
+.cr-cell input:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; }
+.cr-dot { box-shadow: 0 0 0 2px #0a1620; }
+.cr-dot.done, .cr-dot.on { background: #86d6b3; }
+.cr-actions .btn { min-height: 44px; }
+
+/* ---------- Word Scramble: ivory tiles ---------- */
+.ws-tile { background: linear-gradient(#fbf4e2, #e9dcc0); color: #2e2a1c; border: 1px solid #b9a97c; border-radius: 10px; box-shadow: 0 3px 0 #b9a97c, 0 6px 12px #0004; font-weight: 800; }
+.ws-form input { min-height: 48px; }
+.ws-form input:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; }
+
+/* ---------- Trivia: mint category label ---------- */
+.tv-main .hl-round { color: #86d6b3; }
+.tv-q { max-width: 52ch; line-height: 1.3; }
+
+/* ---------- Drawing Telephone: pink chapter marker, numbered chain ---------- */
+.tp-main { border-color: #7a3a63; }
+.tp-main .hl-round { color: #ff8fc8; }
+.tp-prompt { border-left: 4px solid #ff8fc8; padding-left: 12px; }
+.tp-chain { counter-reset: step; }
+.tp-chain > * { counter-increment: step; position: relative; }
+.tp-sep { color: #ff8fc8; }
+.tp-tools .tp-sw { border: 2px solid #ffffff55; }
+
+/* ---------- Bluff Battle: violet prompt, equal-weight anonymous answers ---------- */
+.bl-main { border-color: #5a4fa0; }
+.bl-question { font-size: clamp(18px, 4.5vw, 24px); letter-spacing: -.02em; line-height: 1.25; }
+.bl-tag { background: #5a4fa022; border: 1px solid #5a4fa0; color: #c9b8ff; }
+.bl-opt { min-height: 52px; border-radius: 12px; text-align: left; white-space: normal; }
+.bl-opt:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; }
+.bl-options.reveal .bl-opt { opacity: 1; }
+
+/* ---------- The Impostor: mauve private role card, wrapped clue timeline ---------- */
+.im-main { border-color: #7a4a80; }
+.im-card { border: 1px solid #7a4a80; background: linear-gradient(160deg, #3a1f44, #1d1530); border-radius: 14px; overflow-wrap: anywhere; max-width: 100%; }
+.im-card.impostor { border-color: #ff947d; }
+.im-clues { overflow-wrap: anywhere; }
+.im-clues li { max-width: 100%; }
+.im-votes .btn { min-height: 44px; }
+
+/* ---------- Shared: private-hand trays scroll inside, never the page ---------- */
+.cs-hand-wrap, .gf-hand { max-width: 100%; }
+
+/* ---------- Property Tycoon: cream perimeter, owner marks, phone Map / Properties views ---------- */
+.ty-board { background: #d9cdb0; border-color: #0e2230; box-shadow: 0 18px 50px #0004; }
+.ty-tile { background: #fbf4e2; border: 1px solid #00000018; }
+.ty-tile.corner { background: #efe3c4; }
+.ty-tile:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: -3px; z-index: 3; }
+.ty-tile.sel { outline: 3px solid #adff00; }
+.ty-center { background: radial-gradient(circle at 50% 40%, #174a5a, #0b2432); }
+.ty-views { display: none; gap: 8px; }
+.ty-views .btn { flex: 1; min-height: 44px; }
+.ty-players .b2-player b { overflow-wrap: anywhere; }
+.ty-players .muted { font-size: 12px; }
+.ty-actions .btn { min-height: 44px; }
+.ty-info { border-radius: 14px; }
+@media (max-width: 640px) {
+  .ty-views { display: flex; }
+  .ty[data-view="map"] .ty-sect { display: none; }
+  .ty[data-view="props"] #ty-boardwrap, .ty[data-view="props"] #ty-info { display: none; }
+}
+
+/* ---------- Battleship: ship silhouettes read as hulls; aim crosshair, then explicit Fire ---------- */
+.bs-cell.ship { background: linear-gradient(#9db4c6, #6f8aa0); box-shadow: inset 0 0 0 1px #345; border-radius: 6px; }
+.bs-cell.aim::before { content: "+"; position: absolute; inset: 0; display: grid; place-items: center; color: #adff00; font-weight: 900; font-size: 18px; }
+.bs-cell { position: relative; }
+.bs-cell:focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 2px; z-index: 2; }
+.ty-cash { white-space: nowrap; }
+.ty-players .b2-player > div { min-width: 0; }
+.ty-players .fr-timer { white-space: nowrap; }

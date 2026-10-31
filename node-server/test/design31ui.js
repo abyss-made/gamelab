@@ -110,6 +110,30 @@ async function start(browser, vp, game) {
           const h = await page.evaluate(() => { const c = document.querySelector('canvas'); return !!c; });
           ok(h, `${T}: pool table canvas present`);
         }
+        if (g === 'drawguess') {
+          if (await page.$('[data-choose="0"]')) {
+            await page.click('[data-choose="0"]');
+            await page.waitForFunction(() => App.S.game.phase === 'draw', null, { timeout: 4000 }).catch(() => {});
+          }
+          const t = await page.evaluate(() => ({ labels: document.querySelectorAll('#dg-tools .tool-label').length, out: document.querySelector('#brush-size-val') && document.querySelector('#brush-size-val').textContent, sizes: [...document.querySelectorAll('#dg-tools .tool')].map((b) => Math.min(b.getBoundingClientRect().width, b.getBoundingClientRect().height)) }));
+          if (t.labels) {
+            ok(t.labels === 5 && /^\d+$/.test(t.out), `${T}: tools are labelled and the size shows its number (${t.out})`);
+            ok(t.sizes.every((w) => w >= 44), `${T}: every tool button is >=44px (${t.sizes.map(Math.round)})`);
+          }
+        }
+        if (g === 'rps') {
+          ok((await page.$$('[data-move] svg.rps-svg')).length === 3, `${T}: throws use original vector icons`);
+        }
+        if (g === 'tycoon') {
+          const vis = await page.evaluate(() => getComputedStyle(document.querySelector('.ty-views')).display);
+          if (vp.w < 600) {
+            ok(vis !== 'none', `${T}: Map / Properties switch is shown`);
+            const sect = () => page.evaluate(() => getComputedStyle(document.querySelector('.ty-sect')).display);
+            ok((await sect()) === 'none', `${T}: map view hides the property sheets`);
+            await page.click('[data-tyview="props"]');
+            ok((await sect()) !== 'none' && !(await page.isVisible('.ty-board')), `${T}: properties view shows sheets instead of the map`);
+          } else ok(vis === 'none', `${T}: switch hidden on desktop`);
+        }
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, `${g}-${vp.t}.png`) });
         friends.forEach((f) => f.s.close());
         await ctx.close();

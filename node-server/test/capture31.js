@@ -43,6 +43,7 @@ function fake(name) {
       await page.waitForFunction((x) => App.S.gameId === x && App.S.players.length >= 3, g).catch(() => {});
       await page.evaluate(() => App.socket.emit('startGame'));
       await page.waitForFunction(() => App.S.phase === 'game', null, { timeout: 5000 }).catch(() => {});
+      if (g === 'drawguess') { await page.click('[data-choose="0"]').catch(() => {}); await page.waitForFunction(() => App.S.game.phase === 'draw', null, { timeout: 4000 }).catch(() => {}); }
       await sleep(1200);
       await page.screenshot({ path: path.join(out, `${g}-${vp.t}.png`) });
       console.log(g, vp.t, 'errors:', errs.length ? errs.join('|') : 'none');

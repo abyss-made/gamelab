@@ -382,7 +382,7 @@ GameUI.pool = (() => {
     const turnName = app.esc(g.players[g.turn].name);
     const busy = performance.now() < busyUntil;
     let msg;
-    if (busy && g.last) msg = "Balls are rolling...";
+    if (busy && g.last) msg = "Shot in motion…";
     else if (me < 0) msg = `You're watching. <b>${turnName}</b> is up${g.inHand ? " with ball in hand" : ""}.`;
     else if (me === g.turn) msg = g.inHand ? (placing ? `<b>Ball in hand!</b> Drag the cue ball${g.breakShot ? " behind the line" : ""}, then tap Lock cue ball.` : "<b>Your shot!</b> Drag on the table to aim, set power, then Shoot.") : "<b>Your shot!</b> Drag on the table to aim, set power, then Shoot.";
     else msg = `Waiting for <b>${turnName}</b>...`;

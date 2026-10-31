@@ -31,6 +31,7 @@ GameUI.ludo = (() => {
   let S = null;
   let clock = null;
   let lastRolls = -1;
+  let animateMove = false;
 
   const pos = (colour, tokenIdx, prog) => {
     if (prog === -1) return YARD[colour][tokenIdx];
@@ -72,7 +73,7 @@ GameUI.ludo = (() => {
           .map(({ p, ti, prog }) => {
             const can = p.id === S.you && g.movable.includes(ti);
             const label = `${p.colourName} token ${ti + 1}${prog === -1 ? " in the yard" : prog === 56 ? " home" : ""}${can ? ", can move" : ""}`;
-            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}" ${can ? `data-token="${ti}"` : "disabled"} aria-label="${label}">${ti + 1}</button>`;
+            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${animateMove && g.lastEvent && g.lastEvent.kind === "move" && g.lastEvent.by === p.id && g.lastEvent.token === ti ? " moved" : ""}" ${can ? `data-token="${ti}"` : "disabled"} aria-label="${label}">${ti + 1}</button>`;
           })
           .join("");
         const ev = g.lastEvent;
@@ -143,6 +144,7 @@ GameUI.ludo = (() => {
       const me = g.players[g.myIndex];
       ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1} · ${g.dice} step${g.dice === 1 ? "" : "s"}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
     } else ctl.innerHTML = "";
+    animateMove = g.rolls !== lastRolls && lastRolls >= 0;
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");
     if (mine && g.phase === "roll" && lastRolls >= 0) Sound.play("yourturn");

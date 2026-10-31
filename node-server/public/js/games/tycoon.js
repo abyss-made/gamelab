@@ -258,7 +258,9 @@ GameUI.tycoon = (() => {
     app = a;
     root = document.createElement("div");
     root.className = "b2 ty";
+    root.dataset.view = "map";
     root.innerHTML = `<div class="b2-players card ty-players" id="ty-players"></div>
+      <div class="ty-views" role="group" aria-label="Phone view"><button type="button" class="btn btn-small" data-tyview="map" aria-pressed="true">Map</button><button type="button" class="btn btn-small btn-ghost" data-tyview="props" aria-pressed="false">Properties &amp; trades</button></div>
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>
       <div class="card ty-actions" id="ty-actions" aria-live="polite"></div>
@@ -270,6 +272,16 @@ GameUI.tycoon = (() => {
     auctionTimer = setInterval(tickAuction, 250);
     root.addEventListener("click", (e) => {
       const t = e.target;
+      const vw = t.closest("[data-tyview]");
+      if (vw) {
+        root.dataset.view = vw.dataset.tyview;
+        root.querySelectorAll("[data-tyview]").forEach((b) => {
+          const on = b === vw;
+          b.setAttribute("aria-pressed", String(on));
+          b.classList.toggle("btn-ghost", !on);
+        });
+        return;
+      }
       const tl = t.closest("[data-tile]");
       if (tl) {
         selTile = selTile === Number(tl.dataset.tile) ? -1 : Number(tl.dataset.tile);

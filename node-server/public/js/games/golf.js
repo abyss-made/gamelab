@@ -93,10 +93,10 @@ GameUI.golf = (() => {
     ctx.restore();
     ctx.lineJoin = "round";
     poly(ctx, h.poly);
-    ctx.strokeStyle = "#7a4a22";
+    ctx.strokeStyle = "#a89868";
     ctx.lineWidth = 8;
     ctx.stroke();
-    ctx.strokeStyle = "#b9824a";
+    ctx.strokeStyle = "#f2e8cf";
     ctx.lineWidth = 3;
     ctx.stroke();
     for (const w of h.walls) {
