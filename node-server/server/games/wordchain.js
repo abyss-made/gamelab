@@ -54,7 +54,7 @@ function normalize(w) {
 }
 
 function create(settings) {
-  return { settings: { ...settings }, players: [], turn: 0, chain: [], used: new Set(), letter: '', deadline: 0, over: false, order: [] };
+  return { settings: { ...settings }, players: [], turn: 0, chain: [], used: new Set(), letter: '', from: 0, deadline: 0, over: false, order: [] };
 }
 
 function alive(st) {
@@ -76,6 +76,30 @@ function start(st, api) {
   api.changed();
 }
 
+// The letter the next word must start with: the last letter of the chain, unless the chain was
+// restarted on a fresh letter at its current length (see ensurePlayable).
+function need(st) {
+  return st.chain.length && st.from !== st.chain.length ? st.chain[st.chain.length - 1].word.slice(-1) : st.letter;
+}
+
+function playable(st, l) {
+  for (const w of DICT) if (w[0] === l && w.length >= st.settings.minLen && !st.used.has(w)) return true;
+  return false;
+}
+
+// With the word list on, a letter no unused listed word starts with (x after "xylophone" is used)
+// would make every player lose lives in turn. Switch to a fresh letter instead.
+function ensurePlayable(st, api) {
+  if (st.settings.dictionary !== 'common') return;
+  const l = need(st);
+  if (playable(st, l)) return;
+  const fresh = [...START_LETTERS].filter((c) => c !== l && playable(st, c));
+  if (!fresh.length) return;
+  st.letter = fresh[Math.floor(Math.random() * fresh.length)];
+  st.from = st.chain.length;
+  api.sys(`No words left that start with "${l.toUpperCase()}", so the next word starts with "${st.letter.toUpperCase()}".`, 'info');
+}
+
 function nextTurn(st, api) {
   for (let i = 1; i <= st.players.length; i++) {
     const idx = (st.turn + i) % st.players.length;
@@ -85,6 +109,7 @@ function nextTurn(st, api) {
     }
   }
   resetClock(st, api);
+  ensurePlayable(st, api);
 }
 
 function checkEnd(st, api) {
@@ -124,8 +149,8 @@ function onAction(st, m, a, api) {
   if (!w) return;
   if (w.length > MAX_WORD || !/^[a-z]+$/.test(w)) return reject(api, m, 'Use letters only (a to z), no spaces.');
   if (w.length < st.settings.minLen) return reject(api, m, `Words need at least ${st.settings.minLen} letters.`);
-  const need = st.chain.length ? st.chain[st.chain.length - 1].word.slice(-1) : st.letter;
-  if (w[0] !== need) return reject(api, m, `Your word has to start with "${need.toUpperCase()}".`);
+  const needed = need(st);
+  if (w[0] !== needed) return reject(api, m, `Your word has to start with "${needed.toUpperCase()}".`);
   if (st.used.has(w)) return reject(api, m, `"${w}" was already used.`);
   if (filter.hasBad(w)) return reject(api, m, 'That word is not allowed.');
   if (st.settings.dictionary === 'common' && !DICT.has(w)) return reject(api, m, `"${w}" isn't in the word list.`);
@@ -175,7 +200,7 @@ function view(st, m, now) {
     players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, lives: p.lives, words: p.words })),
     maxLives: st.settings.lives,
     turnId: cur ? cur.id : null,
-    letter: st.chain.length ? st.chain[st.chain.length - 1].word.slice(-1) : st.letter,
+    letter: need(st),
     first: st.chain.length === 0,
     chain: st.chain.slice(-15),
     chainLength: st.chain.length,

@@ -35,15 +35,20 @@ GameUI.gofish = (() => {
         pickRank = null;
         pickTarget = null;
       }
+      // Repaint the picks from the same state; the clock must keep counting from the last server update.
+      repainting = true;
       update(S);
+      repainting = false;
     });
   }
+
+  let repainting = false;
 
   function update(state) {
     S = state;
     const g = S.game;
     const mine = g.turnId === S.you;
-    clock.set(g.timeLeft);
+    if (!repainting) clock.set(g.timeLeft);
     root.querySelector("#gf-players").innerHTML = g.players
       .map((p) => C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-books" title="Books">${p.books.map((r) => `<i>${C.rankLabel(r)}</i>`).join("")}</span>`, sub: `${p.count} cards · ${p.books.length} ${p.books.length === 1 ? "book" : "books"}` }))
       .join("");
@@ -69,7 +74,7 @@ GameUI.gofish = (() => {
     root.querySelector("#gf-hand").innerHTML = g.hand
       ? g.hand.map((c) => C.playingCard(c)).join("") || '<p class="muted">No cards in hand.</p>'
       : '<p class="muted">You\'re watching. Hands are private.</p>';
-    clock.set(g.timeLeft);
+    if (!repainting) clock.set(g.timeLeft);
   }
 
   function unmount() {

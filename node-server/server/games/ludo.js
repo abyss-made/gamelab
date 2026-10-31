@@ -60,6 +60,7 @@ function setDeadline(st, api, ms) {
 }
 
 function beginTurn(st, api) {
+  st.idleCounted = false;
   st.phase = 'roll';
   st.dice = 0;
   st.movable = [];
@@ -229,7 +230,11 @@ function tick(st, api, now) {
   if (st.phase === 'notice') {
     return endTurn(st, api);
   }
-  p.idle++;
+  // A missed turn counts once, however many timeouts it has (roll, move, bonus roll after a 6).
+  if (!st.idleCounted) {
+    st.idleCounted = true;
+    p.idle++;
+  }
   if (p.idle >= IDLE_LIMIT) return dropPlayer(st, api, p, 'was away too long and is out');
   if (st.phase === 'roll') {
     api.sys(`${p.name} ran out of time, so the dice were rolled for them.`, 'warn');

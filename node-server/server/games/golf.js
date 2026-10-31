@@ -150,7 +150,9 @@ function endHole(st, api, ms) {
   st.turn = -1;
   st.deadline = 0;
   st.nextAt = api.now() + ms + BETWEEN_MS;
-  for (const p of st.players) p.scores[st.hole] = p.out && !p.holed ? p.scores[st.hole] : p.strokes;
+  // Players who left keep what dropPlayer recorded (strokes taken before leaving, or nothing),
+  // so later holes show "–" rather than a misleading 0.
+  for (const p of st.players) if (!p.out) p.scores[st.hole] = p.strokes;
   const hole = courseOf(st).holes[st.hole];
   st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par }));
   api.changed();
@@ -251,6 +253,7 @@ function autoPutt(st, api, p) {
 function dropPlayer(st, api, p, why) {
   if (p.out) return;
   p.out = true;
+  if (st.phase === 'play' && p.strokes > 0) p.scores[st.hole] = p.strokes; // strokes taken on this hole before leaving
   p.holed = true;
   api.sys(`${p.name} ${why}.`, 'warn');
   const left = live(st);

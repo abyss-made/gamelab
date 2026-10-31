@@ -46,7 +46,7 @@ GameUI.fourrow = (() => {
     root.className = "fr";
     root.innerHTML = `
       <div class="fr-head card" id="fr-head"></div>
-      <div class="fr-status" id="fr-status"></div>
+      <div class="fr-status" id="fr-status" aria-live="polite"></div>
       <div class="fr-board-wrap"><div class="fr-board" id="fr-board"></div></div>`;
     stage.appendChild(root);
     root.addEventListener("click", (e) => {
@@ -93,13 +93,17 @@ GameUI.fourrow = (() => {
     if (g.timeLeft !== null) deadline = performance.now() + g.timeLeft;
     root.querySelector("#fr-head").innerHTML =
       `${playerHTML(g.players[0], 0, g)}<div class="fr-vs">VS</div>${playerHTML(g.players[1], 1, g)}`;
+    // Name the colour in words too, so nobody has to match disc colours to know which side is theirs.
+    const COLOR_NAMES = ["Red", "Yellow"];
+    const disc = (i) => `<span class="mini-disc d${i + 1}" aria-hidden="true"></span>`;
     const turnName = app.esc(g.players[g.turn].name);
+    const turnColor = `${disc(g.turn)} ${COLOR_NAMES[g.turn]}`;
     root.querySelector("#fr-status").innerHTML =
       g.myIndex < 0
-        ? `You're watching. <b>${turnName}</b> is up.`
+        ? `You're watching. <b>${turnName}</b> (${turnColor}) is up.`
         : myTurn
-          ? "<b>Your turn!</b> Tap a column to drop a disc."
-          : `Waiting for <b>${turnName}</b>...`;
+          ? `<b>Your turn!</b> You are ${disc(g.myIndex)} <b>${COLOR_NAMES[g.myIndex]}</b>. Tap a column to drop a disc.`
+          : `You are ${disc(g.myIndex)} ${COLOR_NAMES[g.myIndex]}. Waiting for <b>${turnName}</b>...`;
     root.querySelector("#fr-status").className =
       "fr-status" + (myTurn ? " mine" : "");
     const board = root.querySelector("#fr-board");
