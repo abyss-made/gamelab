@@ -1,0 +1,380 @@
+[
+  {
+    "game": "drawguess",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 900,
+    "pageErrors": []
+  },
+  {
+    "game": "drawguess",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "fourrow",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "fourrow",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "chess",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 946,
+    "pageErrors": []
+  },
+  {
+    "game": "chess",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 888,
+    "pageErrors": []
+  },
+  {
+    "game": "checkers",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 946,
+    "pageErrors": []
+  },
+  {
+    "game": "checkers",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 888,
+    "pageErrors": []
+  },
+  {
+    "game": "ludo",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 975,
+    "pageErrors": []
+  },
+  {
+    "game": "ludo",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 902,
+    "pageErrors": []
+  },
+  {
+    "game": "pool",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 936,
+    "pageErrors": []
+  },
+  {
+    "game": "pool",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "colorstack",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "colorstack",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "gofish",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "gofish",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "wordchain",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "wordchain",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "categories",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "categories",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "tictactoe",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "tictactoe",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "rps",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "rps",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "dotsboxes",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "dotsboxes",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "wordscramble",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "wordscramble",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "trivia",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "trivia",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "telephone",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 994,
+    "pageErrors": []
+  },
+  {
+    "game": "telephone",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 979,
+    "pageErrors": []
+  },
+  {
+    "game": "bluff",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 994,
+    "pageErrors": []
+  },
+  {
+    "game": "bluff",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "impostor",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 994,
+    "pageErrors": []
+  },
+  {
+    "game": "impostor",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "battleship",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "battleship",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "golf",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 936,
+    "pageErrors": []
+  },
+  {
+    "game": "golf",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  },
+  {
+    "game": "tycoon",
+    "mode": "desktop",
+    "width": 1440,
+    "viewportHeight": 900,
+    "scrollWidth": 1440,
+    "contentHeight": 932,
+    "pageErrors": []
+  },
+  {
+    "game": "tycoon",
+    "mode": "mobile",
+    "width": 390,
+    "viewportHeight": 844,
+    "scrollWidth": 390,
+    "contentHeight": 844,
+    "pageErrors": []
+  }
+]

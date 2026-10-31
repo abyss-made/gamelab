@@ -25,7 +25,7 @@ GameUI.checkers = (() => {
         const movable = playable && legal[i];
         const isT = targets.has(i);
         const cls = ["ck-sq", dark ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? "target" : ""].join(" ");
-        const piece = p ? `<span class="ck-piece o${(p - 1) & 1} ${p >= 3 ? "king" : ""} ${movable ? "can" : ""}">${p >= 3 ? "♛︎" : ""}</span>` : isT ? '<span class="ck-dot"></span>' : "";
+        const piece = p ? `<span class="ck-piece o${(p - 1) & 1} ${p >= 3 ? "king" : ""} ${movable ? "can" : ""}">${p >= 3 ? GameUI.art.crown() : ""}</span>` : isT ? '<span class="ck-dot"></span>' : "";
         const who = p ? `${(p - 1) & 1 ? "White" : "Lime"} ${p >= 3 ? "king" : "man"}` : "empty";
         html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${dark && playable && (movable || isT) ? "" : "disabled"}>${piece}</button>`;
       }

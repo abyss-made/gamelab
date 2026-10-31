@@ -133,14 +133,15 @@ GameUI.ludo = (() => {
     else text = `Waiting for <b>${tName}</b>...`;
     root.querySelector("#ld2-status").innerHTML = text + (describe(g) ? `<div class="muted">${describe(g)}</div>` : "");
     const die = root.querySelector("#ld2-die");
-    die.textContent = g.dice ? PIPS[g.dice] : "🎲︎";
+    die.innerHTML = g.dice ? `<span class="sr-only">${g.dice}</span>` + GameUI.art.dieFace(g.dice) : '<span class="ld2-die-idle">?</span>';
+    die.dataset.value = g.dice || "";
     die.setAttribute("aria-label", g.dice ? "Dice shows " + g.dice : "Dice");
     die.classList.toggle("roll", g.rolls !== lastRolls && lastRolls >= 0);
     const ctl = root.querySelector("#ld2-ctl");
     if (mine && g.phase === "roll") ctl.innerHTML = '<button type="button" class="btn ld2-roll" data-roll="1">Roll dice</button>';
     else if (mine && g.phase === "move") {
       const me = g.players[g.myIndex];
-      ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
+      ctl.innerHTML = g.movable.map((ti) => `<button type="button" class="btn btn-small ld2-pick c${me.colour}" data-move="${ti}">Token ${ti + 1} · ${g.dice} step${g.dice === 1 ? "" : "s"}${me.tokens[ti] === -1 ? " (leave yard)" : ""}</button>`).join("");
     } else ctl.innerHTML = "";
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");

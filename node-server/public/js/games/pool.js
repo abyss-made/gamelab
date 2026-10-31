@@ -171,17 +171,17 @@ GameUI.pool = (() => {
     ctx.setTransform(k, 0, 0, k, 0, 0);
     ctx.clearRect(0, 0, w, h);
     // rail
-    ctx.fillStyle = "#5b3a1e";
+    ctx.fillStyle = "#1d1814";
     ctx.beginPath();
     ctx.roundRect ? ctx.roundRect(0, 0, w, h, 26) : ctx.rect(0, 0, w, h);
     ctx.fill();
-    ctx.strokeStyle = "#8a5a2c";
+    ctx.strokeStyle = "#3b2d22";
     ctx.lineWidth = 3;
     ctx.stroke();
     ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#1f8a4c";
+    ctx.fillStyle = "#0a4848";
     ctx.fillRect(0, 0, t.w, t.h);
-    ctx.strokeStyle = "#0f4f2b";
+    ctx.strokeStyle = "#175b58";
     ctx.lineWidth = 4;
     ctx.strokeRect(0, 0, t.w, t.h);
     if (g.breakShot || (g.inHand && placing)) {

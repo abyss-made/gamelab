@@ -1,0 +1,190 @@
+/* Playgrid 3.1 gameplay visual system (issue #46). Loaded after style.css; presentation only.
+   Tokens follow docs/playgrid-3-1-design/HANDOFF.md. No rule here changes game logic or protocol. */
+:root {
+  --pg-focus: #d6ff8b;
+  --pg-ease: cubic-bezier(.2, .8, .2, 1);
+  --pg-fast: 120ms;
+  --pg-std: 180ms;
+  --pg-emph: 240ms;
+  --pg-warn: #ffcd2d;
+  --pg-err: #ff947d;
+}
+
+/* ---------- Shared: focus, selection, clock states, motion ---------- */
+.fr-col:focus-visible, .ch-sq:focus-visible, .ck-sq:focus-visible, .ld2-tok:focus-visible,
+.cs-card:focus-visible, .ld2-pick:focus-visible {
+  outline: 3px solid var(--pg-focus);
+  outline-offset: 3px;
+  z-index: 3;
+}
+.ch-sq:not(:disabled):focus-visible, .ck-sq:not(:disabled):focus-visible { outline-offset: -4px; }
+[data-timer].hurry, .fr-timer.hurry, .ch-clock.hurry { color: var(--pg-warn); }
+.hurry { font-variant-numeric: tabular-nums; }
+.pg31-scroll-tray { overflow-x: auto; overscroll-behavior-x: contain; }
+@media (prefers-reduced-motion: reduce) {
+  .fr-board *, .ld2-board *, .ch-board *, .ck-board *, .cs-table *, .ld2-die, .ld2-die * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Four in a Row: arcade cabinet ---------- */
+.fr-board {
+  background: linear-gradient(180deg, #3b66e6, #2c55d7 40%, #2549b8);
+  border: 2px solid #1d3c9a;
+  border-top: 6px solid #6c99ff;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px #0004, inset 0 2px 0 #ffffff22;
+}
+.fr-cell { background: #081827; box-shadow: inset 0 3px 5px #0007, 0 1px 0 #6c99ff55; }
+.disc { box-shadow: inset 0 0 0 4px #0003, 0 3px 8px #0004; }
+.disc.d1 { background: #ff477b; }
+.disc.d2 { background: #ffcd2d; }
+/* Winning cells keep a persistent outline (server-supplied winLine) plus the word cue in the result. */
+.disc.win { outline: 3px solid #fff; outline-offset: -1px; box-shadow: 0 0 0 3px #030d17, 0 0 14px #fff8; }
+/* Uncommitted preview: translucent disc in the lowest free slot of the hovered/focused column. */
+.myturn.c1 .fr-col:not(:disabled):hover .target::after, .myturn.c1 .fr-col:not(:disabled):focus-visible .target::after,
+.myturn.c2 .fr-col:not(:disabled):hover .target::after, .myturn.c2 .fr-col:not(:disabled):focus-visible .target::after {
+  content: ""; position: absolute; inset: 14%; border-radius: 50%; opacity: .55; pointer-events: none;
+}
+.myturn.c1 .fr-col:hover .target::after, .myturn.c1 .fr-col:focus-visible .target::after { background: #ff477b; }
+.myturn.c2 .fr-col:hover .target::after, .myturn.c2 .fr-col:focus-visible .target::after { background: #ffcd2d; }
+.fr-cell { position: relative; }
+.fr-col:disabled { cursor: not-allowed; }
+.fr-status.mine { color: #d6ff8b; }
+.fr-timer.hurry { color: var(--pg-warn); }
+
+/* ---------- Chess and Checkers: shared strategy-board materials ---------- */
+.ch-board, .ck-board {
+  border: 4px solid #0e2230;
+  border-radius: 12px;
+  box-shadow: 0 18px 50px #0004;
+  width: min(100%, 560px);
+}
+.ch-sq.light, .ck-sq.light { background: #dfd3ba; }
+.ch-sq.dark, .ck-sq.dark { background: #527080; }
+.ck-sq.dark { background: #527080; }
+.ch-sq i { color: #1b2c38; opacity: .8; font-size: 10px; }
+.ch-sq.dark i { color: #e8efe4; }
+/* Markers: selected origin = lime ring; empty target = centre dot; capture = edge ring; last = filled pair; check = banner + ring. */
+.ch-sq.last { box-shadow: none; background-image: linear-gradient(#ffcd2d55, #ffcd2d55); }
+.ch-sq.sel, .ck-sq.sel { box-shadow: inset 0 0 0 3px #adff00; }
+.ch-sq.check { box-shadow: inset 0 0 0 3px #ff477b; background-image: radial-gradient(circle, #ff477b99 0, #ff477b00 70%); }
+.ch-sq.cap { box-shadow: inset 0 0 0 4px #ff477b; }
+.ck-dot, .ch-sq .ck-dot { width: 24%; height: 24%; background: #071300cc; border: 2px solid #adff00; }
+.ch-sq.target .ck-dot { background: #adff00; border: 0; }
+.ck-sq.target { background: #527080; }
+.ch-sq.cap .ch-svg { filter: drop-shadow(0 0 0 #0000); }
+
+/* Chess pieces: ivory with a dark edge vs navy with a light edge, plus the name in aria-label. */
+.ch-piece { display: grid; place-items: center; width: 82%; height: 82%; }
+.ch-svg { width: 100%; height: 100%; stroke-width: 1.6; stroke-linejoin: round; filter: drop-shadow(0 3px 3px #0004); }
+.ch-piece.w .ch-svg { fill: #f8f0de; stroke: #20384d; }
+.ch-piece.b .ch-svg { fill: #20384d; stroke: #cfe0ec; }
+.ch-piece.w .ch-svg .slit, .ch-piece.w .ch-svg .eye { stroke: #20384d; fill: #20384d; }
+.ch-piece.b .ch-svg .slit, .ch-piece.b .ch-svg .eye { stroke: #cfe0ec; fill: #cfe0ec; }
+.ch-piece.w, .ch-piece.b { text-shadow: none; }
+.ch-svg .slit { fill: none; stroke-width: 2; }
+.ch-promo-btn { min-width: 56px; min-height: 56px; }
+.ch-promo-btn .ch-piece { width: 40px; height: 40px; }
+.ch-promo-btn .ch-piece.w .ch-svg { fill: #f8f0de; }
+.ch-piece { transition: transform var(--pg-std) var(--pg-ease); }
+.ch-sq:not(:disabled):hover .ch-piece { transform: translateY(-2px); }
+
+/* Checkers pieces: layered timber vs slate discs with a concentric inset; kings wear a crown. */
+.ck-piece { border: 0; width: 80%; height: 80%; position: relative; box-shadow: 0 3px 8px #0006; animation: none !important; }
+.ck-piece::before { content: ""; position: absolute; inset: 14%; border-radius: 50%; }
+.ck-piece.o1 { background: radial-gradient(circle at 35% 30%, #f6e9cc, #d8c08d 75%); border: 2px solid #8a7140; color: #4c3a16; }
+.ck-piece.o1::before { border: 2px solid #8a714088; }
+.ck-piece.o0 { background: radial-gradient(circle at 35% 30%, #3a5568, #1c3140 75%); border: 2px solid #0a1822; color: #adff00; }
+.ck-piece.o0::before { border: 2px solid #adff0066; }
+.ck-piece.can { outline: 2px dashed #adff00; outline-offset: 2px; }
+.ck-crown { width: 56%; height: 56%; fill: currentColor; position: relative; z-index: 1; }
+.ck-piece.king { box-shadow: 0 3px 8px #0006, 0 0 0 3px #ffcd2d; }
+
+/* ---------- Ludo: bright toy, precise play ---------- */
+.ld2-board { border: 4px solid #0e2230; border-radius: 14px; width: min(100%, 560px); box-shadow: 0 18px 50px #0004; background: #f4efe2; }
+.ld2-cell.void { background: #f4efe2; }
+.ld2-cell.yard { box-shadow: inset 0 0 0 100px #ffffff1f; }
+.ld2-cell.yardspot { background: #fffaf0; border: 2px solid #0003; box-shadow: inset 0 3px 5px #0003; }
+.ld2-cell.track { background: #fffdf6; border-color: #0002; }
+.ld2-cell.track.safe { background: #efe6cf; }
+.ld2-cell.track.star::after { content: "★"; color: #7a6a3c; }
+.ld2-tok { border: 2px solid #030d17; box-shadow: 0 3px 8px #0005, inset 0 -3px 0 #0003; font-size: clamp(9px, 2.8vw, 14px); animation: none !important; }
+.ld2-tok.can { outline: 3px solid #030d17; outline-offset: 1px; box-shadow: 0 0 0 5px #fff, 0 3px 8px #0005; }
+.ld2-cell.multi .ld2-tok { font-size: 9px; }
+.ld2-die { background: #f3e8d1; border: 2px solid #b9b19e; box-shadow: inset 0 3px 5px #0002; border-radius: 12px; width: 56px; height: 56px; display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); padding: 9px; gap: 2px; place-items: center; }
+.ld2-die i { width: 9px; height: 9px; border-radius: 50%; background: #17303d; }
+.ld2-die-idle { grid-area: 2/2; font-weight: 800; color: #17303d; font-size: 20px; }
+.ld2-roll { min-height: 48px; }
+.ld2-ctl { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.ld2-pick { min-height: 44px; min-width: 44px; color: #030d17; }
+@media (max-width: 640px) { .ld2-die { width: 56px; height: 56px; } }
+@keyframes ldroll31 { 0% { transform: rotate(-12deg) scale(.9); } 100% { transform: none; } }
+.ld2-die.roll { animation: ldroll31 .28s var(--pg-ease); }
+
+/* ---------- Color Stack: original card faces; names always shown, never colour alone ---------- */
+.cs-card { border-width: 2px; }
+.cs-card.playable { outline: 3px solid #adff00; outline-offset: 1px; }
+.cs-card small { font-weight: 700; letter-spacing: .04em; opacity: 1; }
+.cs-hand-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
+.cs-card:focus-visible { transform: translateY(-6px); }
+.cs-out-note { text-align: center; padding: 10px; font-weight: 700; color: #8cceff; }
+
+/* Color Stack: softened original faces with dark text; names stay on every card. */
+.cs-card.c-r { background: #ff7c83; color: #2a0709; }
+.cs-card.c-b { background: #71b9fa; color: #06203a; }
+.cs-card.c-g { background: #86d6b3; color: #062a1b; }
+.cs-card.c-y { background: #ffe18a; color: #2e2300; }
+.cs-card.c-r b, .cs-card.c-b b, .cs-card.c-g b, .cs-card.c-y b, .cs-card.c-r small, .cs-card.c-b small, .cs-card.c-g small, .cs-card.c-y small { color: inherit; text-shadow: none; }
+.cs-card.c-w { background: conic-gradient(#ff7c83 0 25%, #71b9fa 0 50%, #86d6b3 0 75%, #ffe18a 0); color: #0a1620; }
+.cs-card.c-w b { color: #0a1620; text-shadow: 0 0 4px #fff, 0 0 2px #fff; }
+.cs-card.c-w small { background: #ffffffe6; border-radius: 6px; padding: 0 6px; color: #0a1620; }
+.cs-card:disabled:not(.static):not(.playable) { filter: saturate(.55); opacity: .8; }
+.cs-piles { gap: 20px; }
+.cs-hand { overflow-x: auto; scroll-snap-type: x proximity; }
+
+/* Trivia: answers stack at >= 52px; picked / right / wrong never rely on colour alone. */
+.tv-choice { min-height: 56px; border-radius: 12px; }
+.tv-choice.picked::after { content: " ✓ Locked in"; font-size: 12px; font-weight: 700; margin-left: 8px; }
+.tv-choice.right::before { content: "✓ "; font-weight: 800; }
+.tv-choice.wrong::before { content: "✕ "; font-weight: 800; }
+.tv-choice.right { background: #1f7a52; border-color: #86d6b3; }
+.tv-choice.wrong { background: #a3334d; border-color: #ff947d; }
+
+/* Battleship: chart-blue sea, hit X / miss dot, 44px phone targets where space allows. */
+.bs-grid { background: #0a2a40; border-color: #2a5878; }
+.bs-cell { border-radius: 4px; background: #14425f; box-shadow: inset 0 0 0 1px #2a5878; }
+.bs-cell.miss { background: #0e2f45; }
+.bs-cell.miss::after { content: ""; display: block; width: 28%; height: 28%; border-radius: 50%; background: #8cceff; margin: auto; }
+.bs-cell.hit { background: #ff477b; font-weight: 800; }
+.bs-cell.sunk { background: #8a1038; color: #ffd7e2; }
+.bs-cell.aim { background: #14425f; outline: 3px solid #adff00; }
+
+/* Pool / Golf: honest-physics rails get legible numeric labels (values come from the live controls). */
+.pl-ctl label, .gf-ctl label { font-variant-numeric: tabular-nums; }
+
+/* Tic Tac Toe: rounded navy tiles, sky X / amber O with heavier strokes; hover preview is uncommitted. */
+.ttt-cell { background: #102633; border: 1px solid #344f61; border-radius: 14px; box-shadow: inset 0 3px 5px #0004; font-weight: 900; }
+.ttt-cell.m1 { color: #8cceff; }
+.ttt-cell.m2 { color: #ffcd2d; }
+.ttt-mark.m1 { color: #8cceff; }
+.ttt-mark.m2 { color: #ffcd2d; }
+.ttt-cell:not(:disabled):hover { transform: translateY(-2px); transition: transform var(--pg-fast) var(--pg-ease); }
+.ttt-cell:not(:disabled):focus-visible { outline: 3px solid var(--pg-focus); outline-offset: 3px; }
+.ttt-cell.win { background: #adff0022; border: 2px solid #adff00; }
+@media (max-width: 640px) { .ttt-board { width: min(92vw, 380px); gap: 10px; } }
+
+/* Dots & Boxes: indigo lattice, bold active edge, visible junction dots. */
+.db-grid { background: #1c1f5a22; padding: 10px; border-radius: 14px; }
+.db-dot { background: #c9cdfa; box-shadow: 0 0 0 2px #2a2f7c; }
+.db-edge { background: #6a70d033; }
+.db-edge:not(:disabled):hover, .db-edge:not(:disabled):focus-visible { background: #adff00; outline: 2px solid var(--pg-focus); outline-offset: 2px; }
+
+/* Shared: stage materials and phone safe areas for private-hand / action trays. */
+.b2 .card, .fr-head, .ch-top { border-radius: 14px; }
+@media (max-width: 640px) {
+  .ch-layout { grid-template-columns: 1fr; }
+  .board-actions .btn, .ch-promo-btn, .cs-pick, .cs-deck { min-height: 44px; }
+}
+.pg31-low { color: var(--pg-warn); }
