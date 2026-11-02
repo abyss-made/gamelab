@@ -88,6 +88,8 @@ ok(!lexicon.has('nasa') && !lexicon.has('london'), 'proper nouns / abbreviations
 (function cats() {
   const c = require('../server/games/categories');
   ok(c.normalize('Berries') === 'berry' && c.normalize('Glasses') === 'glass' && c.normalize('The Dogs') === 'dog', 'Categories normalizes plurals/articles via lexicon');
+  for (const [a, b] of [['toe', 'toes'], ['doe', 'does'], ['hoe', 'hoes'], ['berry', 'berries'], ['box', 'boxes'], ['glass', 'glasses'], ['fly', 'flies'], ['shoe', 'shoes']])
+    ok(c.normalize(a) === c.normalize(b), `Categories: "${a}" and "${b}" match as duplicates`);
   ok(c.normalize('Éclair') === 'eclair', 'Categories strips accents');
   ok(c.normalize('Cats') === c.normalize('cat') && c.normalize('  CAT  ') === 'cat', 'Categories: duplicate detection ignores case/plural/whitespace');
   ok(!c.validFor('animal', 'A', 'Animal'), 'Categories rejects the category name itself as an answer');

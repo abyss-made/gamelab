@@ -54,10 +54,11 @@ function pickCategories(used) {
 // ("berries" -> "berry", "glasses" -> "glass"); unknown words (names, brands) just lose a plain "s".
 function singular(w) {
   if (w.length <= 3 || lexicon.has(w) && !/s$/.test(w)) return w;
+  // Plain "s" first so silent-e words match ("toes" -> "toe", not "to"); then -ies, then -es.
   const cands = [];
+  if (w.endsWith('s') && !w.endsWith('ss')) cands.push(w.slice(0, -1));
   if (w.endsWith('ies')) cands.push(w.slice(0, -3) + 'y');
   if (/(ch|sh|ss|x|z|o)es$/.test(w)) cands.push(w.slice(0, -2));
-  if (w.endsWith('s') && !w.endsWith('ss')) cands.push(w.slice(0, -1));
   const hit = cands.find((c) => lexicon.has(c));
   if (hit) return hit;
   return w.endsWith('s') && !w.endsWith('ss') && !w.endsWith('ies') ? w.slice(0, -1) : w;
