@@ -1,6 +1,7 @@
 // Categories Rush: everyone answers the same categories for a letter before time runs out.
 // Answers stay private until the round ends. Unique answers score 2, matching answers score 1.
 const filter = require('../filter');
+const lexicon = require('../lexicon');
 
 const meta = {
   id: 'categories',
@@ -48,16 +49,36 @@ function pickCategories(used) {
   return out;
 }
 
-// Case, punctuation, a leading article and a plural "s" don't make an answer different.
+// Case, accents, punctuation, a leading article and a plural ending don't make an answer different.
+// The plural is stripped from the last word only, preferring a reading that is a real lexicon word
+// ("berries" -> "berry", "glasses" -> "glass"); unknown words (names, brands) just lose a plain "s".
+function singular(w) {
+  if (w.length <= 3 || lexicon.has(w) && !/s$/.test(w)) return w;
+  // Plain "s" first so silent-e words match ("toes" -> "toe", not "to"); then -ies, then -es.
+  const cands = [];
+  if (w.endsWith('s') && !w.endsWith('ss')) cands.push(w.slice(0, -1));
+  if (w.endsWith('ies')) cands.push(w.slice(0, -3) + 'y');
+  if (/(ch|sh|ss|x|z|o)es$/.test(w)) cands.push(w.slice(0, -2));
+  const hit = cands.find((c) => lexicon.has(c));
+  if (hit) return hit;
+  return w.endsWith('s') && !w.endsWith('ss') && !w.endsWith('ies') ? w.slice(0, -1) : w;
+}
 function normalize(raw) {
   if (typeof raw !== 'string') return '';
-  let s = raw.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  let s = lexicon.normalize(raw).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
   s = s.replace(/^(the|a|an) /, '');
-  if (s.length > 3 && s.endsWith('s') && !s.endsWith('ss')) s = s.slice(0, -1);
-  return s;
+  const i = s.lastIndexOf(' ') + 1;
+  return s.slice(0, i) + singular(s.slice(i));
 }
-function validFor(norm, letter) {
-  return norm.length >= 2 && norm[0] === letter.toLowerCase() && !filter.hasBad(norm);
+// Letter, length and profanity rules, plus: writing the category's own name is not an answer, and
+// dictionary membership is deliberately NOT required (names, places and brands are not in it).
+function validFor(norm, letter, cat) {
+  if (norm.length < 2 || norm[0] !== letter.toLowerCase() || filter.hasBad(norm)) return false;
+  if (cat) {
+    const c = normalize(cat);
+    if (c === norm) return false;
+  }
+  return true;
 }
 
 function create(settings) {
@@ -97,7 +118,7 @@ function scoreRound(st, api) {
   for (const p of activeP(st)) {
     const ns = p.answers.map((a, i) => {
       const n = normalize(a);
-      if (!validFor(n, st.letter)) return null;
+      if (!validFor(n, st.letter, st.cats[i])) return null;
       counts[i].set(n, (counts[i].get(n) || 0) + 1);
       return n;
     });

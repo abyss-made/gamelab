@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { clampInt } = require('../util');
 const filter = require('../filter');
+const lexicon = require('../lexicon');
 
 const meta = {
   id: 'wordchain',
@@ -25,7 +26,8 @@ const START_LETTERS = 'abcdefghilmnoprstw';
 const WIN_BONUS = 5;
 const IDLE_LIMIT = 3; // consecutive timeouts before a player is dropped
 
-// Built-in word list (server-side only). Single words from the Draw & Guess bank are included.
+// DICT is the small CURATED list (server-side only) used to check a letter can still be played and
+// to pick restart letters. Answer validation is broader: any lexicon word is accepted (see isWord).
 const DICT = new Set();
 function loadDict() {
   const add = (w) => {
@@ -49,9 +51,10 @@ function sanitizeSettings(s, prev) {
 }
 
 function normalize(w) {
-  if (typeof w !== 'string') return '';
-  return w.toLowerCase().trim().slice(0, 64);
+  return lexicon.normalize(w);
 }
+
+const isWord = (w) => lexicon.has(w) || DICT.has(w);
 
 function create(settings) {
   return { settings: { ...settings }, players: [], turn: 0, chain: [], used: new Set(), letter: '', from: 0, deadline: 0, over: false, order: [] };
@@ -153,7 +156,7 @@ function onAction(st, m, a, api) {
   if (w[0] !== needed) return reject(api, m, `Your word has to start with "${needed.toUpperCase()}".`);
   if (st.used.has(w)) return reject(api, m, `"${w}" was already used.`);
   if (filter.hasBad(w)) return reject(api, m, 'That word is not allowed.');
-  if (st.settings.dictionary === 'common' && !DICT.has(w)) return reject(api, m, `"${w}" isn't in the word list.`);
+  if (st.settings.dictionary === 'common' && !isWord(w)) return reject(api, m, `"${w}" isn't in the word list.`);
   st.used.add(w);
   st.chain.push({ word: w, by: cur.id, name: cur.name });
   cur.words++;
@@ -211,4 +214,4 @@ function view(st, m, now) {
   };
 }
 
-module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, DICT, normalize };
+module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, DICT, normalize, isWord };
