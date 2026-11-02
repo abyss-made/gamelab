@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { shuffle } = require('../util');
 const filter = require('../filter');
+const lexicon = require('../lexicon');
 
 const meta = {
   id: 'wordscramble',
@@ -38,6 +39,9 @@ const POOL = { easy: [], medium: [], hard: [] };
   }
 })();
 
+// Solutions come from the curated WORDS pool; any lexicon word counts when accepting a guess.
+const isWord = (w) => WORDS.has(w) || lexicon.has(w);
+
 // Anagram key: lets us accept any dictionary word that uses exactly the same letters.
 const key = (w) => w.split('').sort().join('');
 
@@ -60,7 +64,7 @@ function scramble(word) {
   for (let i = 0; i < 50; i++) {
     const s = shuffle(word.split(''));
     const t = s.join('');
-    if (t !== word && !WORDS.has(t)) return s;
+    if (t !== word && !isWord(t)) return s;
   }
   return word.split('').reverse();
 }
@@ -109,11 +113,11 @@ function onAction(st, m, a, api) {
   if (st.over || st.phase !== 'play' || !a || a.type !== 'guess' || typeof a.word !== 'string') return;
   const p = st.players.find((x) => x.id === m.id);
   if (!p || p.out || p.solvedAt) return;
-  const w = a.word.toLowerCase().trim().slice(0, MAX_GUESS * 2);
+  const w = lexicon.normalize(a.word);
   if (!w || w.length > MAX_GUESS || !/^[a-z]+$/.test(w)) return api.toMember(m.id, 'notice', 'Use letters only (a to z).');
   const exact = w === st.word;
   // Another real word built from the same letters counts too.
-  const anagram = !exact && w.length === st.word.length && key(w) === key(st.word) && WORDS.has(w);
+  const anagram = !exact && w.length === st.word.length && key(w) === key(st.word) && isWord(w) && !filter.hasBad(w);
   if (!exact && !anagram) return api.toMember(m.id, 'notice', 'Not quite. Try again!');
   const total = st.settings.roundTime * 1000;
   const left = Math.max(0, st.deadline - api.now());
