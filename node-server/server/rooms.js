@@ -72,7 +72,7 @@ function seatSpectator(room, m) {
   m.role = 'player';
 }
 function fillFromQueue(room) {
-  if (room.phase !== 'lobby') return;
+  if (room.phase !== 'lobby' || room.holdFill) return;
   while (room.seats.length < seatCap(room)) {
     const m = room.queue.map((id) => room.members.get(id)).find((x) => x && x.role === 'spectator' && x.connected);
     if (!m) break;
@@ -675,6 +675,8 @@ function attach(ioServer) {
         return socket.emit('notice', `${G2.meta.name} seats ${G2.meta.maxPlayers}. Allow spectators in Party Settings so everyone else can watch.`);
       }
       // Bots only come along to games they can play, and never as spectators.
+      // Seats freed by removing bots must not be refilled from the queue using the old game's size.
+      room.holdFill = true;
       const dropBots = (pred) => {
         for (const b of [...room.members.values()]) if (b.bot && pred(b)) removeMember(room, b.id, 'quiet');
       };
@@ -693,6 +695,7 @@ function attach(ioServer) {
           if (spare.length) sys(room, `${spare.length} bot${spare.length === 1 ? ' was' : 's were'} removed to make room for people.`, 'info');
         }
       }
+      room.holdFill = false;
       room.gameId = opts.game;
       room.maxPlayers = G2.meta.maxPlayers;
       room.lastResult = null;

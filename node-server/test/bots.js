@@ -138,6 +138,43 @@ def('idle-bots', async () => {
   host.close();
 });
 
+// Regression tests for the Codex findings on #51.
+def('switch-with-queue', async () => {
+  const { host, code } = await newParty('dotsboxes');
+  await addBot(host); await addBot(host); await addBot(host);
+  const q1 = client('Qa'); const q2 = client('Qb');
+  await q1.join(code); await q2.join(code);
+  await wait([host], (s) => s.spectators.length === 2, 'two watchers');
+  q1.emit('queue', true); q2.emit('queue', true);
+  await wait([host], (s) => s.queue.length === 2, 'queued');
+  host.emit('switchGame', { game: 'chess', seats: [host.state.you, q1.state.you] });
+  await wait([host], (s) => s.gameId === 'chess', 'chess');
+  await srv.passes(2);
+  const room = await srv.room(code);
+  const botSpecs = room.members.filter((m) => m.bot && room.specs.includes(m.id));
+  r.ok(botSpecs.length === 0 && room.seats.length === 2, `queued humans plus trimmed bots: no bot ends up spectating (${botSpecs.length})`);
+  await consistent('switch with queue');
+  [host, q1, q2].forEach((c) => c.close());
+});
+
+def('rps-rematch', async () => {
+  // A one-throw game, then a rematch: the bots must throw again in the new game.
+  const { host } = await newParty('rps', { settings: { bestOf: 1 } });
+  host.emit('watch');
+  await host.untilState((s) => s.role === 'spectator', 'watching');
+  host.emit('addBot', {}); await host.untilState((s) => s.players.length === 1, 'b1');
+  host.emit('addBot', {}); await host.untilState((s) => s.players.length === 2, 'b2');
+  for (let g = 1; g <= 2; g++) {
+    host.emit('startGame');
+    await host.untilState((s) => s.phase === 'game' && s.game, `game ${g} started`);
+    await host.untilState((s) => s.phase === 'lobby' && s.lastResult, `game ${g} finished by bot throws`, 20000);
+    r.ok(true, `game ${g}: two bots threw and finished (rematch included)`);
+    host.emit('backToLobby');
+    await host.untilState((s) => !s.lastResult, 'lobby');
+  }
+  host.close();
+});
+
 def('mixed-ttt-rematch', async () => {
   const { host, code } = await newParty('tictactoe', { settings: { winnerStays: false } });
   await addBot(host, 'normal');
@@ -268,6 +305,7 @@ def('no-work-without-people', async () => {
   console.log(`bots: real server on ${srv.url}, seed ${srv.seed}`);
   try {
     for (const s of SC) {
+      if (process.env.SCENARIO && !process.env.SCENARIO.split(',').includes(s.name)) continue;
       console.log(`\n== ${s.name}`);
       await H.scenario(r, srv, s.name, () => live, s.fn, 120000);
     }

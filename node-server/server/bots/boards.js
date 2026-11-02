@@ -307,10 +307,12 @@ const chess = {
 // ---------- Rock Paper Scissors Tournament ----------
 // Picks are private and final. The bot never looks at anyone else's pick, only whether a throw is open.
 const MOVES = ['rock', 'paper', 'scissors'];
+const thrown = new WeakMap(); // game state -> Map(member id -> throw number); per game, so a rematch starts clean
+const thrownIn = (st) => thrown.get(st) || thrown.set(st, new Map()).get(st);
 const rps = {
-  ready: (st, m) => !st.over && st.phase === 'pick' && m.botThrow !== st.throwNo,
+  ready: (st, m) => !st.over && st.phase === 'pick' && thrownIn(st).get(m.id) !== st.throwNo,
   decide(st, m, { rng }) {
-    m.botThrow = st.throwNo;
+    thrownIn(st).set(m.id, st.throwNo);
     return { type: 'pick', move: pick(MOVES, rng) };
   },
 };
