@@ -6,7 +6,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "test": "node test/drawguess.js && node test/smoke.js && node test/safety.js && node test/alpha.js && node test/phase1.js && node test/ui.js && node test/phase15.js && node test/batch2.js && node test/batch2ui.js && node test/batch1.js && node test/batch1ui.js && node test/batch3.js && node test/batch3ui.js && node test/batch4.js && node test/batch4ui.js && node test/batch5.js && node test/batch5ui.js && node test/audit.js && node test/qol.js && node test/party.js && node test/partyui.js && node test/party3.js && node test/party3ui.js && node test/phase2.js && node test/phase2ui.js && node test/design31ui.js"
+    "test": "node test/drawguess.js && node test/smoke.js && node test/safety.js && node test/alpha.js && node test/phase1.js && node test/ui.js && node test/phase15.js && node test/batch2.js && node test/batch2ui.js && node test/batch1.js && node test/batch1ui.js && node test/batch3.js && node test/batch3ui.js && node test/batch4.js && node test/batch4ui.js && node test/batch5.js && node test/batch5ui.js && node test/audit.js && node test/qol.js && node test/party.js && node test/partyui.js && node test/party3.js && node test/party3ui.js && node test/phase2.js && node test/phase2ui.js && node test/design31ui.js && node test/reliability.js && node test/reliabilityui.js && node test/keyboardui.js",
+    "test:reliability": "node test/reliability.js && node test/reliabilityui.js"
   },
   "engines": { "node": ">=18" },
   "dependencies": {

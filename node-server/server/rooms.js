@@ -162,9 +162,12 @@ function makeApi(room) {
     // first spectator takes the seat. Returns the new player's name, if any.
     rotateLoser: (loserId) => {
       const i = room.seats.indexOf(loserId);
-      if (i < 0 || room.specs.length === 0) return null;
-      // Queued spectators go first (in order), then whoever has been watching longest.
-      const nextId = room.queue.find((id) => room.specs.includes(id)) || room.specs[0];
+      if (i < 0) return null;
+      // Queued spectators go first (in order), then whoever has been watching longest. Only someone
+      // who is connected: like fillFromQueue, never bench the loser for a spectator who has dropped.
+      const here = (id) => room.specs.includes(id) && !!room.members.get(id) && room.members.get(id).connected;
+      const nextId = room.queue.find(here) || room.specs.find(here);
+      if (!nextId) return null;
       const next = room.members.get(nextId);
       const loser = room.members.get(loserId);
       room.specs = room.specs.filter((x) => x !== nextId);

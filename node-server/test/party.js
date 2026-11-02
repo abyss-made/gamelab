@@ -156,7 +156,8 @@ async function winTicTacToe(cs) {
       const rj = await bea2.join(code);
       await until(() => bea2.state);
       ok(rj.rejoined && bea2.state.you === beaId, 'reconnect within grace keeps the same member id');
-      ok(host.state.players.concat(host.state.spectators).find((p) => p.id === beaId).connected, 'reconnected member shows as connected again');
+      // The host's copy of the state arrives on its own socket, so wait for it instead of reading it at once.
+      ok(await until(() => host.state.players.concat(host.state.spectators).find((p) => p.id === beaId).connected), 'reconnected member shows as connected again');
       cs.forEach((c) => c.emit('leaveRoom'));
       bea2.emit('leaveRoom');
     }

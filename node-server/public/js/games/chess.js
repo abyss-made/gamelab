@@ -15,6 +15,15 @@ GameUI.chess = (() => {
   let tickTimer = null;
   let lastCount = -1;
   let animatedCount = -1;
+  const resign = C.makeConfirm(); // survives re-renders, so an opponent's move doesn't disarm it
+  const actionsHTML = (g) =>
+    g.myIndex >= 0
+      ? `<button type="button" class="btn btn-small btn-ghost" data-act="offer" ${g.canOffer ? "" : "disabled"}>Offer draw</button><button type="button" class="btn btn-small btn-ghost" data-act="resign"${resign.armed ? ' data-armed="1"' : ""}>${resign.armed ? "Tap again to resign" : "Resign"}</button>`
+      : "";
+  const paintActions = () => {
+    const el = root && root.querySelector("#ch-actions");
+    if (el && S && S.game) C.keepFocus(document.getElementById("stage"), () => (el.innerHTML = actionsHTML(S.game)));
+  };
 
   const name = (s) => "abcdefgh"[s & 7] + ((s >> 3) + 1);
 
@@ -55,7 +64,7 @@ GameUI.chess = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     tickTimer = setInterval(drawClocks, 250);
-    root.addEventListener("click", onClick);
+    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
   }
 
   function send(from, to, promo) {
@@ -103,12 +112,8 @@ GameUI.chess = (() => {
     if (!act) return;
     const t = act.dataset.act;
     if (t === "resign") {
-      if (act.dataset.armed) app.socket.emit("action", { type: "resign" });
-      else {
-        act.dataset.armed = "1";
-        act.textContent = "Tap again to resign";
-        setTimeout(() => { if (act.isConnected) { delete act.dataset.armed; act.textContent = "Resign"; } }, 3000);
-      }
+      if (resign.tap(paintActions)) app.socket.emit("action", { type: "resign" });
+      else paintActions();
     } else if (t === "offer") app.socket.emit("action", { type: "offerDraw" });
     else if (t === "accept") app.socket.emit("action", { type: "acceptDraw" });
     else if (t === "decline") app.socket.emit("action", { type: "declineDraw" });
@@ -167,7 +172,7 @@ GameUI.chess = (() => {
     if (g.myIndex >= 0 && g.drawOffer >= 0 && g.drawOffer !== g.myIndex) offer.innerHTML = `<div class="ch-offer"><b>${app.esc(g.players[g.drawOffer].name)} offers a draw.</b><div><button type="button" class="btn btn-small" data-act="accept">Accept</button> <button type="button" class="btn btn-small btn-ghost" data-act="decline">Decline</button></div></div>`;
     else if (g.drawOffer >= 0) offer.innerHTML = '<p class="muted">Draw offer sent.</p>';
     else offer.innerHTML = "";
-    root.querySelector("#ch-actions").innerHTML = g.myIndex >= 0 ? `<button type="button" class="btn btn-small btn-ghost" data-act="offer" ${g.canOffer ? "" : "disabled"}>Offer draw</button><button type="button" class="btn btn-small btn-ghost" data-act="resign">Resign</button>` : "";
+    root.querySelector("#ch-actions").innerHTML = actionsHTML(g);
     if (g.moves.length !== lastCount && lastCount >= 0) Sound.play("drop");
     lastCount = g.moves.length;
     drawClocks();
@@ -175,6 +180,7 @@ GameUI.chess = (() => {
 
   function unmount() {
     if (clock) clock.stop();
+    resign.reset();
     clearInterval(tickTimer);
     if (root) root.remove();
     root = null;
