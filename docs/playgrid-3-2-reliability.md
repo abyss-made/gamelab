@@ -204,6 +204,9 @@ Each item below has at least one scenario in section 3.
 ## 6. Residual risks
 
 * No human or physical-device testing; Chromium only; emulated phones; localhost network.
+* With production heartbeat settings, a phone that loses signal without closing its connection can
+  look connected to the others for up to about 45 s. That doesn't change seats or turns, but it does
+  delay "Reconnecting" and the host hand-over.
 * iOS Safari suspends background tabs. Past 20 s that loses the seat (by design), but isn't measured here.
 * Everything is in memory on one process. A restart or deploy ends every party; clients then see
   "This party has closed".
@@ -223,7 +226,56 @@ Each item below has at least one scenario in section 3.
 Environment: Linux container, 4 vCPU Intel Xeon @ 2.10 GHz, 16 GB RAM, Node v22.23.4, Chromium from
 Playwright 1.63.0, server and clients on localhost. Seed 48.
 
-RESULTS_PLACEHOLDER
+**Test runs** (final code, `cd node-server && npm test`, Playwright installed, so nothing skipped):
+
+| Run | Result | Time |
+| --- | --- | --- |
+| Full `npm test`, before this work (baseline) | 3051 passed, 0 failed, 0 skipped | 7 min 57 s |
+| Full `npm test`, this branch | **3513 passed, 0 failed, 0 skipped** | 8 min 44 s |
+| `node test/reliability.js` (seed 48) | 380 passed, 0 failed | 29.1 s |
+| `node test/reliability.js` with seeds 7, 1234, 99 | 380 passed, 0 failed, each | 25.8 to 27.7 s |
+| `node test/reliabilityui.js` | 49 passed, 0 failed | 25.8 s |
+| `node test/keyboardui.js` | 40 passed, 0 failed (also 5 runs in a row) | 3.2 s |
+
+The existing files' pass counts match the baseline file by file, except three groups of checks that
+only run when the random deal, dice or roles produce that situation. Go Fish's browser checks run when
+the page gets the turn (`batch2ui`, +2 this run). An Impostor check runs when the first clue-giver is
+crew (`batch3`, −1). Tycoon's auction checks run when the page lands on an unowned property (`batch5ui`,
+−8). Compared line by line, no check failed or was skipped because of this change.
+
+**Server, socket-level** (`metrics.json` from the full run):
+
+| Measure | 2 people | 4 people | 8 people |
+| --- | --- | --- | --- |
+| All joins acked (one party, joining at once) | 5 ms | 5 ms | 10 ms |
+| One chat line reaches every client | 1 ms | 1 ms | 1 ms |
+| One host change reaches every client | 1 ms | 1 ms | 1 ms |
+| State messages per client for that change | 1 | 1 | 1 |
+
+* Server heap: 11.0 MB at start, 12.4 MB after every scenario and a forced GC. RSS 74.7 MB. Node timers
+  are back to the baseline of one, the room loop.
+* A whole Color Stack game with 3 players: 131 moves (seed 48).
+* Slowest scenarios: `drawguess-secrets` 5.3 s, `colorstack-full-game` 4.0 s, `timers` 4.0 s,
+  `autostart-lock-abandon` 4.0 s, `party-sizes` 3.8 s. Most of that is counted loop passes (250 ms each)
+  after moving the clock. The 21-game smoke pass takes 0.4 s.
+
+**Browser** (5 pages; Chromium 153 from Playwright 1.63.0):
+
+* After 16 game cycles across 8 games: 0 pending animation frames, 25 window/document listeners and 10
+  Socket.IO callbacks per page, unchanged from the first round of cycles. Live intervals: 0, or 1 on pages
+  that had visited Rooms (the idle Rooms poll in section 4). Host page JS heap 9.5 MB.
+* Offline emulation with a 2 s heartbeat: the server marks the page offline in about two heartbeats,
+  and the page rejoins within about a second of coming back online. A probe with a 1 s heartbeat
+  measured 1.9 s and 0.9 s. With production settings (25 s interval, 20 s timeout) detection takes up to
+  45 s. Until then the others see the player as connected.
+
+**Screenshots** (`docs/screenshots/playgrid-3-2/`, from `SHOTS_DIR=../docs/screenshots/playgrid-3-2 node test/reliabilityui.js`):
+
+* `lobby-desktop-host.png` and `lobby-phone-guest.png`: five people joined in four different ways.
+* `drawguess-desktop-host-sees-offline.png`: the drawer sees the word, and Ben, who went offline, shows as reconnecting.
+* `drawguess-desktop-spectator.png`: the spectator sees only the blanks, and chat goes to "players who know the word".
+* `drawguess-phone-reveal.png`: the reveal on a phone.
+* `fourrow-phone-result.png`: a result on a phone with "Winner stays: … plays next" (a connected spectator).
 
 ## 8. Recommended next playtest (people, real devices)
 
@@ -253,3 +305,6 @@ that stops moving, and the device and browser for each problem.
    Battleship phone cell size, and the Drawing Telephone slot for players who left.
 5. Should the Node Server Tests workflow also run for pull requests into `codex/playgrid-2-redesign`?
    That is a workflow change, so it was not made here.
+6. Should the Socket.IO heartbeat be shorter than the default (25 s interval, 20 s timeout)? A dead
+   phone connection would show as "Reconnecting" sooner, at the cost of more keep-alive traffic. Not
+   changed here.

@@ -306,7 +306,7 @@ def('drawguess-live', async () => {
       await waitFor(host, (id) => App.S.players.some((p) => p.id === id && p.connected), flakyId, 'online again', 10000);
       ok((await S(flaky)).you === flakyId, 'coming back online rejoins automatically as the same member');
       await consistent('after reload and offline', all);
-      await shot(eli, 'drawguess-phone-spectator');
+      await shot(eli, 'drawguess-desktop-spectator');
     }
     // Everyone guesses through the chat box.
     for (const P of guessers) {
