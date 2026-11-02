@@ -1,0 +1,89 @@
+[
+  {
+    "game": "color-stack",
+    "width": 1440,
+    "visibleOpponentBacks": [
+      4,
+      6,
+      3
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "go-fish",
+    "width": 1440,
+    "visibleOpponentBacks": [
+      6,
+      4
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "color-stack",
+    "width": 768,
+    "visibleOpponentBacks": [
+      4,
+      6,
+      3
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "go-fish",
+    "width": 768,
+    "visibleOpponentBacks": [
+      6,
+      4
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "color-stack",
+    "width": 390,
+    "visibleOpponentBacks": [
+      4,
+      6,
+      3
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "go-fish",
+    "width": 390,
+    "visibleOpponentBacks": [
+      6,
+      4
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "color-stack",
+    "width": 360,
+    "visibleOpponentBacks": [
+      4,
+      6,
+      3
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "go-fish",
+    "width": 360,
+    "visibleOpponentBacks": [
+      6,
+      4
+    ],
+    "deckLabelClearOfControls": true
+  },
+  {
+    "game": "battleship",
+    "width": 390,
+    "fleetSwitchAndReturn": true,
+    "enemyChartHasNoVessels": true
+  },
+  {
+    "game": "color-stack",
+    "selectionFeedback": true,
+    "reducedMotion": true
+  }
+]

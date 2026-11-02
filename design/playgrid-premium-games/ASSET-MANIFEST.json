@@ -1,0 +1,55 @@
+{
+  "stage": "Owner-approved directions and Claude implementation handoff",
+  "baseline": "3f0d51a",
+  "reuse": [
+    {
+      "path": "../../node-server/public/favicon.svg",
+      "use": "Approved Playgrid mark, unchanged"
+    },
+    {
+      "path": "../../node-server/public/assets/player-portraits.png",
+      "use": "Approved original 2\u00d72 portrait sprite, CSS positions only"
+    },
+    {
+      "path": "../../node-server/public/assets/fonts/inter-variable.ttf",
+      "license": "Existing SIL OFL in assets/fonts/OFL.txt",
+      "use": "Shared Inter typography"
+    },
+    {
+      "path": "../../node-server/public/js/games/art31.js",
+      "use": "Existing original Playgrid Chess silhouette paths, extracted into the concept SVG and restyled"
+    }
+  ],
+  "original_concept_assets": [
+    "blossom-avenue.svg",
+    "chess-walnut.svg",
+    "fleet-chart.svg",
+    "golf-dogleg-portrait.svg",
+    "golf-dogleg.svg",
+    "ludo-board.svg",
+    "marine-card-back.svg",
+    "marine-fish.svg",
+    "pool-portrait.svg",
+    "pool-table.svg",
+    "ship-battleship.svg",
+    "ship-carrier.svg",
+    "ship-destroyer.svg",
+    "ship-patrol.svg",
+    "ship-submarine.svg",
+    "stack-card-back.svg",
+    "target-chart.svg",
+    "tycoon-board-mobile.svg",
+    "tycoon-board.svg"
+  ],
+  "rights": "No competitor artwork, logos, screenshots or proprietary piece sets copied. Sources are existing Playgrid art and newly authored CSS/SVG. No new branding.",
+  "revision": "Owner-requested Stage A pass 2: five games; no production implementation",
+  "original_art_source": "asset-source/build-revision.py (standard-library Python), board-reference.json",
+  "approval_status": "All eight directions approved by owner, including revision 2; implementation assigned via CLAUDE-TASK.md",
+  "production_variants_to_complete": [
+    "Complete card face/deck variants",
+    "All ball, token, damage, building and piece-theme sprites",
+    "All phase and transaction variants",
+    "Final audio assets",
+    "Production implementation contracts"
+  ]
+}

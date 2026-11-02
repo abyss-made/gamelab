@@ -1,0 +1,506 @@
+[
+  {
+    "game": "color-stack",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Play Red 5",
+        "bottom": 817,
+        "right": 1172
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "color-stack",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Play Red 5",
+        "bottom": 943,
+        "right": 713.15625
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "color-stack",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Play Red 5",
+        "bottom": 772,
+        "right": 369
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "color-stack",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Play Red 5",
+        "bottom": 668,
+        "right": 339
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "pool",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Shoot",
+        "bottom": 794,
+        "right": 1174
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "pool",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Shoot",
+        "bottom": 920,
+        "right": 729
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "pool",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Shoot",
+        "bottom": 754,
+        "right": 365
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "pool",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Shoot",
+        "bottom": 650,
+        "right": 335
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "pool",
+    "size": "landscape",
+    "w": 844,
+    "h": 390,
+    "sw": 844,
+    "sh": 390,
+    "primaryActions": [
+      {
+        "label": "Shoot",
+        "bottom": 289.5,
+        "right": 820
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "mini-golf",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Putt",
+        "bottom": 790,
+        "right": 1215
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "mini-golf",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Putt",
+        "bottom": 917.5,
+        "right": 719
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "mini-golf",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Putt",
+        "bottom": 757,
+        "right": 367
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "mini-golf",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Putt",
+        "bottom": 654,
+        "right": 337
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "ludo",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Token 2 \u00b7 6",
+        "bottom": 580.59375,
+        "right": 1198
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "ludo",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Token 2 \u00b7 6",
+        "bottom": 884,
+        "right": 708
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "ludo",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Token 2 \u00b7 6",
+        "bottom": 723,
+        "right": 369
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "ludo",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Token 2 \u00b7 6",
+        "bottom": 621,
+        "right": 340
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "property-tycoon",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Buy Blossom Avenue \u00b7 $160",
+        "bottom": 704.03125,
+        "right": 1228
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "property-tycoon",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Buy Blossom Avenue \u00b7 $160",
+        "bottom": 940,
+        "right": 470
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "property-tycoon",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Buy Blossom Avenue \u00b7 $160",
+        "bottom": 725,
+        "right": 369
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "property-tycoon",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Buy Blossom Avenue \u00b7 $160",
+        "bottom": 623,
+        "right": 341
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "battleship",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Fire at D4",
+        "bottom": 821,
+        "right": 957.140625
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "battleship",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Fire at D4",
+        "bottom": 945,
+        "right": 621.140625
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "battleship",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Fire at D4",
+        "bottom": 776,
+        "right": 370
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "battleship",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Fire at D4",
+        "bottom": 672,
+        "right": 340
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "go-fish",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [
+      {
+        "label": "Ask Nova for 7s",
+        "bottom": 599,
+        "right": 1001.609375
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "go-fish",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [
+      {
+        "label": "Ask Nova for 7s",
+        "bottom": 721,
+        "right": 625.8125
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "go-fish",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [
+      {
+        "label": "Ask Nova for 7s",
+        "bottom": 610,
+        "right": 369
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "go-fish",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [
+      {
+        "label": "Ask Nova for 7s",
+        "bottom": 522,
+        "right": 339
+      }
+    ],
+    "errors": []
+  },
+  {
+    "game": "chess",
+    "size": "desktop",
+    "w": 1440,
+    "h": 900,
+    "sw": 1440,
+    "sh": 900,
+    "primaryActions": [],
+    "errors": []
+  },
+  {
+    "game": "chess",
+    "size": "tablet",
+    "w": 768,
+    "h": 1024,
+    "sw": 768,
+    "sh": 1024,
+    "primaryActions": [],
+    "errors": []
+  },
+  {
+    "game": "chess",
+    "size": "mobile",
+    "w": 390,
+    "h": 844,
+    "sw": 390,
+    "sh": 844,
+    "primaryActions": [],
+    "errors": []
+  },
+  {
+    "game": "chess",
+    "size": "narrow",
+    "w": 360,
+    "h": 740,
+    "sw": 360,
+    "sh": 740,
+    "primaryActions": [],
+    "errors": []
+  }
+]
