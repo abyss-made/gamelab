@@ -22,24 +22,26 @@ GameUI.gofish = (() => {
       <div class="card cs-hand-wrap"><div class="gf-hand" id="gf-hand" aria-label="Your hand"></div></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
-    root.addEventListener("click", (e) => {
-      if (!S) return;
-      const g = S.game;
-      if (g.turnId !== S.you) return;
-      const r = e.target.closest("[data-rank]");
-      const t = e.target.closest("[data-target]");
-      if (r) pickRank = Number(r.dataset.rank);
-      if (t) pickTarget = t.dataset.target;
-      if (e.target.closest("#gf-go") && pickRank !== null && pickTarget) {
-        app.socket.emit("action", { type: "ask", target: pickTarget, rank: pickRank });
-        pickRank = null;
-        pickTarget = null;
-      }
-      // Repaint the picks from the same state; the clock must keep counting from the last server update.
-      repainting = true;
-      update(S);
-      repainting = false;
-    });
+    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+  }
+
+  function onClick(e) {
+    if (!S) return;
+    const g = S.game;
+    if (g.turnId !== S.you) return;
+    const r = e.target.closest("[data-rank]");
+    const t = e.target.closest("[data-target]");
+    if (r) pickRank = Number(r.dataset.rank);
+    if (t) pickTarget = t.dataset.target;
+    if (e.target.closest("#gf-go") && pickRank !== null && pickTarget) {
+      app.socket.emit("action", { type: "ask", target: pickTarget, rank: pickRank });
+      pickRank = null;
+      pickTarget = null;
+    }
+    // Repaint the picks from the same state; the clock must keep counting from the last server update.
+    repainting = true;
+    update(S);
+    repainting = false;
   }
 
   let repainting = false;

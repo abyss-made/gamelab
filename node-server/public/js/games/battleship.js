@@ -3,6 +3,12 @@
 window.GameUI = window.GameUI || {};
 GameUI.battleship = (() => {
   const C = GameUI.common;
+  const resign = C.makeConfirm(); // survives re-renders, so an opponent's shot doesn't disarm it
+  const resignHTML = () => `<button type="button" class="btn btn-small btn-ghost" id="bs-resign"${resign.armed ? ' data-armed="1"' : ""}>${resign.armed ? "Tap again to resign" : "Resign"}</button>`;
+  const paintResign = () => {
+    const b = document.getElementById("bs-resign");
+    if (b) C.keepFocus(document.getElementById("stage"), () => (b.outerHTML = resignHTML()));
+  };
   const N = 10;
   const COLS = "ABCDEFGHIJ";
   let root = null;
@@ -56,7 +62,7 @@ GameUI.battleship = (() => {
       <div id="bs-main"></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
-    root.addEventListener("click", onClick);
+    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
   }
 
   function onClick(e) {
@@ -90,12 +96,8 @@ GameUI.battleship = (() => {
       return;
     }
     if (t.id === "bs-resign") {
-      if (t.dataset.armed) app.socket.emit("action", { type: "resign" });
-      else {
-        t.dataset.armed = "1";
-        t.textContent = "Tap again to resign";
-        setTimeout(() => { if (t.isConnected) { delete t.dataset.armed; t.textContent = "Resign"; } }, 3000);
-      }
+      if (resign.tap(paintResign)) app.socket.emit("action", { type: "resign" });
+      else paintResign();
       return;
     }
     if (t.dataset.cell === undefined || t.disabled) return;
@@ -170,7 +172,7 @@ GameUI.battleship = (() => {
     const mine = g.players[me];
     const myShipCells = new Set((g.myShips || []).flatMap((s) => s.cells));
     main.innerHTML = `<div class="bs-two"><div class="card"><h3 class="bs-title">Enemy waters <small>${foe.remaining} ships left</small></h3>${gridHTML({ shots: foe.shots, sunk: new Set(foe.sunk.flatMap((s) => s.cells)), aimCell: aim, lastCell: g.last && g.last.by === me ? g.last.cell : -1, tappable: myTurn, label: "Enemy waters" })}
-      <div class="bs-ctl"><button type="button" class="btn bs-fire" id="bs-fire" ${myTurn && aim >= 0 ? "" : "disabled"}>Fire!</button><button type="button" class="btn btn-small btn-ghost" id="bs-resign">Resign</button></div></div>
+      <div class="bs-ctl"><button type="button" class="btn bs-fire" id="bs-fire" ${myTurn && aim >= 0 ? "" : "disabled"}>Fire!</button>${resignHTML()}</div></div>
       <div class="card"><h3 class="bs-title">Your fleet <small>${mine.remaining} ships left</small></h3>${gridHTML({ shots: mine.shots, ships: myShipCells, sunk: new Set(mine.sunk.flatMap((s) => s.cells)), lastCell: g.last && g.last.by !== me ? g.last.cell : -1, label: "Your fleet" })}</div></div>`;
   }
 
@@ -201,6 +203,7 @@ GameUI.battleship = (() => {
 
   function unmount() {
     if (clock) clock.stop();
+    resign.reset();
     if (root) root.remove();
     root = null;
     lastMoves = -1;

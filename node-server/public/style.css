@@ -6863,3 +6863,9 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
     display: none;
   }
 }
+
+/* #43: while a board control is disabled (not your turn), keyboard focus waits on the stage itself and
+   returns to the same square when it is enabled again. The stage is only a holding spot, so no ring. */
+#stage:focus {
+  outline: none;
+}

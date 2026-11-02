@@ -64,5 +64,71 @@ GameUI.common = (() => {
     if (!mine) return "reveal";
     return r.winnerId === state.you || (r.winners && r.winners.includes(state.you)) ? "win" : "lose";
   }
-  return { playingCard, cardBack, makeClock, playerChip, podium, resultTitle, resultSound, rankWord, rankLabel };
+  // Re-renders without dropping keyboard focus (#43). Boards are rebuilt with innerHTML, which used
+  // to send focus back to <body>. If a button inside `root` had focus and `render` replaced it, its
+  // replacement (same data-sq / data-cell / data-col / data-rank / data-target / data-ship / data-act
+  // / data-choose, or id) gets focus back. If that control is disabled now (it isn't your turn),
+  // focus waits on `root` and returns to it at a later render, once it is enabled again.
+  const FOCUS_KEYS = ["sq", "cell", "col", "rank", "target", "ship", "act", "choose"];
+  let parked = null;
+  function focusKey(el) {
+    if (!el || el.tagName !== "BUTTON") return null;
+    for (const k of FOCUS_KEYS) if (el.dataset[k] !== undefined) return `[data-${k}="${CSS.escape(el.dataset[k])}"]`;
+    return el.id ? "#" + CSS.escape(el.id) : null;
+  }
+  function keepFocus(root, render) {
+    const before = document.activeElement;
+    let key = root && before && root.contains(before) ? focusKey(before) : null;
+    if (!key && parked && parked.root === root && before === root) key = parked.key;
+    render();
+    if (!key || !root.isConnected) return;
+    const now = document.activeElement;
+    if (now && now !== document.body && now !== root) return; // focus survived, or the user moved on
+    const next = root.querySelector(key);
+    if (next && !next.disabled) {
+      parked = null;
+      next.focus({ preventScroll: true });
+    } else {
+      parked = { root, key };
+      if (!root.hasAttribute("tabindex")) root.setAttribute("tabindex", "-1");
+      root.focus({ preventScroll: true });
+    }
+  }
+
+  // "Tap again to confirm" whose armed state outlives re-renders (#43): an opponent's move rebuilds
+  // the button, but the second tap within `ms` still confirms. `onExpire` repaints the label.
+  function makeConfirm(ms = 3000) {
+    let until = 0;
+    let timer = null;
+    return {
+      get armed() {
+        return performance.now() < until;
+      },
+      // True when this tap confirms. Otherwise it arms, and calls onExpire when the window closes.
+      tap(onExpire) {
+        clearTimeout(timer);
+        if (performance.now() < until) {
+          until = 0;
+          return true;
+        }
+        until = performance.now() + ms;
+        timer = setTimeout(() => {
+          until = 0;
+          if (onExpire) onExpire();
+        }, ms);
+        return false;
+      },
+      reset() {
+        clearTimeout(timer);
+        until = 0;
+      },
+    };
+  }
+
+  // A new game starts with nothing remembered.
+  const releaseFocus = () => {
+    parked = null;
+  };
+
+  return { playingCard, cardBack, makeClock, playerChip, podium, resultTitle, resultSound, rankWord, rankLabel, keepFocus, releaseFocus, makeConfirm };
 })();

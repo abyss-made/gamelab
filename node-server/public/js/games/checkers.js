@@ -9,6 +9,12 @@ GameUI.checkers = (() => {
   let sel = -1;
   let lastMoves = -1;
   let animatedMoves = -1;
+  const resign = C.makeConfirm(); // survives re-renders, so an opponent's move doesn't disarm it
+  const resignHTML = () => `<button type="button" class="btn btn-small btn-ghost" id="ck-resign"${resign.armed ? ' data-armed="1"' : ""}>${resign.armed ? "Tap again to resign" : "Resign"}</button>`;
+  const paintResign = () => {
+    const el = root && root.querySelector("#ck-actions");
+    if (el && el.firstChild) C.keepFocus(document.getElementById("stage"), () => (el.innerHTML = resignHTML()));
+  };
 
   const name = (c) => "abcdefgh"[c & 7] + ((c >> 3) + 1);
 
@@ -45,36 +51,31 @@ GameUI.checkers = (() => {
       <div class="board-actions" id="ck-actions"></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
-    root.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-sq]");
-      if (b && !b.disabled && S && S.game && S.game.myIndex === S.game.turn) {
-        const i = Number(b.dataset.sq);
-        const g = S.game;
-        if (sel >= 0 && g.legal[sel] && g.legal[sel].includes(i)) {
-          app.socket.emit("action", { type: "move", from: sel, to: i });
-          sel = -1;
-        } else if (g.legal[i]) {
-          sel = i;
-          paint();
-        } else {
-          sel = -1;
-          paint();
-        }
-        return;
+    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+  }
+
+  function onClick(e) {
+    const b = e.target.closest("[data-sq]");
+    if (b && !b.disabled && S && S.game && S.game.myIndex === S.game.turn) {
+      const i = Number(b.dataset.sq);
+      const g = S.game;
+      if (sel >= 0 && g.legal[sel] && g.legal[sel].includes(i)) {
+        app.socket.emit("action", { type: "move", from: sel, to: i });
+        sel = -1;
+      } else if (g.legal[i]) {
+        sel = i;
+        paint();
+      } else {
+        sel = -1;
+        paint();
       }
-      const r = e.target.closest("#ck-resign");
-      if (r) {
-        if (r.dataset.armed) {
-          app.socket.emit("action", { type: "resign" });
-        } else {
-          r.dataset.armed = "1";
-          r.textContent = "Tap again to resign";
-          setTimeout(() => {
-            if (r.isConnected) { delete r.dataset.armed; r.textContent = "Resign"; }
-          }, 3000);
-        }
-      }
-    });
+      return;
+    }
+    const r = e.target.closest("#ck-resign");
+    if (r) {
+      if (resign.tap(paintResign)) app.socket.emit("action", { type: "resign" });
+      else paintResign();
+    }
   }
 
   function paint() {
@@ -100,13 +101,14 @@ GameUI.checkers = (() => {
     st.innerHTML = g.myIndex < 0 ? `You're watching. <b>${turnName}</b> is up.` : myTurn ? `<b>Your turn!</b> ${g.chain >= 0 ? "Keep jumping with the same piece." : g.mustJump ? "You must capture." : "Tap a piece, then a square."}` : `Waiting for <b>${turnName}</b>...`;
     st.className = "ttt-status" + (myTurn ? " mine" : "");
     paint();
-    root.querySelector("#ck-actions").innerHTML = g.myIndex >= 0 ? '<button type="button" class="btn btn-small btn-ghost" id="ck-resign">Resign</button>' : "";
+    root.querySelector("#ck-actions").innerHTML = g.myIndex >= 0 ? resignHTML() : "";
     if (g.moves !== lastMoves && lastMoves >= 0) Sound.play("drop");
     lastMoves = g.moves;
   }
 
   function unmount() {
     if (clock) clock.stop();
+    resign.reset();
     if (root) root.remove();
     root = null;
     sel = -1;

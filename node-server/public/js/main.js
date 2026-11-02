@@ -1665,6 +1665,7 @@
     if (mounted && mounted.startsWith("game:"))
       GameUI[mounted.slice(5)].unmount();
     mounted = null;
+    GameUI.common.releaseFocus();
   }
 
   function renderStage() {
@@ -1682,7 +1683,8 @@
       }
     }
     if (mode === "lobby") renderLobby();
-    else GameUI[S.gameId].update(S, app);
+    // A state update rebuilds boards; keep keyboard focus on the same square or button (#43).
+    else GameUI.common.keepFocus(stage, () => GameUI[S.gameId].update(S, app));
   }
 
   // Next-game votes, most popular first.

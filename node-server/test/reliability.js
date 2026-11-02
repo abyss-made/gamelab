@@ -304,7 +304,11 @@ def('impostor-bluff-secrets', async () => {
   ok(p.cs.filter((c) => c !== imp).every((c) => c.g.role === 'crew' && c.g.word === word), 'every crew member is sent the word and the crew role');
   ok(imp.g.role === 'impostor' && imp.g.word === null, 'the impostor is sent their role and no word');
   ok(spec.g.role === null && spec.g.word === null, 'the spectator is sent neither a role nor the word');
-  ok(p.cs.every((c) => !JSON.stringify(c.g).includes(impId) || c === imp || c.g.players.some((x) => x.id === impId)), 'nobody is told who the impostor is');
+  // Nothing before the result names the impostor to anyone else: no impostor role, no impostorId.
+  const named = cs
+    .filter((c) => c !== imp)
+    .filter((c) => c.events.some((e) => e.ev === 'state' && e.data.game && e.data.game.phase !== 'result' && (e.data.game.role === 'impostor' || 'impostorId' in e.data.game || JSON.stringify(e.data).includes('"impostorId"'))));
+  ok(!named.length, `nobody else is told who the impostor is (${named.map((c) => c.name)})`);
   for (let i = 0; i < 4; i++) {
     const turnId = p.host.g.turnId;
     const who = byId(p.cs, turnId);
@@ -321,6 +325,10 @@ def('impostor-bluff-secrets', async () => {
   imp.action({ type: 'guess', text: 'definitely wrong' });
   await everyone(cs, (s) => s.game && s.game.phase === 'result', 'result');
   ok(cs.every((c) => c.g.result && c.g.result.word === word && c.g.result.impostorId === impId), 'the result tells everyone the word and the impostor');
+  const early = cs
+    .filter((c) => c !== imp)
+    .filter((c) => c.events.some((e) => e.ev === 'state' && e.data.game && e.data.game.phase !== 'result' && JSON.stringify(e.data).includes('"impostorId"')));
+  ok(!early.length, `before the result no view carried the impostor's id (${early.map((c) => c.name)})`);
   const legit = (e) => e.ev === 'state' && e.data.game && e.data.game.phase === 'result';
   for (const c of [imp, spec]) {
     const first = c.events.find((e) => mentionRe(word).test(JSON.stringify(e.data) || ''));
@@ -738,6 +746,62 @@ def('races', async () => {
   ok(room.game.moves === 2 && counts[1] === 1 && counts[2] === 1, `spammed moves apply one per turn (${room.game.moves} moves)`);
   await consistent('spammed moves', cs);
   closeAll(cs);
+});
+
+// 12b. Public auto-start countdown, locked parties, and a whole table dropping mid-game.
+def('autostart-lock-abandon', async () => {
+  const p = await party(2, { game: 'fourrow', isPublic: true });
+  await everyone(p.cs, (s) => s.autoStartIn !== null, 'countdown shown');
+  ok(p.cs.every((c) => c.state.autoStartIn > 10000), 'a public lobby with enough players shows the start countdown');
+  const [a, b] = p.cs;
+  const bId = b.id;
+  b.drop();
+  await a.untilState((s) => s.autoStartIn === null, 'countdown cancelled');
+  ok(true, 'the countdown stops when a player drops');
+  await srv.advance(13000);
+  ok((await srv.room(p.code)).phase === 'lobby', 'nothing starts while a player is missing');
+  const back = await b.reconnect();
+  ok(back && back.rejoined && b.id === bId, 'the player comes back as the same member');
+  await everyone(p.cs, (s) => s.autoStartIn !== null, 'countdown restarted');
+  await srv.advance(12500, 3);
+  await everyone(p.cs, (s) => s.phase === 'game', 'auto-started');
+  await srv.passes(3);
+  ok((await srv.room(p.code)).gameCount === 1, 'the countdown starts exactly one game');
+  // Locked: members can still come back, nobody new can get in.
+  p.host.emit('endGame');
+  await everyone(p.cs, (s) => s.phase === 'lobby', 'ended');
+  p.host.emit('hostUpdate', { isPublic: false, locked: true });
+  await everyone(p.cs, (s) => s.locked && !s.isPublic, 'locked');
+  const outsider = client('Lou');
+  const no = await outsider.join(p.code);
+  ok(no.error === 'locked', 'a locked party turns new people away');
+  const rf = await b.refresh();
+  ok(rf && rf.rejoined, 'a member of a locked party can still reload and rejoin');
+  b.leave();
+  await a.untilState((s) => s.players.length === 1, 'b left');
+  await srv.advance(2100, 1);
+  const again = await b.join(p.code);
+  ok(again.error === 'locked', 'someone who left a locked party cannot walk back in');
+  closeAll([...p.cs, outsider]);
+
+  // Everyone drops mid-game: the game ends when they time out, then the party expires.
+  const q = await party(3, { game: 'colorstack' });
+  await start(q, 'colorstack');
+  const ids = q.cs.map((c) => c.id);
+  q.cs.forEach((c) => c.drop());
+  for (let i = 0; i < 20; i++) {
+    const room = await srv.room(q.code);
+    if (room.members.every((m) => !m.connected)) break;
+    await srv.passes(1);
+  }
+  await srv.advance(GRACE + 1000);
+  let room = await srv.room(q.code);
+  ok(room && room.members.length === 0 && room.phase === 'lobby' && !room.hasGame, 'when the whole table drops, the members time out and the game is closed');
+  await srv.advance(ROOM_TTL + 1000);
+  room = await srv.room(q.code);
+  ok(!room, 'and the empty party expires');
+  ok(ids.length === 3, 'three members were dropped');
+  closeAll(q.cs);
 });
 
 // 13. Smoke pass of every visible game: start, private fields, reconnect, end, rematch, abandonment.
