@@ -157,6 +157,18 @@ def('switch-with-queue', async () => {
   [host, q1, q2].forEach((c) => c.close());
 });
 
+def('switch-idle-to-smaller-unsupported', async () => {
+  const { host, code } = await newParty('dotsboxes');
+  await addBot(host, 'idle'); await addBot(host, 'idle'); await addBot(host, 'idle');
+  host.emit('switchGame', { game: 'battleship' });
+  await wait([host], (s) => s.gameId === 'battleship', 'battleship');
+  await srv.passes(2);
+  const room = await srv.room(code);
+  r.ok(room.seats.length === 2 && !room.members.some((m) => m.bot && room.specs.includes(m.id)) && room.queue.length === 0, `excess idle bots are removed, not benched (${room.seats.length} seated, ${room.specs.length} watching)`);
+  await consistent('idle trim');
+  host.close();
+});
+
 def('rps-rematch', async () => {
   // A one-throw game, then a rematch: the bots must throw again in the new game.
   const { host } = await newParty('rps', { settings: { bestOf: 1 } });

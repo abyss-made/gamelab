@@ -688,12 +688,13 @@ function attach(ioServer) {
       } else {
         const keepable = bots.info(opts.game).difficulties;
         for (const b of room.members.values()) if (b.bot && b.difficulty !== 'idle' && !keepable.includes(b.difficulty)) b.difficulty = keepable.includes('normal') ? 'normal' : keepable[0];
-        const over = room.seats.length - G2.meta.maxPlayers;
-        if (over > 0) {
-          const spare = room.seats.filter((id) => room.members.get(id).bot).slice(-over);
-          for (const id of spare) removeMember(room, id, 'quiet');
-          if (spare.length) sys(room, `${spare.length} bot${spare.length === 1 ? ' was' : 's were'} removed to make room for people.`, 'info');
-        }
+      }
+      // Whatever the destination, bots never end up benched: trim any excess bots (idle ones too).
+      const over = room.seats.length - G2.meta.maxPlayers;
+      if (over > 0) {
+        const spare = room.seats.filter((id) => room.members.get(id).bot).slice(-over);
+        for (const id of spare) removeMember(room, id, 'quiet');
+        if (spare.length) sys(room, `${spare.length} bot${spare.length === 1 ? ' was' : 's were'} removed to make room for people.`, 'info');
       }
       room.holdFill = false;
       room.gameId = opts.game;
