@@ -694,7 +694,11 @@ function attach(ioServer) {
       // Whatever the destination, bots never end up benched: trim any excess bots (idle ones too).
       const over = room.seats.length - G2.meta.maxPlayers;
       if (over > 0) {
-        const spare = room.seats.filter((id) => room.members.get(id).bot).slice(-over);
+        // Honour the host's seat picks: remove unselected bots first. If every bot was selected, the
+        // normal seat-selection step below benches the people who weren't.
+        const picked = Array.isArray(opts.seats) ? new Set(opts.seats) : new Set();
+        const botSeats = room.seats.filter((id) => room.members.get(id).bot);
+        const spare = (picked.size ? botSeats.filter((id) => !picked.has(id)) : botSeats).slice(-over);
         for (const id of spare) removeMember(room, id, 'quiet');
         if (spare.length) sys(room, `${spare.length} bot${spare.length === 1 ? ' was' : 's were'} removed to make room for people.`, 'info');
       }

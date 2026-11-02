@@ -180,6 +180,21 @@ def('switch-bots-no-spectators', async () => {
   host.close();
 });
 
+def('switch-honours-picked-bots', async () => {
+  const { host, code } = await newParty('dotsboxes');
+  await addBot(host); await addBot(host); await addBot(host);
+  const [b1, b2, b3] = botsOf(host).map((b) => b.id);
+  host.emit('switchGame', { game: 'chess', seats: [b2, b3] });
+  await wait([host], (s) => s.gameId === 'chess', 'chess');
+  await srv.passes(2);
+  const room = await srv.room(code);
+  const seatedIds = room.seats.slice().sort().join();
+  r.ok(seatedIds === [b2, b3].sort().join(), `the two bots the host picked play; bot 1 is removed and the host watches (${room.seats.length} seated)`);
+  r.ok(!room.members.some((m) => m.id === b1) && room.specs.includes(host.state.you) && !room.members.some((m) => m.bot && room.specs.includes(m.id)), 'only the person is benched; no bot is a spectator');
+  await consistent('picked bots');
+  host.close();
+});
+
 def('rps-rematch', async () => {
   // A one-throw game, then a rematch: the bots must throw again in the new game.
   const { host } = await newParty('rps', { settings: { bestOf: 1 } });
