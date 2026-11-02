@@ -2,6 +2,8 @@
 
 The owner approved all eight creative directions and the revised Color Stack, Mini Golf, Go Fish, Property Tycoon and Battleship concepts. Implement them in the real `node-server` application, preserving gameplay and the Playgrid navy/lime identity. **Do not implement only the five revised games: all eight are required.**
 
+Tracking issue: [abyss-made/gamelab#55](https://github.com/abyss-made/gamelab/issues/55). Read the live issue before implementation; its contents could not be verified from the design environment because GitHub API access was blocked.
+
 Design source branch: `codex/playgrid-premium-directions` in `abyss-made/gamelab`.
 Implementation base: latest `codex/playgrid-2-redesign`.
 Package: `design/playgrid-premium-games/`.
