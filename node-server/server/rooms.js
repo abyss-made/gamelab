@@ -671,7 +671,9 @@ function attach(ioServer) {
       if (room.phase !== 'lobby' || opts.game === room.gameId) return;
       const G2 = GAMES[opts.game];
       // A party bigger than the game only fits if the extra people can watch.
-      if (room.seats.length > G2.meta.maxPlayers && !room.spectatorsOn) {
+      // Bots are trimmed to fit below, so only seated people count against the new game's size.
+      const peopleSeated = room.seats.filter((id) => !room.members.get(id).bot).length;
+      if (peopleSeated > G2.meta.maxPlayers && !room.spectatorsOn) {
         return socket.emit('notice', `${G2.meta.name} seats ${G2.meta.maxPlayers}. Allow spectators in Party Settings so everyone else can watch.`);
       }
       // Bots only come along to games they can play, and never as spectators.

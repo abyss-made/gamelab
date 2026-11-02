@@ -2021,9 +2021,11 @@
   // Why a game can or can't be chosen, in words (never colour alone).
   function eligibility(g) {
     const n = S.players.length + S.spectators.length;
-    if (n > g.max && !S.spectatorsOn)
-      return { ok: false, text: `Seats ${g.max}. Allow spectators to bring all ${n}.` };
-    if (n > g.max) return { ok: true, text: `${g.max} play, ${n - g.max} watch` };
+    const people = S.players.filter((p) => !p.bot).length + S.spectators.length; // extra bots are removed to fit
+    if (people > g.max && !S.spectatorsOn)
+      return { ok: false, text: `Seats ${g.max}. Allow spectators to bring all ${people}.` };
+    if (people > g.max) return { ok: true, text: `${g.max} play, ${people - g.max} watch` };
+    if (n > g.max) return { ok: true, text: "Extra bots are removed" };
     if (n < g.min) return { ok: true, text: `Needs ${g.min}+ · invite ${g.min - n} more` };
     return { ok: true, text: "" };
   }

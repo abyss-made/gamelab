@@ -169,6 +169,17 @@ def('switch-idle-to-smaller-unsupported', async () => {
   host.close();
 });
 
+def('switch-bots-no-spectators', async () => {
+  const { host, code } = await newParty('dotsboxes', { spectatorsOn: false });
+  await addBot(host); await addBot(host); await addBot(host);
+  const t0 = H.mark();
+  host.emit('switchGame', { game: 'chess' });
+  await wait([host], (s) => s.gameId === 'chess', 'chess even with spectators off');
+  r.ok(host.state.players.length === 2 && !notice(host, t0).length, 'with spectators off, 1 person + 3 bots can switch to a 2-seat game (bots are trimmed)');
+  await consistent('switch no spectators');
+  host.close();
+});
+
 def('rps-rematch', async () => {
   // A one-throw game, then a rematch: the bots must throw again in the new game.
   const { host } = await newParty('rps', { settings: { bestOf: 1 } });
