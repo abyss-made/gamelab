@@ -2,7 +2,7 @@
 
 **Owner approval received for all eight directions, including revision 2 of Color Stack, Go Fish, Mini Golf, Property Tycoon and Battleship. Implement the approved designs in the real `node-server` application.** This supersedes the earlier Stage A approval gate. Do not stop after implementing a subset. Do not merge or deploy.
 
-Track implementation in [Issue #55](https://github.com/abyss-made/gamelab/issues/55). Read its current requirements before starting.
+[Issue #55](https://github.com/abyss-made/gamelab/issues/55) covers a separate design-only assignment for the remaining 13 visible games. It does not track this approved eight-game implementation. Use the owner’s separate implementation issue when assigned.
 
 Start with [CLAUDE-TASK.md](CLAUDE-TASK.md), the [gallery](index.html), [revised tables](revised-tables.png), [revised boards](revised-boards.png), each game's `DIRECTION.md`, and the [current-state audit](CURRENT-STATE-AUDIT.md). Inspect the full-size per-game desktop/mobile PNGs; overview sheets are only for comparison.
 
