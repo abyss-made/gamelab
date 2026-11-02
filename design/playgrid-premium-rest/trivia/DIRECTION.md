@@ -1,6 +1,6 @@
 # Trivia Blitz · Orbit Quiz
 
-**Stage A concept · not yet approved.** Source client: `node-server/public/js/games/trivia.js`. This static page illustrates one supported state, not functional multiplayer or a finished state library.
+**Approved direction · Stage B specification is in [SPEC.md](SPEC.md).** Source client: `node-server/public/js/games/trivia.js`. This active page illustrates one state; SPEC.md and the state sheets provide the complete design reference. It is not functional multiplayer.
 
 ## Creative direction
 
@@ -14,16 +14,16 @@ Desktop two-column answers under a large question and ten-step progress. Phone u
 
 The Everest question is from the existing bank; the pictured ask phase does not mark the right answer. One choice locks immediately. Other picks and the correct index stay hidden until server reveal. No lifelines or fake scoring.
 
-## States to finish after owner approval
+## States specified in Stage B
 
 Category/question; asking; locked/answered count; right/wrong/no-answer reveal; streak/gain; long questions/answers; spectator/reconnect; standings/results.
 
 ## Motion intent
 
-Answer lock is immediate and named. On reveal, show Correct/Wrong text plus symbol/outline, not color alone. Animate outcome for 220ms without changing the answer deadline. These are direction-level timing suggestions; final event mapping and audio/accessibility sheets belong to Stage B after approval.
+Answer lock is immediate and named. On reveal, show Correct/Wrong text plus symbol/outline, not color alone. Animate outcome for 220ms without changing the answer deadline. Use the event mapping in [MOTION.md](../MOTION.md) and accessibility contract in [RESPONSIVE-ACCESSIBILITY.md](../RESPONSIVE-ACCESSIBILITY.md).
 
 ## Review
 
 [Desktop 1440×900](desktop.png) · [Phone 390×844](mobile.png) · [Narrow 360×740](narrow.png) · [Editable HTML](concept.html).
 
-Approve the visual direction and responsive composition before Claude implements it. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.
+The owner has approved the visual direction and responsive composition. Claude should use SPEC.md and the shared implementation handoff. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.

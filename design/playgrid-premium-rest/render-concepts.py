@@ -1,4 +1,4 @@
-"""Browser-render Stage A concepts. Requires Python Playwright and Chromium."""
+"""Browser-render approved active concepts. Requires Python Playwright and Chromium."""
 from pathlib import Path
 from functools import partial
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler

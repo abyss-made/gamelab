@@ -1,6 +1,6 @@
 # Rock Paper Scissors · Throwdown
 
-**Stage A concept · not yet approved.** Source client: `node-server/public/js/games/rps.js`. This static page illustrates one supported state, not functional multiplayer or a finished state library.
+**Approved direction · Stage B specification is in [SPEC.md](SPEC.md).** Source client: `node-server/public/js/games/rps.js`. This active page illustrates one state; SPEC.md and the state sheets provide the complete design reference. It is not functional multiplayer.
 
 ## Creative direction
 
@@ -8,22 +8,22 @@ Electric blue duel stage, original illustrated fist/open-hand/V-hand throws and 
 
 ## Desktop and phone composition
 
-Desktop: avatars and decisive VS over three equal throw cards; tournament rail right. Phone: same three 44px-plus action cards, compact semifinal/final rail below. Full 16-player bracket is a Stage B expansion requirement.
+Desktop: avatars and decisive VS over three equal throw cards; tournament rail right. Phone: same three 44px-plus action cards, compact semifinal/final rail below. The full 16-player bracket is included in the Stage B state sheets.
 
 ## Rules and privacy boundary
 
 One tap locks the existing private pick. No extra confirmation, changing throws after lock, or hidden opponent hint. Opponent locked/no-throw states remain words; reveal both throws only from server reveal.
 
-## States to finish after owner approval
+## States specified in Stage B
 
 Private pick/locked; opponent locked; simultaneous reveal; tie/void; bye/waiting; eliminated/spectator; 2–16-player bracket; champion; reconnect/rematch.
 
 ## Motion intent
 
-Lock gets an immediate local acknowledgement; shared reveal follows the authoritative phase. Brief 250ms reveal is cosmetic, never a countdown that postpones the real result. These are direction-level timing suggestions; final event mapping and audio/accessibility sheets belong to Stage B after approval.
+Lock gets an immediate local acknowledgement; shared reveal follows the authoritative phase. Brief 250ms reveal is cosmetic, never a countdown that postpones the real result. Use the event mapping in [MOTION.md](../MOTION.md) and accessibility contract in [RESPONSIVE-ACCESSIBILITY.md](../RESPONSIVE-ACCESSIBILITY.md).
 
 ## Review
 
 [Desktop 1440×900](desktop.png) · [Phone 390×844](mobile.png) · [Narrow 360×740](narrow.png) · [Editable HTML](concept.html).
 
-Approve the visual direction and responsive composition before Claude implements it. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.
+The owner has approved the visual direction and responsive composition. Claude should use SPEC.md and the shared implementation handoff. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.

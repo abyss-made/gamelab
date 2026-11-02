@@ -1,0 +1,13 @@
+/* Opt-in decorative primitives. Apply once per accepted state revision, never per tick. */
+.pg-motion-inspect{transition:transform 140ms ease-out,box-shadow 140ms ease-out}
+.pg-motion-enter{animation:pg-enter 180ms ease-out both}
+.pg-motion-drop{animation:pg-drop 220ms cubic-bezier(.2,.75,.3,1) both}
+.pg-motion-slide{animation:pg-slide 180ms ease-out both}
+.pg-motion-claim{animation:pg-claim 220ms ease-out both}
+.pg-motion-reveal{animation:pg-enter 250ms ease-out both}
+.pg-motion-receipt{animation:pg-enter 200ms ease-out both}
+@keyframes pg-enter{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes pg-drop{from{transform:translateY(var(--pg-drop-start,-70px))}85%{transform:translateY(2px)}to{transform:none}}
+@keyframes pg-slide{from{transform:translate(var(--pg-from-x,0),var(--pg-from-y,0))}to{transform:none}}
+@keyframes pg-claim{from{opacity:.45;transform:scale(.985)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.pg-motion-inspect{transition:none}.pg-motion-enter,.pg-motion-drop,.pg-motion-slide,.pg-motion-claim,.pg-motion-reveal,.pg-motion-receipt{animation:none;transform:none;opacity:1}}

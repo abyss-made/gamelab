@@ -1,4 +1,4 @@
-"""Render Stage A review sheets and package original sources/previews for review."""
+"""Render approved active review sheets and package original sources/previews for review."""
 from pathlib import Path
 from functools import partial
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
@@ -17,7 +17,7 @@ with sync_playwright() as p:
  q=b.new_page(viewport={'width':1440,'height':900});q.goto(f'http://127.0.0.1:{s.server_port}/design/playgrid-premium-rest/baseline-review.html');q.wait_for_function('Array.from(document.images).every(i=>i.complete&&i.naturalWidth>0)');assert q.locator('img').count()==26
  b.close()
 s.shutdown();s.server_close()
-with zipfile.ZipFile(P/'playgrid-premium-rest-stage-a.zip','w',zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile(P/'playgrid-premium-rest-approved.zip','w',zipfile.ZIP_DEFLATED) as z:
  for f in P.rglob('*'):
   if f.is_file() and f.suffix!='.zip' and '__pycache__' not in str(f):z.write(f,f.relative_to(R))
  for name in ['favicon.svg','assets/player-portraits.png','assets/fonts/inter-variable.ttf','assets/fonts/OFL.txt']:

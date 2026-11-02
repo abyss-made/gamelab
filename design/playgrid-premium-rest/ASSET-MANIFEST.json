@@ -1,13 +1,25 @@
 {
-  "stage": "A \u00b7 not yet approved",
+  "stage": "Owner-approved directions \u00b7 Stage B state/specification handoff",
   "issue": 55,
   "baseline": "06609a4",
   "original_art": [
-    "throw-paper.svg",
-    "throw-rock.svg",
+    "check.svg",
+    "clear.svg",
+    "connection.svg",
+    "cross.svg",
+    "crown.svg",
+    "eraser.svg",
+    "fill.svg",
+    "mark-o.svg",
+    "mark-x.svg",
+    "pencil.svg",
     "relay-cat-baker.svg",
     "sketch-dragon.svg",
-    "throw-scissors.svg"
+    "throw-paper.svg",
+    "throw-rock.svg",
+    "throw-scissors.svg",
+    "trophy.svg",
+    "undo.svg"
   ],
   "source": "build-concepts.py and shared.css, original HTML board/card components",
   "reuse": [
@@ -25,5 +37,7 @@
     }
   ],
   "privacy": "Example drawings and board positions are illustrative. No hidden gameplay data is loaded.",
-  "rights": "No proprietary competitor assets, paid API calls or new external dependencies."
+  "rights": "No proprietary competitor assets, paid API calls or new external dependencies.",
+  "stateFamilies": "HTML/CSS-generated marks, discs, man/king, patches, letters, selected/unavailable/accepted/outcome variants; see ASSET-INVENTORY.md",
+  "approval": "All 13 Stage A visual directions approved by owner in this conversation."
 }

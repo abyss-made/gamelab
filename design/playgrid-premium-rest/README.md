@@ -1,48 +1,52 @@
-# Playgrid · premium designs for the remaining games
+# Playgrid · approved premium designs for the remaining 13 games
 
-**Issue #55 · Stage A · 13 concepts awaiting owner approval.** No production code is changed. Baseline: `codex/playgrid-2-redesign` at 06609a4. Design branch: `codex/playgrid-premium-rest-design`.
+**Issue #55 · owner-approved directions · Stage B implementation handoff.** Approval covers all 13 visual directions; see [APPROVAL.md](APPROVAL.md). Production code is unchanged. Audited baseline: `codex/playgrid-2-redesign` at 06609a4. Design source branch: `codex/playgrid-premium-rest-design`.
 
-Open [the gallery](index.html) or these desktop/phone review sheets:
+[Download the complete approved package](playgrid-premium-rest-approved.zip).
 
-1. [Drawing, relay and trivia](review-01.png)
-2. [Word games](review-02.png)
-3. [Social deduction and tournament](review-03.png)
-4. [Tabletop strategy](review-04.png)
+## Claude entry point
 
-| Game | Direction | Desktop / phone | Source |
+Read [CLAUDE-TASK.md](CLAUDE-TASK.md) and [IMPLEMENTATION-HANDOFF.md](IMPLEMENTATION-HANDOFF.md), then each game's SPEC.md and state sheets. Implement all 13 in the real application using actual view fields/intents; preserve gameplay and private information. Use reviewable per-game PRs, actual multiplayer tests and matching implementation screenshots. Do not merge or deploy.
+
+## Review the designs
+
+- [Interactive state explorer](state-explorer.html): 150 full-size reference views, desktop/phone/narrow/keyboard viewport and reduced-motion options. These selectors navigate fixed design examples, not a game.
+- [Reusable components and motion preview](components.html), [component contracts](COMPONENT-SPECS.md), [responsive/accessibility](RESPONSIVE-ACCESSIBILITY.md), [motion timing](MOTION.md), [asset inventory](ASSET-INVENTORY.md), [tokens](tokens.json).
+- Approved active composition sheets: [drawing/relay/quiz](review-01.png), [word games](review-02.png), [social/tournament](review-03.png), [tabletop](review-04.png).
+
+| Game | Specification | State sheets | Active views |
 |---|---|---|---|
-| Draw & Guess | Sketch Club | [1440×900](drawguess/desktop.png) · [390×844](drawguess/mobile.png) | [HTML](drawguess/concept.html) · [Direction](drawguess/DIRECTION.md) |
-| Four in a Row | Drop Society | [1440×900](fourrow/desktop.png) · [390×844](fourrow/mobile.png) | [HTML](fourrow/concept.html) · [Direction](fourrow/DIRECTION.md) |
-| Tic Tac Toe | Cross & Circle | [1440×900](tictactoe/desktop.png) · [390×844](tictactoe/mobile.png) | [HTML](tictactoe/concept.html) · [Direction](tictactoe/DIRECTION.md) |
-| Rock Paper Scissors | Throwdown | [1440×900](rps/desktop.png) · [390×844](rps/mobile.png) | [HTML](rps/concept.html) · [Direction](rps/DIRECTION.md) |
-| Dots & Boxes | Stitch & Claim | [1440×900](dotsboxes/desktop.png) · [390×844](dotsboxes/mobile.png) | [HTML](dotsboxes/concept.html) · [Direction](dotsboxes/DIRECTION.md) |
-| Word Scramble | Letterworks | [1440×900](wordscramble/desktop.png) · [390×844](wordscramble/mobile.png) | [HTML](wordscramble/concept.html) · [Direction](wordscramble/DIRECTION.md) |
-| Trivia Blitz | Orbit Quiz | [1440×900](trivia/desktop.png) · [390×844](trivia/mobile.png) | [HTML](trivia/concept.html) · [Direction](trivia/DIRECTION.md) |
-| Word Chain | Chain Reaction | [1440×900](wordchain/desktop.png) · [390×844](wordchain/mobile.png) | [HTML](wordchain/concept.html) · [Direction](wordchain/DIRECTION.md) |
-| Categories Rush | The Fieldbook | [1440×900](categories/desktop.png) · [390×844](categories/mobile.png) | [HTML](categories/concept.html) · [Direction](categories/DIRECTION.md) |
-| Drawing Telephone | Paper Relay | [1440×900](telephone/desktop.png) · [390×844](telephone/mobile.png) | [HTML](telephone/concept.html) · [Direction](telephone/DIRECTION.md) |
-| Bluff Battle | The Velvet Lie | [1440×900](bluff/desktop.png) · [390×844](bluff/mobile.png) | [HTML](bluff/concept.html) · [Direction](bluff/DIRECTION.md) |
-| The Impostor | Confidential Club | [1440×900](impostor/desktop.png) · [390×844](impostor/mobile.png) | [HTML](impostor/concept.html) · [Direction](impostor/DIRECTION.md) |
-| Checkers | Emerald House | [1440×900](checkers/desktop.png) · [390×844](checkers/mobile.png) | [HTML](checkers/concept.html) · [Direction](checkers/DIRECTION.md) |
+| Draw & Guess | [SPEC](drawguess/SPEC.md) | [Desktop](drawguess/states-desktop.png) · [Phone](drawguess/states-mobile.png) | [1440](drawguess/desktop.png) · [390](drawguess/mobile.png) · [360](drawguess/narrow.png) |
+| Four in a Row | [SPEC](fourrow/SPEC.md) | [Desktop](fourrow/states-desktop.png) · [Phone](fourrow/states-mobile.png) | [1440](fourrow/desktop.png) · [390](fourrow/mobile.png) · [360](fourrow/narrow.png) |
+| Tic Tac Toe | [SPEC](tictactoe/SPEC.md) | [Desktop](tictactoe/states-desktop.png) · [Phone](tictactoe/states-mobile.png) | [1440](tictactoe/desktop.png) · [390](tictactoe/mobile.png) · [360](tictactoe/narrow.png) |
+| Rock Paper Scissors | [SPEC](rps/SPEC.md) | [Desktop](rps/states-desktop.png) · [Phone](rps/states-mobile.png) | [1440](rps/desktop.png) · [390](rps/mobile.png) · [360](rps/narrow.png) |
+| Dots & Boxes | [SPEC](dotsboxes/SPEC.md) | [Desktop](dotsboxes/states-desktop.png) · [Phone](dotsboxes/states-mobile.png) | [1440](dotsboxes/desktop.png) · [390](dotsboxes/mobile.png) · [360](dotsboxes/narrow.png) |
+| Word Scramble | [SPEC](wordscramble/SPEC.md) | [Desktop](wordscramble/states-desktop.png) · [Phone](wordscramble/states-mobile.png) | [1440](wordscramble/desktop.png) · [390](wordscramble/mobile.png) · [360](wordscramble/narrow.png) |
+| Trivia Blitz | [SPEC](trivia/SPEC.md) | [Desktop](trivia/states-desktop.png) · [Phone](trivia/states-mobile.png) | [1440](trivia/desktop.png) · [390](trivia/mobile.png) · [360](trivia/narrow.png) |
+| Word Chain | [SPEC](wordchain/SPEC.md) | [Desktop](wordchain/states-desktop.png) · [Phone](wordchain/states-mobile.png) | [1440](wordchain/desktop.png) · [390](wordchain/mobile.png) · [360](wordchain/narrow.png) |
+| Categories Rush | [SPEC](categories/SPEC.md) | [Desktop](categories/states-desktop.png) · [Phone](categories/states-mobile.png) | [1440](categories/desktop.png) · [390](categories/mobile.png) · [360](categories/narrow.png) |
+| Drawing Telephone | [SPEC](telephone/SPEC.md) | [Desktop](telephone/states-desktop.png) · [Phone](telephone/states-mobile.png) | [1440](telephone/desktop.png) · [390](telephone/mobile.png) · [360](telephone/narrow.png) |
+| Bluff Battle | [SPEC](bluff/SPEC.md) | [Desktop](bluff/states-desktop.png) · [Phone](bluff/states-mobile.png) | [1440](bluff/desktop.png) · [390](bluff/mobile.png) · [360](bluff/narrow.png) |
+| The Impostor | [SPEC](impostor/SPEC.md) | [Desktop](impostor/states-desktop.png) · [Phone](impostor/states-mobile.png) | [1440](impostor/desktop.png) · [390](impostor/mobile.png) · [360](impostor/narrow.png) |
+| Checkers | [SPEC](checkers/SPEC.md) | [Desktop](checkers/states-desktop.png) · [Phone](checkers/states-mobile.png) | [1440](checkers/desktop.png) · [390](checkers/mobile.png) · [360](checkers/narrow.png) |
 
-Each folder also includes a 360×740 narrow-phone render. There are 39 exact viewport renders; `layout-checks.json` records overflow, page errors and visible-control bounds. These are static concept browser screenshots, not working multiplayer. Controls do not submit actions, timers do not run and no fake network success is simulated.
+## Validation and limitations
 
-## Review documents
+[VERIFICATION.md](VERIFICATION.md) summarizes the design evidence and its limits. state-checks.json records desktop/phone/narrow checks for all 150 design states, including role-private presentation and visible-control bounds. layout-checks.json covers the 39 core active renders. responsive-checks.json covers tablet, emulated keyboard viewports and reduced-motion preview. Browser captures are design-reference evidence, not live multiplayer, security, physical-device or screen-reader tests. Standalone frames are illustrative fixtures, not a sequential game replay.
 
-- [Current-state audit](CURRENT-STATE-AUDIT.md): verified roster, per-game gaps and source limitations.
-- [Reference principles](REFERENCE-ANALYSIS.md): category leaders interpreted with original art.
-- [Shared system](DESIGN-SYSTEM.md): reusable tokens, material palettes and responsiveness.
-- [Implementation boundary](IMPLEMENTATION-HANDOFF.md): what must wait for approval and what Claude will need later.
-- [Asset provenance](ASSET-MANIFEST.json) and [original issue brief](ISSUE-55-BRIEF.md).
+The five-letter Word Scramble sample is correctly labeled Easy, the largest Dots grid is 5×5, and Telephone size presets remain 4/10/22. Muted paper/folder text and patch initials have accessible-contrast variants; contrast-checks.json records representative solid-color pairs, not a blanket WCAG certification.
 
-The earlier approved eight-game package remains separate. Issue #55 does not track implementation of that set. Hidden Higher or Lower, Liar’s Dice, Hot Potato and Reversi remain hidden and outside these 13 visible-game concepts.
+The separately approved eight-game package stays on codex/playgrid-premium-directions. Hidden Higher or Lower, Liar’s Dice, Hot Potato and Reversi remain hidden and outside these 13. CURRENT-STATE-AUDIT.md and ISSUE-55-BRIEF.md are historical source evidence, not current approval gates.
 
-## Reopen and regenerate
+## Serve and regenerate
 
-Serve the repo root with `python3 -m http.server`; open `design/playgrid-premium-rest/index.html`. ZIP extraction preserves repo-relative asset paths; serve its root likewise. The historical-baseline gallery requires the existing repository screenshot folder and is not bundled into the portable ZIP.
+Serve the repo root using `python3 -m http.server`, then open `design/playgrid-premium-rest/index.html` or state-explorer.html. ZIP extraction preserves repo-relative reused asset paths; serve its root similarly. Historical baseline screenshots require the repository’s docs/screenshots folder and are not bundled.
 
-`python3 design/playgrid-premium-rest/build-concepts.py` regenerates HTML and original SVGs with standard-library Python. `python3 design/playgrid-premium-rest/render-concepts.py` renders/validates all 39 concepts using Python Playwright and Chromium (optional CHROMIUM_PATH). `package-review.py` creates the review sheets and ZIP. These run a temporary loopback document server, never the game server. No paid APIs or new app dependencies are used.
+1. `python3 design/playgrid-premium-rest/build-concepts.py` — active HTML and original illustrations.
+2. `python3 design/playgrid-premium-rest/build-states.py` — state index/sheet sources and original icon exports.
+3. `python3 design/playgrid-premium-rest/render-concepts.py` — active viewport validation/screenshots.
+4. `python3 design/playgrid-premium-rest/check-states.py` — all state viewport checks/contact sheets.
+5. `python3 design/playgrid-premium-rest/check-responsive.py` — tablet/keyboard/reduced-motion/component checks.
+6. `python3 design/playgrid-premium-rest/package-review.py` — active review sheets and complete portable ZIP.
 
-## Approval checkpoint
-
-Review each visual direction and desktop/phone composition. Issue #55 explicitly reserves complete state sheets, production asset families and final Claude implementation contracts for Stage B after approval. The current handoff describes that boundary rather than claiming that those later deliverables are finished. Nothing is merged or deployed.
+Builders use Python standard library; browser scripts require Python Playwright and Chromium, with optional CHROMIUM_PATH. They run temporary loopback document servers and do not start or change the app. No paid API or production dependency is introduced.

@@ -1,6 +1,6 @@
 # Word Scramble · Letterworks
 
-**Stage A concept · not yet approved.** Source client: `node-server/public/js/games/wordscramble.js`. This static page illustrates one supported state, not functional multiplayer or a finished state library.
+**Approved direction · Stage B specification is in [SPEC.md](SPEC.md).** Source client: `node-server/public/js/games/wordscramble.js`. This active page illustrates one state; SPEC.md and the state sheets provide the complete design reference. It is not functional multiplayer.
 
 ## Creative direction
 
@@ -14,16 +14,16 @@ Desktop letter workspace with compact standings. Phone centers the same letters 
 
 CENAO is illustrative five-letter jumble data, not a hardcoded question. Only server reveal exposes the answer. Players may type while eligible; solved/locked and gain receipts are per player. No unsupported hint/reshuffle.
 
-## States to finish after owner approval
+## States specified in Stage B
 
 All word lengths/difficulties; active typing; rejected guess; solved/locked; others still answering; time-up/reveal; score gain; long words; spectator/reconnect/results.
 
 ## Motion intent
 
-Letter rack assembles once per question (180ms), never on each timer tick. Accepted solve gets a small textual gain chip; answer reveal is gated on the reveal phase. These are direction-level timing suggestions; final event mapping and audio/accessibility sheets belong to Stage B after approval.
+Letter rack assembles once per question (180ms), never on each timer tick. Accepted solve gets a small textual gain chip; answer reveal is gated on the reveal phase. Use the event mapping in [MOTION.md](../MOTION.md) and accessibility contract in [RESPONSIVE-ACCESSIBILITY.md](../RESPONSIVE-ACCESSIBILITY.md).
 
 ## Review
 
 [Desktop 1440×900](desktop.png) · [Phone 390×844](mobile.png) · [Narrow 360×740](narrow.png) · [Editable HTML](concept.html).
 
-Approve the visual direction and responsive composition before Claude implements it. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.
+The owner has approved the visual direction and responsive composition. Claude should use SPEC.md and the shared implementation handoff. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.

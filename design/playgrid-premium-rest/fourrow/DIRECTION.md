@@ -1,6 +1,6 @@
 # Four in a Row · Drop Society
 
-**Stage A concept · not yet approved.** Source client: `node-server/public/js/games/fourrow.js`. This static page illustrates one supported state, not functional multiplayer or a finished state library.
+**Approved direction · Stage B specification is in [SPEC.md](SPEC.md).** Source client: `node-server/public/js/games/fourrow.js`. This active page illustrates one state; SPEC.md and the state sheets provide the complete design reference. It is not functional multiplayer.
 
 ## Creative direction
 
@@ -14,16 +14,16 @@ Desktop board dominates with player/rule details at the sides. Phone places the 
 
 Drop is still the existing immediate column action, never a fake landing-row picker. Full columns and out-of-turn input are unavailable. Preview is cosmetic only. The illustrative sample has six discs of each color and Red to move.
 
-## States to finish after owner approval
+## States specified in Stage B
 
 Empty board; hover/focus preview; valid/full column; drop/turn change; opponent turn; persistent win line; draw/forfeit; winner-stays; spectator/reconnect/rematch.
 
 ## Motion intent
 
-Accepted drop falls into the authoritative destination in about 220ms, settles once and leaves persistent last-move/win outlines; reduced motion snaps to the slot. These are direction-level timing suggestions; final event mapping and audio/accessibility sheets belong to Stage B after approval.
+Accepted drop falls into the authoritative destination in about 220ms, settles once and leaves persistent last-move/win outlines; reduced motion snaps to the slot. Use the event mapping in [MOTION.md](../MOTION.md) and accessibility contract in [RESPONSIVE-ACCESSIBILITY.md](../RESPONSIVE-ACCESSIBILITY.md).
 
 ## Review
 
 [Desktop 1440×900](desktop.png) · [Phone 390×844](mobile.png) · [Narrow 360×740](narrow.png) · [Editable HTML](concept.html).
 
-Approve the visual direction and responsive composition before Claude implements it. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.
+The owner has approved the visual direction and responsive composition. Claude should use SPEC.md and the shared implementation handoff. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.

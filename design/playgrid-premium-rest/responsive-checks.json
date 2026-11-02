@@ -1,0 +1,112 @@
+[
+  {
+    "game": "drawguess",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "fourrow",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "tictactoe",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "rps",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "wordscramble",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "trivia",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "wordchain",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "categories",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "telephone",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "bluff",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "impostor",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "checkers",
+    "viewport": "768x1024",
+    "activeLayout": true
+  },
+  {
+    "game": "drawguess",
+    "state": "guesser",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "wordscramble",
+    "state": "active",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "wordchain",
+    "state": "active",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "categories",
+    "state": "active",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "telephone",
+    "state": "prompt",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "bluff",
+    "state": "write",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "game": "impostor",
+    "state": "lastguess",
+    "viewport": "390x520",
+    "keyboardEmulation": "Focused input and commit visible; not real-device evidence"
+  },
+  {
+    "reducedMotionPreview": "Motion classes disabled under prefers-reduced-motion"
+  }
+]

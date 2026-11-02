@@ -6,7 +6,7 @@ Design-only baseline: `codex/playgrid-2-redesign` at **06609a4** (PR #56 adds th
 
 25 registered games; 21 selectable under the default config. The approved premium eight-game set is separate: Color Stack, Pool, Mini Golf, Ludo, Property Tycoon, Battleship, Go Fish, Chess. **13 remaining visible games** are in this package. Higher or Lower, Liar's Dice, Hot Potato and Reversi are registered but explicitly hidden by `server/config.js`; they are documented, not silently exposed or redesigned. No additional visible game was found. Environment overrides can change this roster, so implementation must recheck config.
 
-Issue #55 was read from its public GitHub HTML (the REST/GraphQL API is blocked). Its body is saved in ISSUE-55-BRIEF.md. It requires a Stage A approval checkpoint. Its statement that the premium eight-game package does not yet exist is outdated relative to the owner-approved package now published on `codex/playgrid-premium-directions`. That does not grant approval to the 13 new concepts.
+Issue #55 was read from its public GitHub HTML (the REST/GraphQL API is blocked). Its body is saved in ISSUE-55-BRIEF.md. It requires a Stage A approval checkpoint. Its statement that the premium eight-game package does not yet exist is outdated relative to the owner-approved package now published on `codex/playgrid-premium-directions`. At audit time approval of the 13 new concepts was still pending; the owner has since approved them.
 
 ## Findings and direction
 
@@ -30,4 +30,4 @@ Issue #55 was read from its public GitHub HTML (the REST/GraphQL API is blocked)
 
 The baseline gallery in `baseline-review.html` links all 13 historical desktop/phone screenshot pairs from the repository. The new concepts are browser-rendered design HTML with illustrative data; they are not live multiplayer screenshots. No new gameplay, bot, latency, screen-reader or real-device claims are made. Acting bots among these 13: Four in a Row, Tic Tac Toe, Dots & Boxes and Checkers have full support; RPS has limited random private throws. Word Scramble, Trivia, drawing, word and social-deduction games have no acting bots; confirm `server/bots/index.js` before implementation. Never present idle fixtures as playing opponents.
 
-Preserve authentication, party/chat/queue, all server rules, reconnect and game switching. Work here is design only. The full state/asset handoff is gated on owner approval of these 13 directions, per Issue #55.
+Preserve authentication, party/chat/queue, all server rules, reconnect and game switching. Work here is design only. Owner approval is now recorded and the Stage B state/asset handoff is in IMPLEMENTATION-HANDOFF.md. This audit remains historical source evidence.

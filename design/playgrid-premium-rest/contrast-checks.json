@@ -1,0 +1,54 @@
+{
+  "scope": "Representative solid pairs only; not whole-site WCAG certification",
+  "pairs": [
+    {
+      "component": "Primary label",
+      "foreground": "#17270e",
+      "background": "#b3f84c",
+      "contrast": 12.34,
+      "normalTextAA": true
+    },
+    {
+      "component": "Shell text",
+      "foreground": "#edf4ef",
+      "background": "#06131d",
+      "contrast": 16.8,
+      "normalTextAA": true
+    },
+    {
+      "component": "Fieldbook helper",
+      "foreground": "#50674f",
+      "background": "#f3edda",
+      "contrast": 5.28,
+      "normalTextAA": true
+    },
+    {
+      "component": "Folder helper on darkest gradient end",
+      "foreground": "#324e43",
+      "background": "#b9bda7",
+      "contrast": 4.73,
+      "normalTextAA": true
+    },
+    {
+      "component": "Ballot number on darkest gradient end",
+      "foreground": "#644653",
+      "background": "#d7c4aa",
+      "contrast": 4.86,
+      "normalTextAA": true
+    },
+    {
+      "component": "Blue patch initial",
+      "foreground": "#0c2028",
+      "background": "#618ea5",
+      "contrast": 4.73,
+      "normalTextAA": true
+    },
+    {
+      "component": "Coral patch initial",
+      "foreground": "#0c2028",
+      "background": "#c9827a",
+      "contrast": 5.55,
+      "normalTextAA": true
+    }
+  ]
+}

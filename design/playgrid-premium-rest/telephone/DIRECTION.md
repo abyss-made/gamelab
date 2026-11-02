@@ -1,6 +1,6 @@
 # Drawing Telephone · Paper Relay
 
-**Stage A concept · not yet approved.** Source client: `node-server/public/js/games/telephone.js`. This static page illustrates one supported state, not functional multiplayer or a finished state library.
+**Approved direction · Stage B specification is in [SPEC.md](SPEC.md).** Source client: `node-server/public/js/games/telephone.js`. This active page illustrates one state; SPEC.md and the state sheets provide the complete design reference. It is not functional multiplayer.
 
 ## Creative direction
 
@@ -14,16 +14,16 @@ Desktop large 4:3 page with left tools and right current brief/readiness/Done. P
 
 The sample is draw step 2 of a four-player relay. Only the current source is visible. Keep prompt/draw/guess sequence, 800×600 canvas, exact tool colors, three size presets, drawing caps and server-acknowledged lock. Like rules/own entry restrictions remain.
 
-## States to finish after owner approval
+## States specified in Stage B
 
 Initial prompt; draw; describe; empty/rejected/limit state; Done pending/ack; waiting; staged chain reveal/likes; skipped entries; long text; spectator/reconnect/results.
 
 ## Motion intent
 
-Done briefly seals the page only after acceptance. At final reveal, each authorized entry joins a numbered paper timeline (200–300ms). Never animate future entries before receipt. These are direction-level timing suggestions; final event mapping and audio/accessibility sheets belong to Stage B after approval.
+Done briefly seals the page only after acceptance. At final reveal, each authorized entry joins a numbered paper timeline (200–300ms). Never animate future entries before receipt. Use the event mapping in [MOTION.md](../MOTION.md) and accessibility contract in [RESPONSIVE-ACCESSIBILITY.md](../RESPONSIVE-ACCESSIBILITY.md).
 
 ## Review
 
 [Desktop 1440×900](desktop.png) · [Phone 390×844](mobile.png) · [Narrow 360×740](narrow.png) · [Editable HTML](concept.html).
 
-Approve the visual direction and responsive composition before Claude implements it. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.
+The owner has approved the visual direction and responsive composition. Claude should use SPEC.md and the shared implementation handoff. Shared shell, avatars, rooms, chat, rules and settings remain existing Playgrid behavior.

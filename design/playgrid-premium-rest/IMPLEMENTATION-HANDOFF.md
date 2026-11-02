@@ -1,38 +1,58 @@
-# Implementation handoff boundary · Issue #55
+# Approved implementation handoff · Issue #55
 
-**Stage A only. These 13 new directions are NOT YET APPROVED. Do not implement them until the owner approves them.** Issue #55 explicitly says “Stage A: present original desktop 1440x900 and mobile 390x844 concept mockups for owner approval” and “Stage B after approval.” This package stops at that checkpoint.
+**Owner approval received for all 13 remaining-game visual directions. The Stage A approval gate is complete.** This Stage B package specifies supported states, reusable components/assets, responsive/accessibility and event-to-animation behavior. Begin with [CLAUDE-TASK.md](CLAUDE-TASK.md).
 
-## Scope and coordination
+## Scope and source
 
-Design branch: `codex/playgrid-premium-rest-design`; baseline: `codex/playgrid-2-redesign` at `06609a4`. Work lives only in `design/playgrid-premium-rest/`. No production code, rules, protocol, dependencies, deployment configuration or live data is changed.
+Design branch `codex/playgrid-premium-rest-design`; implementation base latest `codex/playgrid-2-redesign`; audited gameplay baseline 06609a4. Re-audit newer code before editing. Work on separate implementation branches and use reviewable game-by-game PRs. This package itself changes only design/playgrid-premium-rest/.
 
-This package covers Draw & Guess, Four in a Row, Tic Tac Toe, RPS Tournament, Dots & Boxes, Word Scramble, Trivia Blitz, Word Chain, Categories Rush, Drawing Telephone, Bluff Battle, The Impostor and Checkers. The previously approved eight-game package remains separate at [codex/playgrid-premium-directions](https://github.com/abyss-made/gamelab/tree/codex/playgrid-premium-directions/design/playgrid-premium-games). Its approval does not approve these new concepts.
+All 13: Draw & Guess, Four in a Row, Tic Tac Toe, RPS Tournament, Dots & Boxes, Word Scramble, Trivia Blitz, Word Chain, Categories Rush, Drawing Telephone, Bluff Battle, The Impostor, Checkers. The approved eight-game package is separate on codex/playgrid-premium-directions. Issue #55 tracks this remaining-game brief, not that earlier set.
 
-Claude's existing coordination/audit is Issue #54 and `docs/issue-54-premium-rollout-matrix.md`. That document concerns the eight-game rollout. Do not reassign Issue #55 to that implementation. These 13 require explicit approval first and subsequent coordinated implementation tasks. Preserve the owner's preferred reviewable game-by-game workflow when implementation is assigned; do not merge anything automatically.
+## Start here
 
-## What the package contains
+- Each game's SPEC.md: component hierarchy, real view fields/intents, eligibility/privacy, complete state matrix, focus and acceptance.
+- Each game's states-desktop.png / states-mobile.png: state contact sheets, with full-size views available in [state explorer](state-explorer.html).
+- [COMPONENT-SPECS.md](COMPONENT-SPECS.md), [RESPONSIVE-ACCESSIBILITY.md](RESPONSIVE-ACCESSIBILITY.md), [MOTION.md](MOTION.md), tokens.json and [ASSET-INVENTORY.md](ASSET-INVENTORY.md).
+- shared.css for approved active composition; state.css/state-preview.js illustrate state rendering. motion.css supplies decorative effect primitives. Never install the preview router as production logic.
+- CURRENT-STATE-AUDIT.md is historical source evidence, not a report of new gameplay tests. ISSUE-55-BRIEF.md preserves the original issue wording.
 
-13 original desktop/phone concept pairs plus narrow-phone renders; editable HTML/CSS; five original illustrated SVGs; per-game directions and supported-behavior boundaries; source audit; conceptual reference analysis; shared draft system; browser layout results; four review sheets and a portable ZIP.
+## Implementation rules
 
-One active state per game is illustrated. The pages use fixed illustrative names/scores/board positions/times. Controls do not send actions. They are NOT working multiplayer, comprehensive state sheets, final sprite libraries or an implementation-complete handoff.
+Use the existing node-server application and mount/update/unmount/result lifecycle. Keep Express, Socket.IO, alpha authentication, rooms/lobby/chat/queue, settings/rules/scoring, spectators, reconnect, rematch and party-preserving switching. No new game rules, server schema, database, dependencies or deployment changes are authorized.
 
-## Stage B deliverables after approval
+Static data and images are review fixtures, never authority. Rebuild interactive boards/cells/letters/strokes/money/scores/countdowns from actual view fields. Do not use a screenshot or fixed SVG as a working board. Generated HTML/CSS families cover every mark/disc/patch/man/king/letter/selection/outcome state without requiring one raster export per value. Original drawing SVGs are example player content only. Preserve real stroke/fill replay and current caps.
 
-For each approved game, finish component hierarchy, real client/server view mapping, all states listed in its DIRECTION.md, responsive/keyboard-open/long-content layouts, original production asset exports, named event-to-animation mapping, reduced-motion/audio behavior and a Claude acceptance checklist. Complete waiting, local/opponent turn, spectator, invalid/unavailable, accepted/resolving, disconnect/resync, outcome/rematch and party-preserving game switch for every game.
+Keep shipped C.keepFocus/C.makeConfirm fixes. One-tap locked choices stay one-tap. Local pending does not mean accepted. Do not expose private words, answer keys, picks, bluff authors or role IDs in hidden DOM/labels/data attributes. Cover-word is only a local privacy view.
 
-Game-specific priorities: private word choice/guesser/focus modes in Draw & Guess; win/draw/blocked board states; 16-player RPS bracket and private picks; all Dots grid sizes with precise edge targets; long word/chain entry; Categories locked/review tables; Telephone prompt/describe/staged reveal and limits; Bluff anonymous writing/voting/reveal; Impostor role variants/discussion/vote/last guess; Checkers kings/forced capture/multi-jump and stable resign.
+Bots: Four in a Row/Tic Tac Toe/Dots/Checkers are acting; RPS is limited. Other eight in this package have no acting bots. Keep support labels honest. Existing Timer-Off behavior/policy is not redesigned here. Reconnect does not pause authoritative game time.
 
-## Non-negotiable implementation constraints
+## Concrete data corrections during Stage B
 
-- Work inside the existing node-server frontend. Never ship these static pages or a fixed scene as a working game.
-- Preserve Express/Socket.IO, alpha authentication, rooms, party lobby/chat, queue, settings, scoring, spectators, reconnect and server authority. No new game rules or opponent-data inference.
-- Reuse current gameplay and 3.2 keyboard/focus/resign fixes. Read the latest code before implementing; this design audit does not prove a newer bug is unresolved.
-- Four in a Row/Tic Tac Toe/Dots/Checkers have acting bots; RPS has limited random-pick support. The other eight of these 13 do not. Never invent bot capability or expose hidden answers for bots.
-- Decorative drawings are example player content. Render actual stroke history with existing fill/replay behavior in production. Opponent words/roles/picks/bluff authors/answers remain hidden until the current server view permits them.
-- Complete production variants from actual state. Static samples have no authority over the rules or game contents.
+The five-letter Word Scramble example is **Easy**, not Medium (existing Medium is six letters). Largest Dots example is **5×5**, not a new 6×6 option. Telephone size rail must expose its existing 4/10/22 presets. These fixture/control corrections preserve current rules and approved visual identity. Checkers material Jade maps explicitly to existing Lime; Ivory maps to White.
 
-## Later implementation evidence
+## Evidence and completion gate
 
-Run the existing automated suite (`cd node-server && npm test`) and appropriate regressions. Exercise real separate browser contexts for multiplayer, privacy, turns, result/rematch, reconnect and game switch. Capture actual implementation at desktop and phone for all 13, plus narrow/keyboard/long-content variants. Compare at matching dimensions against the approved designs, fix discrepancies and disclose remaining differences. No merge, deployment or live Render changes.
+1. Implement every listed state in each SPEC.md in the real game, including actual host/member/spectator result actions. Review all 13; do not stop after the easiest boards.
+2. Run `cd node-server && npm test`, then targeted regressions for changed view mapping, private-role DOM, focus/confirm, pointer coordinates, dense edges, input/IME/draft lock and phase deduplication as appropriate. Do not weaken tests to fit a screenshot.
+3. Test multiplayer in separate browser contexts: legal/illegal input, turn/phase transition, private views, room/chat/settings preservation, results/rematch, reconnect and switching. Do not substitute idle fixtures for acting bots or human participants.
+4. Capture actual implementation at 1440×900, 390×844 and 360×740 for all 13 (39 active captures), plus relevant role/phase/result/keyboard variants. Compare side by side at matching dimensions against the approved active/state references; fix scale, typography, spacing, materials, illustrations and control differences.
+5. Verify keyboard, focus restoration, reduced motion and 200% zoom/reflow; check actual iOS/Android soft keyboards and screen readers where available. Explicitly disclose untested devices/AT and any remaining differences.
+6. Each PR lists completed states, tests and implementation screenshots. Do not merge, deploy or modify live Render. Owner final review remains required.
 
-The present `layout-checks.json` verifies design rendering only. No fresh production gameplay test or human-device result is claimed by this design branch.
+| Game | Real state-driven UI | States / privacy / multiplayer verified | Matching desktop / phone / narrow comparison | Tests + remaining differences reported |
+|---|---|---|---|---|
+| Draw & Guess | [ ] | [ ] | [ ] | [ ] |
+| Four in a Row | [ ] | [ ] | [ ] | [ ] |
+| Tic Tac Toe | [ ] | [ ] | [ ] | [ ] |
+| Rock Paper Scissors | [ ] | [ ] | [ ] | [ ] |
+| Dots & Boxes | [ ] | [ ] | [ ] | [ ] |
+| Word Scramble | [ ] | [ ] | [ ] | [ ] |
+| Trivia Blitz | [ ] | [ ] | [ ] | [ ] |
+| Word Chain | [ ] | [ ] | [ ] | [ ] |
+| Categories Rush | [ ] | [ ] | [ ] | [ ] |
+| Drawing Telephone | [ ] | [ ] | [ ] | [ ] |
+| Bluff Battle | [ ] | [ ] | [ ] | [ ] |
+| The Impostor | [ ] | [ ] | [ ] | [ ] |
+| Checkers | [ ] | [ ] | [ ] | [ ] |
+
+The supplied browser checks validate design-reference rendering and privacy presentation, not server security, functional multiplayer, real-device ergonomics or a shipped implementation. No production test result is claimed by this design branch.
