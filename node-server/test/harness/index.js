@@ -338,11 +338,17 @@ function roomViolations(room, snap) {
   if (room.phase === 'lobby' && room.seats.length > room.cap) v.push(`lobby has ${room.seats.length} seats over the cap of ${room.cap}`);
   if (room.phase === 'game' && !room.hasGame) v.push('phase is game but there is no game');
   if (room.phase === 'lobby' && room.hasGame) v.push('phase is lobby but a game object remains');
-  const tokens = room.members.map((m) => m.token);
+  const tokens = room.members.filter((m) => !m.bot).map((m) => m.token);
   if (dup(tokens).length) v.push('two members share one token');
   const sids = room.members.map((m) => m.socketId).filter(Boolean);
   if (dup(sids).length) v.push('two members share one socket');
   for (const m of room.members) {
+    if (m.bot) {
+      if (m.socketId || m.token) v.push(`bot ${m.name} has a socket or token`);
+      if (m.hostId === m.id || room.hostId === m.id) v.push(`bot ${m.name} is the host`);
+      if (m.role !== 'player' || !room.seats.includes(m.id)) v.push(`bot ${m.name} is not seated as a player`);
+      continue;
+    }
     if (m.connected !== !!m.socketId) v.push(`${m.name}: connected=${m.connected} but socketId=${m.socketId}`);
     if (m.socketId && snap) {
       const s = snap.sockets.find((x) => x.id === m.socketId);
@@ -355,6 +361,7 @@ function roomViolations(room, snap) {
     if (!byId.has(target)) v.push(`kick votes kept for departed ${target}`);
     for (const x of voters) if (!byId.has(x)) v.push(`kick vote kept from departed ${x}`);
   }
+  if (room.members.length && !room.members.some((m) => !m.bot)) v.push('room has bots but no people');
   for (const x of Object.keys(room.nextVotes)) if (!byId.has(x)) v.push(`next-game vote kept from departed ${x}`);
   return v;
 }

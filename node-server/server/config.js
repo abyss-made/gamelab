@@ -19,4 +19,7 @@ module.exports = {
   EMPTY_ROOM_TTL_MS: Number(process.env.EMPTY_ROOM_TTL_MS) || 120000, // empty lobbies are deleted after 2 minutes
   AUTOSTART_MS: 12000,        // public lobbies start on their own after this
   MAX_ROOMS: 5000,
+  // Bots wait a random time in this range before acting, so they feel human. Set both to 0 for tests.
+  BOT_DELAY_MIN_MS: process.env.BOT_DELAY_MS !== undefined ? Number(process.env.BOT_DELAY_MS) || 0 : 600,
+  BOT_DELAY_MAX_MS: process.env.BOT_DELAY_MS !== undefined ? Number(process.env.BOT_DELAY_MS) || 0 : 1400,
 };

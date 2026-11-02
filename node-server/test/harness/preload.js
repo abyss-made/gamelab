@@ -116,7 +116,7 @@ function snapshot({ withGame = true } = {}) {
       minPlayers: G ? G.meta.minPlayers : null,
       members: [...r.members.entries()].map(([key, m]) => ({
         key, id: m.id, token: m.token, name: m.name, role: m.role, connected: m.connected, socketId: m.socketId,
-        score: m.score, ready: !!m.ready, lastSeen: m.lastSeen, lastActive: m.lastActive,
+        bot: !!m.bot, difficulty: m.difficulty || null, score: m.score, ready: !!m.ready, lastSeen: m.lastSeen, lastActive: m.lastActive,
       })),
       seats: r.seats.slice(),
       specs: r.specs.slice(),
