@@ -1,135 +1,414 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>%TITLE%</title>
-  <meta name="description" content="%DESC%">
-  <meta property="og:title" content="%TITLE%">
-  <meta property="og:description" content="%DESC%">
-  <meta name="theme-color" content="#4b3bd6">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
-  <!-- AD NETWORK: paste your AdSense (or other network) <script> tag here once approved. -->
-</head>
-<body>
-  <header class="topbar">
-    <a class="logo" href="/" data-nav="/"><span class="logo-mark">✏️</span>%SITE%</a>
-    <div class="topbar-right">
-      <button class="icon-btn" id="sound-btn" title="Sound on/off" aria-label="Sound on/off">🔊</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>%TITLE%</title>
+    <meta name="description" content="%DESC%" />
+    <meta property="og:title" content="%TITLE%" />
+    <meta property="og:description" content="%DESC%" />
+    <meta name="theme-color" content="#030e18" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter-variable.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/style.css?v=bots-20261102" />
+    <link rel="stylesheet" href="/gameplay31.css?v=p31-20261031" />
+  </head>
+  <body data-screen="home">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell" id="main-content" tabindex="-1">
+      <header class="topbar">
+        <a class="logo" href="/" data-nav="/" aria-label="Playgrid home"
+          ><svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true">
+            <path
+              d="M8 5Q4 3 4 9v19q0 5 5 3l8-5v-6l-6 4V12l14 7-8 5v7l15-10q4-3 0-6L13 5Z"
+              fill="currentColor"
+            />
+            <path d="m20 4 8 4-4 4-8-4Z" fill="currentColor" /></svg
+          ><span>PLAYGRID</span></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/" data-nav="/" data-tab="home" class="active">Play</a>
+          <a href="/games" data-nav="/games" data-view="selection" data-tab="selection">Games</a>
+          <a href="/rooms" data-nav="/rooms" data-view="rooms" data-tab="rooms">Rooms</a>
+          <button data-view="profile">Profile</button>
+        </nav>
+        <div class="game-hud" aria-label="Game progress">
+          <span id="header-round"></span
+          ><span class="hud-clock"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="13" r="9" />
+              <path d="M12 8v5l3 2M9 1h6" /></svg
+            ><b id="header-timer">0:00</b></span
+          ><span id="header-difficulty"></span>
+        </div>
+        <div class="topbar-right">
+          <span
+            class="connection-note"
+            id="connection-note"
+            role="status"
+            hidden
+            >Reconnecting…</span
+          >
+          <button
+            class="icon-btn"
+            id="rules-btn"
+            title="Game rules"
+            aria-label="Show game rules"
+            aria-haspopup="dialog"
+            hidden
+          ></button>
+          <button
+            class="icon-btn"
+            id="focus-btn"
+            title="Focus mode: enlarge the game"
+            aria-label="Enter focus mode"
+            aria-pressed="false"
+            hidden
+          ></button>
+          <button
+            class="icon-btn"
+            id="sound-btn"
+            title="Mute sound"
+            aria-label="Mute sound"
+          ></button>
+          <button
+            class="icon-btn"
+            id="settings-btn"
+            title="Settings"
+            aria-label="Open settings"
+          ></button>
+          <button class="btn nav-cta" data-nav="/games">Play Now</button>
+        </div>
+      </header>
+
+      <main id="screen-home" class="screen" hidden>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-orbit" aria-hidden="true"></div>
+          <div class="hero-copy">
+            <h1 id="hero-title">
+              PLAY<br />TOGETHER<br /><span>ANYWHERE</span>
+            </h1>
+            <p>
+              Multiplayer party games for you and your friends.<br />No
+              downloads. Just share a link and play.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-big" id="hero-create"></button
+              ><button class="btn btn-ghost btn-big" id="hero-join"></button>
+            </div>
+            <ul class="trust-cues">
+              <li data-trust="shield">Free to Play</li>
+              <li data-trust="people">No Account Required</li>
+              <li data-trust="monitor">Works on All Devices</li>
+            </ul>
+          </div>
+          <img
+            class="hero-art"
+            src="/assets/hero-mascots.png"
+            alt="A sunglasses-wearing gamer, a friendly robot, and a tabby cat ready to play"
+            width="1024"
+            height="1024"
+            fetchpriority="high"
+          />
+          <svg
+            class="hero-doodles"
+            viewBox="0 0 720 580"
+            fill="none"
+            aria-hidden="true"
+          >
+            <g stroke="#aeff00" stroke-width="4" stroke-linejoin="round">
+              <path
+                d="m552 164 19-23-12-27q-9-21 14-28l45 9q33 8 23 36l-13 31q-8 17-28 10l-24-7Z"
+              />
+            </g>
+            <g fill="#b1ff00">
+              <circle cx="580" cy="115" r="5" />
+              <circle cx="599" cy="122" r="5" />
+              <circle cx="617" cy="129" r="5" />
+              <path
+                d="m159 154 3 9 9 3-9 3-3 9-3-9-9-3 9-3Zm472 84 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z"
+              />
+            </g>
+          </svg>
+        </section>
+      </main>
+
+      <main id="screen-selection" class="screen catalog-screen" hidden>
+        <section class="catalog" aria-labelledby="games-title">
+          <div class="catalog-head">
+            <div>
+              <p class="eyebrow">GAMES</p>
+              <h1 id="games-title">Small cards. More discovery.</h1>
+              <p class="muted">
+                Play opens your party first, then picks the game. Everyone
+                stays together between games.
+              </p>
+            </div>
+          </div>
+          <div class="catalog-tools">
+            <label class="search-field"
+              ><span class="sr-only">Search games</span
+              ><input
+                id="game-search"
+                type="search"
+                placeholder="Search games or categories…"
+                autocomplete="off"
+                aria-controls="games"
+            /></label>
+            <div class="chips" id="game-filters" role="group" aria-label="Filter games by category"></div>
+          </div>
+          <p class="sr-only" id="games-count" role="status" aria-live="polite"></p>
+          <div class="games compact-games" id="games"></div>
+          <div class="no-match" id="games-empty" hidden>
+            <h2>No matches</h2>
+            <p class="muted" id="games-empty-text"></p>
+            <button class="btn btn-ghost" type="button" id="games-clear">Clear Search</button>
+          </div>
+        </section>
+      </main>
+
+      <main id="screen-rooms" class="screen rooms-screen" hidden>
+        <div class="rooms-head">
+          <p class="eyebrow">ROOMS</p>
+          <h1>Your next gathering</h1>
+          <p class="muted">Join friends with a code, hop back into your party, or find a public one.</p>
+        </div>
+        <div class="rooms-grid">
+          <div class="rooms-side">
+            <section class="card join-room" aria-labelledby="join-title">
+              <h2 id="join-title">Join by code</h2>
+              <form class="code-form" id="code-form" novalidate>
+                <input
+                  id="code-input"
+                  placeholder="Enter party code"
+                  maxlength="100"
+                  autocomplete="off"
+                  aria-label="Party code or invitation link"
+                  aria-describedby="code-error"
+                  required
+                /><button class="btn" type="submit">Join</button>
+              </form>
+              <p class="field-error" id="code-error" role="alert" hidden></p>
+            </section>
+            <section class="card current-party" id="current-party" aria-labelledby="current-title" hidden></section>
+          </div>
+          <section class="card browser" id="rooms-browser" aria-labelledby="public-title">
+            <div class="browser-head">
+              <h2 id="public-title">Public parties</h2>
+              <button
+                class="icon-btn small"
+                id="refresh-btn"
+                aria-label="Refresh public parties"
+              ></button>
+            </div>
+            <p class="rooms-explainer">Live public parties · join in or watch</p>
+            <div id="lobby-list" class="lobby-list" aria-live="polite" aria-busy="false"></div>
+          </section>
+        </div>
+      </main>
+
+      <main id="screen-join" class="screen" hidden>
+        <div class="card join-card">
+          <p class="eyebrow">YOU'RE INVITED</p>
+          <h1>Make yourself at home.</h1>
+          <p>
+            Join party <b id="join-code"></b>. Pick your player name and avatar.
+          </p>
+          <p class="muted join-switch-note" id="join-switch-note" role="status" hidden></p>
+          <div class="profile" data-profile></div>
+          <button class="btn btn-big" id="join-btn">Join Party</button
+          ><a class="muted-link" href="/rooms" data-nav="/rooms">Back to rooms</a>
+        </div>
+      </main>
+      <main id="screen-message" class="screen" hidden>
+        <div class="card message-card">
+          <div class="message-icon" id="msg-icon"></div>
+          <h1 id="msg-title"></h1>
+          <p id="msg-text"></p>
+          <div class="message-actions" id="msg-actions"></div>
+        </div>
+      </main>
+
+      <main id="screen-room" class="screen room" hidden>
+        <header class="party-head" id="party-head">
+          <div class="party-id">
+            <p class="eyebrow" id="party-eyebrow">YOUR PARTY</p>
+            <h1 id="party-name">Your party</h1>
+          </div>
+          <div class="party-head-actions">
+            <button class="btn btn-ghost party-code" id="party-code" type="button" aria-describedby="party-copied"></button>
+            <span class="sr-only" id="party-copied" role="status" aria-live="polite"></span>
+            <button class="btn btn-ghost" id="party-invite" type="button">Invite Friends</button>
+            <button class="btn btn-ghost" id="party-settings" type="button" aria-haspopup="dialog">Party Settings</button>
+            <button class="btn btn-ghost" id="party-leave" type="button">Leave Party</button>
+          </div>
+        </header>
+        <div class="room-bar">
+          <div class="room-bar-left">
+            <button class="back-link" id="leave-btn"></button
+            ><span class="game-pill" id="room-game"></span
+            ><span class="badge" id="room-vis"></span
+            ><span class="badge badge-warn" id="room-lock" hidden>Locked</span>
+          </div>
+          <div class="room-bar-right">
+            <span class="room-code-label">Room: <b id="room-code"></b></span
+            ><button
+              class="icon-btn small"
+              id="copy-link"
+              aria-label="Copy room code"
+            ></button
+            ><button
+              class="icon-btn small"
+              id="share-link"
+              aria-label="Share room link"
+            ></button
+            ><button class="btn btn-small btn-ghost" id="rules-link">
+              Rules</button
+            ><button class="btn btn-small btn-ghost" id="end-btn" hidden>
+              End Game</button
+            ><button class="btn btn-small btn-ghost" id="leave-lobby-btn">
+              Leave Lobby
+            </button>
+          </div>
+        </div>
+        <section
+          class="card game-word-slot"
+          id="game-word-slot"
+          aria-live="polite"
+        >
+          <div id="room-word"></div>
+        </section>
+        <aside class="side card" id="side">
+          <div class="side-head">
+            <h2>Players <span id="player-count"></span></h2>
+            <span class="players-status" id="players-status"></span
+            ><button
+              class="icon-btn small mobile-roster-toggle"
+              id="mobile-players-toggle"
+              aria-label="Show player list"
+              aria-expanded="false"
+              aria-controls="player-list spec-list"
+            ></button>
+          </div>
+          <ul class="people" id="player-list"></ul>
+          <div id="seat-action"></div>
+          <div class="spectator-section">
+            <div class="side-head side-sub">
+              <h3>Watching <span id="spec-count"></span></h3>
+            </div>
+            <ul class="people people-small" id="spec-list"></ul>
+          </div>
+        </aside>
+        <section class="stage" id="stage" aria-label="Game area"></section>
+        <aside class="card party-activity" id="party-activity" aria-labelledby="activity-title"></aside>
+        <section class="chat card" id="room-chat" aria-label="Room chat">
+          <div
+            class="chat-log"
+            id="chat-log"
+            tabindex="0"
+            aria-label="Chat history"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions"
+          ></div>
+          <form class="chat-form" id="chat-form">
+            <input
+              id="chat-input"
+              maxlength="120"
+              autocomplete="off"
+              placeholder="Type a message…"
+              aria-label="Chat message or guess"
+            /><button
+              type="submit"
+              class="send-btn"
+              aria-label="Send message"
+            ></button>
+          </form>
+        </section>
+      </main>
     </div>
-  </header>
-
-  <!-- HOME -->
-  <main id="screen-home" class="screen" hidden>
-    <section class="hero">
-      <div class="card profile-card">
-        <h2 class="card-title">Who are you?</h2>
-        <div class="profile" data-profile></div>
-      </div>
-      <div class="hero-copy">
-        <h1>Party games with friends.<br><span>No account. Just a link.</span></h1>
-        <p>Pick a game, make a lobby, send the link. Your friends are in before you finish typing.</p>
-        <form class="code-form" id="code-form">
-          <input id="code-input" placeholder="Have a code? e.g. K7X2QP" maxlength="8" autocomplete="off" aria-label="Lobby code">
-          <button class="btn btn-ghost" type="submit">Join</button>
-        </form>
-      </div>
-    </section>
-
-    <section class="games" id="games"></section>
-
-    <section class="card browser">
-      <div class="browser-head">
-        <h2 class="card-title">Public lobbies</h2>
-        <button class="btn btn-small btn-ghost" id="refresh-btn">Refresh</button>
-      </div>
-      <div id="lobby-list" class="lobby-list"></div>
-    </section>
-
-    <div class="ad-slot ad-wide" data-slot="home-bottom">Ad space</div>
-
     <footer class="footer">
-      <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <span>%SITE%</span>
+      <span>GOOD GAMES. GREAT COMPANY.</span>
+      <div>
+        <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a
+        ><span>PLAYGRID</span>
+      </div>
     </footer>
-  </main>
-
-  <!-- JOIN BY LINK -->
-  <main id="screen-join" class="screen" hidden>
-    <div class="card join-card">
-      <p class="eyebrow">You've been invited to lobby <b id="join-code"></b></p>
-      <h2 class="card-title">Pick a name and jump in</h2>
-      <div class="profile" data-profile></div>
-      <button class="btn btn-big" id="join-btn">Join lobby</button>
-      <a class="muted-link" href="/" data-nav="/">Back to home</a>
+    <button class="return-bar" id="return-bar" type="button" hidden>
+      <span class="return-dot" aria-hidden="true"></span>
+      <span class="return-text"
+        ><b id="return-label">Return to Lobby</b>
+        <small
+          >Room <span id="return-code"></span> ·
+          <span id="return-status"></span></small
+        ></span
+      >
+      <span class="return-go" aria-hidden="true">&rsaquo;</span>
+    </button>
+    <div class="modal-back" id="modal" hidden>
+      <div
+        class="modal card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        id="modal-body"
+        tabindex="-1"
+      ></div>
     </div>
-  </main>
-
-  <!-- MESSAGE (closed, full, locked, kicked) -->
-  <main id="screen-message" class="screen" hidden>
-    <div class="card message-card">
-      <div class="message-icon" id="msg-icon">🚪</div>
-      <h2 class="card-title" id="msg-title"></h2>
-      <p id="msg-text"></p>
-      <div class="message-actions" id="msg-actions"></div>
-    </div>
-  </main>
-
-  <!-- ROOM -->
-  <main id="screen-room" class="screen room" hidden>
-    <div class="room-bar card">
-      <div class="room-bar-left">
-        <span class="game-pill" id="room-game"></span>
-        <span class="badge" id="room-vis"></span>
-        <span class="badge badge-warn" id="room-lock" hidden>🔒 Locked</span>
-      </div>
-      <div class="room-bar-right">
-        <button class="btn btn-small" id="copy-link">🔗 Copy link</button>
-        <button class="btn btn-small btn-ghost" id="share-link">Share</button>
-        <button class="btn btn-small btn-ghost" id="end-btn" hidden>End game</button>
-        <button class="btn btn-small btn-ghost" id="leave-btn">Leave</button>
-      </div>
-    </div>
-
-    <aside class="side card" id="side">
-      <div class="side-head">
-        <h3>Players <span id="player-count"></span></h3>
-      </div>
-      <ul class="people" id="player-list"></ul>
-      <div id="seat-action"></div>
-      <div class="side-head side-sub">
-        <h3>Watching <span id="spec-count"></span></h3>
-      </div>
-      <ul class="people people-small" id="spec-list"></ul>
-      <div class="ad-slot ad-side" data-slot="room-side">Ad space</div>
-    </aside>
-
-    <section class="stage" id="stage"></section>
-
-    <section class="chat card">
-      <div class="chat-log" id="chat-log" aria-live="polite"></div>
-      <form class="chat-form" id="chat-form">
-        <input id="chat-input" maxlength="120" autocomplete="off" placeholder="Say something...">
-      </form>
-    </section>
-  </main>
-
-  <!-- MODAL -->
-  <div class="modal-back" id="modal" hidden>
-    <div class="modal card" role="dialog" aria-modal="true" id="modal-body"></div>
-  </div>
-
-  <div class="toast" id="toast" hidden></div>
-
-  <script>window.PAGE = { game: "%GAME%", site: "%SITE%" };</script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/sound.js"></script>
-  <script src="/js/games/fill.js"></script>
-  <script src="/js/games/drawguess.js"></script>
-  <script src="/js/games/fourrow.js"></script>
-  <script src="/js/main.js"></script>
-</body>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script>
+      window.PAGE = { game: "%GAME%", site: "%SITE%", hidden: %HIDDEN% };
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/ui.js?v=qol-20261029"></script>
+    <script src="/js/sound.js?v=phase15d-20261028"></script>
+    <script src="/js/games/fill.js?v=phase15d-20261028"></script>
+    <script src="/js/games/drawguess.js?v=phase15d-20261028"></script>
+    <script src="/js/games/fourrow.js?v=phase15d-20261028"></script>
+    <script src="/js/games/art31.js?v=p31-20261031"></script>
+    <script src="/js/games/common.js?v=p32-20261101"></script>
+    <script src="/js/games/wordchain.js?v=batch2-20261028"></script>
+    <script src="/js/games/categories.js?v=batch2-20261028"></script>
+    <script src="/js/games/higherlower.js?v=batch2-20261028"></script>
+    <script src="/js/games/colorstack.js?v=batch2-20261028"></script>
+    <script src="/js/games/gofish.js?v=p32-20261101"></script>
+    <script src="/js/games/tictactoe.js?v=batch1-20261028"></script>
+    <script src="/js/games/rps.js?v=batch1-20261028"></script>
+    <script src="/js/games/dotsboxes.js?v=batch1-20261028"></script>
+    <script src="/js/games/wordscramble.js?v=batch1-20261028"></script>
+    <script src="/js/games/trivia.js?v=batch1-20261028"></script>
+    <script src="/js/games/telephone.js?v=batch3-20261028"></script>
+    <script src="/js/games/bluff.js?v=batch3-20261028"></script>
+    <script src="/js/games/impostor.js?v=batch3-20261028"></script>
+    <script src="/js/games/liarsdice.js?v=batch3-20261028"></script>
+    <script src="/js/games/hotpotato.js?v=batch3-20261028"></script>
+    <script src="/js/games/battleship.js?v=p32-20261101"></script>
+    <script src="/js/games/checkers.js?v=p32-20261101"></script>
+    <script src="/js/games/reversi.js?v=batch4-20261028"></script>
+    <script src="/js/games/ludo.js?v=batch4-20261028"></script>
+    <script src="/js/games/chess.js?v=p32-20261101"></script>
+    <script src="/js/games/pool.js?v=batch5-20261028"></script>
+    <script src="/js/games/golf.js?v=batch5-20261028"></script>
+    <script src="/js/games/tycoon.js?v=batch5-20261028"></script>
+    <script src="/js/rules/rules-a.js?v=qol-20261029"></script>
+    <script src="/js/rules/rules-b.js?v=qol-20261029"></script>
+    <script src="/js/rules/rules-c.js?v=qol-20261029"></script>
+    <script src="/js/main.js?v=bots-20261102"></script>
+  </body>
 </html>
