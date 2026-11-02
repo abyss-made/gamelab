@@ -1755,7 +1755,7 @@
   // Bot difficulty: a select for the host in the lobby, plain text for everyone else.
   function botLevelHTML(p) {
     if (!p.bot) return "";
-    const levels = (S.bots && S.bots.difficulties) || [];
+    const levels = S.bots && S.bots.supported ? [...S.bots.difficulties, "idle"] : p.difficulty === "idle" ? ["idle"] : [];
     if (isHost() && levels.length > 1)
       return ` · <select class="bot-level" data-bot-level="${p.id}" data-k="botlevel-${p.id}" aria-label="Difficulty for ${esc(p.name)}">${levels.map((l) => `<option value="${l}" ${p.difficulty === l ? "selected" : ""}>${l[0].toUpperCase() + l.slice(1)}</option>`).join("")}</select>`;
     return p.difficulty ? ` · ${p.difficulty[0].toUpperCase() + p.difficulty.slice(1)}` : "";
@@ -1764,8 +1764,9 @@
   function botControlsHTML() {
     if (!isHost() || !S.bots || S.phase !== "lobby") return "";
     const b = S.bots;
-    if (!b.supported && !S.gameId) return "";
-    return `<div class="bot-controls"><button class="btn btn-ghost" id="add-bot" type="button" data-k="add-bot" ${b.canAdd ? "" : "disabled"} ${b.canAdd ? "" : `title="${esc(b.reason)}"`}>${icon("plus")}Add Bot</button><p class="bot-note muted" role="note">${esc(b.canAdd ? `${b.level === "limited" ? "Limited bot: " : ""}${b.note}` : b.reason)}</p></div>`;
+    if (!S.gameId) return "";
+    const idleBtn = `<button class="btn btn-ghost" id="add-idle-bot" type="button" data-k="add-idle-bot" ${b.canAddIdle ? "" : "disabled"} title="${esc(b.idleNote || "")}">${icon("plus")}Add Idle Bot</button>`;
+    return `<div class="bot-controls"><button class="btn btn-ghost" id="add-bot" type="button" data-k="add-bot" ${b.canAdd ? "" : "disabled"} ${b.canAdd ? "" : `title="${esc(b.reason)}"`}>${icon("plus")}Add Bot</button>${idleBtn}<p class="bot-note muted" role="note">${esc(b.canAdd ? `${b.level === "limited" ? "Limited bot: " : ""}${b.note}` : b.reason)}</p></div>`;
   }
 
   function gameSlotHTML() {
@@ -1931,6 +1932,7 @@
     const t = (sel) => e.target.closest(sel);
     if (t("#lobby-start") || t("#result-again")) socket.emit("startGame");
     else if (t("#add-bot")) socket.emit("addBot", { difficulty: "normal" });
+    else if (t("#add-idle-bot")) socket.emit("addBot", { difficulty: "idle" });
     else if (t("#ready-btn") || t("#result-ready")) {
       const mine = me();
       if (mine) socket.emit("setReady", !mine.ready);

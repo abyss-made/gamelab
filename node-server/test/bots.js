@@ -108,6 +108,36 @@ def('unsupported-and-switch', async () => {
   host.close();
 });
 
+def('idle-bots', async () => {
+  // Idle bots work in any game, including ones without real bots, and never act.
+  const { host, code } = await newParty('drawguess');
+  r.ok(host.state.bots.supported === false && host.state.bots.canAddIdle === true, 'Draw & Guess: real bots are off but Add Idle Bot is on');
+  await addBot(host, 'idle');
+  const b = botsOf(host)[0];
+  r.ok(b && b.bot && b.difficulty === 'idle', 'an idle bot joins Draw & Guess');
+  host.emit('switchGame', { game: 'tictactoe' });
+  await wait([host], (s) => s.gameId === 'tictactoe', 'ttt');
+  r.ok(botsOf(host).length === 1 && botsOf(host)[0].difficulty === 'idle', 'the idle bot stays when switching games');
+  host.emit('hostUpdate', { settings: { turnTime: 0 } });
+  host.emit('startGame');
+  await host.untilState((s) => s.phase === 'game' && s.game, 'started');
+  host.action({ type: 'place', cell: 0 });
+  const hostFirst = host.state.game.myIndex === 0;
+  await srv.passes(8);
+  const moves = (await srv.room(code)).game.moves;
+  r.ok(moves === (hostFirst ? 1 : 0), `the idle bot never moves (moves: ${moves})`);
+  host.emit('endGame');
+  await host.untilState((s) => s.phase === 'lobby', 'ended');
+  host.emit('switchGame', { game: 'wordscramble' });
+  await wait([host], (s) => s.gameId === 'wordscramble', 'scramble');
+  r.ok(botsOf(host).length === 1, 'idle bots survive switching to a game with no real bots');
+  host.emit('setBotDifficulty', { id: botsOf(host)[0].id, difficulty: 'normal' });
+  await srv.passes(2);
+  r.ok(botsOf(host)[0].difficulty === 'idle', 'an idle bot cannot be turned into a real bot in a game without them');
+  await consistent('idle bots');
+  host.close();
+});
+
 def('mixed-ttt-rematch', async () => {
   const { host, code } = await newParty('tictactoe', { settings: { winnerStays: false } });
   await addBot(host, 'normal');

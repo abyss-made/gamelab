@@ -57,7 +57,9 @@ function botName(taken) {
 
 function createBot(gameId, taken, difficulty) {
   const s = SUPPORT[gameId];
-  const d = s.difficulties.includes(difficulty) ? difficulty : s.difficulties.includes('normal') ? 'normal' : s.difficulties[0];
+  // 'idle' bots fill a seat in any game and never act: for testing the UI alone. The game's own
+  // turn timers deal with their turns (random move, then forfeit), so they can't block a match.
+  const d = difficulty === 'idle' || !s ? 'idle' : s.difficulties.includes(difficulty) ? difficulty : s.difficulties.includes('normal') ? 'normal' : s.difficulties[0];
   const now = Date.now();
   return {
     id: crypto.randomBytes(6).toString('hex'),
@@ -94,7 +96,7 @@ function drive(room, G, now) {
 function driveOnce(room, G, now) {
   const S = SUPPORT[room.gameId];
   if (!S) return false;
-  const bots = room.seats.map((id) => room.members.get(id)).filter((m) => m && m.bot);
+  const bots = room.seats.map((id) => room.members.get(id)).filter((m) => m && m.bot && m.difficulty !== 'idle');
   if (!bots.length) return false;
   if (![...room.members.values()].some((m) => !m.bot && m.connected)) return false;
   let acted = false;
@@ -129,4 +131,4 @@ function driveOnce(room, G, now) {
   return acted;
 }
 
-module.exports = { SUPPORT, DIFFICULTIES, supported, info, createBot, drive };
+module.exports = { IDLE_NOTE: 'Idle bot: takes a seat and does nothing, for testing the screen on your own.', SUPPORT, DIFFICULTIES, supported, info, createBot, drive };

@@ -123,7 +123,9 @@ function botState(room) {
   if (canAdd && room.isPublic) (canAdd = false), (reason = 'Bots are for private parties. Make this party private to add one.');
   else if (canAdd && room.phase !== 'lobby') (canAdd = false), (reason = 'Add bots between games.');
   else if (canAdd && room.seats.length >= seatCap(room)) (canAdd = false), (reason = 'Every seat is taken.');
-  return { ...i, count, canAdd, reason };
+  // An idle bot works in any chosen game, under the same private/lobby/seat rules.
+  const canAddIdle = !!room.gameId && !room.isPublic && room.phase === 'lobby' && room.seats.length < seatCap(room);
+  return { ...i, count, canAdd, reason, canAddIdle, idleNote: bots.IDLE_NOTE };
 }
 
 function view(room, m) {
@@ -677,11 +679,13 @@ function attach(ioServer) {
         for (const b of [...room.members.values()]) if (b.bot && pred(b)) removeMember(room, b.id, 'quiet');
       };
       if (!bots.supported(opts.game)) {
-        if (hasBots(room)) sys(room, `Bots were removed: ${bots.info(opts.game).reason}`, 'warn');
-        dropBots(() => true);
+        // Idle bots fit any game; playing bots can't.
+        const playing = [...room.members.values()].some((b) => b.bot && b.difficulty !== 'idle');
+        if (playing) sys(room, `Bots were removed: ${bots.info(opts.game).reason}`, 'warn');
+        dropBots((b) => b.difficulty !== 'idle');
       } else {
         const keepable = bots.info(opts.game).difficulties;
-        for (const b of room.members.values()) if (b.bot && !keepable.includes(b.difficulty)) b.difficulty = keepable.includes('normal') ? 'normal' : keepable[0];
+        for (const b of room.members.values()) if (b.bot && b.difficulty !== 'idle' && !keepable.includes(b.difficulty)) b.difficulty = keepable.includes('normal') ? 'normal' : keepable[0];
         const over = room.seats.length - G2.meta.maxPlayers;
         if (over > 0) {
           const spare = room.seats.filter((id) => room.members.get(id).bot).slice(-over);
@@ -732,7 +736,8 @@ function attach(ioServer) {
       const { room, m } = c;
       if (!(m.botBucket || (m.botBucket = new Bucket(2, 8))).take()) return;
       const st = botState(room);
-      if (!st.canAdd) return socket.emit('notice', st.reason);
+      const idle = !!opts && opts.difficulty === 'idle';
+      if (idle ? !st.canAddIdle : !st.canAdd) return socket.emit('notice', idle && !st.reason ? 'No idle bot can be added right now.' : st.reason || 'No idle bot can be added right now.');
       const taken = new Set([...room.members.values()].map((x) => x.name));
       const bot = bots.createBot(room.gameId, taken, opts && opts.difficulty);
       room.members.set(bot.id, bot);
@@ -746,7 +751,7 @@ function attach(ioServer) {
       if (!c || !opts || typeof opts !== 'object') return;
       const bot = c.room.members.get(opts.id);
       const i = bots.info(c.room.gameId);
-      if (!bot || !bot.bot || !i.supported || !i.difficulties.includes(opts.difficulty)) return;
+      if (!bot || !bot.bot || !(opts.difficulty === 'idle' || (i.supported && i.difficulties.includes(opts.difficulty)))) return;
       bot.difficulty = opts.difficulty;
       broadcast(c.room);
     });

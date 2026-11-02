@@ -17,6 +17,14 @@ disable Add Bot and say why. Nothing here claims all 21.
 - Pacing: a bot "thinks" 0.6 to 1.4 s before acting. `BOT_DELAY_MS=0` (tests) removes the delay.
 - Mobile: the Add Bot button and the difficulty select are at least 44 px tall and wrap inside the screen.
 
+## Idle bots (any game)
+
+**Add Idle Bot** seats a bot in *any* chosen game, including the 15 without real bots. It never acts, so a
+single person can open any game's screen to test the UI. The game's own turn timers still apply to its
+turn (a random move, then a forfeit after repeated timeouts), so set the game's turn timer to Off in Game
+Settings if you want a board to stay put. Same rules as other bots: host only, private lobby, lobby phase,
+free seat; kept when switching games; removed when the last person leaves. Tested in `idle-bots`.
+
 ## Compatibility matrix (all 21 visible games)
 
 | Game | Bots | Notes |
