@@ -1,0 +1,67 @@
+[
+  {
+    "id": "drawguess",
+    "name": "Draw & Guess",
+    "direction": "Sketch Club"
+  },
+  {
+    "id": "fourrow",
+    "name": "Four in a Row",
+    "direction": "Drop Society"
+  },
+  {
+    "id": "tictactoe",
+    "name": "Tic Tac Toe",
+    "direction": "Cross & Circle"
+  },
+  {
+    "id": "rps",
+    "name": "Rock Paper Scissors",
+    "direction": "Throwdown"
+  },
+  {
+    "id": "dotsboxes",
+    "name": "Dots & Boxes",
+    "direction": "Stitch & Claim"
+  },
+  {
+    "id": "wordscramble",
+    "name": "Word Scramble",
+    "direction": "Letterworks"
+  },
+  {
+    "id": "trivia",
+    "name": "Trivia Blitz",
+    "direction": "Orbit Quiz"
+  },
+  {
+    "id": "wordchain",
+    "name": "Word Chain",
+    "direction": "Chain Reaction"
+  },
+  {
+    "id": "categories",
+    "name": "Categories Rush",
+    "direction": "The Fieldbook"
+  },
+  {
+    "id": "telephone",
+    "name": "Drawing Telephone",
+    "direction": "Paper Relay"
+  },
+  {
+    "id": "bluff",
+    "name": "Bluff Battle",
+    "direction": "The Velvet Lie"
+  },
+  {
+    "id": "impostor",
+    "name": "The Impostor",
+    "direction": "Confidential Club"
+  },
+  {
+    "id": "checkers",
+    "name": "Checkers",
+    "direction": "Emerald House"
+  }
+]

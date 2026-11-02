@@ -1,0 +1,29 @@
+{
+  "stage": "A \u00b7 not yet approved",
+  "issue": 55,
+  "baseline": "06609a4",
+  "original_art": [
+    "throw-paper.svg",
+    "throw-rock.svg",
+    "relay-cat-baker.svg",
+    "sketch-dragon.svg",
+    "throw-scissors.svg"
+  ],
+  "source": "build-concepts.py and shared.css, original HTML board/card components",
+  "reuse": [
+    {
+      "path": "node-server/public/favicon.svg",
+      "use": "Approved Playgrid mark"
+    },
+    {
+      "path": "node-server/public/assets/player-portraits.png",
+      "use": "Existing 2\u00d72 original portrait sprite"
+    },
+    {
+      "path": "node-server/public/assets/fonts/inter-variable.ttf",
+      "use": "Inter; existing OFL.txt retained in portable ZIP"
+    }
+  ],
+  "privacy": "Example drawings and board positions are illustrative. No hidden gameplay data is loaded.",
+  "rights": "No proprietary competitor assets, paid API calls or new external dependencies."
+}

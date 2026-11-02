@@ -1,0 +1,203 @@
+{
+  "baseline": "06609a4",
+  "registered": 25,
+  "selectable": 21,
+  "remainingVisible": [
+    "drawguess",
+    "fourrow",
+    "wordchain",
+    "categories",
+    "tictactoe",
+    "rps",
+    "dotsboxes",
+    "wordscramble",
+    "trivia",
+    "telephone",
+    "bluff",
+    "impostor",
+    "checkers"
+  ],
+  "hidden": [
+    "higherlower",
+    "liarsdice",
+    "hotpotato",
+    "reversi"
+  ],
+  "games": [
+    {
+      "id": "drawguess",
+      "name": "Draw & Guess",
+      "minPlayers": 2,
+      "maxPlayers": 12,
+      "selectable": true
+    },
+    {
+      "id": "fourrow",
+      "name": "4 in a Row",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "wordchain",
+      "name": "Word Chain",
+      "minPlayers": 2,
+      "maxPlayers": 8,
+      "selectable": true
+    },
+    {
+      "id": "categories",
+      "name": "Categories Rush",
+      "minPlayers": 2,
+      "maxPlayers": 12,
+      "selectable": true
+    },
+    {
+      "id": "higherlower",
+      "name": "Higher or Lower",
+      "minPlayers": 2,
+      "maxPlayers": 8,
+      "selectable": false
+    },
+    {
+      "id": "colorstack",
+      "name": "Color Stack",
+      "minPlayers": 2,
+      "maxPlayers": 8,
+      "selectable": true
+    },
+    {
+      "id": "gofish",
+      "name": "Go Fish",
+      "minPlayers": 2,
+      "maxPlayers": 6,
+      "selectable": true
+    },
+    {
+      "id": "tictactoe",
+      "name": "Tic Tac Toe",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "rps",
+      "name": "Rock Paper Scissors",
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "selectable": true
+    },
+    {
+      "id": "dotsboxes",
+      "name": "Dots & Boxes",
+      "minPlayers": 2,
+      "maxPlayers": 4,
+      "selectable": true
+    },
+    {
+      "id": "wordscramble",
+      "name": "Word Scramble",
+      "minPlayers": 2,
+      "maxPlayers": 12,
+      "selectable": true
+    },
+    {
+      "id": "trivia",
+      "name": "Trivia Blitz",
+      "minPlayers": 2,
+      "maxPlayers": 12,
+      "selectable": true
+    },
+    {
+      "id": "telephone",
+      "name": "Drawing Telephone",
+      "minPlayers": 3,
+      "maxPlayers": 8,
+      "selectable": true
+    },
+    {
+      "id": "bluff",
+      "name": "Bluff Battle",
+      "minPlayers": 3,
+      "maxPlayers": 10,
+      "selectable": true
+    },
+    {
+      "id": "impostor",
+      "name": "The Impostor",
+      "minPlayers": 3,
+      "maxPlayers": 10,
+      "selectable": true
+    },
+    {
+      "id": "liarsdice",
+      "name": "Liar's Dice",
+      "minPlayers": 2,
+      "maxPlayers": 8,
+      "selectable": false
+    },
+    {
+      "id": "hotpotato",
+      "name": "Hot Potato",
+      "minPlayers": 2,
+      "maxPlayers": 10,
+      "selectable": false
+    },
+    {
+      "id": "battleship",
+      "name": "Battleship",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "checkers",
+      "name": "Checkers",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "reversi",
+      "name": "Reversi",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": false
+    },
+    {
+      "id": "ludo",
+      "name": "Ludo",
+      "minPlayers": 2,
+      "maxPlayers": 4,
+      "selectable": true
+    },
+    {
+      "id": "chess",
+      "name": "Chess",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "pool",
+      "name": "Pool",
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "selectable": true
+    },
+    {
+      "id": "golf",
+      "name": "Mini Golf",
+      "minPlayers": 2,
+      "maxPlayers": 6,
+      "selectable": true
+    },
+    {
+      "id": "tycoon",
+      "name": "Property Tycoon",
+      "minPlayers": 2,
+      "maxPlayers": 6,
+      "selectable": true
+    }
+  ]
+}
