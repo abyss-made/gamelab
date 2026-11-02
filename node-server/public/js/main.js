@@ -1573,13 +1573,17 @@
     const label = GameUI[S.gameId].scoreLabel;
     return `<li class="person ${p.connected ? "" : "offline"} ${p.id === S.you ? "me" : ""}">
       ${avatarHTML(p.avatar)}
-      <div class="pmain"><div class="pname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}</div>
+      <div class="pmain"><div class="pname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}${p.bot ? ' <span class="bot-badge" title="Computer player">BOT</span>' : ""}</div>
       ${spectator ? "" : `<div class="pscore"><span class="lobby-status">${p.id === S.hostId ? "(Host)" : p.connected ? "Connected" : "Reconnecting"}</span><span class="game-score">${p.score} ${p.score === 1 && label === "wins" ? "win" : label}</span></div>`}</div>
       <div class="picons">${icons.join("")}${p.connected ? "" : '<span title="Reconnecting">…</span>'}</div>${memberTools(p)}</li>`;
   }
   // Host: remove or hand over hosting. Public parties: anyone can start a vote kick.
   function memberTools(p) {
     if (p.id === S.you) return "";
+    if (p.bot)
+      return isHost()
+        ? `<button class="kick" data-rmbot="${p.id}" data-k="rmbot-${p.id}" title="Remove ${esc(p.name)}" aria-label="Remove bot ${esc(p.name)}">${icon("close")}</button>`
+        : "";
     if (isHost())
       return (
         `<button class="kick" data-kick="${p.id}" data-k="kick-${p.id}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)} from the party">${icon("close")}</button>` +
@@ -1639,6 +1643,11 @@
     if (seat) socket.emit(seat.dataset.seat === "take" ? "takeSeat" : "watch");
     const q = e.target.closest("[data-queue]");
     if (q) socket.emit("queue", q.dataset.queue === "1");
+    const rb = e.target.closest("[data-rmbot]");
+    if (rb) {
+      socket.emit("kick", rb.dataset.rmbot);
+      return;
+    }
     const k = e.target.closest("[data-kick]");
     const v = e.target.closest("[data-vote]");
     const pr = e.target.closest("[data-promote]");
@@ -1726,8 +1735,11 @@
   function rosterCardHTML(p) {
     const status = [];
     if (p.id === S.hostId) status.push("Host");
+    if (p.bot) status.length = 0;
     status.push(
-      !p.connected
+      p.bot
+        ? "Bot"
+        : !p.connected
         ? "Reconnecting"
         : p.ready
           ? `${icon("check")}Ready`
@@ -1735,9 +1747,26 @@
     );
     return `<li class="roster-card ${p.id === S.you ? "me" : ""} ${p.connected ? "" : "offline"}">
       ${avatarHTML(p.avatar, "av-roster")}
-      <b class="rname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}</b>
-      <span class="rstatus ${p.ready && p.connected ? "is-ready" : ""}">${status.join(" · ")}</span>
+      <b class="rname">${esc(p.name)}${p.id === S.you ? " <small>(you)</small>" : ""}${p.bot ? ' <span class="bot-badge" title="Computer player">BOT</span>' : ""}</b>
+      <span class="rstatus ${p.ready && p.connected ? "is-ready" : ""}">${status.join(" · ")}${botLevelHTML(p)}</span>
       <span class="roster-tools">${memberTools(p)}</span></li>`;
+  }
+
+  // Bot difficulty: a select for the host in the lobby, plain text for everyone else.
+  function botLevelHTML(p) {
+    if (!p.bot) return "";
+    const levels = S.bots && S.bots.supported ? [...S.bots.difficulties, "idle"] : p.difficulty === "idle" ? ["idle"] : [];
+    if (isHost() && levels.length > 1)
+      return ` · <select class="bot-level" data-bot-level="${p.id}" data-k="botlevel-${p.id}" aria-label="Difficulty for ${esc(p.name)}">${levels.map((l) => `<option value="${l}" ${p.difficulty === l ? "selected" : ""}>${l[0].toUpperCase() + l.slice(1)}</option>`).join("")}</select>`;
+    return p.difficulty ? ` · ${p.difficulty[0].toUpperCase() + p.difficulty.slice(1)}` : "";
+  }
+  // Host-only Add Bot, with the reason shown when it is unavailable.
+  function botControlsHTML() {
+    if (!isHost() || !S.bots || S.phase !== "lobby") return "";
+    const b = S.bots;
+    if (!S.gameId) return "";
+    const idleBtn = `<button class="btn btn-ghost" id="add-idle-bot" type="button" data-k="add-idle-bot" ${b.canAddIdle ? "" : "disabled"} title="${esc(b.idleNote || "")}">${icon("plus")}Add Idle Bot</button>`;
+    return `<div class="bot-controls"><button class="btn btn-ghost" id="add-bot" type="button" data-k="add-bot" ${b.canAdd ? "" : "disabled"} ${b.canAdd ? "" : `title="${esc(b.reason)}"`}>${icon("plus")}Add Bot</button>${idleBtn}<p class="bot-note muted" role="note">${esc(b.canAdd ? `${b.level === "limited" ? "Limited bot: " : ""}${b.note}` : b.reason)}</p></div>`;
   }
 
   function gameSlotHTML() {
@@ -1796,6 +1825,7 @@
       <div class="panel-head"><h2 id="people-title">Your people <small>${S.players.length}/${S.maxPlayers}</small></h2><span class="ready-count">${ready} of ${S.players.length} ready</span></div>
       <ul class="party-roster">${S.players.map(rosterCardHTML).join("") || '<li class="empty">Nobody seated yet</li>'}</ul>
       ${gameSlotHTML()}
+      ${botControlsHTML()}
       ${S.role === "spectator" ? `<div class="mobile-seat seat-controls">${seatControlsHTML()}</div>` : ""}
       <div class="mobile-activity"><span>Watching · ${S.spectators.length}</span><button class="link-btn" id="open-activity" type="button" aria-haspopup="dialog">Queue &amp; votes ${icon("arrow")}</button></div>
       ${results ? "" : `<div class="party-actions"><p class="party-status" role="status">${lobbyStatus()}</p><div class="party-buttons">${buttons.join("")}</div></div>`}
@@ -1891,11 +1921,18 @@
     $("#activity-sheet").dataset.html = activityHTML("sheet");
   }
 
+  document.addEventListener("change", (e) => {
+    const sel = e.target.closest && e.target.closest("[data-bot-level]");
+    if (sel && S) socket.emit("setBotDifficulty", { id: sel.dataset.botLevel, difficulty: sel.value });
+  });
+
   // One click handler for the hub, the activity panel and the activity sheet.
   document.addEventListener("click", (e) => {
     if (!S || !e.target.closest("#screen-room, #modal-body")) return;
     const t = (sel) => e.target.closest(sel);
     if (t("#lobby-start") || t("#result-again")) socket.emit("startGame");
+    else if (t("#add-bot")) socket.emit("addBot", { difficulty: "normal" });
+    else if (t("#add-idle-bot")) socket.emit("addBot", { difficulty: "idle" });
     else if (t("#ready-btn") || t("#result-ready")) {
       const mine = me();
       if (mine) socket.emit("setReady", !mine.ready);
@@ -1984,9 +2021,11 @@
   // Why a game can or can't be chosen, in words (never colour alone).
   function eligibility(g) {
     const n = S.players.length + S.spectators.length;
-    if (n > g.max && !S.spectatorsOn)
-      return { ok: false, text: `Seats ${g.max}. Allow spectators to bring all ${n}.` };
-    if (n > g.max) return { ok: true, text: `${g.max} play, ${n - g.max} watch` };
+    const people = S.players.filter((p) => !p.bot).length + S.spectators.length; // extra bots are removed to fit
+    if (people > g.max && !S.spectatorsOn)
+      return { ok: false, text: `Seats ${g.max}. Allow spectators to bring all ${people}.` };
+    if (people > g.max) return { ok: true, text: `${g.max} play, ${people - g.max} watch` };
+    if (n > g.max) return { ok: true, text: "Extra bots are removed" };
     if (n < g.min) return { ok: true, text: `Needs ${g.min}+ · invite ${g.min - n} more` };
     return { ok: true, text: "" };
   }

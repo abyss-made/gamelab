@@ -5,6 +5,7 @@ const config = require('./config');
 const { GAMES, HIDDEN, selectable } = require('./games');
 const filter = require('./filter');
 const { clampInt, shuffle, Bucket } = require('./util');
+const bots = require('./bots');
 
 const rooms = new Map();
 let io = null;
@@ -38,6 +39,8 @@ const gameOf = (room) => (room.gameId ? GAMES[room.gameId] : null);
 const PARTY_MAX = Math.max(...Object.keys(GAMES).filter(selectable).map((id) => GAMES[id].meta.maxPlayers));
 const seatCap = (room) => (room.gameId ? Math.min(gameOf(room).meta.maxPlayers, room.maxPlayers) : room.maxPlayers);
 const member = (room, id) => room.members.get(id);
+const humans = (room) => [...room.members.values()].filter((x) => !x.bot);
+const hasBots = (room) => [...room.members.values()].some((x) => x.bot);
 const seated = (room) => room.seats.map((id) => room.members.get(id)).filter(Boolean);
 
 // Lobby actions that post system chat (seat changes, vote-kick, lock) share one
@@ -49,7 +52,7 @@ const chatLimited = (m) => !(m.chatBucket || (m.chatBucket = new Bucket(1, 5))).
 // Hosting goes to someone connected (and passing `fits`): seated players first, then spectators.
 function pickHost(room, exceptId, fits = () => true) {
   const order = [...room.seats, ...room.specs].filter((id) => id !== exceptId).map((id) => room.members.get(id)).filter(Boolean);
-  return order.find((x) => x.connected && fits(x)) || null;
+  return order.find((x) => !x.bot && x.connected && fits(x)) || null;
 }
 function setHost(room, m, why) {
   if (!m || room.hostId === m.id) return;
@@ -69,7 +72,7 @@ function seatSpectator(room, m) {
   m.role = 'player';
 }
 function fillFromQueue(room) {
-  if (room.phase !== 'lobby') return;
+  if (room.phase !== 'lobby' || room.holdFill) return;
   while (room.seats.length < seatCap(room)) {
     const m = room.queue.map((id) => room.members.get(id)).find((x) => x && x.role === 'spectator' && x.connected);
     if (!m) break;
@@ -103,7 +106,26 @@ function chat(room, msg, onlyFor) {
 const sys = (room, text, style = 'info') => chat(room, { kind: 'sys', text, style });
 
 function pub(m) {
-  return { id: m.id, name: m.name, avatar: m.avatar, connected: m.connected, score: m.score, ready: !!m.ready };
+  const o = { id: m.id, name: m.name, avatar: m.avatar, connected: m.connected, score: m.score, ready: !!m.ready };
+  if (m.bot) {
+    o.bot = true;
+    o.difficulty = m.difficulty;
+  }
+  return o;
+}
+
+// What the lobby needs to show Add Bot: whether this game has bots, why not, and whether a bot fits now.
+function botState(room) {
+  const i = bots.info(room.gameId);
+  const count = room.seats.filter((id) => room.members.get(id) && room.members.get(id).bot).length;
+  let canAdd = i.supported;
+  let reason = i.supported ? '' : i.reason;
+  if (canAdd && room.isPublic) (canAdd = false), (reason = 'Bots are for private parties. Make this party private to add one.');
+  else if (canAdd && room.phase !== 'lobby') (canAdd = false), (reason = 'Add bots between games.');
+  else if (canAdd && room.seats.length >= seatCap(room)) (canAdd = false), (reason = 'Every seat is taken.');
+  // An idle bot works in any chosen game, under the same private/lobby/seat rules.
+  const canAddIdle = !!room.gameId && !room.isPublic && room.phase === 'lobby' && room.seats.length < seatCap(room);
+  return { ...i, count, canAdd, reason, canAddIdle, idleNote: bots.IDLE_NOTE };
 }
 
 function view(room, m) {
@@ -131,6 +153,7 @@ function view(room, m) {
     myVote: room.nextVotes.get(m.id) || null,
     game: room.phase === 'game' && room.game && G ? G.view(room.game, m, now) : null,
     lastResult: room.lastResult,
+    bots: botState(room),
   };
 }
 
@@ -163,6 +186,8 @@ function makeApi(room) {
     rotateLoser: (loserId) => {
       const i = room.seats.indexOf(loserId);
       if (i < 0) return null;
+      const lm = room.members.get(loserId);
+      if (lm && lm.bot) return null; // a bot keeps its seat; it is never benched as a ghost spectator
       // Queued spectators go first (in order), then whoever has been watching longest. Only someone
       // who is connected: like fillFromQueue, never bench the loser for a spectator who has dropped.
       const here = (id) => room.specs.includes(id) && !!room.members.get(id) && room.members.get(id).connected;
@@ -326,15 +351,17 @@ function removeMember(room, id, how = 'left') {
       s.data.memberId = null;
     }
   }
-  sys(room, how === 'kicked' ? `${m.name} was removed from the lobby.` : `${m.name} left.`);
+  if (how !== 'quiet') sys(room, how === 'kicked' ? `${m.name} was removed from the lobby.` : how === 'bot' ? `${m.name} was removed.` : `${m.name} left.`);
   if (room.hostId === id) {
     // Prefer someone connected; if everyone left is offline, keep a host anyway.
-    const h = pickHost(room, id) || room.members.get(room.seats[0] || room.specs[0]);
+    const h = pickHost(room, id) || humans(room).find((x) => x.id !== id);
     room.hostId = null;
     if (h) setHost(room, h);
   }
   if (wasPlayer && room.phase === 'game' && room.game) gameOf(room).onLeave(room.game, id, room.api);
   if (wasPlayer) fillFromQueue(room);
+  // Bots never outlive the last person: no ghost members, no bot-only rooms.
+  if (!m.bot && !humans(room).length) for (const b of [...room.members.values()]) removeMember(room, b.id, 'quiet');
   if (room.members.size === 0) room.emptySince = Date.now();
   broadcast(room);
 }
@@ -350,7 +377,7 @@ function startGame(room) {
   const G = gameOf(room);
   if (!G || room.phase !== 'lobby' || room.seats.length < G.meta.minPlayers) return false;
   if (G.meta.resetScores) for (const m of seated(room)) m.score = 0;
-  for (const m of room.members.values()) m.ready = false; // readiness is asked again for every rematch
+  for (const m of room.members.values()) m.ready = !!m.bot; // readiness is asked again for every rematch
   room.gameCount++;
   room.game = G.create(room.settings[room.gameId]);
   room.phase = 'game';
@@ -376,7 +403,7 @@ function endGame(room, result) {
 function listPublic() {
   const out = [];
   for (const r of rooms.values()) {
-    if (!r.isPublic || r.members.size === 0 || HIDDEN.has(r.gameId)) continue;
+    if (!r.isPublic || r.members.size === 0 || HIDDEN.has(r.gameId) || hasBots(r)) continue;
     const host = r.members.get(r.hostId);
     out.push({
       code: r.code,
@@ -399,7 +426,7 @@ function listPublic() {
 function findQuickRoom(gameId) {
   let best = null;
   for (const r of rooms.values()) {
-    if (!r.isPublic || r.locked || r.gameId !== gameId || HIDDEN.has(r.gameId)) continue;
+    if (!r.isPublic || r.locked || r.gameId !== gameId || HIDDEN.has(r.gameId) || hasBots(r)) continue;
     if (![...r.members.values()].some((m) => m.connected)) continue;
     const open = r.seats.length < seatCap(r) && (r.phase === 'lobby' || gameOf(r).meta.midJoin);
     if (!open) continue;
@@ -416,9 +443,13 @@ function loop() {
       if (room.phase === 'game' && room.game) {
         const G = gameOf(room);
         if (G.tick) G.tick(room.game, room.api, now);
+        if (room.phase === 'game' && room.game) bots.drive(room, G, now);
       }
       for (const m of [...room.members.values()]) {
         if (!m.connected && now - m.lastSeen > config.DISCONNECT_GRACE_MS) removeMember(room, m.id);
+      }
+      if (room.members.size && !humans(room).length) {
+        for (const b of [...room.members.values()]) removeMember(room, b.id, 'quiet');
       }
       if (room.members.size === 0) {
         if (now - (room.emptySince || now) > config.EMPTY_ROOM_TTL_MS) rooms.delete(room.code);
@@ -612,7 +643,10 @@ function attach(ioServer) {
       if (!c || !patch || typeof patch !== 'object') return;
       const { room } = c;
       const G = gameOf(room);
-      if ('isPublic' in patch) room.isPublic = !!patch.isPublic;
+      if ('isPublic' in patch) {
+        if (patch.isPublic && hasBots(room)) emitTo(room, c.m, 'notice', 'Remove the bots before making this party public.');
+        else room.isPublic = !!patch.isPublic;
+      }
       if ('locked' in patch && !!patch.locked !== room.locked && !lobbyLimited(c.m)) {
         room.locked = !!patch.locked;
         sys(room, room.locked ? 'The host locked the lobby. No new people can join.' : 'The host unlocked the lobby.', 'accent');
@@ -637,9 +671,38 @@ function attach(ioServer) {
       if (room.phase !== 'lobby' || opts.game === room.gameId) return;
       const G2 = GAMES[opts.game];
       // A party bigger than the game only fits if the extra people can watch.
-      if (room.seats.length > G2.meta.maxPlayers && !room.spectatorsOn) {
+      // Bots are trimmed to fit below, so only seated people count against the new game's size.
+      const peopleSeated = room.seats.filter((id) => !room.members.get(id).bot).length;
+      if (peopleSeated > G2.meta.maxPlayers && !room.spectatorsOn) {
         return socket.emit('notice', `${G2.meta.name} seats ${G2.meta.maxPlayers}. Allow spectators in Party Settings so everyone else can watch.`);
       }
+      // Bots only come along to games they can play, and never as spectators.
+      // Seats freed by removing bots must not be refilled from the queue using the old game's size.
+      room.holdFill = true;
+      const dropBots = (pred) => {
+        for (const b of [...room.members.values()]) if (b.bot && pred(b)) removeMember(room, b.id, 'quiet');
+      };
+      if (!bots.supported(opts.game)) {
+        // Idle bots fit any game; playing bots can't.
+        const playing = [...room.members.values()].some((b) => b.bot && b.difficulty !== 'idle');
+        if (playing) sys(room, `Bots were removed: ${bots.info(opts.game).reason}`, 'warn');
+        dropBots((b) => b.difficulty !== 'idle');
+      } else {
+        const keepable = bots.info(opts.game).difficulties;
+        for (const b of room.members.values()) if (b.bot && b.difficulty !== 'idle' && !keepable.includes(b.difficulty)) b.difficulty = keepable.includes('normal') ? 'normal' : keepable[0];
+      }
+      // Whatever the destination, bots never end up benched: trim any excess bots (idle ones too).
+      const over = room.seats.length - G2.meta.maxPlayers;
+      if (over > 0) {
+        // Honour the host's seat picks: remove unselected bots first. If every bot was selected, the
+        // normal seat-selection step below benches the people who weren't.
+        const picked = Array.isArray(opts.seats) ? new Set(opts.seats) : new Set();
+        const botSeats = room.seats.filter((id) => room.members.get(id).bot);
+        const spare = (picked.size ? botSeats.filter((id) => !picked.has(id)) : botSeats).slice(-over);
+        for (const id of spare) removeMember(room, id, 'quiet');
+        if (spare.length) sys(room, `${spare.length} bot${spare.length === 1 ? ' was' : 's were'} removed to make room for people.`, 'info');
+      }
+      room.holdFill = false;
       room.gameId = opts.game;
       room.maxPlayers = G2.meta.maxPlayers;
       room.lastResult = null;
@@ -676,6 +739,33 @@ function attach(ioServer) {
       broadcast(room);
     });
 
+    // ----- bots (host only, private parties, lobby only) -----
+    on('addBot', (opts) => {
+      const c = hostCtx();
+      if (!c) return;
+      const { room, m } = c;
+      if (!(m.botBucket || (m.botBucket = new Bucket(2, 8))).take()) return;
+      const st = botState(room);
+      const idle = !!opts && opts.difficulty === 'idle';
+      if (idle ? !st.canAddIdle : !st.canAdd) return socket.emit('notice', idle && !st.reason ? 'No idle bot can be added right now.' : st.reason || 'No idle bot can be added right now.');
+      const taken = new Set([...room.members.values()].map((x) => x.name));
+      const bot = bots.createBot(room.gameId, taken, opts && opts.difficulty);
+      room.members.set(bot.id, bot);
+      room.seats.push(bot.id);
+      sys(room, `${bot.name} joined (bot, ${bot.difficulty}).`);
+      broadcast(room);
+    });
+
+    on('setBotDifficulty', (opts) => {
+      const c = hostCtx();
+      if (!c || !opts || typeof opts !== 'object') return;
+      const bot = c.room.members.get(opts.id);
+      const i = bots.info(c.room.gameId);
+      if (!bot || !bot.bot || !(opts.difficulty === 'idle' || (i.supported && i.difficulties.includes(opts.difficulty)))) return;
+      bot.difficulty = opts.difficulty;
+      broadcast(c.room);
+    });
+
     on('startGame', () => {
       const c = hostCtx();
       if (!c) return;
@@ -696,7 +786,7 @@ function attach(ioServer) {
       const c = hostCtx();
       if (!c || id === c.m.id || lobbyLimited(c.m)) return;
       const target = c.room.members.get(id);
-      if (!target || !target.connected) return;
+      if (!target || target.bot || !target.connected) return;
       setHost(c.room, target);
       broadcast(c.room);
     });
@@ -713,6 +803,7 @@ function attach(ioServer) {
       if (!c || id === c.m.id) return;
       const target = c.room.members.get(id);
       if (!target) return;
+      if (target.bot) return removeMember(c.room, id, 'bot');
       c.room.banned.add(target.token);
       emitTo(c.room, target, 'kicked');
       removeMember(c.room, id, 'kicked');
@@ -723,10 +814,10 @@ function attach(ioServer) {
       if (!c || !c.room.isPublic || id === c.m.id) return;
       const { room, m } = c;
       const target = room.members.get(id);
-      if (!target) return;
+      if (!target || target.bot) return;
       if (room.votes.get(id) && room.votes.get(id).has(m.id)) return;
       if (lobbyLimited(m)) return;
-      const voters = [...room.members.values()].filter((x) => x.connected && x.id !== id);
+      const voters = [...room.members.values()].filter((x) => !x.bot && x.connected && x.id !== id);
       if (voters.length < 2) return socket.emit('notice', 'Not enough people here for a vote kick.');
       const needed = Math.floor(voters.length / 2) + 1;
       if (!room.votes.has(id)) room.votes.set(id, new Set());

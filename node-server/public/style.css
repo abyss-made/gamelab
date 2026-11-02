@@ -6869,3 +6869,47 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
 #stage:focus {
   outline: none;
 }
+
+/* Playgrid 3.3: bots */
+.bot-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--pg-primary, #adff00);
+  color: var(--pg-primary, #adff00);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+}
+.bot-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+.bot-controls .btn {
+  min-height: 44px;
+}
+.bot-note {
+  flex: 1 1 200px;
+  margin: 0;
+  font-size: 13px;
+}
+.bot-level {
+  min-height: 32px;
+  max-width: 100%;
+  padding: 2px 6px;
+  border: 1px solid var(--pg-border, #253d4e);
+  border-radius: 6px;
+  background: var(--pg-inset, #07141f);
+  color: var(--pg-text, #eef5fb);
+  font: inherit;
+  font-size: 12px;
+}
+@media (max-width: 640px) {
+  .bot-level {
+    min-height: 44px;
+  }
+}
