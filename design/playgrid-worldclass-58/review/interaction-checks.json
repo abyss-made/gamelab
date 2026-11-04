@@ -1,0 +1,46 @@
+[
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "aimAndKeyboard": true,
+    "placementIsLocalOnly": true,
+    "golfFineAimNoOverlay": true,
+    "wildWireColors": true,
+    "numericFishRanks": true,
+    "rollAndTokenIndices": true,
+    "precisionFireAndRepeatGuard": true,
+    "uppercaseChessPromo": true,
+    "twoTapResign": true,
+    "auctionValidation": true,
+    "twoSidedTradeReview": true,
+    "textEnterDraft": true,
+    "noGameplayAcceptanceSimulated": true
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "aimAndKeyboard": true,
+    "placementIsLocalOnly": true,
+    "golfFineAimNoOverlay": true,
+    "wildWireColors": true,
+    "numericFishRanks": true,
+    "rollAndTokenIndices": true,
+    "precisionFireAndRepeatGuard": true,
+    "uppercaseChessPromo": true,
+    "twoTapResign": true,
+    "auctionValidation": true,
+    "twoSidedTradeReview": true,
+    "textEnterDraft": true,
+    "noGameplayAcceptanceSimulated": true
+  },
+  {
+    "allowedAvatarModuleVariantsRendered": 530,
+    "legacyConfigurations": 240,
+    "unknownVersionFallback": true,
+    "golfHolesRendered": 18
+  }
+]

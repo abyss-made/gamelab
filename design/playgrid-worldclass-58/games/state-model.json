@@ -1,0 +1,1871 @@
+[
+  {
+    "id": "colorstack",
+    "name": "Color Stack",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "deal",
+        "label": "Dealing",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Dealing",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "drawn",
+        "label": "Drawn playable card / keep-pass",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Drawn playable card / keep-pass",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "wild",
+        "label": "Wild color choice",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Wild color choice",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "penalty",
+        "label": "Penalty draw receipt",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Penalty draw receipt",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "long",
+        "label": "Long hand",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Long hand",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "out",
+        "label": "Out / spectating",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Out / spectating",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "pool",
+    "name": "Pool",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "aim",
+        "label": "Aiming",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Aiming",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "resolving",
+        "label": "Balls in motion",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Balls in motion",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "ballinhand",
+        "label": "Ball in hand",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Ball in hand",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "foul",
+        "label": "Foul / next turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Foul / next turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "resign",
+        "label": "Resign confirmation",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Resign confirmation",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "golf",
+    "name": "Mini Golf",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "aim",
+        "label": "Aim and power",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Aim and power",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rolling",
+        "label": "Ball rolling",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Ball rolling",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "sand",
+        "label": "Existing sand",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Existing sand",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "water",
+        "label": "Existing water penalty",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Existing water penalty",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "hole",
+        "label": "Hole complete",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Hole complete",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "scorecard",
+        "label": "Scorecard",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Scorecard",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "ludo",
+    "name": "Ludo",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "roll",
+        "label": "Waiting to roll",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting to roll",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "choose",
+        "label": "Rolled six / legal choices",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Rolled six / legal choices",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "stack",
+        "label": "Stacked tokens / safe cell",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Stacked tokens / safe cell",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "capture",
+        "label": "Capture return",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Capture return",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "bonus",
+        "label": "Bonus turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Bonus turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "tycoon",
+    "name": "Property Tycoon",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "roll",
+        "label": "Roll / travel",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Roll / travel",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "auction",
+        "label": "Auction / bid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Auction / bid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rent",
+        "label": "Rent receipt",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Rent receipt",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "build",
+        "label": "Owned property / build",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Owned property / build",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "trade",
+        "label": "Trade offer / review",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Trade offer / review",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "debt",
+        "label": "Debt / sell",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Debt / sell",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "bankrupt",
+        "label": "Bankrupt / watching",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Bankrupt / watching",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "battleship",
+    "name": "Battleship",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "placement",
+        "label": "Manual placement",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Manual placement",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "random",
+        "label": "Random & Lock meaning",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Random & Lock meaning",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "fleet",
+        "label": "Friendly fleet",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Friendly fleet",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "hit",
+        "label": "Hit / miss receipt",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Hit / miss receipt",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "sunk",
+        "label": "Public sunk receipt",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Public sunk receipt",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "resign",
+        "label": "Resign confirmation",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Resign confirmation",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "gofish",
+    "name": "Go Fish",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "deal",
+        "label": "Dealing",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Dealing",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rank",
+        "label": "Choose held rank",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Choose held rank",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "target",
+        "label": "Choose opponent",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Choose opponent",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "locked",
+        "label": "Ask pending",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Ask pending",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "draw",
+        "label": "Go Fish draw",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Go Fish draw",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "book",
+        "label": "Book complete",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Book complete",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "long",
+        "label": "Long hand",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Long hand",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "chess",
+    "name": "Chess",
+    "direction": "Approved premium direction \u00b7 interaction extension",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Waiting",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "active",
+        "label": "Active / controls",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Active / controls",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Spectator",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "invalid",
+        "label": "Unavailable / invalid",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Unavailable / invalid",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Reconnect / resync",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "result",
+        "label": "Result / host",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / host",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "rematch",
+        "label": "Result / participant",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Result / participant",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "selected",
+        "label": "Piece / legal targets",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Piece / legal targets",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "check",
+        "label": "Check",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Check",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "promotion",
+        "label": "Promotion choice",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Promotion choice",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "draw",
+        "label": "Draw offer / response",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Draw offer / response",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "resign",
+        "label": "Resign confirmation",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Resign confirmation",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Opponent turn",
+        "focus": "Stable focus and eligibility from actual game view"
+      },
+      {
+        "id": "clock",
+        "label": "Time up",
+        "trigger": "Illustrative fixture; see AUDIT.md for authoritative mapping",
+        "copy": "Time up",
+        "focus": "Stable focus and eligibility from actual game view"
+      }
+    ]
+  },
+  {
+    "id": "drawguess",
+    "name": "Draw & Guess",
+    "direction": "Sketch Club",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "choose",
+        "label": "Six-word choice",
+        "trigger": "Drawer and phase=choose; choices has six words",
+        "copy": "Choose your word.",
+        "focus": "First word button; two columns; no word content for other roles."
+      },
+      {
+        "id": "guesser",
+        "label": "Guesser / masked word",
+        "trigger": "phase=draw and local eligible guesser has not guessed",
+        "copy": "Nova is drawing \u00b7 six-letter mask.",
+        "focus": "Guess input; never drawer tools."
+      },
+      {
+        "id": "guessed",
+        "label": "Guessed correctly",
+        "trigger": "Local ID in guessed; server view now permits word",
+        "copy": "You got it. Let the others guess.",
+        "focus": "Success receipt; keep chat focus; no further scoring guesses."
+      },
+      {
+        "id": "reveal",
+        "label": "Round reveal",
+        "trigger": "phase=reveal; turnResult and word present",
+        "copy": "The word was DRAGON.",
+        "focus": "Reveal heading; do not invent Next button or end the round locally."
+      },
+      {
+        "id": "focus",
+        "label": "Canvas focus mode",
+        "trigger": "Existing expanded drawing view",
+        "copy": "More room for the drawing.",
+        "focus": "Exit Focus visible; Escape returns focus to original expand control."
+      },
+      {
+        "id": "clear",
+        "label": "Clear confirmation",
+        "trigger": "Local clear intent; no clear action sent yet",
+        "copy": "Clear the whole drawing?",
+        "focus": "Use existing confirmation behavior; custom dialog is a presentation proposal requiring parity tests."
+      }
+    ]
+  },
+  {
+    "id": "fourrow",
+    "name": "Four in a Row",
+    "direction": "Drop Society",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "turn differs from myIndex",
+        "copy": "Nova is up. You are Red.",
+        "focus": "Read-only board; turn announcement once, not every tick."
+      },
+      {
+        "id": "full",
+        "label": "Full column",
+        "trigger": "Six occupied slots in a column",
+        "copy": "Column 1 is full. Choose another.",
+        "focus": "Full column is unavailable; keep an accessible reason."
+      },
+      {
+        "id": "draw",
+        "label": "Draw result",
+        "trigger": "Actual result.draw",
+        "copy": "Board full. It\u2019s a draw.",
+        "focus": "Result heading; neutral palette and existing result actions."
+      }
+    ]
+  },
+  {
+    "id": "tictactoe",
+    "name": "Tic Tac Toe",
+    "direction": "Cross & Circle",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "turn differs from myIndex",
+        "copy": "Nova is choosing a square.",
+        "focus": "Read-only board; keep prior focus stable."
+      },
+      {
+        "id": "draw",
+        "label": "Draw result",
+        "trigger": "Actual result.draw",
+        "copy": "Nine marks. No line. A draw.",
+        "focus": "Neutral result heading; no victory celebration."
+      }
+    ]
+  },
+  {
+    "id": "dotsboxes",
+    "name": "Dots & Boxes",
+    "direction": "Stitch & Claim",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "turn differs from myIndex",
+        "copy": "Nova is choosing an edge.",
+        "focus": "Disable playable edges; public owner initials remain."
+      },
+      {
+        "id": "claim",
+        "label": "Box / extra turn",
+        "trigger": "Accepted edge closes one or more boxes and local turn remains",
+        "copy": "Box claimed. You go again.",
+        "focus": "Keep focus on last edge or next legal edge, not a full rerender reset."
+      },
+      {
+        "id": "dense",
+        "label": "Largest supported grid",
+        "trigger": "n=5 from existing settings",
+        "copy": "More boxes, the same clear targets.",
+        "focus": "Precision/keyboard edge input supplements dense direct targets."
+      }
+    ]
+  },
+  {
+    "id": "wordscramble",
+    "name": "Word Scramble",
+    "direction": "Letterworks",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "solved",
+        "label": "Solved / locked",
+        "trigger": "solvedByMe true",
+        "copy": "Solved \u00b7 +90. Waiting for the others.",
+        "focus": "Success receipt; do not expose answer to other participants."
+      },
+      {
+        "id": "reveal",
+        "label": "Answer reveal",
+        "trigger": "phase=reveal and reveal.word exists",
+        "copy": "The word was OCEAN.",
+        "focus": "Announce reveal once with actual gain/no-answer outcome."
+      },
+      {
+        "id": "long",
+        "label": "Long word / wrapping",
+        "trigger": "Existing hard length; same typed-answer rules",
+        "copy": "Keep every letter readable.",
+        "focus": "Normal input, not drag-only tiles."
+      }
+    ]
+  },
+  {
+    "id": "trivia",
+    "name": "Trivia Blitz",
+    "direction": "Orbit Quiz",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "locked",
+        "label": "Answer locked",
+        "trigger": "phase=ask and myPick not null",
+        "copy": "Himalayas locked. Waiting for the others.",
+        "focus": "Selected answer aria-pressed, no change after lock."
+      },
+      {
+        "id": "reveal",
+        "label": "Correct answer / gain",
+        "trigger": "phase=reveal and reveal.correct exists",
+        "copy": "Correct \u00b7 +180. Himalayas.",
+        "focus": "Correct label plus symbol/outline; keyboard focus remains stable."
+      },
+      {
+        "id": "wrong",
+        "label": "Wrong / no-answer reveal",
+        "trigger": "phase=reveal and local wrong or absent pick",
+        "copy": "Not this time. The answer is Himalayas.",
+        "focus": "Mark local wrong separately from the revealed correct answer."
+      },
+      {
+        "id": "long",
+        "label": "Long question / answers",
+        "trigger": "Existing variable-length question and choices",
+        "copy": "Long text wraps without reducing answer targets.",
+        "focus": "Keep each choice fully readable and touchable."
+      }
+    ]
+  },
+  {
+    "id": "wordchain",
+    "name": "Word Chain",
+    "direction": "Chain Reaction",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "turnId differs from local ID",
+        "copy": "Nova\u2019s turn \u00b7 start with R.",
+        "focus": "Disable local word form; preserve draft if policy allows."
+      },
+      {
+        "id": "life",
+        "label": "Life lost / new turn",
+        "trigger": "Accepted server lives/turn change after timeout",
+        "copy": "One life lost. Nova is up.",
+        "focus": "Announce lives and next turn once; do not restart the deadline."
+      },
+      {
+        "id": "deadletter",
+        "label": "New chain start",
+        "trigger": "Server clears chain / first becomes true",
+        "copy": "A fresh start. Begin with A.",
+        "focus": "Focus input only on a newly eligible local turn."
+      },
+      {
+        "id": "out",
+        "label": "Out / watching",
+        "trigger": "Local lives is zero",
+        "copy": "You\u2019re out. Watch the chain continue.",
+        "focus": "Remove actionable word input; preserve public chain/history."
+      }
+    ]
+  },
+  {
+    "id": "categories",
+    "name": "Categories Rush",
+    "direction": "The Fieldbook",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "locked",
+        "label": "Done / read-only",
+        "trigger": "myDone true",
+        "copy": "Your answers are locked. Waiting for the others.",
+        "focus": "Fields readOnly; Done disabled; confirmation receipt remains."
+      },
+      {
+        "id": "review",
+        "label": "Round answer review",
+        "trigger": "phase=review and review.rows exists",
+        "copy": "Unique 2 \u00b7 matching 1 \u00b7 invalid 0.",
+        "focus": "Named review region/table; horizontal scrolling stays inside it."
+      },
+      {
+        "id": "autosave",
+        "label": "Draft pending",
+        "trigger": "Local debounce/send without final done",
+        "copy": "Saving your draft\u2026",
+        "focus": "Never move focus or replace the active input node."
+      },
+      {
+        "id": "long",
+        "label": "Long category / keyboard",
+        "trigger": "Long category names from existing bank",
+        "copy": "The label wraps. Your answer stays editable.",
+        "focus": "Focus and caret survive; controls remain reachable above the keyboard."
+      }
+    ]
+  },
+  {
+    "id": "telephone",
+    "name": "Drawing Telephone",
+    "direction": "Paper Relay",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "prompt",
+        "label": "Initial prompt",
+        "trigger": "phase=work, kind=prompt",
+        "copy": "Write something fun to draw.",
+        "focus": "Prompt input then Submit; no source/chain entries yet."
+      },
+      {
+        "id": "describe",
+        "label": "Describe source drawing",
+        "trigger": "phase=work, kind=guess and source.kind=draw",
+        "copy": "What is this a drawing of?",
+        "focus": "Description input; only this source drawing is shown."
+      },
+      {
+        "id": "pending",
+        "label": "Done awaiting acceptance",
+        "trigger": "Local send, myDone still false",
+        "copy": "Submitting\u2026 Your page is not locked yet.",
+        "focus": "Keep draft/strokes until actual myDone or existing rejection handling."
+      },
+      {
+        "id": "locked",
+        "label": "Done accepted",
+        "trigger": "myDone true",
+        "copy": "Page passed. Waiting for the others.",
+        "focus": "No editable drawing/text; receipt focus stable."
+      },
+      {
+        "id": "reveal",
+        "label": "Staged chain reveal",
+        "trigger": "phase=reveal and rev.entries contains released prefix",
+        "copy": "One story, wonderfully changed.",
+        "focus": "Only returned entries; Like disabled for own/skipped/already-liked."
+      },
+      {
+        "id": "limit",
+        "label": "Drawing limit",
+        "trigger": "Existing stroke/fill/point cap reached locally",
+        "copy": "Drawing limit reached. Undo or clear to continue.",
+        "focus": "Keep Undo/Clear reachable; explain the limit beside canvas."
+      }
+    ]
+  },
+  {
+    "id": "bluff",
+    "name": "Bluff Battle",
+    "direction": "The Velvet Lie",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "write",
+        "label": "Write a bluff",
+        "trigger": "phase=bluff, eligible, myFake absent",
+        "copy": "Make it believable.",
+        "focus": "Fake-answer input max 40, Submit explicit."
+      },
+      {
+        "id": "locked",
+        "label": "Bluff locked",
+        "trigger": "myFake present in bluff phase",
+        "copy": "Your bluff is in. Waiting for the others.",
+        "focus": "Show own text only; remove editable input."
+      },
+      {
+        "id": "voted",
+        "label": "Vote locked",
+        "trigger": "phase=vote, myVote not null",
+        "copy": "Gridmark locked. Waiting for the truth.",
+        "focus": "Own selected option is named, all vote inputs unavailable."
+      },
+      {
+        "id": "reveal",
+        "label": "Truth / authors / voters",
+        "trigger": "phase=reveal; reveal.options returned",
+        "copy": "Octothorpe was the real answer.",
+        "focus": "Reveal real flag, merged authors and voters only now."
+      }
+    ]
+  },
+  {
+    "id": "impostor",
+    "name": "The Impostor",
+    "direction": "Confidential Club",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "impostor",
+        "label": "Private impostor role",
+        "trigger": "role=impostor, word null",
+        "copy": "You are the impostor. Blend in.",
+        "focus": "Category only; no secret word in DOM/labels/data."
+      },
+      {
+        "id": "covered",
+        "label": "Private word covered",
+        "trigger": "Local cover preference while crew view permits word",
+        "copy": "Word covered.",
+        "focus": "Local privacy cover; button toggles aria-expanded; not a security boundary."
+      },
+      {
+        "id": "opponent",
+        "label": "Another player\u2019s clue",
+        "trigger": "phase=clue and turnId differs from local",
+        "copy": "Waiting for Nova\u2019s clue.",
+        "focus": "Own clue form unavailable; public clues readable."
+      },
+      {
+        "id": "discuss",
+        "label": "Discussion / ready",
+        "trigger": "phase=discuss",
+        "copy": "Who doesn\u2019t know the word?",
+        "focus": "Discussion chat plus existing ready action; no voice feature."
+      },
+      {
+        "id": "vote",
+        "label": "Accusation vote",
+        "trigger": "phase=vote and myVote absent",
+        "copy": "Who is the impostor?",
+        "focus": "Equal public player targets; own target unavailable."
+      },
+      {
+        "id": "voted",
+        "label": "Vote locked",
+        "trigger": "myVote present",
+        "copy": "Vote locked. Waiting for the others.",
+        "focus": "Private selected target only; no public counts before result."
+      },
+      {
+        "id": "lastguess",
+        "label": "Caught impostor / guess",
+        "trigger": "phase=guess and role=impostor",
+        "copy": "One last chance. Guess the word.",
+        "focus": "Word remains unknown; guess input for impostor only."
+      },
+      {
+        "id": "reveal",
+        "label": "Round result / word",
+        "trigger": "phase=result and result exists",
+        "copy": "Nova was the impostor. The word was CANDLE.",
+        "focus": "Use actual caught/stole/voided result, not inferred votes."
+      }
+    ]
+  },
+  {
+    "id": "checkers",
+    "name": "Checkers",
+    "direction": "Emerald House",
+    "states": [
+      {
+        "id": "waiting",
+        "label": "Waiting / transition",
+        "trigger": "No eligible game view yet; existing room transition",
+        "copy": "Waiting for the next turn to begin.",
+        "focus": "Keep focus on the route heading; do not autofocus a game control."
+      },
+      {
+        "id": "active",
+        "label": "Active play",
+        "trigger": "The illustrated eligible local participant view",
+        "copy": "The approved active composition.",
+        "focus": "Preserve local input focus across timer/state refreshes."
+      },
+      {
+        "id": "spectator",
+        "label": "Spectator",
+        "trigger": "No participating local index / spectator role",
+        "copy": "You are watching. Private information stays private.",
+        "focus": "Heading then public board/ledger; no private inputs in the tab order."
+      },
+      {
+        "id": "invalid",
+        "label": "Invalid / unavailable",
+        "trigger": "Known local constraint or existing authoritative notice",
+        "copy": "Choose an available action.",
+        "focus": "Keep focus on the originating control/input; associate the inline reason."
+      },
+      {
+        "id": "reconnect",
+        "label": "Reconnect / resync",
+        "trigger": "Socket disconnected or room state not yet restored",
+        "copy": "Reconnecting\u2026 Your controls return when you are connected.",
+        "focus": "Keep focus stable; do not move to a disabled game control."
+      },
+      {
+        "id": "result",
+        "label": "Win / results \u00b7 host",
+        "trigger": "Actual room result, local host; never a guessed timer outcome",
+        "copy": "Results are in. Your party stays together.",
+        "focus": "Result heading; then existing host result actions."
+      },
+      {
+        "id": "rematch",
+        "label": "Result \u00b7 participant",
+        "trigger": "Actual result; participating non-host",
+        "copy": "Ready for another round?",
+        "focus": "Result heading; Ready for Rematch toggles aria-pressed; retain focus."
+      },
+      {
+        "id": "opponent",
+        "label": "Opponent turn",
+        "trigger": "turn differs from myIndex",
+        "copy": "Nova is choosing a move.",
+        "focus": "No legal targets for local non-turn view."
+      },
+      {
+        "id": "capture",
+        "label": "Mandatory capture",
+        "trigger": "mustJump true and legal targets present",
+        "copy": "You must capture.",
+        "focus": "Only real movable pieces/targets enabled."
+      },
+      {
+        "id": "chain",
+        "label": "Locked multi-jump",
+        "trigger": "chain >= 0",
+        "copy": "Keep jumping with the same piece.",
+        "focus": "Chain piece stays selected; focus next permitted destination."
+      },
+      {
+        "id": "king",
+        "label": "King crowned",
+        "trigger": "Accepted board piece >= 3",
+        "copy": "Your piece is now a king.",
+        "focus": "Crown plus named piece; do not infer kings from decorative size."
+      },
+      {
+        "id": "resign",
+        "label": "Resign armed",
+        "trigger": "Existing makeConfirm armed state",
+        "copy": "Tap again to resign.",
+        "focus": "Stable two-tap confirmation survives re-render; no resign on first tap."
+      },
+      {
+        "id": "draw",
+        "label": "Quiet draw",
+        "trigger": "Actual draw result, not local quiet counter alone",
+        "copy": "A draw \u00b7 no capture or man move for 40 moves each.",
+        "focus": "Neutral result and actual final board."
+      }
+    ]
+  }
+]

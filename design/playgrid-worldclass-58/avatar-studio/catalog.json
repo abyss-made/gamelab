@@ -1,0 +1,2616 @@
+{
+  "version": 1,
+  "canonical": "../../../node-server/public/assets/hero-mascots.png",
+  "characters": [
+    {
+      "id": "a01",
+      "name": "Ember",
+      "family": "human",
+      "silhouette": "swept",
+      "asset": "assets/characters/a01-ember.svg",
+      "thumbnail": "assets/thumbnails/a01.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a02",
+      "name": "Juniper",
+      "family": "human",
+      "silhouette": "curls",
+      "asset": "assets/characters/a02-juniper.svg",
+      "thumbnail": "assets/thumbnails/a02.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a03",
+      "name": "Sora",
+      "family": "human",
+      "silhouette": "buns",
+      "asset": "assets/characters/a03-sora.svg",
+      "thumbnail": "assets/thumbnails/a03.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a04",
+      "name": "Orion",
+      "family": "human",
+      "silhouette": "undercut",
+      "asset": "assets/characters/a04-orion.svg",
+      "thumbnail": "assets/thumbnails/a04.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a05",
+      "name": "Mira",
+      "family": "human",
+      "silhouette": "braids",
+      "asset": "assets/characters/a05-mira.svg",
+      "thumbnail": "assets/thumbnails/a05.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a06",
+      "name": "Rowan",
+      "family": "human",
+      "silhouette": "waves",
+      "asset": "assets/characters/a06-rowan.svg",
+      "thumbnail": "assets/thumbnails/a06.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a07",
+      "name": "Zuri",
+      "family": "human",
+      "silhouette": "puff",
+      "asset": "assets/characters/a07-zuri.svg",
+      "thumbnail": "assets/thumbnails/a07.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a08",
+      "name": "Aster",
+      "family": "human",
+      "silhouette": "pony",
+      "asset": "assets/characters/a08-aster.svg",
+      "thumbnail": "assets/thumbnails/a08.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "id": "a09",
+      "name": "Cinder",
+      "family": "animal",
+      "silhouette": "fox",
+      "asset": "assets/characters/a09-cinder.svg",
+      "thumbnail": "assets/thumbnails/a09.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a10",
+      "name": "Clover",
+      "family": "animal",
+      "silhouette": "calico",
+      "asset": "assets/characters/a10-clover.svg",
+      "thumbnail": "assets/thumbnails/a10.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a11",
+      "name": "Pippin",
+      "family": "animal",
+      "silhouette": "tabby",
+      "asset": "assets/characters/a11-pippin.svg",
+      "thumbnail": "assets/thumbnails/a11.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a12",
+      "name": "Tundra",
+      "family": "animal",
+      "silhouette": "husky",
+      "asset": "assets/characters/a12-tundra.svg",
+      "thumbnail": "assets/thumbnails/a12.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a13",
+      "name": "Maple",
+      "family": "animal",
+      "silhouette": "shiba",
+      "asset": "assets/characters/a13-maple.svg",
+      "thumbnail": "assets/thumbnails/a13.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a14",
+      "name": "Mallow",
+      "family": "animal",
+      "silhouette": "rabbit",
+      "asset": "assets/characters/a14-mallow.svg",
+      "thumbnail": "assets/thumbnails/a14.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a15",
+      "name": "Bramble",
+      "family": "animal",
+      "silhouette": "bear",
+      "asset": "assets/characters/a15-bramble.svg",
+      "thumbnail": "assets/thumbnails/a15.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a16",
+      "name": "Pebble",
+      "family": "animal",
+      "silhouette": "panda",
+      "asset": "assets/characters/a16-pebble.svg",
+      "thumbnail": "assets/thumbnails/a16.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a17",
+      "name": "Sorrel",
+      "family": "animal",
+      "silhouette": "redpanda",
+      "asset": "assets/characters/a17-sorrel.svg",
+      "thumbnail": "assets/thumbnails/a17.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a18",
+      "name": "Brook",
+      "family": "animal",
+      "silhouette": "otter",
+      "asset": "assets/characters/a18-brook.svg",
+      "thumbnail": "assets/thumbnails/a18.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a19",
+      "name": "Bandit",
+      "family": "animal",
+      "silhouette": "raccoon",
+      "asset": "assets/characters/a19-bandit.svg",
+      "thumbnail": "assets/thumbnails/a19.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a20",
+      "name": "Quill",
+      "family": "animal",
+      "silhouette": "owl",
+      "asset": "assets/characters/a20-quill.svg",
+      "thumbnail": "assets/thumbnails/a20.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 0
+      }
+    },
+    {
+      "id": "a21",
+      "name": "Bop",
+      "family": "robot",
+      "silhouette": "bubble",
+      "asset": "assets/characters/a21-bop.svg",
+      "thumbnail": "assets/thumbnails/a21.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a22",
+      "name": "Vela",
+      "family": "robot",
+      "silhouette": "visor",
+      "asset": "assets/characters/a22-vela.svg",
+      "thumbnail": "assets/thumbnails/a22.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a23",
+      "name": "Pico",
+      "family": "robot",
+      "silhouette": "antenna",
+      "asset": "assets/characters/a23-pico.svg",
+      "thumbnail": "assets/thumbnails/a23.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a24",
+      "name": "Halo",
+      "family": "robot",
+      "silhouette": "cyclops",
+      "asset": "assets/characters/a24-halo.svg",
+      "thumbnail": "assets/thumbnails/a24.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a25",
+      "name": "Toggle",
+      "family": "robot",
+      "silhouette": "box",
+      "asset": "assets/characters/a25-toggle.svg",
+      "thumbnail": "assets/thumbnails/a25.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a26",
+      "name": "Echo",
+      "family": "robot",
+      "silhouette": "roundears",
+      "asset": "assets/characters/a26-echo.svg",
+      "thumbnail": "assets/thumbnails/a26.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a27",
+      "name": "Sprig",
+      "family": "fantasy",
+      "silhouette": "dragon",
+      "asset": "assets/characters/a27-sprig.svg",
+      "thumbnail": "assets/thumbnails/a27.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a28",
+      "name": "Nyx",
+      "family": "fantasy",
+      "silhouette": "bat",
+      "asset": "assets/characters/a28-nyx.svg",
+      "thumbnail": "assets/thumbnails/a28.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a29",
+      "name": "Wisp",
+      "family": "fantasy",
+      "silhouette": "cloud",
+      "asset": "assets/characters/a29-wisp.svg",
+      "thumbnail": "assets/thumbnails/a29.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a30",
+      "name": "Ripple",
+      "family": "fantasy",
+      "silhouette": "axolotl",
+      "asset": "assets/characters/a30-ripple.svg",
+      "thumbnail": "assets/thumbnails/a30.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a31",
+      "name": "Flick",
+      "family": "fantasy",
+      "silhouette": "salamander",
+      "asset": "assets/characters/a31-flick.svg",
+      "thumbnail": "assets/thumbnails/a31.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    },
+    {
+      "id": "a32",
+      "name": "Gale",
+      "family": "fantasy",
+      "silhouette": "griffin",
+      "asset": "assets/characters/a32-gale.svg",
+      "thumbnail": "assets/thumbnails/a32.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 0
+      }
+    }
+  ]
+}

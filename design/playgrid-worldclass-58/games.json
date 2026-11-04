@@ -1,0 +1,122 @@
+[
+  {
+    "id": "colorstack",
+    "name": "Color Stack",
+    "states": 14,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "pool",
+    "name": "Pool",
+    "states": 13,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "golf",
+    "name": "Mini Golf",
+    "states": 13,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "ludo",
+    "name": "Ludo",
+    "states": 13,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "tycoon",
+    "name": "Property Tycoon",
+    "states": 14,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "battleship",
+    "name": "Battleship",
+    "states": 14,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "gofish",
+    "name": "Go Fish",
+    "states": 15,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "chess",
+    "name": "Chess",
+    "states": 14,
+    "approvedSource": "87d8b35"
+  },
+  {
+    "id": "drawguess",
+    "name": "Draw & Guess",
+    "states": 13,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "fourrow",
+    "name": "Four in a Row",
+    "states": 10,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "tictactoe",
+    "name": "Tic Tac Toe",
+    "states": 9,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "dotsboxes",
+    "name": "Dots & Boxes",
+    "states": 10,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "wordscramble",
+    "name": "Word Scramble",
+    "states": 10,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "trivia",
+    "name": "Trivia Blitz",
+    "states": 11,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "wordchain",
+    "name": "Word Chain",
+    "states": 11,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "categories",
+    "name": "Categories Rush",
+    "states": 11,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "telephone",
+    "name": "Drawing Telephone",
+    "states": 13,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "bluff",
+    "name": "Bluff Battle",
+    "states": 11,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "impostor",
+    "name": "The Impostor",
+    "states": 15,
+    "approvedSource": "71ca099"
+  },
+  {
+    "id": "checkers",
+    "name": "Checkers",
+    "states": 13,
+    "approvedSource": "71ca099"
+  }
+]

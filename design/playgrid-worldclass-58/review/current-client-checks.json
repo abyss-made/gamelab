@@ -1,0 +1,402 @@
+[
+  {
+    "game": "colorstack",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "play",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "play",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "roll",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "roll",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "roll",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "roll",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "place",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "place",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "draw",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "draw",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "play",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "play",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "ask",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "ask",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "answer",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "answer",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "work",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "work",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "bluff",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "bluff",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "clue",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "clue",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      1440,
+      900
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      390,
+      844
+    ],
+    "phase": "game",
+    "pageErrors": [],
+    "scope": "Initial live local client only; non-playing fixture peers; not a full gameplay/AI/human-device test."
+  }
+]

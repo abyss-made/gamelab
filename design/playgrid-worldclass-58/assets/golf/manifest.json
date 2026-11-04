@@ -1,0 +1,308 @@
+[
+  {
+    "id": "meadow-01",
+    "course": "Meadow Mini",
+    "name": "Straight Shot",
+    "par": 2,
+    "tee": [
+      120,
+      220
+    ],
+    "cup": [
+      580,
+      220
+    ],
+    "wide": "meadow-01.svg",
+    "portrait": "meadow-01-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "meadow-02",
+    "course": "Meadow Mini",
+    "name": "Dogleg",
+    "par": 3,
+    "tee": [
+      110,
+      110
+    ],
+    "cup": [
+      590,
+      320
+    ],
+    "wide": "meadow-02.svg",
+    "portrait": "meadow-02-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "meadow-03",
+    "course": "Meadow Mini",
+    "name": "Bumper Park",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "meadow-03.svg",
+    "portrait": "meadow-03-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "meadow-04",
+    "course": "Meadow Mini",
+    "name": "Sand Trap",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "meadow-04.svg",
+    "portrait": "meadow-04-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "meadow-05",
+    "course": "Meadow Mini",
+    "name": "Water Bridge",
+    "par": 3,
+    "tee": [
+      110,
+      200
+    ],
+    "cup": [
+      590,
+      200
+    ],
+    "wide": "meadow-05.svg",
+    "portrait": "meadow-05-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "meadow-06",
+    "course": "Meadow Mini",
+    "name": "The Gate",
+    "par": 3,
+    "tee": [
+      110,
+      170
+    ],
+    "cup": [
+      590,
+      270
+    ],
+    "wide": "meadow-06.svg",
+    "portrait": "meadow-06-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-01",
+    "course": "Canyon Run",
+    "name": "S-Bend",
+    "par": 3,
+    "tee": [
+      110,
+      160
+    ],
+    "cup": [
+      590,
+      330
+    ],
+    "wide": "canyon-01.svg",
+    "portrait": "canyon-01-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-02",
+    "course": "Canyon Run",
+    "name": "Island Hop",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "canyon-02.svg",
+    "portrait": "canyon-02-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-03",
+    "course": "Canyon Run",
+    "name": "Sand Valley",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "canyon-03.svg",
+    "portrait": "canyon-03-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-04",
+    "course": "Canyon Run",
+    "name": "Zigzag",
+    "par": 4,
+    "tee": [
+      110,
+      300
+    ],
+    "cup": [
+      590,
+      140
+    ],
+    "wide": "canyon-04.svg",
+    "portrait": "canyon-04-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-05",
+    "course": "Canyon Run",
+    "name": "Pinball",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "canyon-05.svg",
+    "portrait": "canyon-05-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "canyon-06",
+    "course": "Canyon Run",
+    "name": "The Moat",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "canyon-06.svg",
+    "portrait": "canyon-06-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-01",
+    "course": "Skyline Gauntlet",
+    "name": "Switchback",
+    "par": 5,
+    "tee": [
+      110,
+      110
+    ],
+    "cup": [
+      590,
+      330
+    ],
+    "wide": "skyline-01.svg",
+    "portrait": "skyline-01-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-02",
+    "course": "Skyline Gauntlet",
+    "name": "Bumper Alley",
+    "par": 4,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      600,
+      220
+    ],
+    "wide": "skyline-02.svg",
+    "portrait": "skyline-02-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-03",
+    "course": "Skyline Gauntlet",
+    "name": "Pillars & Pond",
+    "par": 3,
+    "tee": [
+      110,
+      220
+    ],
+    "cup": [
+      590,
+      220
+    ],
+    "wide": "skyline-03.svg",
+    "portrait": "skyline-03-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-04",
+    "course": "Skyline Gauntlet",
+    "name": "The Funnel",
+    "par": 3,
+    "tee": [
+      100,
+      220
+    ],
+    "cup": [
+      610,
+      220
+    ],
+    "wide": "skyline-04.svg",
+    "portrait": "skyline-04-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-05",
+    "course": "Skyline Gauntlet",
+    "name": "Double Dogleg",
+    "par": 4,
+    "tee": [
+      110,
+      110
+    ],
+    "cup": [
+      600,
+      150
+    ],
+    "wide": "skyline-05.svg",
+    "portrait": "skyline-05-portrait.svg",
+    "geometryUnchanged": true
+  },
+  {
+    "id": "skyline-06",
+    "course": "Skyline Gauntlet",
+    "name": "Grand Finale",
+    "par": 5,
+    "tee": [
+      110,
+      330
+    ],
+    "cup": [
+      590,
+      120
+    ],
+    "wide": "skyline-06.svg",
+    "portrait": "skyline-06-portrait.svg",
+    "geometryUnchanged": true
+  }
+]

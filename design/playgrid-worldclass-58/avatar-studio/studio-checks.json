@@ -1,0 +1,47 @@
+[
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "noPageOverflow": true,
+    "characters": 32,
+    "legacyChoices": 24,
+    "localPersistence": true,
+    "originalProfileUnchanged": true,
+    "compatibilityGuard": true,
+    "unknownConfigFallback": true,
+    "reducedMotion": true,
+    "dialogFocusReturn": true
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "noPageOverflow": true,
+    "characters": 32,
+    "legacyChoices": 24,
+    "localPersistence": true,
+    "originalProfileUnchanged": true,
+    "compatibilityGuard": true,
+    "unknownConfigFallback": true,
+    "reducedMotion": true,
+    "dialogFocusReturn": true
+  },
+  {
+    "viewport": [
+      360,
+      740
+    ],
+    "noPageOverflow": true,
+    "characters": 32,
+    "legacyChoices": 24,
+    "localPersistence": true,
+    "originalProfileUnchanged": true,
+    "compatibilityGuard": true,
+    "unknownConfigFallback": true,
+    "reducedMotion": true,
+    "dialogFocusReturn": true
+  }
+]
