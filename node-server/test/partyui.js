@@ -15,7 +15,7 @@ const { io } = require('socket.io-client');
 
 const PORT = 3973;
 const URL = `http://localhost:${PORT}`;
-const HIDDEN = ['higherlower', 'liarsdice', 'hotpotato', 'reversi'];
+const HIDDEN = ['higherlower', 'liarsdice', 'hotpotato', 'reversi', 'rps'];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let failures = 0;
 const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) failures++; };
@@ -58,7 +58,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       await host.evaluate(() => localStorage.setItem('pg_profile', JSON.stringify({ name: 'HostUser', avatar: { e: 1, c: 1 } })));
       await host.reload();
       const cards = await host.$$eval('#games .game-card[data-game]', (els) => els.map((e) => e.dataset.game));
-      ok(cards.length === 21, `${T}: catalog shows 21 games (got ${cards.length})`);
+      ok(cards.length === 20, `${T}: catalog shows 20 games (got ${cards.length})`);
       ok(!cards.some((g) => HIDDEN.includes(g)), `${T}: no hidden game tile in the catalog`);
       ok((await host.$$('#games .coming-soon')).length === 1, `${T}: Coming Soon tile kept`);
       ok(!(await host.$$eval('[data-quick],[data-create]', (els) => els.map((e) => e.dataset.quick || e.dataset.create))).some((g) => HIDDEN.includes(g)), `${T}: no Play or Quick Play button for a hidden game`);
@@ -74,7 +74,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       const code = (await host.textContent('#room-code')).trim();
       await host.click('#slot-change');
       const opts = await host.$$eval('#modal-body [data-pickgame]', (els) => els.map((e) => e.dataset.pickgame));
-      ok(opts.length === 21 && !opts.some((g) => HIDDEN.includes(g)), `${T}: host game picker has 21 games, none hidden`);
+      ok(opts.length === 20 && !opts.some((g) => HIDDEN.includes(g)), `${T}: host game picker has 20 games, none hidden`);
       await host.keyboard.press('Escape');
 
       // ----- two more people: one plays, one (a phone page) spectates -----
@@ -124,7 +124,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       ok(!(await spec.$('#result-again')), `${T}: non-host has no Play Again button`);
       await spec.click('#result-vote');
       const voteOpts = await spec.$$eval('#modal-body [data-pickgame]', (els) => els.map((e) => e.dataset.pickgame));
-      ok(voteOpts.length === 21 && !voteOpts.some((x) => HIDDEN.includes(x)), `${T}: vote picker lists 21 games, none hidden`);
+      ok(voteOpts.length === 20 && !voteOpts.some((x) => HIDDEN.includes(x)), `${T}: vote picker lists 20 games, none hidden`);
       await spec.fill('#picker-search', 'chess');
       await spec.click('[data-pickgame="chess"]');
       ok(/Suggest Chess/.test(await spec.textContent('#picker-go')), `${T}: participant picker offers Suggest, not Choose`);
@@ -137,7 +137,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
 
       await host.click('#result-choose');
       const picks = await host.$$eval('[data-pickgame]', (els) => els.map((e) => e.dataset.pickgame));
-      ok(picks.length === 21 && !picks.some((x) => HIDDEN.includes(x)), `${T}: Choose Another Game lists 21 games, none hidden`);
+      ok(picks.length === 20 && !picks.some((x) => HIDDEN.includes(x)), `${T}: Choose Another Game lists 20 games, none hidden`);
       ok(/1 vote/.test(await host.textContent('[data-pickgame="chess"]')), `${T}: Choose Another Game shows vote counts`);
       await host.keyboard.press('Escape');
 

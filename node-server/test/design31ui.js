@@ -51,7 +51,7 @@ async function start(browser, vp, game) {
 }
 
 (async () => {
-  const srv = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env: { ...process.env, PORT: String(PORT), ALPHA_ENABLED: '' }, stdio: ['ignore', 'pipe', 'inherit'] });
+  const srv = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env: { ...process.env, PORT: String(PORT), ALPHA_ENABLED: '', HIDDEN_GAMES: '' }, stdio: ['ignore', 'pipe', 'inherit'] });
   await new Promise((r) => srv.stdout.once('data', r));
   const browser = await chromium.launch();
   if (SHOTS) fs.mkdirSync(SHOTS, { recursive: true });

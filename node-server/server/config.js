@@ -1,7 +1,7 @@
 // Site-wide settings. Change SITE_NAME once you pick a name.
 // Games hidden from every player-facing picker. Their modules, rules and tests stay so they can
 // come back by editing this list (or setting HIDDEN_GAMES="" in the environment).
-const DEFAULT_HIDDEN = 'higherlower,liarsdice,hotpotato,reversi';
+const DEFAULT_HIDDEN = 'higherlower,liarsdice,hotpotato,reversi,rps';
 
 module.exports = {
   SITE_NAME: process.env.SITE_NAME || 'Playgrid',
