@@ -1,0 +1,56 @@
+{
+  "localHtmlLinks": true,
+  "assetManifestHashes": 217,
+  "focusedRegressions": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "portraitWorldMapping": true,
+      "noReleaseCommit": true,
+      "reconnectControlsDisabled": true,
+      "sameCardFocus": true,
+      "wildSurvivesRefresh": true,
+      "pendingTargetName": true,
+      "loupeMirrorsWorld": true,
+      "pointerCancelCleanup": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "portraitWorldMapping": true,
+      "noReleaseCommit": true,
+      "reconnectControlsDisabled": true,
+      "sameCardFocus": true,
+      "wildSurvivesRefresh": true,
+      "pendingTargetName": true,
+      "loupeMirrorsWorld": true,
+      "pointerCancelCleanup": true
+    },
+    {
+      "viewport": [
+        360,
+        740
+      ],
+      "portraitWorldMapping": true,
+      "noReleaseCommit": true,
+      "reconnectControlsDisabled": true,
+      "sameCardFocus": true,
+      "wildSurvivesRefresh": true,
+      "pendingTargetName": true,
+      "loupeMirrorsWorld": true,
+      "pointerCancelCleanup": true
+    }
+  ],
+  "loadingSaveAndReactionRaceGuard": true,
+  "classicSpriteFailureFallback": true,
+  "classicAndReactionCaptureSizes": [
+    1440,
+    390
+  ],
+  "numericCardZeroSelection": true,
+  "reviewPagesAt390": 5
+}

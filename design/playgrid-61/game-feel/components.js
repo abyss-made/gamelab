@@ -1,0 +1,23 @@
+/* Design-reference components; no Socket.IO, game engine, transport or synthesized success. */
+export const labelCard=c=>({r:'Red',b:'Blue',g:'Green',y:'Yellow',w:'Wild'}[c.c]+' '+({S:'Skip',F:'Reverse',D:'Draw two',W:'Wild',P:'Draw four'}[c.v]||c.v));
+export const rankLabel=r=>({11:'J',12:'Q',13:'K',14:'A'}[r]||String(r));
+export function createFan(root,{onSelect}){
+ const nodes=new Map();let selected=null,cards=[],eligible=new Set();
+ function choose(id,focus=false,info={}){const target=nodes.get(id);if(!target)return;selected=id;nodes.forEach((b,key)=>{b.setAttribute('aria-pressed',String(key===id));b.tabIndex=key===id?0:-1;b.classList.toggle('selected',key===id);});if(focus){target.focus();target.scrollIntoView({block:'nearest',inline:'nearest'});}onSelect(cards.find(c=>c.id===id),eligible.has(id),info);}
+ function update(next,legal){const focused=root.contains(document.activeElement)?document.activeElement?.dataset.card:null;cards=next;eligible=new Set(legal);for(const [id,b]of nodes)if(!next.some(c=>c.id===id)){b.remove();nodes.delete(id);}for(const [index,c] of next.entries()){let b=nodes.get(c.id);if(!b){b=document.createElement('button');b.type='button';b.dataset.card=String(c.id);b.onclick=()=>choose(c.id);b.addEventListener('keydown',e=>{const i=cards.findIndex(x=>x.id===c.id);if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?cards.length-1:(i+(e.key==='ArrowRight'?1:-1)+cards.length)%cards.length;choose(cards[j].id,true);}});nodes.set(c.id,b);}b.className='fan-card color-'+c.c;b.setAttribute('aria-label',labelCard(c)+(eligible.has(c.id)?' · playable':' · unavailable'));b.setAttribute('aria-disabled',String(!eligible.has(c.id)));b.innerHTML='<span>'+c.v+'</span><strong>'+({S:'SKIP',F:'REVERSE',D:'+2',W:'WILD',P:'+4'}[c.v]||c.v)+'</strong><small>'+labelCard(c).split(' ')[0]+'</small>';if(root.children[index]!==b)root.insertBefore(b,root.children[index]||null);}if(!nodes.has(selected))selected=cards.find(c=>eligible.has(c.id))?.id??cards[0]?.id;if(selected!==undefined&&selected!==null)choose(selected,false,{source:'refresh'});if(focused!==null&&focused!==undefined){const target=nodes.get(Number(focused))||nodes.get(selected);if(target&&document.activeElement!==target)target.focus({preventScroll:true});}}
+ return {update,choose,getSelected:()=>selected,isLegal:()=>eligible.has(selected)};
+}
+export class BookLedger{
+ constructor(){this.reset();}reset(){this.seen=new Set();this.ready=false;}
+ ingest(view){const events=[];for(const p of view.players)for(const rank of p.books){const key=p.id+':'+rank;if(this.ready&&!this.seen.has(key))events.push({player:p.id,rank});this.seen.add(key);}this.ready=true;return events;}
+}
+export function preciseAim({svg,onChange,ball={x:250,y:250},bounds={w:1000,h:500,pad:50}}){
+ let angle=0,dragging=false;const map=e=>{const r=svg.getBoundingClientRect(),portrait=svg.dataset.portrait==='true',vw=portrait?bounds.h+bounds.pad*2:bounds.w+bounds.pad*2,vh=portrait?bounds.w+bounds.pad*2:bounds.h+bounds.pad*2;const scale=Math.min(r.width/vw,r.height/vh),ox=(r.width-vw*scale)/2,oy=(r.height-vh*scale)/2,x=(e.clientX-r.left-ox)/scale,y=(e.clientY-r.top-oy)/scale;return portrait?{x:bounds.w+bounds.pad-y,y:x-bounds.pad}:{x:x-bounds.pad,y:y-bounds.pad};};
+ const set=a=>{angle=(a%360+360)%360;onChange(angle);};
+ const down=e=>{if(svg.getAttribute('aria-disabled')==='true')return;dragging=true;svg.setPointerCapture(e.pointerId);move(e);};const move=e=>{if(!dragging)return;const p=map(e);set(Math.atan2(p.y-ball.y,p.x-ball.x)*180/Math.PI);};const up=()=>{dragging=false;};const key=e=>{if(svg.getAttribute('aria-disabled')==='true')return;if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();set(angle+(e.key==='ArrowLeft'?-1:1)*(e.shiftKey?5:.5));}};
+ svg.addEventListener('pointerdown',down);svg.addEventListener('pointermove',move);svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);svg.addEventListener('lostpointercapture',up);svg.addEventListener('keydown',key);
+ return {set,get:()=>angle,dispose:()=>{for(const [n,f]of [['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',up],['lostpointercapture',up],['keydown',key]])svg.removeEventListener(n,f);}};
+}
+export function sampleAt(anim,seconds){
+ const frames=anim.frames;if(seconds>=anim.duration)return frames.at(-1).slice(1);let i=0;while(i<frames.length-2&&frames[i+1][0]<=seconds)i++;const a=frames[i],b=frames[Math.min(i+1,frames.length-1)],u=b[0]===a[0]?0:Math.max(0,Math.min(1,(seconds-a[0])/(b[0]-a[0])));return a.slice(1).map((v,k)=>v===null?null:b[k+1]===null?v:v+(b[k+1]-v)*u);
+}

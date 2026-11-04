@@ -1,0 +1,10 @@
+{
+  "paletteMustBePrimitiveString": true,
+  "arrayAndPrototypeInputsFallBack": true,
+  "unknownVersionAndIdFallback": true,
+  "headwearConflictNormalized": true,
+  "v2MigrationAndUnknownFieldRemoval": true,
+  "roundTripBases": 35,
+  "maxDefaultConfigBytes": 151,
+  "byteCap": 256
+}

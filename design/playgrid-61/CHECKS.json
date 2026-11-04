@@ -1,0 +1,276 @@
+{
+  "avatars": [
+    {
+      "size": "desktop",
+      "viewport": [
+        1440,
+        900
+      ],
+      "pageOverflow": false,
+      "undoRandomizeReset": true,
+      "saveConfirmCancelReload": true,
+      "originalProfileUnchanged": true,
+      "emptyRecovery": true,
+      "compatibilityDisabled": true,
+      "unsavedDialogFocus": true,
+      "reducedMotion": true,
+      "legacyChoices": 24
+    },
+    {
+      "size": "mobile",
+      "viewport": [
+        390,
+        844
+      ],
+      "pageOverflow": false,
+      "undoRandomizeReset": true,
+      "saveConfirmCancelReload": true,
+      "originalProfileUnchanged": true,
+      "emptyRecovery": true,
+      "compatibilityDisabled": true,
+      "unsavedDialogFocus": true,
+      "reducedMotion": true,
+      "legacyChoices": 24
+    },
+    {
+      "size": "narrow",
+      "viewport": [
+        360,
+        740
+      ],
+      "pageOverflow": false,
+      "undoRandomizeReset": true,
+      "saveConfirmCancelReload": true,
+      "originalProfileUnchanged": true,
+      "emptyRecovery": true,
+      "compatibilityDisabled": true,
+      "unsavedDialogFocus": true,
+      "reducedMotion": true,
+      "legacyChoices": 24
+    },
+    {
+      "size": "tablet",
+      "viewport": [
+        768,
+        1024
+      ],
+      "pageOverflow": false,
+      "undoRandomizeReset": true,
+      "saveConfirmCancelReload": true,
+      "originalProfileUnchanged": true,
+      "emptyRecovery": true,
+      "compatibilityDisabled": true,
+      "unsavedDialogFocus": true,
+      "reducedMotion": true,
+      "legacyChoices": 24
+    },
+    {
+      "size": "tablet-landscape",
+      "viewport": [
+        1024,
+        768
+      ],
+      "pageOverflow": false,
+      "undoRandomizeReset": true,
+      "saveConfirmCancelReload": true,
+      "originalProfileUnchanged": true,
+      "emptyRecovery": true,
+      "compatibilityDisabled": true,
+      "unsavedDialogFocus": true,
+      "reducedMotion": true,
+      "legacyChoices": 24
+    }
+  ],
+  "games": [
+    {
+      "game": "pool",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "colorstack",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "gofish",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "ludo",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "tycoon",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "golf",
+      "viewport": [
+        1440,
+        900
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "pool",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "colorstack",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "gofish",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "ludo",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "tycoon",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "golf",
+      "viewport": [
+        390,
+        844
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "pool",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "colorstack",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "gofish",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "ludo",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "tycoon",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    },
+    {
+      "game": "golf",
+      "viewport": [
+        360,
+        740
+      ],
+      "noHorizontalOverflow": true,
+      "interactionDrafts": true,
+      "pageErrors": []
+    }
+  ],
+  "assets": {
+    "additionalBases": 32,
+    "foundationStudies": 3,
+    "layersPerBase": 13,
+    "lobbySizeExports": 105,
+    "previewSizeExports": 35,
+    "crossSlotHeadwearGuard": true,
+    "allowedSingleModuleVariantsComposed": 639,
+    "legacyConfigurationsNormalized": 240
+  }
+}

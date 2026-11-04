@@ -1,0 +1,1921 @@
+{
+  "issue": 61,
+  "catalogVersion": 2,
+  "proposedConfigVersion": 3,
+  "additionalCharacterCount": 32,
+  "foundationStudyCount": 3,
+  "editableSources": 35,
+  "preferredLookPreviews": 35,
+  "lobbyPngExports": 105,
+  "preview128PngExports": 35,
+  "uniqueNonColorGeometrySignatures": 32,
+  "sourceCommits": {
+    "approvedEight": "87d8b35",
+    "approvedRemaining": "71ca099",
+    "priorAvatarAndFeel": "f478a1e",
+    "currentGameCode": "06609a4"
+  },
+  "characters": [
+    {
+      "id": "h01",
+      "name": "Home Gamer",
+      "role": "home-foundation-study",
+      "silhouette": "home-swept",
+      "geometrySignature": "5e13fd12158ad57bb4615946561a93285ee063811dc94f3fed6f91ebeaffb715",
+      "source": "Issue 61 editable foundation study of owner-supplied home family",
+      "asset": "assets/characters/h01-home-gamer.svg",
+      "preview": "assets/previews/h01.svg"
+    },
+    {
+      "id": "h02",
+      "name": "Home Robot",
+      "role": "home-foundation-study",
+      "silhouette": "home-bubble",
+      "geometrySignature": "939a3fc5a27055966e392d5d45f0d7fb4e4d1e0cb3ec5325b4414b2774a6e7be",
+      "source": "Issue 61 editable foundation study of owner-supplied home family",
+      "asset": "assets/characters/h02-home-robot.svg",
+      "preview": "assets/previews/h02.svg"
+    },
+    {
+      "id": "h03",
+      "name": "Home Cat",
+      "role": "home-foundation-study",
+      "silhouette": "home-calico",
+      "geometrySignature": "aad846bdca5851ef4ffda4b4550b36f23a72da3ee92035f25190f5fb7cce747f",
+      "source": "Issue 61 editable foundation study of owner-supplied home family",
+      "asset": "assets/characters/h03-home-cat.svg",
+      "preview": "assets/previews/h03.svg"
+    },
+    {
+      "id": "a01",
+      "name": "Ember",
+      "role": "additional-refined",
+      "silhouette": "swept",
+      "geometrySignature": "7158e91a995b1a7b24067f53b73e11a1096e2e6d28ff407eb80205a3d20d82a8",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a01-ember.svg",
+      "preview": "assets/previews/a01.svg"
+    },
+    {
+      "id": "a02",
+      "name": "Juniper",
+      "role": "additional-refined",
+      "silhouette": "curls",
+      "geometrySignature": "29b7d275da511950404e9598c1091648e484d334f2d331c0099143139390a8cc",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a02-juniper.svg",
+      "preview": "assets/previews/a02.svg"
+    },
+    {
+      "id": "a03",
+      "name": "Sora",
+      "role": "additional-refined",
+      "silhouette": "buns",
+      "geometrySignature": "d655fb9393cc88715ae6de9f79d57fae06ed5c42a5fa407dce2468aba7b16bc2",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a03-sora.svg",
+      "preview": "assets/previews/a03.svg"
+    },
+    {
+      "id": "a04",
+      "name": "Orion",
+      "role": "additional-refined",
+      "silhouette": "undercut",
+      "geometrySignature": "e4d799835271c5d2b079c6e340c777ffbec3539821a25cfe03b9d025639b921d",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a04-orion.svg",
+      "preview": "assets/previews/a04.svg"
+    },
+    {
+      "id": "a05",
+      "name": "Mira",
+      "role": "additional-refined",
+      "silhouette": "braids",
+      "geometrySignature": "1f7c3ff1b1777bf4bb69ddd5a4cf7939ef19cb79d9f442f4599b72964ad34690",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a05-mira.svg",
+      "preview": "assets/previews/a05.svg"
+    },
+    {
+      "id": "a06",
+      "name": "Rowan",
+      "role": "additional-refined",
+      "silhouette": "waves",
+      "geometrySignature": "470beff0fe892be8429ffaac5480e62e39bfd64dcd2e74c1a01e6d568e067e85",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a06-rowan.svg",
+      "preview": "assets/previews/a06.svg"
+    },
+    {
+      "id": "a07",
+      "name": "Zuri",
+      "role": "additional-refined",
+      "silhouette": "puff",
+      "geometrySignature": "e7ffd481afdf82216e40b1f2c0b99b4283b613517bb64387da45956d6e487702",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a07-zuri.svg",
+      "preview": "assets/previews/a07.svg"
+    },
+    {
+      "id": "a08",
+      "name": "Aster",
+      "role": "additional-refined",
+      "silhouette": "pony",
+      "geometrySignature": "7b1475b12c917dd33b4f4bf690e589b54dafb944cd820f6741681f8e5f08d547",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a08-aster.svg",
+      "preview": "assets/previews/a08.svg"
+    },
+    {
+      "id": "a09",
+      "name": "Cinder",
+      "role": "additional-refined",
+      "silhouette": "fox",
+      "geometrySignature": "29522d921d045ef3e7e1bd9493832a4e67e4d0317965ed2e61b1b24ed59e9dda",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a09-cinder.svg",
+      "preview": "assets/previews/a09.svg"
+    },
+    {
+      "id": "a10",
+      "name": "Clover",
+      "role": "additional-refined",
+      "silhouette": "calico",
+      "geometrySignature": "aad846bdca5851ef4ffda4b4550b36f23a72da3ee92035f25190f5fb7cce747f",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a10-clover.svg",
+      "preview": "assets/previews/a10.svg"
+    },
+    {
+      "id": "a11",
+      "name": "Pippin",
+      "role": "additional-refined",
+      "silhouette": "tabby",
+      "geometrySignature": "029984e0841d9472699d7ee75898b6892d9115858537533a1d7a2615a6a98cec",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a11-pippin.svg",
+      "preview": "assets/previews/a11.svg"
+    },
+    {
+      "id": "a12",
+      "name": "Tundra",
+      "role": "additional-refined",
+      "silhouette": "husky",
+      "geometrySignature": "427f69b206315f8c4c51fbdef2d33608590a6e2fabe0ca8dfcc33d645746d2d4",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a12-tundra.svg",
+      "preview": "assets/previews/a12.svg"
+    },
+    {
+      "id": "a13",
+      "name": "Maple",
+      "role": "additional-refined",
+      "silhouette": "shiba",
+      "geometrySignature": "c7ed38377484a5bd68248959d5252afd0505061bdf1dcb150ef0a7295b1088af",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a13-maple.svg",
+      "preview": "assets/previews/a13.svg"
+    },
+    {
+      "id": "a14",
+      "name": "Mallow",
+      "role": "additional-refined",
+      "silhouette": "rabbit",
+      "geometrySignature": "29ef8b760da57053c6248911351f187b1ca5d813678ed9465f972a242997237e",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a14-mallow.svg",
+      "preview": "assets/previews/a14.svg"
+    },
+    {
+      "id": "a15",
+      "name": "Bramble",
+      "role": "additional-refined",
+      "silhouette": "bear",
+      "geometrySignature": "c5c0a8586fff15d230cf07fbf9b36c8a8b35e8bbbd4deeff283264fb2db2e032",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a15-bramble.svg",
+      "preview": "assets/previews/a15.svg"
+    },
+    {
+      "id": "a16",
+      "name": "Pebble",
+      "role": "additional-refined",
+      "silhouette": "panda",
+      "geometrySignature": "b01488599640751642967f6f119955a57f1ca98fa8f2154214f479c7c7ba9ac0",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a16-pebble.svg",
+      "preview": "assets/previews/a16.svg"
+    },
+    {
+      "id": "a17",
+      "name": "Sorrel",
+      "role": "additional-refined",
+      "silhouette": "redpanda",
+      "geometrySignature": "dac3c1becc1bf555ee29981cbdc6676067a4e56a47d359ad599066f995a75f4f",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a17-sorrel.svg",
+      "preview": "assets/previews/a17.svg"
+    },
+    {
+      "id": "a18",
+      "name": "Brook",
+      "role": "additional-refined",
+      "silhouette": "otter",
+      "geometrySignature": "3d9ac23a2aa13e9f41ea49fee2d807079b5d6a7aed482d88febb3cddb75f4d6b",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a18-brook.svg",
+      "preview": "assets/previews/a18.svg"
+    },
+    {
+      "id": "a19",
+      "name": "Bandit",
+      "role": "additional-refined",
+      "silhouette": "raccoon",
+      "geometrySignature": "cf9d9b3680594042e35b5c9088d0d3544dff3fdcf51b06dac4c92243208cb15b",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a19-bandit.svg",
+      "preview": "assets/previews/a19.svg"
+    },
+    {
+      "id": "a20",
+      "name": "Quill",
+      "role": "additional-refined",
+      "silhouette": "owl",
+      "geometrySignature": "e8e3eb69b2c2f9a19967132fa6276956a02ca5be3834450ac8c5e228cb1691cd",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a20-quill.svg",
+      "preview": "assets/previews/a20.svg"
+    },
+    {
+      "id": "a21",
+      "name": "Bop",
+      "role": "additional-refined",
+      "silhouette": "bubble",
+      "geometrySignature": "2ae493941b6c96e5f5c17dc2cedb36d2716a4ea313ac5ed3d2be63a4cef29aaf",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a21-bop.svg",
+      "preview": "assets/previews/a21.svg"
+    },
+    {
+      "id": "a22",
+      "name": "Vela",
+      "role": "additional-refined",
+      "silhouette": "wide-visor",
+      "geometrySignature": "53083cbfe13973eee1e2d61ab7da483646d1e6cc1fd94d7fba79171ec1cda231",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a22-vela.svg",
+      "preview": "assets/previews/a22.svg"
+    },
+    {
+      "id": "a23",
+      "name": "Pico",
+      "role": "additional-refined",
+      "silhouette": "antenna",
+      "geometrySignature": "05ef7ee09c2ea225e0a1c76ed75d5e8ac60b74b48fac9711625814d4eed11e96",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a23-pico.svg",
+      "preview": "assets/previews/a23.svg"
+    },
+    {
+      "id": "a24",
+      "name": "Halo",
+      "role": "additional-refined",
+      "silhouette": "cyclops",
+      "geometrySignature": "81ea4d11d7fdd01a14d167a2a112f09731c534132c4b85339f62247b133b9b8b",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a24-halo.svg",
+      "preview": "assets/previews/a24.svg"
+    },
+    {
+      "id": "a25",
+      "name": "Toggle",
+      "role": "additional-refined",
+      "silhouette": "box",
+      "geometrySignature": "8103117050db1195a65ae7e63713314429d7d1714a92149bcb665fea6fbf71f5",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a25-toggle.svg",
+      "preview": "assets/previews/a25.svg"
+    },
+    {
+      "id": "a26",
+      "name": "Echo",
+      "role": "additional-refined",
+      "silhouette": "roundears",
+      "geometrySignature": "05d27e3506b66ecda7a9c51fb5cd1d20231577d9bd23d8b4f4c7670798d9abc5",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a26-echo.svg",
+      "preview": "assets/previews/a26.svg"
+    },
+    {
+      "id": "a27",
+      "name": "Sprig",
+      "role": "additional-refined",
+      "silhouette": "dragon",
+      "geometrySignature": "24e1b0b895867994a21c4109cc15862e657c07eda64b1fad2ad27cc1de78e8c1",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a27-sprig.svg",
+      "preview": "assets/previews/a27.svg"
+    },
+    {
+      "id": "a28",
+      "name": "Nyx",
+      "role": "additional-refined",
+      "silhouette": "bat",
+      "geometrySignature": "5249848484651a8a7d4bb6b5e37a6da0c151c75c3bf133f93dcf66a59f3f1246",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a28-nyx.svg",
+      "preview": "assets/previews/a28.svg"
+    },
+    {
+      "id": "a29",
+      "name": "Wisp",
+      "role": "additional-refined",
+      "silhouette": "cloud",
+      "geometrySignature": "9c3fecd2e672222afd1831cfdebbe9acae0145951e15193e3c1e4d93806447a3",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a29-wisp.svg",
+      "preview": "assets/previews/a29.svg"
+    },
+    {
+      "id": "a30",
+      "name": "Ripple",
+      "role": "additional-refined",
+      "silhouette": "axolotl",
+      "geometrySignature": "e9a6d2812b29904bdbe1392a2cef1d12d883c75ed2e949f45ab9abd604e7be6b",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a30-ripple.svg",
+      "preview": "assets/previews/a30.svg"
+    },
+    {
+      "id": "a31",
+      "name": "Flick",
+      "role": "additional-refined",
+      "silhouette": "salamander",
+      "geometrySignature": "52ca3dd3adc02cf301b01bce30f2d56dd339f7b0b238db158b6b2ddca9ad34e1",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a31-flick.svg",
+      "preview": "assets/previews/a31.svg"
+    },
+    {
+      "id": "a32",
+      "name": "Gale",
+      "role": "additional-refined",
+      "silhouette": "griffin",
+      "geometrySignature": "44de1498891768ca3d5a15e38b85f0f84fd4916fe659a0b620239c36cd916172",
+      "source": "Issue 58 original base, refined in Issue 61",
+      "asset": "assets/characters/a32-gale.svg",
+      "preview": "assets/previews/a32.svg"
+    }
+  ],
+  "canonicalReferences": [
+    {
+      "path": "node-server/public/favicon.svg",
+      "role": "unchanged-canonical-or-font",
+      "bytes": 260,
+      "sha256": "1feb0b70260f346cc286f57d95c7a235fcb6ea850ecb84bd22e6a88d8c5042ac"
+    },
+    {
+      "path": "node-server/public/assets/hero-mascots.png",
+      "role": "unchanged-canonical-or-font",
+      "bytes": 1888932,
+      "sha256": "0935395406fe72260a0ea23e673d33e82ad76edc348c1166c3e25be618a6b444"
+    },
+    {
+      "path": "node-server/public/assets/player-portraits.png",
+      "role": "unchanged-canonical-or-font",
+      "bytes": 2087820,
+      "sha256": "8ae4824022acf467c6e858e87022dd7fb3d59efaed427c983c789e86f58557cc"
+    },
+    {
+      "path": "node-server/public/assets/fonts/inter-variable.ttf",
+      "role": "unchanged-canonical-or-font",
+      "bytes": 876576,
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+    },
+    {
+      "path": "node-server/public/assets/fonts/OFL.txt",
+      "role": "unchanged-canonical-or-font",
+      "bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    }
+  ],
+  "files": [
+    {
+      "path": "avatar-studio/assets/characters/h01-home-gamer.svg",
+      "role": "editable-base",
+      "character": "h01",
+      "bytes": 16429,
+      "sha256": "e8bd644d0367b68b9b26c279b61230d3ea4e698e2999e801c898d09d0b4001bd"
+    },
+    {
+      "path": "avatar-studio/assets/previews/h01.svg",
+      "role": "preferred-look",
+      "character": "h01",
+      "bytes": 16500,
+      "sha256": "0ce553a6d9f302a126950331aecc1f3a92b62648348945bec8a18a9a2c087254"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h01-24.png",
+      "role": "lobby-export-24",
+      "character": "h01",
+      "bytes": 1694,
+      "sha256": "3298ee0e97153c98cfc6ad44f4b33d76de1fb2b60c7809005ebc90129690876f"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h01-32.png",
+      "role": "lobby-export-32",
+      "character": "h01",
+      "bytes": 2644,
+      "sha256": "ec03497f46d5ac015ba2b441add0eaf01979c92fcc170d6bb3be690e5aee4f17"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h01-48.png",
+      "role": "lobby-export-48",
+      "character": "h01",
+      "bytes": 4956,
+      "sha256": "3063b01f191e33f17dfbe7d147441f049a103d37be24438199c208188b6d62f6"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h01-128.png",
+      "role": "preview-export-128",
+      "character": "h01",
+      "bytes": 21430,
+      "sha256": "c07e02ff41f8b1264290c76be8efa6fc432da3ef90c34edbecd6ce573ee3b6e0"
+    },
+    {
+      "path": "avatar-studio/assets/characters/h02-home-robot.svg",
+      "role": "editable-base",
+      "character": "h02",
+      "bytes": 12601,
+      "sha256": "1e8a6dd8879503216512584093b20bc67489ce541aecd12717626415527ada56"
+    },
+    {
+      "path": "avatar-studio/assets/previews/h02.svg",
+      "role": "preferred-look",
+      "character": "h02",
+      "bytes": 12601,
+      "sha256": "1e8a6dd8879503216512584093b20bc67489ce541aecd12717626415527ada56"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h02-24.png",
+      "role": "lobby-export-24",
+      "character": "h02",
+      "bytes": 1737,
+      "sha256": "6ff2e3927acbb80d49a0817e8810f4c369275c93d12594ed401c0e6b8ba27e49"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h02-32.png",
+      "role": "lobby-export-32",
+      "character": "h02",
+      "bytes": 2584,
+      "sha256": "345728744779c18bb5faf8ffa986a673c67d5cbb32426729f12364aa735cfd35"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h02-48.png",
+      "role": "lobby-export-48",
+      "character": "h02",
+      "bytes": 4794,
+      "sha256": "e0af680ef6a6385b8572658280d63658521b042595ffce9a9d47e7cdab98c54b"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h02-128.png",
+      "role": "preview-export-128",
+      "character": "h02",
+      "bytes": 18679,
+      "sha256": "6910becca2dcda77062d54ece68ea1a221bfd315ed8cef2d03839ea5c1fd9869"
+    },
+    {
+      "path": "avatar-studio/assets/characters/h03-home-cat.svg",
+      "role": "editable-base",
+      "character": "h03",
+      "bytes": 14675,
+      "sha256": "2b4f181c4fb5e29faacf1bae4e5480fabb551aeccfb46cb273d3cf818b98a063"
+    },
+    {
+      "path": "avatar-studio/assets/previews/h03.svg",
+      "role": "preferred-look",
+      "character": "h03",
+      "bytes": 14746,
+      "sha256": "a8253419ae42ff52f1e692ced73dee12432abe3671458cd1ff94405a8505e588"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h03-24.png",
+      "role": "lobby-export-24",
+      "character": "h03",
+      "bytes": 1747,
+      "sha256": "69642a6592bdf834520c2d1e3777f4f91715a62f28d6ee3193a48ef60aed2499"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h03-32.png",
+      "role": "lobby-export-32",
+      "character": "h03",
+      "bytes": 2746,
+      "sha256": "13c8fe8b07b68c2d2303fddc062e288348c0d0d50e4118d61dec2176914e7ba5"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h03-48.png",
+      "role": "lobby-export-48",
+      "character": "h03",
+      "bytes": 5128,
+      "sha256": "0da5ecef360caf87d69127d7330a8e4d0b20214f84fb4d66340189a4e6368f2f"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/h03-128.png",
+      "role": "preview-export-128",
+      "character": "h03",
+      "bytes": 21034,
+      "sha256": "810df547e7b761cffc66859a0bf8d3b75cf5f36c2a1c0b7cc525ba34d63b14ea"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a01-ember.svg",
+      "role": "editable-base",
+      "character": "a01",
+      "bytes": 18175,
+      "sha256": "15197a85f0133b81ef42a20a61f0b79862edb23d2d07f3f55e5ac21934643629"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a01.svg",
+      "role": "preferred-look",
+      "character": "a01",
+      "bytes": 18246,
+      "sha256": "38c36d35f736318fd246e4bce2b106711f49c09507ad8d2bd930b3858a836102"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a01-24.png",
+      "role": "lobby-export-24",
+      "character": "a01",
+      "bytes": 1708,
+      "sha256": "1c9d36f0cf42be94895081945bd14abcaec2c24e0ad15a18967adb1f6f585492"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a01-32.png",
+      "role": "lobby-export-32",
+      "character": "a01",
+      "bytes": 2687,
+      "sha256": "b9de4ce8220750706e8557d8a2771954edbe1d3094981a3b6cef876e5fc09593"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a01-48.png",
+      "role": "lobby-export-48",
+      "character": "a01",
+      "bytes": 5040,
+      "sha256": "c0ddf66e11fea0a35075756dc24a07e4e9eb5be9879fc9767de539a97407a10a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a01-128.png",
+      "role": "preview-export-128",
+      "character": "a01",
+      "bytes": 22215,
+      "sha256": "8a4a4fe3036c7f8ee20168a4c89a5dfb7918a7a750e82fcfc8bfba228ed738a1"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a02-juniper.svg",
+      "role": "editable-base",
+      "character": "a02",
+      "bytes": 18315,
+      "sha256": "7ae59b5ef55f7c02d1339b26ef452763fa59615c7632726ea17aaa28f7c01842"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a02.svg",
+      "role": "preferred-look",
+      "character": "a02",
+      "bytes": 18315,
+      "sha256": "8360204f492d54882ef1a4a24d5ce379f629ce41a8dfffd911d5a28edc34e8b5"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a02-24.png",
+      "role": "lobby-export-24",
+      "character": "a02",
+      "bytes": 1679,
+      "sha256": "e3041bdecdc17d85f6e35cc1084f24e225eeb457ab02d2f54ddfbbe744d76ab1"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a02-32.png",
+      "role": "lobby-export-32",
+      "character": "a02",
+      "bytes": 2655,
+      "sha256": "b7b4f4028c1bd29ed9a7699c0517150116446b765beeb9616404f6d3d6d23109"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a02-48.png",
+      "role": "lobby-export-48",
+      "character": "a02",
+      "bytes": 5004,
+      "sha256": "3851611a11fa9813bdeadeb214a6f5ac8358ba67912fcce674fea4263edede8f"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a02-128.png",
+      "role": "preview-export-128",
+      "character": "a02",
+      "bytes": 22471,
+      "sha256": "55b56ca7f0bf3652ae360f95bf04a3975c716402b32adf47b69c74a743d3ef1b"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a03-sora.svg",
+      "role": "editable-base",
+      "character": "a03",
+      "bytes": 18433,
+      "sha256": "5e05d4faf00eb7e471cae2e23cba363b83b1c34932855e17b679c372a97feea7"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a03.svg",
+      "role": "preferred-look",
+      "character": "a03",
+      "bytes": 18433,
+      "sha256": "0d35a29de24c4e60d5e05da2278f74a8d0d8a5fed2d0f9c42713732ea8afb879"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a03-24.png",
+      "role": "lobby-export-24",
+      "character": "a03",
+      "bytes": 1738,
+      "sha256": "1ed68c13927a1c53caa979c4318005f282ff026f536136519d17f5114d76d491"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a03-32.png",
+      "role": "lobby-export-32",
+      "character": "a03",
+      "bytes": 2726,
+      "sha256": "d7562aa988350900118450093375fca7433bb2e110c398c9521438b0b2849553"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a03-48.png",
+      "role": "lobby-export-48",
+      "character": "a03",
+      "bytes": 5224,
+      "sha256": "da62ee0b20a45d98e716a79a1323a90385fafda46b0f342ce7e97ceda3dc4417"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a03-128.png",
+      "role": "preview-export-128",
+      "character": "a03",
+      "bytes": 23556,
+      "sha256": "91ec17dfd9ab70d26feca0008a5d708f16797bf3e30dc5ba158ddd685477fb9c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a04-orion.svg",
+      "role": "editable-base",
+      "character": "a04",
+      "bytes": 18205,
+      "sha256": "f4c5c8292d32fc3a09d71e5573010dd4a8327c3107da853dd6707e3a65343183"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a04.svg",
+      "role": "preferred-look",
+      "character": "a04",
+      "bytes": 18205,
+      "sha256": "cc1c776c7351ed87ad5def4a772c179276847e024a4f9103c2b61df2e00b695e"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a04-24.png",
+      "role": "lobby-export-24",
+      "character": "a04",
+      "bytes": 1695,
+      "sha256": "c198ab20277b034005c6b78947c724cd17da4206ba5abedd2f14bb83898849b9"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a04-32.png",
+      "role": "lobby-export-32",
+      "character": "a04",
+      "bytes": 2662,
+      "sha256": "0a0cfc8da32db221ea2fa6a9ee84c1c6c1ecbb70ddd2b4658091fbf515841061"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a04-48.png",
+      "role": "lobby-export-48",
+      "character": "a04",
+      "bytes": 5017,
+      "sha256": "127fdc1c96b16f976b7ade10e55910a2d14586dcf5a6735ca7ee32d6187ae5d0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a04-128.png",
+      "role": "preview-export-128",
+      "character": "a04",
+      "bytes": 22398,
+      "sha256": "c5d52014fa5f4f8cc89bc6d5230958a8e76ffaca3fc8e858a081aac51069963c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a05-mira.svg",
+      "role": "editable-base",
+      "character": "a05",
+      "bytes": 19052,
+      "sha256": "297eff9656b77ba0b0bfbe566aed003228f8198601f431a79e103c8c41c6bb03"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a05.svg",
+      "role": "preferred-look",
+      "character": "a05",
+      "bytes": 19052,
+      "sha256": "9911828c914c28b1da4f18e95ae9ba233c97392319fa479da46e956f7961ca5a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a05-24.png",
+      "role": "lobby-export-24",
+      "character": "a05",
+      "bytes": 1731,
+      "sha256": "51b8c1ac39eaf7ec25e677a9bf0a2a57f2d9dd97bb46966d4e9d0ef9cb539635"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a05-32.png",
+      "role": "lobby-export-32",
+      "character": "a05",
+      "bytes": 2770,
+      "sha256": "0f36d05d246bba85de280cc4c0364cd8496806b2bb09bedafbcdde66ed05c012"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a05-48.png",
+      "role": "lobby-export-48",
+      "character": "a05",
+      "bytes": 5265,
+      "sha256": "0f9be53f61aa94c2fd1ba4e98e03947de365e460e1bd1a33e5357508ae2c9b18"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a05-128.png",
+      "role": "preview-export-128",
+      "character": "a05",
+      "bytes": 23907,
+      "sha256": "75733138b53cc81f48e3d5a54718347e2fd498a15a5c66adf2596f7f5ca76c9c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a06-rowan.svg",
+      "role": "editable-base",
+      "character": "a06",
+      "bytes": 18178,
+      "sha256": "e0493d740339434fbb78fba015012eb1fd3c9de04101b66b19a9c5b3ec1e184f"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a06.svg",
+      "role": "preferred-look",
+      "character": "a06",
+      "bytes": 18178,
+      "sha256": "27835c66d893c88f71543719265398830e0b4bba4a23e286f7819516121c70de"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a06-24.png",
+      "role": "lobby-export-24",
+      "character": "a06",
+      "bytes": 1725,
+      "sha256": "70611210552819d81db2a7435a0ffe4fa0afc6f2a15513da0afa4e8a48596b72"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a06-32.png",
+      "role": "lobby-export-32",
+      "character": "a06",
+      "bytes": 2714,
+      "sha256": "48d5985960cf85973d7817daf9c6a626f1cb28a2ba721483bc004a3552da7958"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a06-48.png",
+      "role": "lobby-export-48",
+      "character": "a06",
+      "bytes": 5244,
+      "sha256": "891c123b98a319ae0fd80a41caf45c413d7e0a6acae541dbaaa6fcef98fe760d"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a06-128.png",
+      "role": "preview-export-128",
+      "character": "a06",
+      "bytes": 23955,
+      "sha256": "50d5be1ec14c611fc51f53526b9d07bf6b46cf9bf42e896c8d659a21dd21b08c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a07-zuri.svg",
+      "role": "editable-base",
+      "character": "a07",
+      "bytes": 18659,
+      "sha256": "024fb20c8eedf012467d3f00f320efafe3aee7e9732bcd3fad6043b96cca0f8a"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a07.svg",
+      "role": "preferred-look",
+      "character": "a07",
+      "bytes": 18659,
+      "sha256": "024fb20c8eedf012467d3f00f320efafe3aee7e9732bcd3fad6043b96cca0f8a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a07-24.png",
+      "role": "lobby-export-24",
+      "character": "a07",
+      "bytes": 1661,
+      "sha256": "9fa8e0a883c2cbfd0349c895ef8e3ee6065f58e1b11ced81486c140f86c149e3"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a07-32.png",
+      "role": "lobby-export-32",
+      "character": "a07",
+      "bytes": 2618,
+      "sha256": "c47df767310140f3ef4ddefe96b2f7a17690ddc7dc6f8b48cb66cc3552cb8c2f"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a07-48.png",
+      "role": "lobby-export-48",
+      "character": "a07",
+      "bytes": 4947,
+      "sha256": "f928c29b0d6ad5cdbf68e0cc66b3a3ecb75873b3b01fd878c81a08ae9514f372"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a07-128.png",
+      "role": "preview-export-128",
+      "character": "a07",
+      "bytes": 22214,
+      "sha256": "1d4ef211a194fe74b539914537e2ce77edf53ca0475729ba04fb714111a90d2e"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a08-aster.svg",
+      "role": "editable-base",
+      "character": "a08",
+      "bytes": 18408,
+      "sha256": "937079eee702cc79d6d09e711b12153284f63b82e796291547ca433e62d97356"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a08.svg",
+      "role": "preferred-look",
+      "character": "a08",
+      "bytes": 18408,
+      "sha256": "ce3b99e11707c8b328862c7189029fa08a5793b01ed6e48b44892a016439c421"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a08-24.png",
+      "role": "lobby-export-24",
+      "character": "a08",
+      "bytes": 1733,
+      "sha256": "89e438e780fcffbaf99ca54c85448ad7dd90f2f067ddc43f7b5bb7040fedd438"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a08-32.png",
+      "role": "lobby-export-32",
+      "character": "a08",
+      "bytes": 2765,
+      "sha256": "e7362f409625d7129d11ab4b64173e74e3f058e6de4f75fc76de82c4859c8581"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a08-48.png",
+      "role": "lobby-export-48",
+      "character": "a08",
+      "bytes": 5186,
+      "sha256": "f5860cae24fc263019b0c2955c9f6ac63bde1c7c228dc1effe5312ee27c382bd"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a08-128.png",
+      "role": "preview-export-128",
+      "character": "a08",
+      "bytes": 23376,
+      "sha256": "fdfd3bdfcf5d7c3c3f7fd08e01a89a43a97f34d6ab6b0e404866394e4a6273c6"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a09-cinder.svg",
+      "role": "editable-base",
+      "character": "a09",
+      "bytes": 14477,
+      "sha256": "f46d837bea293c8b24ad9459d822fba872321e6b98b4089a1849b419ec39c182"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a09.svg",
+      "role": "preferred-look",
+      "character": "a09",
+      "bytes": 14547,
+      "sha256": "8edb97a02b3c39ee9a21d96b0dba3b0f7592033404b4649b4e45f4b87bc0d603"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a09-24.png",
+      "role": "lobby-export-24",
+      "character": "a09",
+      "bytes": 1780,
+      "sha256": "2c8d5c2fde62863b15c05f9ded32547ac6021c2e4d7f726ededcc4c6fe5d9cd3"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a09-32.png",
+      "role": "lobby-export-32",
+      "character": "a09",
+      "bytes": 2787,
+      "sha256": "12197e663ddd17627071740761b73a5b0cecd75524485fc314e44fa0acd2926e"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a09-48.png",
+      "role": "lobby-export-48",
+      "character": "a09",
+      "bytes": 5143,
+      "sha256": "396e25f288d7a3cd4fee72e3b49c93a7c6f5f5525cbe9d081280aec02a3a90dc"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a09-128.png",
+      "role": "preview-export-128",
+      "character": "a09",
+      "bytes": 20945,
+      "sha256": "3060154c1c0b76b15dace5506e05ff02960db3df6b8d8019084f196cfad19a4f"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a10-clover.svg",
+      "role": "editable-base",
+      "character": "a10",
+      "bytes": 14668,
+      "sha256": "1ab9aeb046580e21686b1368def75cfc95cf18b17bcef75adf8798f646fc4944"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a10.svg",
+      "role": "preferred-look",
+      "character": "a10",
+      "bytes": 14738,
+      "sha256": "f5e989148351288fb3986edf6796676e2f0b5e062e4042924b1aa7be023d9b9e"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a10-24.png",
+      "role": "lobby-export-24",
+      "character": "a10",
+      "bytes": 1764,
+      "sha256": "9225744f530115d27e82d6bb288bf1c1e6fc64ddd2a1307805a559a2a47f1dbe"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a10-32.png",
+      "role": "lobby-export-32",
+      "character": "a10",
+      "bytes": 2758,
+      "sha256": "1a3d1d3bcd6b529869dfc74541da8d7dd425f4309cbd4707ef7c9dc204ed2d37"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a10-48.png",
+      "role": "lobby-export-48",
+      "character": "a10",
+      "bytes": 5140,
+      "sha256": "6877a8df9eb357c9ac2b939c04b8245d1afe8c74e097a9c8a3a433ab8f21da39"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a10-128.png",
+      "role": "preview-export-128",
+      "character": "a10",
+      "bytes": 21125,
+      "sha256": "b834eb4cacac372ffb7cea11320c42c64aa055f7f021879546f7ae46f0529435"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a11-pippin.svg",
+      "role": "editable-base",
+      "character": "a11",
+      "bytes": 14917,
+      "sha256": "e5572ef2c859b074175eafe246bf3599b4f65b4798643348ed6e23464fbd5b96"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a11.svg",
+      "role": "preferred-look",
+      "character": "a11",
+      "bytes": 14917,
+      "sha256": "dd98f9a417d755a7db1a83f627303867d48968b2e3bf0116f702cb1a22e6da1f"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a11-24.png",
+      "role": "lobby-export-24",
+      "character": "a11",
+      "bytes": 1760,
+      "sha256": "ee908ab075cff344c064279947bae664243810e64364ff507938228869b6fd56"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a11-32.png",
+      "role": "lobby-export-32",
+      "character": "a11",
+      "bytes": 2737,
+      "sha256": "5595dc161f642dfe2943ae907e3fa60a646b86d38f6350e00a3b16e41c80da53"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a11-48.png",
+      "role": "lobby-export-48",
+      "character": "a11",
+      "bytes": 5104,
+      "sha256": "f89ffde69d73dbddcf206d844195673a38b4f27ead3d43620aa5ba07859a57a2"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a11-128.png",
+      "role": "preview-export-128",
+      "character": "a11",
+      "bytes": 21475,
+      "sha256": "d4c61e69a0792f29cd52c0e3aea936a3c219b90ed77dd48c7e3ceadde1bf419c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a12-tundra.svg",
+      "role": "editable-base",
+      "character": "a12",
+      "bytes": 14485,
+      "sha256": "96e6719772a7c7d308419308817f1e6a1b6a44edf39cdae63ae937e972766bfd"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a12.svg",
+      "role": "preferred-look",
+      "character": "a12",
+      "bytes": 14485,
+      "sha256": "d05daa2968676408de34eb3bba297ceaf8ac6a8e5ff9210dd706ddb0e0945b45"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a12-24.png",
+      "role": "lobby-export-24",
+      "character": "a12",
+      "bytes": 1761,
+      "sha256": "b91e85ca947929afd08fcb84d7d8f1d06910f0b33b7b213a880690d128499134"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a12-32.png",
+      "role": "lobby-export-32",
+      "character": "a12",
+      "bytes": 2729,
+      "sha256": "7683a308393d5bb34510beb1bcd1ba4c12975a16e770fc71d0d6f123cf6aeb87"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a12-48.png",
+      "role": "lobby-export-48",
+      "character": "a12",
+      "bytes": 5061,
+      "sha256": "58dfb17c9b5937f57d37992a33da3236b099bed2a89f1c133c8f466bb450182b"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a12-128.png",
+      "role": "preview-export-128",
+      "character": "a12",
+      "bytes": 21053,
+      "sha256": "98340707d4395349ec84ad7c0c07f28db3b3dd8a611c52e73a20d2263b15243e"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a13-maple.svg",
+      "role": "editable-base",
+      "character": "a13",
+      "bytes": 14317,
+      "sha256": "33751cbae810300ce7fcffbf9409ce93a83c3fa2f9bec0ab1714dd1e459d9542"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a13.svg",
+      "role": "preferred-look",
+      "character": "a13",
+      "bytes": 14317,
+      "sha256": "33751cbae810300ce7fcffbf9409ce93a83c3fa2f9bec0ab1714dd1e459d9542"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a13-24.png",
+      "role": "lobby-export-24",
+      "character": "a13",
+      "bytes": 1717,
+      "sha256": "b8a245691ca928c0217b0889cb9008ace0f84672b2049fc39c21fbea59bc2b85"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a13-32.png",
+      "role": "lobby-export-32",
+      "character": "a13",
+      "bytes": 2690,
+      "sha256": "d36adc143217d55ea26c4bb4a5c894a8adb91bc9464f649dd3a8d334ea83ef04"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a13-48.png",
+      "role": "lobby-export-48",
+      "character": "a13",
+      "bytes": 4968,
+      "sha256": "c0d8a2e16a6fa8c0fa3b59022bb43cc8d4a4af7e311ecc37f5a1d5eec3763736"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a13-128.png",
+      "role": "preview-export-128",
+      "character": "a13",
+      "bytes": 20670,
+      "sha256": "938197fdc9a0ae80258cb29bd1c644c340a8bbeacf36878e88dea504874cb511"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a14-mallow.svg",
+      "role": "editable-base",
+      "character": "a14",
+      "bytes": 14172,
+      "sha256": "91a3e266d1736c295deae25239f933ea762ce531ca67169f55ae63f40e53a8d1"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a14.svg",
+      "role": "preferred-look",
+      "character": "a14",
+      "bytes": 14172,
+      "sha256": "13a4dcc73714330019eb80a52b0e29f4477015bd223bea6e1f274d5b1ffb46f0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a14-24.png",
+      "role": "lobby-export-24",
+      "character": "a14",
+      "bytes": 1785,
+      "sha256": "e9bb84024297d82c0d8227b0db4b9d4d0d829ec54f1e89935d016b779a857ad0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a14-32.png",
+      "role": "lobby-export-32",
+      "character": "a14",
+      "bytes": 2727,
+      "sha256": "e2f7aa937f3ba4943e3bfb70114eb1dbe13312a35e5569e9f66bc531a2b3dae7"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a14-48.png",
+      "role": "lobby-export-48",
+      "character": "a14",
+      "bytes": 5021,
+      "sha256": "314ba530cc0ce6ebd193fb6e7e5b8b8c47c2b9d7d636029eef17f428bfb8ff37"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a14-128.png",
+      "role": "preview-export-128",
+      "character": "a14",
+      "bytes": 20759,
+      "sha256": "0e78bd646581de8303fa50582deaec82f860cf7535fad6853329842db9477bbc"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a15-bramble.svg",
+      "role": "editable-base",
+      "character": "a15",
+      "bytes": 14282,
+      "sha256": "8bb9443de5dea9cae053d3a8d681048ce25aaaf373de33a388bd6fd697eb4f87"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a15.svg",
+      "role": "preferred-look",
+      "character": "a15",
+      "bytes": 14282,
+      "sha256": "66d7af83278808da14ab4022073c89de4fefbcc1fbb810ddf943703a7374caec"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a15-24.png",
+      "role": "lobby-export-24",
+      "character": "a15",
+      "bytes": 1733,
+      "sha256": "9431b9a42ffa097bada06b322588e68e45fdf0775cb7005fd92bcbe6008815c5"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a15-32.png",
+      "role": "lobby-export-32",
+      "character": "a15",
+      "bytes": 2677,
+      "sha256": "af3db570ab177bfd506637fc8ea5fcdf08b351c3f46798e3c81457ce923e8176"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a15-48.png",
+      "role": "lobby-export-48",
+      "character": "a15",
+      "bytes": 4945,
+      "sha256": "8de0c1f67b48244031db8b33ded6fb23aae73aa5d43f3c87a30dd590c5cbd69e"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a15-128.png",
+      "role": "preview-export-128",
+      "character": "a15",
+      "bytes": 20701,
+      "sha256": "493f4b6bed80b2c8a4a9f15c050b866daa61cae35d101d59fc6e5a999553fc6a"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a16-pebble.svg",
+      "role": "editable-base",
+      "character": "a16",
+      "bytes": 14369,
+      "sha256": "3c9fb43a7462250b4f11d84ba20bd1550021ad87a624448ed4e3b636ed55b241"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a16.svg",
+      "role": "preferred-look",
+      "character": "a16",
+      "bytes": 14369,
+      "sha256": "5d4e862454ecf8c402756781084efa854d2511f0965f3d9cb1e86333f58b8138"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a16-24.png",
+      "role": "lobby-export-24",
+      "character": "a16",
+      "bytes": 1756,
+      "sha256": "83c9917d2d14938b9950725b8434dc9399847a46a631b1146b9f80f3866e25b9"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a16-32.png",
+      "role": "lobby-export-32",
+      "character": "a16",
+      "bytes": 2727,
+      "sha256": "cce47d0cf60aa0eb153c01b129333e15e9a10f442648e6826bb7e5f652a1c238"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a16-48.png",
+      "role": "lobby-export-48",
+      "character": "a16",
+      "bytes": 5028,
+      "sha256": "f0fc459d12620d47b66ed89a9eb2b7250f505f6d85735aa06398ee1b3e1c1ad7"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a16-128.png",
+      "role": "preview-export-128",
+      "character": "a16",
+      "bytes": 20966,
+      "sha256": "864abf6d45eb4b26ab260815a9ea9410b9371f20991cbe023a3c4cc1b48fc6fc"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a17-sorrel.svg",
+      "role": "editable-base",
+      "character": "a17",
+      "bytes": 14579,
+      "sha256": "1093199d59da786dbdc946b3b46d3111f8960e9def79ddc3f72da989101e3b18"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a17.svg",
+      "role": "preferred-look",
+      "character": "a17",
+      "bytes": 14579,
+      "sha256": "c0ee85a164bd8a962d8a3aa3f6273842111c093d4c6c2ecc6bcf5ba5f158c657"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a17-24.png",
+      "role": "lobby-export-24",
+      "character": "a17",
+      "bytes": 1764,
+      "sha256": "a6312256a35b177d87bd32899d517bb2fda7be6ae4c4270664c8a47442632e5c"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a17-32.png",
+      "role": "lobby-export-32",
+      "character": "a17",
+      "bytes": 2744,
+      "sha256": "fdd35feb0a7b70acef46b8db36a071f362b4ca4f32c688b05eea267266d50dc7"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a17-48.png",
+      "role": "lobby-export-48",
+      "character": "a17",
+      "bytes": 5026,
+      "sha256": "4579fdeec32ae82beee5ae9faed30132607103858118c3eb97d9697b573150ca"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a17-128.png",
+      "role": "preview-export-128",
+      "character": "a17",
+      "bytes": 20801,
+      "sha256": "97a830bbed8d2969da741c6e7ac82a51bebaa92f08d27080f799d6b21fbe72aa"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a18-brook.svg",
+      "role": "editable-base",
+      "character": "a18",
+      "bytes": 14397,
+      "sha256": "6a2b9ac68946040eb150242c756e657c8160e3f1c1341ada7733b0a9c30c6aed"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a18.svg",
+      "role": "preferred-look",
+      "character": "a18",
+      "bytes": 14397,
+      "sha256": "2bdeea9c4752e0ef5748ce14d6e1956ea9dc0a83f47984daf086e875673633b7"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a18-24.png",
+      "role": "lobby-export-24",
+      "character": "a18",
+      "bytes": 1727,
+      "sha256": "ecb1f82e3a8046dc25adcd3881639161d218abbace14dc2e63d1fcfa9621dccb"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a18-32.png",
+      "role": "lobby-export-32",
+      "character": "a18",
+      "bytes": 2661,
+      "sha256": "f1f9e7b48f75dce9c7dd86c072b7c83a23e71e110031789689778d5c3ea4b30a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a18-48.png",
+      "role": "lobby-export-48",
+      "character": "a18",
+      "bytes": 4938,
+      "sha256": "215d8be5aefe5f4c0387592d21b32b8dee31d669c823638b861124f092ad36d0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a18-128.png",
+      "role": "preview-export-128",
+      "character": "a18",
+      "bytes": 20516,
+      "sha256": "7fc64987b374a8809b8406f32f9273c9fd442c54207c1b7ef8757eddbe07f05c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a19-bandit.svg",
+      "role": "editable-base",
+      "character": "a19",
+      "bytes": 14514,
+      "sha256": "5f4cb300a586ba0042b2c93ede65efb89c5e2900296ed7564b8f33de7d94ef6a"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a19.svg",
+      "role": "preferred-look",
+      "character": "a19",
+      "bytes": 14514,
+      "sha256": "5f4cb300a586ba0042b2c93ede65efb89c5e2900296ed7564b8f33de7d94ef6a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a19-24.png",
+      "role": "lobby-export-24",
+      "character": "a19",
+      "bytes": 1744,
+      "sha256": "22aba3b4571045d0a8e45d0f84e5cb1264f9dbab4fb83025629ab74c440fe71e"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a19-32.png",
+      "role": "lobby-export-32",
+      "character": "a19",
+      "bytes": 2716,
+      "sha256": "260edd3df2152b21c631520138d85a135426aac759d181c2e199288e64e39b5c"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a19-48.png",
+      "role": "lobby-export-48",
+      "character": "a19",
+      "bytes": 5081,
+      "sha256": "e61d6628ab38cbda54e55880a22a544c4bd7365676ec80403e091629ac9e0726"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a19-128.png",
+      "role": "preview-export-128",
+      "character": "a19",
+      "bytes": 21110,
+      "sha256": "71d861787c6aec0f348bcc9dd4a7b05a18bf80ae218e3b507f57e35d9ec91141"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a20-quill.svg",
+      "role": "editable-base",
+      "character": "a20",
+      "bytes": 13354,
+      "sha256": "71545c963ca87ba0ef44f7e838ff24727400eef9015709e4add5735b222ab3c2"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a20.svg",
+      "role": "preferred-look",
+      "character": "a20",
+      "bytes": 13354,
+      "sha256": "5c60e7496f7b69228542747c28990ab54731960dfcffe087ea18f5041de94846"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a20-24.png",
+      "role": "lobby-export-24",
+      "character": "a20",
+      "bytes": 1742,
+      "sha256": "3191f825d0e3c0e963b53cb3cba77155b99929f7247c197f4d145b60384b6f03"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a20-32.png",
+      "role": "lobby-export-32",
+      "character": "a20",
+      "bytes": 2717,
+      "sha256": "702f8a088cad39a06dad6771300e385de6f4981c183aecf6847ec6bdbff65a3b"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a20-48.png",
+      "role": "lobby-export-48",
+      "character": "a20",
+      "bytes": 5105,
+      "sha256": "f26f3fff2faf7094c138dfbed6f52bfa2b9032f76e1a77dceb0e420f1967f60a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a20-128.png",
+      "role": "preview-export-128",
+      "character": "a20",
+      "bytes": 21447,
+      "sha256": "ab205787f46294e27a2ad742ef7eb545f7a49df1d76980de0733e11e88373c17"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a21-bop.svg",
+      "role": "editable-base",
+      "character": "a21",
+      "bytes": 12287,
+      "sha256": "111ef0fcfd832b5e3803add23d2901e7681acccce5e7f009219fe66758173c02"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a21.svg",
+      "role": "preferred-look",
+      "character": "a21",
+      "bytes": 12287,
+      "sha256": "111ef0fcfd832b5e3803add23d2901e7681acccce5e7f009219fe66758173c02"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a21-24.png",
+      "role": "lobby-export-24",
+      "character": "a21",
+      "bytes": 1718,
+      "sha256": "2bebf529477c1060b0fd326a87a7ea28c7aa12e06299a051aa1af1e2d4e82864"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a21-32.png",
+      "role": "lobby-export-32",
+      "character": "a21",
+      "bytes": 2578,
+      "sha256": "e6869925cab0c5bc9181572001fb58f9421fae50f1e3da3cbb0a0ad944804a57"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a21-48.png",
+      "role": "lobby-export-48",
+      "character": "a21",
+      "bytes": 4804,
+      "sha256": "a368e3ab97c5c9ecd93e3b9fd3893f7446f1509d1e7fac209f657f6c28982add"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a21-128.png",
+      "role": "preview-export-128",
+      "character": "a21",
+      "bytes": 18716,
+      "sha256": "adcd44e3aa3ca95f63968063c6d37d49bd6a35671f3bd00f2ba90beb827c5cc2"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a22-vela.svg",
+      "role": "editable-base",
+      "character": "a22",
+      "bytes": 12289,
+      "sha256": "0fa57d6eae8d9fcdb646416f186b793338b756e6d84b60b9ce69adc149a03343"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a22.svg",
+      "role": "preferred-look",
+      "character": "a22",
+      "bytes": 12289,
+      "sha256": "0fa57d6eae8d9fcdb646416f186b793338b756e6d84b60b9ce69adc149a03343"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a22-24.png",
+      "role": "lobby-export-24",
+      "character": "a22",
+      "bytes": 1721,
+      "sha256": "50ee28ce1f40c35103394449ce5239104957684cf1e6f2524f0d170cd52916bc"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a22-32.png",
+      "role": "lobby-export-32",
+      "character": "a22",
+      "bytes": 2567,
+      "sha256": "e32446a5b810d41d52c09a68773c5cfc84c008aa1e7c05cb0d58f6c49471e805"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a22-48.png",
+      "role": "lobby-export-48",
+      "character": "a22",
+      "bytes": 4730,
+      "sha256": "f05ec5f9bf3f5c49805671ca161eed3c2029223d9c04164b3fb47df803490e20"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a22-128.png",
+      "role": "preview-export-128",
+      "character": "a22",
+      "bytes": 18676,
+      "sha256": "c0252af344ec75303a436f9b4b98178de6b8c29bd0d27179a7fd073bd1845dc3"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a23-pico.svg",
+      "role": "editable-base",
+      "character": "a23",
+      "bytes": 12383,
+      "sha256": "8ab35d6c536d3d67a1b9b174e04384255169214ac9e976492135c839bfd27f18"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a23.svg",
+      "role": "preferred-look",
+      "character": "a23",
+      "bytes": 12383,
+      "sha256": "8ab35d6c536d3d67a1b9b174e04384255169214ac9e976492135c839bfd27f18"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a23-24.png",
+      "role": "lobby-export-24",
+      "character": "a23",
+      "bytes": 1724,
+      "sha256": "4fed20e88fa6fa0fdb51fdbf6456487cd8b1898bf66bf709718f5b89659adf53"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a23-32.png",
+      "role": "lobby-export-32",
+      "character": "a23",
+      "bytes": 2615,
+      "sha256": "48883162f056414b72562834b12595f50bfa8da3de138f0ade3f4b5c6ec36b53"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a23-48.png",
+      "role": "lobby-export-48",
+      "character": "a23",
+      "bytes": 4812,
+      "sha256": "89eeb7bb7b972518d649f5b4744f3792d10b92da3b632606d775cfc1cd0a026c"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a23-128.png",
+      "role": "preview-export-128",
+      "character": "a23",
+      "bytes": 18887,
+      "sha256": "543e55ee2043462d429a5bcabb0ebfb93145564ac3d9090cb02d35fc19bf2ce3"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a24-halo.svg",
+      "role": "editable-base",
+      "character": "a24",
+      "bytes": 11548,
+      "sha256": "f7e6cb7d440482396511e7a22675954a2202e6d01c860d17da8095ac92d23a87"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a24.svg",
+      "role": "preferred-look",
+      "character": "a24",
+      "bytes": 11548,
+      "sha256": "f7e6cb7d440482396511e7a22675954a2202e6d01c860d17da8095ac92d23a87"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a24-24.png",
+      "role": "lobby-export-24",
+      "character": "a24",
+      "bytes": 1695,
+      "sha256": "85d0120e72012ae09cc6ffa09490bce440c7600eaa7eecaa72a303d6ce5d08e3"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a24-32.png",
+      "role": "lobby-export-32",
+      "character": "a24",
+      "bytes": 2573,
+      "sha256": "23ad9903384dbcd2eef08ea524ef53d0dc52cb835d0d8bc4fbe3db6b32274fc0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a24-48.png",
+      "role": "lobby-export-48",
+      "character": "a24",
+      "bytes": 4690,
+      "sha256": "3184502133d80d38dc63882e97575c463d831f15f22e5ebee25b91932ada8955"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a24-128.png",
+      "role": "preview-export-128",
+      "character": "a24",
+      "bytes": 18332,
+      "sha256": "f092ec60e3cb4126c1426fad2608b3ab5cc818959dfc811b356da0537dfaf950"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a25-toggle.svg",
+      "role": "editable-base",
+      "character": "a25",
+      "bytes": 12160,
+      "sha256": "0775baaa38b9123077d74d87bafacf83f2832e36165649088aba2004dc4883a6"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a25.svg",
+      "role": "preferred-look",
+      "character": "a25",
+      "bytes": 12160,
+      "sha256": "0775baaa38b9123077d74d87bafacf83f2832e36165649088aba2004dc4883a6"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a25-24.png",
+      "role": "lobby-export-24",
+      "character": "a25",
+      "bytes": 1688,
+      "sha256": "329c302555a2fbddf5ae85fb959e0d1480895c361b70f6c071b2b51611373448"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a25-32.png",
+      "role": "lobby-export-32",
+      "character": "a25",
+      "bytes": 2515,
+      "sha256": "6c2a8334c402f6295863743e3bf9676c4232277dac1206740fdf0553d9307f86"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a25-48.png",
+      "role": "lobby-export-48",
+      "character": "a25",
+      "bytes": 4586,
+      "sha256": "07d2d3e193950b5b30784d6f1e1026959fd3f0a5964b5fd45939fa2703abd709"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a25-128.png",
+      "role": "preview-export-128",
+      "character": "a25",
+      "bytes": 17901,
+      "sha256": "c07487febf81fc6a9e68e5e61d1271c639fdc9d411d5babf3bc09c2e440a515c"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a26-echo.svg",
+      "role": "editable-base",
+      "character": "a26",
+      "bytes": 12543,
+      "sha256": "05ef40d291ca522c622c0baafe145ef4259c951444abf1ac01db5850ce9d1841"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a26.svg",
+      "role": "preferred-look",
+      "character": "a26",
+      "bytes": 12543,
+      "sha256": "05ef40d291ca522c622c0baafe145ef4259c951444abf1ac01db5850ce9d1841"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a26-24.png",
+      "role": "lobby-export-24",
+      "character": "a26",
+      "bytes": 1767,
+      "sha256": "e29eaa4c1f75ecf1a35fc03187ad99537c9fea914365fa7aa6ca54c1d1d6e6b1"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a26-32.png",
+      "role": "lobby-export-32",
+      "character": "a26",
+      "bytes": 2635,
+      "sha256": "97588c81626b477e8b28930f420788546b3f410cf9057076a16955d03a24b4ae"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a26-48.png",
+      "role": "lobby-export-48",
+      "character": "a26",
+      "bytes": 4950,
+      "sha256": "17a79364a63f715acff45f8d33fd8f9f2fd5998632b3da622ab73c69a888e44a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a26-128.png",
+      "role": "preview-export-128",
+      "character": "a26",
+      "bytes": 19223,
+      "sha256": "3d904a0eee3045f269c4826e87395362d1d18ffbfc3a707f7be5ee1d6fb71c10"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a27-sprig.svg",
+      "role": "editable-base",
+      "character": "a27",
+      "bytes": 14208,
+      "sha256": "5919b5d1ae584adebafcce3e3b353e79ea6f51b88e17261a723a1be496db4ec7"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a27.svg",
+      "role": "preferred-look",
+      "character": "a27",
+      "bytes": 14208,
+      "sha256": "72cef517c330f7c77256614568187b8c3b7dcfbf2c5b6457820274b655053b52"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a27-24.png",
+      "role": "lobby-export-24",
+      "character": "a27",
+      "bytes": 1730,
+      "sha256": "07968d0f123c200ef1e36282659892fd92f2f4514c6d7904d9a2269a758844e9"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a27-32.png",
+      "role": "lobby-export-32",
+      "character": "a27",
+      "bytes": 2732,
+      "sha256": "c9603680da3dc39a974e6b1cb5c5c3eebce66db48c5e02ebe7bf2810586f03ca"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a27-48.png",
+      "role": "lobby-export-48",
+      "character": "a27",
+      "bytes": 5013,
+      "sha256": "9b9c938977e99b55232103e4f0b2b08631c4564e1e05d5da4cde9aa6044624ff"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a27-128.png",
+      "role": "preview-export-128",
+      "character": "a27",
+      "bytes": 21551,
+      "sha256": "7f3bd7cfe1f83755bb180304636c41dcbb0ffd668b4a09274badd119800d4353"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a28-nyx.svg",
+      "role": "editable-base",
+      "character": "a28",
+      "bytes": 14038,
+      "sha256": "427c37f48fd8e5792523167ab304ab611124458de0d84c4322f7bd84c5d7cc20"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a28.svg",
+      "role": "preferred-look",
+      "character": "a28",
+      "bytes": 14038,
+      "sha256": "f93e52e2885944a77ef30233cc5a2e2ad2d6ed0c180075063ffe0ea952304b46"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a28-24.png",
+      "role": "lobby-export-24",
+      "character": "a28",
+      "bytes": 1753,
+      "sha256": "1de392d1b5aa04f40b7fa35849bd143545d80dcaeb5ef3fc373e254ee3620441"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a28-32.png",
+      "role": "lobby-export-32",
+      "character": "a28",
+      "bytes": 2719,
+      "sha256": "b49ddb31217b37a5b23276238ee8151bc4f3f1165c2924d2897b85034f1f6ab0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a28-48.png",
+      "role": "lobby-export-48",
+      "character": "a28",
+      "bytes": 4866,
+      "sha256": "d7b2bc889fb808bf600548a81c1731946de32c3f1e1197e84b41b3c18145e107"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a28-128.png",
+      "role": "preview-export-128",
+      "character": "a28",
+      "bytes": 20999,
+      "sha256": "ca768fe84095895029f2b45f843c923a0d600bb1969f7e2da86064cf0a90438a"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a29-wisp.svg",
+      "role": "editable-base",
+      "character": "a29",
+      "bytes": 14460,
+      "sha256": "0dafd987ffd18db6999e2a3d02337f911cc8b4d9f7de9716c8605705d83cd5a4"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a29.svg",
+      "role": "preferred-look",
+      "character": "a29",
+      "bytes": 14460,
+      "sha256": "e70cc5115c74856b33d0916b463ec1cd91e745f66e82a4c8e85cb9ad7589f801"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a29-24.png",
+      "role": "lobby-export-24",
+      "character": "a29",
+      "bytes": 1740,
+      "sha256": "10aa46c9f420f1da380da2367bfe2171f99d498c129a63f98435a7ca65201ad0"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a29-32.png",
+      "role": "lobby-export-32",
+      "character": "a29",
+      "bytes": 2735,
+      "sha256": "2089f3c30dbfd504959f61dd5d2172a1ab4d76ad02374dd258641ad385ef4b73"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a29-48.png",
+      "role": "lobby-export-48",
+      "character": "a29",
+      "bytes": 5087,
+      "sha256": "1af2893f74ef26a125f23dda4ae31919967ac77e5462e0a44677a27a01a52405"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a29-128.png",
+      "role": "preview-export-128",
+      "character": "a29",
+      "bytes": 21874,
+      "sha256": "1503f88dcd3cb3bfaff79273ed6b541d96e2b4009ed14c7ba863e34536e57de5"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a30-ripple.svg",
+      "role": "editable-base",
+      "character": "a30",
+      "bytes": 14643,
+      "sha256": "211647bd0dd7dfb7fb30c35503305e83fc512c4f44826bc063b26ed8f05aac02"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a30.svg",
+      "role": "preferred-look",
+      "character": "a30",
+      "bytes": 14643,
+      "sha256": "2753e71d6a5bcc4e15d55bfe499fbc8cb77a327a3f5d913039e3d1395addca45"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a30-24.png",
+      "role": "lobby-export-24",
+      "character": "a30",
+      "bytes": 1748,
+      "sha256": "1e15a3320da48cd7774d393c5ae587e7d0086a2a22bb42838396567e20237229"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a30-32.png",
+      "role": "lobby-export-32",
+      "character": "a30",
+      "bytes": 2713,
+      "sha256": "d851d9e0b89d70b1e7a4b8c450db70f6e16a563af0287f07bc06f53f9dff0523"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a30-48.png",
+      "role": "lobby-export-48",
+      "character": "a30",
+      "bytes": 5032,
+      "sha256": "bc85ef75bbf13d65ce5fc1866d51fb685fd0071c61339b401201572100ffcd34"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a30-128.png",
+      "role": "preview-export-128",
+      "character": "a30",
+      "bytes": 20574,
+      "sha256": "b7d1be291c7e2247c860f71509268c9da587a3d937276c491a2b703e7aa02e4d"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a31-flick.svg",
+      "role": "editable-base",
+      "character": "a31",
+      "bytes": 14261,
+      "sha256": "f690bafdac6beb90aad9ce60c818445041cf1a25c7d553a12ae2536825d08222"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a31.svg",
+      "role": "preferred-look",
+      "character": "a31",
+      "bytes": 14261,
+      "sha256": "f690bafdac6beb90aad9ce60c818445041cf1a25c7d553a12ae2536825d08222"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a31-24.png",
+      "role": "lobby-export-24",
+      "character": "a31",
+      "bytes": 1690,
+      "sha256": "8022e63db14db5b4d5ebc5ffabcbefaff59e3ec3cb437800028f427bf25d099c"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a31-32.png",
+      "role": "lobby-export-32",
+      "character": "a31",
+      "bytes": 2638,
+      "sha256": "27744d79232c4cee7f05c96eed214e4f8b4be4b548f4798434429349dc5831c1"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a31-48.png",
+      "role": "lobby-export-48",
+      "character": "a31",
+      "bytes": 4955,
+      "sha256": "4dbc83bbcd92a6a5c7145cba7d37c6533d1fe68d006b665c04e4188d28b40cd2"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a31-128.png",
+      "role": "preview-export-128",
+      "character": "a31",
+      "bytes": 20764,
+      "sha256": "08328c1222c5b5f49702e2d79c8601a8f9298942c6d20f72784bbc1c63ddde78"
+    },
+    {
+      "path": "avatar-studio/assets/characters/a32-gale.svg",
+      "role": "editable-base",
+      "character": "a32",
+      "bytes": 12964,
+      "sha256": "90e0f00ac5652b2f67272f7458f08172ad244b95cc854e67b89bf037679e1a5d"
+    },
+    {
+      "path": "avatar-studio/assets/previews/a32.svg",
+      "role": "preferred-look",
+      "character": "a32",
+      "bytes": 12964,
+      "sha256": "992bef882b2696f6718483516437928c086fe4c754d76b84fa48aa34ceb34a88"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a32-24.png",
+      "role": "lobby-export-24",
+      "character": "a32",
+      "bytes": 1687,
+      "sha256": "b6c55ec598f5f4c3bc62171b7800faf14283a5ce4ce495c88296cf2e1b525fdc"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a32-32.png",
+      "role": "lobby-export-32",
+      "character": "a32",
+      "bytes": 2632,
+      "sha256": "5307ef309d9bedd6b23417d156cc0cfc50151af461382a9ea427e207359b8425"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a32-48.png",
+      "role": "lobby-export-48",
+      "character": "a32",
+      "bytes": 4828,
+      "sha256": "d4f0545f6f48511e9baa647176239840a4798ad428d105a40f1abe538a994f0a"
+    },
+    {
+      "path": "avatar-studio/assets/thumbnails/a32-128.png",
+      "role": "preview-export-128",
+      "character": "a32",
+      "bytes": 20751,
+      "sha256": "0ff930caa5da9d269d746121b8ba648531b7c0606416aa56db365b6fc160bdb9"
+    },
+    {
+      "path": "game-feel/assets/marine-card-back.svg",
+      "role": "approved-game-art-excerpt",
+      "bytes": 6728,
+      "sha256": "3205841d0faefb3c28b1b2778b69b70b596c3fc156f289ef9702af3d299040d7"
+    },
+    {
+      "path": "game-feel/assets/marine-fish.svg",
+      "role": "approved-game-art-excerpt",
+      "bytes": 4349,
+      "sha256": "ddc9c8e2572e7386de630bf458c7ea23275f7f427fd36dee9d7980064d6e5fca"
+    },
+    {
+      "path": "game-feel/assets/stack-card-back.svg",
+      "role": "approved-game-art-excerpt",
+      "bytes": 3435,
+      "sha256": "07b12b3912c820a0383fb516cd6f1e7b63e02d3038b1f7d807a4ab95634694f4"
+    },
+    {
+      "path": "reference/a02-issue58.svg",
+      "role": "issue58-before-study",
+      "bytes": 16523,
+      "sha256": "b640c2ebbb7579fccbe3b1fb81e1e08f2638d087d00b7e8a89b95fddc382d5d1"
+    },
+    {
+      "path": "reference/a13-issue58.svg",
+      "role": "issue58-before-study",
+      "bytes": 12257,
+      "sha256": "b8d2fd8b349adcc7d6e55880989cef98364dc4eb3a783883c613784e86d7c840"
+    },
+    {
+      "path": "reference/a19-issue58.svg",
+      "role": "issue58-before-study",
+      "bytes": 12512,
+      "sha256": "f18d261c59f8852a3b75a739668a309ff95583b5600daf753e6b4c1430f72cf2"
+    },
+    {
+      "path": "avatar-studio/assets/fallback.svg",
+      "role": "fallback-utility",
+      "bytes": 624,
+      "sha256": "bee0186432e98f1e5c5fea9910f0415cd654b1626ef9b6aaf14a50321804f223"
+    }
+  ],
+  "licensingInventory": "LICENSING-ORIGINALITY.md",
+  "renderCatalog": "avatar-studio/catalog.json",
+  "compatibility": "avatar-studio/COMPATIBILITY.csv",
+  "noProductionChanges": true,
+  "exactPaintedTextureMatch": false
+}

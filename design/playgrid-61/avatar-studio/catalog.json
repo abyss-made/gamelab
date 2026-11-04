@@ -1,0 +1,3703 @@
+{
+  "catalogVersion": 2,
+  "schemaVersion": 3,
+  "canonical": "../../../node-server/public/assets/hero-mascots.png",
+  "additionalCharacters": 32,
+  "foundationStudies": 3,
+  "globalConflicts": [
+    {
+      "hat": "not-none",
+      "accessory": "headphones",
+      "resolution": "keep-hat-reset-accessory"
+    }
+  ],
+  "characters": [
+    {
+      "id": "h01",
+      "name": "Home Gamer",
+      "family": "human",
+      "silhouette": "home-swept",
+      "asset": "assets/characters/h01-home-gamer.svg",
+      "thumbnail": "assets/thumbnails/h01-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 104,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 61 editable foundation study of owner-supplied home family",
+      "isAdditional": false,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "sunglasses",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "foundation": "swept dark hair, angled sunglasses, asymmetric smile, navy hoodie",
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/h01-24.png",
+        "32": "assets/thumbnails/h01-32.png",
+        "48": "assets/thumbnails/h01-48.png"
+      },
+      "preview": "assets/previews/h01.svg"
+    },
+    {
+      "id": "h02",
+      "name": "Home Robot",
+      "family": "robot",
+      "silhouette": "home-bubble",
+      "asset": "assets/characters/h02-home-robot.svg",
+      "thumbnail": "assets/thumbnails/h02-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 61 editable foundation study of owner-supplied home family",
+      "isAdditional": false,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "foundation": "rounded white shell, glass face, lime eyes, pill-shaped chest light",
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/h02-24.png",
+        "32": "assets/thumbnails/h02-32.png",
+        "48": "assets/thumbnails/h02-48.png"
+      },
+      "preview": "assets/previews/h02.svg"
+    },
+    {
+      "id": "h03",
+      "name": "Home Cat",
+      "family": "animal",
+      "silhouette": "home-calico",
+      "asset": "assets/characters/h03-home-cat.svg",
+      "thumbnail": "assets/thumbnails/h03-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 103,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 61 editable foundation study of owner-supplied home family",
+      "isAdditional": false,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "sunglasses",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "foundation": "orange-and-cream ears, dark sunglasses, lime bandana",
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/h03-24.png",
+        "32": "assets/thumbnails/h03-32.png",
+        "48": "assets/thumbnails/h03-48.png"
+      },
+      "preview": "assets/previews/h03.svg"
+    },
+    {
+      "id": "a01",
+      "name": "Ember",
+      "family": "human",
+      "silhouette": "swept",
+      "asset": "assets/characters/a01-ember.svg",
+      "thumbnail": "assets/thumbnails/a01-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "sunglasses",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a01-24.png",
+        "32": "assets/thumbnails/a01-32.png",
+        "48": "assets/thumbnails/a01-48.png"
+      },
+      "preview": "assets/previews/a01.svg"
+    },
+    {
+      "id": "a02",
+      "name": "Juniper",
+      "family": "human",
+      "silhouette": "curls",
+      "asset": "assets/characters/a02-juniper.svg",
+      "thumbnail": "assets/thumbnails/a02-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "cyan",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a02-24.png",
+        "32": "assets/thumbnails/a02-32.png",
+        "48": "assets/thumbnails/a02-48.png"
+      },
+      "preview": "assets/previews/a02.svg"
+    },
+    {
+      "id": "a03",
+      "name": "Sora",
+      "family": "human",
+      "silhouette": "buns",
+      "asset": "assets/characters/a03-sora.svg",
+      "thumbnail": "assets/thumbnails/a03-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "violet",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a03-24.png",
+        "32": "assets/thumbnails/a03-32.png",
+        "48": "assets/thumbnails/a03-48.png"
+      },
+      "preview": "assets/previews/a03.svg"
+    },
+    {
+      "id": "a04",
+      "name": "Orion",
+      "family": "human",
+      "silhouette": "undercut",
+      "asset": "assets/characters/a04-orion.svg",
+      "thumbnail": "assets/thumbnails/a04-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "amber",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a04-24.png",
+        "32": "assets/thumbnails/a04-32.png",
+        "48": "assets/thumbnails/a04-48.png"
+      },
+      "preview": "assets/previews/a04.svg"
+    },
+    {
+      "id": "a05",
+      "name": "Mira",
+      "family": "human",
+      "silhouette": "braids",
+      "asset": "assets/characters/a05-mira.svg",
+      "thumbnail": "assets/thumbnails/a05-128.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "rose",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a05-24.png",
+        "32": "assets/thumbnails/a05-32.png",
+        "48": "assets/thumbnails/a05-48.png"
+      },
+      "preview": "assets/previews/a05.svg"
+    },
+    {
+      "id": "a06",
+      "name": "Rowan",
+      "family": "human",
+      "silhouette": "waves",
+      "asset": "assets/characters/a06-rowan.svg",
+      "thumbnail": "assets/thumbnails/a06-128.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "mint",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a06-24.png",
+        "32": "assets/thumbnails/a06-32.png",
+        "48": "assets/thumbnails/a06-48.png"
+      },
+      "preview": "assets/previews/a06.svg"
+    },
+    {
+      "id": "a07",
+      "name": "Zuri",
+      "family": "human",
+      "silhouette": "puff",
+      "asset": "assets/characters/a07-zuri.svg",
+      "thumbnail": "assets/thumbnails/a07-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a07-24.png",
+        "32": "assets/thumbnails/a07-32.png",
+        "48": "assets/thumbnails/a07-48.png"
+      },
+      "preview": "assets/previews/a07.svg"
+    },
+    {
+      "id": "a08",
+      "name": "Aster",
+      "family": "human",
+      "silhouette": "pony",
+      "asset": "assets/characters/a08-aster.svg",
+      "thumbnail": "assets/thumbnails/a08-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 21,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 101,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 0,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "hoodie-stitch",
+      "defaultLook": {
+        "palette": "cyan",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a08-24.png",
+        "32": "assets/thumbnails/a08-32.png",
+        "48": "assets/thumbnails/a08-48.png"
+      },
+      "preview": "assets/previews/a08.svg"
+    },
+    {
+      "id": "a09",
+      "name": "Cinder",
+      "family": "animal",
+      "silhouette": "fox",
+      "asset": "assets/characters/a09-cinder.svg",
+      "thumbnail": "assets/thumbnails/a09-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "violet",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "sunglasses",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a09-24.png",
+        "32": "assets/thumbnails/a09-32.png",
+        "48": "assets/thumbnails/a09-48.png"
+      },
+      "preview": "assets/previews/a09.svg"
+    },
+    {
+      "id": "a10",
+      "name": "Clover",
+      "family": "animal",
+      "silhouette": "calico",
+      "asset": "assets/characters/a10-clover.svg",
+      "thumbnail": "assets/thumbnails/a10-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "amber",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "sunglasses",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a10-24.png",
+        "32": "assets/thumbnails/a10-32.png",
+        "48": "assets/thumbnails/a10-48.png"
+      },
+      "preview": "assets/previews/a10.svg"
+    },
+    {
+      "id": "a11",
+      "name": "Pippin",
+      "family": "animal",
+      "silhouette": "tabby",
+      "asset": "assets/characters/a11-pippin.svg",
+      "thumbnail": "assets/thumbnails/a11-128.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "rose",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a11-24.png",
+        "32": "assets/thumbnails/a11-32.png",
+        "48": "assets/thumbnails/a11-48.png"
+      },
+      "preview": "assets/previews/a11.svg"
+    },
+    {
+      "id": "a12",
+      "name": "Tundra",
+      "family": "animal",
+      "silhouette": "husky",
+      "asset": "assets/characters/a12-tundra.svg",
+      "thumbnail": "assets/thumbnails/a12-128.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "mint",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a12-24.png",
+        "32": "assets/thumbnails/a12-32.png",
+        "48": "assets/thumbnails/a12-48.png"
+      },
+      "preview": "assets/previews/a12.svg"
+    },
+    {
+      "id": "a13",
+      "name": "Maple",
+      "family": "animal",
+      "silhouette": "shiba",
+      "asset": "assets/characters/a13-maple.svg",
+      "thumbnail": "assets/thumbnails/a13-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a13-24.png",
+        "32": "assets/thumbnails/a13-32.png",
+        "48": "assets/thumbnails/a13-48.png"
+      },
+      "preview": "assets/previews/a13.svg"
+    },
+    {
+      "id": "a14",
+      "name": "Mallow",
+      "family": "animal",
+      "silhouette": "rabbit",
+      "asset": "assets/characters/a14-mallow.svg",
+      "thumbnail": "assets/thumbnails/a14-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "cyan",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a14-24.png",
+        "32": "assets/thumbnails/a14-32.png",
+        "48": "assets/thumbnails/a14-48.png"
+      },
+      "preview": "assets/previews/a14.svg"
+    },
+    {
+      "id": "a15",
+      "name": "Bramble",
+      "family": "animal",
+      "silhouette": "bear",
+      "asset": "assets/characters/a15-bramble.svg",
+      "thumbnail": "assets/thumbnails/a15-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "violet",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a15-24.png",
+        "32": "assets/thumbnails/a15-32.png",
+        "48": "assets/thumbnails/a15-48.png"
+      },
+      "preview": "assets/previews/a15.svg"
+    },
+    {
+      "id": "a16",
+      "name": "Pebble",
+      "family": "animal",
+      "silhouette": "panda",
+      "asset": "assets/characters/a16-pebble.svg",
+      "thumbnail": "assets/thumbnails/a16-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "amber",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a16-24.png",
+        "32": "assets/thumbnails/a16-32.png",
+        "48": "assets/thumbnails/a16-48.png"
+      },
+      "preview": "assets/previews/a16.svg"
+    },
+    {
+      "id": "a17",
+      "name": "Sorrel",
+      "family": "animal",
+      "silhouette": "redpanda",
+      "asset": "assets/characters/a17-sorrel.svg",
+      "thumbnail": "assets/thumbnails/a17-128.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "rose",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a17-24.png",
+        "32": "assets/thumbnails/a17-32.png",
+        "48": "assets/thumbnails/a17-48.png"
+      },
+      "preview": "assets/previews/a17.svg"
+    },
+    {
+      "id": "a18",
+      "name": "Brook",
+      "family": "animal",
+      "silhouette": "otter",
+      "asset": "assets/characters/a18-brook.svg",
+      "thumbnail": "assets/thumbnails/a18-128.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "mint",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a18-24.png",
+        "32": "assets/thumbnails/a18-32.png",
+        "48": "assets/thumbnails/a18-48.png"
+      },
+      "preview": "assets/previews/a18.svg"
+    },
+    {
+      "id": "a19",
+      "name": "Bandit",
+      "family": "animal",
+      "silhouette": "raccoon",
+      "asset": "assets/characters/a19-bandit.svg",
+      "thumbnail": "assets/thumbnails/a19-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a19-24.png",
+        "32": "assets/thumbnails/a19-32.png",
+        "48": "assets/thumbnails/a19-48.png"
+      },
+      "preview": "assets/previews/a19.svg"
+    },
+    {
+      "id": "a20",
+      "name": "Quill",
+      "family": "animal",
+      "silhouette": "owl",
+      "asset": "assets/characters/a20-quill.svg",
+      "thumbnail": "assets/thumbnails/a20-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 2,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "cyan",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a20-24.png",
+        "32": "assets/thumbnails/a20-32.png",
+        "48": "assets/thumbnails/a20-48.png"
+      },
+      "preview": "assets/previews/a20.svg"
+    },
+    {
+      "id": "a21",
+      "name": "Bop",
+      "family": "robot",
+      "silhouette": "bubble",
+      "asset": "assets/characters/a21-bop.svg",
+      "thumbnail": "assets/thumbnails/a21-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a21-24.png",
+        "32": "assets/thumbnails/a21-32.png",
+        "48": "assets/thumbnails/a21-48.png"
+      },
+      "preview": "assets/previews/a21.svg"
+    },
+    {
+      "id": "a22",
+      "name": "Vela",
+      "family": "robot",
+      "silhouette": "wide-visor",
+      "asset": "assets/characters/a22-vela.svg",
+      "thumbnail": "assets/thumbnails/a22-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a22-24.png",
+        "32": "assets/thumbnails/a22-32.png",
+        "48": "assets/thumbnails/a22-48.png"
+      },
+      "preview": "assets/previews/a22.svg"
+    },
+    {
+      "id": "a23",
+      "name": "Pico",
+      "family": "robot",
+      "silhouette": "antenna",
+      "asset": "assets/characters/a23-pico.svg",
+      "thumbnail": "assets/thumbnails/a23-128.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a23-24.png",
+        "32": "assets/thumbnails/a23-32.png",
+        "48": "assets/thumbnails/a23-48.png"
+      },
+      "preview": "assets/previews/a23.svg"
+    },
+    {
+      "id": "a24",
+      "name": "Halo",
+      "family": "robot",
+      "silhouette": "cyclops",
+      "asset": "assets/characters/a24-halo.svg",
+      "thumbnail": "assets/thumbnails/a24-128.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a24-24.png",
+        "32": "assets/thumbnails/a24-32.png",
+        "48": "assets/thumbnails/a24-48.png"
+      },
+      "preview": "assets/previews/a24.svg"
+    },
+    {
+      "id": "a25",
+      "name": "Toggle",
+      "family": "robot",
+      "silhouette": "box",
+      "asset": "assets/characters/a25-toggle.svg",
+      "thumbnail": "assets/thumbnails/a25-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a25-24.png",
+        "32": "assets/thumbnails/a25-32.png",
+        "48": "assets/thumbnails/a25-48.png"
+      },
+      "preview": "assets/previews/a25.svg"
+    },
+    {
+      "id": "a26",
+      "name": "Echo",
+      "family": "robot",
+      "silhouette": "roundears",
+      "asset": "assets/characters/a26-echo.svg",
+      "thumbnail": "assets/thumbnails/a26-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 39,
+          "y": 56,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "panel-marks",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a26-24.png",
+        "32": "assets/thumbnails/a26-32.png",
+        "48": "assets/thumbnails/a26-48.png"
+      },
+      "preview": "assets/previews/a26.svg"
+    },
+    {
+      "id": "a27",
+      "name": "Sprig",
+      "family": "fantasy",
+      "silhouette": "dragon",
+      "asset": "assets/characters/a27-sprig.svg",
+      "thumbnail": "assets/thumbnails/a27-128.png",
+      "defaultAccent": "#b49aee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "violet",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a27-24.png",
+        "32": "assets/thumbnails/a27-32.png",
+        "48": "assets/thumbnails/a27-48.png"
+      },
+      "preview": "assets/previews/a27.svg"
+    },
+    {
+      "id": "a28",
+      "name": "Nyx",
+      "family": "fantasy",
+      "silhouette": "bat",
+      "asset": "assets/characters/a28-nyx.svg",
+      "thumbnail": "assets/thumbnails/a28-128.png",
+      "defaultAccent": "#f2b16b",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "amber",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a28-24.png",
+        "32": "assets/thumbnails/a28-32.png",
+        "48": "assets/thumbnails/a28-48.png"
+      },
+      "preview": "assets/previews/a28.svg"
+    },
+    {
+      "id": "a29",
+      "name": "Wisp",
+      "family": "fantasy",
+      "silhouette": "cloud",
+      "asset": "assets/characters/a29-wisp.svg",
+      "thumbnail": "assets/thumbnails/a29-128.png",
+      "defaultAccent": "#e7a2bc",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf",
+          "headphones"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "rose",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a29-24.png",
+        "32": "assets/thumbnails/a29-32.png",
+        "48": "assets/thumbnails/a29-48.png"
+      },
+      "preview": "assets/previews/a29.svg"
+    },
+    {
+      "id": "a30",
+      "name": "Ripple",
+      "family": "fantasy",
+      "silhouette": "axolotl",
+      "asset": "assets/characters/a30-ripple.svg",
+      "thumbnail": "assets/thumbnails/a30-128.png",
+      "defaultAccent": "#a4dba8",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "beanie",
+          "cap",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "mint",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a30-24.png",
+        "32": "assets/thumbnails/a30-32.png",
+        "48": "assets/thumbnails/a30-48.png"
+      },
+      "preview": "assets/previews/a30.svg"
+    },
+    {
+      "id": "a31",
+      "name": "Flick",
+      "family": "fantasy",
+      "silhouette": "salamander",
+      "asset": "assets/characters/a31-flick.svg",
+      "thumbnail": "assets/thumbnails/a31-128.png",
+      "defaultAccent": "#b7ff04",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "lime",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a31-24.png",
+        "32": "assets/thumbnails/a31-32.png",
+        "48": "assets/thumbnails/a31-48.png"
+      },
+      "preview": "assets/previews/a31.svg"
+    },
+    {
+      "id": "a32",
+      "name": "Gale",
+      "family": "fantasy",
+      "silhouette": "griffin",
+      "asset": "assets/characters/a32-gale.svg",
+      "thumbnail": "assets/thumbnails/a32-128.png",
+      "defaultAccent": "#62d5ee",
+      "layers": [
+        "backdrop",
+        "body",
+        "head-back",
+        "face",
+        "markings",
+        "eyes",
+        "mouth",
+        "hair-front",
+        "rim-light",
+        "hat",
+        "glasses",
+        "accessory",
+        "detail"
+      ],
+      "compatibility": {
+        "hat": [
+          "none",
+          "crown"
+        ],
+        "glasses": [
+          "none",
+          "sunglasses",
+          "round"
+        ],
+        "accessory": [
+          "none",
+          "scarf"
+        ],
+        "expression": [
+          "smile",
+          "joy",
+          "focused",
+          "surprised",
+          "sad"
+        ],
+        "eyes": [
+          "default",
+          "bright",
+          "sleepy"
+        ],
+        "detail": [
+          "signature",
+          "clean"
+        ]
+      },
+      "anchors": {
+        "hat": {
+          "x": 54,
+          "y": 24,
+          "width": 150,
+          "height": 90
+        },
+        "glasses": {
+          "x": 56,
+          "y": 98,
+          "width": 143,
+          "height": 57
+        },
+        "accessory": {
+          "x": 38,
+          "y": 49,
+          "width": 180,
+          "height": 130
+        },
+        "scarf": {
+          "x": 56,
+          "y": 179,
+          "width": 150,
+          "height": 75
+        }
+      },
+      "fallback": {
+        "e": 3,
+        "c": 3
+      },
+      "revision": 2,
+      "origin": "Issue 58 original base, refined in Issue 61",
+      "isAdditional": true,
+      "detailKind": "scarf-pin",
+      "defaultLook": {
+        "palette": "cyan",
+        "expression": "smile",
+        "eyes": "default",
+        "hat": "none",
+        "glasses": "none",
+        "accessory": "none",
+        "detail": "signature"
+      },
+      "lobbyThumbnails": {
+        "24": "assets/thumbnails/a32-24.png",
+        "32": "assets/thumbnails/a32-32.png",
+        "48": "assets/thumbnails/a32-48.png"
+      },
+      "preview": "assets/previews/a32.svg"
+    }
+  ]
+}

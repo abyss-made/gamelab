@@ -1,0 +1,140 @@
+{
+  "designOnly": true,
+  "reviewControlsAreNotProduct": true,
+  "components": [
+    {
+      "id": "pool",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=pool",
+      "states": [
+        "aim",
+        "power",
+        "drafted",
+        "recorded-replay",
+        "elapsed-resume",
+        "settled",
+        "reconnect"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#pool"
+    },
+    {
+      "id": "colorstack",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=colorstack",
+      "states": [
+        "long-hand",
+        "expanded",
+        "unavailable",
+        "wild",
+        "refresh",
+        "reverse",
+        "skip",
+        "draw-two"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#colorstack"
+    },
+    {
+      "id": "gofish",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=gofish",
+      "states": [
+        "rank",
+        "target",
+        "pending",
+        "book",
+        "duplicate-view",
+        "ace-14",
+        "unchanged-view"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#gofish"
+    },
+    {
+      "id": "ludo",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=ludo",
+      "states": [
+        "shared-safe-cell",
+        "legal-token",
+        "unavailable-token",
+        "same-roll"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#ludo"
+    },
+    {
+      "id": "tycoon",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=tycoon",
+      "states": [
+        "offer-summary",
+        "review",
+        "unavailable-mid-review",
+        "draft-accept"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#tycoon"
+    },
+    {
+      "id": "golf",
+      "source": "game-feel/components.js",
+      "controller": "game-feel/feel.js",
+      "prototype": "game-feel/index.html?game=golf",
+      "states": [
+        "aim",
+        "loupe",
+        "pointer-cancel",
+        "fine-keyboard",
+        "draft",
+        "recorded-replay"
+      ],
+      "spec": "GAME-FEEL-DELTAS.md#golf"
+    }
+  ],
+  "creator": {
+    "source": "avatar-studio/studio2.js",
+    "renderer": "avatar-studio/renderer.js",
+    "styles": [
+      "avatar-studio/foundation.css",
+      "avatar-studio/studio2.css"
+    ],
+    "states": [
+      "base",
+      "looks",
+      "reactions",
+      "classic",
+      "empty",
+      "asset-failure",
+      "storage-failure",
+      "unavailable-fit",
+      "unsaved-exit",
+      "confirm",
+      "saved",
+      "loading"
+    ],
+    "viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        360,
+        740
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1024,
+        768
+      ]
+    ]
+  }
+}

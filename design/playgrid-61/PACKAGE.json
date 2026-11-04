@@ -1,0 +1,13 @@
+{
+  "archive": "playgrid-61-design.zip",
+  "bytes": 28613636,
+  "sha256": "05061887d641569e83b4bf5b71deef16435c5eb84629e059775cea6a653dd1f9",
+  "designFiles": 349,
+  "canonicalAssets": 5,
+  "productionCodeIncluded": false,
+  "baseCount": {
+    "additionalRefined": 32,
+    "homeFoundationStudies": 3
+  },
+  "screenshotCount": 88
+}
