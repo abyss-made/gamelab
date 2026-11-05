@@ -20,6 +20,8 @@ function newCode() {
 }
 const newId = () => crypto.randomBytes(6).toString('hex');
 
+const { normalizeV3 } = require('./avatarv3');
+
 function cleanProfile(p) {
   p = p && typeof p === 'object' ? p : {};
   const a = p.avatar && typeof p.avatar === 'object' ? p.avatar : {};
@@ -28,6 +30,8 @@ function cleanProfile(p) {
     avatar: {
       e: clampInt(a.e, 0, config.AVATAR_EMOJIS - 1, 0),
       c: clampInt(a.c, 0, config.AVATAR_COLORS - 1, 0),
+      // Optional Avatar Studio config; old clients omit it and keep the e/c fallback.
+      ...((v3) => (v3 ? { v3 } : {}))(normalizeV3(a.v3)),
     },
   };
 }
