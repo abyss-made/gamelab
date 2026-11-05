@@ -367,3 +367,27 @@
 .pck .ttt-status { color: #e4efe6; }
 .pck .board-actions .btn { min-height: 44px; }
 @media (max-width: 600px) { .pck { padding: 8px; } .pck .ck-board { padding: 8px; max-width: 100%; } }
+
+/* ---------- Tic Tac Toe · Cross & Circle ceramic ---------- */
+.pttt { grid-template-columns: minmax(0, 1fr); min-width: 0; background: radial-gradient(ellipse at 50% 35%, #24434d, #0b1d27 85%); border-radius: 22px; padding: 14px; }
+.pttt .b2-players { background: transparent; border: 0; justify-content: space-between; }
+.pttt .b2-player { background: #10262ecc; border: 1px solid #3f5f6655; border-radius: 14px; }
+.pttt .b2-player.active { border-color: #b8e08a; }
+.pttt .ttt-board { width: min(100%, 500px, calc(100svh - 330px)); aspect-ratio: 1; margin: 6px auto; padding: 20px; gap: 14px; border-radius: 22px; background: linear-gradient(#e8dcc0, #cdbf9f); box-shadow: 0 0 0 3px #f1e8d2, 0 10px 0 #a99c7c, 0 22px 34px #0007; }
+.pttt .ttt-cell { border: 0; border-radius: 12px; background: linear-gradient(#cfd2c0, #c2c6b3); box-shadow: inset 0 0 0 1px #ffffff55, 0 4px 0 #9fa392; display: grid; place-items: center; position: relative; }
+.pttt .ttt-cell:not(:disabled)::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #8d9285; }
+.pttt .ttt-cell:not(:disabled):hover { background: linear-gradient(#e2e4d4, #d3d6c4); }
+.pttt .ttt-cell:focus-visible { outline: 3px solid #d6ff8b; outline-offset: 3px; }
+.pttt .ttt-cell.m1, .pttt .ttt-cell.m2 { background: linear-gradient(#fffaea, #f1e7cf); box-shadow: inset 0 0 0 1px #fff, 0 4px 0 #b9ae92; }
+.pttt .ttt-mark { width: 62%; height: 62%; fill: none; stroke-linecap: round; filter: drop-shadow(0 3px 0 #0000001f); }
+.pttt .m1 .ttt-mark { stroke: #517f9b; stroke-width: 18; }
+.pttt .m2 .ttt-mark { stroke: #d78073; stroke-width: 16; }
+.pttt .ttt-cell.new .ttt-mark { animation: pttt-stamp .22s ease-out; }
+.pttt .ttt-cell.win { background: linear-gradient(#f3f8de, #e1ecc0); box-shadow: inset 0 0 0 3px #9ccf6b, 0 4px 0 #8aa65f; }
+@keyframes pttt-stamp { from { transform: scale(1.35); opacity: .2; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pttt .ttt-cell.new .ttt-mark { animation: none; } }
+@media (max-width: 600px) { .pttt { padding: 8px; } .pttt .ttt-board { padding: 12px; gap: 10px; } }
+.ttt-board.small.done .ttt-mark { width: 62%; height: 62%; fill: none; stroke-linecap: round; }
+.ttt-board.small.done .m1 .ttt-mark { stroke: #517f9b; stroke-width: 18; } .ttt-board.small.done .m2 .ttt-mark { stroke: #d78073; stroke-width: 16; }
+.pttt .b2-players, .pck .b2-players, .pl .b2-players { display: flex; flex-wrap: nowrap; gap: 10px; }
+.pttt .b2-players > .b2-player, .pck .b2-players > .b2-player, .pl .b2-players > .b2-player { flex: 1 1 0; max-width: 280px; min-width: 0; }

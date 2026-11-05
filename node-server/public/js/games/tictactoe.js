@@ -15,7 +15,9 @@ GameUI.tictactoe = (() => {
         const mark = v ? (v === 1 ? "X" : "O") : "";
         const cls = ["ttt-cell", v ? "m" + v : "", win.has(i) ? "win" : "", last === i ? "new" : ""].join(" ");
         const label = `Row ${Math.floor(i / 3) + 1}, column ${(i % 3) + 1}: ${mark || "empty"}`;
-        return `<button type="button" class="${cls}" data-cell="${i}" aria-label="${label}" ${playable && !v ? "" : "disabled"}>${mark}</button>`;
+        // original ceramic stamp marks (vector), with the letter kept for screen readers via the label
+        const art = v === 1 ? '<svg class="ttt-mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M18 18L78 78M78 18L18 78"/></svg>' : v === 2 ? '<svg class="ttt-mark" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="31"/></svg>' : "";
+        return `<button type="button" class="${cls}" data-cell="${i}" aria-label="${label}" ${playable && !v ? "" : "disabled"}>${art}</button>`;
       })
       .join("");
   }
@@ -23,7 +25,7 @@ GameUI.tictactoe = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 ttt";
+    root.className = "b2 ttt pttt";
     root.innerHTML = `<div class="b2-players card" id="ttt-players"></div>
       <div class="ttt-status" id="ttt-status" aria-live="polite"></div>
       <div class="ttt-board" id="ttt-board" role="group" aria-label="Tic Tac Toe board"></div>`;
