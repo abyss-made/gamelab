@@ -575,3 +575,5 @@
 .pcs .pcs-fan.scroll .pcs-card { scroll-snap-align: start; }
 .bs .pbs-chart .bs-cell .pbs-mark { z-index: 3; }
 .bs .pbs-chart .bs-cell.miss .pbs-mark { z-index: 3; }
+.pgf .pgf-hand.scroll { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+.pgf .pgf-hand.scroll .pgf-card { scroll-snap-align: start; }

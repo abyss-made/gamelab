@@ -259,6 +259,18 @@ async function createRoom(page, game) {
               GameUI.gofish.update(window.App.S);
               return { seededNew, aceLabel, sent: sent.length, sentRank: sent[0] && sent[0][1] && sent[0][1].rank, pendingText, lockedAfterAsk, stillPending, dupNew, newBooks, cleared };
             });
+            const gfLong = await page.evaluate(() => {
+              const st = JSON.parse(JSON.stringify(window.App.S));
+              st.game.hand = Array.from({ length: 24 }, (_, i) => ({ r: 2 + (i % 13), s: 'SHDC'[i % 4] }));
+              GameUI.gofish.update(st);
+              const hand = document.querySelector('#gf-hand');
+              const last = hand.lastElementChild;
+              last.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+              const hr = hand.getBoundingClientRect(), lr = last.getBoundingClientRect();
+              GameUI.gofish.update(window.App.S);
+              return lr.right <= hr.right + 1 && lr.left >= hr.left - 1;
+            });
+            ok(gfLong, `${t}: a 24-card Go Fish hand keeps every card reachable`);
             ok(arr.aceLabel === 'A', `${t}: rank 14 is labelled Ace (A)`);
             ok(arr.seededNew === 0, `${t}: existing books are seeded silently on first view`);
             ok(arr.sent === 1 && arr.sentRank === 14, `${t}: Ask sends the chosen rank once`);

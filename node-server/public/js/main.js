@@ -405,10 +405,18 @@
     }).catch(() => { studio.note = "Avatar Studio could not load. Your current avatar is unchanged."; renderProfiles(); });
   }
   // In a room, a saved look is sent to the server (validated there) so others see it now.
+  // Rate-limited saves are retried automatically (always with the latest saved look) until accepted.
+  let avatarRetry = 0;
   function syncAvatar() {
+    clearTimeout(avatarRetry);
     if (typeof S === "undefined" || !S || !S.code) return;
     socket.emit("setAvatar", profile.avatar.v3 || null, (res) => {
-      if (res && res.error && res.error !== "room") { studio.note = res.error === "slow" ? "Saved on this device. Your party will see it after a moment; try again shortly." : "Saved on this device, but the party could not accept that look."; renderProfiles(); }
+      if (!res || !res.error || res.error === "room") return;
+      if (res.error === "slow") {
+        studio.note = "Saved on this device. Updating your party in a moment…";
+        avatarRetry = setTimeout(syncAvatar, 2200);
+      } else studio.note = "Saved on this device, but the party could not accept that look.";
+      renderProfiles();
     });
   }
   const studioDirty = () => !!studio.draft && JSON.stringify(AV.normalize(profile.avatar.v3) || null) !== JSON.stringify(studio.draft);

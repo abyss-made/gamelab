@@ -87,6 +87,21 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         const burst = await page.evaluate(async () => { const out = []; for (let i = 0; i < 5; i++) out.push(await new Promise((r) => App.socket.emit('setAvatar', null, r))); return out.map((x) => x.error || 'ok'); });
         ok(burst.includes('slow'), `${t}: avatar updates are rate limited (${burst.join(',')})`);
         ok(await page.evaluate(() => { const me = App.S.players.find((x) => x.id === App.S.you); return Number.isInteger(me.avatar.e) && Number.isInteger(me.avatar.c); }), `${t}: the classic e/c fallback is always kept`);
+        // A save that hits the rate limit is retried automatically and still reaches the party.
+        const pageId = await page.evaluate(() => App.S.you);
+        await page.evaluate(() => {
+          const p = JSON.parse(localStorage.getItem('pg_profile'));
+          p.avatar.v3 = { v: 3, id: 'a09', palette: 'rose', expression: 'smile', eyes: 'default', hat: 'none', glasses: 'none', accessory: 'none', detail: 'clean' };
+          localStorage.setItem('pg_profile', JSON.stringify(p));
+        });
+        await page.click('#settings-btn');
+        await page.click('#modal [data-view="profile"]');
+        if (await page.$('#modal [data-studio="open"]')) await page.click('#modal [data-studio="open"]');
+        await page.waitForSelector('#modal [data-studio-field="id"]');
+        await page.selectOption('#modal [data-studio-field="id"]', 'a11');
+        await page.click('#modal [data-studio="save"]'); // bucket is empty from the burst above -> 'slow' -> retry
+        await hostPage.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a11'; }, pageId, { timeout: 9000 })
+          .then(() => ok(true, `${t}: a rate-limited save is retried and reaches the party`), () => ok(false, `${t}: a rate-limited save is retried and reaches the party`));
       }
       ok(errors.length === 0, `${t}: no page errors${errors.length ? ' - ' + errors[0] : ''}`);
       await hostPage.context().close();

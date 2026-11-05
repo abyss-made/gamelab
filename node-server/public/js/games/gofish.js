@@ -130,8 +130,11 @@ GameUI.gofish = (() => {
     const cards = [...hand.querySelectorAll(".pgf-card")];
     if (cards.length < 2) return;
     const w = cards[0].offsetWidth;
-    const overlap = Math.max(-12, Math.min(w * 0.7, (cards.length * w - (hand.clientWidth - 24)) / (cards.length - 1)));
+    const need = (cards.length * w - (hand.clientWidth - 24)) / (cards.length - 1);
+    const overlap = Math.max(-12, Math.min(w * 0.7, need));
     cards.forEach((c, i) => { c.style.marginLeft = i ? `${-overlap}px` : "0"; });
+    // Hands too long even at the overlap cap scroll horizontally so every card stays reachable.
+    hand.classList.toggle("scroll", need > w * 0.7);
   }
 
   function unmount() {
