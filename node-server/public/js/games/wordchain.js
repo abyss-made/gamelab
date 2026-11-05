@@ -12,7 +12,7 @@ GameUI.wordchain = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 wc";
+    root.className = "b2 wc pwc";
     root.innerHTML = `
       <div class="b2-players card" id="wc-players"></div>
       <div class="card wc-main">

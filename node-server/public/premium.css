@@ -439,3 +439,63 @@
 .dg .dg-top { background: #10292f; border-color: #2c4c52; }
 .dg .dg-top .dg-word { letter-spacing: .04em; }
 .dg .dg-overlay .card, .dg .dg-overlay > div { background: #10292fee; border-color: #3d5c60; }
+
+/* ---------- shared: premium word/party rooms ---------- */
+.pws, .ptv, .pwc, .pcat, .ptel, .pbf, .pimp { grid-template-columns: minmax(0, 1fr); min-width: 0; border-radius: 22px; padding: 16px; }
+.pws .b2-players, .ptv .b2-players, .pwc .b2-players, .pcat .b2-players, .ptel .b2-players, .pbf .b2-players, .pimp .b2-players { background: transparent; border: 0; justify-content: center; }
+.pws .b2-player, .ptv .b2-player, .pwc .b2-player, .pcat .b2-player, .ptel .b2-player, .pbf .b2-player, .pimp .b2-player { background: #0b1d2acc; border: 1px solid #ffffff1f; border-radius: 30px; padding: 6px 14px 6px 6px; }
+.pws .b2-player.active, .ptv .b2-player.active, .pwc .b2-player.active, .pcat .b2-player.active, .ptel .b2-player.active, .pbf .b2-player.active, .pimp .b2-player.active { border-color: #b8e08a; }
+.pws > .card:not(.b2-players), .ptv > .card:not(.b2-players), .pwc > .card:not(.b2-players), .pcat > .card:not(.b2-players), .ptel > .card:not(.b2-players), .pbf > .card:not(.b2-players), .pimp > .card:not(.b2-players) { background: transparent; border: 0; box-shadow: none; }
+
+/* ---------- Word Scramble · Letterworks ---------- */
+.pws { background: radial-gradient(ellipse at 50% 35%, #2d6a64, #0d2a2e 85%); }
+.pws .ws-main { padding: 26px 10px 30px; }
+.pws .hl-round { letter-spacing: 2px; font-size: 12px; text-transform: uppercase; color: #cfe2da; }
+.pws .ws-tiles { position: relative; gap: 12px; padding: 0 24px 18px; margin: 18px auto 26px; }
+.pws .ws-tiles::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; border-radius: 7px; background: #143034; box-shadow: inset 0 2px 4px #0008; }
+.pws .ws-tile { position: relative; z-index: 1; width: clamp(48px, 9vw, 96px); height: clamp(52px, 10vw, 104px); font-size: clamp(28px, 5vw, 56px); border-radius: 10px; color: #16353a; background: linear-gradient(145deg, #fbf3dc, #e6d8b4); border: 1px solid #fff6dc; box-shadow: inset 0 0 0 4px #ffffff55, inset 0 0 0 5px #d8c79f, 0 6px 0 #b9a77c, 0 10px 14px #0006; transform: rotate(var(--r, 0deg)); }
+.pws .ws-tile:nth-child(odd) { --r: -2deg; } .pws .ws-tile:nth-child(3n) { --r: 2deg; }
+.pws .ws-tile.ok { background: linear-gradient(145deg, #e9f7d3, #c6e3a0); }
+.pws .ws-form { max-width: 800px; gap: 12px; }
+.pws .ws-form input { min-height: 52px; font-size: 17px; background: #0d2228; border-color: #3f6466; }
+.pws .ws-form .btn { min-width: 120px; min-height: 52px; }
+.pws .hl-status { color: #cfe2da; }
+
+/* ---------- Trivia Blitz · Orbit Quiz ---------- */
+.ptv { background: radial-gradient(ellipse at 50% 25%, #344a96, #131f4a 85%); }
+.ptv .tv-main { padding: 26px 6px 18px; }
+.ptv .hl-round { letter-spacing: 2.5px; font-size: 11px; text-transform: uppercase; color: #c4cdf0; }
+.ptv .tv-q { font-size: clamp(24px, 3.4vw, 46px); line-height: 1.12; letter-spacing: -1px; max-width: 760px; margin: 14px auto 26px; color: #f4f6ff; }
+.ptv .tv-choices { gap: 14px; max-width: 1060px; }
+.ptv .tv-choice { min-height: 84px; justify-content: flex-start; gap: 18px; padding: 0 24px; font-size: clamp(16px, 1.8vw, 24px); font-weight: 650; color: #fff; border: 1px solid #ffffff33; border-radius: 14px; box-shadow: inset 0 1px 0 #ffffff33, 0 6px 0 #00000033; text-align: left; }
+.ptv .tv-choice:nth-child(1) { background: linear-gradient(90deg, #c9636f, #a9566f); }
+.ptv .tv-choice:nth-child(2) { background: linear-gradient(90deg, #5689c9, #3f6fae); }
+.ptv .tv-choice:nth-child(3) { background: linear-gradient(90deg, #a68a3f, #86703c); }
+.ptv .tv-choice:nth-child(4) { background: linear-gradient(90deg, #3f8b88, #2b6d6e); }
+.ptv .tv-choice kbd { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 50%; border: 1px solid #ffffff99; background: #ffffff1a; color: #fff; font: 600 15px Inter, sans-serif; }
+.ptv .tv-choice.picked { outline: 3px solid #d6ff8b; outline-offset: 2px; }
+.ptv .tv-choice.right { outline: 3px solid #d6ff8b; outline-offset: 2px; filter: saturate(1.2); }
+.ptv .tv-choice.right::after { content: "Correct"; margin-left: auto; font-size: 13px; padding: 4px 10px; border-radius: 20px; background: #d6ff8b; color: #12200c; }
+.ptv .tv-choice.wrong::after { content: "Your pick"; margin-left: auto; font-size: 13px; padding: 4px 10px; border-radius: 20px; background: #ffffffcc; color: #3a1c22; }
+.ptv .tv-choice.dim { opacity: .45; }
+.ptv .tv-choice:disabled { opacity: 1; cursor: default; }
+.ptv .tv-choice.dim:disabled { opacity: .45; }
+.ptv .hl-status { color: #c4cdf0; }
+@media (max-width: 600px) { .ptv .tv-choice { min-height: 64px; padding: 0 14px; gap: 12px; } .ptv .tv-choice kbd { width: 30px; height: 30px; } }
+
+/* ---------- Word Chain · Chain Reaction ---------- */
+.pwc { background: radial-gradient(ellipse at 40% 35%, #234a73, #0d1d33 85%); }
+.pwc .wc-main { padding: 22px 8px; }
+.pwc .wc-status { color: #dbe6f2; font-size: 15px; }
+.pwc .wc-letter { width: clamp(110px, 14vw, 160px); height: clamp(120px, 15vw, 176px); margin: 14px auto 22px; display: grid; place-items: center; font-size: clamp(64px, 8vw, 110px); font-weight: 800; color: #1d3a4c; text-shadow: none; border-radius: 14px; background: linear-gradient(145deg, #fbf3dc, #e2d3ad); box-shadow: inset 0 0 0 5px #ffffff55, inset 0 0 0 6px #d8c79f, 0 8px 0 #a8976d, 0 14px 22px #0007; transform: rotate(-4deg); }
+.pwc .wc-form { max-width: 640px; gap: 12px; }
+.pwc .wc-form input { min-height: 52px; font-size: 17px; background: #0f2235; border-color: #3d5875; }
+.pwc .wc-form .btn { min-width: 130px; min-height: 52px; }
+.pwc .wc-chain { max-width: 640px; margin: 20px auto 0; gap: 8px; }
+.pwc .wc-chain li { border-radius: 10px; background: #102a42; border: 1px solid #3d5875; color: #e7eef6; letter-spacing: 1px; font-weight: 700; }
+.pwc .heart.on { background: #e8d7a0; }
+@media (max-width: 600px) {
+  .pws .b2-players, .ptv .b2-players, .pwc .b2-players, .pcat .b2-players, .ptel .b2-players, .pbf .b2-players, .pimp .b2-players { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .pws .b2-player, .ptv .b2-player, .pwc .b2-player, .pcat .b2-player, .ptel .b2-player, .pbf .b2-player, .pimp .b2-player { min-width: 0; padding: 4px 8px 4px 4px; }
+  .pws, .ptv, .pwc, .pcat, .ptel, .pbf, .pimp { padding: 10px; }
+}

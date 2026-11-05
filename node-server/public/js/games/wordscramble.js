@@ -11,7 +11,7 @@ GameUI.wordscramble = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 ws";
+    root.className = "b2 ws pws";
     root.innerHTML = `<div class="b2-players card" id="ws-players"></div>
       <div class="card ws-main">
         <div class="hl-round" id="ws-round"></div>
