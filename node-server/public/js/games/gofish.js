@@ -18,6 +18,8 @@ GameUI.gofish = (() => {
   let seen = null; // BookLedger: Set of "playerId:rank" already observed (seeded silently on first view)
   let fresh = new Set(); // books newly observed in this update (animate once)
   let repainting = false;
+  let pendingTimer = 0;
+  let lost = false; // last Ask got no response: tell the player they can try again
 
   const tilt = (i, n) => (n <= 1 ? 0 : Math.round((i - (n - 1) / 2) * Math.min(5, 30 / n) * 10) / 10);
   const backs = (n) => Array.from({ length: Math.min(n, MAX_BACKS) }, (_, i) => `<img src="${BACK}" alt="" style="--tilt:${tilt(i, Math.min(n, MAX_BACKS))}deg">`).join("");
@@ -60,9 +62,21 @@ GameUI.gofish = (() => {
     if (r && !pending) pickRank = Number(r.dataset.rank);
     if (t && !pending) pickTarget = t.dataset.target;
     if (e.target.closest("#gf-go") && pickRank !== null && pickTarget && !pending) {
+      lost = false;
       app.socket.emit("action", { type: "ask", target: pickTarget, rank: pickRank });
       // Keep the named ask visible until the server's view changes; never claim it was accepted.
       pending = { rank: pickRank, target: pickTarget, key: viewKey(g) };
+      // If the Ask never reaches the server (e.g. a dropped connection), release the lock after 5s
+      // so the player can try again. No automatic retry and no claim that it was accepted.
+      clearTimeout(pendingTimer);
+      pendingTimer = setTimeout(() => {
+        if (!root || !pending || !S) return;
+        pending = null;
+        lost = true;
+        repainting = true;
+        update(S);
+        repainting = false;
+      }, 5000);
     }
     // Repaint the picks from the same state; the clock must keep counting from the last server update.
     repainting = true;
@@ -76,7 +90,8 @@ GameUI.gofish = (() => {
     const mine = g.turnId === S.you;
     if (!repainting) clock.set(g.timeLeft);
     // pending ask resolves on any meaningful view change (turn, pond, log, hand)
-    if (pending && (viewKey(g) !== pending.key || !mine)) { pending = null; pickRank = null; pickTarget = null; }
+    if (pending && (viewKey(g) !== pending.key || !mine)) { pending = null; pickRank = null; pickTarget = null; clearTimeout(pendingTimer); }
+    if (!mine) lost = false;
     // BookLedger: seed silently on the first view (incl. reconnect), then only new (player, rank) pairs animate.
     fresh = new Set();
     const all = g.players.flatMap((p) => p.books.map((r) => `${p.id}:${r}`));
@@ -99,7 +114,7 @@ GameUI.gofish = (() => {
       : pending
         ? `Asking <b>${tName(pending.target)}</b> for ${C.rankWord(pending.rank)}s… <span class="fr-timer" data-timer></span>`
         : mine
-          ? `<b>Your turn.</b> Pick a rank from your hand and a player to ask. <span class="fr-timer" data-timer></span>`
+          ? `<b>Your turn.</b> ${lost ? "Your last ask didn't go through. Try again. " : "Pick a rank from your hand and a player to ask. "}<span class="fr-timer" data-timer></span>`
           : `Waiting for <b>${app.esc(turn ? turn.name : "")}</b>. <span class="fr-timer" data-timer></span>`;
     root.querySelector("#gf-status").className = "cs-status pgf-status" + (mine ? " mine" : "");
     root.querySelector("#gf-deck").textContent = `The pond · ${g.deckCount} cards`;
@@ -141,6 +156,8 @@ GameUI.gofish = (() => {
 
   function unmount() {
     window.removeEventListener("resize", fitHand);
+    clearTimeout(pendingTimer);
+    lost = false;
     if (clock) clock.stop();
     if (root) root.remove();
     root = null;

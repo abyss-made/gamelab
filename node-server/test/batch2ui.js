@@ -271,6 +271,27 @@ async function createRoom(page, game) {
               return lr.right <= hr.right + 1 && lr.left >= hr.left - 1;
             });
             ok(gfLong, `${t}: a 24-card Go Fish hand keeps every card reachable`);
+            // A lost Ask (emit swallowed, view never changes) unlocks after 5s with a retry note.
+            const lostAsk = await page.evaluate(async () => {
+              const base = JSON.parse(JSON.stringify(window.App.S));
+              base.game.turnId = base.you;
+              base.game.hand = [{ r: 9, s: 'S' }, { r: 4, s: 'H' }];
+              const emit = window.App.socket.emit;
+              window.App.socket.emit = () => {};
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(base);
+              document.querySelector('[data-rank="9"]').click();
+              document.querySelector('#gf-go').click();
+              const locked = document.querySelector('#gf-go').disabled;
+              await new Promise((r) => setTimeout(r, 5400));
+              const unlocked = !document.querySelector('[data-rank="9"]').disabled;
+              const note = /didn't go through/.test(document.querySelector('#gf-status').textContent);
+              window.App.socket.emit = emit;
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(window.App.S);
+              return { locked, unlocked, note };
+            });
+            ok(lostAsk.locked && lostAsk.unlocked && lostAsk.note, `${t}: a lost Ask unlocks after 5s so the player can retry`);
             ok(arr.aceLabel === 'A', `${t}: rank 14 is labelled Ace (A)`);
             ok(arr.seededNew === 0, `${t}: existing books are seeded silently on first view`);
             ok(arr.sent === 1 && arr.sentRank === 14, `${t}: Ask sends the chosen rank once`);

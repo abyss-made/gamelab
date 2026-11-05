@@ -431,7 +431,7 @@
   }
   function studioHTML() {
     if (!AV) return "";
-    if (!studio.open) return `<div class="av-studio"><button type="button" class="btn btn-small btn-ghost" data-studio="open">Avatar Studio</button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}</div>`;
+    if (!studio.open) return `<div class="av-studio"><button type="button" class="btn btn-small btn-ghost" data-studio="open">Avatar Studio</button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}${studio.note ? `<p class="muted" role="status">${esc(studio.note)}</p>` : ""}</div>`;
     const cat = AV.catalog();
     if (!cat || !studio.draft) return `<div class="av-studio" role="status">${esc(studio.note) || "Loading Avatar Studio…"}</div>`;
     const d = studio.draft;
@@ -457,7 +457,14 @@
     if (!b || !AV) return;
     const act = b.dataset.studio;
     if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-field="id"]')?.focus(), 60); }
-    if (act === "classic") { delete profile.avatar.v3; studio.draft = null; studio.undo = []; saveProfile(); syncAvatar(); renderProfiles(); return focusLauncher(); }
+    if (act === "classic") {
+      const prev = profile.avatar.v3;
+      delete profile.avatar.v3;
+      try { saveProfile(); studio.note = ""; }
+      catch (err) { profile.avatar.v3 = prev; studio.note = "Could not save on this device (storage is full or blocked). Your avatar is unchanged."; renderProfiles(); return; }
+      studio.draft = null; studio.undo = []; syncAvatar(); renderProfiles();
+      return focusLauncher();
+    }
     if (act === "close") {
       // Unsaved changes ask before they are thrown away; Keep editing leaves everything as it was.
       if (studioDirty() && !window.confirm("Discard your unsaved avatar changes?")) return;

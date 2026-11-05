@@ -103,6 +103,24 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         await hostPage.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a11'; }, pageId, { timeout: 9000 })
           .then(() => ok(true, `${t}: a rate-limited save is retried and reaches the party`), () => ok(false, `${t}: a rate-limited save is retried and reaches the party`));
       }
+      if (vp.w === 390) {
+        // Use classic with storage failing keeps the saved Studio look (rollback) and explains why.
+        await page.click('#settings-btn');
+        await page.click('#modal [data-view="profile"]');
+        if (await page.$('#modal [data-studio="close"]')) await page.click('#modal [data-studio="close"]');
+        await page.waitForSelector('#modal [data-studio="classic"]', { timeout: 5000 });
+        const keep = await page.evaluate(() => {
+          const set = Storage.prototype.setItem;
+          Storage.prototype.setItem = () => { throw new Error('quota'); };
+          const btn = document.querySelector('#modal [data-studio="classic"]');
+          if (btn) btn.click();
+          Storage.prototype.setItem = set;
+          const stillV3 = !!JSON.parse(localStorage.getItem('pg_profile')).avatar.v3;
+          const msg = [...document.querySelectorAll('.av-studio [role="status"]')].some((n) => /Could not save/.test(n.textContent));
+          return { clicked: !!btn, stillV3, msg };
+        });
+        ok(keep.clicked && keep.stillV3 && keep.msg, `${t}: Use classic rolls back and explains when storage fails`);
+      }
       ok(errors.length === 0, `${t}: no page errors${errors.length ? ' - ' + errors[0] : ''}`);
       await hostPage.context().close();
       await page.context().close();
