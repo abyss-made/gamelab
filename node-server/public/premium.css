@@ -209,7 +209,7 @@
 .bs .bs-title small { font-size: 10px; letter-spacing: 0; text-transform: none; color: #8eb2c2; }
 .bs .bs-grid.pbs-chart { position: relative; max-width: 520px; gap: 0; padding: 10px; border-radius: 14px; border: 2px solid #3d6273; background: #0c2633; box-shadow: inset 0 0 0 6px #0a1f2a, 0 14px 30px #0006; }
 .bs .pbs-chart .bs-head { color: #9bb9c6; font-size: 11px; font-style: normal; text-align: center; align-self: center; }
-.bs .pbs-chart .bs-cell { border-radius: 0; background: repeating-linear-gradient(0deg, #ffffff06 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 40%, #1d5468, #12394a); border: 0.5px solid #3f7487aa; position: relative; z-index: 1; }
+.bs .pbs-chart .bs-cell { border-radius: 0; background: repeating-linear-gradient(0deg, #ffffff06 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 40%, #1d5468, #12394a); border: 0.5px solid #3f7487aa; position: relative; }
 .bs .pbs-chart .bs-cell.ship, .bs .pbs-chart .bs-cell.draft { background: repeating-linear-gradient(0deg, #ffffff06 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 40%, #1d5468, #12394a); }
 .bs .pbs-chart .bs-cell:not(:disabled):hover { background: #24657a; }
 .bs .pbs-chart .bs-cell:focus-visible { outline: 3px solid #d6ff8b; outline-offset: -3px; z-index: 4; }
@@ -569,3 +569,9 @@
 .ptel .ws-form input { min-height: 52px; font-size: 17px; background: #2c1d22; border-color: #7a5450; }
 .ptel .ws-form .btn { min-height: 52px; min-width: 120px; }
 .ptel .hl-status { color: #f0d8cc; }
+
+/* review fixes */
+.pcs .pcs-fan.scroll { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; overscroll-behavior-x: contain; padding-top: 26px; }
+.pcs .pcs-fan.scroll .pcs-card { scroll-snap-align: start; }
+.bs .pbs-chart .bs-cell .pbs-mark { z-index: 3; }
+.bs .pbs-chart .bs-cell.miss .pbs-mark { z-index: 3; }

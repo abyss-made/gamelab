@@ -162,6 +162,20 @@ async function createRoom(page, game) {
             const backs = await page.$$eval('.pcs-seat .pcs-backs img', (e) => e.length);
             ok(backs === Math.min(7, f.state.game.players.find((p) => p.id !== me).count), `${t}: opponent fan shows face-down backs from the public count (${backs})`);
             ok(!(await page.$('.pcs-backs .pcs-card')), `${t}: opponent fans never contain card faces`);
+            // Arranged long hand (nothing sent): 30 cards must all stay reachable (scroll fallback).
+            const longHand = await page.evaluate(() => {
+              const st = JSON.parse(JSON.stringify(window.App.S));
+              st.game.hand = Array.from({ length: 30 }, (_, i) => ({ id: 900 + i, c: 'rbgy'[i % 4], v: String(i % 10) }));
+              GameUI.colorstack.update(st);
+              const hand = document.querySelector('#cs-hand');
+              const last = hand.lastElementChild;
+              last.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+              const hr = hand.getBoundingClientRect(), lr = last.getBoundingClientRect();
+              const reachable = lr.right <= hr.right + 1 && lr.left >= hr.left - 1;
+              GameUI.colorstack.update(window.App.S);
+              return { reachable, scroll: hand.scrollWidth >= hand.clientWidth };
+            });
+            ok(longHand.reachable, `${t}: a 30-card hand keeps every card reachable`);
             const enemy = JSON.stringify(f.state.game.hand);
             const pl = await page.$$('#cs-hand .cs-card.playable');
             if (pl.length) {

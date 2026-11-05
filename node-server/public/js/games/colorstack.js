@@ -107,8 +107,11 @@ GameUI.colorstack = (() => {
     if (cards.length < 2) return;
     const w = cards[0].offsetWidth;
     const avail = hand.clientWidth - 24;
-    const overlap = Math.max(10, Math.min(w * 0.72, (cards.length * w - avail) / (cards.length - 1)));
+    const need = (cards.length * w - avail) / (cards.length - 1);
+    const overlap = Math.max(10, Math.min(w * 0.72, need));
     cards.forEach((c, i) => { c.style.marginLeft = i ? `${-overlap}px` : "0"; });
+    // Very long hands can't fit even at the overlap cap: fall back to a horizontal scroller so every card stays reachable.
+    hand.classList.toggle("scroll", need > w * 0.72);
   }
 
   // Repaint only the private fan + dock; keeps keyboard focus on the same card id.

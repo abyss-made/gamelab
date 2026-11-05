@@ -135,6 +135,22 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
           ok((await page.$$('.bs-cell.hit, .bs-cell.miss')).length >= 1, `${t}: the shot shows as a hit or miss on the board`);
           ok((await page.$$('.pbs-enemy .pbs-ship')).length === 0, `${t}: enemy waters never draw ship art`);
           ok((await page.$$('.pbs-friendly .pbs-ship img')).length === 5, `${t}: your fleet shows the five vessel illustrations`);
+          // A hit on my own ship must paint its marker above the vessel art.
+          if (vp.tag === 'phone') await page.click('[data-bstab="fleet"]');
+          const markOnTop = await page.evaluate(() => {
+            const st = JSON.parse(JSON.stringify(window.App.S));
+            const g = st.game, me = g.myIndex;
+            const cell = g.myShips[0].cells[1];
+            g.players[me].shots[cell] = 2;
+            GameUI.battleship.update(st);
+            const el = document.querySelector(`.pbs-friendly [data-cell="${cell}"] .pbs-mark`);
+            const r = el.getBoundingClientRect();
+            const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+            GameUI.battleship.update(window.App.S);
+            return top === el || el.contains(top);
+          });
+          ok(markOnTop, `${t}: hit markers on your fleet paint above the ship illustrations`);
+          if (vp.tag === 'phone') await page.click('[data-bstab="target"]');
           if (vp.tag === 'phone') {
             await page.click('[data-bstab="fleet"]');
             ok(await page.isVisible('.pbs-friendly') && !(await page.isVisible('.pbs-enemy')), `${t}: phone Fleet tab shows your fleet`);
