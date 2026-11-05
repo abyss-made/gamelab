@@ -390,7 +390,7 @@ GameUI.tycoon = (() => {
     if (root) root.remove();
     root = null; g = null; selTile = -1; lastRoll = -1; shown = {}; wasMyTurn = false; bidText = "";
     for (const k of Object.keys(html)) delete html[k];
-    tf.open = false; tf.giveProps.clear(); tf.askProps.clear(); tf.giveCash = ""; tf.askCash = "";
+    reviewId = null; tf.open = false; tf.giveProps.clear(); tf.askProps.clear(); tf.giveCash = ""; tf.askCash = "";
   }
 
   function renderResult(r, state, a) {
