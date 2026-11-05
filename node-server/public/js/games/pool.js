@@ -342,7 +342,7 @@ GameUI.pool = (() => {
   function onPointer(ev) {
     if (!canShoot()) return;
     if (ev.type === "pointerdown") {
-      canvas.setPointerCapture && canvas.setPointerCapture(ev.pointerId);
+      try { canvas.setPointerCapture(ev.pointerId); } catch (e) { /* pointer already gone */ }
       dragging = true;
       canvas.focus({ preventScroll: true });
     }
