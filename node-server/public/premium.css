@@ -346,3 +346,24 @@
 .pch .ch-board { grid-template-rows: repeat(8, 1fr); aspect-ratio: 1; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
 .pch .pch-player { width: 100%; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
 @media (max-width: 899px) { .pch .ch-board, .pch .pch-player { max-width: 100%; } }
+
+/* ---------- Checkers · Emerald House ---------- */
+.pck { grid-template-columns: minmax(0, 1fr); min-width: 0; background: radial-gradient(ellipse at 50% 30%, #1d4a44, #0b2228 85%); border-radius: 22px; padding: 14px; }
+.pck .b2-players { background: transparent; border: 0; justify-content: space-between; }
+.pck .b2-player { background: #0f2c2acc; border: 1px solid #45706455; border-radius: 14px; }
+.pck .b2-player.active { border-color: #b8e08a; }
+.pck .ck-board { width: 100%; max-width: min(520px, calc(100svh - 330px)); border: 0; padding: 18px; border-radius: 12px; background: #8fa98a; box-shadow: 0 0 0 3px #b8cbb0, 0 8px 0 #4f6a55, 0 18px 30px #0007; gap: 0; grid-template-rows: repeat(8, 1fr); }
+.pck .ck-sq.light { background: #efe6cf; }
+.pck .ck-sq.dark { background: #3f6e5e; }
+.pck .ck-sq.last { box-shadow: inset 0 0 0 3px #e8d38a99; }
+.pck .ck-sq.sel { box-shadow: inset 0 0 0 3px #d6ff8b; }
+.pck .ck-sq.target { background: #3f6e5e; }
+.pck .ck-dot { width: 22%; height: 22%; background: #c9f08d; box-shadow: 0 0 0 3px #c9f08d33; }
+.pck .ck-piece { border: 0; box-shadow: 0 4px 0 #00000040, 0 6px 8px #0005, inset 0 -3px 0 #0000001f; }
+.pck .ck-piece.o0 { background: radial-gradient(circle at 35% 30%, #d6f3c4, #8fcf7e 45%, #5aa25a 100%); color: #19361f; }
+.pck .ck-piece.o1 { background: radial-gradient(circle at 35% 30%, #fffdf4, #efe3c3 50%, #cdbb92 100%); color: #4a3c22; }
+.pck .ck-piece.can { animation: none; outline: 2px solid #d6ff8b; outline-offset: 2px; }
+.pck .ck-key.o0 { background: #8fcf7e; } .pck .ck-key.o1 { background: #efe3c3; }
+.pck .ttt-status { color: #e4efe6; }
+.pck .board-actions .btn { min-height: 44px; }
+@media (max-width: 600px) { .pck { padding: 8px; } .pck .ck-board { padding: 8px; max-width: 100%; } }

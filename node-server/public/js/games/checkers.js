@@ -44,7 +44,7 @@ GameUI.checkers = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 ck";
+    root.className = "b2 ck pck";
     root.innerHTML = `<div class="b2-players card" id="ck-players"></div>
       <div class="ttt-status" id="ck-status" aria-live="polite"></div>
       <div id="ck-board"></div>
@@ -94,7 +94,7 @@ GameUI.checkers = (() => {
     if (g.chain >= 0) sel = g.chain; // a multi-jump continues with the same piece
     else if (!myTurn || !g.legal[sel]) sel = -1;
     root.querySelector("#ck-players").innerHTML = g.players
-      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: `<span class="ck-key o${i}" aria-hidden="true"></span>` + (g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.side} · ${p.pieces} piece${p.pieces === 1 ? "" : "s"}` }))
+      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: `<span class="ck-key o${i}" aria-hidden="true"></span>` + (g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.side}${p.side === "Lime" ? " (jade)" : p.side === "White" ? " (ivory)" : ""} · ${p.pieces} piece${p.pieces === 1 ? "" : "s"}` }))
       .join("");
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ck-status");
