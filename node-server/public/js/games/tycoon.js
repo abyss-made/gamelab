@@ -18,6 +18,7 @@ GameUI.tycoon = (() => {
   let auctionTimer = 0;
   let auctionEnds = 0;
   const html = {}; // last HTML per panel, so unchanged panels are not rebuilt
+  let reviewId = null; // incoming offer being reviewed (bound to the offer id, never a replacement)
   const tf = { open: false, to: "", giveProps: new Set(), askProps: new Set(), giveCash: "", askCash: "" };
 
   const N = 36;
@@ -163,9 +164,26 @@ GameUI.tycoon = (() => {
     return t.type !== "prop" || !g.board.some((x, j) => x.group === t.group && g.levels[j] > 0);
   };
 
+  // Review step for an incoming offer: full give/get and projected cash (a local preview; real
+  // balances only change from the server view). If the offer vanishes while open, Accept is
+  // disabled with a neutral reason: no invented expiry, and a replacement offer is never accepted.
+  function reviewHTML() {
+    if (reviewId === null) return "";
+    const tr = g.trades.find((x) => x.id === reviewId && x.to === S.you);
+    const me = myIdx();
+    const list = (props, cash) => [...(props || []).map((i) => app.esc(tile(i).name)), ...(cash ? [money(cash)] : [])].join(", ") || "nothing";
+    let body;
+    if (tr) {
+      const from = pById(tr.from);
+      const cash = me >= 0 ? g.players[me].cash : 0;
+      body = `<p><b>${app.esc(from ? from.name : "A player")}</b> offers a trade.</p><p><b>You give:</b> ${list(tr.askProps, tr.askCash)}</p><p><b>You get:</b> ${list(tr.giveProps, tr.giveCash)}</p><p class="muted">Cash after the trade: ${money(cash - tr.askCash + tr.giveCash)} (preview, from ${money(cash)})</p>`;
+    } else body = `<p role="status">This offer is no longer available.</p>`;
+    return `<div class="ty-offer mine" role="group" aria-label="Review trade offer">${body}<div class="board-actions"><button type="button" class="btn btn-small" data-trade-accept="${reviewId}" ${tr ? "" : "disabled"}>Accept</button><button type="button" class="btn btn-small btn-ghost" data-trade-close>${tr ? "Back" : "Close"}</button></div></div>`;
+  }
+
   function tradeHTML() {
     const me = myIdx();
-    let out = "";
+    let out = reviewHTML();
     for (const tr of g.trades) {
       const from = pById(tr.from);
       const to = pById(tr.to);
@@ -173,7 +191,7 @@ GameUI.tycoon = (() => {
       const list = (props, cash) => [...props.map((i) => app.esc(tile(i).name)), ...(cash ? [money(cash)] : [])].join(", ") || "nothing";
       const involved = tr.to === S.you || tr.from === S.you;
       out += `<div class="ty-offer ${involved ? "mine" : ""}"><div><b>${app.esc(from.name)}</b> offers <b>${app.esc(to.name)}</b>: ${list(tr.giveProps, tr.giveCash)} <span class="muted">for</span> ${list(tr.askProps, tr.askCash)}</div>`;
-      if (tr.to === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small" data-trade-accept="${tr.id}">Accept</button><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Decline</button></div>`;
+      if (tr.to === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small" data-trade-review="${tr.id}">Review</button><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Decline</button></div>`;
       else if (tr.from === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Cancel offer</button></div>`;
       out += "</div>";
     }
@@ -309,7 +327,15 @@ GameUI.tycoon = (() => {
       const s = t.closest("[data-sell]");
       if (s) return app.socket.emit("action", { type: "sell", tile: Number(s.dataset.sell) });
       const ta = t.closest("[data-trade-accept]");
-      if (ta) return app.socket.emit("action", { type: "trade_accept", id: Number(ta.dataset.tradeAccept) });
+      if (ta) {
+        const id = Number(ta.dataset.tradeAccept);
+        if (!g.trades.some((x) => x.id === id && x.to === S.you)) return paint(); // stale: never emit
+        reviewId = null;
+        return app.socket.emit("action", { type: "trade_accept", id });
+      }
+      const tr = t.closest("[data-trade-review]");
+      if (tr) { reviewId = Number(tr.dataset.tradeReview); return paint(); }
+      if (t.closest("[data-trade-close]")) { reviewId = null; return paint(); }
       const td = t.closest("[data-trade-decline]");
       if (td) return app.socket.emit("action", { type: "trade_decline", id: Number(td.dataset.tradeDecline) });
       if (t.closest("[data-trade-toggle]")) { tf.open = !tf.open; return paint(); }

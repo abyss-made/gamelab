@@ -289,6 +289,17 @@ const GAMES = ['pool', 'golf', 'tycoon'];
               fr[0].act({ type: 'trade_accept', id: fr[0].state.game.trades[0].id });
               await until(() => fr[0].state.game.trades.length === 0);
               ok(fr[0].state.game.players.find((p) => p.id === fr[0].state.you).cash === before + 10, `${t}: accepting completes the trade`);
+              // Incoming offer review guard: Review -> full give/get; if the offer vanishes, Accept is disabled.
+              fr[0].act({ type: 'trade_offer', to: me, giveProps: [], askProps: [], giveCash: 5, askCash: 0 });
+              await until(() => fr[0].state.game.trades.length === 1);
+              await page.click('[data-trade-review]');
+              ok((await page.textContent('[aria-label="Review trade offer"]')).includes('You get'), `${t}: reviewing an incoming offer shows both sides`);
+              ok(!(await page.isDisabled('[data-trade-accept]')), `${t}: Accept is enabled while the offer exists`);
+              fr[0].act({ type: 'trade_decline', id: fr[0].state.game.trades[0].id });
+              await until(() => fr[0].state.game.trades.length === 0);
+              await until(async () => page.isDisabled('[data-trade-accept]'));
+              ok((await page.textContent('[aria-label="Review trade offer"]')).includes('no longer available'), `${t}: a vanished offer disables Accept with a neutral reason`);
+              await page.click('[data-trade-close]');
               await page.click('[data-act="end"]');
               break;
             } else if (g.phase === 'roll') await page.click('[data-act="roll"]');
