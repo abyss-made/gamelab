@@ -311,3 +311,38 @@
   .pgf .pgf-hand { min-height: 130px; }
 }
 @media (prefers-reduced-motion: reduce) { .pgf-card { transition: none; } .pgf .gf-books i.new, .pgf-book.new { animation: none; } }
+
+/* ---------- Chess · Walnut & Ivory ---------- */
+.pch { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.pch .pch-layout { display: grid; gap: 36px; align-items: center; background: radial-gradient(ellipse at 38% 25%, #383631, #0e1b25 85%); border-radius: 22px; padding: 18px 26px; }
+@media (min-width: 900px) { .pch .pch-layout { grid-template-columns: minmax(0, 640px) 240px; justify-content: center; } }
+.pch-table { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pch-player { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 54px; }
+.pch-player .b2-player { background: transparent; border: 1px solid transparent; }
+.pch-player .b2-player.active { border-color: #b0da77; background: #c4ff8010; }
+.pch .ch-clock { font-variant-numeric: tabular-nums; font-size: 24px; letter-spacing: 1px; padding: 8px 16px; background: #1b2022; border: 1px solid #546269; border-radius: 9px; color: #c1c9c7; margin-left: 0; }
+.pch .ch-clock.ticking { background: #ece0bd; color: #24312f; border-color: #e9d8ab; box-shadow: 0 3px 0 #9f8d65; }
+.pch .ch-clock.hurry { color: #b8443b; }
+.pch .ch-board { width: 100%; max-width: 640px; border: 0; padding: 18px; border-radius: 12px; background: linear-gradient(135deg, #a77b4c, #6d4a2a); box-shadow: 0 0 0 2px #c79f6b, 0 15px 30px #0007; }
+.pch[data-theme="walnut"] .ch-sq.light { background: #f1e3c4; }
+.pch[data-theme="walnut"] .ch-sq.dark { background: #8a5c38; }
+.pch[data-theme="walnut"] .ch-sq.dark i { color: #f1e3c4; }
+.pch[data-theme="walnut"] .ch-sq.light i { color: #6d4a2a; }
+.pch[data-theme="slate"] .ch-board { background: linear-gradient(135deg, #4a5a66, #26323b); box-shadow: 0 0 0 2px #7d8f9b, 0 15px 30px #0007; }
+.pch .ch-piece.w .ch-svg { fill: #f6ead0; stroke: #6a5034; }
+.pch .ch-piece.b .ch-svg { fill: #3f2c1e; stroke: #e7d6b4; }
+.pch .ch-sq.sel { box-shadow: inset 0 0 0 3px #c6e88c; }
+.pch .ch-sq.last { background-image: linear-gradient(#e7c66b44, #e7c66b44); }
+.pch .ch-sq.target .ck-dot { background: #8fbf5a; border: 0; }
+.pch-notes { display: flex; flex-direction: column; gap: 22px; background: transparent; border: 0; }
+.pch-eyebrow { display: block; font-size: 10px; letter-spacing: 1.8px; font-weight: 750; color: #cfb38c; margin-bottom: 8px; }
+.pch-caption .ttt-status { text-align: left; color: #efe2cc; font-size: 15px; line-height: 1.6; }
+.pch-moves { border-block: 1px solid #5a686144; padding: 14px 0; }
+.pch .ch-moves { max-height: 200px; color: #e8ece9; }
+.pch-theme { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pch-theme span { width: 100%; font-size: 11px; color: #8da5a5; }
+.pch-theme [aria-pressed="true"] { border-color: #c6e88c; }
+@media (max-width: 899px) { .pch .pch-layout { padding: 10px; gap: 16px; } .pch .ch-board { padding: 8px; } .pch .ch-clock { font-size: 18px; padding: 6px 10px; } }
+.pch .ch-board { grid-template-rows: repeat(8, 1fr); aspect-ratio: 1; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
+.pch .pch-player { width: 100%; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
+@media (max-width: 899px) { .pch .ch-board, .pch .pch-player { max-width: 100%; } }
