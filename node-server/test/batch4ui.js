@@ -212,6 +212,33 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
             await page.click('[data-move] >> nth=0');
             ok(true, `${t}: chose a token with the big buttons`);
           } else ok(true, `${t}: rolled ${dice}: no legal move, the turn passes`);
+          // Shared-square picker (arranged view, nothing is sent): my token 1 and Green token 1 share track square 8.
+          const pick = await page.evaluate(() => {
+            const st = JSON.parse(JSON.stringify(window.App.S));
+            const g = st.game;
+            const me = g.players[g.myIndex];
+            const other = g.players.find((p) => p.id !== me.id);
+            g.phase = 'move'; g.turnId = me.id; g.dice = 3; g.movable = [0];
+            me.tokens = [(8 - me.colour * 13 + 52) % 52, -1, -1, -1];
+            other.tokens = [(8 - other.colour * 13 + 52) % 52, -1, -1, -1];
+            const sent = [];
+            const emit = window.App.socket.emit;
+            window.App.socket.emit = (...a) => { sent.push(a); };
+            GameUI.ludo.update(st);
+            const cellBtn = document.querySelector('[data-cell]');
+            if (!cellBtn) { window.App.socket.emit = emit; return { cell: false }; }
+            cellBtn.click();
+            const picker = document.querySelector('.pld-picker');
+            const btns = [...picker.querySelectorAll('button.ld2-pick')].map((b) => ({ t: b.textContent, dis: b.disabled }));
+            picker.querySelector('button.ld2-pick:disabled')?.click();
+            const sentAfterDisabled = sent.length;
+            window.App.socket.emit = emit;
+            GameUI.ludo.update(window.App.S);
+            return { cell: true, btns, sentAfterDisabled, gone: !document.querySelector('.pld-picker') || window.App.S.game.phase !== 'move' };
+          });
+          ok(pick.cell, `${t}: a square shared with an opponent opens a picker`);
+          ok(pick.cell && pick.btns.length === 2 && pick.btns.filter((b) => !b.dis).length === 1 && pick.btns.some((b) => b.dis && /Green|Yellow|Blue|Red/.test(b.t)), `${t}: the picker names owner + number and enables only my movable token`);
+          ok(pick.cell && pick.sentAfterDisabled === 0, `${t}: an opponent's token in the picker never sends a move`);
           await shot('-after');
         }
         ok((await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)) <= 0, `${t}: still no horizontal overflow after playing`);
