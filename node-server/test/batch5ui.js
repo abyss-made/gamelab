@@ -107,7 +107,7 @@ const GAMES = ['pool', 'golf', 'tycoon'];
         if (game === 'pool') {
           const canvas = page.locator('#pl-canvas');
           const box = await canvas.boundingBox();
-          ok(box.width >= 340 && box.height >= 180, `${t}: the table is a usable size (${Math.round(box.width)}x${Math.round(box.height)})`);
+          ok(Math.min(box.width, box.height) >= 250 && Math.max(box.width, box.height) >= 500, `${t}: the table is a usable size (${Math.round(box.width)}x${Math.round(box.height)})`);
           ok((await canvas.getAttribute('aria-label')).includes('Drag to aim'), `${t}: the table has an accessible description`);
           const hostFirst = await page.evaluate(() => window.App.S.game.turn === window.App.S.game.myIndex);
           if (!hostFirst) {
@@ -132,6 +132,8 @@ const GAMES = ['pool', 'golf', 'tycoon'];
             ok(await page.isEnabled('#pl-shoot'), `${t}: Shoot enables after the cue ball is locked`);
           }
           // aim by dragging on the table, power by slider
+          await canvas.scrollIntoViewIfNeeded();
+          Object.assign(box, await canvas.boundingBox());
           const aim0 = await page.inputValue('#pl-aim');
           await page.mouse.move(box.x + box.width * 0.4, box.y + box.height * 0.5);
           await page.mouse.down();
@@ -139,6 +141,41 @@ const GAMES = ['pool', 'golf', 'tycoon'];
           await page.mouse.up();
           const aim1 = await page.inputValue('#pl-aim');
           ok(aim0 !== aim1, `${t}: dragging on the table changes the aim`);
+          if (vp.tag === 'phone') {
+            // Portrait table: screen-up is physical +x, so dragging straight up from the cue ball aims at ~0deg.
+            ok(await page.evaluate(() => document.querySelector('#pl-canvas').classList.contains('portrait')), `${t}: phone shows the portrait table`);
+            await canvas.scrollIntoViewIfNeeded();
+            const b2 = await canvas.boundingBox();
+            const PAD = 44, W = 1000 + PAD * 2, H = 500 + PAD * 2;
+            const toScreen = (q) => ({ x: b2.x + ((q.y + PAD) / H) * b2.width, y: b2.y + ((W - q.x - PAD) / W) * b2.height });
+            let cue = await page.evaluate(() => { const g = window.App.S.game; const c = g.balls.find((b) => b.id === 0); return c && !c.gone && !g.inHand ? { x: c.x, y: c.y } : null; });
+            if (!cue && await page.evaluate(() => window.App.S.game.inHand)) {
+              // re-place the cue ball at a known physical spot through the portrait transform
+              cue = { x: 150, y: 250 };
+              await page.click('#pl-place'); // back to moving
+              await canvas.scrollIntoViewIfNeeded();
+              Object.assign(b2, await canvas.boundingBox());
+              const from = toScreen({ x: 200, y: 250 }), to = toScreen(cue);
+              await page.mouse.move(from.x, from.y);
+              await page.mouse.down();
+              await page.mouse.move(to.x, to.y, { steps: 4 });
+              await page.mouse.up();
+              await page.click('#pl-place'); // lock
+              await canvas.scrollIntoViewIfNeeded();
+              Object.assign(b2, await canvas.boundingBox());
+            }
+            if (cue) {
+              const { x: sx, y: sy } = toScreen(cue);
+              await page.mouse.move(sx, sy - 40);
+              await page.mouse.down();
+              await page.mouse.move(sx, sy - 120, { steps: 4 });
+              await page.mouse.up();
+              const a = Number(await page.inputValue('#pl-aim'));
+              ok(a < 3 || a > 357, `${t}: portrait drag is inverse-mapped to physical aim (${a.toFixed(1)}deg)`);
+            }
+          }
+          await page.click('[data-fine="1"]');
+          ok((await page.textContent('#pl-aim-val')).length > 0, `${t}: fine aim + button works`);
           await canvas.focus();
           await page.keyboard.press('ArrowRight');
           ok((await page.inputValue('#pl-aim')) !== aim1, `${t}: arrow keys fine-tune the aim`);

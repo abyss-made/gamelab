@@ -82,3 +82,16 @@
 @media (prefers-reduced-motion: reduce) {
   .pcs .pcs-card { transition: none; }
 }
+
+/* ---------- Pool · The Walnut Room ---------- */
+.pl { background: radial-gradient(ellipse at 50% 40%, #1d3f36, #04131a 85%); border-radius: 22px; padding: 12px; }
+.pl .pl-canvas { aspect-ratio: auto; border: 0; box-shadow: 0 15px 24px #0006; border-radius: 30px; background: transparent; }
+.pl .pl-canvas.portrait { margin: 0 auto; border-radius: 22px; }
+.pl .pl-controls { background: #102923b3; border: 1px solid #6a836744; border-radius: 14px; }
+.pl .pl-fine-row { display: flex; align-items: center; gap: 8px; }
+.pl .pl-fine-row .btn { min-width: 44px; min-height: 40px; padding: 0 10px; font-size: 18px; }
+.pl .pl-fine-row input { flex: 1; min-width: 0; }
+.pl #pl-shoot:not(:disabled) { background: #b3f84c; color: #12200c; box-shadow: 0 3px 0 #557825; }
+.pl .b2-players { background: transparent; border: 0; justify-content: space-between; }
+.pl .b2-player { background: #061a19a8; border: 1px solid #2c4a43; border-radius: 14px; }
+.pl .b2-player.active { border-color: #b0da77; }
