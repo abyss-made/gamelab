@@ -43,7 +43,7 @@ GameUI.fourrow = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "fr";
+    root.className = "fr pfr";
     root.innerHTML = `
       <div class="fr-head card" id="fr-head"></div>
       <div class="fr-status" id="fr-status" aria-live="polite"></div>

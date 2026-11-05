@@ -412,3 +412,21 @@
 .pdb .db-box.p0, .pdb .db-box.p1, .pdb .db-box.p2, .pdb .db-box.p3 { margin: 3px; border-radius: 3px; box-shadow: inset 0 0 0 3px #ffffff33, inset 0 0 0 4px #00000022; outline: 1px dashed #ffffff66; outline-offset: -8px; }
 .pdb .db-box.p0 { background: var(--t0); } .pdb .db-box.p1 { background: var(--t1); } .pdb .db-box.p2 { background: var(--t2); } .pdb .db-box.p3 { background: var(--t3); }
 @media (max-width: 600px) { .pdb { padding: 8px; } .pdb .db-grid { padding: 12px; margin: 10px; box-shadow: 0 0 0 7px #cfc8ae, 0 12px 20px #0007; } }
+
+/* ---------- Four in a Row · Drop Society (selective: keep simplicity) ---------- */
+.pfr { --d1: #e8786f; --d2: #f0c25e; }
+.pfr .fr-board-wrap { position: relative; max-width: min(620px, calc((100svh - 330px) * 1.15)); margin-top: 26px; margin-bottom: 26px; background: linear-gradient(160deg, #3b6aa8, #22487e); border: 3px solid #8fb3df; border-radius: 22px; box-shadow: 0 16px 34px #0007, inset 0 0 0 6px #ffffff12; }
+.pfr .fr-board { counter-reset: frcol; }
+.pfr .fr-col { position: relative; }
+.pfr .fr-col::before { counter-increment: frcol; content: counter(frcol); position: absolute; top: -34px; left: 0; right: 0; text-align: center; font-size: 12px; color: #b9cbe0; }
+.pfr .fr-board-wrap::after { content: ""; position: absolute; left: -16px; right: -16px; bottom: -22px; height: 16px; border-radius: 8px; background: linear-gradient(#c7a77d, #8e6b45); box-shadow: 0 6px 12px #0006; }
+.pfr .fr-cell { background: #10284a; border: 2px solid #0c1f3a; box-shadow: inset 0 4px 8px #0009, 0 1px 0 #ffffff22; }
+.pfr .disc { border: 3px solid #fff3; box-shadow: inset 0 5px 6px #ffffff66, inset 0 -6px 8px #0003, 0 2px 0 #0004; }
+.pfr .disc.d1 { background: radial-gradient(circle at 40% 35%, #ffb1a8, var(--d1) 60%); }
+.pfr .disc.d2 { background: radial-gradient(circle at 40% 35%, #ffe6a3, var(--d2) 60%); }
+.pfr .disc.win { outline: 3px solid #fff8e2; outline-offset: -9px; }
+.pfr .fr-board.myturn .fr-col:not(:disabled):hover .target, .pfr .fr-col:not(:disabled):focus-visible .target { background: #ffffff22; }
+.pfr .fr-col:focus-visible { outline: 3px solid #d6ff8b; outline-offset: 4px; border-radius: 30px; }
+.pfr .fr-board { background: transparent; border: 0; box-shadow: none; border-radius: 0; }
+.pfr .fr-board-wrap { margin-top: 34px; }
+.pfr .fr-col::before { top: -40px; }
