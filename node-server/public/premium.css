@@ -430,3 +430,12 @@
 .pfr .fr-board { background: transparent; border: 0; box-shadow: none; border-radius: 0; }
 .pfr .fr-board-wrap { margin-top: 34px; }
 .pfr .fr-col::before { top: -40px; }
+
+/* ---------- Draw & Guess · Sketch Club (selective: canvas stays the star) ---------- */
+.dg .dg-board { background: #f4ecd6; border: 0; padding: 10px; border-radius: 16px; box-shadow: 0 0 0 2px #e9dfc4, 0 8px 0 #a99c7c66, 0 18px 40px #0006; }
+.dg .dg-canvas { background: #fffdf6; border-radius: 6px; }
+.dg .dg-tools { background: #0f2a30; border-color: #2c4c52; }
+.dg .dg-tools .tool.on, .dg .dg-tools .tool[aria-pressed="true"] { border-color: #c6e88c; }
+.dg .dg-top { background: #10292f; border-color: #2c4c52; }
+.dg .dg-top .dg-word { letter-spacing: .04em; }
+.dg .dg-overlay .card, .dg .dg-overlay > div { background: #10292fee; border-color: #3d5c60; }
