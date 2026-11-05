@@ -68,8 +68,16 @@ GameUI.tycoon = (() => {
     }
     const cur = pById(g.turnId);
     const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die">${g.dice[0]}</span><span class="ty-die">${g.dice[1]}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center"><div class="ty-logo">Playgrid<br>Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div>`;
+    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/premium/tycoon-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
+  }
+
+  // Your balance at a glance (from the view only) + round counter.
+  function stripHTML() {
+    const me = myIdx();
+    const p = me >= 0 ? g.players[me] : null;
+    const mineTurn = p && p.id === g.turnId;
+    return `<div class="pty-strip">${p ? `<div><small>${mineTurn ? "YOUR TURN" : "YOU"}</small><b>${app.esc(p.name)}</b></div><div><small>Available cash</small><strong>${p.out ? "–" : money(p.cash)}</strong></div><div><small>Properties</small><strong>${p.props}</strong></div>` : '<div><small>WATCHING</small><b>Spectator</b></div>'}<span class="pty-round">${g.rounds ? `Round ${g.round} / ${g.rounds}` : `Round ${g.round}`}</span></div>`;
   }
 
   function playersHTML() {
@@ -236,6 +244,7 @@ GameUI.tycoon = (() => {
     if (!root || !g) return;
     setPanel("ty-boardwrap", boardHTML());
     setPanel("ty-players", playersHTML());
+    setPanel("ty-strip", stripHTML());
     setPanel("ty-actions", actionHTML());
     setPanel("ty-info", selTile >= 0 ? infoHTML(selTile) : "");
     setPanel("ty-props", propsHTML());
@@ -277,7 +286,7 @@ GameUI.tycoon = (() => {
     root = document.createElement("div");
     root.className = "b2 ty";
     root.dataset.view = "map";
-    root.innerHTML = `<div class="b2-players card ty-players" id="ty-players"></div>
+    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players"></div>
       <div class="ty-views" role="group" aria-label="Phone view"><button type="button" class="btn btn-small" data-tyview="map" aria-pressed="true">Map</button><button type="button" class="btn btn-small btn-ghost" data-tyview="props" aria-pressed="false">Properties &amp; trades</button></div>
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>

@@ -170,3 +170,31 @@
 }
 .ld2 { grid-template-columns: minmax(0, 1fr); min-width: 0; }
 .ld2 .pld .ld2-cell.yardspot .ld2-tok { width: 118%; height: 118%; flex: none; }
+
+/* ---------- Property Tycoon · miniature city ---------- */
+.ty { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.pty-strip { display: flex; align-items: center; gap: 32px; padding: 14px 22px; border: 1px solid #3c5a5c; border-radius: 16px; background: radial-gradient(ellipse at 35% 35%, #304946, #0b2028); flex-wrap: wrap; }
+.pty-strip small { display: block; font-size: 10px; color: #a9c2c3; letter-spacing: .4px; }
+.pty-strip b { font-size: 16px; color: #f1ecdb; }
+.pty-strip strong { display: block; font-size: 23px; margin-top: 2px; color: #f4db9a; }
+.pty-round { margin-left: auto; font-size: 12px; color: #acc6c9; }
+.ty .ty-board { background: linear-gradient(#f8dd90, #9a743c); border: 0; padding: 7px; gap: 3px; border-radius: 18px; box-shadow: 0 0 0 2px #b2a477, 0 18px 40px #0007; }
+.ty .ty-tile { background: linear-gradient(#fff7de, #e6d8b6); border: 1px solid #c9b78a; border-radius: 5px; color: #274a4c; box-shadow: 0 2px 0 #9a8a5e55; }
+.ty .ty-tile.corner { background: linear-gradient(#f3ecd5, #d9c9a4); }
+.ty .ty-tile.t-surprise, .ty .ty-tile.t-tax, .ty .ty-tile.t-station, .ty .ty-tile.t-util, .ty .ty-tile.t-gototimeout { background: linear-gradient(#fff7de, #e6d8b6); }
+.ty .ty-tile .ty-pr { color: #426965; }
+.ty .ty-band { border-radius: 3px; }
+.ty .ty-tile.sel { outline: 3px solid #b3f84c; outline-offset: -2px; }
+.ty .ty-center.pty-city { position: relative; overflow: hidden; border-radius: 14px; background: #76aaa0; border: 3px solid #d4e2b6; padding: 0; justify-content: flex-end; }
+.pty-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.pty-plaque { position: relative; z-index: 1; margin: 0 8% 6%; padding: 8px 14px; border-radius: 12px; background: #153c3cf0; border: 2px solid #f4e3ad; text-align: center; display: grid; gap: 4px; justify-items: center; color: #e7f1ea; font-size: 12px; max-width: 86%; }
+.pty-plaque .ty-logo { color: #fff1c4; font-size: 4cqw; letter-spacing: .02em; }
+.pty-plaque .ty-card { color: #1d2a33; }
+.ty .ty-tok { border: 2px solid #fffaf0; box-shadow: 0 2px 4px #0006; }
+.ty .ty-info { background: #f1e9d6; color: #203c40; border-radius: 17px; border: 1px solid #d1d8b9; box-shadow: 0 10px 28px #0005; }
+.ty .ty-info .muted { color: #5c7676; }
+.ty .ty-info b { font-size: 20px; }
+.ty .ty-info .ty-rent th, .ty .ty-info .ty-rent td { color: #203c40; }
+.ty .ty-info .ty-rent tr.cur { background: #bd799233; }
+.ty .ty-info .ty-x { color: #203c40; border-color: #8faaa2; }
+@media (max-width: 600px) { .pty-strip { gap: 16px; padding: 10px 14px; } .pty-strip strong { font-size: 18px; } .pty-plaque { font-size: 10px; padding: 5px 8px; } }
