@@ -404,6 +404,15 @@
       renderProfiles();
     }).catch(() => { studio.note = "Avatar Studio could not load. Your current avatar is unchanged."; renderProfiles(); });
   }
+  // In a room, a saved look is sent to the server (validated there) so others see it now.
+  function syncAvatar() {
+    if (typeof S === "undefined" || !S || !S.code) return;
+    socket.emit("setAvatar", profile.avatar.v3 || null, (res) => {
+      if (res && res.error && res.error !== "room") { studio.note = res.error === "slow" ? "Saved on this device. Your party will see it after a moment; try again shortly." : "Saved on this device, but the party could not accept that look."; renderProfiles(); }
+    });
+  }
+  const studioDirty = () => !!studio.draft && JSON.stringify(AV.normalize(profile.avatar.v3) || null) !== JSON.stringify(studio.draft);
+  const focusLauncher = () => setTimeout(() => document.querySelector('[data-studio="open"]')?.focus(), 0);
   function studioSet(next, note = "") {
     const n = AV.normalize(next);
     if (!n) return;
@@ -439,9 +448,15 @@
     const b = e.target.closest("[data-studio]");
     if (!b || !AV) return;
     const act = b.dataset.studio;
-    if (act === "open") return studioOpenNow();
-    if (act === "classic") { delete profile.avatar.v3; studio.draft = null; studio.undo = []; saveProfile(); return renderProfiles(); }
-    if (act === "close") { studio.open = false; studio.draft = null; studio.undo = []; studio.note = ""; return renderProfiles(); }
+    if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-field="id"]')?.focus(), 60); }
+    if (act === "classic") { delete profile.avatar.v3; studio.draft = null; studio.undo = []; saveProfile(); syncAvatar(); renderProfiles(); return focusLauncher(); }
+    if (act === "close") {
+      // Unsaved changes ask before they are thrown away; Keep editing leaves everything as it was.
+      if (studioDirty() && !window.confirm("Discard your unsaved avatar changes?")) return;
+      studio.open = false; studio.draft = null; studio.undo = []; studio.note = "";
+      renderProfiles();
+      return focusLauncher();
+    }
     if (!studio.draft) return;
     if (act === "undo") { studio.draft = studio.undo.pop() || studio.draft; studio.note = ""; }
     else if (act === "reset") studioSet(AV.defaultConfig(studio.draft.id), "Reset to this character's default look.");
@@ -454,8 +469,10 @@
     } else if (act === "save") {
       const n = AV.normalize(studio.draft);
       if (!n) return;
+      const prev = profile.avatar.v3;
       profile.avatar.v3 = n;
-      try { saveProfile(); studio.note = "Saved."; } catch (err) { delete profile.avatar.v3; studio.note = "Could not save on this device. Your avatar is unchanged."; }
+      try { saveProfile(); studio.note = "Saved."; syncAvatar(); }
+      catch (err) { if (prev) profile.avatar.v3 = prev; else delete profile.avatar.v3; studio.note = "Could not save on this device (storage is full or blocked). Your avatar is unchanged."; }
     }
     renderProfiles();
   });
@@ -684,7 +701,7 @@
   });
   function openProfile() {
     openModal(
-      '<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">Your player is saved on this device. Changes apply when you next join a room.</p><div class="modal-actions"><button class="btn" data-close>Let’s Play</button></div>',
+      `<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">${S && S.code ? "Your player is saved on this device. A saved Avatar Studio look updates for your party right away." : "Your player is saved on this device. Changes apply when you next join a room."}</p><div class="modal-actions"><button class="btn" data-close>Let’s Play</button></div>`,
     );
     renderProfiles();
   }
@@ -1109,7 +1126,7 @@
             .map((v) => opt(v, S.maxPlayers))
             .join("")}</select></label>`;
     openModal(
-      `<h2 class="card-title">Game Settings</h2><p class="settings-note">${esc(G.name)} · ${editable ? "sensible defaults, fewer decisions." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the game settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions">${editable ? '<button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="settings-save" type="button">Save Settings</button>' : '<button class="btn" data-close>Close</button>'}</div>`,
+      `<h2 class="card-title">Game Settings</h2><p class="settings-note">${esc(G.name)} · ${editable ? "sensible defaults, fewer decisions." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the game settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions"><button class="btn btn-ghost" type="button" data-view="profile">Your player</button>${editable ? '<button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="settings-save" type="button">Save Settings</button>' : '<button class="btn" data-close>Close</button>'}</div>`,
     );
     $("#modal-body").classList.add("settings-modal");
     $("#modal-body").classList.toggle("settings-readonly", !editable);
@@ -2220,7 +2237,7 @@
         <label class="field"><span>Max spectators</span><select id="p-maxspec">${[0, 5, 10, 20, 50].map((v) => opt(v, S.maxSpectators)).join("")}</select></label>
         <label class="switch-row"><span>Lock party <small>No new people can join</small></span><input type="checkbox" role="switch" id="p-lock" ${S.locked ? "checked" : ""}></label>
       </fieldset>
-      <div class="modal-actions"><button class="btn btn-ghost btn-danger" id="p-leave" type="button">Leave Party</button><span class="grow"></span><button class="btn btn-ghost" data-close>Cancel</button>${host ? '<button class="btn" id="p-save" type="button">Save</button>' : ""}</div>`);
+      <div class="modal-actions"><button class="btn btn-ghost btn-danger" id="p-leave" type="button">Leave Party</button><span class="grow"></span><button class="btn btn-ghost" type="button" data-view="profile">Your player</button><button class="btn btn-ghost" data-close>Cancel</button>${host ? '<button class="btn" id="p-save" type="button">Save</button>' : ""}</div>`);
     $("#p-leave").addEventListener("click", leaveParty);
     $("#p-save")?.addEventListener("click", () => {
       if (!isHost()) return closeModal();

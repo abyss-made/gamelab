@@ -57,6 +57,26 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       await page.waitForFunction(() => window.App && App.S && App.S.code);
       ok(await page.evaluate(() => App.S.players.some((p) => p.id === App.S.you && p.avatar.v3 && p.avatar.v3.v === 3)), `${t}: server keeps the validated v3 config`);
       await page.waitForSelector('#screen-room .avatar.avatar-v3 svg', { timeout: 5000 }).then(() => ok(true, `${t}: room avatar renders the studio SVG`), () => ok(false, `${t}: room avatar renders the studio SVG`));
+      // Live sync: in the room, the host opens Your player from Party Settings, saves a studio look,
+      // and the other member sees it without rejoining.
+      if (vp.w === 1440) {
+        await hostPage.click('#settings-btn');
+        await hostPage.click('#modal [data-view="profile"]');
+        await hostPage.click('#modal [data-studio="open"]');
+        await hostPage.waitForSelector('#modal [data-studio-field="id"]');
+        await hostPage.selectOption('#modal [data-studio-field="id"]', 'a03');
+        await hostPage.click('#modal [data-studio="save"]');
+        const hostId = await hostPage.evaluate(() => App.S.you);
+        await page.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a03'; }, hostId, { timeout: 5000 })
+          .then(() => ok(true, `${t}: a saved look reaches the rest of the party live`), () => ok(false, `${t}: a saved look reaches the rest of the party live`));
+        // server rejects a forged / malformed config and keeps the accepted one
+        const bad = await page.evaluate(() => new Promise((r) => App.socket.emit('setAvatar', { v: 3, id: 'a01', palette: 'url(x)', expression: 'smile', eyes: 'default', hat: 'none', glasses: 'none', accessory: 'none', detail: 'clean' }, r)));
+        ok(bad && bad.error === 'invalid' && bad.avatar && bad.avatar.v3 && bad.avatar.v3.v === 3, `${t}: the server rejects a malformed avatar and keeps the accepted one`);
+        // rate limit: burst of 3, then slow
+        const burst = await page.evaluate(async () => { const out = []; for (let i = 0; i < 5; i++) out.push(await new Promise((r) => App.socket.emit('setAvatar', null, r))); return out.map((x) => x.error || 'ok'); });
+        ok(burst.includes('slow'), `${t}: avatar updates are rate limited (${burst.join(',')})`);
+        ok(await page.evaluate(() => { const me = App.S.players.find((x) => x.id === App.S.you); return Number.isInteger(me.avatar.e) && Number.isInteger(me.avatar.c); }), `${t}: the classic e/c fallback is always kept`);
+      }
       ok(errors.length === 0, `${t}: no page errors${errors.length ? ' - ' + errors[0] : ''}`);
       await hostPage.context().close();
       await page.context().close();

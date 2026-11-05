@@ -550,6 +550,24 @@ function attach(ioServer) {
 
     on('leaveRoom', () => leaveBySocket(socket));
 
+    // Avatar Studio: a member updates only their own look. The config is re-validated against the
+    // bundled allowlist; the legacy e/c fallback is kept for older clients. Rate limited per member
+    // (1 per 2s, burst 3) so reconnecting does not refill it. The ack returns the accepted config.
+    on('setAvatar', (v3, ack) => {
+      const c = ctx();
+      if (!c) return reply(ack, { error: 'room' });
+      if (!(c.m.avatarBucket || (c.m.avatarBucket = new Bucket(0.5, 3))).take()) return reply(ack, { error: 'slow', avatar: c.m.avatar });
+      const base = { e: c.m.avatar.e, c: c.m.avatar.c };
+      if (v3 === null) c.m.avatar = base; // back to the classic portrait
+      else {
+        const ok = normalizeV3(v3);
+        if (!ok) return reply(ack, { error: 'invalid', avatar: c.m.avatar });
+        c.m.avatar = { ...base, v3: ok };
+      }
+      broadcast(c.room);
+      reply(ack, { ok: true, avatar: c.m.avatar });
+    });
+
     on('chat', (text) => {
       const c = ctx();
       if (!c || chatLimited(c.m)) return;
