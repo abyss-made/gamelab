@@ -40,7 +40,7 @@ GameUI.dotsboxes = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 db";
+    root.className = "b2 db pdb";
     root.innerHTML = `<div class="b2-players card" id="db-players"></div>
       <div class="ttt-status" id="db-status" aria-live="polite"></div>
       <div class="db-wrap" id="db-board"></div>`;
