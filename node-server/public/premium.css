@@ -198,3 +198,51 @@
 .ty .ty-info .ty-rent tr.cur { background: #bd799233; }
 .ty .ty-info .ty-x { color: #203c40; border-color: #8faaa2; }
 @media (max-width: 600px) { .pty-strip { gap: 16px; padding: 10px 14px; } .pty-strip strong { font-size: 18px; } .pty-plaque { font-size: 10px; padding: 5px 8px; } }
+
+/* ---------- Battleship · Bluewater Command ---------- */
+.bs { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.bs #bs-main { background: radial-gradient(ellipse at 50% 40%, #183a4c, #041522 90%); border-radius: 22px; padding: 16px; }
+.bs .card { background: transparent; border: 0; box-shadow: none; }
+.pbs-label { display: flex; justify-content: space-between; padding: 6px 8px 10px; font-size: 11px; letter-spacing: 1px; color: #dbe7ec; }
+.pbs-label small { font-size: 10px; letter-spacing: 0; color: #8eb2c2; }
+.bs .bs-title { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #dbe7ec; }
+.bs .bs-title small { font-size: 10px; letter-spacing: 0; text-transform: none; color: #8eb2c2; }
+.bs .bs-grid.pbs-chart { position: relative; max-width: 520px; gap: 0; padding: 10px; border-radius: 14px; border: 2px solid #3d6273; background: #0c2633; box-shadow: inset 0 0 0 6px #0a1f2a, 0 14px 30px #0006; }
+.bs .pbs-chart .bs-head { color: #9bb9c6; font-size: 11px; font-style: normal; text-align: center; align-self: center; }
+.bs .pbs-chart .bs-cell { border-radius: 0; background: repeating-linear-gradient(0deg, #ffffff06 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 40%, #1d5468, #12394a); border: 0.5px solid #3f7487aa; position: relative; z-index: 1; }
+.bs .pbs-chart .bs-cell.ship, .bs .pbs-chart .bs-cell.draft { background: repeating-linear-gradient(0deg, #ffffff06 0 1px, transparent 1px 9px), radial-gradient(ellipse at 50% 40%, #1d5468, #12394a); }
+.bs .pbs-chart .bs-cell:not(:disabled):hover { background: #24657a; }
+.bs .pbs-chart .bs-cell:focus-visible { outline: 3px solid #d6ff8b; outline-offset: -3px; z-index: 4; }
+.bs .pbs-chart .bs-cell.miss .pbs-mark { position: absolute; inset: 38%; border-radius: 50%; background: #e8f4f7; box-shadow: 0 0 0 3px #e8f4f733; }
+.bs .pbs-chart .bs-cell.hit .pbs-mark { position: absolute; inset: 14%; border-radius: 50%; background: #f39a5a; border: 2px solid #ffd2a8; box-shadow: 0 0 10px #f39a5a88; z-index: 3; }
+.bs .pbs-chart .bs-cell.hit .pbs-mark::before, .bs .pbs-chart .bs-cell.hit .pbs-mark::after { content: ""; position: absolute; left: 50%; top: 18%; bottom: 18%; width: 2px; background: #3a1c0e; transform: translateX(-50%) rotate(45deg); }
+.bs .pbs-chart .bs-cell.hit .pbs-mark::after { transform: translateX(-50%) rotate(-45deg); }
+.bs .pbs-chart .bs-cell.sunk .pbs-mark { background: #b8443b; border-color: #f2a59a; }
+.bs .pbs-chart .bs-cell.aim { outline: 3px solid #b3f84c; outline-offset: -4px; background: #1f5d50; }
+.bs .pbs-chart .bs-cell.aim::after { content: ""; position: absolute; inset: 22%; border: 2px solid #d6ff8b; border-radius: 50%; }
+.bs .pbs-chart .bs-cell.last { box-shadow: inset 0 0 0 2px #ffd2a8; }
+.pbs-ship { position: relative; z-index: 2; pointer-events: none; display: block; }
+.pbs-ship img { position: absolute; left: 50%; top: 50%; width: 96%; height: 80%; transform: translate(-50%, -50%); object-fit: fill; filter: drop-shadow(0 3px 3px #0008); }
+.pbs-ship.v img { width: calc(var(--len) * 96%); height: calc(80% / var(--len)); transform: translate(-50%, -50%) rotate(90deg); }
+.bs .bs-fleet { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.bs .bs-ship { display: flex; align-items: center; gap: 8px; min-height: 44px; background: #0c2633; border: 1px solid #3d6273; color: #dbe7ec; border-radius: 10px; padding: 4px 10px; }
+.bs .bs-ship img { width: 54px; height: 16px; object-fit: fill; }
+.bs .bs-ship small { color: #8eb2c2; font-size: 10px; }
+.bs .bs-ship.cur { border-color: #b3f84c; }
+.pbs-fire { align-items: center; justify-content: center; gap: 18px; padding: 10px 14px; margin-top: 12px; border: 1px solid #4f7180; border-radius: 12px; }
+.pbs-target small { display: block; font-size: 10px; color: #97b9ca; }
+.pbs-target strong { font-size: 28px; color: #dfebcf; }
+.pbs-fire .bs-fire { min-width: 170px; min-height: 48px; }
+.pbs-fire .bs-fire:not(:disabled) { background: #b3f84c; color: #12200c; box-shadow: 0 3px 0 #557825; }
+.pbs-tabs { display: none; gap: 8px; margin-bottom: 10px; }
+.pbs-back { display: none; margin: 12px auto 0; }
+@media (min-width: 820px) { .bs-two.pbs .pbs-enemy { order: 2; } .bs-two.pbs .pbs-friendly { order: 1; } }
+@media (max-width: 819px) {
+  .pbs-tabs { display: flex; }
+  .pbs-tabs .btn { flex: 1; min-height: 44px; }
+  .bs-two.pbs[data-tab="target"] .pbs-friendly { display: none; }
+  .bs-two.pbs[data-tab="fleet"] .pbs-enemy { display: none; }
+  .bs-two.pbs[data-tab="fleet"] .pbs-back { display: flex; }
+  .bs #bs-main { padding: 8px; }
+  .bs .bs-grid.pbs-chart { padding: 6px; }
+}

@@ -133,6 +133,14 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
           ok(f1.state.game.moves >= 1, `${t}: firing is applied on the server`);
           await until(async () => (await page.$$('.bs-cell.hit, .bs-cell.miss')).length >= 1);
           ok((await page.$$('.bs-cell.hit, .bs-cell.miss')).length >= 1, `${t}: the shot shows as a hit or miss on the board`);
+          ok((await page.$$('.pbs-enemy .pbs-ship')).length === 0, `${t}: enemy waters never draw ship art`);
+          ok((await page.$$('.pbs-friendly .pbs-ship img')).length === 5, `${t}: your fleet shows the five vessel illustrations`);
+          if (vp.tag === 'phone') {
+            await page.click('[data-bstab="fleet"]');
+            ok(await page.isVisible('.pbs-friendly') && !(await page.isVisible('.pbs-enemy')), `${t}: phone Fleet tab shows your fleet`);
+            await page.click('.pbs-back');
+            ok(await page.isVisible('.pbs-enemy'), `${t}: Back to targeting returns to enemy waters`);
+          }
           ok(!JSON.stringify(f1.state.game.players).includes('"cells"') || f1.state.game.players.every((p) => p.sunk.every((s) => s.cells.length === s.len)), `${t}: opponents only receive cells of sunk ships`);
         }
         if (game === 'checkers') {
