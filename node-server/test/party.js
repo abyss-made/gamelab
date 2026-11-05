@@ -11,7 +11,7 @@ let failures = 0;
 const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) failures++; };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const tok = () => [...Array(32)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-const HIDDEN = ['higherlower', 'liarsdice', 'hotpotato', 'reversi'];
+const HIDDEN = ['higherlower', 'liarsdice', 'hotpotato', 'reversi', 'rps'];
 
 function start(port, env = {}) {
   const base = { ...process.env, PORT: String(port), ALPHA_ENABLED: '' };
@@ -95,11 +95,11 @@ async function winTicTacToe(cs) {
       const page = await get(url + '/');
       const m = page.body.match(/hidden: (\[[^\]]*\])/);
       const hidden = m ? JSON.parse(m[1]) : null;
-      ok(hidden && hidden.slice().sort().join() === HIDDEN.slice().sort().join(), 'home page tells the client exactly the four hidden games');
+      ok(hidden && hidden.slice().sort().join() === HIDDEN.slice().sort().join(), 'home page tells the client exactly the five hidden games');
       const { GAMES } = require('../server/games');
       ok(Object.keys(GAMES).length === 25 && HIDDEN.every((id) => GAMES[id]), 'hidden game modules stay registered (25 total)');
-      ok(Object.keys(GAMES).length - hidden.length === 21, '21 games are selectable');
-      for (const slug of ['/higher-or-lower', '/liars-dice', '/hot-potato', '/reversi']) {
+      ok(Object.keys(GAMES).length - hidden.length === 20, '20 games are selectable');
+      for (const slug of ['/higher-or-lower', '/liars-dice', '/hot-potato', '/reversi', '/rock-paper-scissors']) {
         const r = await get(url + slug);
         ok(r.status === 302 && r.headers.location === '/?view=games', `${slug} redirects to the catalog`);
       }

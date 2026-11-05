@@ -66,7 +66,7 @@ async function startWithFriend(page, game) {
 }
 
 (async () => {
-  const env = { ...process.env, PORT: String(PORT), ALPHA_ENABLED: '' };
+  const env = { ...process.env, PORT: String(PORT), ALPHA_ENABLED: '', HIDDEN_GAMES: '' };
   const srv = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env, stdio: ['ignore', 'pipe', 'inherit'] });
   await new Promise((r) => srv.stdout.once('data', r));
   const browser = await chromium.launch();

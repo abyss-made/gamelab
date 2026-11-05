@@ -376,6 +376,7 @@ function leaveBySocket(socket) {
 function startGame(room) {
   const G = gameOf(room);
   if (!G || room.phase !== 'lobby' || room.seats.length < G.meta.minPlayers) return false;
+  if (HIDDEN.has(room.gameId)) return false; // a room left in a retired game can't begin a new match
   if (G.meta.resetScores) for (const m of seated(room)) m.score = 0;
   for (const m of room.members.values()) m.ready = !!m.bot; // readiness is asked again for every rematch
   room.gameCount++;
@@ -771,6 +772,7 @@ function attach(ioServer) {
       if (!c) return;
       const G = gameOf(c.room);
       if (!G) return socket.emit('notice', 'Choose a game first.');
+      if (HIDDEN.has(c.room.gameId)) return socket.emit('notice', 'That game is no longer available. Choose another game.');
       if (!startGame(c.room)) socket.emit('notice', `You need at least ${G.meta.minPlayers} players to start.`);
     });
 

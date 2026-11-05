@@ -339,7 +339,7 @@ def('no-work-without-people', async () => {
 });
 
 (async () => {
-  srv = await H.startServer({ env: { BOT_DELAY_MS: '0' } });
+  srv = await H.startServer({ env: { BOT_DELAY_MS: '0', HIDDEN_GAMES: '' } });
   console.log(`bots: real server on ${srv.url}, seed ${srv.seed}`);
   try {
     for (const s of SC) {

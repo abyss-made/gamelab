@@ -809,7 +809,7 @@ def('autostart-lock-abandon', async () => {
 const PRIVATE = ['hand', 'myShips', 'word', 'role', 'source', 'myAnswers', 'myPick', 'myFake'];
 const PRIVATE_FOR = { drawguess: ['choices'] };
 def('smoke-all-games', async () => {
-  ok(VISIBLE.length === 21, `21 games are visible (${VISIBLE.length})`);
+  ok(VISIBLE.length === 20, `20 games are visible (${VISIBLE.length})`);
   for (const game of VISIBLE) {
     const meta = GAMES[game].meta;
     const n = Math.min(meta.maxPlayers, Math.max(meta.minPlayers, 3));
