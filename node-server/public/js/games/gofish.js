@@ -48,6 +48,7 @@ GameUI.gofish = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+    window.addEventListener("resize", fitHand); // rotation / resize refits the hand
   }
 
   function onClick(e) {
@@ -126,6 +127,7 @@ GameUI.gofish = (() => {
 
   // overlap cards just enough to fit; the corner index stays visible
   function fitHand() {
+    if (!root) return;
     const hand = root.querySelector("#gf-hand");
     const cards = [...hand.querySelectorAll(".pgf-card")];
     if (cards.length < 2) return;
@@ -138,6 +140,7 @@ GameUI.gofish = (() => {
   }
 
   function unmount() {
+    window.removeEventListener("resize", fitHand);
     if (clock) clock.stop();
     if (root) root.remove();
     root = null;

@@ -343,8 +343,8 @@
 .pch-theme span { width: 100%; font-size: 11px; color: #8da5a5; }
 .pch-theme [aria-pressed="true"] { border-color: #c6e88c; }
 @media (max-width: 899px) { .pch .pch-layout { padding: 10px; gap: 16px; } .pch .ch-board { padding: 8px; } .pch .ch-clock { font-size: 18px; padding: 6px 10px; } }
-.pch .ch-board { grid-template-rows: repeat(8, 1fr); aspect-ratio: 1; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
-.pch .pch-player { width: 100%; max-width: min(640px, calc(100svh - 330px)); margin: 0 auto; }
+.pch .ch-board { grid-template-rows: repeat(8, 1fr); aspect-ratio: 1; max-width: min(640px, max(300px, calc(100svh - 330px))); margin: 0 auto; }
+.pch .pch-player { width: 100%; max-width: min(640px, max(300px, calc(100svh - 330px))); margin: 0 auto; }
 @media (max-width: 899px) { .pch .ch-board, .pch .pch-player { max-width: 100%; } }
 
 /* ---------- Checkers · Emerald House ---------- */
@@ -352,7 +352,7 @@
 .pck .b2-players { background: transparent; border: 0; justify-content: space-between; }
 .pck .b2-player { background: #0f2c2acc; border: 1px solid #45706455; border-radius: 14px; }
 .pck .b2-player.active { border-color: #b8e08a; }
-.pck .ck-board { width: 100%; max-width: min(520px, calc(100svh - 330px)); border: 0; padding: 18px; border-radius: 12px; background: #8fa98a; box-shadow: 0 0 0 3px #b8cbb0, 0 8px 0 #4f6a55, 0 18px 30px #0007; gap: 0; grid-template-rows: repeat(8, 1fr); }
+.pck .ck-board { width: 100%; max-width: min(520px, max(300px, calc(100svh - 330px))); border: 0; padding: 18px; border-radius: 12px; background: #8fa98a; box-shadow: 0 0 0 3px #b8cbb0, 0 8px 0 #4f6a55, 0 18px 30px #0007; gap: 0; grid-template-rows: repeat(8, 1fr); }
 .pck .ck-sq.light { background: #efe6cf; }
 .pck .ck-sq.dark { background: #3f6e5e; }
 .pck .ck-sq.last { box-shadow: inset 0 0 0 3px #e8d38a99; }
@@ -373,7 +373,7 @@
 .pttt .b2-players { background: transparent; border: 0; justify-content: space-between; }
 .pttt .b2-player { background: #10262ecc; border: 1px solid #3f5f6655; border-radius: 14px; }
 .pttt .b2-player.active { border-color: #b8e08a; }
-.pttt .ttt-board { width: min(100%, 500px, calc(100svh - 330px)); aspect-ratio: 1; margin: 6px auto; padding: 20px; gap: 14px; border-radius: 22px; background: linear-gradient(#e8dcc0, #cdbf9f); box-shadow: 0 0 0 3px #f1e8d2, 0 10px 0 #a99c7c, 0 22px 34px #0007; }
+.pttt .ttt-board { width: min(100%, 500px, max(300px, calc(100svh - 330px))); aspect-ratio: 1; margin: 6px auto; padding: 20px; gap: 14px; border-radius: 22px; background: linear-gradient(#e8dcc0, #cdbf9f); box-shadow: 0 0 0 3px #f1e8d2, 0 10px 0 #a99c7c, 0 22px 34px #0007; }
 .pttt .ttt-cell { border: 0; border-radius: 12px; background: linear-gradient(#cfd2c0, #c2c6b3); box-shadow: inset 0 0 0 1px #ffffff55, 0 4px 0 #9fa392; display: grid; place-items: center; position: relative; }
 .pttt .ttt-cell:not(:disabled)::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #8d9285; }
 .pttt .ttt-cell:not(:disabled):hover { background: linear-gradient(#e2e4d4, #d3d6c4); }
@@ -415,7 +415,7 @@
 
 /* ---------- Four in a Row · Drop Society (selective: keep simplicity) ---------- */
 .pfr { --d1: #e8786f; --d2: #f0c25e; }
-.pfr .fr-board-wrap { position: relative; max-width: min(620px, calc((100svh - 330px) * 1.15)); margin-top: 26px; margin-bottom: 26px; background: linear-gradient(160deg, #3b6aa8, #22487e); border: 3px solid #8fb3df; border-radius: 22px; box-shadow: 0 16px 34px #0007, inset 0 0 0 6px #ffffff12; }
+.pfr .fr-board-wrap { position: relative; max-width: min(620px, max(320px, calc((100svh - 330px) * 1.15))); margin-top: 26px; margin-bottom: 26px; background: linear-gradient(160deg, #3b6aa8, #22487e); border: 3px solid #8fb3df; border-radius: 22px; box-shadow: 0 16px 34px #0007, inset 0 0 0 6px #ffffff12; }
 .pfr .fr-board { counter-reset: frcol; }
 .pfr .fr-col { position: relative; }
 .pfr .fr-col::before { counter-increment: frcol; content: counter(frcol); position: absolute; top: -34px; left: 0; right: 0; text-align: center; font-size: 12px; color: #b9cbe0; }
