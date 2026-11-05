@@ -209,6 +209,48 @@ async function createRoom(page, game) {
               await sleep(400);
               ok((await page.textContent('#gf-log')).length > 0, `${t}: the move appears in the log`);
             }
+            // Arranged views (nothing sent): pending ask, book ledger, Ace = 14.
+            const arr = await page.evaluate(() => {
+              const base = JSON.parse(JSON.stringify(window.App.S));
+              const g = base.game;
+              const meP = g.players.find((p) => p.id === base.you);
+              const other = g.players.find((p) => p.id !== base.you);
+              g.turnId = base.you;
+              g.hand = [{ r: 14, s: 'S' }, { r: 14, s: 'H' }, { r: 7, s: 'C' }];
+              meP.books = [5]; other.books = [9];
+              const sent = [];
+              const emit = window.App.socket.emit;
+              window.App.socket.emit = (...a) => { sent.push(a); };
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(base);
+              const seededNew = document.querySelectorAll('.pgf .new').length;
+              const aceChip = [...document.querySelectorAll('[data-rank]')].find((b) => b.dataset.rank === '14');
+              const aceLabel = aceChip ? aceChip.textContent.trim() : '';
+              aceChip.click();
+              document.querySelector('#gf-go').click();
+              const pendingText = document.querySelector('#gf-status').textContent;
+              const lockedAfterAsk = document.querySelector('#gf-go').disabled && [...document.querySelectorAll('[data-rank]')].every((b) => b.disabled);
+              GameUI.gofish.update(base); // duplicate snapshot: still pending, no celebration
+              const stillPending = /Asking/.test(document.querySelector('#gf-status').textContent);
+              const dupNew = document.querySelectorAll('.pgf .new').length;
+              const next = JSON.parse(JSON.stringify(base));
+              next.game.players.find((p) => p.id === base.you).books = [5, 14];
+              next.game.hand = [{ r: 7, s: 'C' }];
+              next.game.log = [...next.game.log, 'arranged'];
+              GameUI.gofish.update(next);
+              const newBooks = [...document.querySelectorAll('.pgf .new')].map((e) => e.textContent.trim());
+              const cleared = !/Asking/.test(document.querySelector('#gf-status').textContent);
+              window.App.socket.emit = emit;
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(window.App.S);
+              return { seededNew, aceLabel, sent: sent.length, sentRank: sent[0] && sent[0][1] && sent[0][1].rank, pendingText, lockedAfterAsk, stillPending, dupNew, newBooks, cleared };
+            });
+            ok(arr.aceLabel === 'A', `${t}: rank 14 is labelled Ace (A)`);
+            ok(arr.seededNew === 0, `${t}: existing books are seeded silently on first view`);
+            ok(arr.sent === 1 && arr.sentRank === 14, `${t}: Ask sends the chosen rank once`);
+            ok(/Asking/.test(arr.pendingText) && arr.lockedAfterAsk, `${t}: the named ask stays pending and locked until the view changes`);
+            ok(arr.stillPending && arr.dupNew === 0, `${t}: a duplicate snapshot keeps the ask pending and celebrates nothing`);
+            ok(arr.newBooks.length === 1 && arr.newBooks[0].startsWith('A') && arr.cleared, `${t}: only the newly observed book animates, and the pending ask clears`);
           }
         }
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, `${game}-${vp.tag}.png`) });

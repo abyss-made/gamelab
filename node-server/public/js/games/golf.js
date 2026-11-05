@@ -335,7 +335,7 @@ GameUI.golf = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 gf";
+    root.className = "b2 gf golf";
     root.innerHTML = `<div class="gf-head"><div><span class="gf-eyebrow" id="gf-eyebrow"></span><h2 id="gf-title"></h2></div><div class="gf-score" id="gf-score"></div></div>
       <div class="b2-players card" id="gf-players"></div>
       <div class="ttt-status" id="gf-status" aria-live="polite"></div>
