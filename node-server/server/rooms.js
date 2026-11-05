@@ -557,13 +557,12 @@ function attach(ioServer) {
       const c = ctx();
       if (!c) return reply(ack, { error: 'room' });
       if (!(c.m.avatarBucket || (c.m.avatarBucket = new Bucket(0.5, 3))).take()) return reply(ack, { error: 'slow', avatar: c.m.avatar });
-      const base = { e: c.m.avatar.e, c: c.m.avatar.c };
-      if (v3 === null) c.m.avatar = base; // back to the classic portrait
-      else {
-        const ok = normalizeV3(v3);
-        if (!ok) return reply(ack, { error: 'invalid', avatar: c.m.avatar });
-        c.m.avatar = { ...base, v3: ok };
-      }
+      // Mutate the member's avatar object in place: active games snapshot this same reference
+      // (st.avatars / st.players[].avatar), so their in-game portraits update too.
+      const ok = v3 === null ? null : normalizeV3(v3);
+      if (v3 !== null && !ok) return reply(ack, { error: 'invalid', avatar: c.m.avatar });
+      if (ok) c.m.avatar.v3 = ok;
+      else delete c.m.avatar.v3; // back to the classic portrait
       broadcast(c.room);
       reply(ack, { ok: true, avatar: c.m.avatar });
     });

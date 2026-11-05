@@ -69,6 +69,17 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         const hostId = await hostPage.evaluate(() => App.S.you);
         await page.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a03'; }, hostId, { timeout: 5000 })
           .then(() => ok(true, `${t}: a saved look reaches the rest of the party live`), () => ok(false, `${t}: a saved look reaches the rest of the party live`));
+        // Mid-game: a saved look also reaches the active game's own player views (Chess snapshots avatars at start).
+        await hostPage.evaluate(() => App.socket.emit('switchGame', { game: 'chess' }));
+        await hostPage.waitForFunction(() => App.S.gameId === 'chess');
+        await hostPage.evaluate(() => App.socket.emit('startGame'));
+        await page.waitForFunction(() => App.S.phase === 'game' && App.S.game && App.S.game.players, null, { timeout: 8000 });
+        const look = { v: 3, id: 'a07', palette: 'cyan', expression: 'joy', eyes: 'bright', hat: 'none', glasses: 'none', accessory: 'none', detail: 'clean' };
+        const res = await hostPage.evaluate((l) => new Promise((r) => App.socket.emit('setAvatar', l, r)), look);
+        ok(res && res.ok, `${t}: mid-game avatar save is accepted`);
+        await page.waitForFunction((id) => { const p = App.S.game.players.find((x) => x.id === id); return p && p.avatar && p.avatar.v3 && p.avatar.v3.id === 'a07'; }, hostId, { timeout: 5000 })
+          .then(() => ok(true, `${t}: a mid-game save updates the in-game player view`), () => ok(false, `${t}: a mid-game save updates the in-game player view`));
+        await hostPage.evaluate(() => App.socket.emit('endGame'));
         // server rejects a forged / malformed config and keeps the accepted one
         const bad = await page.evaluate(() => new Promise((r) => App.socket.emit('setAvatar', { v: 3, id: 'a01', palette: 'url(x)', expression: 'smile', eyes: 'default', hat: 'none', glasses: 'none', accessory: 'none', detail: 'clean' }, r)));
         ok(bad && bad.error === 'invalid' && bad.avatar && bad.avatar.v3 && bad.avatar.v3.v === 3, `${t}: the server rejects a malformed avatar and keeps the accepted one`);
