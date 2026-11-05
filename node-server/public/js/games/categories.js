@@ -12,7 +12,7 @@ GameUI.categories = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 cr";
+    root.className = "b2 cr pcat";
     root.innerHTML = `<div class="card cr-head" id="cr-head"></div><div class="card cr-body" id="cr-body"></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);

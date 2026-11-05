@@ -11,7 +11,7 @@ GameUI.bluff = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 bl";
+    root.className = "b2 bl pbf";
     root.innerHTML = `<div class="b2-players card" id="bl-players"></div>
       <div class="card bl-main">
         <div class="hl-round" id="bl-round"></div>
