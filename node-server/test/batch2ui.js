@@ -159,16 +159,32 @@ async function createRoom(page, game) {
             }
             const n = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
             ok(n >= 7, `${t}: host sees their own hand (${n} cards)`);
+            const backs = await page.$$eval('.pcs-seat .pcs-backs img', (e) => e.length);
+            ok(backs === Math.min(7, f.state.game.players.find((p) => p.id !== me).count), `${t}: opponent fan shows face-down backs from the public count (${backs})`);
+            ok(!(await page.$('.pcs-backs .pcs-card')), `${t}: opponent fans never contain card faces`);
             const enemy = JSON.stringify(f.state.game.hand);
             const pl = await page.$$('#cs-hand .cs-card.playable');
             if (pl.length) {
               const before = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
               const isWild = await pl[0].evaluate((e) => e.classList.contains('c-w'));
+              const id = await pl[0].getAttribute('data-card');
               await pl[0].click();
+              await sleep(300);
+              ok(await page.$$eval('#cs-hand .cs-card', (e) => e.length) === before, `${t}: tapping a card only inspects it`);
+              ok(await page.getAttribute(`#cs-hand [data-card="${id}"]`, 'aria-pressed') === 'true', `${t}: the inspected card is marked selected`);
+              await sleep(1200); // a timer tick repaints the screen
+              ok(await page.getAttribute(`#cs-hand [data-card="${id}"]`, 'aria-pressed') === 'true', `${t}: selection survives timer repaints`);
+              const unplayable = await page.$('#cs-hand .cs-card:not(.playable)');
+              if (unplayable) {
+                await unplayable.click();
+                ok(await page.isDisabled('#cs-play'), `${t}: Play is disabled for a card that doesn't match`);
+                await page.click(`#cs-hand [data-card="${id}"]`);
+              }
+              await page.click('#cs-play');
               if (isWild) await page.click('[data-color="g"]');
               await sleep(400);
               const after = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
-              ok(after === before - 1, `${t}: tapping a playable card plays it`);
+              ok(after === before - 1, `${t}: Play plays the selected card`);
             } else {
               await page.click('#cs-draw');
               await sleep(400);
