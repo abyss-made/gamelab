@@ -32,16 +32,24 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       const open = page.locator('[data-studio="open"]:visible').first();
       await open.waitFor({ timeout: 5000 });
       await open.click();
-      await page.waitForSelector('[data-studio-field="id"]');
+      await page.waitForSelector('.av-gallery .av-tile');
       ok(true, `${t}: Avatar Studio opens`);
-      ok((await page.locator('[data-studio-field="id"] option').count()) === 35, `${t}: 35 characters offered`);
-      await page.selectOption('[data-studio-field="id"]', 'a05');
+      ok((await page.locator('.av-gallery .av-tile').count()) === 35, `${t}: 35 characters offered`);
+      await page.waitForFunction(() => document.querySelectorAll('.av-gallery .av-tile svg').length === 35, null, { timeout: 8000 }).then(() => ok(true, `${t}: all 35 gallery tiles render SVG previews`), () => ok(false, `${t}: all 35 gallery tiles render SVG previews`));
+      ok((await page.locator('.av-gallery .av-tile.on').count()) === 1, `${t}: exactly one tile is selected`);
+      await page.fill('[data-studio-search]', 'zzzz');
+      ok((await page.locator('.av-gallery .av-tile:visible').count()) === 0, `${t}: search with no match hides all tiles`);
+      await page.fill('[data-studio-search]', '');
+      ok((await page.locator('.av-gallery .av-tile:visible').count()) === 35, `${t}: clearing search restores all 35`);
+      if (process.env.SHOTS) await page.screenshot({ path: `${process.env.SHOTS}/gallery-${vp.w}.png` });
+      await page.click('[data-studio-pick="a05"]');
+      await page.waitForFunction(() => { const f = document.activeElement; return !!f && f.matches('[data-studio-pick="a05"]') && f.getClientRects().length > 0; }, null, { timeout: 2000 }).then(() => ok(true, `${t}: focus stays on the picked visible tile`), () => ok(false, `${t}: focus stays on the picked visible tile`));
       await page.waitForSelector('.av-studio-preview svg');
       ok(await page.isEnabled('[data-studio="save"]'), `${t}: changing the draft enables Save`);
       ok((await page.evaluate(() => JSON.parse(localStorage.getItem('pg_profile')).avatar.v3)) === undefined, `${t}: draft does not touch the saved profile`);
       await page.click('[data-studio="undo"]');
       ok(await page.isDisabled('[data-studio="undo"]'), `${t}: Undo restores the previous draft`);
-      await page.selectOption('[data-studio-field="id"]', 'a01');
+      await page.click('[data-studio-pick="a01"]');
       await page.selectOption('[data-studio-field="hat"]', 'beanie');
       ok((await page.evaluate(() => document.querySelector('[data-studio-field="accessory"] option[value="headphones"]').disabled)), `${t}: headphones disabled while a hat is worn`);
       await page.click('[data-studio="random"]');
@@ -63,8 +71,9 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         await hostPage.click('#settings-btn');
         await hostPage.click('#modal [data-view="profile"]');
         await hostPage.click('#modal [data-studio="open"]');
-        await hostPage.waitForSelector('#modal [data-studio-field="id"]');
-        await hostPage.selectOption('#modal [data-studio-field="id"]', 'a03');
+        await hostPage.waitForSelector('#modal .av-gallery .av-tile');
+        await hostPage.click('#modal [data-studio-pick="a03"]');
+        await hostPage.waitForFunction(() => document.activeElement && document.activeElement.matches('#modal [data-studio-pick="a03"]'), null, { timeout: 2000 }).then(() => ok(true, `${t}: modal gallery keeps keyboard focus on the picked tile`), () => ok(false, `${t}: modal gallery keeps keyboard focus on the picked tile`));
         await hostPage.click('#modal [data-studio="save"]');
         const hostId = await hostPage.evaluate(() => App.S.you);
         await page.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a03'; }, hostId, { timeout: 5000 })
@@ -97,8 +106,8 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         await page.click('#settings-btn');
         await page.click('#modal [data-view="profile"]');
         if (await page.$('#modal [data-studio="open"]')) await page.click('#modal [data-studio="open"]');
-        await page.waitForSelector('#modal [data-studio-field="id"]');
-        await page.selectOption('#modal [data-studio-field="id"]', 'a11');
+        await page.waitForSelector('#modal .av-gallery .av-tile');
+        await page.click('#modal [data-studio-pick="a11"]');
         await page.click('#modal [data-studio="save"]'); // bucket is empty from the burst above -> 'slow' -> retry
         await hostPage.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a11'; }, pageId, { timeout: 9000 })
           .then(() => ok(true, `${t}: a rate-limited save is retried and reaches the party`), () => ok(false, `${t}: a rate-limited save is retried and reaches the party`));

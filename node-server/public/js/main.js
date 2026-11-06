@@ -394,7 +394,7 @@
 
   // ----- Avatar Studio 2.0: draft is separate from the saved look until Save -----
   const AV = window.PGAvatar;
-  const studio = { open: false, draft: null, undo: [], note: "" };
+  const studio = { open: false, draft: null, undo: [], note: "", q: "" };
   const STUDIO_LABELS = { expression: "Expression", eyes: "Eyes", hat: "Hat", glasses: "Glasses", accessory: "Accessory", detail: "Detail" };
   const cap = (x) => x.charAt(0).toUpperCase() + x.slice(1);
   function studioOpenNow() {
@@ -431,7 +431,7 @@
   }
   function studioHTML() {
     if (!AV) return "";
-    if (!studio.open) return `<div class="av-studio"><button type="button" class="btn btn-small btn-ghost" data-studio="open">Avatar Studio</button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}${studio.note ? `<p class="muted" role="status">${esc(studio.note)}</p>` : ""}</div>`;
+    if (!studio.open) return `<div class="av-studio"><button type="button" class="btn av-studio-launch" data-studio="open">✨ Avatar Studio <small>35 characters</small></button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}${studio.note ? `<p class="muted" role="status">${esc(studio.note)}</p>` : ""}</div>`;
     const cat = AV.catalog();
     if (!cat || !studio.draft) return `<div class="av-studio" role="status">${esc(studio.note) || "Loading Avatar Studio…"}</div>`;
     const d = studio.draft;
@@ -440,7 +440,11 @@
     const saved = JSON.stringify(AV.normalize(profile.avatar.v3) || null) === JSON.stringify(d);
     return `<div class="av-studio open" role="group" aria-label="Avatar Studio">
       <div class="av-studio-preview">${avatarHTML({ e: 0, c: profile.avatar.c, v3: d }, "av-xl")}</div>
-      <label class="field"><span>Character</span><select data-studio-field="id">${cat.characters.map((c) => `<option value="${c.id}" ${c.id === d.id ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></label>
+      <div class="field"><span id="av-gal-label">Character</span>
+        <input type="search" class="av-search" data-studio-search placeholder="Search 35 characters" aria-label="Search characters" value="${esc(studio.q)}" maxlength="24" autocomplete="off">
+        <div class="av-gallery" role="group" aria-labelledby="av-gal-label">${cat.characters.map((c) => `<button type="button" class="av-tile ${c.id === d.id ? "on" : ""}" data-studio-pick="${c.id}" data-name="${esc(c.name.toLowerCase())}" aria-pressed="${c.id === d.id}" aria-label="${esc(c.name)}" title="${esc(c.name)}" ${studio.q && !c.name.toLowerCase().includes(studio.q.toLowerCase()) ? "hidden" : ""}>${avatarHTML({ e: 0, c: profile.avatar.c, v3: { ...AV.defaultConfig(c.id), palette: d.palette } }, "av-tile-art")}<span>${esc(c.name)}</span></button>`).join("")}</div>
+        <p class="muted av-empty" ${studio.q && !cat.characters.some((c) => c.name.toLowerCase().includes(studio.q.toLowerCase())) ? "" : "hidden"}>No characters match.</p>
+      </div>
       ${sel("palette", Object.keys(AV.PALETTES), "Color")}
       ${AV.SLOTS.map((k) => sel(k, ch.compatibility[k], STUDIO_LABELS[k])).join("")}
       <p class="muted" role="status" aria-live="polite">${esc(studio.note)}</p>
@@ -456,7 +460,7 @@
     const b = e.target.closest("[data-studio]");
     if (!b || !AV) return;
     const act = b.dataset.studio;
-    if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-field="id"]')?.focus(), 60); }
+    if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-search]')?.focus(), 60); }
     if (act === "classic") {
       const prev = profile.avatar.v3;
       delete profile.avatar.v3;
@@ -491,12 +495,28 @@
     }
     renderProfiles();
   });
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-studio-pick]");
+    if (!t || !AV || !studio.draft || t.dataset.studioPick === studio.draft.id) return;
+    const host = t.closest("[data-profile]");
+    studioSet({ ...studio.draft, id: t.dataset.studioPick }, "");
+    renderProfiles();
+    setTimeout(() => (host && host.isConnected ? host : document).querySelector(`[data-studio-pick="${studio.draft.id}"]`)?.focus(), 0);
+  });
+  document.addEventListener("input", (e) => {
+    if (!e.target.matches("[data-studio-search]")) return;
+    studio.q = e.target.value.trim().slice(0, 24);
+    const q = studio.q.toLowerCase();
+    let n = 0;
+    for (const t of e.target.parentElement.querySelectorAll(".av-tile")) { const m = !q || t.dataset.name.includes(q); t.hidden = !m; if (m) n++; }
+    const empty = e.target.parentElement.querySelector(".av-empty");
+    if (empty) empty.hidden = n > 0;
+  });
   document.addEventListener("change", (e) => {
     const f = e.target.closest("[data-studio-field]");
     if (!f || !AV || !studio.draft) return;
     const key = f.dataset.studioField;
-    if (key === "id") studioSet({ ...studio.draft, id: f.value }, "");
-    else studioSet({ ...studio.draft, [key]: f.value });
+    studioSet({ ...studio.draft, [key]: f.value });
     renderProfiles();
   });
 
