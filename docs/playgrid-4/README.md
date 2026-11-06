@@ -23,6 +23,7 @@ Use the repository's existing private-alpha configuration. The screenshot script
 - [Monitor ad preview](screenshots/ads-preview-1920.png)
 - [Full screenshot matrix](SCREENSHOTS.md), including every active game at six sizes
 - [Before/after evidence](COMPARISON.md)
+- [Delivery / manual PR instructions](DELIVERY.md)
 - [Implementation and ad configuration](HANDOFF.md)
 - [Test evidence and limits](VALIDATION.md)
 - [Independent review](REVIEW.md)
