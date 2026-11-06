@@ -6922,3 +6922,16 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
 .av-studio-preview { display: flex; justify-content: center; }
 .av-studio .field select { width: 100%; }
 .av-studio .board-actions { flex-wrap: wrap; }
+
+/* Avatar Studio gallery (#64) */
+.av-studio-launch { font-weight: 700; padding: 10px 16px; }
+.av-studio-launch small { opacity: .75; font-weight: 500; margin-left: 4px; }
+.av-search { width: 100%; box-sizing: border-box; margin: 4px 0 8px; min-height: 40px; }
+.av-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; max-height: 232px; overflow-y: auto; overscroll-behavior: contain; padding: 4px; }
+.av-tile { display: grid; justify-items: center; gap: 2px; padding: 6px 2px; min-height: 44px; background: #0f2230; border: 2px solid #1d3647; border-radius: 10px; color: #dceaf5; font-size: 11px; cursor: pointer; }
+.av-tile[hidden], .av-empty[hidden] { display: none; }
+.av-tile.on { border-color: #b7ff04; background: #14303f; }
+.av-tile:focus-visible { outline: 3px solid #62d5ee; outline-offset: 1px; }
+.av-tile-art { width: 52px; height: 52px; }
+.av-tile span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 420px) { .av-gallery { grid-template-columns: repeat(4, 1fr); max-height: 200px; } }
