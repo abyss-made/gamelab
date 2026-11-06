@@ -11,7 +11,7 @@ GameUI.impostor = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 im";
+    root.className = "b2 im pimp";
     root.innerHTML = `<div class="b2-players card" id="im-players"></div>
       <div class="card im-main">
         <div class="hl-round" id="im-round"></div>

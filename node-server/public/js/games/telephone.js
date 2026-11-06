@@ -73,7 +73,7 @@ GameUI.telephone = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 tp";
+    root.className = "b2 tp ptel";
     root.innerHTML = `<div class="b2-players card" id="tp-players"></div><div class="card tp-main"><div class="hl-round" id="tp-head"></div><div id="tp-body"></div><div class="hl-status" id="tp-status" aria-live="polite"></div></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);

@@ -20,6 +20,8 @@ function newCode() {
 }
 const newId = () => crypto.randomBytes(6).toString('hex');
 
+const { normalizeV3 } = require('./avatarv3');
+
 function cleanProfile(p) {
   p = p && typeof p === 'object' ? p : {};
   const a = p.avatar && typeof p.avatar === 'object' ? p.avatar : {};
@@ -28,6 +30,8 @@ function cleanProfile(p) {
     avatar: {
       e: clampInt(a.e, 0, config.AVATAR_EMOJIS - 1, 0),
       c: clampInt(a.c, 0, config.AVATAR_COLORS - 1, 0),
+      // Optional Avatar Studio config; old clients omit it and keep the e/c fallback.
+      ...((v3) => (v3 ? { v3 } : {}))(normalizeV3(a.v3)),
     },
   };
 }
@@ -545,6 +549,23 @@ function attach(ioServer) {
     });
 
     on('leaveRoom', () => leaveBySocket(socket));
+
+    // Avatar Studio: a member updates only their own look. The config is re-validated against the
+    // bundled allowlist; the legacy e/c fallback is kept for older clients. Rate limited per member
+    // (1 per 2s, burst 3) so reconnecting does not refill it. The ack returns the accepted config.
+    on('setAvatar', (v3, ack) => {
+      const c = ctx();
+      if (!c) return reply(ack, { error: 'room' });
+      if (!(c.m.avatarBucket || (c.m.avatarBucket = new Bucket(0.5, 3))).take()) return reply(ack, { error: 'slow', avatar: c.m.avatar });
+      // Mutate the member's avatar object in place: active games snapshot this same reference
+      // (st.avatars / st.players[].avatar), so their in-game portraits update too.
+      const ok = v3 === null ? null : normalizeV3(v3);
+      if (v3 !== null && !ok) return reply(ack, { error: 'invalid', avatar: c.m.avatar });
+      if (ok) c.m.avatar.v3 = ok;
+      else delete c.m.avatar.v3; // back to the classic portrait
+      broadcast(c.room);
+      reply(ack, { ok: true, avatar: c.m.avatar });
+    });
 
     on('chat', (text) => {
       const c = ctx();

@@ -84,8 +84,9 @@ async function start(browser, vp, game) {
         if (g === 'fourrow') {
           const first = await page.$eval('.fr-col', (e) => e.getAttribute('aria-label'));
           ok(/^Drop (Red|Yellow) in column 1$/.test(first), `${T}: column button reads "${first}"`);
-          const bg = await page.$eval('.fr-board', (e) => getComputedStyle(e).borderTopColor);
-          ok(bg === 'rgb(108, 153, 255)', `${T}: cabinet raised top edge (${bg})`);
+          // Issue #62 Drop Society cabinet: the raised top edge now lives on the outer cabinet frame.
+          const edge = await page.$eval('.fr-board-wrap', (e) => { const cs = getComputedStyle(e); return { c: cs.borderTopColor, w: parseFloat(cs.borderTopWidth) }; });
+          ok(edge.c === 'rgb(143, 179, 223)' && edge.w >= 2, `${T}: cabinet raised top edge (${edge.c}, ${edge.w}px)`);
           await page.focus('.fr-col:not([disabled])');
           await page.keyboard.press('Shift+Tab');
           await page.keyboard.press('Tab');

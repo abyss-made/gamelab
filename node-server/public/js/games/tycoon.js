@@ -18,6 +18,7 @@ GameUI.tycoon = (() => {
   let auctionTimer = 0;
   let auctionEnds = 0;
   const html = {}; // last HTML per panel, so unchanged panels are not rebuilt
+  let reviewId = null; // incoming offer being reviewed (bound to the offer id, never a replacement)
   const tf = { open: false, to: "", giveProps: new Set(), askProps: new Set(), giveCash: "", askCash: "" };
 
   const N = 36;
@@ -67,8 +68,16 @@ GameUI.tycoon = (() => {
     }
     const cur = pById(g.turnId);
     const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die">${g.dice[0]}</span><span class="ty-die">${g.dice[1]}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center"><div class="ty-logo">Playgrid<br>Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div>`;
+    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/premium/tycoon-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
+  }
+
+  // Your balance at a glance (from the view only) + round counter.
+  function stripHTML() {
+    const me = myIdx();
+    const p = me >= 0 ? g.players[me] : null;
+    const mineTurn = p && p.id === g.turnId;
+    return `<div class="pty-strip">${p ? `<div><small>${mineTurn ? "YOUR TURN" : "YOU"}</small><b>${app.esc(p.name)}</b></div><div><small>Available cash</small><strong>${p.out ? "–" : money(p.cash)}</strong></div><div><small>Properties</small><strong>${p.props}</strong></div>` : '<div><small>WATCHING</small><b>Spectator</b></div>'}<span class="pty-round">${g.rounds ? `Round ${g.round} / ${g.rounds}` : `Round ${g.round}`}</span></div>`;
   }
 
   function playersHTML() {
@@ -163,9 +172,26 @@ GameUI.tycoon = (() => {
     return t.type !== "prop" || !g.board.some((x, j) => x.group === t.group && g.levels[j] > 0);
   };
 
+  // Review step for an incoming offer: full give/get and projected cash (a local preview; real
+  // balances only change from the server view). If the offer vanishes while open, Accept is
+  // disabled with a neutral reason: no invented expiry, and a replacement offer is never accepted.
+  function reviewHTML() {
+    if (reviewId === null) return "";
+    const tr = g.trades.find((x) => x.id === reviewId && x.to === S.you);
+    const me = myIdx();
+    const list = (props, cash) => [...(props || []).map((i) => app.esc(tile(i).name)), ...(cash ? [money(cash)] : [])].join(", ") || "nothing";
+    let body;
+    if (tr) {
+      const from = pById(tr.from);
+      const cash = me >= 0 ? g.players[me].cash : 0;
+      body = `<p><b>${app.esc(from ? from.name : "A player")}</b> offers a trade.</p><p><b>You give:</b> ${list(tr.askProps, tr.askCash)}</p><p><b>You get:</b> ${list(tr.giveProps, tr.giveCash)}</p><p class="muted">Cash after the trade: ${money(cash - tr.askCash + tr.giveCash)} (preview, from ${money(cash)})</p>`;
+    } else body = `<p role="status">This offer is no longer available.</p>`;
+    return `<div class="ty-offer mine" role="group" aria-label="Review trade offer">${body}<div class="board-actions"><button type="button" class="btn btn-small" data-trade-accept="${reviewId}" ${tr ? "" : "disabled"}>Accept</button><button type="button" class="btn btn-small btn-ghost" data-trade-close>${tr ? "Back" : "Close"}</button></div></div>`;
+  }
+
   function tradeHTML() {
     const me = myIdx();
-    let out = "";
+    let out = reviewHTML();
     for (const tr of g.trades) {
       const from = pById(tr.from);
       const to = pById(tr.to);
@@ -173,7 +199,7 @@ GameUI.tycoon = (() => {
       const list = (props, cash) => [...props.map((i) => app.esc(tile(i).name)), ...(cash ? [money(cash)] : [])].join(", ") || "nothing";
       const involved = tr.to === S.you || tr.from === S.you;
       out += `<div class="ty-offer ${involved ? "mine" : ""}"><div><b>${app.esc(from.name)}</b> offers <b>${app.esc(to.name)}</b>: ${list(tr.giveProps, tr.giveCash)} <span class="muted">for</span> ${list(tr.askProps, tr.askCash)}</div>`;
-      if (tr.to === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small" data-trade-accept="${tr.id}">Accept</button><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Decline</button></div>`;
+      if (tr.to === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small" data-trade-review="${tr.id}">Review</button><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Decline</button></div>`;
       else if (tr.from === S.you) out += `<div class="board-actions"><button type="button" class="btn btn-small btn-ghost" data-trade-decline="${tr.id}">Cancel offer</button></div>`;
       out += "</div>";
     }
@@ -218,6 +244,7 @@ GameUI.tycoon = (() => {
     if (!root || !g) return;
     setPanel("ty-boardwrap", boardHTML());
     setPanel("ty-players", playersHTML());
+    setPanel("ty-strip", stripHTML());
     setPanel("ty-actions", actionHTML());
     setPanel("ty-info", selTile >= 0 ? infoHTML(selTile) : "");
     setPanel("ty-props", propsHTML());
@@ -259,7 +286,7 @@ GameUI.tycoon = (() => {
     root = document.createElement("div");
     root.className = "b2 ty";
     root.dataset.view = "map";
-    root.innerHTML = `<div class="b2-players card ty-players" id="ty-players"></div>
+    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players"></div>
       <div class="ty-views" role="group" aria-label="Phone view"><button type="button" class="btn btn-small" data-tyview="map" aria-pressed="true">Map</button><button type="button" class="btn btn-small btn-ghost" data-tyview="props" aria-pressed="false">Properties &amp; trades</button></div>
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>
@@ -309,7 +336,15 @@ GameUI.tycoon = (() => {
       const s = t.closest("[data-sell]");
       if (s) return app.socket.emit("action", { type: "sell", tile: Number(s.dataset.sell) });
       const ta = t.closest("[data-trade-accept]");
-      if (ta) return app.socket.emit("action", { type: "trade_accept", id: Number(ta.dataset.tradeAccept) });
+      if (ta) {
+        const id = Number(ta.dataset.tradeAccept);
+        if (!g.trades.some((x) => x.id === id && x.to === S.you)) return paint(); // stale: never emit
+        reviewId = null;
+        return app.socket.emit("action", { type: "trade_accept", id });
+      }
+      const tr = t.closest("[data-trade-review]");
+      if (tr) { reviewId = Number(tr.dataset.tradeReview); return paint(); }
+      if (t.closest("[data-trade-close]")) { reviewId = null; return paint(); }
       const td = t.closest("[data-trade-decline]");
       if (td) return app.socket.emit("action", { type: "trade_decline", id: Number(td.dataset.tradeDecline) });
       if (t.closest("[data-trade-toggle]")) { tf.open = !tf.open; return paint(); }
@@ -364,7 +399,7 @@ GameUI.tycoon = (() => {
     if (root) root.remove();
     root = null; g = null; selTile = -1; lastRoll = -1; shown = {}; wasMyTurn = false; bidText = "";
     for (const k of Object.keys(html)) delete html[k];
-    tf.open = false; tf.giveProps.clear(); tf.askProps.clear(); tf.giveCash = ""; tf.askCash = "";
+    reviewId = null; tf.open = false; tf.giveProps.clear(); tf.askProps.clear(); tf.giveCash = ""; tf.askCash = "";
   }
 
   function renderResult(r, state, a) {

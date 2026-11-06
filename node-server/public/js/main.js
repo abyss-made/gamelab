@@ -388,8 +388,117 @@
 
   const avatarHTML = (a = {}, cls = "") => {
     const i = Math.max(0, Math.min(23, Number(a.e) || 0));
-    return `<span class="avatar ${cls}" aria-hidden="true" style="--av:${COLORS[a.c] || COLORS[0]};--avatar-x:${(i % 2) * 100}%;--avatar-y:${Math.floor((i % 4) / 2) * 100}%;--avatar-hue:${Math.floor(i / 4) * 12}deg"><span class="avatar-art"></span></span>`;
+    const v3 = a.v3 && typeof a.v3 === "object" ? ` data-v3="${esc(JSON.stringify(a.v3))}"` : "";
+    return `<span class="avatar ${cls}" aria-hidden="true"${v3} style="--av:${COLORS[a.c] || COLORS[0]};--avatar-x:${(i % 2) * 100}%;--avatar-y:${Math.floor((i % 4) / 2) * 100}%;--avatar-hue:${Math.floor(i / 4) * 12}deg"><span class="avatar-art"></span></span>`;
   };
+
+  // ----- Avatar Studio 2.0: draft is separate from the saved look until Save -----
+  const AV = window.PGAvatar;
+  const studio = { open: false, draft: null, undo: [], note: "" };
+  const STUDIO_LABELS = { expression: "Expression", eyes: "Eyes", hat: "Hat", glasses: "Glasses", accessory: "Accessory", detail: "Detail" };
+  const cap = (x) => x.charAt(0).toUpperCase() + x.slice(1);
+  function studioOpenNow() {
+    studio.open = true;
+    AV.loadCatalog().then(() => {
+      if (!studio.draft) studio.draft = AV.normalize(profile.avatar.v3) || AV.defaultConfig("h01");
+      renderProfiles();
+    }).catch(() => { studio.note = "Avatar Studio could not load. Your current avatar is unchanged."; renderProfiles(); });
+  }
+  // In a room, a saved look is sent to the server (validated there) so others see it now.
+  // Rate-limited saves are retried automatically (always with the latest saved look) until accepted.
+  let avatarRetry = 0;
+  function syncAvatar() {
+    clearTimeout(avatarRetry);
+    if (typeof S === "undefined" || !S || !S.code) return;
+    socket.emit("setAvatar", profile.avatar.v3 || null, (res) => {
+      if (!res || !res.error || res.error === "room") return;
+      if (res.error === "slow") {
+        studio.note = "Saved on this device. Updating your party in a moment…";
+        avatarRetry = setTimeout(syncAvatar, 2200);
+      } else studio.note = "Saved on this device, but the party could not accept that look.";
+      renderProfiles();
+    });
+  }
+  const studioDirty = () => !!studio.draft && JSON.stringify(AV.normalize(profile.avatar.v3) || null) !== JSON.stringify(studio.draft);
+  const focusLauncher = () => setTimeout(() => document.querySelector('[data-studio="open"]')?.focus(), 0);
+  function studioSet(next, note = "") {
+    const n = AV.normalize(next);
+    if (!n) return;
+    studio.undo.push(studio.draft);
+    if (studio.undo.length > 32) studio.undo.shift();
+    studio.note = note || (studio.draft.hat === "none" && n.hat !== "none" && studio.draft.accessory === "headphones" ? "Headphones removed: they don't fit with a hat." : "");
+    studio.draft = n;
+  }
+  function studioHTML() {
+    if (!AV) return "";
+    if (!studio.open) return `<div class="av-studio"><button type="button" class="btn btn-small btn-ghost" data-studio="open">Avatar Studio</button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}${studio.note ? `<p class="muted" role="status">${esc(studio.note)}</p>` : ""}</div>`;
+    const cat = AV.catalog();
+    if (!cat || !studio.draft) return `<div class="av-studio" role="status">${esc(studio.note) || "Loading Avatar Studio…"}</div>`;
+    const d = studio.draft;
+    const ch = cat.characters.find((c) => c.id === d.id);
+    const sel = (key, vals, label) => `<label class="field"><span>${label}</span><select data-studio-field="${key}">${vals.map((v) => `<option value="${v}" ${d[key] === v ? "selected" : ""} ${key === "accessory" && v === "headphones" && d.hat !== "none" ? "disabled" : ""}>${cap(v)}</option>`).join("")}</select></label>`;
+    const saved = JSON.stringify(AV.normalize(profile.avatar.v3) || null) === JSON.stringify(d);
+    return `<div class="av-studio open" role="group" aria-label="Avatar Studio">
+      <div class="av-studio-preview">${avatarHTML({ e: 0, c: profile.avatar.c, v3: d }, "av-xl")}</div>
+      <label class="field"><span>Character</span><select data-studio-field="id">${cat.characters.map((c) => `<option value="${c.id}" ${c.id === d.id ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></label>
+      ${sel("palette", Object.keys(AV.PALETTES), "Color")}
+      ${AV.SLOTS.map((k) => sel(k, ch.compatibility[k], STUDIO_LABELS[k])).join("")}
+      <p class="muted" role="status" aria-live="polite">${esc(studio.note)}</p>
+      <div class="board-actions">
+        <button type="button" class="btn btn-small btn-ghost" data-studio="random">Randomize</button>
+        <button type="button" class="btn btn-small btn-ghost" data-studio="reset">Reset</button>
+        <button type="button" class="btn btn-small btn-ghost" data-studio="undo" ${studio.undo.length ? "" : "disabled"}>Undo</button>
+        <button type="button" class="btn btn-small" data-studio="save" ${saved ? "disabled" : ""}>Save look</button>
+        <button type="button" class="btn btn-small btn-ghost" data-studio="close">${saved ? "Close" : "Discard"}</button>
+      </div></div>`;
+  }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-studio]");
+    if (!b || !AV) return;
+    const act = b.dataset.studio;
+    if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-field="id"]')?.focus(), 60); }
+    if (act === "classic") {
+      const prev = profile.avatar.v3;
+      delete profile.avatar.v3;
+      try { saveProfile(); studio.note = ""; }
+      catch (err) { profile.avatar.v3 = prev; studio.note = "Could not save on this device (storage is full or blocked). Your avatar is unchanged."; renderProfiles(); return; }
+      studio.draft = null; studio.undo = []; syncAvatar(); renderProfiles();
+      return focusLauncher();
+    }
+    if (act === "close") {
+      // Unsaved changes ask before they are thrown away; Keep editing leaves everything as it was.
+      if (studioDirty() && !window.confirm("Discard your unsaved avatar changes?")) return;
+      studio.open = false; studio.draft = null; studio.undo = []; studio.note = "";
+      renderProfiles();
+      return focusLauncher();
+    }
+    if (!studio.draft) return;
+    if (act === "undo") { studio.draft = studio.undo.pop() || studio.draft; studio.note = ""; }
+    else if (act === "reset") studioSet(AV.defaultConfig(studio.draft.id), "Reset to this character's default look.");
+    else if (act === "random") {
+      const cat = AV.catalog();
+      const c = cat.characters[rand(cat.characters.length)];
+      const next = { v: cat.schemaVersion, id: c.id, palette: Object.keys(AV.PALETTES)[rand(6)] };
+      for (const k of AV.SLOTS) { const o = c.compatibility[k]; next[k] = k === "hat" || k === "glasses" || k === "accessory" ? (Math.random() < 0.4 ? o[rand(o.length)] : "none") : o[rand(o.length)]; }
+      studioSet(next, "");
+    } else if (act === "save") {
+      const n = AV.normalize(studio.draft);
+      if (!n) return;
+      const prev = profile.avatar.v3;
+      profile.avatar.v3 = n;
+      try { saveProfile(); studio.note = "Saved."; syncAvatar(); }
+      catch (err) { if (prev) profile.avatar.v3 = prev; else delete profile.avatar.v3; studio.note = "Could not save on this device (storage is full or blocked). Your avatar is unchanged."; }
+    }
+    renderProfiles();
+  });
+  document.addEventListener("change", (e) => {
+    const f = e.target.closest("[data-studio-field]");
+    if (!f || !AV || !studio.draft) return;
+    const key = f.dataset.studioField;
+    if (key === "id") studioSet({ ...studio.draft, id: f.value }, "");
+    else studioSet({ ...studio.draft, [key]: f.value });
+    renderProfiles();
+  });
 
   function renderProfiles() {
     $$("[data-profile]").forEach((el) => {
@@ -400,6 +509,7 @@
           <button class="arrow" type="button" data-av="1" aria-label="Next avatar">›</button>
         </div>
         <div class="color-row">${COLORS.map((c, i) => `<button type="button" class="dot ${i === profile.avatar.c ? "on" : ""}" style="--av:${c}" data-color="${i}" aria-label="Color ${i + 1}"></button>`).join("")}</div>
+        ${studioHTML()}
         <div class="name-row">
           <input class="name-input" maxlength="16" placeholder="Your name" value="${esc(profile.name)}" aria-label="Your name">
           <button type="button" class="icon-btn dice" title="Random name and avatar" aria-label="Randomize">${icon("dice")}</button>
@@ -418,6 +528,7 @@
     if (col) profile.avatar.c = Number(col.dataset.color);
     if (dice) {
       profile.avatar = { e: rand(AVATAR_COUNT), c: rand(COLORS.length) };
+      studio.draft = null; studio.undo = []; studio.open = false;
       profile.name = ADJ[rand(ADJ.length)] + NOUN[rand(NOUN.length)];
     }
     saveProfile();
@@ -605,7 +716,7 @@
   });
   function openProfile() {
     openModal(
-      '<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">Your player is saved on this device. Changes apply when you next join a room.</p><div class="modal-actions"><button class="btn" data-close>Let’s Play</button></div>',
+      `<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">${S && S.code ? "Your player is saved on this device. A saved Avatar Studio look updates for your party right away." : "Your player is saved on this device. Changes apply when you next join a room."}</p><div class="modal-actions"><button class="btn" data-close>Let’s Play</button></div>`,
     );
     renderProfiles();
   }
@@ -1030,7 +1141,7 @@
             .map((v) => opt(v, S.maxPlayers))
             .join("")}</select></label>`;
     openModal(
-      `<h2 class="card-title">Game Settings</h2><p class="settings-note">${esc(G.name)} · ${editable ? "sensible defaults, fewer decisions." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the game settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions">${editable ? '<button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="settings-save" type="button">Save Settings</button>' : '<button class="btn" data-close>Close</button>'}</div>`,
+      `<h2 class="card-title">Game Settings</h2><p class="settings-note">${esc(G.name)} · ${editable ? "sensible defaults, fewer decisions." : S.phase === "game" ? "This game is in progress. Settings can change in the lobby." : "Your host controls the game settings."}</p><fieldset class="settings-fields" ${editable ? "" : "disabled"}>${settingsHTML(S.gameId, S.settings)}</fieldset><div class="modal-actions"><button class="btn btn-ghost" type="button" data-view="profile">Your player</button>${editable ? '<button class="btn btn-ghost" data-close>Cancel</button><button class="btn" id="settings-save" type="button">Save Settings</button>' : '<button class="btn" data-close>Close</button>'}</div>`,
     );
     $("#modal-body").classList.add("settings-modal");
     $("#modal-body").classList.toggle("settings-readonly", !editable);
@@ -2141,7 +2252,7 @@
         <label class="field"><span>Max spectators</span><select id="p-maxspec">${[0, 5, 10, 20, 50].map((v) => opt(v, S.maxSpectators)).join("")}</select></label>
         <label class="switch-row"><span>Lock party <small>No new people can join</small></span><input type="checkbox" role="switch" id="p-lock" ${S.locked ? "checked" : ""}></label>
       </fieldset>
-      <div class="modal-actions"><button class="btn btn-ghost btn-danger" id="p-leave" type="button">Leave Party</button><span class="grow"></span><button class="btn btn-ghost" data-close>Cancel</button>${host ? '<button class="btn" id="p-save" type="button">Save</button>' : ""}</div>`);
+      <div class="modal-actions"><button class="btn btn-ghost btn-danger" id="p-leave" type="button">Leave Party</button><span class="grow"></span><button class="btn btn-ghost" type="button" data-view="profile">Your player</button><button class="btn btn-ghost" data-close>Cancel</button>${host ? '<button class="btn" id="p-save" type="button">Save</button>' : ""}</div>`);
     $("#p-leave").addEventListener("click", leaveParty);
     $("#p-save")?.addEventListener("click", () => {
       if (!isHost()) return closeModal();

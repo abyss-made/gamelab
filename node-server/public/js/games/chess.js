@@ -26,6 +26,8 @@ GameUI.chess = (() => {
   };
 
   const name = (s) => "abcdefgh"[s & 7] + ((s >> 3) + 1);
+  // Board theme is local presentation only (never sent to the server).
+  const loadTheme = () => { try { return localStorage.getItem("pg_chess_theme") === "slate" ? "slate" : "walnut"; } catch (e) { return "walnut"; } };
 
   function boardHTML(g, { flip = false, playable = false, selected = -1, label = "Chess board", animate = false } = {}) {
     const legal = g.legal || {};
@@ -56,10 +58,13 @@ GameUI.chess = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 ch";
-    root.innerHTML = `<div class="ch-top card" id="ch-top"></div>
-      <div class="ttt-status" id="ch-status" aria-live="polite"></div>
-      <div class="ch-layout"><div id="ch-board"></div><div class="ch-side card"><div id="ch-offer"></div><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol><div class="board-actions" id="ch-actions"></div></div></div>
+    root.className = "b2 ch pch";
+    root.dataset.theme = loadTheme();
+    root.innerHTML = `<div class="ch-layout pch-layout"><div class="pch-table" id="ch-top"><div class="pch-player" id="ch-opp"></div><div id="ch-board"></div><div class="pch-player" id="ch-me"></div></div>
+      <div class="ch-side pch-notes"><div class="pch-caption"><span class="pch-eyebrow" id="ch-eyebrow">WALNUT &amp; IVORY</span><div class="ttt-status" id="ch-status" aria-live="polite"></div></div>
+      <div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
+      <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Walnut</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
+      <div class="board-actions" id="ch-actions"></div><small class="muted">Tap a piece, then a highlighted square.</small></div></div>
       <div class="ch-promo" id="ch-promo" hidden></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
@@ -106,6 +111,14 @@ GameUI.chess = (() => {
         sel = -1;
         paint();
       }
+      return;
+    }
+    const th = e.target.closest("button[data-theme]");
+    if (th) {
+      root.dataset.theme = th.dataset.theme;
+      try { localStorage.setItem("pg_chess_theme", th.dataset.theme); } catch (err) { /* private mode */ }
+      root.querySelector("#ch-eyebrow").textContent = th.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
+      root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b === th)));
       return;
     }
     const act = e.target.closest("[data-act]");
@@ -156,9 +169,11 @@ GameUI.chess = (() => {
     }
     clock.set(g.clocks ? g.clocks[g.turn] : g.idleLeft);
     const order = g.myIndex === 1 ? [1, 0] : [0, 1]; // your side at the bottom, opponent on top
-    root.querySelector("#ch-top").innerHTML = order
-      .map((i) => C.playerChip(app, g.players[i], { active: g.turn === i, extra: `<span class="ch-key ${g.players[i].colour}" aria-hidden="true"></span>` + (g.clocks ? `<span class="ch-clock" data-clock="${i}"></span>` : ""), sub: g.players[i].colour === "w" ? "White" : "Black" }))
-      .join("");
+    const chip = (i) => C.playerChip(app, g.players[i], { active: g.turn === i, extra: `<span class="ch-key ${g.players[i].colour}" aria-hidden="true"></span>`, sub: (g.players[i].colour === "w" ? "White" : "Black") + (g.turn === i && i === g.myIndex ? " · Your move" : "") }) + (g.clocks ? `<span class="ch-clock ${g.turn === i ? "ticking" : ""}" data-clock="${i}"></span>` : "");
+    root.querySelector("#ch-opp").innerHTML = chip(order[1]);
+    root.querySelector("#ch-me").innerHTML = chip(order[0]);
+    root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.theme === root.dataset.theme)));
+    root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ch-status");
     const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">⚠ Check!</b>' : "";

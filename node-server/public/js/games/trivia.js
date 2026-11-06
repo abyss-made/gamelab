@@ -11,7 +11,7 @@ GameUI.trivia = (() => {
   function mount(stage, a) {
     app = a;
     root = document.createElement("div");
-    root.className = "b2 tv";
+    root.className = "b2 tv ptv";
     root.innerHTML = `<div class="b2-players card" id="tv-players"></div>
       <div class="card tv-main">
         <div class="hl-round" id="tv-round"></div>

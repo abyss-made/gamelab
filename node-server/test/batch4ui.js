@@ -133,6 +133,30 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
           ok(f1.state.game.moves >= 1, `${t}: firing is applied on the server`);
           await until(async () => (await page.$$('.bs-cell.hit, .bs-cell.miss')).length >= 1);
           ok((await page.$$('.bs-cell.hit, .bs-cell.miss')).length >= 1, `${t}: the shot shows as a hit or miss on the board`);
+          ok((await page.$$('.pbs-enemy .pbs-ship')).length === 0, `${t}: enemy waters never draw ship art`);
+          ok((await page.$$('.pbs-friendly .pbs-ship img')).length === 5, `${t}: your fleet shows the five vessel illustrations`);
+          // A hit on my own ship must paint its marker above the vessel art.
+          if (vp.tag === 'phone') await page.click('[data-bstab="fleet"]');
+          const markOnTop = await page.evaluate(() => {
+            const st = JSON.parse(JSON.stringify(window.App.S));
+            const g = st.game, me = g.myIndex;
+            const cell = g.myShips[0].cells[1];
+            g.players[me].shots[cell] = 2;
+            GameUI.battleship.update(st);
+            const el = document.querySelector(`.pbs-friendly [data-cell="${cell}"] .pbs-mark`);
+            const r = el.getBoundingClientRect();
+            const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+            GameUI.battleship.update(window.App.S);
+            return top === el || el.contains(top);
+          });
+          ok(markOnTop, `${t}: hit markers on your fleet paint above the ship illustrations`);
+          if (vp.tag === 'phone') await page.click('[data-bstab="target"]');
+          if (vp.tag === 'phone') {
+            await page.click('[data-bstab="fleet"]');
+            ok(await page.isVisible('.pbs-friendly') && !(await page.isVisible('.pbs-enemy')), `${t}: phone Fleet tab shows your fleet`);
+            await page.click('.pbs-back');
+            ok(await page.isVisible('.pbs-enemy'), `${t}: Back to targeting returns to enemy waters`);
+          }
           ok(!JSON.stringify(f1.state.game.players).includes('"cells"') || f1.state.game.players.every((p) => p.sunk.every((s) => s.cells.length === s.len)), `${t}: opponents only receive cells of sunk ships`);
         }
         if (game === 'checkers') {
@@ -212,6 +236,33 @@ const GAMES = ['battleship', 'checkers', 'reversi', 'ludo', 'chess'];
             await page.click('[data-move] >> nth=0');
             ok(true, `${t}: chose a token with the big buttons`);
           } else ok(true, `${t}: rolled ${dice}: no legal move, the turn passes`);
+          // Shared-square picker (arranged view, nothing is sent): my token 1 and Green token 1 share track square 8.
+          const pick = await page.evaluate(() => {
+            const st = JSON.parse(JSON.stringify(window.App.S));
+            const g = st.game;
+            const me = g.players[g.myIndex];
+            const other = g.players.find((p) => p.id !== me.id);
+            g.phase = 'move'; g.turnId = me.id; g.dice = 3; g.movable = [0];
+            me.tokens = [(8 - me.colour * 13 + 52) % 52, -1, -1, -1];
+            other.tokens = [(8 - other.colour * 13 + 52) % 52, -1, -1, -1];
+            const sent = [];
+            const emit = window.App.socket.emit;
+            window.App.socket.emit = (...a) => { sent.push(a); };
+            GameUI.ludo.update(st);
+            const cellBtn = document.querySelector('[data-cell]');
+            if (!cellBtn) { window.App.socket.emit = emit; return { cell: false }; }
+            cellBtn.click();
+            const picker = document.querySelector('.pld-picker');
+            const btns = [...picker.querySelectorAll('button.ld2-pick')].map((b) => ({ t: b.textContent, dis: b.disabled }));
+            picker.querySelector('button.ld2-pick:disabled')?.click();
+            const sentAfterDisabled = sent.length;
+            window.App.socket.emit = emit;
+            GameUI.ludo.update(window.App.S);
+            return { cell: true, btns, sentAfterDisabled, gone: !document.querySelector('.pld-picker') || window.App.S.game.phase !== 'move' };
+          });
+          ok(pick.cell, `${t}: a square shared with an opponent opens a picker`);
+          ok(pick.cell && pick.btns.length === 2 && pick.btns.filter((b) => !b.dis).length === 1 && pick.btns.some((b) => b.dis && /Green|Yellow|Blue|Red/.test(b.t)), `${t}: the picker names owner + number and enables only my movable token`);
+          ok(pick.cell && pick.sentAfterDisabled === 0, `${t}: an opponent's token in the picker never sends a move`);
           await shot('-after');
         }
         ok((await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)) <= 0, `${t}: still no horizontal overflow after playing`);

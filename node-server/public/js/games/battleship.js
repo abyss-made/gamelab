@@ -21,6 +21,22 @@ GameUI.battleship = (() => {
   let aim = -1;
   let msg = "";
   let lastMoves = -1;
+  let tab = "target"; // phone battle view: target | fleet
+  const SHIP_ART = ["ship-carrier", "ship-battleship", "ship-destroyer", "ship-submarine", "ship-patrol"].map((n) => `/assets/premium/${n}.svg`);
+
+  // Vessel illustrations for MY fleet only (from my own ship cells / local draft). Enemy ships are never drawn.
+  function shipsLayer(list) {
+    return list
+      .map(({ i, cells }) => {
+        if (!cells || !cells.length) return "";
+        const xs = cells.map((c) => c % N), ys = cells.map((c) => Math.floor(c / N));
+        const x = Math.min(...xs), y = Math.min(...ys), len = cells.length;
+        const hz = new Set(ys).size === 1;
+        const area = hz ? `grid-column:${x + 2}/span ${len};grid-row:${y + 2}` : `grid-column:${x + 2};grid-row:${y + 2}/span ${len}`;
+        return `<span class="pbs-ship ${hz ? "h" : "v"}" style="${area};--len:${len}" aria-hidden="true"><img src="${SHIP_ART[i] || SHIP_ART[2]}" alt=""></span>`;
+      })
+      .join("");
+  }
 
   const cellName = (c) => COLS[c % N] + (Math.floor(c / N) + 1);
   const shipCells = (len, s) => Array.from({ length: len }, (_, k) => (s.y + (s.horizontal ? 0 : k)) * N + s.x + (s.horizontal ? k : 0));
@@ -34,8 +50,8 @@ GameUI.battleship = (() => {
 
   // opts: ships = own ship cell map (cell -> ship index), shots (0/1/2), sunk (cell set), aim, last, tappable
   function gridHTML(opts) {
-    const { shots, ships, sunk, aimCell = -1, lastCell = -1, tappable = false, label, draftCells } = opts;
-    let html = `<div class="bs-grid" role="group" aria-label="${label}"><i class="bs-corner"></i>`;
+    const { shots, ships, sunk, aimCell = -1, lastCell = -1, tappable = false, label, draftCells, art = "" } = opts;
+    let html = `<div class="bs-grid pbs-chart" role="group" aria-label="${label}"><i class="bs-corner"></i>`;
     for (let x = 0; x < N; x++) html += `<i class="bs-head">${COLS[x]}</i>`;
     for (let y = 0; y < N; y++) {
       html += `<i class="bs-head">${y + 1}</i>`;
@@ -46,10 +62,10 @@ GameUI.battleship = (() => {
         const cls = ["bs-cell", ship ? "ship" : "", draftCells && draftCells.has(c) ? "draft" : "", shot === 1 ? "miss" : "", shot === 2 ? "hit" : "", sunk && sunk.has(c) ? "sunk" : "", aimCell === c ? "aim" : "", lastCell === c ? "last" : ""].join(" ");
         const state = shot === 2 ? (sunk && sunk.has(c) ? "hit, ship sunk" : "hit") : shot === 1 ? "miss" : ship ? "your ship" : "unknown";
         const off = !tappable || (shots && shots[c]);
-        html += `<button type="button" class="${cls}" data-cell="${c}" aria-label="${cellName(c)}: ${state}" ${off ? "disabled" : ""}>${shot === 2 ? "✹" : shot === 1 ? "•" : ""}</button>`;
+        html += `<button type="button" class="${cls}" style="grid-column:${x + 2};grid-row:${y + 2}" data-cell="${c}" aria-label="${cellName(c)}: ${state}" ${off ? "disabled" : ""}><span class="pbs-mark" aria-hidden="true"></span></button>`;
       }
     }
-    return html + "</div>";
+    return html + art + "</div>";
   }
 
   function mount(stage, a) {
@@ -63,6 +79,23 @@ GameUI.battleship = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+    // precision picker: arrow keys move between cells of the same chart; Enter/Space selects as usual
+    root.addEventListener("keydown", (e) => {
+      const b = e.target.closest("[data-cell]");
+      if (!b) return;
+      const d = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -N, ArrowDown: N }[e.key];
+      if (d === undefined) return;
+      e.preventDefault();
+      const grid = b.closest(".bs-grid");
+      let c = Number(b.dataset.cell);
+      for (;;) {
+        const n = c + d;
+        if (n < 0 || n >= N * N || (Math.abs(d) === 1 && Math.floor(n / N) !== Math.floor(c / N))) return; // edge: stay
+        c = n;
+        const next = grid.querySelector(`[data-cell="${c}"]`);
+        if (next && !next.disabled) return next.focus(); // skip cells already fired at
+      }
+    });
   }
 
   function onClick(e) {
@@ -86,6 +119,7 @@ GameUI.battleship = (() => {
       return paint();
     }
     if (t.id === "bs-random") return app.socket.emit("action", { type: "random" });
+    if (t.dataset.bstab) { tab = t.dataset.bstab; return paint(); }
     if (t.id === "bs-lock") {
       if (placed.every(Boolean)) app.socket.emit("action", { type: "place", ships: placed.map((s) => ({ x: s.x, y: s.y, horizontal: s.horizontal })) });
       return;
@@ -132,7 +166,7 @@ GameUI.battleship = (() => {
   }
 
   function legend(g) {
-    return `<ul class="bs-fleet">${g.fleet.map((s, i) => `<li><button type="button" class="bs-ship ${i === pick ? "cur" : ""} ${placed[i] ? "done" : ""}" data-ship="${i}" aria-pressed="${i === pick}">${s.name} <span>${"■".repeat(s.len)}</span>${placed[i] ? " ✓" : ""}</button></li>`).join("")}</ul>`;
+    return `<ul class="bs-fleet">${g.fleet.map((s, i) => `<li><button type="button" class="bs-ship ${i === pick ? "cur" : ""} ${placed[i] ? "done" : ""}" data-ship="${i}" aria-pressed="${i === pick}"><img src="${SHIP_ART[i]}" alt="" aria-hidden="true">${s.name} <small>${s.len} cells</small>${placed[i] ? " ✓" : ""}</button></li>`).join("")}</ul>`;
   }
 
   function paint() {
@@ -154,8 +188,9 @@ GameUI.battleship = (() => {
       const foe = g.players[1 - me];
       st.innerHTML = ready ? `Fleet locked in. ${foe.ready ? "Starting..." : `Waiting for <b>${app.esc(foe.name)}</b> to place theirs.`}` : msg ? `<span class="warn-text">${app.esc(msg)}</span>` : `Place your <b>${app.esc(g.fleet[Math.max(0, pick)] ? g.fleet[Math.max(0, pick)].name : "fleet")}</b>: tap its top-left square.`;
       st.className = "ttt-status" + (ready ? "" : " mine");
-      main.innerHTML = `<div class="card bs-place"><div class="bs-boardwrap">${gridHTML({ ships: shipsSet, shots: null, tappable: !ready, label: "Your fleet placement board" })}</div>
-        ${ready ? "" : `${legend(g)}<div class="bs-ctl"><button type="button" class="btn btn-small" id="bs-rotate">Rotate: ${horizontal ? "horizontal ↔" : "vertical ↕"}</button><button type="button" class="btn btn-small btn-ghost" id="bs-random">Random fleet</button><button type="button" class="btn btn-small btn-ghost" id="bs-clear">Clear</button></div><button type="button" class="btn bs-lock" id="bs-lock" ${placed.every(Boolean) ? "" : "disabled"}>Lock in fleet</button>`}</div>`;
+      const artList = ready && g.myShips ? g.myShips.map((sh, i) => ({ i, cells: sh.cells })) : placed.map((p, i) => (p ? { i, cells: shipCells(g.fleet[i].len, p) } : null)).filter(Boolean);
+      main.innerHTML = `<div class="card bs-place pbs"><div class="pbs-label"><b>YOUR FLEET</b><small>${ready ? "Locked in" : "Place five ships"}</small></div><div class="bs-boardwrap">${gridHTML({ ships: shipsSet, shots: null, tappable: !ready, label: "Your fleet placement board", art: shipsLayer(artList) })}</div>
+        ${ready ? "" : `${legend(g)}<div class="bs-ctl"><button type="button" class="btn btn-small" id="bs-rotate">Rotate: ${horizontal ? "horizontal ↔" : "vertical ↕"}</button><button type="button" class="btn btn-small btn-ghost" id="bs-random">Random &amp; Lock</button><button type="button" class="btn btn-small btn-ghost" id="bs-clear">Clear</button></div><button type="button" class="btn bs-lock" id="bs-lock" ${placed.every(Boolean) ? "" : "disabled"}>Lock in fleet</button>`}</div>`;
       return;
     }
     // battle
@@ -171,9 +206,10 @@ GameUI.battleship = (() => {
     const foe = g.players[1 - me];
     const mine = g.players[me];
     const myShipCells = new Set((g.myShips || []).flatMap((s) => s.cells));
-    main.innerHTML = `<div class="bs-two"><div class="card"><h3 class="bs-title">Enemy waters <small>${foe.remaining} ships left</small></h3>${gridHTML({ shots: foe.shots, sunk: new Set(foe.sunk.flatMap((s) => s.cells)), aimCell: aim, lastCell: g.last && g.last.by === me ? g.last.cell : -1, tappable: myTurn, label: "Enemy waters" })}
-      <div class="bs-ctl"><button type="button" class="btn bs-fire" id="bs-fire" ${myTurn && aim >= 0 ? "" : "disabled"}>Fire!</button>${resignHTML()}</div></div>
-      <div class="card"><h3 class="bs-title">Your fleet <small>${mine.remaining} ships left</small></h3>${gridHTML({ shots: mine.shots, ships: myShipCells, sunk: new Set(mine.sunk.flatMap((s) => s.cells)), lastCell: g.last && g.last.by !== me ? g.last.cell : -1, label: "Your fleet" })}</div></div>`;
+    main.innerHTML = `<div class="pbs-tabs" role="group" aria-label="Chart"><button type="button" class="btn btn-small ${tab === "target" ? "" : "btn-ghost"}" data-bstab="target" aria-pressed="${tab === "target"}">Enemy waters</button><button type="button" class="btn btn-small ${tab === "fleet" ? "" : "btn-ghost"}" data-bstab="fleet" aria-pressed="${tab === "fleet"}">Your fleet</button></div>
+      <div class="bs-two pbs" data-tab="${tab}"><div class="card pbs-enemy"><h3 class="bs-title">Enemy waters <small>${foe.remaining} ships left · one target at a time</small></h3>${gridHTML({ shots: foe.shots, sunk: new Set(foe.sunk.flatMap((s) => s.cells)), aimCell: aim, lastCell: g.last && g.last.by === me ? g.last.cell : -1, tappable: myTurn, label: "Enemy waters" })}
+      <div class="bs-ctl pbs-fire"><div class="pbs-target"><small>${aim >= 0 ? "Target locked" : "Target"}</small><strong>${aim >= 0 ? cellName(aim) : "–"}</strong></div><button type="button" class="btn bs-fire" id="bs-fire" ${myTurn && aim >= 0 ? "" : "disabled"}>${aim >= 0 ? `Fire at ${cellName(aim)}` : "Fire!"}</button>${resignHTML()}</div></div>
+      <div class="card pbs-friendly"><h3 class="bs-title">Your fleet <small>${mine.remaining} ships afloat</small></h3>${gridHTML({ shots: mine.shots, ships: myShipCells, sunk: new Set(mine.sunk.flatMap((s) => s.cells)), lastCell: g.last && g.last.by !== me ? g.last.cell : -1, label: "Your fleet", art: shipsLayer((g.myShips || []).map((sh, i) => ({ i, cells: sh.cells }))) })}${tab === "fleet" ? '<button type="button" class="btn btn-small pbs-back" data-bstab="target">Back to targeting</button>' : ""}</div></div>`;
   }
 
   function describeLast(g) {
@@ -208,6 +244,7 @@ GameUI.battleship = (() => {
     root = null;
     lastMoves = -1;
     aim = -1;
+    tab = "target";
   }
 
   function renderResult(r, state, a) {

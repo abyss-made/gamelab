@@ -6913,3 +6913,12 @@ body.focus-mode[data-screen="room"][data-game="impostor"] .chat-log {
     min-height: 44px;
   }
 }
+
+/* Avatar Studio 2.0 */
+.avatar.avatar-v3 { background: #0b1a28; }
+.avatar.avatar-v3 > svg { width: 100%; height: 100%; display: block; }
+.av-studio { margin: 8px 0 16px; display: grid; gap: 8px; justify-items: center; }
+.av-studio.open { justify-items: stretch; padding: 12px; border: 1px solid #1d3647; border-radius: 12px; }
+.av-studio-preview { display: flex; justify-content: center; }
+.av-studio .field select { width: 100%; }
+.av-studio .board-actions { flex-wrap: wrap; }

@@ -22,6 +22,11 @@ GameUI.pool = (() => {
   let busyUntil = 0;
   let lastShot = -1;
   let dragging = null;
+  let pendingCue = null; // { aim, from, until }: cue shown at contact while the server resolves the shot
+
+  // Phone portrait: draw the physical 1000x500 table rotated -90deg (head string at the bottom).
+  // Only presentation changes; pointers are inverse-mapped back to physical table coordinates.
+  const portrait = () => !!canvas && window.innerWidth < 700 && window.innerHeight > window.innerWidth;
 
   const deg = (r) => ((((r * 180) / Math.PI) % 360) + 360) % 360;
 
@@ -30,16 +35,26 @@ GameUI.pool = (() => {
     const w = t.w + PAD * 2;
     const h = t.h + PAD * 2;
     const rect = canvas.getBoundingClientRect();
-    const k = rect.width / w;
-    return { t, w, h, k, rect };
+    const rot = portrait();
+    const k = rect.width / (rot ? h : w);
+    return { t, w, h, k, rect, rot };
   }
 
   function fit() {
     if (!canvas || !g) return;
-    const { w, h, rect } = geometry();
+    const rot = portrait();
+    const { w, h } = geometry();
+    canvas.classList.toggle("portrait", rot);
+    if (rot) {
+      // fit the tall table into the viewport height left for it
+      const wrapW = canvas.parentElement.clientWidth;
+      const maxH = Math.max(320, window.innerHeight * 0.6);
+      canvas.style.width = `${Math.min(wrapW, (maxH * h) / w)}px`;
+    } else canvas.style.width = "";
+    const rect = canvas.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const cw = Math.round(rect.width * dpr);
-    const ch = Math.round((rect.width * h) / w * dpr);
+    const ch = Math.round((rot ? (rect.width * w) / h : (rect.width * h) / w) * dpr);
     if (canvas.width !== cw || canvas.height !== ch) {
       canvas.width = cw;
       canvas.height = ch;
@@ -48,11 +63,13 @@ GameUI.pool = (() => {
 
   const canShoot = () => g && g.myIndex === g.turn && g.myIndex >= 0 && performance.now() >= busyUntil && !S.lastResult;
 
+  // Screen point -> physical table coordinates (inverse of the draw transform).
   function toTable(ev) {
-    const { k, rect, t } = geometry();
-    const x = ((ev.clientX - rect.left) / rect.width) * (t.w + PAD * 2) - PAD;
-    const y = ((ev.clientY - rect.top) / rect.height) * (t.h + PAD * 2) - PAD;
-    return { x, y };
+    const { rect, t, w, h, rot } = geometry();
+    const sx = (ev.clientX - rect.left) / rect.width;
+    const sy = (ev.clientY - rect.top) / rect.height;
+    if (rot) return { x: w - sy * w - PAD, y: sx * h - PAD };
+    return { x: sx * w - PAD, y: sy * h - PAD };
   }
 
   function cueBall() {
@@ -94,6 +111,7 @@ GameUI.pool = (() => {
     return { balls: g.balls.map((b) => (b.id in pos ? (pos[b.id] ? { ...b, ...pos[b.id], gone: false } : { ...b, gone: true }) : b)), moving: true };
   }
 
+  let labelRot = 0;
   function drawBall(c, b, r) {
     const x = b.x, y = b.y;
     c.save();
@@ -123,7 +141,11 @@ GameUI.pool = (() => {
       c.font = `700 ${r * 0.72}px Arial, sans-serif`;
       c.textAlign = "center";
       c.textBaseline = "middle";
-      c.fillText(String(b.id), x, y + 0.5);
+      c.save();
+      c.translate(x, y);
+      if (labelRot) c.rotate(labelRot);
+      c.fillText(String(b.id), 0, 0.5);
+      c.restore();
     }
     c.beginPath();
     c.arc(x - r * 0.32, y - r * 0.34, r * 0.22, 0, 7);
@@ -166,24 +188,13 @@ GameUI.pool = (() => {
   function draw(now) {
     if (!canvas || !g) return;
     fit();
-    const { t, w, h } = geometry();
-    const k = canvas.width / w;
+    const { t, w, h, rot } = geometry();
+    const k = canvas.width / (rot ? h : w);
     ctx.setTransform(k, 0, 0, k, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-    // rail
-    ctx.fillStyle = "#1d1814";
-    ctx.beginPath();
-    ctx.roundRect ? ctx.roundRect(0, 0, w, h, 26) : ctx.rect(0, 0, w, h);
-    ctx.fill();
-    ctx.strokeStyle = "#3b2d22";
-    ctx.lineWidth = 3;
-    ctx.stroke();
-    ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#0a4848";
-    ctx.fillRect(0, 0, t.w, t.h);
-    ctx.strokeStyle = "#175b58";
-    ctx.lineWidth = 4;
-    ctx.strokeRect(0, 0, t.w, t.h);
+    ctx.clearRect(0, 0, rot ? h : w, rot ? w : h);
+    if (rot) { ctx.translate(0, w); ctx.rotate(-Math.PI / 2); }
+    labelRot = rot ? Math.PI / 2 : 0;
+    drawTable(t, w, h);
     if (g.breakShot || (g.inHand && placing)) {
       ctx.strokeStyle = "#ffffff30";
       ctx.lineWidth = 2;
@@ -194,8 +205,15 @@ GameUI.pool = (() => {
     }
     for (const p of t.pockets) {
       ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 0.82 + 5, 0, 7);
+      ctx.fillStyle = "#9c7a45";
+      ctx.fill();
+      ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82, 0, 7);
-      ctx.fillStyle = "#050a0e";
+      const pg = ctx.createRadialGradient(p.x, p.y, 2, p.x, p.y, p.r);
+      pg.addColorStop(0, "#000");
+      pg.addColorStop(1, "#14110d");
+      ctx.fillStyle = pg;
       ctx.fill();
     }
     const cur = currentBalls(now);
@@ -218,14 +236,32 @@ GameUI.pool = (() => {
       ctx.strokeStyle = "#adff00";
       ctx.lineWidth = 2;
       ctx.stroke();
-      // cue stick
-      const back = 26 + power * 1.3;
-      ctx.strokeStyle = "#e8c48a";
+      // cue stick: follows the aim and draws back with power
+      const near = t.r + 8 + (power / 100) * 40;
+      const far = near + 230;
+      const cx = Math.cos(aim), cy = Math.sin(aim);
+      const cg = ctx.createLinearGradient(from.x - cx * near, from.y - cy * near, from.x - cx * far, from.y - cy * far);
+      cg.addColorStop(0, "#f3ead6");
+      cg.addColorStop(0.04, "#e8c48a");
+      cg.addColorStop(0.7, "#c79a5b");
+      cg.addColorStop(1, "#5a3a22");
+      ctx.strokeStyle = cg;
       ctx.lineWidth = 7;
       ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(from.x - Math.cos(aim) * (t.r + 8 + (power / 100) * 40), from.y - Math.sin(aim) * (t.r + 8 + (power / 100) * 40));
-      ctx.lineTo(from.x - Math.cos(aim) * (t.r + back + 150), from.y - Math.sin(aim) * (t.r + back + 150));
+      ctx.moveTo(from.x - cx * near, from.y - cy * near);
+      ctx.lineTo(from.x - cx * far, from.y - cy * far);
+      ctx.stroke();
+    }
+    if (pendingCue && performance.now() < pendingCue.until && !cur.moving) {
+      // accepted-but-unresolved: the cue rests at contact, no predicted result
+      const { from, aim: a0 } = pendingCue;
+      ctx.strokeStyle = "#c9a26799";
+      ctx.lineWidth = 7;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(from.x - Math.cos(a0) * (t.r + 3), from.y - Math.sin(a0) * (t.r + 3));
+      ctx.lineTo(from.x - Math.cos(a0) * (t.r + 180), from.y - Math.sin(a0) * (t.r + 180));
       ctx.stroke();
     }
     const handCue = g.inHand && mine && !cur.moving; // the shooter's cue ball is drawn at its chosen spot
@@ -247,6 +283,48 @@ GameUI.pool = (() => {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
+  // Walnut rail, brass diamonds, jewel-green cloth (material only; geometry is the server's table).
+  function drawTable(t, w, h) {
+    const wood = ctx.createLinearGradient(0, 0, 0, h);
+    wood.addColorStop(0, "#9a6a3f");
+    wood.addColorStop(0.5, "#7a4f2c");
+    wood.addColorStop(1, "#5e3a1f");
+    ctx.fillStyle = wood;
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(0, 0, w, h, 30) : ctx.rect(0, 0, w, h);
+    ctx.fill();
+    ctx.strokeStyle = "#d8b98a66";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.save();
+    ctx.globalAlpha = 0.12;
+    ctx.strokeStyle = "#2b1a0e";
+    ctx.lineWidth = 1;
+    for (let i = 6; i < h; i += 9) { ctx.beginPath(); ctx.moveTo(8, i); ctx.bezierCurveTo(w * 0.3, i + 3, w * 0.6, i - 3, w - 8, i + 1); ctx.stroke(); }
+    ctx.restore();
+    ctx.fillStyle = "#e8cf8f";
+    for (let i = 1; i < 8; i++) {
+      if (i === 4) continue;
+      const x = PAD + (t.w * i) / 8;
+      for (const y of [PAD / 2, h - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
+    }
+    for (let i = 1; i < 4; i++) {
+      const y = PAD + (t.h * i) / 4;
+      for (const x of [PAD / 2, w - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
+    }
+    ctx.translate(PAD, PAD);
+    ctx.fillStyle = "#2f8b5f";
+    ctx.fillRect(-10, -10, t.w + 20, t.h + 20);
+    const cloth = ctx.createRadialGradient(t.w / 2, t.h * 0.45, 20, t.w / 2, t.h / 2, t.w * 0.62);
+    cloth.addColorStop(0, "#1f7a6a");
+    cloth.addColorStop(1, "#0b4a43");
+    ctx.fillStyle = cloth;
+    ctx.fillRect(0, 0, t.w, t.h);
+    ctx.strokeStyle = "#0a3a33";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(0, 0, t.w, t.h);
+  }
+
   function loop(now) {
     draw(performance.now());
     raf = requestAnimationFrame(loop);
@@ -264,7 +342,7 @@ GameUI.pool = (() => {
   function onPointer(ev) {
     if (!canShoot()) return;
     if (ev.type === "pointerdown") {
-      canvas.setPointerCapture && canvas.setPointerCapture(ev.pointerId);
+      try { canvas.setPointerCapture(ev.pointerId); } catch (e) { /* pointer already gone */ }
       dragging = true;
       canvas.focus({ preventScroll: true });
     }
@@ -294,7 +372,7 @@ GameUI.pool = (() => {
       <div class="ttt-status" id="pl-status" aria-live="polite"></div>
       <div class="pl-wrap"><canvas id="pl-canvas" class="pl-canvas" tabindex="0" role="application" aria-label="Pool table. Drag to aim. Arrow keys fine tune the aim and power. Enter shoots."></canvas></div>
       <div class="pl-controls card" id="pl-controls">
-        <label class="pl-slider"><span>Aim <b id="pl-aim-val"></b></span><input type="range" id="pl-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"></label>
+        <div class="pl-slider pl-fine"><span>Aim <b id="pl-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost btn-small" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="pl-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost btn-small" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
         <label class="pl-slider"><span>Power <b id="pl-pow-val"></b></span><input type="range" id="pl-pow" min="3" max="100" step="1" aria-label="Shot power percent"></label>
         <div class="board-actions">
           <button type="button" class="btn" id="pl-shoot">Shoot</button>
@@ -322,6 +400,11 @@ GameUI.pool = (() => {
     root.querySelector("#pl-aim").addEventListener("input", (e) => { aim = (Number(e.target.value) * Math.PI) / 180; syncControls(true); });
     root.querySelector("#pl-pow").addEventListener("input", (e) => { power = Number(e.target.value); syncControls(true); });
     root.querySelector("#pl-shoot").addEventListener("click", shoot);
+    root.querySelectorAll("[data-fine]").forEach((b) => b.addEventListener("click", (e) => {
+      if (!canShoot()) return;
+      aim += (Number(b.dataset.fine) * (e.shiftKey ? 5 : 0.5) * Math.PI) / 180;
+      syncControls();
+    }));
     root.querySelector("#pl-place").addEventListener("click", () => {
       if (!cuePos || !legalSpot(cuePos.x, cuePos.y)) return;
       placing = !placing;
@@ -349,6 +432,7 @@ GameUI.pool = (() => {
       msg.place = { x: cuePos.x, y: cuePos.y };
     }
     app.socket.emit("action", msg);
+    pendingCue = { aim, from: cueXY(), until: performance.now() + 1500 };
     Sound.play("drop");
     // lock controls until the server's reply arrives
     busyUntil = performance.now() + 600;
@@ -362,7 +446,8 @@ GameUI.pool = (() => {
     const powEl = root.querySelector("#pl-pow");
     aimEl.value = deg(aim).toFixed(2);
     powEl.value = power;
-    root.querySelector("#pl-aim-val").textContent = Math.round(deg(aim)) + "°";
+    root.querySelector("#pl-aim-val").textContent = deg(aim).toFixed(1) + "°";
+    root.querySelectorAll("[data-fine]").forEach((b) => { b.disabled = !mine; });
     root.querySelector("#pl-pow-val").textContent = power + "%";
     const ctrls = root.querySelector("#pl-controls");
     ctrls.hidden = g.myIndex < 0;
@@ -412,6 +497,7 @@ GameUI.pool = (() => {
     clock.set(g.timeLeft);
     const a = g.anim;
     if (a && a.shot !== animKey) {
+      pendingCue = null;
       animKey = a.shot;
       animT0 = performance.now() - a.elapsedMs;
       if (lastShot >= 0) Sound.play("drop");
@@ -448,7 +534,7 @@ GameUI.pool = (() => {
     window.removeEventListener("resize", fit);
     if (clock) clock.stop();
     if (root) root.remove();
-    root = null; canvas = null; ctx = null; g = null; animKey = -1; lastShot = -1; busyUntil = 0; cuePos = null; placing = true;
+    root = null; canvas = null; ctx = null; g = null; pendingCue = null; animKey = -1; lastShot = -1; busyUntil = 0; cuePos = null; placing = true;
   }
 
   function renderResult(r, state, a) {

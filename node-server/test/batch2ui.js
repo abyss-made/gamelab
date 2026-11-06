@@ -159,16 +159,46 @@ async function createRoom(page, game) {
             }
             const n = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
             ok(n >= 7, `${t}: host sees their own hand (${n} cards)`);
+            const backs = await page.$$eval('.pcs-seat .pcs-backs img', (e) => e.length);
+            ok(backs === Math.min(7, f.state.game.players.find((p) => p.id !== me).count), `${t}: opponent fan shows face-down backs from the public count (${backs})`);
+            ok(!(await page.$('.pcs-backs .pcs-card')), `${t}: opponent fans never contain card faces`);
+            // Arranged long hand (nothing sent): 30 cards must all stay reachable (scroll fallback).
+            const longHand = await page.evaluate(() => {
+              const st = JSON.parse(JSON.stringify(window.App.S));
+              st.game.hand = Array.from({ length: 30 }, (_, i) => ({ id: 900 + i, c: 'rbgy'[i % 4], v: String(i % 10) }));
+              GameUI.colorstack.update(st);
+              const hand = document.querySelector('#cs-hand');
+              const last = hand.lastElementChild;
+              last.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+              const hr = hand.getBoundingClientRect(), lr = last.getBoundingClientRect();
+              const reachable = lr.right <= hr.right + 1 && lr.left >= hr.left - 1;
+              GameUI.colorstack.update(window.App.S);
+              return { reachable, scroll: hand.scrollWidth >= hand.clientWidth };
+            });
+            ok(longHand.reachable, `${t}: a 30-card hand keeps every card reachable`);
             const enemy = JSON.stringify(f.state.game.hand);
             const pl = await page.$$('#cs-hand .cs-card.playable');
             if (pl.length) {
               const before = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
               const isWild = await pl[0].evaluate((e) => e.classList.contains('c-w'));
+              const id = await pl[0].getAttribute('data-card');
               await pl[0].click();
+              await sleep(300);
+              ok(await page.$$eval('#cs-hand .cs-card', (e) => e.length) === before, `${t}: tapping a card only inspects it`);
+              ok(await page.getAttribute(`#cs-hand [data-card="${id}"]`, 'aria-pressed') === 'true', `${t}: the inspected card is marked selected`);
+              await sleep(1200); // a timer tick repaints the screen
+              ok(await page.getAttribute(`#cs-hand [data-card="${id}"]`, 'aria-pressed') === 'true', `${t}: selection survives timer repaints`);
+              const unplayable = await page.$('#cs-hand .cs-card:not(.playable)');
+              if (unplayable) {
+                await unplayable.click();
+                ok(await page.isDisabled('#cs-play'), `${t}: Play is disabled for a card that doesn't match`);
+                await page.click(`#cs-hand [data-card="${id}"]`);
+              }
+              await page.click('#cs-play');
               if (isWild) await page.click('[data-color="g"]');
               await sleep(400);
               const after = await page.$$eval('#cs-hand .cs-card', (e) => e.length);
-              ok(after === before - 1, `${t}: tapping a playable card plays it`);
+              ok(after === before - 1, `${t}: Play plays the selected card`);
             } else {
               await page.click('#cs-draw');
               await sleep(400);
@@ -193,6 +223,81 @@ async function createRoom(page, game) {
               await sleep(400);
               ok((await page.textContent('#gf-log')).length > 0, `${t}: the move appears in the log`);
             }
+            // Arranged views (nothing sent): pending ask, book ledger, Ace = 14.
+            const arr = await page.evaluate(() => {
+              const base = JSON.parse(JSON.stringify(window.App.S));
+              const g = base.game;
+              const meP = g.players.find((p) => p.id === base.you);
+              const other = g.players.find((p) => p.id !== base.you);
+              g.turnId = base.you;
+              g.hand = [{ r: 14, s: 'S' }, { r: 14, s: 'H' }, { r: 7, s: 'C' }];
+              meP.books = [5]; other.books = [9];
+              const sent = [];
+              const emit = window.App.socket.emit;
+              window.App.socket.emit = (...a) => { sent.push(a); };
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(base);
+              const seededNew = document.querySelectorAll('.pgf .new').length;
+              const aceChip = [...document.querySelectorAll('[data-rank]')].find((b) => b.dataset.rank === '14');
+              const aceLabel = aceChip ? aceChip.textContent.trim() : '';
+              aceChip.click();
+              document.querySelector('#gf-go').click();
+              const pendingText = document.querySelector('#gf-status').textContent;
+              const lockedAfterAsk = document.querySelector('#gf-go').disabled && [...document.querySelectorAll('[data-rank]')].every((b) => b.disabled);
+              GameUI.gofish.update(base); // duplicate snapshot: still pending, no celebration
+              const stillPending = /Asking/.test(document.querySelector('#gf-status').textContent);
+              const dupNew = document.querySelectorAll('.pgf .new').length;
+              const next = JSON.parse(JSON.stringify(base));
+              next.game.players.find((p) => p.id === base.you).books = [5, 14];
+              next.game.hand = [{ r: 7, s: 'C' }];
+              next.game.log = [...next.game.log, 'arranged'];
+              GameUI.gofish.update(next);
+              const newBooks = [...document.querySelectorAll('.pgf .new')].map((e) => e.textContent.trim());
+              const cleared = !/Asking/.test(document.querySelector('#gf-status').textContent);
+              window.App.socket.emit = emit;
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(window.App.S);
+              return { seededNew, aceLabel, sent: sent.length, sentRank: sent[0] && sent[0][1] && sent[0][1].rank, pendingText, lockedAfterAsk, stillPending, dupNew, newBooks, cleared };
+            });
+            const gfLong = await page.evaluate(() => {
+              const st = JSON.parse(JSON.stringify(window.App.S));
+              st.game.hand = Array.from({ length: 24 }, (_, i) => ({ r: 2 + (i % 13), s: 'SHDC'[i % 4] }));
+              GameUI.gofish.update(st);
+              const hand = document.querySelector('#gf-hand');
+              const last = hand.lastElementChild;
+              last.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+              const hr = hand.getBoundingClientRect(), lr = last.getBoundingClientRect();
+              GameUI.gofish.update(window.App.S);
+              return lr.right <= hr.right + 1 && lr.left >= hr.left - 1;
+            });
+            ok(gfLong, `${t}: a 24-card Go Fish hand keeps every card reachable`);
+            // A lost Ask (emit swallowed, view never changes) unlocks after 5s with a retry note.
+            const lostAsk = await page.evaluate(async () => {
+              const base = JSON.parse(JSON.stringify(window.App.S));
+              base.game.turnId = base.you;
+              base.game.hand = [{ r: 9, s: 'S' }, { r: 4, s: 'H' }];
+              const emit = window.App.socket.emit;
+              window.App.socket.emit = () => {};
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(base);
+              document.querySelector('[data-rank="9"]').click();
+              document.querySelector('#gf-go').click();
+              const locked = document.querySelector('#gf-go').disabled;
+              await new Promise((r) => setTimeout(r, 5400));
+              const unlocked = !document.querySelector('[data-rank="9"]').disabled;
+              const note = /didn't go through/.test(document.querySelector('#gf-status').textContent);
+              window.App.socket.emit = emit;
+              GameUI.gofish.unmount(); GameUI.gofish.mount(document.getElementById('stage'), window.App);
+              GameUI.gofish.update(window.App.S);
+              return { locked, unlocked, note };
+            });
+            ok(lostAsk.locked && lostAsk.unlocked && lostAsk.note, `${t}: a lost Ask unlocks after 5s so the player can retry`);
+            ok(arr.aceLabel === 'A', `${t}: rank 14 is labelled Ace (A)`);
+            ok(arr.seededNew === 0, `${t}: existing books are seeded silently on first view`);
+            ok(arr.sent === 1 && arr.sentRank === 14, `${t}: Ask sends the chosen rank once`);
+            ok(/Asking/.test(arr.pendingText) && arr.lockedAfterAsk, `${t}: the named ask stays pending and locked until the view changes`);
+            ok(arr.stillPending && arr.dupNew === 0, `${t}: a duplicate snapshot keeps the ask pending and celebrates nothing`);
+            ok(arr.newBooks.length === 1 && arr.newBooks[0].startsWith('A') && arr.cleared, `${t}: only the newly observed book animates, and the pending ask clears`);
           }
         }
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, `${game}-${vp.tag}.png`) });
