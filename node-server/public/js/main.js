@@ -373,10 +373,12 @@
       avatar: { e: rand(AVATAR_COUNT), c: rand(COLORS.length) },
     };
   }
+  let identityConfirmed=false;
+  try { const flag=localStorage.getItem("pg_identity_confirmed"); identityConfirmed=flag==="1"||(flag===null&&!!localStorage.getItem("pg_profile")); localStorage.setItem("pg_identity_confirmed",identityConfirmed?"1":"0"); } catch {}
   const profile = loadProfile();
   const saveProfile = () =>
     localStorage.setItem("pg_profile", JSON.stringify(profile));
-  saveProfile();
+  try { saveProfile(); } catch {}
 
   let token = sessionStorage.getItem("pg_token");
   if (!token || !/^[a-f0-9]{32}$/.test(token)) {
@@ -394,12 +396,13 @@
 
   // ----- Avatar Studio 2.0: draft is separate from the saved look until Save -----
   const AV = window.PGAvatar;
-  const studio = { open: false, draft: null, undo: [], note: "" };
+  const studio = { open: true, search: "", tab: "characters", family: "all", draft: null, undo: [], note: "" };
   const STUDIO_LABELS = { expression: "Expression", eyes: "Eyes", hat: "Hat", glasses: "Glasses", accessory: "Accessory", detail: "Detail" };
   const cap = (x) => x.charAt(0).toUpperCase() + x.slice(1);
   function studioOpenNow() {
+    if (!AV) { studio.open = false; renderProfiles(); return; }
     studio.open = true;
-    AV.loadCatalog().then(() => {
+    return AV.loadCatalog().then(() => {
       if (!studio.draft) studio.draft = AV.normalize(profile.avatar.v3) || AV.defaultConfig("h01");
       renderProfiles();
     }).catch(() => { studio.note = "Avatar Studio could not load. Your current avatar is unchanged."; renderProfiles(); });
@@ -420,8 +423,9 @@
     });
   }
   const studioDirty = () => !!studio.draft && JSON.stringify(AV.normalize(profile.avatar.v3) || null) !== JSON.stringify(studio.draft);
-  const focusLauncher = () => setTimeout(() => document.querySelector('[data-studio="open"]')?.focus(), 0);
+  const focusLauncher = () => setTimeout(() => [...document.querySelectorAll('[data-studio="open"]')].find(el => el.getClientRects().length)?.focus(), 0);
   function studioSet(next, note = "") {
+    studio.useClassic=false;
     const n = AV.normalize(next);
     if (!n) return;
     studio.undo.push(studio.draft);
@@ -430,34 +434,36 @@
     studio.draft = n;
   }
   function studioHTML() {
-    if (!AV) return "";
+    if (!AV) return `<p role="status">The character creator could not load. Refresh to retry; your classic avatar is still available.</p>`;
     if (!studio.open) return `<div class="av-studio"><button type="button" class="btn btn-small btn-ghost" data-studio="open">Avatar Studio</button>${profile.avatar.v3 ? ' <button type="button" class="btn btn-small btn-ghost" data-studio="classic">Use classic avatar</button>' : ""}${studio.note ? `<p class="muted" role="status">${esc(studio.note)}</p>` : ""}</div>`;
     const cat = AV.catalog();
-    if (!cat || !studio.draft) return `<div class="av-studio" role="status">${esc(studio.note) || "Loading Avatar Studio…"}</div>`;
+    if (!cat || !studio.draft) return `<div class="av-studio" role="status">${esc(studio.note) || "Loading Avatar Studio…"}${studio.note?'<button type="button" class="btn btn-ghost" data-studio="open">Retry creator</button>':""}</div>`;
     const d = studio.draft;
     const ch = cat.characters.find((c) => c.id === d.id);
-    const sel = (key, vals, label) => `<label class="field"><span>${label}</span><select data-studio-field="${key}">${vals.map((v) => `<option value="${v}" ${d[key] === v ? "selected" : ""} ${key === "accessory" && v === "headphones" && d.hat !== "none" ? "disabled" : ""}>${cap(v)}</option>`).join("")}</select></label>`;
+    const sel = (key, vals, label) => `<label class="field"><span>${label}</span><select data-studio-field="${key}" tabindex="-1" aria-hidden="true">${vals.map((v) => `<option value="${v}" ${d[key] === v ? "selected" : ""} ${key === "accessory" && v === "headphones" && d.hat !== "none" ? "disabled" : ""}>${cap(v)}</option>`).join("")}</select></label>`;
+    const optionArt = (key, value) => {
+      if (!["hat", "glasses", "accessory"].includes(key) || value === "none") return "";
+      const symbol = value === "round" ? "round-glasses" : value;
+      return `<svg class="av-option-art" viewBox="0 0 160 100" aria-hidden="true" style="--accent:${AV.PALETTES[d.palette]}"><use href="${ch.asset}#${ch.id}-${symbol}" width="160" height="100"/></svg>`;
+    };
     const saved = JSON.stringify(AV.normalize(profile.avatar.v3) || null) === JSON.stringify(d);
+    const matches = cat.characters.filter(c => (studio.family === "all" || c.family === studio.family) && c.name.toLowerCase().includes(studio.search.toLowerCase()));
     return `<div class="av-studio open" role="group" aria-label="Avatar Studio">
-      <div class="av-studio-preview">${avatarHTML({ e: 0, c: profile.avatar.c, v3: d }, "av-xl")}</div>
-      <label class="field"><span>Character</span><select data-studio-field="id">${cat.characters.map((c) => `<option value="${c.id}" ${c.id === d.id ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></label>
-      ${sel("palette", Object.keys(AV.PALETTES), "Color")}
-      ${AV.SLOTS.map((k) => sel(k, ch.compatibility[k], STUDIO_LABELS[k])).join("")}
-      <p class="muted" role="status" aria-live="polite">${esc(studio.note)}</p>
-      <div class="board-actions">
-        <button type="button" class="btn btn-small btn-ghost" data-studio="random">Randomize</button>
-        <button type="button" class="btn btn-small btn-ghost" data-studio="reset">Reset</button>
-        <button type="button" class="btn btn-small btn-ghost" data-studio="undo" ${studio.undo.length ? "" : "disabled"}>Undo</button>
-        <button type="button" class="btn btn-small" data-studio="save" ${saved ? "disabled" : ""}>Save look</button>
-        <button type="button" class="btn btn-small btn-ghost" data-studio="close">${saved ? "Close" : "Discard"}</button>
-      </div></div>`;
+      <div class="av-studio-hero"><div class="av-studio-preview">${avatarHTML({ e: profile.avatar.e, c: profile.avatar.c, v3: d }, "av-xl")}</div><h3>${esc(ch.name)}</h3><p>Your next party face.</p><div class="board-actions"><button type="button" class="btn btn-small btn-ghost" data-studio="random">Surprise me</button><button type="button" class="btn btn-small btn-ghost" data-studio="undo" ${studio.undo.length ? "" : "disabled"}>Undo</button><button type="button" class="btn btn-small btn-ghost" data-studio="reset">Reset</button></div></div>
+      <div class="av-studio-edit" data-category="${studio.tab}"><nav class="av-editor-nav" aria-label="Creator category"><button type="button" data-studio-tab="characters" aria-pressed="${studio.tab==='characters'}">Characters · 35</button><button type="button" data-studio-tab="looks" aria-pressed="${studio.tab==='looks'}">Looks & accessories</button></nav><div class="av-catalog-tools"><input type="search" data-studio-search placeholder="Find your character…" aria-label="Find your character" value="${esc(studio.search)}"><select data-studio-family aria-label="Character family">${["all","home","human","animal","robot","fantasy"].map(f=>`<option value="${f}" ${f===studio.family?"selected":""}>${cap(f)}</option>`).join("")}</select></div>
+      <select data-studio-field="id" class="sr-only" tabindex="-1" aria-hidden="true" aria-label="Character">${cat.characters.map(c=>`<option value="${c.id}" ${c.id===d.id?"selected":""}>${esc(c.name)}</option>`).join("")}</select>
+      <div class="av-gallery" aria-label="Characters">${matches.map(c=>`<button type="button" data-character="${c.id}" aria-pressed="${c.id===d.id}" aria-label="Choose ${esc(c.name)}"><img src="${c.preview}" alt="" loading="lazy"><b>${esc(c.name)}</b></button>`).join("") || '<p>No matching characters. Clear your search to see the crew.</p>'}</div>
+      <div class="av-customize">${["palette",...AV.SLOTS].map(k=>`<fieldset><legend>${k==="palette"?"Color":STUDIO_LABELS[k]}</legend><div class="av-options">${(k==="palette"?Object.keys(AV.PALETTES):ch.compatibility[k]).map(v=>`<button type="button" data-look-key="${k}" data-look-value="${v}" aria-pressed="${d[k]===v}" ${k==="accessory"&&v==="headphones"&&d.hat!=="none"?"disabled":""} ${k==="palette"?`style="--swatch:${AV.PALETTES[v]}" class="av-swatch"`:""}>${optionArt(k,v)}<span>${cap(v)}</span></button>`).join("")}</div>${sel(k,k==="palette"?Object.keys(AV.PALETTES):ch.compatibility[k],k==="palette"?"Color":STUDIO_LABELS[k]).replace('class="field"','class="sr-only" aria-hidden="true"')}</fieldset>`).join("")}</div></div>
+      <div class="av-studio-save" data-has-note="${!!studio.note}"><p role="status" aria-live="polite">${esc(studio.note)||"Try a look. Your saved character stays unchanged until Save."}</p><button type="button" class="btn" data-studio="save" ${saved?"disabled":""}>Save look</button><button type="button" class="btn btn-ghost" data-studio="classic">Use classic</button></div></div>`;
   }
+
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-studio]");
     if (!b || !AV) return;
     const act = b.dataset.studio;
-    if (act === "open") { studioOpenNow(); return setTimeout(() => document.querySelector('[data-studio-field="id"]')?.focus(), 60); }
+    if (act === "open") { studioOpenNow()?.then(() => [...document.querySelectorAll("[data-studio-search]")].find(el => el.getClientRects().length)?.focus()); return; }
     if (act === "classic") {
+      studio.useClassic=true;studio.open=false;
       const prev = profile.avatar.v3;
       delete profile.avatar.v3;
       try { saveProfile(); studio.note = ""; }
@@ -486,11 +492,19 @@
       if (!n) return;
       const prev = profile.avatar.v3;
       profile.avatar.v3 = n;
-      try { saveProfile(); studio.note = "Saved."; syncAvatar(); }
+      try { saveProfile(); if(profile.name.trim()){identityConfirmed=true;try{localStorage.setItem("pg_identity_confirmed","1");}catch{}} studio.note = "Saved."; syncAvatar(); }
       catch (err) { if (prev) profile.avatar.v3 = prev; else delete profile.avatar.v3; studio.note = "Could not save on this device (storage is full or blocked). Your avatar is unchanged."; }
     }
     renderProfiles();
   });
+  document.addEventListener("click", e => {
+    const category=e.target.closest("[data-studio-tab]");if(category){studio.tab=category.dataset.studioTab;renderProfiles();document.querySelectorAll(".av-studio-edit").forEach(n=>n.scrollTop=0);}
+    const c=e.target.closest("[data-character]"), o=e.target.closest("[data-look-key]");
+    if(c){studioSet({...studio.draft,id:c.dataset.character});renderProfiles();}
+    if(o&&!o.disabled){studioSet({...studio.draft,[o.dataset.lookKey]:o.dataset.lookValue});renderProfiles();}
+  });
+  document.addEventListener("input", e=>{if(e.target.matches("[data-studio-search]")){studio.search=e.target.value;const start=e.target.selectionStart;renderProfiles();const next=[...document.querySelectorAll('[data-studio-search]')].find(n=>n.getClientRects().length);next?.focus();next?.setSelectionRange(start,start);}});
+  document.addEventListener("change", e=>{if(e.target.matches("[data-studio-family]")){studio.family=e.target.value;renderProfiles();}});
   document.addEventListener("change", (e) => {
     const f = e.target.closest("[data-studio-field]");
     if (!f || !AV || !studio.draft) return;
@@ -501,8 +515,18 @@
   });
 
   function renderProfiles() {
+    if (AV && !AV.catalog() && !studio.loading) { studio.loading=true; studioOpenNow(); }
+    if(AV?.catalog()&&!studio.draft)studio.draft=AV.normalize(profile.avatar.v3)||AV.defaultConfig("h01");
     $$("[data-profile]").forEach((el) => {
+      const active=el.contains(document.activeElement)?document.activeElement:null;
+      const keys=["character","look-key","look-value","studio-tab","studio","studio-field","studio-family","studio-search"];
+      const focusSelector=active?keys.filter(k=>active.hasAttribute('data-'+k)).map(k=>'[data-'+k+'="'+CSS.escape(active.getAttribute('data-'+k))+'"]' ).join(''):'';
+      const oldScroll=el.querySelector(".av-studio-edit")?.scrollTop||0;
       el.innerHTML = `
+        <div class="name-row">
+          <input class="name-input" maxlength="16" placeholder="Your name" value="${esc(profile.name)}" aria-label="Your name">
+          <button type="button" class="icon-btn dice" title="Random name and avatar" aria-label="Randomize">${icon("dice")}</button>
+        </div>
         <div class="avatar-pick">
           <button class="arrow" type="button" data-av="-1" aria-label="Previous avatar">‹</button>
           ${avatarHTML(profile.avatar, "av-xl")}
@@ -510,10 +534,9 @@
         </div>
         <div class="color-row">${COLORS.map((c, i) => `<button type="button" class="dot ${i === profile.avatar.c ? "on" : ""}" style="--av:${c}" data-color="${i}" aria-label="Color ${i + 1}"></button>`).join("")}</div>
         ${studioHTML()}
-        <div class="name-row">
-          <input class="name-input" maxlength="16" placeholder="Your name" value="${esc(profile.name)}" aria-label="Your name">
-          <button type="button" class="icon-btn dice" title="Random name and avatar" aria-label="Randomize">${icon("dice")}</button>
-        </div>`;
+`;
+      if(el.querySelector(".av-studio-edit"))el.querySelector(".av-studio-edit").scrollTop=oldScroll;
+      if(focusSelector)el.querySelector(focusSelector)?.focus({preventScroll:true});
     });
   }
   document.addEventListener("click", (e) => {
@@ -525,6 +548,7 @@
       profile.avatar.e =
         (profile.avatar.e + Number(av.dataset.av) + AVATAR_COUNT) %
         AVATAR_COUNT;
+    if(av||col){studio.useClassic=true;studio.open=false;}
     if (col) profile.avatar.c = Number(col.dataset.color);
     if (dice) {
       profile.avatar = { e: rand(AVATAR_COUNT), c: rand(COLORS.length) };
@@ -537,7 +561,9 @@
   document.addEventListener("input", (e) => {
     if (!e.target.classList.contains("name-input")) return;
     profile.name = e.target.value.slice(0, 16);
-    saveProfile();
+    if (profile.name.trim() && $("#toast").textContent === "Enter your player name before joining.") $("#toast").hidden = true;
+    try { saveProfile(); }
+    catch { toast("Your player name is available for this session, but your browser could not save it."); }
     $$(".name-input").forEach((i) => {
       if (i !== e.target) i.value = profile.name;
     });
@@ -564,6 +590,7 @@
     const title = $("#modal-body").querySelector("h2");
     if (title) title.id = "modal-title";
     $("#modal").hidden = false;
+    if(html.includes('data-profile')&&typeof currentCode!=="undefined"&&currentCode){const resume=$("#nav-return").cloneNode(true);resume.removeAttribute('id');resume.dataset.returnCurrent='1';resume.hidden=false;$("#modal-body").append(resume);}
     $("#modal-body").focus();
   }
   function closeModal() {
@@ -603,7 +630,7 @@
     $$(".screen").forEach((s) => {
       s.hidden = s.id !== "screen-" + name;
     });
-    document.body.dataset.screen = name;
+    document.body.dataset.screen = name;window.PGAds?.refresh();
     $$("[data-tab]").forEach((el) => {
       el.classList.toggle("active", el.dataset.tab === name);
       if (el.dataset.tab === name) el.setAttribute("aria-current", "page");
@@ -612,6 +639,7 @@
     if (name !== "room") GameUI.drawguess?.exitBig?.();
     window.scrollTo(0, 0);
     if (typeof syncReturn === "function") syncReturn();
+    if (name === "room") window.dispatchEvent(new Event("resize"));
   }
 
   const soundBtn = $("#sound-btn");
@@ -716,7 +744,7 @@
   });
   function openProfile() {
     openModal(
-      `<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">${S && S.code ? "Your player is saved on this device. A saved Avatar Studio look updates for your party right away." : "Your player is saved on this device. Changes apply when you next join a room."}</p><div class="modal-actions"><button class="btn" data-close>Let’s Play</button></div>`,
+      `<h2 class="card-title">Your Player</h2><p class="muted">No accounts. Just a name, a face, and good company.</p><div class="profile" data-profile></div><p class="profile-note">${S && S.code ? "Your player is saved on this device. A saved Avatar Studio look updates for your party right away." : "Your player is saved on this device. Changes apply when you next join a room."}</p><div class="modal-actions"><button class="btn" data-close>Done</button></div>`,
     );
     renderProfiles();
   }
@@ -748,6 +776,7 @@
   const socket = io();
   let S = null; // latest lobby state from the server
   let currentCode = null; // lobby we're in
+  try{const remembered=sessionStorage.getItem("pg_active_room");if(/^[A-Z0-9]{4,8}$/.test(remembered||""))currentCode=remembered;}catch{}
   let mounted = null; // what the stage is showing
   let lastResultKey = null;
 
@@ -802,6 +831,7 @@
     route();
   }
   function route() {
+    if(/^#[a-z0-9]{4,8}$/i.test(location.hash)){history.replaceState({},"","/r/"+location.hash.slice(1).toUpperCase());}
     const m = location.pathname.match(/^\/r\/([A-Za-z0-9]{4,8})\/?$/);
     if (m) {
       const code = m[1].toUpperCase();
@@ -1249,7 +1279,11 @@
   }
 
   // ---------- join ----------
+  let inviteEdited=false, inviteOriginCode=null;
   function showJoin(code) {
+    if (inviteOriginCode !== code) inviteOriginCode = null;
+    studio.open=!identityConfirmed;
+    if(!identityConfirmed)profile.name="";inviteEdited=false;studio.useClassic=false;studio.draft=AV?.normalize(profile.avatar.v3)||null;
     showScreen("join");
     $("#join-code").textContent = code;
     renderProfiles();
@@ -1258,7 +1292,23 @@
     if (other)
       $("#join-switch-note").textContent =
         `You are in party ${currentCode}. Joining ${code} will leave it.`;
-    $("#join-btn").onclick = () => join(code);
+    const returning=identityConfirmed;
+    document.querySelector('.join-card').classList.toggle('returning',returning);
+    document.querySelector('.join-card').classList.toggle('first-invite',!returning);
+    document.querySelector('#invite-edit')?.remove();
+    const edit=document.createElement('button');edit.id='invite-edit';edit.className='btn btn-ghost';edit.textContent='Edit character or name';edit.hidden=!returning;edit.onclick=()=>{inviteEdited=true;studioOpenNow();document.querySelector('.join-card').classList.remove('returning');edit.hidden=true;};
+    document.querySelector('#join-btn').before(edit);
+    $("#join-btn").textContent=returning?"Confirm & Join":"Save & Join Party";
+    $("#join-btn").onclick = () => {
+      if(!returning&&!studio.useClassic&&(!AV?.catalog()||!studio.draft))return toast("Wait for the character gallery, or retry the creator.");
+      if(!profile.name.trim())return toast("Enter your player name before joining.");
+      if((!returning||inviteEdited)&&!studio.useClassic&&studio.draft&&AV.normalize(studio.draft)){profile.avatar.v3=AV.normalize(studio.draft);}
+      try{saveProfile();}catch{toast("Your browser cannot save this player. You can still join for this session.");}
+      identityConfirmed=true;try{localStorage.setItem("pg_identity_confirmed","1");}catch{}
+      const inline = inviteOriginCode === code;
+      inviteOriginCode = null;
+      join(code,{confirmed:true,inline});
+    };
   }
 
   // Leaving is deliberate: confirm when the game or hosting would be disrupted.
@@ -1280,7 +1330,8 @@
     return confirmLeave(`You are in party ${currentCode}. Leave it?`);
   }
 
-  function join(code, { silent, inline } = {}) {
+  function join(code, { silent, inline, confirmed } = {}) {
+    if(!silent&&!confirmed&&code!==currentCode){inviteOriginCode=inline?code:null;nav("/r/"+code);return;}
     if (!silent && currentCode === code) {
       nav("/r/" + code);
       return;
@@ -1303,14 +1354,20 @@
   };
   function handleJoin(res, silent, inline) {
     if (!res || res.error) {
-      if (silent && currentCode) leaveLocal();
+      if (silent && currentCode) {const wasRoom=document.body.dataset.screen==="room";leaveLocal();if(!wasRoom){toast("Your previous party is no longer available.");return;}}
       const kind = res ? res.error : "closed";
-      if (inline && document.body.dataset.screen === "rooms")
+      if (inline) {
+        if (document.body.dataset.screen !== "rooms") {
+          history.replaceState({}, "", "/rooms");
+          showRooms();
+        }
         return codeError(INLINE_ERRORS[kind] || INLINE_ERRORS.closed);
+      }
       return showMessage(kind, res);
     }
+    identityConfirmed=true;try{localStorage.setItem("pg_identity_confirmed","1");}catch{}
     const fresh = currentCode !== res.code;
-    currentCode = res.code;
+    currentCode = res.code;try{sessionStorage.setItem("pg_active_room",currentCode);}catch{}
     // A silent reconnect must not drag the user back from another view.
     const onRoomView = document.body.dataset.screen === "room";
     if (!silent && location.pathname !== "/r/" + res.code)
@@ -1331,7 +1388,7 @@
   }
 
   function leaveLocal() {
-    currentCode = null;
+    currentCode = null;try{sessionStorage.removeItem("pg_active_room");}catch{}
     syncReturn();
     unmountStage();
     S = null;
@@ -1351,8 +1408,12 @@
   $("#leave-lobby-btn").addEventListener("click", () => leaveParty());
   const returnBar = $("#return-bar");
   function syncReturn() {
+    window.PGAds?.refresh();
     const show = !!currentCode && document.body.dataset.screen !== "room";
     returnBar.hidden = !show;
+    const top=document.querySelector('#nav-return');
+    top.hidden=!currentCode;document.querySelectorAll("[data-return-current]").forEach(b=>b.hidden=!currentCode);
+    top.querySelector('small').textContent=currentCode?currentCode+' · '+(S?.phase==='game'?'Playing':'In party'):'';
     document.body.classList.toggle("has-return", show);
     if (!show) return;
     const playing = S && S.phase === "game";
@@ -1366,6 +1427,8 @@
         : "Waiting in lobby"
       : "Connecting";
   }
+  document.addEventListener("click",e=>{if(e.target.closest("[data-return-current]")&&currentCode){closeModal();nav("/r/"+currentCode);}});
+  $("#nav-return").addEventListener("click",()=>{if(currentCode){closeModal();nav("/r/"+currentCode);}});
   returnBar.addEventListener("click", () => {
     closeModal();
     nav("/r/" + currentCode);

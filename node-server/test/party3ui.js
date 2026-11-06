@@ -57,6 +57,7 @@ const screen = (page) => page.evaluate(() => document.body.dataset.screen);
       page.on('dialog', (d) => d.accept());
       await page.goto(URL + '/');
       await page.evaluate(() => localStorage.setItem('pg_profile', JSON.stringify({ name: 'Alex', avatar: { e: 1, c: 1 } })));
+      await page.evaluate(() => localStorage.setItem('pg_identity_confirmed', '1'));
 
       // ----- routes: Games and Rooms are separate views -----
       await page.goto(URL + '/games');
@@ -87,6 +88,9 @@ const screen = (page) => page.evaluate(() => document.body.dataset.screen);
       ok(/does not look right/.test(await page.textContent('#code-error')), `${T}: malformed code is explained inline`);
       await page.fill('#code-input', '#ZZZZZZ');
       await page.press('#code-input', 'Enter');
+      await page.waitForSelector('#screen-join', { state: 'visible' });
+      ok(await page.textContent('#join-btn') === 'Confirm & Join', `${T}: room-code joins confirm the saved identity before taking a seat`);
+      await page.click('#join-btn');
       await page.waitForFunction(() => /No party with that code/.test(document.querySelector('#code-error').textContent));
       ok((await screen(page)) === 'rooms', `${T}: #CODE form is accepted and a closed code stays on Rooms with an inline error`);
       ok((await overflow(page)) <= 0, `${T}: Rooms has no horizontal overflow`);
@@ -209,7 +213,7 @@ const screen = (page) => page.evaluate(() => document.body.dataset.screen);
       gp.on('pageerror', (e) => errors.push('guest: ' + e.message));
       gp.on('dialog', (d) => d.accept());
       await gp.goto(URL + '/r/' + code);
-      await gp.click('#join-btn');
+      if (!(await gp.inputValue('#screen-join .name-input')).trim()) await gp.fill('#screen-join .name-input', 'Browser Guest'); await gp.click('#join-btn');
       await gp.waitForSelector('#screen-room', { state: 'visible' });
       await gp.waitForFunction(() => window.App && App.S);
       ok(await gp.isVisible('#party-leave') && (await gp.isHidden('#party-settings')), `${T}: participant sees Leave Party, not Party Settings`);
@@ -270,7 +274,7 @@ const screen = (page) => page.evaluate(() => document.body.dataset.screen);
       const errors = [];
       page.on('pageerror', (e) => errors.push(e.message));
       await page.goto(URL + '/r/' + r.code);
-      await page.click('#join-btn');
+      if (!(await page.inputValue('#screen-join .name-input')).trim()) await page.fill('#screen-join .name-input', 'Browser Guest'); await page.click('#join-btn');
       await page.waitForFunction(() => window.App && App.S && App.S.role === 'player');
       const me = await page.evaluate(() => App.S.you);
       // The same moves give the same winner and an identical result, so the two results share a key.

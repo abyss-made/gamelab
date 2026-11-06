@@ -198,15 +198,21 @@ def('invite-join', async () => {
   const cy = await open('Cy', PHONE, '/rooms');
   await cy.page.fill('#code-input', `#${code}`);
   await cy.page.press('#code-input', 'Enter');
+  await cy.page.waitForSelector('#join-btn', { state: 'visible' });
+  await cy.page.click('#join-btn');
   await cy.page.waitForSelector('#screen-room', { state: 'visible' });
   // 3. A whole invite link pasted into the code box (phone), and 4. a lower-case code.
   const dee = await open('Dee', PHONE, '/rooms');
   await dee.page.fill('#code-input', `${srv.url}/r/${code}`);
   await dee.page.press('#code-input', 'Enter');
+  await dee.page.waitForSelector('#join-btn', { state: 'visible' });
+  await dee.page.click('#join-btn');
   await dee.page.waitForSelector('#screen-room', { state: 'visible' });
   const eli = await open('Eli', DESKTOP, '/rooms');
   await eli.page.fill('#code-input', code.toLowerCase());
   await eli.page.press('#code-input', 'Enter');
+  await eli.page.waitForSelector('#join-btn', { state: 'visible' });
+  await eli.page.click('#join-btn');
   await eli.page.waitForSelector('#screen-room', { state: 'visible' });
   const all = [host, ben, cy, dee, eli];
   await waitAll(all, () => App.S && App.S.players.length === 5, null, 'five seated');
@@ -272,12 +278,10 @@ def('drawguess-live', async () => {
     }
     const guessers = others.filter((P) => P !== eli);
     if (turns === 1) {
-      // A reload mid-turn: back through the join screen as the same member, canvas replayed, still no word.
+      // A reload mid-turn restores the same member and canvas without a duplicate seat.
       const reloader = guessers[guessers.length - 1];
       const idBefore = (await S(reloader)).you;
       await reloader.page.reload();
-      await reloader.page.waitForSelector('#join-btn', { state: 'visible' });
-      await reloader.page.click('#join-btn');
       await waitFor(reloader, () => App.S && App.S.game && App.S.game.phase === 'draw', null, 'back in the game');
       ok((await S(reloader)).you === idBefore, 'a reload mid-game rejoins as the same member');
       const painted = await reloader.page.evaluate(() => {

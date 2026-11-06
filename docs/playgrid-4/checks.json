@@ -1,0 +1,1676 @@
+[
+  {
+    "flow": "new invite, saved identity, remote sync, refresh and returning confirmation",
+    "passed": true
+  },
+  {
+    "creator": [
+      1366,
+      768
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "creator": [
+      1440,
+      900
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "creator": [
+      1920,
+      1080
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "creator": [
+      2560,
+      1440
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "creator": [
+      390,
+      844
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "creator": [
+      360,
+      800
+    ],
+    "characters": 35,
+    "horizontalOverflow": false
+  },
+  {
+    "drawing": [
+      1366,
+      768
+    ],
+    "canvas": {
+      "x": 183,
+      "y": 138.5,
+      "width": 804,
+      "height": 603
+    },
+    "document": {
+      "height": 768,
+      "viewport": 768,
+      "width": 1366
+    }
+  },
+  {
+    "drawing": [
+      1440,
+      900
+    ],
+    "canvas": {
+      "x": 132,
+      "y": 138.5,
+      "width": 980,
+      "height": 735
+    },
+    "document": {
+      "height": 900,
+      "viewport": 900,
+      "width": 1440
+    }
+  },
+  {
+    "drawing": [
+      1920,
+      1080
+    ],
+    "canvas": {
+      "x": 252,
+      "y": 138.5,
+      "width": 1220,
+      "height": 915
+    },
+    "document": {
+      "height": 1080,
+      "viewport": 1080,
+      "width": 1920
+    }
+  },
+  {
+    "drawing": [
+      2560,
+      1440
+    ],
+    "canvas": {
+      "x": 332,
+      "y": 138.5,
+      "width": 1700,
+      "height": 1275
+    },
+    "document": {
+      "height": 1440,
+      "viewport": 1440,
+      "width": 2560
+    }
+  },
+  {
+    "drawing": [
+      390,
+      844
+    ],
+    "canvas": {
+      "x": 12,
+      "y": 180,
+      "width": 366,
+      "height": 274.5
+    },
+    "document": {
+      "height": 931,
+      "viewport": 844,
+      "width": 390
+    }
+  },
+  {
+    "drawing": [
+      360,
+      800
+    ],
+    "canvas": {
+      "x": 12,
+      "y": 180,
+      "width": 336,
+      "height": 252
+    },
+    "document": {
+      "height": 933,
+      "viewport": 800,
+      "width": 360
+    }
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "drawguess",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "fourrow",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordchain",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "categories",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "colorstack",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "gofish",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tictactoe",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "dotsboxes",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "wordscramble",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "trivia",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "telephone",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "bluff",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "impostor",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": ".bs-grid",
+    "bounds": {
+      "x": 175.5,
+      "y": 326.5,
+      "width": 418,
+      "height": 415.03125
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#bs-lock",
+    "bounds": {
+      "x": 737,
+      "y": 708.5,
+      "width": 190,
+      "height": 44
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": ".bs-grid",
+    "bounds": {
+      "x": 146.5,
+      "y": 326.5,
+      "width": 550,
+      "height": 546.90625
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#bs-lock",
+    "bounds": {
+      "x": 791.5,
+      "y": 789.09375,
+      "width": 190,
+      "height": 44
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": ".bs-grid",
+    "bounds": {
+      "x": 301.5,
+      "y": 326.5,
+      "width": 720,
+      "height": 716.90625
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#bs-lock",
+    "bounds": {
+      "x": 1031.5,
+      "y": 902.4375,
+      "width": 190,
+      "height": 44
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": ".bs-grid",
+    "bounds": {
+      "x": 621.5,
+      "y": 326.5,
+      "width": 720,
+      "height": 716.90625
+    }
+  },
+  {
+    "game": "battleship",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#bs-lock",
+    "bounds": {
+      "x": 1351.5,
+      "y": 902.4375,
+      "width": 190,
+      "height": 44
+    }
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "checkers",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": ".ld2-board",
+    "bounds": {
+      "x": 70.5,
+      "y": 239,
+      "width": 508,
+      "height": 508
+    }
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": ".ld2-board",
+    "bounds": {
+      "x": 51.5,
+      "y": 239,
+      "width": 620,
+      "height": 620
+    }
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": ".ld2-board",
+    "bounds": {
+      "x": 291.5,
+      "y": 239,
+      "width": 620,
+      "height": 620
+    }
+  },
+  {
+    "game": "ludo",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": ".ld2-board",
+    "bounds": {
+      "x": 611.5,
+      "y": 239,
+      "width": 620,
+      "height": 620
+    }
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": ".ch-board",
+    "bounds": {
+      "x": 79,
+      "y": 212,
+      "width": 438,
+      "height": 438
+    }
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": ".ch-board",
+    "bounds": {
+      "x": 97.5,
+      "y": 212,
+      "width": 570,
+      "height": 570
+    }
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": ".ch-board",
+    "bounds": {
+      "x": 313.5,
+      "y": 212,
+      "width": 640,
+      "height": 640
+    }
+  },
+  {
+    "game": "chess",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": ".ch-board",
+    "bounds": {
+      "x": 633.5,
+      "y": 212,
+      "width": 640,
+      "height": 640
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#pl-canvas",
+    "bounds": {
+      "x": 125.53125,
+      "y": 269,
+      "width": 717.921875,
+      "height": 387.953125
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#pl-controls",
+    "bounds": {
+      "x": 24,
+      "y": 668.953125,
+      "width": 921,
+      "height": 87.609375
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#pl-canvas",
+    "bounds": {
+      "x": 43.5,
+      "y": 269,
+      "width": 956,
+      "height": 517
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#pl-controls",
+    "bounds": {
+      "x": 43.5,
+      "y": 798,
+      "width": 956,
+      "height": 87.609375
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#pl-canvas",
+    "bounds": {
+      "x": 283.5,
+      "y": 269,
+      "width": 956,
+      "height": 517
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#pl-controls",
+    "bounds": {
+      "x": 283.5,
+      "y": 798,
+      "width": 956,
+      "height": 87.609375
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#pl-canvas",
+    "bounds": {
+      "x": 603.5,
+      "y": 269,
+      "width": 956,
+      "height": 517
+    }
+  },
+  {
+    "game": "pool",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#pl-controls",
+    "bounds": {
+      "x": 603.5,
+      "y": 798,
+      "width": 956,
+      "height": 87.609375
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#gf-canvas",
+    "bounds": {
+      "x": 83.765625,
+      "y": 370,
+      "width": 569.453125,
+      "height": 358.28125
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#gf-controls",
+    "bounds": {
+      "x": 723,
+      "y": 362,
+      "width": 220,
+      "height": 241.21875
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#gf-canvas",
+    "bounds": {
+      "x": 53.5,
+      "y": 370,
+      "width": 704,
+      "height": 443
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#gf-controls",
+    "bounds": {
+      "x": 777.5,
+      "y": 362,
+      "width": 220,
+      "height": 241.21875
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#gf-canvas",
+    "bounds": {
+      "x": 293.5,
+      "y": 370,
+      "width": 704,
+      "height": 443
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#gf-controls",
+    "bounds": {
+      "x": 1017.5,
+      "y": 362,
+      "width": 220,
+      "height": 241.21875
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#gf-canvas",
+    "bounds": {
+      "x": 613.5,
+      "y": 370,
+      "width": 704,
+      "height": 443
+    }
+  },
+  {
+    "game": "golf",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#gf-controls",
+    "bounds": {
+      "x": 1337.5,
+      "y": 362,
+      "width": 220,
+      "height": 241.21875
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1366,
+      768
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1440,
+      900
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      360,
+      800
+    ],
+    "horizontalOverflow": false
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": ".ty-board",
+    "bounds": {
+      "x": 117.5625,
+      "y": 376,
+      "width": 372,
+      "height": 372
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1366,
+      768
+    ],
+    "primaryControl": "#ty-actions",
+    "bounds": {
+      "x": 607.125,
+      "y": 394.1875,
+      "width": 349.875,
+      "height": 51
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": ".ty-board",
+    "bounds": {
+      "x": 82,
+      "y": 376,
+      "width": 504,
+      "height": 504
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1440,
+      900
+    ],
+    "primaryControl": "#ty-actions",
+    "bounds": {
+      "x": 648.5,
+      "y": 420.59375,
+      "width": 363,
+      "height": 51
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": ".ty-board",
+    "bounds": {
+      "x": 271.5,
+      "y": 376,
+      "width": 605,
+      "height": 605
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "primaryControl": "#ty-actions",
+    "bounds": {
+      "x": 888.5,
+      "y": 440.796875,
+      "width": 363,
+      "height": 51
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": ".ty-board",
+    "bounds": {
+      "x": 591.5,
+      "y": 376,
+      "width": 605,
+      "height": 605
+    }
+  },
+  {
+    "game": "tycoon",
+    "viewport": [
+      2560,
+      1440
+    ],
+    "primaryControl": "#ty-actions",
+    "bounds": {
+      "x": 1208.5,
+      "y": 440.796875,
+      "width": 363,
+      "height": 51
+    }
+  }
+]

@@ -17,6 +17,7 @@ GameUI.tycoon = (() => {
   let stepTimer = 0;
   let auctionTimer = 0;
   let auctionEnds = 0;
+  let fitFrame = 0;
   const html = {}; // last HTML per panel, so unchanged panels are not rebuilt
   let reviewId = null; // incoming offer being reviewed (bound to the offer id, never a replacement)
   const tf = { open: false, to: "", giveProps: new Set(), askProps: new Set(), giveCash: "", askCash: "" };
@@ -251,6 +252,20 @@ GameUI.tycoon = (() => {
     setPanel("ty-trades", tradeHTML());
     setPanel("ty-log", `<ol>${g.log.slice().reverse().map((l) => `<li>${app.esc(l)}</li>`).join("")}</ol>`);
     root.querySelector("#ty-auc-left") && tickAuction();
+    fitBoard();
+  }
+
+  function fitBoard() {
+    if (fitFrame) return;
+    fitFrame = requestAnimationFrame(() => {
+      fitFrame = 0;
+      const board = root && root.querySelector(".ty-board");
+      if (!board || !board.getClientRects().length) return;
+      if (innerWidth < 1101) return board.style.removeProperty("--ty-board-max");
+      // Names/roster wrapping change the header height. Measure it instead of assuming a fixed cap.
+      const top = board.getBoundingClientRect().top + scrollY;
+      board.style.setProperty("--ty-board-max", `${Math.max(200, innerHeight - top - 20)}px`);
+    });
   }
 
   function tickAuction() {
@@ -295,6 +310,7 @@ GameUI.tycoon = (() => {
       <details class="card ty-sect" open><summary>Trades</summary><div id="ty-trades"></div></details>
       <details class="card ty-sect"><summary>Game log</summary><div id="ty-log" class="ty-log"></div></details>`;
     stage.appendChild(root);
+    window.addEventListener("resize", fitBoard);
     clock = C.makeClock(() => root);
     auctionTimer = setInterval(tickAuction, 250);
     root.addEventListener("click", (e) => {
@@ -393,6 +409,9 @@ GameUI.tycoon = (() => {
   }
 
   function unmount() {
+    window.removeEventListener("resize", fitBoard);
+    cancelAnimationFrame(fitFrame);
+    fitFrame = 0;
     clearInterval(stepTimer);
     clearInterval(auctionTimer);
     if (clock) clock.stop();

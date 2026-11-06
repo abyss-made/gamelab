@@ -43,7 +43,7 @@ function tryConnect(url, opts) {
     ['short secret', { ALPHA_ENABLED: 'true', ALPHA_SECRET: 'short' }],
     ['invalid flag', { ALPHA_ENABLED: 'maybe', ALPHA_SECRET: SECRET }],
   ]) {
-    const p = start(3980, env);
+    const p = start(43860, env);
     const up = await p.ready;
     ok(!up, `alpha mode with ${label} refuses to start`);
     ok(!p.output().includes(SECRET), `${label}: secret not logged`);
@@ -51,7 +51,7 @@ function tryConnect(url, opts) {
   }
 
   // ---- gated server ----
-  const PORT = 3981;
+  const PORT = 43862;
   const URL = `http://localhost:${PORT}`;
   const p = start(PORT, { ALPHA_ENABLED: 'true', ALPHA_SECRET: SECRET });
   ok(await p.ready, 'alpha server starts with valid secret');
@@ -128,10 +128,10 @@ function tryConnect(url, opts) {
   }
 
   // ---- alpha disabled: unchanged behavior ----
-  const q = start(3982, {});
+  const q = start(43863, {});
   await q.ready;
   try {
-    const U = 'http://localhost:3982';
+    const U = 'http://localhost:43863';
     ok((await fetch(U + '/')).status === 200, 'alpha off: pages open');
     ok((await fetch(U + '/api/rooms')).status === 200, 'alpha off: API open');
     ok(await tryConnect(U, { transports: ['websocket'] }), 'alpha off: sockets open');

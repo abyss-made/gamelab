@@ -3,7 +3,7 @@ let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { console.log('SKIP  playwright not installed; avatar studio UI checks not run'); process.exit(0); }
 const path = require('path');
 const { spawn } = require('child_process');
-const PORT = 3981;
+const PORT = 43861;
 const URL = `http://localhost:${PORT}`;
 let failures = 0;
 const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) failures++; };
@@ -27,11 +27,15 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       const code = await hostPage.evaluate(() => App.S.code);
       await page.goto(URL + '/');
       await page.evaluate(() => localStorage.setItem('pg_profile', JSON.stringify({ name: 'Alex', avatar: { e: 5, c: 2 } })));
+      await page.evaluate(() => localStorage.setItem('pg_identity_confirmed','1'));
       await page.goto(URL + '/r/' + code);
       await page.reload();
+      if(await page.locator('#invite-edit').isVisible())await page.click('#invite-edit');
       const open = page.locator('[data-studio="open"]:visible').first();
-      await open.waitFor({ timeout: 5000 });
-      await open.click();
+      if (!(await page.locator(".av-studio.open:visible").count())) {
+        await open.waitFor({ timeout: 5000 });
+        await open.click();
+      }
       await page.waitForSelector('[data-studio-field="id"]');
       ok(true, `${t}: Avatar Studio opens`);
       ok((await page.locator('[data-studio-field="id"] option').count()) === 35, `${t}: 35 characters offered`);
@@ -42,7 +46,8 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       await page.click('[data-studio="undo"]');
       ok(await page.isDisabled('[data-studio="undo"]'), `${t}: Undo restores the previous draft`);
       await page.selectOption('[data-studio-field="id"]', 'a01');
-      await page.selectOption('[data-studio-field="hat"]', 'beanie');
+      await page.click('[data-studio-tab="looks"]');
+      await page.click('[data-look-key="hat"][data-look-value="beanie"]');
       ok((await page.evaluate(() => document.querySelector('[data-studio-field="accessory"] option[value="headphones"]').disabled)), `${t}: headphones disabled while a hat is worn`);
       await page.click('[data-studio="random"]');
       await page.click('[data-studio="reset"]');
@@ -52,7 +57,7 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       ok((await page.evaluate(() => JSON.stringify(JSON.parse(localStorage.getItem('pg_profile')).avatar.v3).length)) <= 256, `${t}: saved config is within 256 bytes`);
       ok((await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)) <= 0, `${t}: no horizontal overflow`);
       // The server echoes the avatar back in the room and it renders as an inline SVG.
-      await page.click('#join-btn');
+      if (!(await page.inputValue('#screen-join .name-input')).trim()) await page.fill('#screen-join .name-input', 'Browser Guest'); await page.click('#join-btn');
       await page.waitForSelector('#screen-room', { state: 'visible' });
       await page.waitForFunction(() => window.App && App.S && App.S.code);
       ok(await page.evaluate(() => App.S.players.some((p) => p.id === App.S.you && p.avatar.v3 && p.avatar.v3.v === 3)), `${t}: server keeps the validated v3 config`);
@@ -62,7 +67,7 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       if (vp.w === 1440) {
         await hostPage.click('#settings-btn');
         await hostPage.click('#modal [data-view="profile"]');
-        await hostPage.click('#modal [data-studio="open"]');
+        if (!(await hostPage.locator('#modal .av-studio.open').count())) await hostPage.click('#modal [data-studio="open"]');
         await hostPage.waitForSelector('#modal [data-studio-field="id"]');
         await hostPage.selectOption('#modal [data-studio-field="id"]', 'a03');
         await hostPage.click('#modal [data-studio="save"]');
