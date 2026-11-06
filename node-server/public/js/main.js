@@ -498,9 +498,10 @@
   document.addEventListener("click", (e) => {
     const t = e.target.closest("[data-studio-pick]");
     if (!t || !AV || !studio.draft || t.dataset.studioPick === studio.draft.id) return;
+    const host = t.closest("[data-profile]");
     studioSet({ ...studio.draft, id: t.dataset.studioPick }, "");
     renderProfiles();
-    setTimeout(() => document.querySelector(`[data-studio-pick="${studio.draft.id}"]`)?.focus(), 0);
+    setTimeout(() => (host && host.isConnected ? host : document).querySelector(`[data-studio-pick="${studio.draft.id}"]`)?.focus(), 0);
   });
   document.addEventListener("input", (e) => {
     if (!e.target.matches("[data-studio-search]")) return;

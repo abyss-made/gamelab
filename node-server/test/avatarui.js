@@ -43,6 +43,7 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
       ok((await page.locator('.av-gallery .av-tile:visible').count()) === 35, `${t}: clearing search restores all 35`);
       if (process.env.SHOTS) await page.screenshot({ path: `${process.env.SHOTS}/gallery-${vp.w}.png` });
       await page.click('[data-studio-pick="a05"]');
+      await page.waitForFunction(() => { const f = document.activeElement; return !!f && f.matches('[data-studio-pick="a05"]') && f.getClientRects().length > 0; }, null, { timeout: 2000 }).then(() => ok(true, `${t}: focus stays on the picked visible tile`), () => ok(false, `${t}: focus stays on the picked visible tile`));
       await page.waitForSelector('.av-studio-preview svg');
       ok(await page.isEnabled('[data-studio="save"]'), `${t}: changing the draft enables Save`);
       ok((await page.evaluate(() => JSON.parse(localStorage.getItem('pg_profile')).avatar.v3)) === undefined, `${t}: draft does not touch the saved profile`);
@@ -72,6 +73,7 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         await hostPage.click('#modal [data-studio="open"]');
         await hostPage.waitForSelector('#modal .av-gallery .av-tile');
         await hostPage.click('#modal [data-studio-pick="a03"]');
+        await hostPage.waitForFunction(() => document.activeElement && document.activeElement.matches('#modal [data-studio-pick="a03"]'), null, { timeout: 2000 }).then(() => ok(true, `${t}: modal gallery keeps keyboard focus on the picked tile`), () => ok(false, `${t}: modal gallery keeps keyboard focus on the picked tile`));
         await hostPage.click('#modal [data-studio="save"]');
         const hostId = await hostPage.evaluate(() => App.S.you);
         await page.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a03'; }, hostId, { timeout: 5000 })
