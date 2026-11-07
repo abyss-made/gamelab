@@ -81,6 +81,10 @@ const get = (p) => new Promise((res, rej) => http.get(URL + p, (r) => { let b = 
   ok(!all.includes(tk), 'logs never contain member tokens');
   ok(!all.includes(r.code), 'logs never contain the raw room code');
 
+  // a second server on the same port must exit non-zero instead of idling without a listener
+  const dup = spawn('node', [path.join(__dirname, '..', 'server', 'index.js')], { env: { ...process.env, PORT: String(PORT) }, stdio: 'ignore' });
+  const dupCode = await new Promise((res) => { dup.on('exit', res); setTimeout(() => { dup.kill(); res('hung'); }, 5000); });
+  ok(dupCode === 1, 'EADDRINUSE exits with code 1 (got ' + dupCode + ')');
   // ---- graceful shutdown ----
   srv.kill('SIGTERM');
   for (let i = 0; i < 80 && exited === null; i++) await sleep(50);

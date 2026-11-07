@@ -4,7 +4,7 @@ Scope: server reliability, diagnostics, load testing. No gameplay or UI changes.
 
 ## What changed (this PR)
 - `server/log.js`: structured JSON logs (`evt`, `level`, `t`). Room codes appear only as an 8-char salted hash (`room`), tokens are scrubbed; names/chat are never logged.
-- `server/index.js`: security headers (nosniff, same-origin referrer, SAMEORIGIN frames), `/healthz` (503 while draining), `/api/health` (aggregate counts, memory), graceful SIGTERM/SIGINT shutdown with an 8 s hard stop, and process-level `uncaughtException`/`unhandledRejection` logging so one stray error is logged instead of silently killing every room.
+- `server/index.js`: security headers (nosniff, same-origin referrer, SAMEORIGIN frames), `/healthz` (503 while draining), `/api/health` (aggregate counts, memory), graceful SIGTERM/SIGINT shutdown with an 8 s hard stop, a non-zero exit on listen errors (EADDRINUSE/EACCES), and process-level `uncaughtException`/`unhandledRejection` logging so one stray error is logged instead of silently killing every room.
 - `test/platform.js` (in `npm test`): health, headers, adversarial socket input (junk payloads, prototype pollution, oversize packets, join flooding), log privacy, clean shutdown.
 - `scripts/loadtest.js`: repeatable local load test (`npm run loadtest -- 40 4 10`).
 
@@ -18,9 +18,9 @@ Scope: server reliability, diagnostics, load testing. No gameplay or UI changes.
 Run `npm run loadtest -- 40 4 10` before and after a change (local only; never against production).
 
 Baseline (this PR, 4 vCPU container, Node 22): 40 rooms × 4 players, 10 s steady traffic, 0 errors:
-join p50 8.5 ms / p95 136 ms (burst of 160 simultaneous joins); rejoin p50 41 ms / p95 44 ms; chat fan-out p50 0.6 ms / p95 16 ms / p99 21 ms; ~960 events/s; server CPU ≈ 5 % of one core; RSS 83 → 108 MB. No bottleneck was found, so no optimisation was made (none is justified by data).
+every room starts a real Tic Tac Toe match and players send valid moves (matches end in ≤ 9 moves, so gameplay volume is small; the script fails if no move is applied); join p50 14 ms / p95 185 ms (burst of 160 simultaneous joins); rejoin p50 44 ms / p95 60 ms; chat fan-out p50 0.7 ms / p95 13 ms / p99 20 ms; ~950 events/s; server CPU ≈ 6 % of one core; RSS 83 → 107 MB. No bottleneck was found, so no optimisation was made (none is justified by data).
 
-Known limits: single process, in-memory rooms, localhost network, Tic Tac Toe traffic only (chat + actions), no browser load. Game-heavy traffic (Draw & Guess strokes, Chess Hard bots ≈ 270 ms event-loop block) is not covered.
+Known limits: single process, in-memory rooms, localhost network, Tic Tac Toe only (chat plus a few short matches), no browser load. Game-heavy traffic (Draw & Guess strokes, Chess Hard bots ≈ 270 ms event-loop block) is not covered.
 
 ## Deployment troubleshooting (Render)
 - Blueprint: `render.yaml` (`healthCheckPath: /healthz`, `autoDeploy: false`). Deploys are manual and need owner approval.

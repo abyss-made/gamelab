@@ -233,6 +233,11 @@ function shutdown(signal) {
     process.exit(0);
   });
 }
+// Startup failures (EADDRINUSE, EACCES) must exit non-zero so the supervisor restarts or reports them.
+server.on('error', (err) => {
+  log.error('server_error', { err });
+  process.exit(1);
+});
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 process.on('SIGINT', () => shutdown('SIGINT'));
 // A stray exception in one handler must not take every room down; log it with context.

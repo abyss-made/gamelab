@@ -13,7 +13,7 @@ const URL = `http://localhost:${PORT}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const tok = () => [...Array(32)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 const lat = { join: [], rejoin: [], chatFanout: [] };
-let errors = 0, emitted = 0, received = 0;
+let errors = 0, emitted = 0, received = 0, movesApplied = 0, gamesStarted = 0;
 const pct = (a, p) => (a.length ? [...a].sort((x, y) => x - y)[Math.min(a.length - 1, Math.floor((a.length * p) / 100))] : 0);
 const summ = (a) => ({ n: a.length, p50: +pct(a, 50).toFixed(1), p95: +pct(a, 95).toFixed(1), p99: +pct(a, 99).toFixed(1), max: +Math.max(0, ...a).toFixed(1) });
 
@@ -21,7 +21,7 @@ function mk(name) {
   const s = io(URL, { transports: ['websocket'], forceNew: true });
   const c = { s, name, token: tok(), code: null };
   s.on('chat', () => { received++; });
-  s.on('state', () => { received++; });
+  s.on('state', (st) => { received++; c.game = st && st.game; c.phase = st && st.phase; });
   c.ack = (ev, d) => new Promise((res) => { const t = performance.now(); s.emit(ev, d, (r) => res([r, performance.now() - t])); setTimeout(() => res([{ error: 'timeout' }, 0]), 5000); });
   c.profile = { name, avatar: { e: 1, c: 1 } };
   return c;
@@ -50,6 +50,13 @@ const rssMb = (pid) => { try { return +(fs.readFileSync(`/proc/${pid}/status`, '
     rooms.push(members);
   }));
 
+  // Start a real match in every room (host only) and wait for the server to confirm it began.
+  for (const members of rooms) { members[0].s.emit('startGame'); gamesStarted++; emitted++; }
+  const startBy = Date.now() + 5000;
+  while (Date.now() < startBy && !rooms.every((ms) => ms[0].game)) await sleep(50);
+  const notStarted = rooms.filter((ms) => !ms[0].game).length;
+  if (notStarted) { console.error(`${notStarted} rooms never started a game`); errors += notStarted; }
+
   // Steady traffic: each player chats ~2/s (server limits chat); measure chat fan-out latency from a probe.
   const end = Date.now() + SECONDS * 1000;
   const probe = async (members) => {
@@ -59,7 +66,15 @@ const rssMb = (pid) => { try { return +(fs.readFileSync(`/proc/${pid}/status`, '
   };
   const loops = rooms.map(async (members, i) => {
     while (Date.now() < end) {
-      for (const m of members) { m.s.emit('chat', 'hello ' + Math.random().toString(36).slice(2, 6)); emitted++; m.s.emit('action', { type: 'noop' }); emitted++; }
+      for (const m of members) { m.s.emit('chat', 'hello ' + Math.random().toString(36).slice(2, 6)); emitted++; }
+      // Whoever's turn it is places a random open cell (valid move). Matches end quickly (<=9 moves), so gameplay volume is small.
+      for (const m of members) {
+        const g = m.game;
+        if (g && g.myIndex >= 0 && g.myIndex === g.turn && Array.isArray(g.board)) {
+          const open = g.board.map((v, k) => (v ? -1 : k)).filter((k) => k >= 0);
+          if (open.length) { m.s.emit('action', { type: 'place', cell: open[Math.floor(Math.random() * open.length)] }); emitted++; }
+        }
+      }
       if (i % 5 === 0) await probe(members);
       await sleep(600 + Math.random() * 400);
     }
@@ -77,13 +92,16 @@ const rssMb = (pid) => { try { return +(fs.readFileSync(`/proc/${pid}/status`, '
   // Host migration: host leaves; remaining members must still be in a live room.
   await Promise.all(rooms.map((members) => { members[0].s.emit('leaveRoom'); return sleep(0); }));
   await sleep(500);
+  // Moves the server actually applied, as seen in each room's first-player view of the current match.
+  for (const ms of rooms) movesApplied += (ms[0].game && ms[0].game.moves) || 0;
+  if (!movesApplied) { console.error('no gameplay moves were applied'); errors++; }
   const health = await (await fetch(URL + '/api/health')).json();
 
   const cpu1 = cpuMs(srv.pid), wall = Date.now() - t0;
   const res = {
     config: { rooms: ROOMS, players: PLAYERS, seconds: SECONDS, node: process.version, cpus: require('os').cpus().length },
     latencyMs: { join: summ(lat.join), rejoin: summ(lat.rejoin), chatFanout: summ(lat.chatFanout) },
-    throughput: { clientEventsEmitted: emitted, serverEventsReceivedByClients: received, perSec: Math.round((emitted + received) / (wall / 1000)) },
+    throughput: { gamesStarted, movesAppliedInCurrentMatches: movesApplied, clientEventsEmitted: emitted, serverEventsReceivedByClients: received, perSec: Math.round((emitted + received) / (wall / 1000)) },
     server: { cpuPercentOfOneCore: +(((cpu1 - cpu0) / wall) * 100).toFixed(1), rssMbStart: rss0, rssMbEnd: rssMb(srv.pid), healthAtEnd: health },
     errors,
   };
