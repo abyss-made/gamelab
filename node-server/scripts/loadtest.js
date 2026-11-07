@@ -21,7 +21,7 @@ function mk(name) {
   const s = io(URL, { transports: ['websocket'], forceNew: true });
   const c = { s, name, token: tok(), code: null };
   s.on('chat', () => { received++; });
-  s.on('state', (st) => { received++; c.game = st && st.game; c.phase = st && st.phase; });
+  s.on('state', (st) => { received++; c.game = st && st.game; if (st && st.game && st.game.moves > (c.maxMoves || 0)) c.maxMoves = st.game.moves; c.phase = st && st.phase; });
   c.ack = (ev, d) => new Promise((res) => { const t = performance.now(); s.emit(ev, d, (r) => res([r, performance.now() - t])); setTimeout(() => res([{ error: 'timeout' }, 0]), 5000); });
   c.profile = { name, avatar: { e: 1, c: 1 } };
   return c;
@@ -92,8 +92,9 @@ const rssMb = (pid) => { try { return +(fs.readFileSync(`/proc/${pid}/status`, '
   // Host migration: host leaves; remaining members must still be in a live room.
   await Promise.all(rooms.map((members) => { members[0].s.emit('leaveRoom'); return sleep(0); }));
   await sleep(500);
-  // Moves the server actually applied, as seen in each room's first-player view of the current match.
-  for (const ms of rooms) movesApplied += (ms[0].game && ms[0].game.moves) || 0;
+  // Moves the server confirmed: the highest move count seen in the host's state events for the match
+  // (kept even after the match ends and the game view goes null).
+  for (const ms of rooms) movesApplied += ms[0].maxMoves || 0;
   if (!movesApplied) { console.error('no gameplay moves were applied'); errors++; }
   const health = await (await fetch(URL + '/api/health')).json();
 
@@ -101,7 +102,7 @@ const rssMb = (pid) => { try { return +(fs.readFileSync(`/proc/${pid}/status`, '
   const res = {
     config: { rooms: ROOMS, players: PLAYERS, seconds: SECONDS, node: process.version, cpus: require('os').cpus().length },
     latencyMs: { join: summ(lat.join), rejoin: summ(lat.rejoin), chatFanout: summ(lat.chatFanout) },
-    throughput: { gamesStarted, movesAppliedInCurrentMatches: movesApplied, clientEventsEmitted: emitted, serverEventsReceivedByClients: received, perSec: Math.round((emitted + received) / (wall / 1000)) },
+    throughput: { gamesStarted, movesConfirmed: movesApplied, clientEventsEmitted: emitted, serverEventsReceivedByClients: received, perSec: Math.round((emitted + received) / (wall / 1000)) },
     server: { cpuPercentOfOneCore: +(((cpu1 - cpu0) / wall) * 100).toFixed(1), rssMbStart: rss0, rssMbEnd: rssMb(srv.pid), healthAtEnd: health },
     errors,
   };
