@@ -2,6 +2,7 @@
 // Everything lives in memory. Nothing is saved to disk.
 const crypto = require('crypto');
 const config = require('./config');
+const log = require('./log');
 const { GAMES, HIDDEN, selectable } = require('./games');
 const filter = require('./filter');
 const { clampInt, shuffle, Bucket } = require('./util');
@@ -482,7 +483,7 @@ function loop() {
         startGame(room);
       }
     } catch (err) {
-      console.error('room loop error', room.code, err);
+      log.error('room_loop_error', { code: room.code, err });
     }
   }
 }
@@ -512,7 +513,7 @@ function attach(ioServer) {
         try {
           fn(...args);
         } catch (err) {
-          console.error('handler error', ev, err);
+          log.error('handler_error', { event: String(ev), err });
         }
       });
     const reply = (ack, data) => {
@@ -865,4 +866,10 @@ function attach(ioServer) {
   });
 }
 
-module.exports = { attach, listPublic, rooms };
+function stats() {
+  let members = 0;
+  for (const r of rooms.values()) members += r.members.size;
+  return { rooms: rooms.size, members };
+}
+
+module.exports = { attach, listPublic, rooms, stats };

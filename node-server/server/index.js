@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const config = require('./config');
 const rooms = require('./rooms');
 const alpha = require('./alpha');
+const log = require('./log');
 const { HIDDEN } = require('./games');
 
 // Throws (and the process exits) if alpha mode is on without a usable secret.
@@ -14,6 +15,14 @@ const gate = alphaCfg.enabled ? alpha.createGate(alphaCfg.secret) : null;
 
 const app = express();
 app.disable('x-powered-by');
+// Conservative hardening headers. No CSP here: the client uses inline scripts/styles, and a
+// header that breaks the page is worse than none. Add one only together with a client change.
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'same-origin'); // room codes can appear in /r/CODE and #CODE URLs
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  next();
+});
 if (gate) {
   app.set('trust proxy', 1); // host terminates HTTPS; needed for req.secure and per-IP limits
   app.use(express.urlencoded({ extended: false, limit: '1kb' }));
@@ -183,7 +192,22 @@ for (const [p, page] of Object.entries(PAGES)) {
 for (const p of ['/games', '/rooms']) app.get(p, (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/r/:code', (req, res) => res.set('Cache-Control', 'no-store').type('html').send(rendered['/']));
 app.get('/api/rooms', (req, res) => res.json(rooms.listPublic()));
-app.get('/healthz', (req, res) => res.send('ok'));
+let shuttingDown = false;
+const startedAt = Date.now();
+// Liveness for Render: plain 'ok' while serving; 503 once shutdown has begun so traffic drains.
+app.get('/healthz', (req, res) => res.status(shuttingDown ? 503 : 200).set('Cache-Control', 'no-store').send(shuttingDown ? 'shutting down' : 'ok'));
+// Aggregate counts only: no room codes, names or tokens.
+app.get('/api/health', (req, res) => {
+  const mem = process.memoryUsage();
+  res.set('Cache-Control', 'no-store').status(shuttingDown ? 503 : 200).json({
+    ok: !shuttingDown,
+    uptimeS: Math.round((Date.now() - startedAt) / 1000),
+    ...rooms.stats(),
+    sockets: io.engine.clientsCount,
+    rssMb: Math.round(mem.rss / 1048576),
+    heapMb: Math.round(mem.heapUsed / 1048576),
+  });
+});
 app.use(express.static(PUBLIC, { index: false, maxAge: '1h', setHeaders(res, filePath) {
   if (/\.(?:js|css)$/i.test(filePath)) res.setHeader('Cache-Control', 'no-store');
 } }));
@@ -193,4 +217,24 @@ rooms.attach(io);
 
 server.listen(config.PORT, () => {
   console.log(`${config.SITE_NAME} running on http://localhost:${config.PORT}`);
+  log.info('listening', { port: config.PORT, node: process.version });
 });
+
+// Graceful shutdown (Render sends SIGTERM on deploy/restart). Stop accepting traffic, tell
+// clients, close sockets, then exit; a hard timer guarantees we never hang the deploy.
+function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  log.info('shutdown_start', { signal, ...rooms.stats() });
+  const force = setTimeout(() => process.exit(1), 8000);
+  force.unref();
+  io.close(() => {
+    log.info('shutdown_done', {});
+    process.exit(0);
+  });
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
+// A stray exception in one handler must not take every room down; log it with context.
+process.on('uncaughtException', (err) => log.error('uncaught_exception', { err }));
+process.on('unhandledRejection', (err) => log.error('unhandled_rejection', { err }));
