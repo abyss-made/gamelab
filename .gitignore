@@ -13,7 +13,8 @@ playgrid/playgrid.html
 playgrid/site/*
 !playgrid/site/.gitkeep
 
-# Test screenshots
+# Test screenshots and failure artifacts from the reliability suites
+node-server/test-artifacts/
 playgrid/pshots/*
 !playgrid/pshots/.gitkeep
 

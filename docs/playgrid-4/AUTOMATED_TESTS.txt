@@ -1,0 +1,35 @@
+Environment: Node v24.19.0; Chromium 154.0.8037.57; installed Playwright.
+Base: b506ded0fc514c653756de99672c86614a284ebc
+
+Repository sweep:
+  PLAYWRIGHT_BROWSERS_PATH=/tmp/pg4-browsers npm --prefix node-server test
+  The first 32 test programs passed. Program 33 (bots) reported one failure:
+  a client was disconnected before its human move reached the server (moves 0 -> 0).
+  The command exited 1 and therefore did not execute the final two programs.
+
+Correction:
+  The no-work-without-people test now waits for the accepted human move on an
+  isolated delayed-bot fixture, disconnects, and advances beyond the bot's due time.
+  It still requires exactly one move throughout disconnection. Production bot code
+  was not changed. The corrected isolated scenario passed, then the full bots
+  program and the remaining programs were run successfully.
+
+Final targeted runs (all exit 0; details in affected-tests.json):
+  PLAYWRIGHT_BROWSERS_PATH=/tmp/pg4-browsers node node-server/test/<program>.js
+  avatarui, party3ui, batch5ui, design31ui, reliabilityui, keyboardui,
+  bots, botsui, lexicon
+
+Combined coverage: all 35 programs from npm test have passing results after the
+correction; affected UI programs were rerun against the final integration.
+A fresh monolithic npm test was not repeated after the corrected bot fixture.
+No test program was deliberately skipped; no failing result remains unresolved.
+
+Additional checks:
+  node node-server/test/avatarv3.js                         PASS (final SVG/catalog data)
+  python docs/playgrid-4/verify.py                         PASS (120 game frames, 40 primary bounds)
+  python docs/playgrid-4/verify_flows.py                   PASS (15 reported integration checks)
+  node --check for each changed runtime JavaScript file   PASS
+  git diff --check                                       PASS
+
+Python browser scripts use separate real local Express/Socket.IO servers on
+ports 43994/43995; no production deploy or external ad requests were performed.
