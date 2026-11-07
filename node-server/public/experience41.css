@@ -96,3 +96,15 @@ body[data-game=golf] #gf-place-note:empty{display:none}
  .pgf-mid .pgf-action{grid-column:2;grid-row:1;font-size:11px;padding:8px}
  .pgf-mid:has(.pgf-action:not([hidden])) .pgf-books{grid-column:2;grid-row:2;padding-top:18px;max-width:100%}
 }
+
+/* Keep private role cards and fieldbook validation messages readable. */
+.pimp .im-card{color:#e8f0dd;transform:none;box-shadow:0 7px 0 #081b2870,0 14px 25px #0004}
+.pimp .im-card::before{content:none}
+.pimp .im-card b,.pimp .im-card.crew b:last-of-type{color:#d8ff86}
+.pimp .im-card.impostor b:first-of-type{color:#ffbc9a}
+.pcat .cr-table td.invalid{text-decoration:none;opacity:1}
+.pcat .cr-table td.invalid .cr-answer{text-decoration:line-through;color:#7c3028}
+.pcat .cr-table td small{color:#346843;line-height:1.4}
+.pcat .cr-table td.invalid small{color:#8c332a;font-size:11px}
+.pcat .cr-table td{min-width:105px}
+.pcat .cr-table-wrap+.muted{color:#4f6a64}

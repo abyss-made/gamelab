@@ -353,7 +353,7 @@ def('impostor-bluff-secrets', async () => {
   ok(spec.g.options.every((o) => o.mine === false) && seated.every((c) => c.g.options.filter((o) => o.mine).length === 1), 'each player is told only which option is their own');
   seated.forEach((c) => c.action({ type: 'vote', option: c.g.options.find((o) => !o.mine).i }));
   await everyone(cs, (s) => s.game && s.game.phase === 'reveal', 'bluff reveal');
-  ok(cs.every((c) => c.g.reveal && c.g.reveal.answer === room.game.q.a), 'the reveal gives everyone the real answer');
+  ok(cs.every((c) => c.g.reveal && c.g.reveal.answer === room.game.q.a.toUpperCase()), 'the reveal gives everyone the real answer');
   p.host.emit('endGame');
   await everyone(cs, (s) => s.phase === 'lobby', 'host ended bluff');
   await consistent('bluff ended by the host', cs);
