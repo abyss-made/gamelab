@@ -85,3 +85,14 @@ body[data-game=golf] #gf-place-note:empty{display:none}
  body.dg-big[data-game=drawguess] .dg:not(.chat-open) .chat{display:none!important}
  body.dg-big[data-game=drawguess] .dg.chat-open .chat{grid-area:chat;width:min(260px,32vw);max-height:100%;margin:0}
 }
+
+/* Public request belongs on the table, preserving the player's hand height. */
+.pgf-mid:has(.pgf-action:not([hidden])){gap:24px}
+.pgf-mid .pgf-action{flex:0 1 330px;margin:0}
+.pgf-mid:has(.pgf-action:not([hidden])) .pgf-books{max-width:170px}
+@media(max-width:650px){
+ .pgf-mid:has(.pgf-action:not([hidden])){display:grid;grid-template-columns:85px minmax(0,1fr);gap:8px 12px}
+ .pgf-mid:has(.pgf-action:not([hidden])) .pgf-pond{grid-row:1/span 2}
+ .pgf-mid .pgf-action{grid-column:2;grid-row:1;font-size:11px;padding:8px}
+ .pgf-mid:has(.pgf-action:not([hidden])) .pgf-books{grid-column:2;grid-row:2;padding-top:18px;max-width:100%}
+}

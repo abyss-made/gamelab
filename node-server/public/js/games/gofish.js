@@ -40,12 +40,12 @@ GameUI.gofish = (() => {
         <div class="pgf-opponents" id="gf-players"></div>
         <div class="pgf-mid">
           <div class="pgf-pond"><img src="${BACK}" alt=""><small id="gf-deck"></small></div>
-          <div class="pgf-books" id="gf-mybooks"></div>
+          <div id="gf-public-action" class="pgf-action" role="status" hidden></div><div class="pgf-books" id="gf-mybooks"></div>
         </div>
         <div class="cs-status pgf-status" id="gf-status" aria-live="polite"></div>
         <div class="gf-ask pgf-ask" id="gf-ask"></div>
         <div class="pgf-handhead"><span id="gf-handlabel"></span><span id="gf-bookcount"></span></div>
-        <div id="gf-public-action" class="pgf-action" role="status" hidden></div><div class="gf-hand pgf-hand" id="gf-hand" aria-label="Your hand"></div>
+        <div class="gf-hand pgf-hand" id="gf-hand" aria-label="Your hand"></div>
         <details class="pgf-logwrap"><summary>Recent moves</summary><ul class="gf-log" id="gf-log" aria-label="Recent moves"></ul></details>
       </div>`;
     stage.appendChild(root);
