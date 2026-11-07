@@ -72,8 +72,8 @@ function normalize(raw, category) {
   const i = s.lastIndexOf(' ') + 1;
   return (wordRules.proper[category] || wordRules.isProper(s)) ? wordRules.canonicalProper(s, category) : s.slice(0, i) + singular(s.slice(i));
 }
-// Letter, length and profanity rules, plus: writing the category's own name is not an answer, and
-// dictionary membership is deliberately NOT required (names, places and brands are not in it).
+// Validate the original initial before alias canonicalization. Known proper names supplement
+// dictionary words; writing the category name itself is not an answer.
 function invalidReason(raw, letter, cat) {
   const answer=wordRules.plain(raw);
   if (!answer) return 'No answer submitted.';
