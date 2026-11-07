@@ -103,9 +103,10 @@ const ok = (c, m) => { console.log(`${c ? 'PASS' : 'FAIL'}  ${m}`); if (!c) fail
         await page.click('#modal [data-view="profile"]');
         if (await page.$('#modal [data-studio="open"]')) await page.click('#modal [data-studio="open"]');
         await page.waitForSelector('#modal [data-studio-field="id"]');
-        await page.selectOption('#modal [data-studio-field="id"]', 'a11');
+        const nextId = (await page.inputValue('#modal [data-studio-field="id"]')) === 'a11' ? 'a12' : 'a11';
+        await page.selectOption('#modal [data-studio-field="id"]', nextId);
         await page.click('#modal [data-studio="save"]'); // bucket is empty from the burst above -> 'slow' -> retry
-        await hostPage.waitForFunction((id) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === 'a11'; }, pageId, { timeout: 9000 })
+        await hostPage.waitForFunction(({id, nextId}) => { const p = App.S.players.find((x) => x.id === id); return p && p.avatar.v3 && p.avatar.v3.id === nextId; }, {id:pageId,nextId}, { timeout: 9000 })
           .then(() => ok(true, `${t}: a rate-limited save is retried and reaches the party`), () => ok(false, `${t}: a rate-limited save is retried and reaches the party`));
       }
       if (vp.w === 390) {

@@ -51,8 +51,8 @@ GameUI.impostor = (() => {
     root.querySelector("#im-round").innerHTML = `Round ${g.round} of ${g.rounds} · ${phaseName} <span class="fr-timer" data-timer></span>`;
     let role;
     if (!me || me.out) role = `<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
-    else if (g.role === "impostor") role = `<div class="im-card impostor">You are the <b>IMPOSTOR</b>. Category: <b>${app.esc(g.category)}</b>. Blend in!</div>`;
-    else role = `<div class="im-card crew">Category: <b>${app.esc(g.category)}</b> · Secret word: <b>${app.esc(g.word || "")}</b></div>`;
+    else if (g.role === "impostor") role = `<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
+    else role = `<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word || "")}</b>Category: ${app.esc(g.category)}. Give a useful clue without saying the word.</div>`;
     root.querySelector("#im-role").innerHTML = role;
     root.querySelector("#im-clues").innerHTML = g.clues.map((c) => `<li><b>${nameOf(g, c.id)}</b>: ${app.esc(c.text)}</li>`).join("");
     const body = root.querySelector("#im-body");
@@ -87,6 +87,7 @@ GameUI.impostor = (() => {
         const r = g.result;
         body.innerHTML = `<div class="im-result"><p>The impostor was <b>${nameOf(g, r.impostorId)}</b>. The word was <b>${app.esc(r.word)}</b>.</p>
           <p>${r.voided ? "The impostor left, so this round doesn't count." : r.stole ? `${nameOf(g, r.impostorId)} guessed the word and steals it!` : r.caught ? "The crew caught the impostor!" : "The impostor got away!"}${r.guess && !r.stole ? ` (Guessed “${app.esc(r.guess)}”.)` : ""}</p>
+          <ul class="im-vote-results">${g.players.map(player=>`<li>${app.avatarHTML(player.avatar)}<span>${app.esc(player.name)}${player.id===r.impostorId?' · Impostor':''}</span><strong>${Object.values(r.votes).filter(id=>id===player.id).length} votes</strong></li>`).join('')}</ul>
           <ul class="bl-gains">${g.players.filter((p) => r.gains[p.id]).map((p) => `<li>${app.esc(p.name)} <b>+${r.gains[p.id]}</b></li>`).join("")}</ul></div>`;
         if (me) Sound.play(r.gains[S.you] ? "join" : "drop");
       } else body.innerHTML = "";

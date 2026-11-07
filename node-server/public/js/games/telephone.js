@@ -216,7 +216,7 @@ GameUI.telephone = (() => {
       const content = li.querySelector(".tp-content");
       if (e.kind === "draw") content.appendChild(e.skipped ? Object.assign(document.createElement("em"), { textContent: "(no drawing)" }) : thumb(e.strokes, `Drawing by ${who ? who.name : "a player"}`));
       else content.innerHTML = `<p class="tp-text">${app.esc(e.text)}</p>`;
-      if (!e.skipped && e.by !== S.you && g.myIndex >= 0) {
+      if (!e.skipped && !e.generated && e.by !== S.you && g.myIndex >= 0) {
         li.insertAdjacentHTML("beforeend", `<button class="btn btn-small btn-ghost tp-like ${e.liked ? "on" : ""}" data-like="${r.chain}:${e.i}" ${e.liked ? "disabled" : ""} aria-label="Like this entry">${e.liked ? "♥" : "♡"} ${e.likes}</button>`);
       } else if (e.likes) li.insertAdjacentHTML("beforeend", `<span class="tp-like-n">♥ ${e.likes}</span>`);
       ol.appendChild(li);

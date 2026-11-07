@@ -19,6 +19,7 @@ GameUI.gofish = (() => {
   let fresh = new Set(); // books newly observed in this update (animate once)
   let repainting = false;
   let pendingTimer = 0;
+  let seenMove = null;
   let lost = false; // last Ask got no response: tell the player they can try again
 
   const tilt = (i, n) => (n <= 1 ? 0 : Math.round((i - (n - 1) / 2) * Math.min(5, 30 / n) * 10) / 10);
@@ -44,7 +45,7 @@ GameUI.gofish = (() => {
         <div class="cs-status pgf-status" id="gf-status" aria-live="polite"></div>
         <div class="gf-ask pgf-ask" id="gf-ask"></div>
         <div class="pgf-handhead"><span id="gf-handlabel"></span><span id="gf-bookcount"></span></div>
-        <div class="gf-hand pgf-hand" id="gf-hand" aria-label="Your hand"></div>
+        <div id="gf-public-action" class="pgf-action" role="status" hidden></div><div class="gf-hand pgf-hand" id="gf-hand" aria-label="Your hand"></div>
         <details class="pgf-logwrap"><summary>Recent moves</summary><ul class="gf-log" id="gf-log" aria-label="Recent moves"></ul></details>
       </div>`;
     stage.appendChild(root);
@@ -100,8 +101,16 @@ GameUI.gofish = (() => {
 
     root.querySelector("#gf-players").innerHTML = g.players
       .filter((p) => p.id !== S.you)
-      .map((p) => `<div class="pgf-seat">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-books" title="Books">${p.books.map((r) => `<i class="${fresh.has(`${p.id}:${r}`) ? "new" : ""}">${C.rankLabel(r)}</i>`).join("")}</span>`, sub: `${p.count} cards · ${p.books.length} ${p.books.length === 1 ? "book" : "books"}` })}<div class="pgf-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
+      .map((p) => `<div class="pgf-seat ${g.lastMove?.askerId===p.id?"asker":""} ${g.lastMove?.targetId===p.id?"target":""}">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-books" title="Books">${p.books.map((r) => `<i class="${fresh.has(`${p.id}:${r}`) ? "new" : ""}">${C.rankLabel(r)}</i>`).join("")}</span>`, sub: `${p.count} cards · ${p.books.length} ${p.books.length === 1 ? "book" : "books"}` })}<div class="pgf-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
       .join("");
+    const event=g.lastMove,action=root.querySelector('#gf-public-action');
+    if(event && action.dataset.sequence!==String(event.sequence)){
+      const who=id=>app.esc(g.players.find(player=>player.id===id)?.name||'A player');
+      const animated=seenMove!==null && seenMove!==event.sequence;seenMove=event.sequence;
+      action.dataset.sequence=String(event.sequence);action.hidden=false;
+      action.className='pgf-action'+(animated?(event.received?' transfer':' fish'):'');
+      action.innerHTML=`<small>MOST RECENT ASK</small><b>${who(event.askerId)}</b> → <b>${who(event.targetId)}</b> · <strong class="request-rank">${C.rankWord(event.rank)}s</strong><img src="${BACK}" alt=""><small>${event.received?`${event.received} card${event.received===1?'':'s'} handed over.`:event.drawn?'Go Fish — one private card drawn.':'Go Fish — the pond is empty.'} ${event.again?'Asker goes again.':'Turn passes.'}${event.books.map(book=>` ${who(book.by)} completed a book of ${C.rankWord(book.rank)}s!`).join('')}</small>`;
+    }else if(!event&&seenMove===null)seenMove=0;
     const turn = g.players.find((p) => p.id === g.turnId);
     const ranks = g.hand ? [...new Set(g.hand.map((c) => c.r))].sort((x, y) => x - y) : [];
     if (!mine || (pickRank !== null && !ranks.includes(pickRank) && !pending)) pickRank = null;
@@ -163,6 +172,7 @@ GameUI.gofish = (() => {
     root = null;
     pickRank = pickTarget = null;
     pending = null;
+    seenMove = null;
     seen = null; // reset the ledger per game instance
     fresh = new Set();
   }

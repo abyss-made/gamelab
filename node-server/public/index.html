@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="/style.css?v=bots-20261102" />
     <link rel="stylesheet" href="/gameplay31.css?v=p31-20261031" />
-    <link rel="stylesheet" href="/premium.css?v=p62-20261105" /><link rel="stylesheet" href="/playgrid4.css?v=4-1" />
+    <link rel="stylesheet" href="/premium.css?v=p62-20261105" /><link rel="stylesheet" href="/playgrid4.css?v=4-1" /><link rel="stylesheet" href="/experience41.css?v=41-1" />
   </head>
   <body data-screen="home">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -226,15 +226,20 @@
 
       <main id="screen-join" class="screen" hidden>
         <div class="card join-card">
-          <p class="eyebrow">YOU'RE INVITED</p>
-          <h1>Make yourself at home.</h1>
-          <p>
-            Join party <b id="join-code"></b>. Pick your player name and avatar.
-          </p>
-          <p class="muted join-switch-note" id="join-switch-note" role="status" hidden></p>
-          <div class="profile" data-profile></div>
-          <button class="btn btn-big" id="join-btn">Join Party</button
-          ><a class="muted-link" href="/rooms" data-nav="/rooms">Back to rooms</a>
+          <aside class="invite-ticket">
+            <p class="eyebrow">A PLAYGRID INVITATION</p>
+            <div class="invite-mascots" aria-hidden="true"><img src="/assets/avatars/previews/h02.svg" alt=""><img src="/assets/avatars/previews/h01.svg" alt=""><img src="/assets/avatars/previews/h03.svg" alt=""></div>
+            <h1>Good games.<br> Great company.</h1>
+            <p class="invite-ticket-copy">Bring your character.<br>We'll bring the games.</p>
+            <div class="invite-code"><span>PARTY CODE</span><b id="join-code"></b></div>
+            <small class="invite-no-account">No signup. Just your people.</small>
+          </aside>
+          <section class="invite-panel" aria-labelledby="invite-title">
+            <header><p class="eyebrow">YOUR PARTY FACE</p><h2 id="invite-title">Make an entrance.</h2><p id="invite-hint">A name, a character, and you're in.</p></header>
+            <p class="muted join-switch-note" id="join-switch-note" role="status" hidden></p>
+            <div class="profile" data-profile></div>
+            <div class="invite-footer"><button class="btn btn-big" id="join-btn">Save &amp; Join Party</button><a class="muted-link" href="/rooms" data-nav="/rooms">Back to rooms</a></div>
+          </section>
         </div>
       </main>
       <main id="screen-message" class="screen" hidden>
@@ -385,18 +390,18 @@
     <script src="/js/games/art31.js?v=p31-20261031"></script>
     <script src="/js/games/common.js?v=p32-20261101"></script>
     <script src="/js/games/wordchain.js?v=p62-20261105"></script>
-    <script src="/js/games/categories.js?v=p62-20261105"></script>
+    <script src="/js/games/categories.js?v=41-1"></script>
     <script src="/js/games/higherlower.js?v=batch2-20261028"></script>
     <script src="/js/games/colorstack.js?v=p62-20261105"></script>
-    <script src="/js/games/gofish.js?v=p62-20261105"></script>
+    <script src="/js/games/gofish.js?v=41-1"></script>
     <script src="/js/games/tictactoe.js?v=p62-20261105"></script>
     <script src="/js/games/rps.js?v=batch1-20261028"></script>
-    <script src="/js/games/dotsboxes.js?v=p62-20261105"></script>
+    <script src="/js/games/dotsboxes.js?v=41-1"></script>
     <script src="/js/games/wordscramble.js?v=p62-20261105"></script>
     <script src="/js/games/trivia.js?v=p62-20261105"></script>
-    <script src="/js/games/telephone.js?v=p62-20261105"></script>
-    <script src="/js/games/bluff.js?v=p62-20261105"></script>
-    <script src="/js/games/impostor.js?v=p62-20261105"></script>
+    <script src="/js/games/telephone.js?v=41-1"></script>
+    <script src="/js/games/bluff.js?v=41-1"></script>
+    <script src="/js/games/impostor.js?v=41-1"></script>
     <script src="/js/games/liarsdice.js?v=batch3-20261028"></script>
     <script src="/js/games/hotpotato.js?v=batch3-20261028"></script>
     <script src="/js/games/battleship.js?v=p62-20261105"></script>
@@ -405,13 +410,14 @@
     <script src="/js/games/ludo.js?v=p62-20261105"></script>
     <script src="/js/games/chess.js?v=p62-20261105"></script>
     <script src="/js/games/pool.js?v=p62-20261105"></script>
-    <script src="/js/games/golf.js?v=p62b-20261105"></script>
-    <script src="/js/games/tycoon.js?v=4-1"></script>
-    <script src="/js/rules/rules-a.js?v=qol-20261029"></script>
-    <script src="/js/rules/rules-b.js?v=qol-20261029"></script>
-    <script src="/js/rules/rules-c.js?v=qol-20261029"></script>
+    <script src="/js/games/golf.js?v=41-1"></script>
+    <script src="/js/games/tycoon.js?v=41-1"></script>
+    <script src="/js/rules/rules-a.js?v=41-1"></script>
+    <script src="/js/rules/rules-b.js?v=41-1"></script>
+    <script src="/js/rules/rules-c.js?v=41-1"></script>
     <script src="/js/avatar.js?v=4-1"></script>
     <script src="/js/ads.js"></script>
-    <script src="/js/main.js?v=4-1"></script>
+    <script src="/js/briefs41.js?v=41-1"></script>
+    <script src="/js/main.js?v=41-1"></script>
   </body>
 </html>

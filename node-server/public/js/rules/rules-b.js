@@ -87,9 +87,9 @@ Object.assign(window.GameRules, {
     goal: "Pass prompts and drawings along a chain and enjoy how they get twisted, earning points for taking part and for likes.",
     players: "3–8 players; extras spectate",
     flow: [
-      "Round 1: everyone secretly writes a prompt. Each prompt starts its own chain.",
+      "First, everyone writes a secret prompt, or the server deals a curated/custom prompt. Generated prompts do not earn participation or like points.",
       "Then chains rotate. You get one entry from a neighbour: draw text you receive, or describe a drawing you receive, alternating.",
-      "There are as many rounds as players, so every chain passes through everyone once.",
+      "By default each chain passes through the whole table. The host can choose 3, 5, 7 or 9 steps, including the starting prompt.",
       "Finally every chain is replayed step by step. Like the entries you enjoy.",
     ],
     controls: [
@@ -108,7 +108,7 @@ Object.assign(window.GameRules, {
       "Drawing limits: 250 strokes, 4000 points and 20 fills per drawing (12 colours, 3 brush sizes).",
       "If you run out of time, a blank drawing, '(no guess)' or a random prompt is filled in so the chain keeps going.",
     ],
-    timer: "Drawing time 45, 60 or 90 seconds (default 60); writing time 20, 30 or 45 (default 30). The reveal auto-advances every 5 seconds.",
+    timer: "Drawing time 30–120 seconds (default 60); writing/guessing time 15–60 (default 30). The host chooses a player, curated or custom prompt source. The reveal auto-advances every 5 seconds.",
     ending: "After all chains are revealed, most points wins. Equal top scores tie. The game ends early (forfeit) if fewer than 2 players remain.",
   },
 
@@ -217,10 +217,10 @@ Object.assign(window.GameRules, {
       "Losing your last life knocks you out for the rest of the game.",
     ],
     special: [
-      "Answers need at least 2 characters and cannot repeat within a round.",
+      "Use real English words or recognized proper names, at least 2 characters. Case, accents and punctuation do not make an answer new. Inflections are separate answers. The group judges whether an answer fits the prompt.",
       "You cannot pass back to the player who just gave you the bomb (unless only two players are alive).",
       "Holding the bomb longer than 12 seconds makes it explode in your hands, even before the fuse ends.",
-      "Fuse length: Short 10–22 s, Medium 18–38 s, Long 30–55 s (random, never shown). Answers are not checked for correctness.",
+      "Fuse length: Short 10–22 s, Medium 18–38 s, Long 30–55 s (random, never shown). Word legitimacy is checked by the server; the group judges fit to the prompt.",
     ],
     timer: "A 12-second hold limit is shown on screen; the hidden fuse is shorter or longer depending on the setting (default Medium). Boom lasts 4 seconds.",
     ending: "Last player with a life wins. If everyone else leaves, the remaining player wins by forfeit. There are no ties.",
