@@ -33,3 +33,26 @@ Game modules, game-specific rules/data, gameplay UI, invitation presentation and
 4. Integration validation, screenshots, conflicts/known limits and PR review.
 
 The opening-state screenshot matrix will cover 1366×768, 1440×900, 390×844 and 932×430. Full multiplayer transitions/reconnects require additional functional tests; a screenshot alone is not a passing gameplay test.
+
+## Round/end-condition matrix
+
+| Game family | Authoritative meaning | Verification |
+|---|---|---|
+| Draw & Guess | Configured table rounds; each eligible drawer takes a turn before a round completes | Existing DG suite plus configured-final-total regression |
+| Categories, Word Scramble, Bluff, Impostor | One prompt/word/vote cycle per configured round | New regression drives each to the selected final total and checks bounded views/results |
+| Trivia | Question index versus configured question count | Existing suite plus configured-final-total regression; shared header says Question |
+| Drawing Telephone | Chain steps including initial prompt, then reveal; default initial roster length | New 5-step deterministic and 3-step real-browser custom-source runs; reveal clamps to total |
+| Higher or Lower (hidden) | Configured question/guess rounds | New selected-total regression, visibility unchanged |
+| Property Tycoon | Table turns, then configured round advances; zero is existing endless mode | Existing batch5 finite/infinite ending tests; compact HUD keeps server round |
+| Mini Golf | Hole number / course hole count | Existing per-hole/course/end tests, plus 24-hole geometry/tee matrix; header says Hole |
+| Word Chain, Hot Potato, Liar's Dice | Elimination / lives, rather than a configured fixed round total | Existing life/forfeit/fuse tests; do not fabricate a fixed round denominator |
+| Board/card games | Legal terminal position, books or empty hand | Existing game suites; no invented round progress |
+
+## Late browser findings
+
+- Distinct Golf starts invalidated a legacy browser fixture's fixed-angle second-player shot. The fixture now tests choosing the vacated central tee through the real placement action before its existing miss/sink scenario.
+- Golf's snapshot `busy` flag stays true until another update; placement must use the same local replay deadline as Putt. Fixed and verified without a fresh snapshot.
+- The legacy short-landscape shell margin made a 100%-wide shell overflow by four pixels. Scoped landscape margin reset removes that overflow.
+- Untouched base `a81444b` still overlays the expanded 932×430 drawing word bar with desktop canvas/tools. Explicit focus grid areas fix this; a real hit-test now checks that the word is unobscured, not merely present in the DOM.
+- Go Fish's initial public-action panel pushed the private hand below the desktop fold. The final panel lives in the table center beside the pond/books.
+- Played review captures exposed unreadable inherited lime/struck-through validation reasons on the cream Categories table and inherited dark text on new navy Impostor cards. Scoped contrast corrections preserve the answer strike-through alone; the horizontally scrollable review table is keyboard focusable.

@@ -1,0 +1,22 @@
+{
+  "issue": 70,
+  "base": "a81444b4afc59bfbe1bf83213ba5f6fc4dd7ac76",
+  "production_code_commit": "7c17152",
+  "completed_utc": "2026-11-07T21:06:55.578660+00:00",
+  "node": "24.19.0",
+  "chromium": "154.0.8037.57",
+  "npm_command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/pg4-browsers npm --prefix node-server test",
+  "npm_exit_code": 0,
+  "programs": 36,
+  "pass_lines": 3832,
+  "failed": 0,
+  "skipped": 0,
+  "browser_flow_checks": 14,
+  "browser_page_errors": 0,
+  "png_counts": {
+    "before": 49,
+    "after": 48,
+    "flows": 17
+  },
+  "npm_log_sha256": "388f43dd25afcbd4907542094d1f0214db491e09eafb63684c15ceac1f442111"
+}

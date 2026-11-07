@@ -1,0 +1,19 @@
+{
+  "passed": [
+    "Hash invites, first-player setup and merged classic Dice selection retain room/identity with three real clients",
+    "Returning mobile invitation stays compact after asynchronous catalog load and does not allocate a seat",
+    "All 20 selectable games expose a worked example and expandable rules before starting",
+    "Categories rejects submitted nonsense for every real client and renders the server reason in review",
+    "Telephone settings round-trip to all clients; custom prompt \u2192 real drawing \u2192 guess \u2192 bounded reveal; refresh restores the same member",
+    "Bluff uppercases actual entry values, submitted answers and anonymous voting options",
+    "Go Fish request names/rank/outcome synchronize to all clients without private draw data; reconnect does not replay the transfer animation",
+    "Dots & Boxes captures use owner numbers/initials, accessible line ownership, distinct colors and extra-turn feedback",
+    "Desktop pointer, rotated mobile touch and keyboard tee placement use validated, distinct server positions",
+    "Tee placement re-enables on the local replay clock without requiring a fresh server snapshot",
+    "Real multiplayer collision paths and final ball positions match across clients, including refresh during replay",
+    "Host can select Harbor Links; authored slope course renders on desktop and mobile",
+    "Tycoon keeps the map focal with contextual expandable trades and no horizontal overflow at all required viewports",
+    "Expanded landscape drawing has an unobscured compact word/timer bar and usable non-overlapping canvas"
+  ],
+  "errors": []
+}

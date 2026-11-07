@@ -1,0 +1,18 @@
+# Game contracts for #70
+
+All actions use the existing `action` channel; all state uses existing per-member `view()` snapshots. No new socket event handler or service.
+
+| Game | Contract | Privacy / compatibility |
+|---|---|---|
+| Telephone settings | `rounds: 0,3,5,7,9`; `0` means initial roster length/full-table pass. Total includes the initial text step. `drawTime:30,45,60,90,120`; `writeTime:15,20,30,45,60`; `promptSource:players,curated,custom`; `customWords` comma/newline-separated, 2,000 input chars, 30 unique prompts, 60 chars each | Wrong types/unsupported values ignored. Empty custom source falls back to players. Defaults preserve existing player-written prompts. |
+| Telephone view | Bounded `round`, `rounds`, `completedRounds`; source metadata. Seeded source starts at step 2 (draw) because step 1 was generated. Revealed entries may have `generated:true` | During work only the assigned player sees their source; spectators cannot. Generated entries earn neither human submission credit nor likes. Reveal is not an extra step. |
+| Categories | `review.rows[].cells[].reason` explains a zero-score invalid answer | Submissions stay private until review. Validation checks original first letter before canonical aliases are used for duplicate scoring. |
+| Go Fish | `lastMove:{sequence,askerId,targetId,rank,received,drawn,matched,again,books:[{by,rank}]}` | Public rank is the requested rank; drawn is a count, never the private card's rank/suit. Seed first observed sequence on mount/reconnect; animate only newer events. |
+| Golf placement | `{type:place,x,y}` finite course coordinates, before that player's first stroke, in designated tee square, clear of hazards/walls/other balls, no shot in flight | Seated live player only. Out-of-turn placement allowed while idle; no clock reset. Defaults are already valid distinct positions. |
+| Golf view | `hole.teeArea`, `hole.slopes`, `players[].placed`, `last.collisions`; `anim.paths` keyed by other public player ID | Original shooter `anim.frames` remains `[time,x,y]`. Other paths use the same timestamps/null-after-holing convention. Server positions are final authoritative results, never client-calculated physics. |
+| Golf replay clock | `anim.elapsedMs`, `busyMs` are values at snapshot time | Derive remaining local busy time once per snapshot. Both Putt and Place controls use the local deadline; do not wait for the old `busy` boolean to mutate spontaneously. |
+| Physics helper | Optional `accelerationAt(ball)` callback to fixed-step simulation | Absent means existing Pool behavior. Force stronger than terrain friction can accelerate a resting ball. No room/platform contract change. |
+| Impostor | Private role/word from each member's existing view; public reveal only in result | Assignment is independent each round; repeats permitted. Votes stay private until the existing end reveal. |
+| Bluff | Stored and visible question/answer strings uppercase | Existing normalized matching, invalid-real-answer checks, duplicate authors and anonymous options retained. |
+
+Word policy: `wordrules.js` supplements the existing bundled English lexicon with `party-proper-nouns.json`. Categories handles common plural/irregular duplicate keys while preserving recognized proper names. Country aliases include USA/US/United States of America, UK/Great Britain, Czech Republic and Turkiye; cities include NYC/New York City and Washington DC. Hot Potato uses case/accent/punctuation/article-normalized duplicate keys; inflected words are separate answers there. No runtime dictionary downloads or third-party language service.
