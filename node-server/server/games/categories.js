@@ -68,14 +68,14 @@ function singular(w) {
 }
 function normalize(raw, category) {
   if (typeof raw !== 'string') return '';
-  let s = lexicon.normalize(raw).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-  s = s.replace(/^(the|a|an) /, '');
+  const s = wordRules.plain(raw);
   const i = s.lastIndexOf(' ') + 1;
-  return wordRules.proper[category] ? wordRules.canonicalProper(s, category) : s.slice(0, i) + singular(s.slice(i));
+  return (wordRules.proper[category] || wordRules.isProper(s)) ? wordRules.canonicalProper(s, category) : s.slice(0, i) + singular(s.slice(i));
 }
 // Letter, length and profanity rules, plus: writing the category's own name is not an answer, and
 // dictionary membership is deliberately NOT required (names, places and brands are not in it).
-function invalidReason(answer, letter, cat) {
+function invalidReason(raw, letter, cat) {
+  const answer=wordRules.plain(raw);
   if (!answer) return 'No answer submitted.';
   if (answer.length < 2) return 'Use at least two letters.';
   if (answer[0] !== letter.toLowerCase()) return `Start with ${letter.toUpperCase()}.`;
@@ -122,7 +122,7 @@ function scoreRound(st, api) {
   for (const p of activeP(st)) {
     const ns = p.answers.map((a, i) => {
       const n = normalize(a, st.cats[i]);
-      if (!validFor(n, st.letter, st.cats[i])) return null;
+      if (!validFor(a, st.letter, st.cats[i])) return null;
       counts[i].set(n, (counts[i].get(n) || 0) + 1);
       return n;
     });
@@ -142,7 +142,7 @@ function scoreRound(st, api) {
         status = dup ? 'dup' : 'unique';
       }
       gained += pts;
-      return { text: a, points: pts, status, reason: n ? null : invalidReason(normalize(a, st.cats[i]), st.letter, st.cats[i]) };
+      return { text: a, points: pts, status, reason: n ? null : invalidReason(a, st.letter, st.cats[i]) };
     });
     p.points += gained;
     const m = api.member(p.id);

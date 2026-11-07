@@ -51,8 +51,18 @@ const COURSES = [
   },
 ];
 
+// The original 18-hole tour is stable; Harbor Links is a separate six-hole course.
+const ORIGINAL_COURSES = COURSES.slice();
+COURSES.push({id:'harbor',name:'Harbor Links',blurb:'Slopes, piers and tidal hazards',holes:[
+ {name:'Breeze Lane',par:3,poly:rect(60,100,640,340),slopes:[{x:250,y:140,w:150,h:160,ax:180,ay:0}],tee:[110,220],cup:[590,220]},
+ {name:'Split Current',par:3,poly:rect(60,60,640,380),water:[{x:280,y:130,w:140,h:180}],tee:[110,220],cup:[590,220]},
+ {name:'Quay Corner',par:4,poly:[[60,60],[640,60],[640,380],[450,380],[450,240],[60,240]],bumpers:[{x:480,y:190,r:24}],tee:[110,140],cup:[550,330]},
+ {name:'Tide Pools',par:4,poly:rect(60,60,640,380),water:[{x:200,y:60,w:60,h:210},{x:430,y:170,w:60,h:210}],sand:[{x:295,y:240,w:90,h:80}],tee:[110,300],cup:[590,110]},
+ {name:'Bankers Bend',par:4,poly:[[60,120],[160,60],[540,60],[640,120],[640,320],[540,380],[160,380],[60,320]],walls:[rect(330,100,350,270)],slopes:[{x:220,y:130,w:100,h:100,ax:0,ay:180}],tee:[110,220],cup:[590,220]},
+ {name:'Lighthouse',par:4,poly:rect(60,60,640,380),walls:[rect(290,120,410,320)],bumpers:[{x:540,y:120,r:25}],slopes:[{x:450,y:180,w:80,h:80,ax:180,ay:0}],tee:[110,220],cup:[560,220]}
+]});
 const BY_ID = Object.fromEntries(COURSES.map((c) => [c.id, c]));
-const TOUR = { id: 'tour', name: 'Playgrid Open (18 holes)', blurb: 'All three courses', holes: COURSES.flatMap((c) => c.holes.map((h) => ({ ...h, course: c.name }))) };
+const TOUR = { id: 'tour', name: 'Playgrid Open (18 holes)', blurb: 'All three courses', holes: ORIGINAL_COURSES.flatMap((c) => c.holes.map((h) => ({ ...h, course: c.name }))) };
 BY_ID.tour = TOUR;
 
 module.exports = { COURSES, BY_ID, W, H, rect };

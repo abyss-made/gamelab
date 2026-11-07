@@ -18,6 +18,7 @@ test('Categories accepts proper names without corrupting final S and canonicaliz
  for(const [answer,category,letter] of [['James','Boy name','J'],['Paris','City','P'],['United States','Country','U'],['New York','City','N']]) {
   const normalized=categories.normalize(answer,category);assert(categories.validFor(normalized,letter,category));
  }
+ assert(categories.validFor('Great Britain','G','Country'));assert(categories.validFor('Adidas','A','Brand or store'));assert(categories.validFor("McDonald's",'M','Brand or store'));
  assert.equal(categories.normalize('James','Boy name'),'james');assert.equal(categories.normalize('USA','Country'),categories.normalize('United States','Country'));
  assert.equal(categories.normalize('The Children'),categories.normalize('child'));assert.equal(categories.normalize('Berries'),'berry');
 });
@@ -58,6 +59,33 @@ test('Impostor views keep role, word and ballots private until the result',()=>{
  for(let i=0;i<3;i++){const g=r.view(i);assert.equal(g.role,r.members[i].id===impostor?'impostor':'crew');assert.equal(g.word,r.members[i].id===impostor?null:r.st.word);assert(!('impostorId' in g));}
  for(let i=0;i<3;i++)r.tick();for(let i=0;i<3;i++)r.act(i,{type:'ready'});assert.equal(r.st.phase,'vote');
  r.act(0,{type:'vote',target:'p1'});assert(!('result' in r.view(2)));assert(!('votes' in r.view(2)));r.tick();if(r.st.phase==='guess')r.tick();assert(r.view(0).result.impostorId);
+});
+test('Golf all 24 holes offer six safe non-overlapping tee positions',()=>{
+ const G=GAMES.golf.rules;for(const course of require('../server/games/golfcourses').COURSES)for(const hole of course.holes){
+  const points=[];for(let i=0;i<6;i++){const pos=G.startPosition(hole,points);assert(G.onFairway(hole,pos.x,pos.y));assert(points.every(p=>Math.hypot(p.x-pos.x,p.y-pos.y)>=13));points.push(pos);}
+ }
+});
+test('Golf placement validates ownership, bounds, overlap and first-stroke restriction',()=>{
+ const r=room('golf',{},3);const p=r.st.players[0],before={x:p.x,y:p.y};
+ r.act(0,{type:'place',x:999,y:999});assert.equal(p.x,before.x);
+ r.act(0,{type:'place',x:r.st.players[1].x,y:r.st.players[1].y});assert.equal(p.x,before.x);
+ r.act(0,{type:'place',x:142,y:220});assert(p.placed);assert.equal(p.x,142);
+ r.act(0,{type:'putt',angle:0,power:.3});const after=p.x;r.act(0,{type:'place',x:120,y:220});assert.equal(p.x,after);
+});
+test('Golf collision paths are deterministic and replay every moving ball',()=>{
+ const hole=require('../server/games/golfcourses').BY_ID.meadow.holes[0],G=GAMES.golf.rules;
+ const a=G.simulatePutt(hole,110,220,0,.55,[{id:'other',x:300,y:220}]);const b=G.simulatePutt(hole,110,220,0,.55,[{id:'other',x:300,y:220}]);
+ assert.deepEqual(a,b);assert(a.collisions>0);assert(a.others[0].x>300);assert(a.anim.paths.other.length===a.anim.frames.length);assert(a.anim.frames.every(f=>f[1]===null||Number.isFinite(f[1])));
+});
+test('Golf slopes change a deterministic path and the original tour stays at 18 holes',()=>{
+ const courses=require('../server/games/golfcourses'),hole=courses.BY_ID.harbor.holes[0],G=GAMES.golf.rules;
+ const slope=G.simulatePutt(hole,110,220,0,.5),flat=G.simulatePutt({...hole,slopes:[]},110,220,0,.5);
+ assert.notDeepEqual(slope.anim.frames,flat.anim.frames);assert.equal(courses.BY_ID.tour.holes.length,18);
+});
+test('Go Fish public transitions identify requests without leaking private draws',()=>{
+ const r=room('gofish');r.st.players.sort((a,b)=>a.id.localeCompare(b.id));r.st.turn=0;r.st.players[0].hand=[{r:8,s:'S'}];r.st.players[1].hand=[{r:8,s:'H'},{r:2,s:'S'}];r.st.players[2].hand=[{r:3,s:'S'}];r.st.deck=[{r:7,s:'S'}];
+ r.act(0,{type:'ask',target:'p1',rank:8});assert.equal(r.view(null).lastMove.received,1);assert.equal(r.view(null).lastMove.askerId,'p0');assert.equal(r.view(null).hand,null);
+ r.act(0,{type:'ask',target:'p1',rank:8});const move=r.view(null).lastMove;assert(move.drawn);assert.equal(move.rank,8);assert.equal(move.matched,false);assert(!('card' in move));assert(!JSON.stringify(move).includes('7'));assert.equal(move.sequence,2);
 });
 console.log(`experience41: ${count} checks passed`);
 module.exports={room,test};
