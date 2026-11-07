@@ -86,7 +86,7 @@ const overflow = (page) => page.evaluate(() => document.documentElement.scrollWi
       spec.on('dialog', (d) => d.accept());
       await spec.goto(URL + '/r/' + code);
       await spec.evaluate(() => localStorage.setItem('pg_profile', JSON.stringify({ name: 'Watcher', avatar: { e: 4, c: 4 } })));
-      await spec.click('#join-btn');
+      if (!(await spec.inputValue('#screen-join .name-input')).trim()) await spec.fill('#screen-join .name-input', 'Browser Guest'); await spec.click('#join-btn');
       await spec.waitForSelector('#screen-room', { state: 'visible' });
       await until(() => pal.state && pal.state.spectators.length === 1);
       ok(await spec.isVisible('[data-queue="1"]'), `${T}: spectator sees Join the Queue when seats are full`);

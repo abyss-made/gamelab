@@ -11,7 +11,7 @@
   let seq = 0;
 
   const loadCatalog = () =>
-    catalogP || (catalogP = fetch("/assets/avatars/catalog.json").then((r) => { if (!r.ok) throw Error("catalog"); return r.json(); }).then((c) => (catalog = c)));
+    catalogP || (catalogP = fetch("/assets/avatars/catalog.json").then((r) => { if (!r.ok) throw Error("catalog"); return r.json(); }).then((c) => (catalog = c)).catch(e=>{catalogP=null;throw e;}));
   const byId = (id) => catalog && catalog.characters.find((c) => c.id === id);
 
   // Returns a fresh, valid config or null. Needs the catalog to be loaded.
@@ -19,7 +19,7 @@
     if (!catalog || !v || typeof v !== "object" || Array.isArray(v) || v.v !== catalog.schemaVersion) return null;
     const c = typeof v.id === "string" && byId(v.id);
     if (!c) return null;
-    const out = { v: v.v, id: c.id, palette: Object.hasOwn(PALETTES, v.palette) ? v.palette : c.defaultLook.palette };
+    const out = { v: v.v, id: c.id, palette: typeof v.palette === "string" && Object.hasOwn(PALETTES, v.palette) ? v.palette : c.defaultLook.palette };
     for (const s of SLOTS) out[s] = c.compatibility[s].includes(v[s]) ? v[s] : c.defaultLook[s];
     if (out.hat !== "none" && out.accessory === "headphones") out.accessory = "none";
     return out;
@@ -85,7 +85,7 @@
         el.querySelector("svg")?.remove();
         el.append(svg);
         el.classList.add("avatar-v3");
-      } catch (e) { /* classic art stays */ }
+      } catch (e) { sources.delete(cfg.id); /* classic art stays; retry next render */ }
     }
   }
 

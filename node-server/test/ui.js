@@ -104,7 +104,7 @@ async function createRoom(page, game, setup) {
       await opp.emit('joinRoom', { code: r.code, token: opp.token, profile: opp.profile });
       const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
       await page.goto(URL + '/r/' + r.code);
-      await page.click('#join-btn');
+      if (!(await page.inputValue('#screen-join .name-input')).trim()) await page.fill('#screen-join .name-input', 'Browser Guest'); await page.click('#join-btn');
       await until(() => host.state && host.state.spectators.length === 1, 8000);
       host.s.emit('startGame');
       await until(() => host.state.phase === 'game');

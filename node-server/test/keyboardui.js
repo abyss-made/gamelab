@@ -68,7 +68,7 @@ async function setup(vp, T) {
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('dialog', (d) => d.accept());
   await page.goto(`${srv.url}/r/${res.code}`);
-  await page.click('#join-btn');
+  if (!(await page.inputValue('#screen-join .name-input')).trim()) await page.fill('#screen-join .name-input', 'Browser Guest'); await page.click('#join-btn');
   await waitPage(page, () => window.App && App.S && App.S.players.length === 2, null, 'joined');
   return { bot, page, ctx, errors, code: res.code };
 }

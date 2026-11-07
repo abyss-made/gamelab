@@ -319,23 +319,37 @@ def('host-leaves-and-cleanup', async () => {
 });
 
 def('no-work-without-people', async () => {
-  const { host, code } = await newParty('tictactoe');
-  await addBot(host);
-  host.emit('startGame');
-  await host.untilState((s) => s.phase === 'game' && s.game, 'started');
-  r.ok(host.state.game.myIndex === 0, 'the person moves first in the first game');
-  host.action({ type: 'place', cell: 0 });
-  host.drop(); // gone before the next loop pass, so the bot's reply would be the next thing to happen
-  await srv.passes(1);
-  const moves1 = (await srv.room(code)).game.moves;
-  await srv.passes(8);
-  const moves2 = (await srv.room(code)).game.moves;
-  r.ok(moves1 === 1 && moves2 === 1, `bots stop acting while no person is connected (moves ${moves1} → ${moves2})`);
-  await srv.advance(GRACE + 2000);
-  await srv.passes(3);
-  const gone = await srv.room(code);
-  r.ok(!gone || gone.members.length === 0, 'after the grace period the absent person and the bots are removed');
-  host.close();
+  // Await the accepted human move before disconnecting; dropping an unflushed action can lose it.
+  // A separate delayed-bot server makes that wait deterministic without letting the bot answer first.
+  const isolated = await H.startServer({ env: { BOT_DELAY_MS: '5000', HIDDEN_GAMES: '' } });
+  const host = new H.Client(isolated, 'Hana');
+  try {
+    const res = await host.create({ game: 'tictactoe' });
+    const code = res.code;
+    host.emit('addBot', {});
+    await host.untilState((s) => s.players.length === 2, 'bot added');
+    host.emit('startGame');
+    await host.untilState((s) => s.phase === 'game' && s.game, 'started');
+    r.ok(host.state.game.myIndex === 0, 'the person moves first in the first game');
+    host.action({ type: 'place', cell: 0 });
+    await host.untilState((s) => s.game && s.game.moves === 1, 'human move accepted');
+    host.drop();
+    await isolated.passes(1);
+    const moves1 = (await isolated.room(code)).game.moves;
+    // Pass the bot's due time, not merely its normal think delay, while nobody is connected.
+    await isolated.advance(6000);
+    await isolated.passes(8);
+    const moves2 = (await isolated.room(code)).game.moves;
+    r.ok(moves1 === 1 && moves2 === 1, `bots stop acting while no person is connected (moves ${moves1} → ${moves2})`);
+    await isolated.advance(GRACE + 2000);
+    await isolated.passes(3);
+    const gone = await isolated.room(code);
+    r.ok(!gone || gone.members.length === 0, 'after the grace period the absent person and the bots are removed');
+    r.ok(isolated.errors.length === 0, 'isolated bot-disconnect server logged no errors');
+  } finally {
+    host.close();
+    await isolated.stop();
+  }
 });
 
 (async () => {

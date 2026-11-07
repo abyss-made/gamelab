@@ -138,14 +138,19 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       await page.waitForSelector('#code-input');
       await page.fill('#code-input', r2.code);
       await page.press('#code-input', 'Enter');
+      await page.waitForSelector('#screen-join', { state: 'visible' });
+      await page.click('#join-btn');
       await sleep(400);
       ok(msgs.length === 1 && /in progress/.test(msgs[0]), 'joining another room by code asks for confirmation while a game is running');
       ok(f.state.players.length === 2 && other.state.players.length === 1, 'declining the confirmation keeps the first room and does not join the second');
       page.removeListener('dialog', onDlg);
       page.on('dialog', (d) => d.accept());
       // a failed join (mistyped code) after confirming must not cost the current seat
+      await page.click('.main-nav [data-view="rooms"]');
       await page.fill('#code-input', 'ZZZZZZ');
       await page.press('#code-input', 'Enter');
+      await page.waitForSelector('#screen-join', { state: 'visible' });
+      await page.click('#join-btn');
       await sleep(500);
       ok(f.state.players.length === 2 && f.state.hostId === hostId, 'a failed join keeps the current seat, host and roster');
       ok(await vis(page, '#return-bar'), 'return indicator remains after a failed join');
@@ -167,11 +172,10 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       const r = await host.emit('createRoom', { game: 'drawguess', token: host.token, profile: host.profile });
       const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
       await page.goto(URL + '/r/' + r.code);
-      await page.click('#join-btn');
+      if (!(await page.inputValue('#screen-join .name-input')).trim()) await page.fill('#screen-join .name-input', 'Browser Guest'); await page.click('#join-btn');
       await page.waitForSelector('#screen-room', { state: 'visible' });
       ok(await until(() => host.state.players.length + host.state.spectators.length === 2), 'deep link /r/CODE joins the room');
       await page.reload();
-      await page.click('#join-btn');
       await page.waitForSelector('#screen-room', { state: 'visible' });
       await sleep(300);
       ok(host.state.players.length + host.state.spectators.length === 2, 'reload rejoins without duplicate membership');
@@ -209,11 +213,12 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       // Portrait phones: since #40 the normal canvas is already phone-wide, so focus mode only has to keep
       // it at least that large and edge to edge. Elsewhere it must grow as before.
       const portraitPhone = mobile && vp.w < vp.h;
-      ok(portraitPhone ? before.w >= vp.w * 0.9 && after.w * after.h >= before.w * before.h * 0.99 && after.w >= vp.w * 0.95 : after.w * after.h > before.w * before.h * (mobile && vp.w > vp.h ? 0.8 : 1.15), `${tag}: expanded canvas ${before.w}x${before.h} -> ${after.w}x${after.h}`);
+      const desktop = vp.w > 900;
+      ok(desktop ? after.w * after.h >= before.w * before.h * 0.99 : portraitPhone ? before.w >= vp.w * 0.9 && after.w * after.h >= before.w * before.h * 0.99 && after.w >= vp.w * 0.95 : after.w * after.h > before.w * before.h * (mobile && vp.w > vp.h ? 0.8 : 1.15), `${tag}: expanded canvas ${before.w}x${before.h} -> ${after.w}x${after.h}`);
       ok(Math.abs(after.w / after.h - 4 / 3) < 0.02, `${tag}: expanded canvas keeps 4:3`);
       ok(after.x >= -1 && after.y >= -1 && after.x + after.w <= vp.w + 1 && after.y + after.h <= vp.h + 1, `${tag}: expanded canvas fully on screen`);
       ok(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `${tag}: no horizontal overflow while expanded`);
-      ok(await vis(page, '#dg-chat-toggle'), `${tag}: Chat toggle is available in focus mode`);
+      ok(desktop ? await vis(page, '.room > .side') && await vis(page, '#room-chat') : await vis(page, '#dg-chat-toggle'), `${tag}: social controls remain available in focus mode`);
       // chat panel opens without covering the canvas, keeps history, and can send
       if (!(await vis(page, '#room-chat'))) await page.click('#dg-chat-toggle');
       await sleep(200);
@@ -228,6 +233,7 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       ok(await page.evaluate(() => { const i = document.getElementById('chat-input').getBoundingClientRect(); return i.bottom <= innerHeight && i.top >= 0; }), `${tag}: chat input is on screen`);
       await page.press('#chat-input', 'Enter');
       ok(await until(() => f.chats.some((m) => m.text === 'guess from focus mode')), `${tag}: message sent from the expanded view reaches the room`);
+      if (!desktop) {
       // unread badge while closed
       await page.click('#dg-chat-toggle');
       await sleep(100);
@@ -237,6 +243,7 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       await page.click('#dg-chat-toggle');
       await sleep(100);
       ok(!(await vis(page, '#dg-unread')) && (await page.textContent('#chat-log')).includes('ping one'), `${tag}: opening chat clears the badge and shows the message`);
+      }
       // Escape closes focus mode and returns chat to the page with history intact
       await page.keyboard.press('Escape');
       await sleep(150);

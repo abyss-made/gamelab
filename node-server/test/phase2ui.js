@@ -45,6 +45,7 @@ async function openPage(browser, vp, name) {
   page.on('dialog', (d) => d.accept());
   await page.goto(URL + '/');
   await page.evaluate((n) => localStorage.setItem('pg_profile', JSON.stringify({ name: n, avatar: { e: 1, c: 1 } })), name);
+  await page.evaluate(() => localStorage.setItem('pg_identity_confirmed', '1'));
   await page.reload();
   return page;
 }

@@ -247,6 +247,7 @@ GameUI.drawguess = (() => {
     $("#dg-expand").addEventListener("click", () => setBig(!big));
     $("#dg-chat-toggle").addEventListener("click", () => setChat(!chatOpen));
     document.addEventListener("keydown", onKey);
+    window.addEventListener("resize", resizeFocus);
     clock = setInterval(tickClock, 200);
   }
 
@@ -256,6 +257,7 @@ GameUI.drawguess = (() => {
   // The chat panel is moved (not cloned) into the focus layout, so messages, scroll position and any
   // half-typed guess survive opening and closing it. It is a collapsible panel with an unread badge.
   let big = false;
+  let focusedWide = null;
   let chatOpen = false;
   let unread = 0;
   let chatHome = null; // placeholder marking where the chat lives outside focus mode
@@ -313,6 +315,7 @@ GameUI.drawguess = (() => {
   }
   function setBig(on) {
     big = !!on;
+    focusedWide = big ? isWide() : null;
     if (!root) return;
     root.classList.toggle("big", big);
     document.body.classList.toggle("dg-big", big);
@@ -325,14 +328,19 @@ GameUI.drawguess = (() => {
     b.setAttribute("aria-pressed", String(big));
     $("#dg-chat-toggle").hidden = !big;
     if (big) {
-      adoptChat();
+      if (isWide()) releaseChat();
+      else adoptChat();
       unread = 0;
-      // Guessers need the chat to guess; drawers get the pixels until they ask for it.
-      setChat(isWide() && !canDraw());
+      // Desktop retains the social rail. Phones can toggle their bottom chat panel.
+      setChat(isWide());
     } else {
       releaseChat();
       root.classList.remove("chat-open");
     }
+  }
+  function resizeFocus() {
+    // Keyboard/toolbar height changes must not close an already-open phone chat.
+    if (big && isWide() !== focusedWide) setBig(true);
   }
   function onKey(e) {
     if (e.key === "Escape" && big) setBig(false);
@@ -483,6 +491,7 @@ GameUI.drawguess = (() => {
     stop();
     setBig(false);
     document.removeEventListener("keydown", onKey);
+    window.removeEventListener("resize", resizeFocus);
     if (root) root.remove();
     root = null;
     lastKey = "";

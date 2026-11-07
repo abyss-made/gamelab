@@ -1,0 +1,813 @@
+/* Scoped production integration. Homepage art and existing game rules stay intact. */
+#modal-body:has(.av-studio) {
+  width:min(1240px,96vw);
+  max-width:1240px;
+  max-height:94dvh;
+  overflow:auto;
+  padding:28px
+}
+
+.profile:has(.av-studio.open)>.avatar-pick,.profile:has(.av-studio.open)>.color-row {
+  display:none
+}
+
+.av-studio.open {
+  display:grid;
+  grid-template-columns:270px minmax(0,1fr);
+  gap:20px;
+  padding:20px;
+  border:1px solid #3f626c;
+  border-radius:22px;
+  background:radial-gradient(ellipse at 10% 10%,#223649,#081c29);
+  width:100%;
+  text-align:left
+}
+
+.av-studio-hero {
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  gap:12px;
+  padding:12px
+}
+
+.av-studio-preview .avatar.av-xl {
+  width:230px;
+  height:230px;
+  max-width:100%;
+  border:0;
+  background:none
+}
+
+.av-studio-preview svg {
+  width:100%;
+  height:100%;
+  filter:drop-shadow(0 10px 18px #0005)
+}
+
+.av-studio-hero h3 {
+  font-size:26px;
+  margin:0
+}
+
+.av-studio-hero p {
+  color:#a9c5c9;
+  font-size:13px
+}
+
+.av-studio-hero .board-actions {
+  margin-top:auto
+}
+
+.av-studio-edit {
+  min-width:0;
+  max-height:59dvh;
+  overflow:auto;
+  padding:4px 8px 12px;
+  scrollbar-color:#527779 #0b2331
+}
+
+.av-catalog-tools {
+  display:flex;
+  gap:10px;
+  position:sticky;
+  top:0;
+  background:#102635;
+  padding:8px 0 14px;
+  z-index:2
+}
+
+.av-catalog-tools input {
+  min-width:0;
+  flex:1
+}
+
+.av-catalog-tools select {
+  max-width:120px
+}
+
+.av-gallery {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px
+}
+
+.av-gallery button {
+  min-width:0;
+  padding:8px;
+  border:1px solid #365668;
+  border-radius:13px;
+  background:linear-gradient(135deg,#1c3543,#10232e);
+  color:#ecf1e6
+}
+
+.av-gallery button[aria-pressed=true] {
+  border-color:#b7f350;
+  background:#b5ef5715;
+  box-shadow:0 0 0 2px #abed6422
+}
+
+.av-gallery img {
+  width:100%;
+  aspect-ratio:1;
+  object-fit:contain;
+  display:block
+}
+
+.av-gallery b {
+  font-size:11px;
+  display:block;
+  margin-top:5px
+}
+
+.av-customize {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:22px
+}
+
+.av-customize fieldset {
+  border:1px solid #355962;
+  border-radius:12px;
+  padding:10px;
+  min-width:0
+}
+
+.av-customize legend {
+  font-size:12px;
+  color:#bfd7bf;
+  padding:0 6px
+}
+
+.av-options {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap
+}
+
+.av-options button {
+  min-height:40px;
+  padding:7px 10px;
+  border:1px solid #52717c;
+  border-radius:8px;
+  background:#102a39;
+  color:#e4efdc;
+  font-size:12px
+}
+
+.av-options button[aria-pressed=true] {
+  border-color:#b7ee6c;
+  background:#b2f45f20
+}
+
+.av-options .av-swatch {
+  background:var(--swatch);
+  color:#102530;
+  border:3px solid #a8bcbf66;
+  min-width:46px;
+  min-height:44px;
+  font-size:10px
+}
+
+.av-options .av-swatch[aria-pressed=true] {
+  background:var(--swatch);
+  border-color:white
+}
+
+.av-studio-save {
+  grid-column:1/-1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding-top:14px;
+  border-top:1px solid #355360
+}
+
+.av-studio-save p {
+  flex:1;
+  min-width:180px;
+  font-size:12px;
+  color:#bbd4bd
+}
+
+.profile>.name-row {
+  margin:14px 0
+}
+
+.join-card {
+  width:min(1200px,96vw);
+  max-width:1200px;
+  margin:24px auto
+}
+
+.join-card.returning {
+  max-width:550px
+}
+
+.join-card.returning .av-studio,.join-card.returning .name-row button {
+  display:none
+}
+
+.join-card.returning .avatar-pick {
+  display:flex!important
+}
+
+.join-card.returning .color-row {
+  display:none!important
+}
+
+#invite-edit {
+  margin:12px
+}
+
+#join-btn {
+  margin:16px 0
+}
+
+.nav-return {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#0b251a;
+  border:1px solid #b4ff19;
+  border-radius:13px;
+  box-shadow:0 0 16px #a9ef4022;
+  color:#eaf6d9;
+  padding:8px 12px;
+  min-height:44px
+}
+
+.nav-return[hidden] {
+  display:none
+}
+
+.nav-return i {
+  width:7px;
+  height:7px;
+  background:#b5f85a;
+  border-radius:50%;
+  box-shadow:0 0 9px #b5f85a
+}
+
+.nav-return b {
+  display:block;
+  font-size:12px
+}
+
+.nav-return small {
+  display:block;
+  font-size:9px;
+  color:#b1caa3
+}
+
+.nav-return:hover {
+  background:#193f24;
+  box-shadow:0 0 20px #b4ff1933
+}
+
+.pg-ad[hidden] {
+  display:none!important
+}
+
+.pg-ad {
+  grid-area:ad;
+  max-height:130px;
+  border:1px solid #355260;
+  padding:10px;
+  border-radius:9px;
+  text-align:center;
+  overflow:hidden
+}
+
+.pg-ad small {
+  display:block;
+  font-size:10px;
+  color:#9eb8bc
+}
+
+.pg-ad div {
+  padding:20px;
+  color:#9eb8bc
+}
+
+.pg-ad:empty {
+  display:none
+}
+
+@media(min-width:901px) {
+  body[data-screen=room][data-game=drawguess] .room[data-phase=game],body.dg-big .room[data-phase=game],body.focus-mode[data-game=drawguess] .room[data-phase=game] {
+    height:calc(100dvh - 80px);
+    min-height:0;
+    box-sizing:border-box;
+    grid-template-columns:minmax(0,1fr) 280px;
+    grid-template-areas:"bar bar" "stage word" "stage side" "stage chat" "stage ad";
+    grid-template-rows:30px 58px minmax(85px,.5fr) minmax(160px,1fr) auto;
+    gap:10px;
+    padding:10px 18px
+  }
+  body[data-game=drawguess] .room[data-phase=game] .stage {
+    min-height:0;
+    overflow:hidden;
+    height:100%
+  }
+  body[data-game=drawguess] .dg {
+    height:100%;
+    min-height:0;
+    grid-template-columns:72px minmax(0,1fr);
+    grid-template-rows:1fr
+  }
+  body[data-game=drawguess] .dg-board {
+    grid-column:2;
+    grid-row:1;
+    align-self:stretch;
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    justify-content:center;
+    padding:6px
+  }
+  body[data-game=drawguess] .dg-wrap {
+    width:100%;
+    height:auto;
+    max-width:calc((100dvh - 165px)*4/3);
+    max-height:100%;
+    aspect-ratio:4/3;
+    flex:none
+  }
+  body[data-game=drawguess] .dg-tools {
+    grid-column:1;
+    grid-row:1;
+    max-height:100%;
+    overflow:auto;
+    padding:7px!important
+  }
+  @media(min-height:501px) {
+    body[data-game=drawguess] .dg-top {
+      display:none!important
+    }
+  }
+  body[data-game=drawguess] .room[data-phase=game] .side {
+    min-height:0;
+    overflow:auto;
+    padding:8px
+  }
+  body[data-game=drawguess] .room[data-phase=game] .chat,body.dg-big[data-game=drawguess] .chat,body.focus-mode[data-game=drawguess] .chat {
+    display:flex!important;
+    flex-direction:column;
+    min-height:0;
+    max-height:none;
+    padding:8px
+  }
+  body[data-game=drawguess] .room[data-phase=game] .chat-log {
+    display:block!important;
+    flex:1;
+    min-height:0;
+    max-height:none;
+    overflow:auto
+  }
+  body[data-game=drawguess] .room[data-phase=game] .chat-form {
+    flex:none
+  }
+  body[data-game=drawguess] .person .avatar {
+    width:30px!important;
+    height:30px!important
+  }
+}
+
+@media(max-width:900px) {
+  .av-studio.open {
+    grid-template-columns:200px minmax(0,1fr);
+    gap:12px;
+    padding:12px
+  }
+  .av-gallery {
+    grid-template-columns:repeat(3,minmax(0,1fr))
+  }
+  .av-studio-preview .avatar.av-xl {
+    width:175px;
+    height:175px
+  }
+  .av-customize {
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:600px) {
+  #modal-body:has(.av-studio) {
+    padding:16px;
+    width:96vw;
+    max-height:94dvh
+  }
+  .av-studio.open {
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+    gap:12px
+  }
+  .av-studio-hero {
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:8px;
+    padding:5px
+  }
+  .av-studio-preview {
+    grid-row:1/4
+  }
+  .av-studio-preview .avatar.av-xl {
+    width:120px;
+    height:120px
+  }
+  .av-studio-hero h3 {
+    font-size:22px
+  }
+  .av-studio-hero p {
+    font-size:11px
+  }
+  .av-studio-hero .board-actions {
+    grid-column:1/-1;
+    margin:6px 0 0;
+    justify-content:center
+  }
+  .av-studio-edit {
+    max-height:54dvh;
+    min-height:200px
+  }
+  .av-gallery {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px
+  }
+  .av-catalog-tools {
+    gap:6px
+  }
+  .av-catalog-tools input {
+    width:100px
+  }
+  .av-catalog-tools select {
+    width:90px
+  }
+  .av-gallery b {
+    font-size:10px
+  }
+  .av-studio-save .btn {
+    min-height:44px
+  }
+  .av-customize {
+    grid-template-columns:1fr
+  }
+  .nav-return {
+    padding:6px 8px;
+    gap:6px
+  }
+  .nav-return b {
+    font-size:10px
+  }
+  .nav-return small {
+    display:none
+  }
+  .topbar-right {
+    gap:5px
+  }
+  .topbar-right:has(.nav-return:not([hidden])) .nav-cta {
+    display:none
+  }
+  .join-card {
+    padding:16px;
+    margin:12px auto
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .av-gallery button,.nav-return {
+    transition:none
+  }
+}
+
+.av-editor-nav {
+  display:flex;
+  gap:10px;
+  position:sticky;
+  top:0;
+  z-index:3;
+  padding:8px 0;
+  background:#102635
+}
+
+.av-editor-nav button {
+  background:#13313e;
+  border:1px solid #426271;
+  border-radius:10px;
+  padding:10px 14px;
+  color:#dceccf;
+  min-height:44px
+}
+
+.av-editor-nav button[aria-pressed=true] {
+  border-color:#b2ef60;
+  background:#a4df5b20
+}
+
+.av-studio-edit[data-category=characters] .av-customize {
+  display:none
+}
+
+.av-studio-edit[data-category=looks] .av-gallery,.av-studio-edit[data-category=looks] .av-catalog-tools {
+  display:none
+}
+
+.av-catalog-tools {
+  top:60px
+}
+
+.av-studio-edit[data-category=looks] .av-customize {
+  margin-top:8px
+}
+
+@media(min-width:901px) {
+  body[data-game=drawguess] .dg .tool-picks,body[data-game=drawguess] .dg .dg-actions {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:5px
+  }
+  body[data-game=drawguess] .dg .tool {
+    width:100%;
+    min-height:38px;
+    padding:3px;
+    font-size:10px
+  }
+  body[data-game=drawguess] .dg .dg-palette {
+    display:grid;
+    grid-template-columns:repeat(2,22px);
+    gap:4px
+  }
+  body[data-game=drawguess] .dg .swatch {
+    width:22px;
+    height:22px
+  }
+  body[data-game=drawguess] .dg .tool-caption {
+    display:none
+  }
+  body[data-game=drawguess] .room[data-phase=game] .game-word-slot {
+    padding:5px;
+    font-size:12px;
+    overflow:auto
+  }
+  body[data-game=drawguess] .game-word-slot strong {
+    font-size:20px;
+    line-height:1.15
+  }
+}
+
+@media(min-width:901px) {
+  body[data-game=drawguess] .game-word-slot .dg-answer {
+    font-size:20px;
+    line-height:24px
+  }
+  body[data-game=drawguess] .game-word-slot .dg-label {
+    font-size:10px;
+    line-height:13px
+  }
+}
+
+.room[data-phase=lobby]>.pg-ad {
+  grid-area:auto;
+  grid-column:1/-1
+}
+
+.room[data-phase=game]>.pg-ad {
+  grid-area:auto;
+  grid-column:2;
+  grid-row:5
+}
+
+.av-studio-preview svg {
+  animation:pg4-arrive 160ms ease-out
+}
+
+@keyframes pg4-arrive {
+  from {
+    opacity:.55;
+    transform:translateY(4px) scale(.98)
+  }
+  to {
+    opacity:1;
+    transform:none
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .av-studio-preview svg {
+    animation:none
+  }
+}
+
+@media(max-width:600px) {
+  .nav-return {
+    width:40px;
+    min-width:40px;
+    min-height:40px;
+    padding:5px;
+    justify-content:center
+  }
+  .nav-return>span:has(b) {
+    display:none
+  }
+  .topbar-right {
+    gap:3px!important
+  }
+}
+
+#modal-body>[data-return-current] {
+  position:absolute;
+  top:22px;
+  right:60px
+}
+
+/* Keep identity and commit controls visible above the fold. */
+#modal-body:has(.av-studio.open) .profile>.name-row {
+  margin:10px 0 14px
+}
+
+#modal-body:has(.av-studio.open) .av-studio-edit {
+  max-height:42dvh
+}
+
+.av-studio-save p {
+  margin:0
+}
+
+@media(max-width:600px) {
+  #modal-body:has(.av-studio.open) .av-studio-edit {
+    max-height:25dvh;
+    min-height:160px
+  }
+  .av-studio-save {
+    gap:8px;
+    padding-top:10px
+  }
+  .av-studio-save p {
+    flex-basis:100%;
+    font-size:11px
+  }
+  .av-studio-save .btn {
+    flex:1
+  }
+  .av-studio-hero {
+    gap:4px
+  }
+  .av-editor-nav button {
+    padding:8px;
+    font-size:12px
+  }
+  .profile:has(.av-studio.open)~.profile-note {
+    display:none
+  }
+}
+
+@media(min-width:901px) {
+  body[data-game=drawguess] .dg {
+    grid-template-columns:80px minmax(0,1fr)
+  }
+  body[data-game=drawguess] .dg .dg-tools {
+    gap:10px
+  }
+  body[data-game=drawguess] .dg .dg-palette {
+    grid-template-columns:repeat(3,18px);
+    gap:4px
+  }
+  body[data-game=drawguess] .dg .swatch {
+    width:18px;
+    height:18px
+  }
+  body[data-game=drawguess] .dg .tool-field {
+    gap:6px
+  }
+}
+
+/* Desktop focus preserves both players and chat, rather than moving chat over the board. */
+@media(min-width:901px) and (min-height:501px) {
+  body.dg-big[data-game=drawguess] .dg {
+    position:relative;
+    inset:auto;
+    z-index:auto;
+    height:100%;
+    padding:0;
+    grid-template-areas:none;
+    gap:10px
+  }
+  body.dg-big[data-game=drawguess] .dg-board {
+    grid-area:auto;
+    grid-column:2;
+    grid-row:1;
+    display:flex;
+    border-radius:10px;
+    container-type:normal;
+    padding:6px
+  }
+  body.dg-big[data-game=drawguess] .dg-tools {
+    grid-area:auto;
+    grid-column:1;
+    grid-row:1;
+    width:auto;
+    border-radius:10px
+  }
+  body.dg-big[data-game=drawguess] .dg-wrap {
+    width:100%;
+    max-width:calc((100dvh - 165px)*4/3);
+    aspect-ratio:4/3
+  }
+  body.dg-big[data-game=drawguess] .dg-boardbar {
+    position:absolute;
+    top:auto;
+    bottom:14px;
+    right:14px;
+    z-index:3
+  }
+  body.dg-big[data-game=drawguess] #dg-chat-toggle {
+    display:none!important
+  }
+  body.focus-mode[data-game=drawguess] .room[data-phase=game]>.side {
+    display:block!important
+  }
+  body.focus-mode[data-game=drawguess] .room[data-phase=game]>.room-bar {
+    display:flex!important
+  }
+}
+
+@media(min-width:901px) and (min-height:501px) {
+  body.focus-mode[data-screen=room][data-game=drawguess] .room[data-phase=game] {
+    grid-template-columns:minmax(0,1fr) 280px;
+    grid-template-areas:"bar bar" "stage word" "stage side" "stage chat" "stage ad";
+    grid-template-rows:30px 58px minmax(85px,.5fr) minmax(160px,1fr) auto;
+    height:calc(100dvh - 80px)
+  }
+}
+
+@media(max-width:600px){
+ .av-studio-hero{grid-template-columns:100px minmax(0,1fr);align-items:center}
+ .av-studio-preview .avatar.av-xl{width:100px;height:100px}
+ .av-studio-hero h3{font-size:20px}
+ .av-studio-hero p{margin:0}
+ .av-studio-hero .board-actions{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0;align-self:start}
+ .av-studio-hero .board-actions .btn{padding:7px;font-size:11px}
+ .av-studio-hero .board-actions .btn:first-child{grid-column:1/-1}
+ #modal-body:has(.av-studio.open) .av-studio-edit{max-height:30dvh;min-height:235px}
+}
+
+.av-option-art{width:64px;height:44px;display:block;filter:drop-shadow(0 3px 3px #0006)}
+.av-options button:has(.av-option-art){display:flex;flex-direction:column;align-items:center;gap:5px;min-width:78px}
+/* Game-specific desktop workspaces; keep the existing art, physics and mobile rotation. */
+@media(min-width:1101px){
+ body[data-game=pool] .pl .pl-wrap{width:min(100%,calc((100dvh - 380px)*1088/588))}
+ body[data-game=pool] .pl .pl-controls{width:100%;padding:10px}
+ body[data-game=golf] .golf{grid-template-columns:minmax(0,1fr) 220px;align-items:start}
+ body[data-game=golf] .golf>.gf-head,body[data-game=golf] .golf>#gf-players,body[data-game=golf] .golf>#gf-status{grid-column:1/-1}
+ body[data-game=golf] .golf>.gf-wrap{grid-column:1;grid-row:4;width:min(100%,calc((100dvh - 400px)*700/440))}
+ body[data-game=golf] .golf>.gf-controls{grid-column:2;grid-row:4;grid-template-columns:1fr;width:100%;gap:20px}
+ body[data-game=golf] .golf>.gf-card,body[data-game=golf] .golf>.gf-between{grid-column:1/-1}
+ body[data-game=tycoon] .ty{grid-template-columns:minmax(0,1fr) minmax(230px,.6fr);align-items:start}
+ body[data-game=tycoon] #ty-strip,body[data-game=tycoon] #ty-players{grid-column:1/-1}
+ body[data-game=tycoon] #ty-boardwrap{grid-column:1;grid-row:3/span 5}
+ body[data-game=tycoon] .ty .ty-board{width:min(100%,var(--ty-board-max,calc(100dvh - 440px)))}
+ body[data-game=tycoon] #ty-info,body[data-game=tycoon] #ty-actions,body[data-game=tycoon] .ty-sect{grid-column:2}
+ body[data-game=battleship] .bs-place{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:10px;align-items:start}
+ body[data-game=battleship] .bs-place>.pbs-label{grid-column:1/-1}
+ body[data-game=battleship] .bs-place>.bs-boardwrap{grid-column:1;grid-row:2/span 3}
+ body[data-game=battleship] .bs-place>.bs-fleet,body[data-game=battleship] .bs-place>.bs-ctl,body[data-game=battleship] .bs-place>.bs-lock{grid-column:2;margin:0}
+ body[data-game=battleship] .bs-place>.bs-ctl{display:flex;flex-direction:column}
+ body[data-game=battleship] .bs .bs-grid.pbs-chart{max-width:min(100%,calc(100dvh - 350px))}
+}
+.pg-ad{grid-area:auto}
+#screen-selection>.pg-ad{grid-column:1/-1}
+
+@media(min-width:1101px){
+ body[data-game=battleship] .bs-place .bs-ship{min-height:38px}
+}
+@media(min-width:1101px){
+ body[data-game=ludo] .ld2 .ld2-board.pld{width:min(100%,calc(100dvh - 260px));margin:0 auto}
+}
+.join-card.returning .avatar-pick .arrow{display:none}
+.av-gallery button:hover{border-color:#93c68f;background:#24483c}
+.av-gallery button:focus-visible,.av-options button:focus-visible,.av-editor-nav button:focus-visible{outline:3px solid #e4ffc5;outline-offset:2px}
+/* Invitation has one primary commit: Save & Join. Keep its action in reach while browsing. */
+.join-card:not(.returning){gap:10px}
+.join-card:not(.returning) .av-studio-edit{max-height:34dvh}
+.join-card.first-invite .av-studio-save [data-studio=save],.join-card:not(.returning) .av-studio-save[data-has-note=false] p{display:none}
+.join-card:not(.returning) .av-studio-save{justify-content:flex-end;padding-top:8px}
+.join-card:not(.returning) .av-studio-save .btn{min-height:40px}
+.join-card:not(.returning) #join-btn{position:sticky;bottom:12px;z-index:4;box-shadow:0 0 0 8px #0a1c28,0 6px 24px #0008;margin:8px 0}
+@media(min-width:901px){
+ .join-card:not(.returning) .av-studio-preview .avatar.av-xl{width:180px;height:180px}
+ .join-card:not(.returning) .av-studio-hero .board-actions{flex-wrap:nowrap;gap:6px}
+ .join-card:not(.returning) .av-studio-hero .btn{padding:8px;font-size:11px}
+}
+@media(max-width:600px){
+ .join-card:not(.returning){padding:14px;gap:8px}
+ .join-card:not(.returning) h1{font-size:22px}
+ .join-card:not(.returning) .av-studio-edit{max-height:26dvh;min-height:220px}
+ .join-card:not(.returning) .av-studio-save .btn{flex:0 1 auto}
+}
+.av-studio-edit{scroll-padding-top:130px;padding-top:0}
+.av-editor-nav{box-shadow:0 -8px 0 #102635}
+@media(max-width:600px){.join-card:not(.returning) .av-studio-edit{max-height:30dvh;min-height:248px}}

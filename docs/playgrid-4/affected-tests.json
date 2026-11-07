@@ -1,0 +1,38 @@
+[
+  {
+    "program": "avatarui",
+    "exitCode": 0
+  },
+  {
+    "program": "party3ui",
+    "exitCode": 0
+  },
+  {
+    "program": "batch5ui",
+    "exitCode": 0
+  },
+  {
+    "program": "design31ui",
+    "exitCode": 0
+  },
+  {
+    "program": "reliabilityui",
+    "exitCode": 0
+  },
+  {
+    "program": "keyboardui",
+    "exitCode": 0
+  },
+  {
+    "program": "bots",
+    "exitCode": 0
+  },
+  {
+    "program": "botsui",
+    "exitCode": 0
+  },
+  {
+    "program": "lexicon",
+    "exitCode": 0
+  }
+]
