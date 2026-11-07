@@ -552,7 +552,7 @@
     if (col) profile.avatar.c = Number(col.dataset.color);
     if (dice) {
       profile.avatar = { e: rand(AVATAR_COUNT), c: rand(COLORS.length) };
-      studio.draft = null; studio.undo = []; studio.open = false;
+      studio.draft = null; studio.undo = []; studio.open = false; studio.useClassic = true;
       profile.name = ADJ[rand(ADJ.length)] + NOUN[rand(NOUN.length)];
     }
     saveProfile();

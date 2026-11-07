@@ -2,6 +2,7 @@
   "passed": [
     "Explicit homepage identity save and gallery keyboard-focus preservation",
     "First invite requires a deliberate name and saves selected character before joining",
+    "Randomized classic avatar on a first invite is the identity submitted on join",
     "Homepage refresh and compact mobile Return to Game restore the existing room",
     "Returning invite confirms saved identity or opens visual editing without allocating a seat",
     "Classic avatar controls remain accessible and synchronize to the other client",
