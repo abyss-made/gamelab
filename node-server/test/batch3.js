@@ -376,7 +376,7 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   while (r.st.phase === 'play' && guard++ < 200) {
     const hh = r.idx(r.view(0).holderId);
     const to = [0, 1, 2].find((i) => i !== hh && r.members[i].id !== r.view(0).fromId && r.st.players[i].lives > 0);
-    r.act(hh, { type: 'pass', to: r.members[to].id, answer: 'ans' + guard });
+    r.act(hh, { type: 'pass', to: r.members[to].id, answer: ['ant','bear','cat','dog','elephant','fox','goat','horse','iguana','jaguar','koala','lion','mouse','newt','owl','pig','quail','rabbit','snake','tiger','urchin','vole','wolf','yak','zebra'][guard % 25] });
     r.adv(2000);
   }
   ok(r.st.phase === 'boom' && r.st.round === 2 && fuseAt - 1000000 > 0, 'Hot Potato: the bomb explodes on its own when the hidden fuse runs out');

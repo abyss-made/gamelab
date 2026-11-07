@@ -323,7 +323,7 @@ GameUI.golf = (() => {
     return { x: sx * g.size.w, y: sy * g.size.h };
   }
 
-  const canPlace = () => g && g.phase==='play' && !g.busy && myBall() && !myBall().out && myBall().strokes===0;
+  const canPlace = () => g && g.phase==='play' && performance.now() >= busyUntil && !S.lastResult && myBall() && !myBall().out && myBall().strokes===0;
   function onPointer(ev) {
     if (placing && canPlace()) {
       ev.preventDefault();

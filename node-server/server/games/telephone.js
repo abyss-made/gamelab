@@ -164,7 +164,7 @@ function like(st, p, a, api) {
   const c = st.chains[a.chain];
   const e = c && c.entries[a.idx];
   // Only entries that have already been revealed can be liked, and never your own.
-  if (!e || e.by === p.id || e.skipped) return;
+  if (!e || e.by === p.id || e.skipped || e.generated) return;
   if (a.chain > st.rev.chain || (a.chain === st.rev.chain && a.idx > st.rev.idx)) return;
   const key = `${p.id}:${a.chain}:${a.idx}`;
   if (st.likes.has(key)) return;

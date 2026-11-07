@@ -115,7 +115,8 @@ function run(world) {
       // friction: constant deceleration + drag
       const k = frictionAt ? frictionAt(b) : 1;
       const sp = Math.max(0, sp0 - roll * k * DT) * Math.exp(-drag * k * DT);
-      if (sp < stopSpeed) {
+      const accelerating = force && Math.hypot(force.x, force.y) > roll * k;
+      if (sp < stopSpeed && !accelerating) {
         b.vx = 0;
         b.vy = 0;
       } else {

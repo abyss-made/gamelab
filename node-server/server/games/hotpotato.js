@@ -3,6 +3,7 @@
 const { shuffle } = require('../util');
 const { cleanText, norm, randInt, pick } = require('./socialutil');
 const { POTATO } = require('../data/social');
+const words = require('./wordrules');
 
 const meta = { id: 'hotpotato', name: 'Hot Potato', minPlayers: 2, maxPlayers: 10, midJoin: false, resetScores: true, scoreLabel: 'lives' };
 
@@ -77,8 +78,11 @@ function onAction(st, m, a, api) {
   if (target === st.from && alive(st).length > 2) return api.toMember(m.id, 'notice', "You can't pass it straight back. Pick someone else.");
   const text = cleanText(a.answer, ANSWER_MAX);
   if (norm(text).length < 2) return api.toMember(m.id, 'notice', 'Type an answer to pass the bomb.');
-  if (st.used.includes(norm(text))) return api.toMember(m.id, 'notice', 'That answer was already used this round.');
-  st.used.push(norm(text));
+  const reason = words.phraseReason(text);
+  if (reason) return api.toMember(m.id, 'notice', reason);
+  const key = words.plain(text);
+  if (st.used.includes(key)) return api.toMember(m.id, 'notice', 'That answer was already used this round.');
+  st.used.push(key);
   st.lastAnswer = { by: m.id, text };
   st.from = i;
   st.holder = target;
