@@ -343,8 +343,10 @@
     overflow:auto;
     padding:7px!important
   }
-  body[data-game=drawguess] .dg-top {
-    display:none!important
+  @media(min-height:501px) {
+    body[data-game=drawguess] .dg-top {
+      display:none!important
+    }
   }
   body[data-game=drawguess] .room[data-phase=game] .side {
     min-height:0;

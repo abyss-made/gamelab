@@ -63,6 +63,11 @@ try:
 
    drawer.locator('#focus-btn').click()
   passed('Four desktop sizes: default, expanded and global focus retain players/chat, fit canvas and expose Clear')
+  drawer.set_viewport_size({'width':932,'height':430})
+  if not drawer.evaluate("document.body.classList.contains('dg-big')"):drawer.locator('#dg-expand').click()
+  drawer.wait_for_timeout(120);assert drawer.evaluate("document.body.classList.contains('dg-big')");assert drawer.locator('.dg-top').first.is_visible(),'short landscape expanded must keep the word/timer bar'
+  drawer.set_viewport_size({'width':1440,'height':900});drawer.wait_for_timeout(120);assert not drawer.locator('.dg-top').first.is_visible(),'desktop expanded hides the redundant top bar';drawer.locator('#dg-expand').click();drawer.wait_for_timeout(120);assert not drawer.evaluate("document.body.classList.contains('dg-big')")
+  passed('Short landscape (932x430) expanded Draw & Guess keeps the word/hint bar; desktop expanded still hides it')
   passed('Real mouse strokes map to expected 800×600 canvas pixels on the remote client at all desktop sizes')
 
   drawer.set_viewport_size({'width':390,'height':844});drawer.locator('#dg-expand').click();drawer.locator('#dg-chat-toggle').click();drawer.locator('#chat-input').fill('typing on phone');drawer.set_viewport_size({'width':390,'height':740});drawer.wait_for_timeout(100);assert drawer.locator('#room-chat').is_visible();assert drawer.locator('#chat-input').input_value()=='typing on phone';drawer.keyboard.press('Escape')

@@ -8,6 +8,7 @@
     "Classic avatar controls remain accessible and synchronize to the other client",
     "Catalog failure blocks accidental joining and Retry recovers without reloading the page",
     "Four desktop sizes: default, expanded and global focus retain players/chat, fit canvas and expose Clear",
+    "Short landscape (932x430) expanded Draw & Guess keeps the word/hint bar; desktop expanded still hides it",
     "Real mouse strokes map to expected 800\u00d7600 canvas pixels on the remote client at all desktop sizes",
     "Phone focus chat and its unfinished message survive a viewport-height change",
     "Ad preview sits below chat on spacious monitors and collapses on laptops; default creates no ad request",
