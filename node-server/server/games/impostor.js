@@ -45,11 +45,8 @@ function start(st, api) {
 function nextRound(st, api) {
   st.round++;
   const live = activeP(st);
-  // Everyone takes a turn as impostor before anyone repeats.
-  let pool = live.filter((p) => !st.usedImpostors.includes(p.id));
-  if (!pool.length) { st.usedImpostors = []; pool = live; }
-  const imp = pick(pool);
-  st.usedImpostors.push(imp.id);
+  // Independent assignment avoids a predictable final role in a no-repeat rotation.
+  const imp = pick(live);
   st.impostorId = imp.id;
   const fresh = IMPOSTOR.flatMap((c) => c.words.map((w) => ({ cat: c.cat, w }))).filter((x) => !st.usedWords.has(x.w));
   const choice = pick(fresh.length ? fresh : IMPOSTOR.flatMap((c) => c.words.map((w) => ({ cat: c.cat, w }))));

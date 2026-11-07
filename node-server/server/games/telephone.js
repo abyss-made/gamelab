@@ -3,13 +3,15 @@
 // Each player only ever sees the one entry passed to them; whole chains are revealed at the end.
 const WORDS = require('../data/words.json');
 const { clampInt, shuffle } = require('../util');
-const { cleanText, pick } = require('./socialutil');
+const { cleanText, pick, norm } = require('./socialutil');
 
 const meta = { id: 'telephone', name: 'Drawing Telephone', minPlayers: 3, maxPlayers: 8, midJoin: false, resetScores: true, scoreLabel: 'pts' };
 
-const DRAW_TIMES = [45, 60, 90];
-const WRITE_TIMES = [20, 30, 45];
-const defaults = { drawTime: 60, writeTime: 30 };
+const DRAW_TIMES = [30, 45, 60, 90, 120];
+const STEPS = [0, 3, 5, 7, 9];
+const SOURCES = ['players', 'curated', 'custom'];
+const WRITE_TIMES = [15, 20, 30, 45, 60];
+const defaults = { rounds: 0, drawTime: 60, writeTime: 30, promptSource: 'players', customWords: '' };
 const W = 800;
 const H = 600;
 const MAX_STROKES = 250;
@@ -25,6 +27,15 @@ function sanitizeSettings(s, prev) {
   if (!s || typeof s !== 'object') return o;
   if (DRAW_TIMES.includes(s.drawTime)) o.drawTime = s.drawTime;
   if (WRITE_TIMES.includes(s.writeTime)) o.writeTime = s.writeTime;
+  if (STEPS.includes(s.rounds)) o.rounds = s.rounds;
+  if (typeof s.customWords === 'string') {
+    const seen = new Set();
+    o.customWords = s.customWords.slice(0, 2000).split(/[,\n]/).map(word => cleanText(word, 60)).filter(word => {
+      const key = norm(word); if (!key || seen.has(key)) return false; seen.add(key); return true;
+    }).slice(0, 30).join(', ');
+  }
+  if (SOURCES.includes(s.promptSource)) o.promptSource = s.promptSource;
+  if (o.promptSource === 'custom' && !o.customWords) o.promptSource = 'players';
   return o;
 }
 
@@ -32,7 +43,8 @@ function create(settings) {
   return { settings: { ...settings }, players: [], chains: [], round: 0, phase: 'work', deadline: 0, over: false, rev: { chain: 0, idx: 0 }, likes: new Set() };
 }
 
-const randomPrompt = () => pick([...WORDS.easy, ...WORDS.medium]);
+const randomPrompt = st => pick(st?.settings.promptSource === 'custom' && st.settings.customWords ? st.settings.customWords.split(', ') : [...WORDS.easy, ...WORDS.medium]);
+const totalRounds = st => st.settings.rounds || st.players.length;
 const activeP = (st) => st.players.filter((p) => !p.out);
 
 // Round 0 everyone writes a prompt. Odd rounds draw the text before, even rounds describe the drawing before.
@@ -44,6 +56,10 @@ function start(st, api) {
   st.players = shuffle(api.seated()).map((m) => ({ id: m.id, name: m.name, avatar: m.avatar, points: 0, out: false, done: false }));
   st.chains = st.players.map((p) => ({ owner: p.id, entries: [] }));
   api.sys('Drawing Telephone: write a prompt, then draw and describe what gets passed to you.', 'accent');
+  if (st.settings.promptSource && st.settings.promptSource !== 'players') {
+    st.chains.forEach(chain => chain.entries.push({ by: chain.owner, kind: 'prompt', text: randomPrompt(st), generated: true }));
+    st.round = 1;
+  }
   beginRound(st, api);
 }
 
@@ -125,7 +141,7 @@ function fillMissing(st) {
     const chain = st.chains[chainOf(st, st.players.indexOf(p))];
     if (chain.entries[st.round]) continue;
     if (kind === 'draw') chain.entries[st.round] = { by: p.id, kind, strokes: [], skipped: true };
-    else chain.entries[st.round] = { by: p.id, kind, text: kind === 'prompt' ? randomPrompt() : '(no guess)', skipped: true };
+    else chain.entries[st.round] = { by: p.id, kind, text: kind === 'prompt' ? randomPrompt(st) : '(no guess)', skipped: true };
     p.done = true;
   }
 }
@@ -133,7 +149,7 @@ function fillMissing(st) {
 function endRound(st, api) {
   fillMissing(st);
   st.round++;
-  if (st.round >= st.players.length) {
+  if (st.round >= totalRounds(st)) {
     st.phase = 'reveal';
     st.rev = { chain: 0, idx: 0 };
     st.deadline = api.now() + STEP_MS;
@@ -173,7 +189,7 @@ function finish(st, api, forfeit) {
   const eligible = standings.filter((s) => !s.out);
   const top = eligible[0] ? eligible[0].points : 0;
   const winners = eligible.filter((s) => s.points === top).map((s) => s.id);
-  api.end({ type: 'telephone', winnerId: winners[0] || null, winners, tie: winners.length > 1, standings, forfeit: !!forfeit });
+  api.end({ type: 'telephone', winnerId: winners[0] || null, winners, tie: winners.length > 1, standings, rounds: totalRounds(st), completedRounds: Math.min(st.round, totalRounds(st)), forfeit: !!forfeit });
 }
 
 function tick(st, api, now) {
@@ -208,8 +224,10 @@ function view(st, m, now) {
   const g = {
     phase: st.phase,
     players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, points: p.points, out: p.out, done: st.phase === 'work' ? p.done : true })),
-    round: st.round + 1,
-    rounds: st.players.length,
+    round: Math.min(st.round + 1, totalRounds(st)),
+    rounds: totalRounds(st),
+    completedRounds: Math.min(st.round, totalRounds(st)),
+    promptSource: st.settings.promptSource,
     timeLeft: Math.max(0, st.deadline - now),
     totalTime: st.phase === 'work' ? (kindOf(st.round) === 'draw' ? st.settings.drawTime : st.settings.writeTime) * 1000 : STEP_MS,
     myIndex: idx,
@@ -231,7 +249,7 @@ function view(st, m, now) {
       idx: st.rev.idx,
       owner: c.owner,
       entries: c.entries.slice(0, st.rev.idx + 1).map((e, i) => ({
-        by: e.by, kind: e.kind, text: e.text, strokes: e.strokes, skipped: !!e.skipped, i,
+        by: e.by, kind: e.kind, text: e.text, strokes: e.strokes, skipped: !!e.skipped, generated: !!e.generated, i,
         liked: st.likes.has(`${m.id}:${st.rev.chain}:${i}`),
         likes: st.players.reduce((n, p) => n + (st.likes.has(`${p.id}:${st.rev.chain}:${i}`) ? 1 : 0), 0),
       })),
@@ -240,4 +258,4 @@ function view(st, m, now) {
   return g;
 }
 
-module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, kindOf, chainOf };
+module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, kindOf, chainOf, totalRounds };

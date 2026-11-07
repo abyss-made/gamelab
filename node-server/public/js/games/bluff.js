@@ -19,6 +19,12 @@ GameUI.bluff = (() => {
         <div id="bl-body"></div>
         <div class="hl-status" id="bl-status" aria-live="polite"></div>
       </div>`;
+    root.addEventListener("input", e => {
+      if (e.target.id !== "bl-input") return;
+      const start = e.target.selectionStart, end = e.target.selectionEnd;
+      e.target.value = e.target.value.toUpperCase();
+      e.target.setSelectionRange(start, end);
+    });
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {

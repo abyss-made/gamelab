@@ -86,15 +86,16 @@ function fakeRoom(names, gameId, settings) {
 // ---------------- Categories Rush ----------------
 (function categories() {
   const r = fakeRoom(['A', 'B', 'C'], 'categories', { rounds: 3, roundTime: 30 });
-  const L = r.st.letter.toLowerCase();
+  r.st.letter = 'A'; r.st.cats = Array(5).fill('Animal');
+  const L = 'a';
   const v0 = r.view(0);
   ok(v0.cats.length === 5 && v0.letter, 'Categories: round has 5 categories and a letter');
-  r.act(0, { type: 'answers', answers: [L + 'ab', L + 'cd', L + 'ef', 'zzz', ''] });
-  r.act(1, { type: 'answers', answers: ['The ' + L.toUpperCase() + 'ab', L + 'cdx', '', L, '  '] });
+  r.act(0, { type: 'answers', answers: ['ant', 'ape', 'alligator', 'zzz', ''] });
+  r.act(1, { type: 'answers', answers: ['The ANT', 'alpaca', '', L, '  '] });
   const v1 = r.view(1);
-  ok(JSON.stringify(r.view(2)).indexOf(L + 'cd') === -1, 'Categories: other players\' answers are not in a player\'s view during the round');
-  ok(v1.myAnswers[0].toLowerCase().includes(L + 'ab'), 'Categories: you see your own answers');
-  r.act(2, { type: 'answers', answers: Array(5).fill(L + 'zz'), done: true });
+  ok(JSON.stringify(r.view(2)).indexOf('ape') === -1, 'Categories: other players\' answers are not in a player\'s view during the round');
+  ok(v1.myAnswers[0].toLowerCase().includes('ant'), 'Categories: you see your own answers');
+  r.act(2, { type: 'answers', answers: Array(5).fill('aardvark'), done: true });
   r.act(0, { type: 'done' });
   r.act(1, { type: 'done' });
   ok(r.st.phase === 'review', 'Categories: round scores when everyone is done');

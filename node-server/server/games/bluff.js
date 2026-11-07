@@ -57,7 +57,7 @@ function onAction(st, m, a, api) {
   if (!p || p.out) return;
   if (st.phase === 'bluff' && a.type === 'bluff') {
     if (p.fake) return; // final once submitted
-    const text = cleanText(a.text, ANSWER_MAX);
+    const text = cleanText(a.text, ANSWER_MAX).toUpperCase();
     if (!text) return;
     if (isReal(st, text)) return api.toMember(p.id, 'notice', "That's the real answer! Invent something else.");
     p.fake = text;
@@ -86,10 +86,10 @@ function openVote(st, api) {
   }
   if (!byText.size) {
     api.sys('Nobody bluffed in time. Skipping this question.', 'warn');
-    st.options = [{ text: st.q.a, authors: [], real: true }];
+    st.options = [{ text: st.q.a.toUpperCase(), authors: [], real: true }];
     return reveal(st, api);
   }
-  st.options = shuffle([...byText.values(), { text: st.q.a, authors: [], real: true }]);
+  st.options = shuffle([...byText.values(), { text: st.q.a.toUpperCase(), authors: [], real: true }]);
   st.phase = 'vote';
   st.deadline = api.now() + st.settings.voteTime * 1000;
   api.changed();
@@ -109,7 +109,7 @@ function reveal(st, api) {
     if (mem) mem.score = p.points;
   }
   st.reveal = {
-    answer: st.q.a,
+    answer: st.q.a.toUpperCase(),
     options: st.options.map((o) => ({
       text: o.text, real: o.real,
       authors: o.authors,
@@ -158,7 +158,7 @@ function view(st, m, now) {
     phase: st.phase,
     round: st.round,
     rounds: st.settings.rounds,
-    question: st.q.q,
+    question: st.q.q.toUpperCase(),
     players: st.players.map((p) => ({
       id: p.id, name: p.name, avatar: p.avatar, points: p.points, out: p.out,
       locked: st.phase === 'bluff' ? !!p.fake : st.phase === 'vote' ? p.vote !== null : true,

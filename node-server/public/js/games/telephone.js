@@ -211,7 +211,7 @@ GameUI.telephone = (() => {
       const who = g.players.find((p) => p.id === e.by);
       const li = document.createElement("li");
       li.className = "tp-entry";
-      const label = e.kind === "draw" ? "drew" : e.kind === "prompt" ? "wrote" : "guessed";
+      const label = e.kind === "draw" ? "drew" : e.kind === "prompt" ? (e.generated ? "received a party prompt" : "wrote") : "guessed";
       li.innerHTML = `<div class="tp-by">${who ? app.avatarHTML(who.avatar) : ""}<b>${who ? app.esc(who.name) : "?"}</b> ${label}</div><div class="tp-content"></div>`;
       const content = li.querySelector(".tp-content");
       if (e.kind === "draw") content.appendChild(e.skipped ? Object.assign(document.createElement("em"), { textContent: "(no drawing)" }) : thumb(e.strokes, `Drawing by ${who ? who.name : "a player"}`));

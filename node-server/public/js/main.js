@@ -1093,7 +1093,7 @@
         `<label class="field"><span>Category</span><select data-setting="category">${["mixed", "Science", "Geography", "History", "Entertainment", "Sports", "Food"].map((v) => opt(v, s.category, v === "mixed" ? "Mixed" : v)).join("")}</select></label>`
       );
     if (gameId === "telephone")
-      return sel("drawTime", "Drawing Time", [45, 60, 90], s.drawTime, (v) => v + " seconds") + sel("writeTime", "Writing Time", [20, 30, 45], s.writeTime, (v) => v + " seconds");
+      return sel("rounds", "Chain length", [0, 3, 5, 7, 9], s.rounds, v => v ? v + " steps (including prompt)" : "Full table pass") + sel("drawTime", "Drawing Time", [30, 45, 60, 90, 120], s.drawTime, v => v + " seconds") + sel("writeTime", "Writing / Guessing Time", [15, 20, 30, 45, 60], s.writeTime, v => v + " seconds") + `<label class="field"><span>Prompt source</span><select data-setting="promptSource">${[["players","Players write prompts"],["curated","Playgrid word bank"],["custom","Custom prompts"]].map(([v,l])=>opt(v,s.promptSource,l)).join("")}</select></label><label class="field"><span>Custom prompts</span><textarea data-setting="customWords" maxlength="2000" rows="3" placeholder="A dragon at the beach, a dancing robot">${esc(s.customWords||"")}</textarea><small>Up to 30 phrases, separated by commas or new lines. A custom source needs at least one prompt.</small></label>`;
     if (gameId === "bluff")
       return sel("rounds", "Questions", [3, 5, 8], s.rounds) + sel("bluffTime", "Time To Bluff", [30, 45, 60], s.bluffTime, (v) => v + " seconds") + sel("voteTime", "Time To Vote", [15, 20, 30], s.voteTime, (v) => v + " seconds");
     if (gameId === "impostor")
@@ -1208,7 +1208,7 @@
     });
   }
 
-  const STRING_SETTINGS = ["difficulty", "dictionary", "category", "course"];
+  const STRING_SETTINGS = ["difficulty", "dictionary", "category", "course", "promptSource"];
   function readSettings(el) {
     const out = {};
     $$("[data-setting]", el).forEach((i) => {
