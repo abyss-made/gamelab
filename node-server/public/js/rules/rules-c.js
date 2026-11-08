@@ -158,7 +158,7 @@ Object.assign(window.GameRules, {
     flow: [
       "Everyone plays the same holes in order. Each hole shows its par.",
       "One player putts at a time. The player farthest from the cup goes next; on the tee the honour rotates each hole.",
-      "Aim, set power and putt. The ball's path is played out for everyone.",
+      "Optionally choose a free spot in the marked tee square before your first stroke. Aim, set power and putt; all moving ball paths replay identically for everyone.",
       "A hole ends for you when you sink the ball or reach the stroke limit; the hole ends when all players are done.",
       "A scorecard is shown for a few seconds between holes, then the next hole starts automatically.",
     ],
@@ -175,7 +175,7 @@ Object.assign(window.GameRules, {
     special: [
       "Balls never collide with each other.",
       "Water: +1 penalty stroke and the ball returns to where you hit it from.",
-      "Sand slows the ball a lot. Bumpers bounce the ball.",
+      "Sand slows the ball; bumpers bounce it. Harbor slope chevrons show the downhill direction. A stationary on-course ball may be moved by a collision or slope.",
       "The cup only captures a ball that is slow enough; a fast ball rolls over it.",
     ],
     timer: "Turn Timer: 20, 30, 45 (default) or 60 seconds per putt. On timeout a putt is aimed at the cup for you; two timeouts in a row removes you from the game.",

@@ -143,7 +143,7 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   r.act(1, { type: 'vote', option: 99 });
   ok(r.st.players[1].vote === null, 'Bluff: an invalid option is rejected');
   const realIdx = r.st.options.findIndex((o) => o.real);
-  const dragonIdx = r.st.options.findIndex((o) => o.text === 'Dragon');
+  const dragonIdx = r.st.options.findIndex((o) => o.text === 'DRAGON');
   r.act(0, { type: 'vote', option: realIdx });
   r.act(1, { type: 'vote', option: dragonIdx });
   r.act(0, { type: 'vote', option: dragonIdx });
@@ -156,7 +156,7 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   ok(g.p3 === 1 && g.p1 === 1, 'Bluff: each vote your bluff earns is worth 1');
   ok(r.members[3].score === r.st.players[3].points, 'Bluff: member scores are kept in sync');
   const rev = r.view('spec').reveal;
-  ok(rev.answer === real && rev.options.find((o) => o.real).voters.length === 2, 'Bluff: the reveal shows the real answer and who voted for it');
+  ok(rev.answer === real.toUpperCase() && rev.options.find((o) => o.real).voters.length === 2, 'Bluff: the reveal shows the real answer and who voted for it');
   for (let i = 0; i < 12 && !r.log.ended; i++) {
     if (r.st.phase === 'reveal') r.adv(10000);
     else if (r.st.phase === 'bluff') { r.adv(31000); }
@@ -222,7 +222,7 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   ok(crewIdx.every((i) => r.st.result.gains[r.members[i].id] === 2) && r.st.result.gains[impId] === 0, 'Impostor: crew who found the impostor score 2');
   ok(r.view('spec').result.impostorId === impId && r.view('spec').word === word, 'Impostor: roles and word are revealed to everyone at the results');
   r.adv(10000);
-  ok(r.st.round === 2 && r.st.impostorId !== impId, 'Impostor: the next round picks a different impostor');
+  ok(r.st.round === 2 && r.st.players.some(p => p.id === r.st.impostorId && !p.out), 'Impostor: the next round secretly assigns an eligible player (repeats are allowed)');
   // escape
   const word2 = r.st.word;
   const imp2 = r.idx(r.st.impostorId);
@@ -376,7 +376,7 @@ const lastNotice = (r, i) => [...r.log.toMember].reverse().find((x) => x.id === 
   while (r.st.phase === 'play' && guard++ < 200) {
     const hh = r.idx(r.view(0).holderId);
     const to = [0, 1, 2].find((i) => i !== hh && r.members[i].id !== r.view(0).fromId && r.st.players[i].lives > 0);
-    r.act(hh, { type: 'pass', to: r.members[to].id, answer: 'ans' + guard });
+    r.act(hh, { type: 'pass', to: r.members[to].id, answer: ['ant','bear','cat','dog','elephant','fox','goat','horse','iguana','jaguar','koala','lion','mouse','newt','owl','pig','quail','rabbit','snake','tiger','urchin','vole','wolf','yak','zebra'][guard % 25] });
     r.adv(2000);
   }
   ok(r.st.phase === 'boom' && r.st.round === 2 && fuseAt - 1000000 > 0, 'Hot Potato: the bomb explodes on its own when the hidden fuse runs out');

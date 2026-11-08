@@ -95,9 +95,9 @@ ok(!lexicon.has('nasa') && !lexicon.has('london'), 'proper nouns / abbreviations
   ok(!c.validFor('animal', 'A', 'Animal'), 'Categories rejects the category name itself as an answer');
   ok(c.validFor('ant', 'A', 'Animal') && !c.validFor('bat', 'A', 'Animal'), 'Categories enforces the round letter');
   const r = fakeRoom(['A', 'B'], 'categories', { rounds: 3, roundTime: 30 });
-  const L = r.st.letter.toLowerCase();
-  r.act(0, { type: 'answers', answers: [L + 'ax', L + 'ox', '', '', ''], done: true });
-  r.act(1, { type: 'answers', answers: [L + 'ax', 'zzz', '', '', ''], done: true });
+  r.st.letter = 'A'; r.st.cats = Array(5).fill('Animal');
+  r.act(0, { type: 'answers', answers: ['Ant', 'ape', '', '', ''], done: true });
+  r.act(1, { type: 'answers', answers: ['ANT', 'zzz', '', '', ''], done: true });
   const rows = r.st.review.rows;
   ok(rows[0].cells[0].status === 'dup' && rows[1].cells[0].status === 'dup', 'Categories: matching answers score as duplicates');
   ok(rows[0].cells[1].status === 'unique' && rows[1].cells[1].status === 'invalid', 'Categories: unique scores, wrong-letter answer is invalid');

@@ -266,6 +266,10 @@ const GAMES = ['pool', 'golf', 'tycoon'];
           ok(fa !== (await page.evaluate(() => document.querySelector('#gf-canvas').toDataURL())), `${t}: the putt animates`);
           await shot('-rolling');
           await sleep(1800);
+          // The first ball is now down: friend may choose the cleared central tee before their first stroke.
+          f1.act({ type: 'place', x: f1.state.game.hole.tee[0], y: f1.state.game.hole.tee[1] });
+          await until(() => f1.state.game.players[1].placed);
+          ok(f1.state.game.players[1].placed, `${t}: friend can select the cleared central tee`);
           // friend takes a shot that misses, then sinks
           f1.act({ type: 'putt', angle: Math.PI, power: 0.05 });
           await until(() => f1.state.game.players[1].strokes === 1);
@@ -341,6 +345,7 @@ const GAMES = ['pool', 'golf', 'tycoon'];
               // try a trade from the UI: give $10 to Friend1
               // Phone layout (3.1): trades live in the Properties & trades view.
               if (await page.isVisible('[data-tyview="props"]')) await page.click('[data-tyview="props"]');
+              if (!(await page.isVisible('[data-trade-toggle]'))) await page.click('details:has(#ty-trades) > summary');
               await page.click('[data-trade-toggle]');
               ok(await page.isVisible('#tf-to'), `${t}: the trade form opens`);
               await page.fill('#tf-give', '10');

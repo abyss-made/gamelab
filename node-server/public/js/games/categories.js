@@ -66,9 +66,9 @@ GameUI.categories = (() => {
     } else if (g.review) {
       roundKey = "r" + g.round;
       const rv = g.review;
-      body.innerHTML = `<div class="cr-table-wrap"><table class="cr-table"><thead><tr><th>Player</th>${rv.cats.map((c) => `<th>${app.esc(c)}</th>`).join("")}<th>Round</th><th>Total</th></tr></thead><tbody>${rv.rows
+      body.innerHTML = `<div class="cr-table-wrap" tabindex="0" role="region" aria-label="Round answers; scroll horizontally to compare every category"><table class="cr-table"><thead><tr><th>Player</th>${rv.cats.map((c) => `<th>${app.esc(c)}</th>`).join("")}<th>Round</th><th>Total</th></tr></thead><tbody>${rv.rows
         .map(
-          (r) => `<tr class="${r.id === S.you ? "me" : ""}"><th>${app.esc(r.name)}</th>${r.cells.map((c) => `<td class="${c.status}">${c.text ? app.esc(c.text) : "–"}<small>${c.points ? "+" + c.points : ""}</small></td>`).join("")}<td><b>+${r.gained}</b></td><td>${r.total}</td></tr>`,
+          (r) => `<tr class="${r.id === S.you ? "me" : ""}"><th>${app.esc(r.name)}</th>${r.cells.map((c) => `<td class="${c.status}"><span class="cr-answer">${c.text ? app.esc(c.text) : "–"}</span><small>${c.points ? "+" + c.points : c.reason ? app.esc(c.reason) : ""}</small></td>`).join("")}<td><b>+${r.gained}</b></td><td>${r.total}</td></tr>`,
         )
         .join("")}</tbody></table></div><p class="muted center">Next round starts soon. Answers that match another player's score 1 instead of 2.</p>`;
     }

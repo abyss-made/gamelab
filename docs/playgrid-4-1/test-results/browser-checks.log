@@ -1,0 +1,14 @@
+PASS Hash invites, first-player setup and merged classic Dice selection retain room/identity with three real clients
+PASS Returning mobile invitation stays compact after asynchronous catalog load and does not allocate a seat
+PASS All 20 selectable games expose a worked example and expandable rules before starting
+PASS Categories rejects submitted nonsense for every real client and renders the server reason in review
+PASS Telephone settings round-trip to all clients; custom prompt → real drawing → guess → bounded reveal; refresh restores the same member
+PASS Bluff uppercases actual entry values, submitted answers and anonymous voting options
+PASS Go Fish request names/rank/outcome synchronize to all clients without private draw data; reconnect does not replay the transfer animation
+PASS Dots & Boxes captures use owner numbers/initials, accessible line ownership, distinct colors and extra-turn feedback
+PASS Desktop pointer, rotated mobile touch and keyboard tee placement use validated, distinct server positions
+PASS Tee placement re-enables on the local replay clock without requiring a fresh server snapshot
+PASS Real multiplayer collision paths and final ball positions match across clients, including refresh during replay
+PASS Host can select Harbor Links; authored slope course renders on desktop and mobile
+PASS Tycoon keeps the map focal with contextual expandable trades and no horizontal overflow at all required viewports
+PASS Expanded landscape drawing has an unobscured compact word/timer bar and usable non-overlapping canvas

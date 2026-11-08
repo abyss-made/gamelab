@@ -250,6 +250,9 @@ GameUI.tycoon = (() => {
     setPanel("ty-info", selTile >= 0 ? infoHTML(selTile) : "");
     setPanel("ty-props", propsHTML());
     setPanel("ty-trades", tradeHTML());
+    root.querySelector('#ty-props').parentElement.querySelector('summary').textContent=`Your properties · ${myIdx()>=0?g.owners.filter(owner=>owner===myIdx()).length:0}`;
+    root.querySelector('#ty-trades').parentElement.querySelector('summary').textContent=`Trades · ${g.trades.length} offers`;
+    if(tf.open || reviewId || g.trades.some(tr=>tr.to===S.you))root.querySelector("#ty-trades").parentElement.open=true;
     setPanel("ty-log", `<ol>${g.log.slice().reverse().map((l) => `<li>${app.esc(l)}</li>`).join("")}</ol>`);
     root.querySelector("#ty-auc-left") && tickAuction();
     fitBoard();
@@ -306,8 +309,8 @@ GameUI.tycoon = (() => {
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>
       <div class="card ty-actions" id="ty-actions" aria-live="polite"></div>
-      <details class="card ty-sect" open><summary>Your properties</summary><div id="ty-props"></div></details>
-      <details class="card ty-sect" open><summary>Trades</summary><div id="ty-trades"></div></details>
+      <details class="card ty-sect"><summary>Your properties</summary><div id="ty-props"></div></details>
+      <details class="card ty-sect"><summary>Trades</summary><div id="ty-trades"></div></details>
       <details class="card ty-sect"><summary>Game log</summary><div id="ty-log" class="ty-log"></div></details>`;
     stage.appendChild(root);
     window.addEventListener("resize", fitBoard);

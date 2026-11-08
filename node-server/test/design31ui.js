@@ -148,6 +148,7 @@ async function start(browser, vp, game) {
             await page.click('[data-tyview="props"]');
             ok((await sect()) !== 'none' && !(await page.isVisible('.ty-board')), `${T}: properties view shows sheets instead of the map`);
             if (await page.$('.ty-link')) {
+              if (!(await page.isVisible('.ty-link'))) await page.click('details:has(#ty-props) > summary');
               await page.click('.ty-link');
               ok(await page.isVisible('#ty-info .ty-info'), `${T}: property details show in the properties view`);
             }

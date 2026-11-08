@@ -524,7 +524,7 @@
       const oldScroll=el.querySelector(".av-studio-edit")?.scrollTop||0;
       el.innerHTML = `
         <div class="name-row">
-          <input class="name-input" maxlength="16" placeholder="Your name" value="${esc(profile.name)}" aria-label="Your name">
+          <span class="name-caption">Your name</span><input class="name-input" maxlength="16" placeholder="Your name" value="${esc(profile.name)}" aria-label="Your name">
           <button type="button" class="icon-btn dice" title="Random name and avatar" aria-label="Randomize">${icon("dice")}</button>
         </div>
         <div class="avatar-pick">
@@ -1093,7 +1093,7 @@
         `<label class="field"><span>Category</span><select data-setting="category">${["mixed", "Science", "Geography", "History", "Entertainment", "Sports", "Food"].map((v) => opt(v, s.category, v === "mixed" ? "Mixed" : v)).join("")}</select></label>`
       );
     if (gameId === "telephone")
-      return sel("drawTime", "Drawing Time", [45, 60, 90], s.drawTime, (v) => v + " seconds") + sel("writeTime", "Writing Time", [20, 30, 45], s.writeTime, (v) => v + " seconds");
+      return sel("rounds", "Chain length", [0, 3, 5, 7, 9], s.rounds, v => v ? v + " steps (including prompt)" : "Full table pass") + sel("drawTime", "Drawing Time", [30, 45, 60, 90, 120], s.drawTime, v => v + " seconds") + sel("writeTime", "Writing / Guessing Time", [15, 20, 30, 45, 60], s.writeTime, v => v + " seconds") + `<label class="field"><span>Prompt source</span><select data-setting="promptSource">${[["players","Players write prompts"],["curated","Playgrid word bank"],["custom","Custom prompts"]].map(([v,l])=>opt(v,s.promptSource,l)).join("")}</select></label><label class="field"><span>Custom prompts</span><textarea data-setting="customWords" maxlength="2000" rows="3" placeholder="A dragon at the beach, a dancing robot">${esc(s.customWords||"")}</textarea><small>Up to 30 phrases, separated by commas or new lines. A custom source needs at least one prompt.</small></label>`;
     if (gameId === "bluff")
       return sel("rounds", "Questions", [3, 5, 8], s.rounds) + sel("bluffTime", "Time To Bluff", [30, 45, 60], s.bluffTime, (v) => v + " seconds") + sel("voteTime", "Time To Vote", [15, 20, 30], s.voteTime, (v) => v + " seconds");
     if (gameId === "impostor")
@@ -1118,7 +1118,7 @@
     if (gameId === "pool") return turnOpt([0, 30, 45, 60]) + stays;
     if (gameId === "golf")
       return (
-        `<label class="field"><span>Course</span><select data-setting="course">${[["meadow", "Meadow Mini (6 holes)"], ["canyon", "Canyon Run (6 holes)"], ["skyline", "Skyline Gauntlet (6 holes)"], ["tour", "Playgrid Open (all 18)"]].map(([v, l]) => opt(v, s.course, l)).join("")}</select></label>` +
+        `<label class="field"><span>Course</span><select data-setting="course">${[["meadow", "Meadow Mini (6 holes)"], ["canyon", "Canyon Run (6 holes)"], ["skyline", "Skyline Gauntlet (6 holes)"], ["harbor", "Harbor Links (6 holes · slopes)"], ["tour", "Playgrid Open (original 18)"]].map(([v, l]) => opt(v, s.course, l)).join("")}</select></label>` +
         sel("maxStrokes", "Stroke Limit Per Hole", [6, 8, 10], s.maxStrokes) +
         sel("turnTime", "Turn Timer", [20, 30, 45, 60], s.turnTime, (v) => v + " seconds")
       );
@@ -1208,7 +1208,7 @@
     });
   }
 
-  const STRING_SETTINGS = ["difficulty", "dictionary", "category", "course"];
+  const STRING_SETTINGS = ["difficulty", "dictionary", "category", "course", "promptSource"];
   function readSettings(el) {
     const out = {};
     $$("[data-setting]", el).forEach((i) => {
@@ -1293,10 +1293,12 @@
       $("#join-switch-note").textContent =
         `You are in party ${currentCode}. Joining ${code} will leave it.`;
     const returning=identityConfirmed;
+    $('#invite-title').textContent=returning?'Welcome back.':'Make an entrance.';
+    $('#invite-hint').textContent=returning?'Your player is saved. Update your name or jump in.':'Pick a name and a character. No account needed.';
     document.querySelector('.join-card').classList.toggle('returning',returning);
     document.querySelector('.join-card').classList.toggle('first-invite',!returning);
     document.querySelector('#invite-edit')?.remove();
-    const edit=document.createElement('button');edit.id='invite-edit';edit.className='btn btn-ghost';edit.textContent='Edit character or name';edit.hidden=!returning;edit.onclick=()=>{inviteEdited=true;studioOpenNow();document.querySelector('.join-card').classList.remove('returning');edit.hidden=true;};
+    const edit=document.createElement('button');edit.id='invite-edit';edit.className='btn btn-ghost';edit.textContent='Customize character';edit.hidden=!returning;edit.onclick=()=>{inviteEdited=true;studioOpenNow();document.querySelector('.join-card').classList.remove('returning');edit.hidden=true;};
     document.querySelector('#join-btn').before(edit);
     $("#join-btn").textContent=returning?"Confirm & Join":"Save & Join Party";
     $("#join-btn").onclick = () => {
@@ -1647,12 +1649,8 @@
     $("#game-word-slot").hidden = !(
       S.phase === "game" && S.gameId === "drawguess"
     );
-    $("#header-round").textContent =
-      S.gameId === "drawguess" && S.game
-        ? `Round ${Math.min(S.game.round, S.game.rounds)}/${S.game.rounds}`
-        : G
-          ? G.name
-          : "Party";
+    const progress=S.phase==='game'&&S.game,total=progress&&(progress.rounds||progress.total);
+    $('#header-round').textContent=progress?.course?`Hole ${progress.holeIndex+1}/${progress.course.holes}`:progress?.round&&total?`${S.gameId==='telephone'?'Step':S.gameId==='trivia'?'Question':'Round'} ${Math.min(progress.round,total)}/${total}`:G?G.name:'Party';
     $("#header-difficulty").innerHTML =
       S.gameId === "drawguess"
         ? `Difficulty: <b class="difficulty-${esc(S.settings.difficulty)}">${esc(S.settings.difficulty[0].toUpperCase() + S.settings.difficulty.slice(1))}</b>`
@@ -1899,6 +1897,7 @@
   // A short "3 rounds · Medium · 80 seconds" line from the real settings.
   function settingsSummary() {
     if (!S.settings) return "";
+    if(S.gameId==="telephone")return `${S.settings.rounds?S.settings.rounds+" steps":"Full table pass"} · ${S.settings.drawTime}s draw · ${S.settings.writeTime}s write · ${S.settings.promptSource||"players"} prompts`;
     return Object.keys(SUMMARY)
       .filter((k) => k in S.settings)
       .slice(0, 3)
@@ -1952,9 +1951,15 @@
         <button class="btn" id="slot-choose" type="button">${host ? "Choose a Game" : "Suggest a Game"}</button></div>`;
     return `<div class="game-slot"><span class="slot-art">${G.art}</span>
       <div class="slot-info"><b>${esc(G.name)}</b><small>${rangeText(G)} · ${G.cat}</small><small>${esc(settingsSummary())}</small></div>
-      <div class="slot-actions"><button class="btn btn-ghost btn-small" id="slot-rules" type="button">Rules</button><button class="btn btn-ghost" id="slot-change" type="button">${host ? "Change" : "Suggest"}</button></div></div>`;
+      <div class="slot-actions"><button class="btn btn-ghost btn-small" id="slot-rules" type="button">Rules</button><button class="btn btn-ghost" id="slot-change" type="button">${host ? "Change" : "Suggest"}</button></div></div>${lobbyBriefHTML()}`;
   }
 
+  function lobbyBriefHTML() {
+    const G=gameOfS(), R=G&&window.GameRules?.[S.gameId], B=G&&window.GameBriefs?.[S.gameId];
+    if(!G||!R||!B)return '';
+    const end=S.gameId==='telephone'?`${S.settings.rounds||S.players.length} chain steps, then reveal every chain.`:R.ending;
+    return `<article class="game-brief" aria-label="${esc(G.name)} quick start"><div class="brief-heading"><span>${G.art}</span><div><small>QUICK START</small><h3>${esc(R.goal)}</h3></div></div><figure class="brief-example"><figcaption>FOR EXAMPLE</figcaption><div>${B.map((step,i)=>`<span>${esc(step)}</span>${i<B.length-1?'<b aria-hidden="true">→</b>':''}`).join('')}</div></figure><details><summary>Flow, timer &amp; finish</summary><p>${esc(R.flow[0])}</p><p>${esc(R.timer)}</p><p>${esc(end)}</p></details><small class="brief-ready">${isHost()?'Start when your party is ready.':'Use Ready when you are set to play.'}</small></article>`;
+  }
   // What the party is waiting on, in words.
   function lobbyStatus() {
     const G = gameOfS();

@@ -148,7 +148,7 @@ const GAMES = ['telephone', 'bluff', 'impostor', 'liarsdice', 'hotpotato'];
           const role = await page.textContent('#im-role');
           const meImp = role.includes('IMPOSTOR');
           const word = f1.state.game.word || f2.state.game.word;
-          ok(meImp ? !role.includes(word || '\u0000') : role.includes('Secret word'), `${t}: role card shows ${meImp ? 'no word to the impostor' : 'the secret word to the crew'}`);
+          ok(meImp ? !role.includes(word || '\u0000') : !!word && role.includes(word), `${t}: role card shows ${meImp ? 'no word to the impostor' : 'the secret word to the crew'}`);
           const roles = [f1, f2].map((f) => f.state.game.role).concat(meImp ? ['impostor'] : ['crew']);
           ok(roles.filter((r) => r === 'impostor').length === 1, `${t}: exactly one impostor in the room`);
           if (SHOTS) await page.screenshot({ path: path.join(SHOTS, `${game}-${vp.tag}.png`) });

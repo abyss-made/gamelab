@@ -2,6 +2,7 @@
 // Answers stay private until the round ends. Unique answers score 2, matching answers score 1.
 const filter = require('../filter');
 const lexicon = require('../lexicon');
+const wordRules = require('./wordrules');
 
 const meta = {
   id: 'categories',
@@ -53,6 +54,8 @@ function pickCategories(used) {
 // The plural is stripped from the last word only, preferring a reading that is a real lexicon word
 // ("berries" -> "berry", "glasses" -> "glass"); unknown words (names, brands) just lose a plain "s".
 function singular(w) {
+  const irregular = { children: 'child', men: 'man', women: 'woman', teeth: 'tooth', feet: 'foot', mice: 'mouse', geese: 'goose', people: 'person' };
+  if (irregular[w]) return irregular[w];
   if (w.length <= 3 || lexicon.has(w) && !/s$/.test(w)) return w;
   // Plain "s" first so silent-e words match ("toes" -> "toe", not "to"); then -ies, then -es.
   const cands = [];
@@ -63,23 +66,24 @@ function singular(w) {
   if (hit) return hit;
   return w.endsWith('s') && !w.endsWith('ss') && !w.endsWith('ies') ? w.slice(0, -1) : w;
 }
-function normalize(raw) {
+function normalize(raw, category) {
   if (typeof raw !== 'string') return '';
-  let s = lexicon.normalize(raw).replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-  s = s.replace(/^(the|a|an) /, '');
+  const s = wordRules.plain(raw);
   const i = s.lastIndexOf(' ') + 1;
-  return s.slice(0, i) + singular(s.slice(i));
+  return (wordRules.proper[category] || wordRules.isProper(s)) ? wordRules.canonicalProper(s, category) : s.slice(0, i) + singular(s.slice(i));
 }
-// Letter, length and profanity rules, plus: writing the category's own name is not an answer, and
-// dictionary membership is deliberately NOT required (names, places and brands are not in it).
-function validFor(norm, letter, cat) {
-  if (norm.length < 2 || norm[0] !== letter.toLowerCase() || filter.hasBad(norm)) return false;
-  if (cat) {
-    const c = normalize(cat);
-    if (c === norm) return false;
-  }
-  return true;
+// Validate the original initial before alias canonicalization. Known proper names supplement
+// dictionary words; writing the category name itself is not an answer.
+function invalidReason(raw, letter, cat) {
+  const answer=wordRules.plain(raw);
+  if (!answer) return 'No answer submitted.';
+  if (answer.length < 2) return 'Use at least two letters.';
+  if (answer[0] !== letter.toLowerCase()) return `Start with ${letter.toUpperCase()}.`;
+  if (filter.hasBad(answer)) return 'That answer is not allowed.';
+  if (cat && normalize(cat) === answer) return 'Give an example, not the category name.';
+  return wordRules.phraseReason(answer, cat);
 }
+function validFor(answer, letter, cat) { return !invalidReason(answer, letter, cat); }
 
 function create(settings) {
   return { settings: { ...settings }, players: [], round: 0, letter: '', cats: [], usedCats: new Set(), usedLetters: new Set(), phase: 'answer', deadline: 0, review: null, over: false };
@@ -117,8 +121,8 @@ function scoreRound(st, api) {
   const normd = new Map();
   for (const p of activeP(st)) {
     const ns = p.answers.map((a, i) => {
-      const n = normalize(a);
-      if (!validFor(n, st.letter, st.cats[i])) return null;
+      const n = normalize(a, st.cats[i]);
+      if (!validFor(a, st.letter, st.cats[i])) return null;
       counts[i].set(n, (counts[i].get(n) || 0) + 1);
       return n;
     });
@@ -138,7 +142,7 @@ function scoreRound(st, api) {
         status = dup ? 'dup' : 'unique';
       }
       gained += pts;
-      return { text: a, points: pts, status };
+      return { text: a, points: pts, status, reason: n ? null : invalidReason(a, st.letter, st.cats[i]) };
     });
     p.points += gained;
     const m = api.member(p.id);
@@ -223,4 +227,4 @@ function view(st, m, now) {
   };
 }
 
-module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, normalize, validFor, CATEGORIES };
+module.exports = { meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view, normalize, validFor, invalidReason, CATEGORIES };

@@ -104,7 +104,7 @@ Object.assign(window.GameRules, {
     scoring: [
       "A valid answer nobody else matched scores 2 points. A valid answer another player also gave scores 1 point for each of them.",
       "Blank, wrong-letter, too-short (under 2 letters) or blocked answers score 0.",
-      "Matching ignores case, punctuation, a leading 'the/a/an' and a trailing plural 's'. The game does not check whether an answer fits the category.",
+      "Common-word answers ignore case, accents, articles and regular/irregular plurals. Countries, cities and names use a recognized list without stripping final S. Other categories check real words/names; your party judges creative category fit.",
     ],
     special: [
       "Letters and categories do not repeat within a game where possible.",

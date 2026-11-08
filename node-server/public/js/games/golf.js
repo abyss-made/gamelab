@@ -14,6 +14,8 @@ GameUI.golf = (() => {
   let raf = 0;
   let aim = 0;
   let power = 50;
+  let placing = false;
+  let teeDraft = null;
   let animKey = -1;
   let animT0 = 0;
   let busyUntil = 0;
@@ -120,10 +122,11 @@ GameUI.golf = (() => {
   // Position of a player's ball right now (the mover's ball follows the replayed path).
   function ballAt(p, now) {
     const a = g.anim;
-    if (a && a.shot === animKey && a.by === p.id) {
+    const path = a && (a.by === p.id ? a.frames : a.paths?.[p.id]);
+    if (a && a.shot === animKey && path) {
       const t = (now - animT0) / 1000;
       if (t < a.duration) {
-        const fr = a.frames;
+        const fr = path;
         let i = 0;
         while (i < fr.length - 2 && fr[i + 1][0] <= t) i++;
         const f0 = fr[i], f1 = fr[Math.min(i + 1, fr.length - 1)];
@@ -132,7 +135,7 @@ GameUI.golf = (() => {
         if (f1[1] === null) return { x: f0[1], y: f0[2] };
         return { x: f0[1] + (f1[1] - f0[1]) * u, y: f0[2] + (f1[2] - f0[2]) * u };
       }
-      if (a.outcome === "cup") return null;
+      if (p.holed) return null;
     }
     return { x: p.x, y: p.y };
   }
@@ -229,6 +232,16 @@ GameUI.golf = (() => {
       ctx.fillStyle = "#030d17";
       ctx.fill();
     }
+    for (const zone of h.slopes || []) {
+      ctx.fillStyle='#cfba6b88';ctx.fillRect(zone.x,zone.y,zone.w,zone.h);
+      ctx.save();ctx.beginPath();ctx.rect(zone.x,zone.y,zone.w,zone.h);ctx.clip();ctx.strokeStyle='#fcf3cc99';ctx.lineWidth=2;
+      for(let y=zone.y+14;y<zone.y+zone.h;y+=24)for(let x=zone.x+14;x<zone.x+zone.w;x+=24){
+        ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(zone.ay,zone.ax));ctx.beginPath();ctx.moveTo(-7,-5);ctx.lineTo(0,0);ctx.lineTo(-7,5);ctx.stroke();ctx.restore();
+      }ctx.restore();
+    }
+    const area=h.teeArea;
+    if(area){ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=placing?'#c6ff55':'#ffffff88';ctx.lineWidth=2;ctx.strokeRect(area.x,area.y,area.w,area.h);ctx.restore();}
+    if(placing&&teeDraft){ctx.beginPath();ctx.arc(teeDraft.x,teeDraft.y,h.ballR+4,0,7);ctx.strokeStyle='#c6ff55';ctx.lineWidth=3;ctx.stroke();}
     // tee and cup
     ctx.beginPath();
     ctx.arc(h.tee[0], h.tee[1], 9, 0, 7);
@@ -259,7 +272,7 @@ GameUI.golf = (() => {
     g.players.forEach((p, i) => {
       if (p.out) return;
       const pos = ballAt(p, now);
-      if (!pos || (p.holed && !(g.anim && g.anim.by === p.id && g.anim.shot === animKey && now - animT0 < g.anim.duration * 1000))) return;
+      if (!pos || (p.holed && !(g.anim && (g.anim.by === p.id || g.anim.paths?.[p.id]) && g.anim.shot === animKey && now - animT0 < g.anim.duration * 1000))) return;
       ctx.beginPath();
       ctx.arc(pos.x + 1, pos.y + 2, h.ballR, 0, 7);
       ctx.fillStyle = "#0005";
@@ -310,7 +323,14 @@ GameUI.golf = (() => {
     return { x: sx * g.size.w, y: sy * g.size.h };
   }
 
+  const canPlace = () => g && g.phase==='play' && performance.now() >= busyUntil && !S.lastResult && myBall() && !myBall().out && myBall().strokes===0;
   function onPointer(ev) {
+    if (placing && canPlace()) {
+      ev.preventDefault();
+      if(ev.type==='pointerdown'||ev.type==='pointermove'&&ev.buttons){teeDraft=toCourse(ev);}
+      if(ev.type==='pointerup'){const p=toCourse(ev);app.socket.emit('action',{type:'place',x:p.x,y:p.y});placing=false;teeDraft=null;syncControls();}
+      return;
+    }
     if (!canPutt()) return;
     if (ev.type === "pointerdown") {
       dragging = true;
@@ -341,7 +361,7 @@ GameUI.golf = (() => {
       <div class="ttt-status" id="gf-status" aria-live="polite"></div>
       <div class="gf-wrap"><canvas id="gf-canvas" class="gf-canvas" tabindex="0" role="application" aria-label="Mini golf hole. Drag to aim. Arrow keys fine tune the aim and power. Enter putts."></canvas></div>
       <div class="gf-between card" id="gf-between" hidden></div>
-      <div class="gf-controls card" id="gf-controls">
+      <div class="gf-controls card" id="gf-controls"><button type="button" class="btn btn-ghost" id="gf-place">Choose tee position</button><small id="gf-place-note" role="status"></small>
         <div class="pl-slider pl-fine"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost btn-small" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost btn-small" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
         <label class="pl-slider"><span>Power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label>
         <div class="board-actions"><button type="button" class="btn" id="gf-putt">Putt</button></div>
@@ -352,7 +372,14 @@ GameUI.golf = (() => {
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
     for (const ev of ["pointerdown", "pointermove", "pointerup", "pointercancel", "lostpointercapture"]) canvas.addEventListener(ev, onPointer);
+    root.querySelector('#gf-place').addEventListener('click',()=>{if(!canPlace())return;placing=!placing;teeDraft=placing?{x:myBall().x,y:myBall().y}:null;syncControls();canvas.focus({preventScroll:true});});
     canvas.addEventListener("keydown", (e) => {
+      if(placing&&canPlace()){
+        const delta={ArrowLeft:[-4,0],ArrowRight:[4,0],ArrowUp:[0,-4],ArrowDown:[0,4]}[e.key];
+        if(delta){e.preventDefault();teeDraft.x+=delta[0];teeDraft.y+=delta[1];return;}
+        if(e.key==='Enter'){e.preventDefault();app.socket.emit('action',{type:'place',x:teeDraft.x,y:teeDraft.y});placing=false;teeDraft=null;syncControls();return;}
+        if(e.key==='Escape'){placing=false;teeDraft=null;syncControls();return;}
+      }
       const step = e.shiftKey ? 5 : 0.5;
       if (e.key === "ArrowLeft") aim -= (step * Math.PI) / 180;
       else if (e.key === "ArrowRight") aim += (step * Math.PI) / 180;
@@ -386,6 +413,8 @@ GameUI.golf = (() => {
   function syncControls() {
     if (!root || !g) return;
     const mine = canPutt();
+    const place=root.querySelector('#gf-place');place.hidden=!myBall()||myBall().strokes>0;place.disabled=!canPlace();place.textContent=placing?'Cancel tee placement':'Choose tee position';place.setAttribute('aria-pressed',String(placing));
+    root.querySelector('#gf-place-note').textContent=placing?'Tap a free spot inside the square. Keyboard: arrows move, Enter confirms.':canPlace()?'Optional: pick a tee position before your first stroke.':'';
     const aimEl = root.querySelector("#gf-aim");
     const powEl = root.querySelector("#gf-pow");
     aimEl.value = deg(aim).toFixed(2);
@@ -462,7 +491,7 @@ GameUI.golf = (() => {
     clock.set(g.timeLeft);
     const key = g.course.id + ":" + g.holeIndex;
     if (key !== holeKey) {
-      holeKey = key;
+      holeKey = key; placing=false;teeDraft=null;
       const b = myBall();
       aim = b ? Math.atan2(g.hole.cup[1] - b.y, g.hole.cup[0] - b.x) : 0;
       animKey = -1;
@@ -495,7 +524,7 @@ GameUI.golf = (() => {
     window.removeEventListener("resize", fit);
     if (clock) clock.stop();
     if (root) root.remove();
-    root = null; canvas = null; ctx = null; g = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;
+    root = null; canvas = null; ctx = null; g = null; placing = false; teeDraft = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;
   }
 
   function renderResult(r, state, a) {

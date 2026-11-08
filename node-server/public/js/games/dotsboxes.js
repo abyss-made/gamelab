@@ -6,6 +6,8 @@ GameUI.dotsboxes = (() => {
   let app = null;
   let S = null;
   let clock = null;
+  let previousBoxes = null;
+  let freshBoxes = new Set();
 
   function gridHTML(g, { playable, myIndex }) {
     const n = g.n;
@@ -25,7 +27,7 @@ GameUI.dotsboxes = (() => {
           html += edge("v", er, ec, o, playable, g.last, `Vertical line, row ${er + 1}, column ${ec + 1}`);
         } else {
           const o = g.boxes[(r - 1) / 2][(c - 1) / 2];
-          html += `<span class="db-box ${o >= 0 ? "p" + o : ""}" aria-label="${o >= 0 ? "Box owned by " + app.esc(g.players[o] ? g.players[o].name : "a player") : "Empty box"}">${o >= 0 ? app.esc((g.players[o] ? g.players[o].name : "?").slice(0, 1).toUpperCase()) : ""}</span>`;
+          html += `<span class="db-box ${o >= 0 ? "p" + o + (freshBoxes.has(((r-1)/2)+":"+((c-1)/2))?" capture":"") : ""}" aria-label="${o >= 0 ? "Box owned by " + app.esc(g.players[o] ? g.players[o].name : "a player") : "Empty box"}">${o >= 0 ? (o+1)+app.esc((g.players[o] ? g.players[o].name : "?").slice(0, 1).toUpperCase()) : ""}</span>`;
         }
       }
     }
@@ -34,7 +36,7 @@ GameUI.dotsboxes = (() => {
   function edge(kind, r, c, owner, playable, last, label) {
     const taken = owner >= 0;
     const isLast = last && last.kind === kind && last.r === r && last.c === c;
-    return `<button type="button" class="db-edge ${kind} ${taken ? "taken p" + owner : ""} ${isLast ? "new" : ""}" data-kind="${kind}" data-r="${r}" data-c="${c}" aria-label="${label}${taken ? ", taken" : ""}" ${playable && !taken ? "" : "disabled"}></button>`;
+    return `<button type="button" class="db-edge ${kind} ${taken ? "taken p" + owner : ""} ${isLast ? "new" : ""}" data-kind="${kind}" data-r="${r}" data-c="${c}" aria-label="${label}${taken ? ", owned by player "+(owner+1)+" "+app.esc(S?.game?.players[owner]?.name||"") : ""}" ${playable && !taken ? "" : "disabled"}></button>`;
   }
 
   function mount(stage, a) {
@@ -57,14 +59,17 @@ GameUI.dotsboxes = (() => {
     S = state;
     const g = S.game;
     if (!g) return;
+    freshBoxes=new Set();if(previousBoxes)g.boxes.forEach((row,r)=>row.forEach((owner,c)=>{if(owner>=0&&previousBoxes[r]?.[c]===-1)freshBoxes.add(r+':'+c);}));
+    previousBoxes=g.boxes.map(row=>row.slice());
     const myTurn = g.myIndex === g.turn;
     clock.set(g.timeLeft);
     root.querySelector("#db-players").innerHTML = g.players
-      .map((p, i) => C.playerChip(app, p, { active: g.turn === i && !p.out, extra: `<span class="db-key p${i}" aria-hidden="true"></span>` + (g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.boxes} box${p.boxes === 1 ? "" : "es"}` }))
+      .map((p, i) => C.playerChip(app, p, { active: g.turn === i && !p.out, extra: `<span class="db-key p${i}" aria-label="Player ${i+1}">${i+1}</span>` + (g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.boxes} box${p.boxes === 1 ? "" : "es"}` }))
       .join("");
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#db-status");
     st.innerHTML = g.myIndex < 0 ? `You're watching. <b>${turnName}</b> is up.` : myTurn ? "<b>Your turn!</b> Draw a line. Complete a box to go again." : `Waiting for <b>${turnName}</b>...`;
+    if(freshBoxes.size)st.innerHTML=`<b>${turnName}</b> captured ${freshBoxes.size} box${freshBoxes.size===1?'':'es'} and goes again!`;
     st.className = "ttt-status" + (myTurn ? " mine" : "");
     const key = JSON.stringify(g.last) + g.players.map((p) => p.boxes).join(",") + (myTurn ? "m" : "w");
     const board = root.querySelector("#db-board");
@@ -79,11 +84,12 @@ GameUI.dotsboxes = (() => {
   function unmount() {
     if (clock) clock.stop();
     if (root) root.remove();
-    root = null;
+    root = null; previousBoxes=null;freshBoxes=new Set();
   }
 
   function renderResult(r, state, a) {
     app = a;
+    freshBoxes=new Set();
     const g = { n: r.n, h: r.h, v: r.v, boxes: r.boxes, players: r.players, last: null };
     return `<h2 class="result-title">${C.resultTitle(r, state, a)}</h2>${r.forfeit ? '<p class="muted center">Won by forfeit.</p>' : ""}${C.podium(r.standings, a, (p) => p.boxes, "boxes")}<div class="db-wrap small">${gridHTML(g, { playable: false })}</div>`;
   }

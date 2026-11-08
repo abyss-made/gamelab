@@ -378,13 +378,13 @@ function bfsPath(hole, maxDepth = 7) {
 
 (function golfPhysics() {
   const all = COURSES.COURSES.flatMap((c) => c.holes.map((h) => ({ c, h })));
-  ok(COURSES.COURSES.length === 3 && all.length === 18 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: three courses of six holes, 18 in the full tour');
-  ok(new Set(all.map((x) => x.h.name)).size === 18, 'Golf: every hole has its own name (no copies)');
+  ok(COURSES.COURSES.length === 4 && all.length === 24 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: four courses of six holes, original 18-hole tour retained');
+  ok(new Set(all.map((x) => x.h.name)).size === all.length, 'Golf: every hole has its own name (no copies)');
   ok(all.every(({ h }) => GR.onFairway(h, h.tee[0], h.tee[1]) && GR.onFairway(h, h.cup[0], h.cup[1])), 'Golf: every tee and cup is on the fairway, clear of walls and bumpers');
   ok(all.every(({ h }) => !(h.water || []).some((z) => h.tee[0] >= z.x && h.tee[0] <= z.x + z.w && h.tee[1] >= z.y && h.tee[1] <= z.y + z.h) && !(h.water || []).some((z) => h.cup[0] >= z.x && h.cup[0] <= z.x + z.w && h.cup[1] >= z.y && h.cup[1] <= z.y + z.h)), 'Golf: no tee or cup sits in water');
   ok(all.every(({ h }) => h.par >= 2 && h.par <= 5), 'Golf: every hole has a sensible par');
   // distinct geometry: no two holes are identical
-  ok(new Set(all.map((x) => JSON.stringify([x.h.poly, x.h.walls, x.h.bumpers, x.h.sand, x.h.water, x.h.tee, x.h.cup]))).size === 18, 'Golf: no hole is a copy of another (no static placeholder holes)');
+  ok(new Set(all.map((x) => JSON.stringify([x.h.poly, x.h.walls, x.h.bumpers, x.h.sand, x.h.water, x.h.tee, x.h.cup]))).size === all.length, 'Golf: no hole is a copy of another (no static placeholder holes)');
 
   // every hole can actually be completed within the stroke limit
   const lens = [];

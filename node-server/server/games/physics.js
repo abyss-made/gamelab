@@ -85,7 +85,7 @@ const r1 = (v) => Math.round(v * 10) / 10;
 function run(world) {
   const {
     balls, walls = [], circles = [], wallRest = 0.8, ballRest = 0.96, roll = 100, drag = 0.3, stopSpeed = 5,
-    maxTime = 20, sampleEvery = 8, collide = false, frictionAt, afterStep, onWall, onBalls,
+    maxTime = 20, sampleEvery = 8, collide = false, frictionAt, accelerationAt, afterStep, onWall, onBalls,
   } = world;
   const frames = [];
   const snap = (t) => {
@@ -106,6 +106,8 @@ function run(world) {
     let moving = false;
     for (const b of balls) {
       if (b.gone) continue;
+      const force = accelerationAt && accelerationAt(b);
+      if (force) { b.vx += force.x * DT; b.vy += force.y * DT; }
       const sp0 = Math.hypot(b.vx, b.vy);
       if (sp0 === 0) continue;
       b.x += b.vx * DT;
@@ -113,7 +115,8 @@ function run(world) {
       // friction: constant deceleration + drag
       const k = frictionAt ? frictionAt(b) : 1;
       const sp = Math.max(0, sp0 - roll * k * DT) * Math.exp(-drag * k * DT);
-      if (sp < stopSpeed) {
+      const accelerating = force && Math.hypot(force.x, force.y) > roll * k;
+      if (sp < stopSpeed && !accelerating) {
         b.vx = 0;
         b.vy = 0;
       } else {

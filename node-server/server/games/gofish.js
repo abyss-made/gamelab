@@ -25,7 +25,7 @@ function sanitizeSettings(s, prev) {
 }
 
 function create(settings) {
-  return { settings: { ...settings }, players: [], deck: [], turn: 0, log: [], deadline: 0, over: false };
+  return { settings: { ...settings }, players: [], deck: [], turn: 0, log: [], moveSeq: 0, lastMove: null, deadline: 0, over: false };
 }
 
 function logLine(st, text) {
@@ -113,6 +113,8 @@ function onAction(st, m, a, api) {
 
 function ask(st, p, target, rank, api) {
   p.idle = 0;
+  const beforeBooks=new Map(st.players.map(player=>[player.id,player.books.length]));
+  let drawn=false,matched=false;
   const got = target.hand.filter((c) => c.r === rank);
   let again;
   if (got.length) {
@@ -127,6 +129,7 @@ function ask(st, p, target, rank, api) {
     again = false;
     if (st.deck.length) {
       const c = st.deck.pop();
+      drawn=true; matched=c.r===rank;
       p.hand.push(c);
       if (c.r === rank) {
         logLine(st, `${p.name} fished the ${rankName(rank)} they wanted and goes again.`);
@@ -135,6 +138,7 @@ function ask(st, p, target, rank, api) {
       layBooks(st, p, api);
     }
   }
+  st.lastMove={sequence:++st.moveSeq,askerId:p.id,targetId:target.id,rank,received:got.length,drawn,matched,again,books:st.players.flatMap(player=>player.books.slice(beforeBooks.get(player.id)).map(rank=>({by:player.id,rank})))};
   if (!again) st.turn = nextIdx(st, st.turn);
   resetClock(st, api);
   settleTurn(st, api);
@@ -213,6 +217,7 @@ function view(st, m, now) {
     deckCount: st.deck.length,
     hand, // spectators get null
     log: st.log.slice(),
+    lastMove: st.lastMove ? {...st.lastMove, books: st.lastMove.books.map(book=>({...book}))} : null,
     timeLeft: st.deadline ? Math.max(0, st.deadline - now) : null,
     totalTime: st.settings.turnTime * 1000,
     myIndex: st.players.findIndex((p) => p.id === m.id),
