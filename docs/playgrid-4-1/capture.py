@@ -5,7 +5,7 @@ import subprocess,os,json,time,sys
 ROOT=Path(__file__).resolve().parents[2];tag=sys.argv[1];port=sys.argv[2] if len(sys.argv)>2 else '44070';URL='http://127.0.0.1:'+port
 if tag not in {'before','after'}:raise SystemExit('Use before or after.')
 if tag=='before' and subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()!='a81444b4afc59bfbe1bf83213ba5f6fc4dd7ac76':raise SystemExit('Before captures require the untouched a81444b base checkout.')
-OUT=Path(__file__).resolve().parent/'screenshots'/tag;OUT.mkdir(parents=True,exist_ok=True)
+OUT=Path(os.environ.get('PG41_EVIDENCE_DIR',str(Path(__file__).resolve().parent)))/'screenshots'/tag;OUT.mkdir(parents=True,exist_ok=True)
 VP=[(1366,768),(1440,900),(390,844),(932,430)]
 server=subprocess.Popen(['node','server/index.js'],cwd=ROOT/'node-server',env={**os.environ,'PORT':port,'ALPHA_ENABLED':''},stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
 try:

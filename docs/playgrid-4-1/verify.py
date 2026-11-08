@@ -1,8 +1,8 @@
 """Issue #70 integration QA, real browsers and actual Express/Socket.IO state."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
-import subprocess,os,time,json,math
-ROOT=Path(__file__).resolve().parents[2];OUT=Path(__file__).resolve().parent;URL='http://127.0.0.1:44071';shots=OUT/'screenshots'/'flows';shots.mkdir(parents=True,exist_ok=True)
+import subprocess,os,time,json,math,urllib.request
+ROOT=Path(__file__).resolve().parents[2];OUT=Path(os.environ.get('PG41_EVIDENCE_DIR',str(Path(__file__).resolve().parent)));URL='http://127.0.0.1:44071';shots=OUT/'screenshots'/'flows';shots.mkdir(parents=True,exist_ok=True)
 server=subprocess.Popen(['node','server/index.js'],cwd=ROOT/'node-server',env={**os.environ,'PORT':'44071','ALPHA_ENABLED':''},stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
 checks=[];errors=[]
 def passed(label):checks.append(label);print('PASS',label,flush=True)
@@ -36,6 +36,12 @@ try:
   returning=b.new_context(storage_state=guest.context.storage_state()).new_page();returning.goto(URL+'/r/'+code);returning.wait_for_selector('#join-btn');returning.set_viewport_size({'width':390,'height':844});returning.wait_for_timeout(200)
   assert not returning.locator('.av-studio').last.is_visible();assert returning.locator('#join-btn').is_visible();assert returning.locator('#screen-join .name-input').input_value()=='Nova';assert returning.evaluate('App.S') is None;returning.screenshot(path=str(shots/'returning-390.png'));returning.close()
   passed('Returning mobile invitation stays compact after asynchronous catalog load and does not allocate a seat')
+  for path in ['/r/'+code,'/js/main.js','/experience41.css','/api/health']:
+   with urllib.request.urlopen(URL+path) as response:
+    assert response.headers['X-Content-Type-Options']=='nosniff';assert response.headers['Referrer-Policy']=='same-origin';assert response.headers['X-Frame-Options']=='SAMEORIGIN'
+    if path=='/api/health':
+     health=json.load(response);assert health['ok'] and health['rooms']==1 and health['members']==3 and health['sockets']>=3;assert set(health)=={'ok','uptimeS','rooms','members','sockets','rssMb','heapMb'}
+  passed('Claude security headers serve redesigned invites and assets; health reports only aggregates with three gameplay clients connected')
   games=host.evaluate('Object.keys(GameBriefs)')
   for game in games:
    switch(host,game);host.wait_for_selector('.game-brief');assert host.locator('.brief-example span').count()>=3;assert host.locator('.game-brief').inner_text().strip()
@@ -88,4 +94,4 @@ try:
   assert not errors,errors
   b.close()
  (OUT/'browser-checks.json').write_text(json.dumps({'passed':checks,'errors':errors},indent=2)+'\n')
-finally:server.terminate();server.wait(timeout=10)
+finally:server.terminate();server.wait(timeout=10);assert server.returncode==0, f"Server shutdown exit {server.returncode}"

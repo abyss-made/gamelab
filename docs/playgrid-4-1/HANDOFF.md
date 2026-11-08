@@ -1,5 +1,7 @@
 # Playgrid 4.1 — Issue #70
 
+**Integration update:** Production PR #72 is merged into this feature branch. See [PR #73 integration](integration-pr73/README.md) for current base, conflict resolution and combined validation. The original gameplay scope and limits below remain applicable.
+
 Production implementation on `codex/playgrid-4-1-experience`, based on `a81444b4afc59bfbe1bf83213ba5f6fc4dd7ac76` of `codex/playgrid-2-redesign` (merged #68). Target the same branch for review. #66 remains superseded.
 
 ## Delivered

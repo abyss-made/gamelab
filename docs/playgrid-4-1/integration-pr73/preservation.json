@@ -1,0 +1,45 @@
+{
+  "production": "89d3d89fb4f50a13b9aeab425c8c38d4b231641c",
+  "original_4_1": "878e202d62c569b02104a2868cc44297ebbe5369",
+  "integration_commit": "50778409a41d8baadcea1e4699b0f735f8069221",
+  "claude_files": {
+    "node-server/server/index.js": {
+      "production": "b19f1172eefe62057ac0ad60ebfc25a1b98a93e3",
+      "integrated": "b19f1172eefe62057ac0ad60ebfc25a1b98a93e3"
+    },
+    "node-server/server/rooms.js": {
+      "production": "8f22601bacab5c5c9566bd65979629c0f3c1acd6",
+      "integrated": "8f22601bacab5c5c9566bd65979629c0f3c1acd6"
+    },
+    "node-server/server/log.js": {
+      "production": "cb014684863ea9932d1e39ffd1834c514c11840d",
+      "integrated": "cb014684863ea9932d1e39ffd1834c514c11840d"
+    },
+    "node-server/scripts/loadtest.js": {
+      "production": "4a55ba3c307327e006b53f6903c0d2f7e5867326",
+      "integrated": "4a55ba3c307327e006b53f6903c0d2f7e5867326"
+    },
+    "node-server/test/platform.js": {
+      "production": "5f91a139beb35d1f623b255f8f81ccefb70c73c0",
+      "integrated": "5f91a139beb35d1f623b255f8f81ccefb70c73c0"
+    },
+    "docs/playgrid-4-1/RUNBOOK.md": {
+      "production": "b2c081c146eadb05c7054a72e54f11e0e54b9494",
+      "integrated": "b2c081c146eadb05c7054a72e54f11e0e54b9494"
+    }
+  },
+  "gameplay_trees": {
+    "node-server/public": {
+      "original_4_1": "acc4fdc10c1466cd1a2a3ba8a2075ec79ba4da45",
+      "integrated": "acc4fdc10c1466cd1a2a3ba8a2075ec79ba4da45"
+    },
+    "node-server/server/games": {
+      "original_4_1": "ea00099c5249f1aa613d57466697ec47eded8633",
+      "integrated": "ea00099c5249f1aa613d57466697ec47eded8633"
+    },
+    "node-server/server/data": {
+      "original_4_1": "6eeaf46bbc26ad09c82028a06eb17962ed861031",
+      "integrated": "6eeaf46bbc26ad09c82028a06eb17962ed861031"
+    }
+  }
+}

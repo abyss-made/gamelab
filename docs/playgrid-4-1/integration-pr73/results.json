@@ -1,0 +1,88 @@
+{
+  "pr": 73,
+  "production_base": "89d3d89fb4f50a13b9aeab425c8c38d4b231641c",
+  "application_integration_commit": "50778409a41d8baadcea1e4699b0f735f8069221",
+  "completed_client_time": "2026-11-07T22:42:37.043682-05:00",
+  "node": "24.19.0",
+  "chromium": "154.0.8037.57",
+  "npm_command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/pg4-browsers npm --prefix node-server test",
+  "npm_exit_code": 0,
+  "test_programs": 37,
+  "pass_lines": 3854,
+  "failures": 0,
+  "skips": 0,
+  "targeted_platform_checks": 19,
+  "browser_checks": 15,
+  "browser_page_errors": 0,
+  "loadtest": {
+    "config": {
+      "rooms": 40,
+      "players": 4,
+      "seconds": 10,
+      "node": "v24.19.0",
+      "cpus": 5
+    },
+    "latencyMs": {
+      "join": {
+        "n": 160,
+        "p50": 8.8,
+        "p95": 178.5,
+        "p99": 190.6,
+        "max": 192.3
+      },
+      "rejoin": {
+        "n": 40,
+        "p50": 79.7,
+        "p95": 106,
+        "p99": 108.2,
+        "max": 108.2
+      },
+      "chatFanout": {
+        "n": 40,
+        "p50": 0.4,
+        "p95": 14.9,
+        "p99": 15.5,
+        "max": 15.5
+      }
+    },
+    "throughput": {
+      "gamesStarted": 40,
+      "movesConfirmed": 249,
+      "clientEventsEmitted": 2294,
+      "serverEventsReceivedByClients": 11085,
+      "perSec": 1052
+    },
+    "server": {
+      "cpuPercentOfOneCore": 5,
+      "rssMbStart": 73.8,
+      "rssMbEnd": 94.4,
+      "healthAtEnd": {
+        "ok": true,
+        "uptimeS": 13,
+        "rooms": 40,
+        "members": 120,
+        "sockets": 160,
+        "rssMb": 94,
+        "heapMb": 29
+      }
+    },
+    "errors": 0
+  },
+  "screenshots": {
+    "after": 48,
+    "flows": 17
+  },
+  "logs_sha256": {
+    "npm-test.log": "6fcbac2552fac86e0735fa82980f0df42a34cad34859a16b9460a68856eb8f41",
+    "browser-checks.log": "044b351911043aeaa65cbde89379d6b807abd577272f079420fb95d92bc57e86",
+    "platform.log": "e45d9c3868de9d9f1b8774a52a65c33598c6648fe9b7ff2496e3530d16eb0122",
+    "loadtest.log": "691827b431885323558c8b6325a877e24e77018f0576ee229188372ac30a0918"
+  },
+  "raw_logs_sha256": {
+    "npm-test.log": "16c8aea69b8ff7db54a6d87a4dfdf39789c7b7d3a8e700504bed46f2eacbce58",
+    "platform.log": "e45d9c3868de9d9f1b8774a52a65c33598c6648fe9b7ff2496e3530d16eb0122",
+    "loadtest.log": "691827b431885323558c8b6325a877e24e77018f0576ee229188372ac30a0918",
+    "browser-checks.log": "044b351911043aeaa65cbde89379d6b807abd577272f079420fb95d92bc57e86"
+  },
+  "log_format": "Archived logs remove trailing whitespace only; message contents and ordering are unchanged."
+}
