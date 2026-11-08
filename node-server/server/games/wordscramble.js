@@ -118,7 +118,7 @@ function onAction(st, m, a, api) {
   const exact = w === st.word;
   // Another real word built from the same letters counts too.
   const anagram = !exact && w.length === st.word.length && key(w) === key(st.word) && isWord(w) && !filter.hasBad(w);
-  if (!exact && !anagram) return api.toMember(m.id, 'notice', 'Not quite. Try again!');
+  if (!exact && !anagram) return api.toMember(m.id, 'notice', w.length !== st.word.length || key(w) !== key(st.word) ? 'Use every displayed letter exactly once.' : filter.hasBad(w) ? 'That word is not allowed.' : 'Those letters fit, but this is not in the English word list. Try another arrangement.');
   const total = st.settings.roundTime * 1000;
   const left = Math.max(0, st.deadline - api.now());
   const gained = BASE + Math.round(SPEED * (left / total)) + (st.solveOrder.length === 0 ? FIRST_BONUS : 0);

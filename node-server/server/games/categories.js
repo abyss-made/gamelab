@@ -69,6 +69,8 @@ function singular(w) {
 function normalize(raw, category) {
   if (typeof raw !== 'string') return '';
   const s = wordRules.plain(raw);
+  const canonical = wordRules.canonicalCategory(s, category);
+  if (canonical) return canonical;
   const i = s.lastIndexOf(' ') + 1;
   return (wordRules.proper[category] || wordRules.isProper(s)) ? wordRules.canonicalProper(s, category) : s.slice(0, i) + singular(s.slice(i));
 }
@@ -215,6 +217,7 @@ function view(st, m, now) {
     rounds: st.settings.rounds,
     letter: st.letter,
     cats: st.cats,
+    categoryPolicies: st.cats.map(wordRules.policy),
     phase: st.phase,
     // Only your own answers are ever sent during a round.
     myAnswers: me && st.phase === 'answer' ? me.answers : null,

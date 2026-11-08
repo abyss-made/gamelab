@@ -86,7 +86,7 @@ function need(st) {
 }
 
 function playable(st, l) {
-  for (const w of DICT) if (w[0] === l && w.length >= st.settings.minLen && !st.used.has(w)) return true;
+  for (const w of lexicon.startingWith(l)) if (w[0] === l && w.length >= st.settings.minLen && !st.used.has(w)) return true;
   return false;
 }
 
@@ -156,7 +156,7 @@ function onAction(st, m, a, api) {
   if (w[0] !== needed) return reject(api, m, `Your word has to start with "${needed.toUpperCase()}".`);
   if (st.used.has(w)) return reject(api, m, `"${w}" was already used.`);
   if (filter.hasBad(w)) return reject(api, m, 'That word is not allowed.');
-  if (st.settings.dictionary === 'common' && !isWord(w)) return reject(api, m, `"${w}" isn't in the word list.`);
+  if (st.settings.dictionary === 'common' && !isWord(w)) return reject(api, m, `"${w}" is not in the English word list. Proper names, spaces and hyphens do not count here.`);
   st.used.add(w);
   st.chain.push({ word: w, by: cur.id, name: cur.name });
   cur.words++;
