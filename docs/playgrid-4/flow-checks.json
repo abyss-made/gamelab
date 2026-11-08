@@ -1,0 +1,21 @@
+{
+  "passed": [
+    "Explicit homepage identity save and gallery keyboard-focus preservation",
+    "First invite requires a deliberate name and saves selected character before joining",
+    "Randomized classic avatar on a first invite is submitted on join, seen by the host, and survives refresh",
+    "Homepage refresh and compact mobile Return to Game restore the existing room",
+    "Returning invite confirms saved identity or opens visual editing without allocating a seat",
+    "Classic avatar controls remain accessible and synchronize to the other client",
+    "Catalog failure blocks accidental joining and Retry recovers without reloading the page",
+    "Four desktop sizes: default, expanded and global focus retain players/chat, fit canvas and expose Clear",
+    "Short landscape (932x430) expanded Draw & Guess keeps the word/hint bar; desktop expanded still hides it",
+    "Real mouse strokes map to expected 800\u00d7600 canvas pixels on the remote client at all desktop sizes",
+    "Phone focus chat and its unfinished message survive a viewport-height change",
+    "Ad preview sits below chat on spacious monitors and collapses on laptops; default creates no ad request",
+    "Catalog ad survives navigation, search and catalog rerenders without occupying a game-card cell",
+    "Mistyped room-code join returns an inline Rooms error without losing the running-game seat",
+    "Invalid remembered room is cleared gracefully without navigating away from the homepage",
+    "Hash invitation preserves the target code and requires identity confirmation without allocating a seat",
+    "Tycoon refits immediately after navigating home, resizing, and returning to the same game"
+  ]
+}

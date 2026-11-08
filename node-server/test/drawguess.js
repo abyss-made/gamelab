@@ -19,6 +19,13 @@ ok(all.length >= 700, `word bank has 700+ entries (${all.length})`);
 ok(new Set(all.map(norm)).size === all.length, 'no duplicate entries after normalizing');
 ok(all.every((w) => /^[a-z0-9 'ñ-]+$/i.test(w) && w.length >= 3 && w.length <= 30), 'entries are 3-30 plain characters');
 ok(bank.hard.some((w) => w.includes(' ')) && bank.hard.filter((w) => w.includes(' ')).length >= 50, 'hard tier has many multi-word concepts');
+// Phase 2 (#40): larger curated bank, every tier deep enough for long games.
+ok(all.length >= 1400 && tiers.every((t) => bank[t].length >= 450), `bank has 1400+ words, 450+ per tier (${tiers.map((t) => bank[t].length).join('/')})`);
+{
+  const { cleanChat } = require('../server/filter');
+  const masked = all.filter((w) => cleanChat(w) !== w);
+  ok(!masked.length, `no word is altered by the chat filter, so every word can be guessed (${masked.join(', ')})`);
+}
 
 // ---------- settings ----------
 const base = { ...dg.defaults };
@@ -208,6 +215,89 @@ function box(d, x0, y0, x1, y1, gap) {
   floodFill(d, BW, BH, 400, 300, '#ff0000');
   const ms = Date.now() - t;
   ok(ms < 1500, `full 800x600 fill is bounded (${ms} ms)`);
+}
+
+{
+  // Phase 2 (#40): the faster fill must paint exactly what the original algorithm painted.
+  // Reference: the pre-#40 implementation, kept here verbatim in behaviour as an oracle.
+  const ref = (d, W, H, x0, y0, hex) => {
+    const { TOL, GROW, EDGE_MAX } = require('../public/js/games/fill');
+    const x = Math.floor(x0), y = Math.floor(y0);
+    if (!(x >= 0 && y >= 0 && x < W && y < H)) return 0;
+    const s0 = (y * W + x) * 4, tr = d[s0], tg = d[s0 + 1], tb = d[s0 + 2];
+    const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+    if (tr === r && tg === g && tb === b) return 0;
+    const dist = (p) => Math.max(Math.abs(d[p * 4] - tr), Math.abs(d[p * 4 + 1] - tg), Math.abs(d[p * 4 + 2] - tb));
+    const region = new Uint8Array(W * H);
+    const okp = (p) => !region[p] && dist(p) <= TOL;
+    const stack = [x, y];
+    let count = 0;
+    while (stack.length) {
+      const cy = stack.pop(), cx = stack.pop();
+      if (!okp(cy * W + cx)) continue;
+      let lx = cx, rx = cx;
+      while (lx > 0 && okp(cy * W + lx - 1)) lx--;
+      while (rx < W - 1 && okp(cy * W + rx + 1)) rx++;
+      let up = false, down = false;
+      for (let xx = lx; xx <= rx; xx++) {
+        const p = cy * W + xx;
+        region[p] = 1; count++;
+        if (cy > 0) { const q = okp(p - W); if (q && !up) stack.push(xx, cy - 1); up = q; }
+        if (cy < H - 1) { const q = okp(p + W); if (q && !down) stack.push(xx, cy + 1); down = q; }
+      }
+    }
+    let frontier = [];
+    for (let p = 0; p < W * H; p++) if (region[p]) frontier.push(p);
+    const edge = [], rim = new Uint8Array(W * H);
+    for (let step = 0; step < GROW; step++) {
+      const next = [];
+      for (const p of frontier) {
+        const px = p % W;
+        for (const q of [px > 0 ? p - 1 : -1, px < W - 1 ? p + 1 : -1, p >= W ? p - W : -1, p < W * (H - 1) ? p + W : -1]) {
+          if (q < 0 || region[q] || rim[q]) continue;
+          const dq = dist(q);
+          if (dq <= TOL || dq >= EDGE_MAX) continue;
+          rim[q] = 1; edge.push(q, 255 - Math.floor((dq * 255) / EDGE_MAX)); next.push(q);
+        }
+      }
+      frontier = next;
+    }
+    for (let p = 0; p < W * H; p++) if (region[p]) { d[p * 4] = r; d[p * 4 + 1] = g; d[p * 4 + 2] = b; d[p * 4 + 3] = 255; }
+    for (let i = 0; i < edge.length; i += 2) {
+      const p = edge[i], w = edge[i + 1];
+      for (let c = 0; c < 3; c++) d[p * 4 + c] = Math.floor((d[p * 4 + c] * (255 - w) + [r, g, b][c] * w) / 255);
+      d[p * 4 + 3] = 255;
+    }
+    return count;
+  };
+  let seed = 40;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  let same = true;
+  // Mixed sizes in one run also prove the reused scratch buffers never carry state between fills.
+  for (let t = 0; t < 120 && same; t++) {
+    const w = 20 + Math.floor(rnd() * 120), h = 20 + Math.floor(rnd() * 90);
+    const d = new Uint8ClampedArray(w * h * 4).fill(255);
+    for (let k = 0; k < 40; k++) {
+      const x = Math.floor(rnd() * w), y = Math.floor(rnd() * h), v = Math.floor(rnd() * 256), len = Math.floor(rnd() * w), vert = rnd() < 0.5;
+      for (let i = 0; i < len; i++) {
+        const j = ((vert ? (y + i) % h : y) * w + (vert ? x : (x + i) % w)) * 4;
+        d[j] = v; d[j + 1] = Math.floor(rnd() * 256); d[j + 2] = v;
+      }
+    }
+    const a = d.slice(), b = d.slice();
+    for (let f = 0; f < 5; f++) {
+      const x = rnd() * w, y = rnd() * h, c = '#' + Math.floor(rnd() * 0xffffff).toString(16).padStart(6, '0');
+      if (ref(a, w, h, x, y, c) !== floodFill(b, w, h, x, y, c)) same = false;
+    }
+    if (!a.every((v, i) => v === b[i])) same = false;
+  }
+  ok(same, 'optimized fill matches the original algorithm pixel for pixel on 120 random canvases');
+  const BW = 800, BH = 600;
+  const d = new Uint8ClampedArray(BW * BH * 4).fill(255);
+  const time = (fn) => { const t = process.hrtime.bigint(); fn(); return Number(process.hrtime.bigint() - t) / 1e6; };
+  const refMs = time(() => { for (let i = 0; i < 4; i++) ref(d, BW, BH, 400, 300, i % 2 ? '#ff0000' : '#00ff00'); });
+  const newMs = time(() => { for (let i = 0; i < 4; i++) floodFill(d, BW, BH, 400, 300, i % 2 ? '#ff0000' : '#00ff00'); });
+  ok(newMs < refMs, `full-canvas fill is faster than before (${(newMs / 4).toFixed(1)} ms vs ${(refMs / 4).toFixed(1)} ms per fill)`);
 }
 
 console.log(failures ? `\n${failures} FAILED` : '\nAll passed');

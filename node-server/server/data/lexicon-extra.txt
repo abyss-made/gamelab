@@ -1,0 +1,4 @@
+# Extra accepted words (one per line, lowercase a-z). Use this to fix omissions in lexicon.txt.
+# Lines starting with # are ignored. No restart of generation needed; loaded at startup.
+cafe
+cafes

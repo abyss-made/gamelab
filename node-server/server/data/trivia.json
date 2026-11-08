@@ -1,0 +1,722 @@
+[
+{
+"c": "Science",
+"q": "What planet is known as the Red Planet?",
+"a": "Mars",
+"w": [
+"Venus",
+"Jupiter",
+"Mercury"
+]
+},
+{
+"c": "Science",
+"q": "What gas do plants absorb from the air for photosynthesis?",
+"a": "Carbon dioxide",
+"w": [
+"Oxygen",
+"Nitrogen",
+"Hydrogen"
+]
+},
+{
+"c": "Science",
+"q": "What is the chemical symbol for gold?",
+"a": "Au",
+"w": [
+"Ag",
+"Gd",
+"Go"
+]
+},
+{
+"c": "Science",
+"q": "How many bones are in the adult human body?",
+"a": "206",
+"w": [
+"186",
+"212",
+"256"
+]
+},
+{
+"c": "Science",
+"q": "What is the hardest natural substance?",
+"a": "Diamond",
+"w": [
+"Quartz",
+"Steel",
+"Granite"
+]
+},
+{
+"c": "Science",
+"q": "Which planet has the most prominent rings?",
+"a": "Saturn",
+"w": [
+"Mars",
+"Earth",
+"Mercury"
+]
+},
+{
+"c": "Science",
+"q": "What force keeps us on the ground?",
+"a": "Gravity",
+"w": [
+"Magnetism",
+"Friction",
+"Inertia"
+]
+},
+{
+"c": "Science",
+"q": "What is H2O commonly called?",
+"a": "Water",
+"w": [
+"Hydrogen",
+"Salt",
+"Peroxide"
+]
+},
+{
+"c": "Science",
+"q": "Which organ pumps blood around the body?",
+"a": "The heart",
+"w": [
+"The liver",
+"The lungs",
+"The kidneys"
+]
+},
+{
+"c": "Science",
+"q": "What is the closest star to Earth?",
+"a": "The Sun",
+"w": [
+"Proxima Centauri",
+"Sirius",
+"Polaris"
+]
+},
+{
+"c": "Science",
+"q": "What do bees collect from flowers to make honey?",
+"a": "Nectar",
+"w": [
+"Pollen dust",
+"Sap",
+"Resin"
+]
+},
+{
+"c": "Science",
+"q": "At sea level, water boils at what temperature in Celsius?",
+"a": "100",
+"w": [
+"90",
+"110",
+"120"
+]
+},
+{
+"c": "Geography",
+"q": "What is the capital of France?",
+"a": "Paris",
+"w": [
+"Lyon",
+"Marseille",
+"Nice"
+]
+},
+{
+"c": "Geography",
+"q": "Which is the largest ocean on Earth?",
+"a": "Pacific Ocean",
+"w": [
+"Atlantic Ocean",
+"Indian Ocean",
+"Arctic Ocean"
+]
+},
+{
+"c": "Geography",
+"q": "Which continent is Egypt in?",
+"a": "Africa",
+"w": [
+"Asia",
+"Europe",
+"South America"
+]
+},
+{
+"c": "Geography",
+"q": "What is the longest river in South America?",
+"a": "Amazon",
+"w": [
+"Orinoco",
+"Paraná",
+"Magdalena"
+]
+},
+{
+"c": "Geography",
+"q": "What is the capital of Japan?",
+"a": "Tokyo",
+"w": [
+"Kyoto",
+"Osaka",
+"Nagoya"
+]
+},
+{
+"c": "Geography",
+"q": "Which country has the city of Toronto?",
+"a": "Canada",
+"w": [
+"Australia",
+"United States",
+"New Zealand"
+]
+},
+{
+"c": "Geography",
+"q": "Mount Everest is part of which mountain range?",
+"a": "Himalayas",
+"w": [
+"Andes",
+"Alps",
+"Rockies"
+]
+},
+{
+"c": "Geography",
+"q": "What is the capital of Australia?",
+"a": "Canberra",
+"w": [
+"Sydney",
+"Melbourne",
+"Perth"
+]
+},
+{
+"c": "Geography",
+"q": "Which desert is the largest hot desert in the world?",
+"a": "Sahara",
+"w": [
+"Gobi",
+"Kalahari",
+"Mojave"
+]
+},
+{
+"c": "Geography",
+"q": "What is the smallest country in the world by area?",
+"a": "Vatican City",
+"w": [
+"Monaco",
+"San Marino",
+"Malta"
+]
+},
+{
+"c": "Geography",
+"q": "Which country is shaped like a boot?",
+"a": "Italy",
+"w": [
+"Greece",
+"Portugal",
+"Spain"
+]
+},
+{
+"c": "Geography",
+"q": "In which country would you find Machu Picchu?",
+"a": "Peru",
+"w": [
+"Chile",
+"Mexico",
+"Colombia"
+]
+},
+{
+"c": "History",
+"q": "Who was the first President of the United States?",
+"a": "George Washington",
+"w": [
+"Thomas Jefferson",
+"Abraham Lincoln",
+"John Adams"
+]
+},
+{
+"c": "History",
+"q": "In which year did World War II end?",
+"a": "1945",
+"w": [
+"1939",
+"1918",
+"1950"
+]
+},
+{
+"c": "History",
+"q": "Which ancient civilization built the pyramids at Giza?",
+"a": "Egyptians",
+"w": [
+"Romans",
+"Greeks",
+"Mayans"
+]
+},
+{
+"c": "History",
+"q": "Who painted the Mona Lisa?",
+"a": "Leonardo da Vinci",
+"w": [
+"Michelangelo",
+"Raphael",
+"Van Gogh"
+]
+},
+{
+"c": "History",
+"q": "The Berlin Wall fell in which year?",
+"a": "1989",
+"w": [
+"1975",
+"1991",
+"1961"
+]
+},
+{
+"c": "History",
+"q": "Which empire was ruled by Julius Caesar?",
+"a": "Roman Empire",
+"w": [
+"Ottoman Empire",
+"Persian Empire",
+"Byzantine Empire"
+]
+},
+{
+"c": "History",
+"q": "Who was the first person to walk on the Moon?",
+"a": "Neil Armstrong",
+"w": [
+"Buzz Aldrin",
+"Yuri Gagarin",
+"John Glenn"
+]
+},
+{
+"c": "History",
+"q": "Which ship sank on its first voyage in 1912?",
+"a": "Titanic",
+"w": [
+"Lusitania",
+"Britannic",
+"Mayflower"
+]
+},
+{
+"c": "History",
+"q": "Who discovered that the Earth orbits the Sun, challenging older views, publishing in 1543?",
+"a": "Copernicus",
+"w": [
+"Ptolemy",
+"Aristotle",
+"Newton"
+]
+},
+{
+"c": "History",
+"q": "Which wall was built across northern England by the Romans?",
+"a": "Hadrian's Wall",
+"w": [
+"Great Wall",
+"Offa's Dyke",
+"Antonine Gate"
+]
+},
+{
+"c": "History",
+"q": "Christopher Columbus first reached the Americas in which year?",
+"a": "1492",
+"w": [
+"1066",
+"1607",
+"1776"
+]
+},
+{
+"c": "History",
+"q": "Which country gave the Statue of Liberty to the United States?",
+"a": "France",
+"w": [
+"England",
+"Spain",
+"Italy"
+]
+},
+{
+"c": "Entertainment",
+"q": "What color is Pikachu?",
+"a": "Yellow",
+"w": [
+"Red",
+"Blue",
+"Green"
+]
+},
+{
+"c": "Entertainment",
+"q": "In the Toy Story films, what kind of toy is Woody?",
+"a": "A cowboy",
+"w": [
+"A spaceman",
+"A dinosaur",
+"A robot"
+]
+},
+{
+"c": "Entertainment",
+"q": "How many players are on the field for one soccer team?",
+"a": "11",
+"w": [
+"9",
+"10",
+"12"
+]
+},
+{
+"c": "Entertainment",
+"q": "Which instrument has black and white keys?",
+"a": "Piano",
+"w": [
+"Violin",
+"Trumpet",
+"Flute"
+]
+},
+{
+"c": "Entertainment",
+"q": "What is the name of the wizard school in Harry Potter?",
+"a": "Hogwarts",
+"w": [
+"Durmstrang",
+"Beauxbatons",
+"Ilvermorny"
+]
+},
+{
+"c": "Entertainment",
+"q": "Which video game character is Mario's brother?",
+"a": "Luigi",
+"w": [
+"Wario",
+"Toad",
+"Yoshi"
+]
+},
+{
+"c": "Entertainment",
+"q": "In music, how many strings does a standard guitar have?",
+"a": "6",
+"w": [
+"4",
+"5",
+"8"
+]
+},
+{
+"c": "Entertainment",
+"q": "Which animated movie features a snowman named Olaf?",
+"a": "Frozen",
+"w": [
+"Moana",
+"Tangled",
+"Brave"
+]
+},
+{
+"c": "Entertainment",
+"q": "In Toy Story, which space ranger toy is Woody's friend?",
+"a": "Buzz Lightyear",
+"w": [
+"Hamm",
+"Rex",
+"Slinky"
+]
+},
+{
+"c": "Entertainment",
+"q": "Which band sang 'Hey Jude'?",
+"a": "The Beatles",
+"w": [
+"The Rolling Stones",
+"Queen",
+"ABBA"
+]
+},
+{
+"c": "Entertainment",
+"q": "What do you call a group of musicians playing together?",
+"a": "A band",
+"w": [
+"A herd",
+"A flock",
+"A crew"
+]
+},
+{
+"c": "Entertainment",
+"q": "In chess, which piece can move diagonally any distance?",
+"a": "Bishop",
+"w": [
+"Rook",
+"Knight",
+"Pawn"
+]
+},
+{
+"c": "Sports",
+"q": "How many points is a touchdown worth in American football?",
+"a": "6",
+"w": [
+"3",
+"7",
+"5"
+]
+},
+{
+"c": "Sports",
+"q": "Which sport uses a shuttlecock?",
+"a": "Badminton",
+"w": [
+"Tennis",
+"Squash",
+"Table tennis"
+]
+},
+{
+"c": "Sports",
+"q": "How often are the Summer Olympic Games held?",
+"a": "Every 4 years",
+"w": [
+"Every 2 years",
+"Every 3 years",
+"Every 5 years"
+]
+},
+{
+"c": "Sports",
+"q": "In which sport would you perform a slam dunk?",
+"a": "Basketball",
+"w": [
+"Volleyball",
+"Handball",
+"Netball"
+]
+},
+{
+"c": "Sports",
+"q": "How many rings are on the Olympic flag?",
+"a": "5",
+"w": [
+"4",
+"6",
+"7"
+]
+},
+{
+"c": "Sports",
+"q": "In tennis, what score comes after 30?",
+"a": "40",
+"w": [
+"35",
+"45",
+"50"
+]
+},
+{
+"c": "Sports",
+"q": "Which country hosted the 2016 Summer Olympics?",
+"a": "Brazil",
+"w": [
+"China",
+"Greece",
+"United Kingdom"
+]
+},
+{
+"c": "Sports",
+"q": "In baseball, how many strikes make an out?",
+"a": "3",
+"w": [
+"2",
+"4",
+"5"
+]
+},
+{
+"c": "Sports",
+"q": "What is the length of a marathon, rounded to the nearest kilometer?",
+"a": "42 km",
+"w": [
+"21 km",
+"36 km",
+"50 km"
+]
+},
+{
+"c": "Sports",
+"q": "Which sport is played at Wimbledon?",
+"a": "Tennis",
+"w": [
+"Golf",
+"Cricket",
+"Rugby"
+]
+},
+{
+"c": "Sports",
+"q": "How many players does a standard volleyball team have on court?",
+"a": "6",
+"w": [
+"5",
+"7",
+"8"
+]
+},
+{
+"c": "Sports",
+"q": "In golf, what is one stroke under par called?",
+"a": "Birdie",
+"w": [
+"Eagle",
+"Bogey",
+"Albatross"
+]
+},
+{
+"c": "Food",
+"q": "Which fruit is traditionally used to make guacamole?",
+"a": "Avocado",
+"w": [
+"Mango",
+"Banana",
+"Papaya"
+]
+},
+{
+"c": "Food",
+"q": "What is the main ingredient in hummus?",
+"a": "Chickpeas",
+"w": [
+"Lentils",
+"Black beans",
+"Peanuts"
+]
+},
+{
+"c": "Food",
+"q": "Sushi originated in which country?",
+"a": "Japan",
+"w": [
+"China",
+"Thailand",
+"Korea"
+]
+},
+{
+"c": "Food",
+"q": "Which nut is used to make marzipan?",
+"a": "Almond",
+"w": [
+"Walnut",
+"Cashew",
+"Peanut"
+]
+},
+{
+"c": "Food",
+"q": "What is dried grape called?",
+"a": "Raisin",
+"w": [
+"Prune",
+"Date",
+"Fig"
+]
+},
+{
+"c": "Food",
+"q": "Which country is famous for inventing pizza?",
+"a": "Italy",
+"w": [
+"France",
+"Greece",
+"Spain"
+]
+},
+{
+"c": "Food",
+"q": "What type of pasta is shaped like small tubes cut at an angle?",
+"a": "Penne",
+"w": [
+"Spaghetti",
+"Farfalle",
+"Fusilli"
+]
+},
+{
+"c": "Food",
+"q": "Which spice comes from the Crocus flower and is very expensive?",
+"a": "Saffron",
+"w": [
+"Turmeric",
+"Paprika",
+"Cumin"
+]
+},
+{
+"c": "Food",
+"q": "Tofu is made from which bean?",
+"a": "Soybean",
+"w": [
+"Kidney bean",
+"Black bean",
+"Pinto bean"
+]
+},
+{
+"c": "Food",
+"q": "Paella is a traditional dish from which country?",
+"a": "Spain",
+"w": [
+"Portugal",
+"Mexico",
+"Italy"
+]
+},
+{
+"c": "Food",
+"q": "Which fruit has its seeds on the outside?",
+"a": "Strawberry",
+"w": [
+"Raspberry",
+"Blueberry",
+"Cherry"
+]
+},
+{
+"c": "Food",
+"q": "Which vegetable makes you cry when you cut it?",
+"a": "Onion",
+"w": [
+"Carrot",
+"Potato",
+"Cucumber"
+]
+}
+]

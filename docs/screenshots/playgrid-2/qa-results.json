@@ -1,0 +1,68 @@
+{
+  "viewport_desktop": [
+    1440,
+    900
+  ],
+  "viewport_mobile": [
+    390,
+    844
+  ],
+  "checks": [
+    "Four independent browser sessions create and join the real room",
+    "Host settings and chat synchronize; guest settings stay read-only",
+    "Segmented settings persist to server; dialog traps and restores keyboard focus",
+    "Drawer secrecy holds in server state and the visible redesigned UI",
+    "Brush and paint bucket render the same drawing across all four clients",
+    "Undo restores the shared drawing through server replay",
+    "Expand and Escape preserve the live canvas",
+    "Socket reconnect retains the seat, identity, and drawing",
+    "Late spectator receives the drawing without the secret or drawing controls",
+    "390px portrait and phone landscape have no horizontal overflow",
+    "One complete four-player Draw & Guess game produces real scored standings",
+    "Switching games seats two players, moves others to spectators, and Four in a Row reaches a real win",
+    "Selection displays real public rooms; 390px game selection remains usable",
+    "Private-alpha browser login permits the real frontend and sockets; a fresh session stays gated",
+    "axe WCAG A/AA checks report no violations across 14 desktop and mobile captures",
+    "No JavaScript page errors or missing artwork requests across all browser sessions"
+  ],
+  "page_errors": [],
+  "missing_assets": [],
+  "standings": [
+    {
+      "id": "f272e7c42279",
+      "name": "Nova",
+      "avatar": {
+        "e": 1,
+        "c": 1
+      },
+      "score": 2042
+    },
+    {
+      "id": "3dbf742c5d50",
+      "name": "Trouble",
+      "avatar": {
+        "e": 2,
+        "c": 2
+      },
+      "score": 2041
+    },
+    {
+      "id": "c5a4aec3ba32",
+      "name": "Kai",
+      "avatar": {
+        "e": 3,
+        "c": 3
+      },
+      "score": 2039
+    },
+    {
+      "id": "114e89e7c548",
+      "name": "Alex",
+      "avatar": {
+        "e": 0,
+        "c": 0
+      },
+      "score": 2034
+    }
+  ]
+}

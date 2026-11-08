@@ -1,0 +1,147 @@
+{
+  "baseline": "d89486c609b40cf21158d1625c8469194a3531c3",
+  "reuse": [
+    {
+      "path": "../../node-server/public/favicon.svg",
+      "use": "Unchanged approved Playgrid mark"
+    },
+    {
+      "path": "../../node-server/public/assets/player-portraits.png",
+      "use": "Existing 2\u00d72 portrait sprite; CSS positions only"
+    },
+    {
+      "path": "../../node-server/public/assets/fonts/inter-variable.ttf",
+      "license": "Existing fonts/OFL.txt",
+      "use": "Self-hosted Inter"
+    }
+  ],
+  "original_design_vectors": [
+    {
+      "id": "drawguess",
+      "path": "assets/drawguess.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "fourrow",
+      "path": "assets/fourrow.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "chess",
+      "path": "assets/chess.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "checkers",
+      "path": "assets/checkers.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "ludo",
+      "path": "assets/ludo.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "pool",
+      "path": "assets/pool.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "colorstack",
+      "path": "assets/colorstack.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "gofish",
+      "path": "assets/gofish.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "wordchain",
+      "path": "assets/wordchain.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "categories",
+      "path": "assets/categories.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "tictactoe",
+      "path": "assets/tictactoe.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "rps",
+      "path": "assets/rps.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "dotsboxes",
+      "path": "assets/dotsboxes.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "wordscramble",
+      "path": "assets/wordscramble.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "trivia",
+      "path": "assets/trivia.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "telephone",
+      "path": "assets/telephone.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "bluff",
+      "path": "assets/bluff.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "impostor",
+      "path": "assets/impostor.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "battleship",
+      "path": "assets/battleship.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "golf",
+      "path": "assets/golf.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    },
+    {
+      "id": "tycoon",
+      "path": "assets/tycoon.svg",
+      "source": "build.py / board(); original vector design specimen",
+      "implementation": "Design reference only; retain live board geometry and authoritative server state, never serve as game background"
+    }
+  ],
+  "not_used": "No stock imagery, generated raster assets, new branding or third-party piece fonts"
+}

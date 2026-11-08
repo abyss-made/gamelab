@@ -7,7 +7,7 @@ The repo holds two versions of the same project:
 | Folder | What it is | Design |
 |---|---|---|
 | `playgrid/` | Current version (temporary name "Playgrid"). One HTML file built for Claude artifacts. Multiplayer runs in the host's browser through the artifact `room` capability. Bots let you practice alone. | Approved navy/lime "Social Arcade" UI |
-| `node-server/` | Earlier standalone website: Node.js + Express + Socket.IO server, ready to host on a VPS. | Older purple "PartyPad" UI |
+| `node-server/` | Earlier standalone website: Node.js + Express + Socket.IO server, ready to host on a VPS. | Playgrid 2.0 frontend ([screenshots and QA](docs/playgrid-2.md)) |
 
 ## playgrid/
 

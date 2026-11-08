@@ -1,0 +1,72 @@
+[
+  {
+    "screen": "01-landing-desktop.png",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "screen": "01-landing-mobile.png",
+    "violations": [],
+    "passes": 21
+  },
+  {
+    "screen": "03-lobby-desktop.png",
+    "violations": [],
+    "passes": 29
+  },
+  {
+    "screen": "03-lobby-mobile.png",
+    "violations": [],
+    "passes": 29
+  },
+  {
+    "screen": "07-settings-desktop.png",
+    "violations": [],
+    "passes": 29
+  },
+  {
+    "screen": "07-settings-mobile.png",
+    "violations": [],
+    "passes": 29
+  },
+  {
+    "screen": "04-drawing-desktop.png",
+    "violations": [],
+    "passes": 29
+  },
+  {
+    "screen": "05-gameplay-mobile-390.png",
+    "violations": [],
+    "passes": 27
+  },
+  {
+    "screen": "05-gameplay-mobile-landscape.png",
+    "violations": [],
+    "passes": 27
+  },
+  {
+    "screen": "06-results-desktop.png",
+    "violations": [],
+    "passes": 30
+  },
+  {
+    "screen": "06-results-mobile.png",
+    "violations": [],
+    "passes": 30
+  },
+  {
+    "screen": "08-four-in-a-row-desktop.png",
+    "violations": [],
+    "passes": 28
+  },
+  {
+    "screen": "02-games-desktop.png",
+    "violations": [],
+    "passes": 22
+  },
+  {
+    "screen": "02-games-mobile.png",
+    "violations": [],
+    "passes": 23
+  }
+]

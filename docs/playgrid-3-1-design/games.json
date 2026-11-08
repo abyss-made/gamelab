@@ -1,0 +1,212 @@
+[
+  {
+    "id": "drawguess",
+    "name": "Draw & Guess",
+    "family": "Creative",
+    "accent": "#adff00",
+    "tagline": "Draw a little. Laugh a lot.",
+    "status": "Your word: CAT \u00b7 Draw for your party.",
+    "primary": "Brush \u00b7 10px",
+    "secondary": "Undo"
+  },
+  {
+    "id": "fourrow",
+    "name": "Four in a Row",
+    "family": "Board",
+    "accent": "#4d91ff",
+    "tagline": "One drop can change everything.",
+    "status": "Your turn \u00b7 You are Red. Choose a column.",
+    "primary": "Drop in column 4",
+    "secondary": "Rules"
+  },
+  {
+    "id": "chess",
+    "name": "Chess",
+    "family": "Strategy",
+    "accent": "#d5af7e",
+    "tagline": "Your next great move.",
+    "status": "Your turn \u00b7 White to move.",
+    "primary": "Move selected piece",
+    "secondary": "Offer draw"
+  },
+  {
+    "id": "checkers",
+    "name": "Checkers",
+    "family": "Strategy",
+    "accent": "#dc855e",
+    "tagline": "A small move. A big capture.",
+    "status": "Your turn \u00b7 A capture is available.",
+    "primary": "Select highlighted piece",
+    "secondary": "Resign"
+  },
+  {
+    "id": "ludo",
+    "name": "Ludo",
+    "family": "Board",
+    "accent": "#ff477b",
+    "tagline": "Bring the whole crew home.",
+    "status": "You rolled 6 \u00b7 Choose a movable token.",
+    "primary": "Move token 2",
+    "secondary": "Rules"
+  },
+  {
+    "id": "pool",
+    "name": "Pool",
+    "family": "Skill",
+    "accent": "#33c8ae",
+    "tagline": "Find your angle.",
+    "status": "Your turn \u00b7 Solids \u00b7 Drag to aim, then Shoot.",
+    "primary": "Shoot",
+    "secondary": "Rules"
+  },
+  {
+    "id": "colorstack",
+    "name": "Color Stack",
+    "family": "Cards",
+    "accent": "#4db8ff",
+    "tagline": "Keep the color. Change the game.",
+    "status": "Your turn \u00b7 Match Red or 7.",
+    "primary": "Play Red 5",
+    "secondary": "Draw a card"
+  },
+  {
+    "id": "gofish",
+    "name": "Go Fish",
+    "family": "Cards",
+    "accent": "#5ed1d4",
+    "tagline": "A good catch starts with a question.",
+    "status": "Choose a rank in your hand, then a player.",
+    "primary": "Ask Nova for 7",
+    "secondary": "Rules"
+  },
+  {
+    "id": "wordchain",
+    "name": "Word Chain",
+    "family": "Words",
+    "accent": "#d5a4ff",
+    "tagline": "Keep the chain alive.",
+    "status": "Your turn \u00b7 Start with T \u00b7 At least 3 letters.",
+    "primary": "Send word",
+    "secondary": "Rules"
+  },
+  {
+    "id": "categories",
+    "name": "Categories Rush",
+    "family": "Words",
+    "accent": "#ffcd2d",
+    "tagline": "One letter. So many possibilities.",
+    "status": "Round 2/5 \u00b7 Every answer starts with S.",
+    "primary": "I\u2019m done",
+    "secondary": "Rules"
+  },
+  {
+    "id": "tictactoe",
+    "name": "Tic Tac Toe",
+    "family": "Board",
+    "accent": "#79c7ff",
+    "tagline": "Three makes a moment.",
+    "status": "Your turn \u00b7 You are X.",
+    "primary": "Place X",
+    "secondary": "Rules"
+  },
+  {
+    "id": "rps",
+    "name": "Rock Paper Scissors",
+    "family": "Party",
+    "accent": "#ffb46e",
+    "tagline": "Make your move. Keep it secret.",
+    "status": "Round 2 \u00b7 Pick before the timer ends.",
+    "primary": "Lock in Paper",
+    "secondary": "Rules"
+  },
+  {
+    "id": "dotsboxes",
+    "name": "Dots & Boxes",
+    "family": "Board",
+    "accent": "#b09bff",
+    "tagline": "Connect. Close. Claim.",
+    "status": "Your turn \u00b7 Complete a box to play again.",
+    "primary": "Select a line",
+    "secondary": "Rules"
+  },
+  {
+    "id": "wordscramble",
+    "name": "Word Scramble",
+    "family": "Words",
+    "accent": "#ffc377",
+    "tagline": "A little chaos. A clever answer.",
+    "status": "Round 3/8 \u00b7 Unscramble the letters.",
+    "primary": "Submit guess",
+    "secondary": "Rules"
+  },
+  {
+    "id": "trivia",
+    "name": "Trivia Blitz",
+    "family": "Party",
+    "accent": "#7ddac6",
+    "tagline": "A bright idea beats the buzzer.",
+    "status": "Question 3/10 \u00b7 Pick one answer.",
+    "primary": "Lock answer",
+    "secondary": "Rules"
+  },
+  {
+    "id": "telephone",
+    "name": "Drawing Telephone",
+    "family": "Creative",
+    "accent": "#ffa6cc",
+    "tagline": "Every retelling gets better.",
+    "status": "Step 2 \u00b7 Draw the prompt privately.",
+    "primary": "Done drawing",
+    "secondary": "Undo"
+  },
+  {
+    "id": "bluff",
+    "name": "Bluff Battle",
+    "family": "Party",
+    "accent": "#b59dff",
+    "tagline": "Make the unbelievable believable.",
+    "status": "Round 2/5 \u00b7 Write a convincing fake answer.",
+    "primary": "Submit bluff",
+    "secondary": "Rules"
+  },
+  {
+    "id": "impostor",
+    "name": "The Impostor",
+    "family": "Party",
+    "accent": "#e697ba",
+    "tagline": "Who\u2019s just playing along?",
+    "status": "Clue round \u00b7 Your turn to give a clue.",
+    "primary": "Give clue",
+    "secondary": "Rules"
+  },
+  {
+    "id": "battleship",
+    "name": "Battleship",
+    "family": "Strategy",
+    "accent": "#65c8fa",
+    "tagline": "Quiet seas. Clever moves.",
+    "status": "Target selected \u00b7 B4 \u00b7 Confirm to fire.",
+    "primary": "Fire at B4",
+    "secondary": "Rules"
+  },
+  {
+    "id": "golf",
+    "name": "Mini Golf",
+    "family": "Skill",
+    "accent": "#6ed192",
+    "tagline": "Small course. Big bragging rights.",
+    "status": "Hole 2/9 \u00b7 Stroke 2 \u00b7 Aim, set power, putt.",
+    "primary": "Putt",
+    "secondary": "Rules"
+  },
+  {
+    "id": "tycoon",
+    "name": "Property Tycoon",
+    "family": "Board",
+    "accent": "#f0c16b",
+    "tagline": "Build a little empire together.",
+    "status": "Your turn \u00b7 Review Riverside before buying.",
+    "primary": "Buy for $160",
+    "secondary": "Auction"
+  }
+]
