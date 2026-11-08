@@ -41,7 +41,7 @@ GameUI.common = (() => {
 
   function playerChip(a, p, { active, extra = "", sub = "" } = {}) {
     const m = a.member(p.id);
-    return `<div class="b2-player ${active ? "active" : ""} ${p.out || (m && !m.connected) ? "offline" : ""}">${a.avatarHTML(p.avatar)}<div><b>${a.esc(p.name)}</b>${p.id === a.S.you ? " <small>(you)</small>" : ""}<div class="muted">${sub}</div></div>${extra}</div>`;
+    return `<div data-player="${a.esc(p.id)}" class="b2-player ${active ? "active" : ""} ${p.out || (m && !m.connected) ? "offline" : ""}">${a.avatarHTML(p.avatar)}<div><b>${a.esc(p.name)}</b>${p.id === a.S.you ? " <small>(you)</small>" : ""}<div class="muted">${sub}</div></div>${extra}</div>`;
   }
 
   function podium(rows, a, key, unit) {
@@ -54,7 +54,7 @@ GameUI.common = (() => {
   }
 
   function resultTitle(r, state, a) {
-    if (r.tie) return r.winners.includes(state.you) ? "It's a tie, and you're in it!" : "It's a tie!";
+    if (r.tie) return (r.winners || []).includes(state.you) ? "It's a tie, and you're in it!" : "It's a tie!";
     if (r.winnerId === state.you) return "You win!";
     const w = (r.standings || r.players || []).find((p) => p.id === r.winnerId);
     return w ? `${a.esc(w.name)} wins!` : "Game over";
@@ -62,18 +62,20 @@ GameUI.common = (() => {
   function resultSound(r, state) {
     const mine = (r.standings || r.players || r.hands || []).some((p) => p.id === state.you);
     if (!mine) return "reveal";
-    return r.winnerId === state.you || (r.winners && r.winners.includes(state.you)) ? "win" : "lose";
+    return r.winnerId === state.you || (r.winners && (r.winners || []).includes(state.you)) ? "win" : "lose";
   }
   // Re-renders without dropping keyboard focus (#43). Boards are rebuilt with innerHTML, which used
   // to send focus back to <body>. If a button inside `root` had focus and `render` replaced it, its
   // replacement (same data-sq / data-cell / data-col / data-rank / data-target / data-ship / data-act
   // / data-choose, or id) gets focus back. If that control is disabled now (it isn't your turn),
   // focus waits on `root` and returns to it at a later render, once it is enabled again.
-  const FOCUS_KEYS = ["sq", "cell", "col", "rank", "target", "ship", "act", "choose"];
+  const FOCUS_KEYS = ["sq", "cell", "col", "card", "handCard", "tileIndex", "token", "tok", "rank", "target", "ship", "act", "choose", "ans", "vote", "promo", "like"];
   let parked = null;
   function focusKey(el) {
     if (!el || el.tagName !== "BUTTON") return null;
-    for (const k of FOCUS_KEYS) if (el.dataset[k] !== undefined) return `[data-${k}="${CSS.escape(el.dataset[k])}"]`;
+    if(el.dataset.kind && el.dataset.r!==undefined && el.dataset.c!==undefined)
+      return `[data-kind="${CSS.escape(el.dataset.kind)}"][data-r="${CSS.escape(el.dataset.r)}"][data-c="${CSS.escape(el.dataset.c)}"]`;
+    for (const k of FOCUS_KEYS) if (el.dataset[k] !== undefined) return `[data-${k.replace(/[A-Z]/g,c=>"-"+c.toLowerCase())}="${CSS.escape(el.dataset[k])}"]`;
     return el.id ? "#" + CSS.escape(el.id) : null;
   }
   function keepFocus(root, render) {
@@ -125,10 +127,21 @@ GameUI.common = (() => {
     };
   }
 
+  function wordFeedback(root,app,inputId,game){
+    const input=root.querySelector(inputId);
+    input.closest('form').insertAdjacentHTML('afterend',`<p class="word-feedback" role="status"></p><details class="word-help"><summary>Word rules &amp; missing words</summary><p>${game==='wordchain'?'English words only. Accepted inflections and spelling variants count; proper names, spaces and hyphens do not.':'Use every tile once. Any recognized English anagram counts.'}</p><p>Our offline dictionary is not exhaustive. <a class="word-report" href="https://github.com/abyss-made/gamelab/issues/new" target="_blank" rel="noopener noreferrer">Report a missing word on GitHub</a>. Review the report before submitting.</p></details>`);
+    const feedback=root.querySelector('.word-feedback');
+    const notice=text=>{if(typeof text!=='string'||!root.isConnected||!/(word|letter|arrangement|spelling|already used)/i.test(text))return;feedback.textContent=text;input.setAttribute('aria-invalid','true');GameExperience.animate(input,[{borderColor:'#ffb388'},{borderColor:'#557385'}]);};
+    const clear=()=>{feedback.textContent='';input.removeAttribute('aria-invalid');};
+    input.addEventListener('input',clear);
+    root.querySelector('.word-report').addEventListener('click',event=>{const word=input.value.trim().slice(0,24);event.currentTarget.href='https://github.com/abyss-made/gamelab/issues/new?title='+encodeURIComponent('Word list omission: '+word)+'&body='+encodeURIComponent('Game: '+game+'\nWord: '+word+'\nExpected meaning / dictionary source: ');});
+    app.socket.on('notice',notice);return {clear,stop:()=>app.socket.off('notice',notice)};
+  }
+
   // A new game starts with nothing remembered.
   const releaseFocus = () => {
     parked = null;
   };
 
-  return { playingCard, cardBack, makeClock, playerChip, podium, resultTitle, resultSound, rankWord, rankLabel, keepFocus, releaseFocus, makeConfirm };
+  return { playingCard, cardBack, makeClock, playerChip, podium, resultTitle, resultSound, rankWord, rankLabel, keepFocus, releaseFocus, makeConfirm, wordFeedback };
 })();

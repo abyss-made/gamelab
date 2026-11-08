@@ -202,25 +202,23 @@ GameUI.telephone = (() => {
     if (i && matchMedia("(pointer:fine)").matches) i.focus();
   }
 
-  function renderReveal(body, g) {
-    const r = g.rev;
-    const owner = g.players.find((p) => p.id === r.owner);
-    body.innerHTML = `<h3 class="tp-chain">${owner ? app.esc(owner.name) + "'s chain" : "Chain"} <small>${r.chain + 1} of ${r.chains}</small></h3><ol class="tp-entries" id="tp-entries"></ol>`;
-    const ol = body.querySelector("#tp-entries");
-    r.entries.forEach((e) => {
-      const who = g.players.find((p) => p.id === e.by);
-      const li = document.createElement("li");
-      li.className = "tp-entry";
-      const label = e.kind === "draw" ? "drew" : e.kind === "prompt" ? (e.generated ? "received a party prompt" : "wrote") : "guessed";
-      li.innerHTML = `<div class="tp-by">${who ? app.avatarHTML(who.avatar) : ""}<b>${who ? app.esc(who.name) : "?"}</b> ${label}</div><div class="tp-content"></div>`;
-      const content = li.querySelector(".tp-content");
-      if (e.kind === "draw") content.appendChild(e.skipped ? Object.assign(document.createElement("em"), { textContent: "(no drawing)" }) : thumb(e.strokes, `Drawing by ${who ? who.name : "a player"}`));
-      else content.innerHTML = `<p class="tp-text">${app.esc(e.text)}</p>`;
-      if (!e.skipped && !e.generated && e.by !== S.you && g.myIndex >= 0) {
-        li.insertAdjacentHTML("beforeend", `<button class="btn btn-small btn-ghost tp-like ${e.liked ? "on" : ""}" data-like="${r.chain}:${e.i}" ${e.liked ? "disabled" : ""} aria-label="Like this entry">${e.liked ? "♥" : "♡"} ${e.likes}</button>`);
-      } else if (e.likes) li.insertAdjacentHTML("beforeend", `<span class="tp-like-n">♥ ${e.likes}</span>`);
-      ol.appendChild(li);
-    });
+  function renderReveal(body,g){
+    const r=g.rev,owner=g.players.find(p=>p.id===r.owner),same=body.querySelector('#tp-entries')&&body.dataset.chain===String(r.chain);
+    if(!same){body.dataset.chain=r.chain;body.innerHTML=`<h3 class="tp-chain">${owner?app.esc(owner.name)+"'s chain":"Chain"}<small>${r.chain+1} / ${r.chains}</small></h3><ol class="tp-entries" id="tp-entries"></ol><button type="button" class="btn btn-small btn-ghost" id="tp-latest">Jump to latest reveal</button>`;
+      body.querySelector('#tp-latest').addEventListener('click',()=>body.querySelector('.tp-entry:last-child')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'}));}
+    const ol=body.querySelector('#tp-entries');
+    for(const e of r.entries){
+      let li=[...ol.children].find(n=>n.dataset.entry===String(e.i));
+      if(!li){const who=g.players.find(p=>p.id===e.by);li=document.createElement('li');li.className='tp-entry';li.dataset.entry=e.i;
+        const label=e.kind==='draw'?'drew':e.kind==='prompt'?(e.generated?'received a prompt':'wrote'):'guessed';
+        li.innerHTML=`<div class="tp-by">${who?app.avatarHTML(who.avatar):''}<b>${who?app.esc(who.name):'?'}</b> ${label} · ${e.i+1}</div><div class="tp-content"></div><div class="tp-reaction"></div>`;
+        const content=li.querySelector('.tp-content');if(e.kind==='draw')content.appendChild(e.skipped?Object.assign(document.createElement('em'),{textContent:'(no drawing)'}):thumb(e.strokes,`Drawing by ${who?who.name:'a player'}`));else content.innerHTML=`<p class="tp-text">${app.esc(e.text)}</p>`;
+        ol.appendChild(li);if(same)GameExperience.animate(li,[{opacity:0,translate:'0px 16px',rotate:'-2deg'},{opacity:1,translate:'0px 0px',rotate:'0deg'}],{duration:320});
+      }
+      const reaction=li.querySelector('.tp-reaction'),html=!e.skipped&&!e.generated&&e.by!==S.you&&g.myIndex>=0?`<button class="btn btn-small btn-ghost tp-like ${e.liked?'on':''}" data-like="${r.chain}:${e.i}" ${e.liked?'disabled':''} aria-label="Like this entry">${e.liked?'♥':'♡'} ${e.likes}</button>`:e.likes?`<span class="tp-like-n">♥ ${e.likes}</span>`:'';
+      if(reaction.innerHTML!==html)reaction.innerHTML=html;
+    }
+    body.querySelector('#tp-latest').hidden=r.entries.length<2;
   }
 
   function update(state) {

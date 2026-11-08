@@ -797,6 +797,7 @@
 
   socket.on("disconnect", () => {
     $("#connection-note").hidden = false;
+    GameExperience.reset($("#stage"));
   });
   socket.on("connect", () => {
     $("#connection-note").hidden = true;
@@ -1847,6 +1848,7 @@
       GameUI[mounted.slice(5)].unmount();
     mounted = null;
     GameUI.common.releaseFocus();
+    GameExperience.reset($("#stage"));
   }
 
   function renderStage() {
@@ -1865,7 +1867,11 @@
     }
     if (mode === "lobby") renderLobby();
     // A state update rebuilds boards; keep keyboard focus on the same square or button (#43).
-    else GameUI.common.keepFocus(stage, () => GameUI[S.gameId].update(S, app));
+    else {
+      const feedback=GameExperience.before(stage,S);
+      GameUI.common.keepFocus(stage,()=>GameUI[S.gameId].update(S,app));
+      GameExperience.after(stage,S,feedback);
+    }
   }
 
   // Next-game votes, most popular first.

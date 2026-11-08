@@ -8,6 +8,7 @@ GameUI.wordchain = (() => {
   let S = null;
   let lastLen = -1;
   let lastTurn = null;
+  let feedback=null;
 
   function mount(stage, a) {
     app = a;
@@ -25,6 +26,7 @@ GameUI.wordchain = (() => {
         <ol class="wc-chain" id="wc-chain" aria-label="Words so far"></ol>
       </div>`;
     stage.appendChild(root);
+    feedback=C.wordFeedback(root,app,"#wc-input","wordchain");
     clock = C.makeClock(() => root);
     root.querySelector("#wc-form").addEventListener("submit", (e) => {
       e.preventDefault();
@@ -65,6 +67,7 @@ GameUI.wordchain = (() => {
     lastTurn = g.turnId;
     if (g.chainLength !== lastLen && lastLen >= 0) {
       input.value = "";
+      feedback.clear();
       Sound.play("drop");
     }
     lastLen = g.chainLength;
@@ -78,6 +81,7 @@ GameUI.wordchain = (() => {
 
   function unmount() {
     if (clock) clock.stop();
+    feedback?.stop();
     if (root) root.remove();
     root = null;
     lastLen = -1;

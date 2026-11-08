@@ -7,6 +7,7 @@ GameUI.impostor = (() => {
   let clock = null;
   let S = null;
   let key = "";
+  let concealed=false;
 
   function mount(stage, a) {
     app = a;
@@ -16,6 +17,7 @@ GameUI.impostor = (() => {
       <div class="card im-main">
         <div class="hl-round" id="im-round"></div>
         <div class="im-role" id="im-role" aria-live="polite"></div>
+        <button type="button" class="btn btn-small btn-ghost im-privacy" id="im-privacy" aria-pressed="false">Hide private role</button>
         <ul class="im-clues" id="im-clues"></ul>
         <div id="im-body"></div>
         <div class="hl-status" id="im-status" aria-live="polite"></div>
@@ -23,6 +25,7 @@ GameUI.impostor = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
+      if(e.target.closest("#im-privacy")){concealed=!concealed;update(S);return;}
       const v = e.target.closest("[data-vote]");
       if (v && !v.disabled) app.socket.emit("action", { type: "vote", target: v.dataset.vote });
       if (e.target.closest("#im-ready")) app.socket.emit("action", { type: "ready" });
@@ -53,7 +56,10 @@ GameUI.impostor = (() => {
     if (!me || me.out) role = `<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
     else if (g.role === "impostor") role = `<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
     else role = `<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word || "")}</b>Category: ${app.esc(g.category)}. Give a useful clue without saying the word.</div>`;
-    root.querySelector("#im-role").innerHTML = role;
+    const roleNode=root.querySelector('#im-role');
+    const roleHTML=concealed&&me&&!me.out?'<div class="im-card"><span class="im-role-tag">FOR YOUR EYES ONLY</span><b class="im-secret">ROLE HIDDEN</b>Your role is saved. Reveal it when you are ready.</div>':role;
+    if(roleNode.innerHTML!==roleHTML)roleNode.innerHTML=roleHTML;
+    const privacy=root.querySelector('#im-privacy');privacy.hidden=!me||me.out;privacy.textContent=concealed?'Show private role':'Hide private role';privacy.setAttribute('aria-pressed',String(concealed));
     root.querySelector("#im-clues").innerHTML = g.clues.map((c) => `<li><b>${nameOf(g, c.id)}</b>: ${app.esc(c.text)}</li>`).join("");
     const body = root.querySelector("#im-body");
     const status = root.querySelector("#im-status");
@@ -106,6 +112,7 @@ GameUI.impostor = (() => {
     if (root) root.remove();
     root = null;
     key = "";
+    concealed=false;
   }
   const chatPlaceholder = (st) => (st.game && st.game.phase === "discuss" ? "Discuss who the impostor is…" : null);
   function renderResult(r, state, a) {

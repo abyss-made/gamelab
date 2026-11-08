@@ -32,6 +32,7 @@ GameUI.trivia = (() => {
   function onKey(e) {
     if (!root || !S || e.ctrlKey || e.metaKey || e.altKey) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || "").toUpperCase())) return;
+    if(document.querySelector("dialog[open], [aria-modal=true]:not([hidden])"))return;
     const i = "1234".indexOf(e.key);
     if (i < 0) return;
     const b = root.querySelector(`[data-ans="${i}"]`);
