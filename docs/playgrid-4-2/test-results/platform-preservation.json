@@ -1,0 +1,26 @@
+{
+  "node-server/server/index.js": {
+    "base": "b19f1172eefe62057ac0ad60ebfc25a1b98a93e3",
+    "current": "b19f1172eefe62057ac0ad60ebfc25a1b98a93e3"
+  },
+  "node-server/server/rooms.js": {
+    "base": "8f22601bacab5c5c9566bd65979629c0f3c1acd6",
+    "current": "8f22601bacab5c5c9566bd65979629c0f3c1acd6"
+  },
+  "node-server/server/log.js": {
+    "base": "cb014684863ea9932d1e39ffd1834c514c11840d",
+    "current": "cb014684863ea9932d1e39ffd1834c514c11840d"
+  },
+  "node-server/scripts/loadtest.js": {
+    "base": "4a55ba3c307327e006b53f6903c0d2f7e5867326",
+    "current": "4a55ba3c307327e006b53f6903c0d2f7e5867326"
+  },
+  "node-server/test/platform.js": {
+    "base": "5f91a139beb35d1f623b255f8f81ccefb70c73c0",
+    "current": "5f91a139beb35d1f623b255f8f81ccefb70c73c0"
+  },
+  "docs/playgrid-4-1/RUNBOOK.md": {
+    "base": "b2c081c146eadb05c7054a72e54f11e0e54b9494",
+    "current": "b2c081c146eadb05c7054a72e54f11e0e54b9494"
+  }
+}

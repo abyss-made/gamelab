@@ -1,0 +1,91 @@
+PASS English vocabulary exceeds 190,000 entries
+PASS Accept livestream
+PASS Accept livestreaming
+PASS Accept microplastics
+PASS Accept neurodivergent
+PASS Accept quokkas
+PASS Accept aerogel
+PASS Accept coöperate
+PASS Accept café
+PASS Accept encyclopædia
+PASS Accept manoeuvre
+PASS Accept colour
+PASS Accept color
+PASS Accept children
+PASS Accept running
+PASS Accept wolves
+PASS Reject "axqzzl"
+PASS Reject "xxzplqq"
+PASS Reject "pizzazzxyz"
+PASS Reject "doggggg"
+PASS Reject "livestreaminging"
+PASS Reject "catttttts"
+PASS Reject "London"
+PASS Reject "NASA"
+PASS Reject "dog9"
+PASS Reject "ice-cream"
+PASS Reject "ice cream"
+PASS Reject "dogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdogdog"
+PASS Reject null
+PASS Reject {}
+PASS Unicode and boundaries
+PASS Semantic membership axolotls
+PASS Semantic membership red pandas
+PASS Semantic membership mice
+PASS Semantic membership boba
+PASS Semantic membership ukuleles
+PASS Semantic membership teeth
+PASS Semantic membership dragon fruit
+PASS Semantic membership microbus
+PASS Semantic membership software engineer
+PASS Semantic membership aubergine
+PASS Semantic membership hammers
+PASS Reject wrong category airplane
+PASS Reject wrong category hammer
+PASS Reject wrong category banana
+PASS Reject wrong category piano
+PASS Reject wrong category table
+PASS Reject wrong category axqzzl
+PASS Common occupation doctor
+PASS Common occupation nurse
+PASS Common occupation teacher
+PASS Common occupation lawyer
+PASS Common occupation dentist
+PASS Common occupation engineer
+PASS Common occupation accountant
+PASS Common occupation farmer
+PASS Common occupation police officer
+PASS Common occupation firefighter
+PASS Common occupation artist
+PASS Common occupation musician
+PASS Common occupation scientist
+PASS Common occupation manager
+PASS Common occupation surgeon
+PASS Common occupation author
+PASS Common occupation architect
+PASS Common occupation plumber
+PASS Common occupation carpenter
+PASS Common occupation pilot
+PASS Common occupation chef
+PASS Common occupation mechanic
+PASS Common drink water
+PASS Common drink juice
+PASS Common drink orange juice
+PASS Common drink milk
+PASS Common drink tea
+PASS Common drink coffee
+PASS Common vehicle train
+PASS Common vehicle car
+PASS Common vehicle bus
+PASS Common vehicle truck
+PASS Common vehicle bicycle
+PASS Common vehicle airplane
+PASS Common vehicle boat
+PASS Cities and aliases preserve typed initial
+PASS Plural duplicates preserve proper names
+PASS Real wrong-category answers score zero, private until review
+PASS Creative category policy is explicit
+PASS Word Chain exhaustion uses broad vocabulary
+PASS Scramble separates wrong letters from unknown anagrams
+PASS Invented Bluff answers remain valid
+experience42: 90 checks passed

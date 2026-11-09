@@ -1,0 +1,26 @@
+PASS  ghost: room created
+PASS  ghost: same socket attaches a second identity
+PASS  ghost: previous member released immediately, not left connected
+PASS  ghost: room still listed during grace period
+PASS  ghost: room unlisted after grace
+PASS  ghost: stale room is deleted after the grace period and TTL
+PASS  ghost: identity swap on a full lobby takes the freed seat
+PASS  ghost: legitimate reconnect recovers same member
+PASS  ghost: same token from another socket takes over the seat
+PASS  word: third person in a 2-seat room spectates
+PASS  word: spectator state and events never contain the secret word
+PASS  word: guesser does not see the word
+PASS  word: drawer sees the word
+PASS  word: no free seat mid-turn for the spectator
+PASS  word: guess accepted
+PASS  word: revealed to spectators at turn end
+PASS  undo/clear spam bounded (6 canvas broadcasts from 200 requests)
+PASS  non-drawer cannot clear or undo
+PASS  legitimate undo still works after spam
+PASS  seat-change spam bounded (4 system messages from 200 requests)
+PASS  lock toggle spam bounded (4 system messages from 100 requests)
+PASS  vote-kick spam bounded (1 system messages from 100 requests)
+PASS  normal chat still works
+PASS  single legitimate seat action is not blocked
+
+All passed
