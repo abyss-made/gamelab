@@ -2084,6 +2084,9 @@
       top += `<div class="card result-card">${GameUI[S.lastResult.type].renderResult(S.lastResult, S, app)}${resultActionsHTML()}</div>`;
     }
     patch($("#lobby-top"), top);
+    const resultRegion=$("#lobby-top"),celebrationKey=results?JSON.stringify(S.lastResult):'';
+    if(results&&resultRegion.dataset.celebrated!==celebrationKey)GameExperience.celebrate(resultRegion.querySelector('.result-card'),S.lastResult);
+    resultRegion.dataset.celebrated=celebrationKey;
     patch($("#party-main"), partyMainHTML(results));
     patch($("#party-activity"), activityHTML());
     clearInterval(autoTimer);

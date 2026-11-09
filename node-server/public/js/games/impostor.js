@@ -8,6 +8,7 @@ GameUI.impostor = (() => {
   let S = null;
   let key = "";
   let concealed=false;
+  let repainting=false;
 
   function mount(stage, a) {
     app = a;
@@ -25,7 +26,7 @@ GameUI.impostor = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
-      if(e.target.closest("#im-privacy")){concealed=!concealed;update(S);return;}
+      if(e.target.closest("#im-privacy")){concealed=!concealed;repainting=true;update(S);repainting=false;return;}
       const v = e.target.closest("[data-vote]");
       if (v && !v.disabled) app.socket.emit("action", { type: "vote", target: v.dataset.vote });
       if (e.target.closest("#im-ready")) app.socket.emit("action", { type: "ready" });
@@ -40,7 +41,7 @@ GameUI.impostor = (() => {
   function update(state) {
     S = state;
     const g = S.game;
-    clock.set(g.timeLeft);
+    if(!repainting)clock.set(g.timeLeft);
     const me = g.myIndex >= 0 ? g.players[g.myIndex] : null;
     root.querySelector("#im-players").innerHTML = g.players
       .map((p) =>
@@ -104,7 +105,7 @@ GameUI.impostor = (() => {
       : g.phase === "vote" ? (g.myVote ? "Vote locked in." : "Vote for who you think is the impostor.")
       : g.phase === "guess" ? (g.role === "impostor" ? "You were caught! Guess the word to steal the win." : "The impostor is making a last guess…")
       : "";
-    clock.set(g.timeLeft);
+    if(!repainting)clock.set(g.timeLeft);
   }
 
   function unmount() {

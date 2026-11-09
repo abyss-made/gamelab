@@ -86,3 +86,6 @@
 }
 @media(max-height:500px) and (orientation:landscape){#stage[data-experience] :is(.wc-main,.ws-main,.tv-main,.bl-main,.im-main,.tp-main){padding:16px}#stage[data-experience] .tv-q{font-size:24px;margin:10px auto}#stage[data-experience] .tv-choice{min-height:48px}#stage[data-experience] .im-card{padding:14px;margin:8px auto}#stage[data-experience] .im-secret{font-size:28px}#stage[data-experience] .ws-tiles{margin:12px auto;min-height:54px}#stage[data-experience] .ws-arrange{margin-bottom:8px}}
 @media(prefers-reduced-motion:reduce){#stage[data-experience] *, .result-card *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.result-spark{position:absolute;top:0;width:6px;height:10px;border-radius:2px;pointer-events:none;opacity:0}
+/* Keep presets beside their slider on desktop rather than adding a tall extra control row. */
+@media(min-width:1101px){#stage[data-experience=pool] .pl-controls{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(160px,1fr);gap:10px}#stage[data-experience=pool] .power-presets{grid-column:2;grid-row:2}#stage[data-experience=pool] .pl-controls>.board-actions{grid-column:3;grid-row:1/span 2}#stage[data-experience=pool] .pl-controls>.pl-fine{grid-row:1/span 2}}

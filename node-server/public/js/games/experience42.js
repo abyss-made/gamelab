@@ -3,7 +3,7 @@ window.GameExperience=(()=>{
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),cache=new WeakMap();
  const phaseTargets={trivia:'#tv-choices',bluff:'#bl-body',impostor:'#im-body',telephone:'#tp-body',categories:'#cr-body',wordscramble:'#ws-tiles',tycoon:'#ty-actions'};
  const specs={colorstack:['#cs-hand [data-card]','card'],gofish:['#gf-hand [data-hand-card]','handCard'],ludo:['[data-tok]','tok']};
- function animate(el,frames,options={}){if(el&&!reduced.matches&&el.animate)el.animate(frames,{duration:240,easing:'cubic-bezier(.2,.8,.2,1)',...options});}
+ function animate(el,frames,options={}){if(el&&!reduced.matches&&el.animate)return el.animate(frames,{duration:240,easing:'cubic-bezier(.2,.8,.2,1)',...options});}
  function nodes(stage,game){const out=new Map(),s=specs[game];if(s)stage.querySelectorAll(s[0]).forEach(el=>out.set(el.dataset[s[1]],{el,rect:el.getBoundingClientRect()}));return out;}
  function before(stage,state){return {nodes:nodes(stage,state.gameId),previous:cache.get(stage)};}
  function after(stage,state,snap){
@@ -45,5 +45,14 @@ window.GameExperience=(()=>{
   e.preventDefault();next?.focus({preventScroll:true});
  });
  reduced.addEventListener('change',()=>{if(reduced.matches)document.getAnimations().forEach(a=>a.cancel());});
- return {before,after,reset,animate};
+ function celebrate(card,result){
+  if(!card||reduced.matches||!(result.winnerId||result.winners?.length))return;
+  animate(card.querySelector('.result-title'),[{opacity:.2,translate:'0px 10px'},{opacity:1,translate:'0px 0px'}],{duration:320});
+  for(let i=0;i<14;i++){
+   const piece=document.createElement('i');piece.className='result-spark';piece.setAttribute('aria-hidden','true');piece.style.left=(8+i*6)+'%';piece.style.background=['#b7ff46','#f3d88a','#81cddd'][i%3];card.appendChild(piece);
+   const motion=animate(piece,[{opacity:0,translate:'0px -16px',rotate:'0deg'},{opacity:.9,offset:.2},{opacity:0,translate:`${i%2?24:-24}px 140px`,rotate:`${i%2?140:-160}deg`}],{duration:700+i%3*80});
+   if(motion)motion.finished.then(()=>piece.remove(),()=>piece.remove());else piece.remove();
+  }
+ }
+ return {before,after,reset,animate,celebrate};
 })();
