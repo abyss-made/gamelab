@@ -109,8 +109,8 @@ for (const [v, n] of [['D', 2], ['P', 4]]) {
 // ---------- Word Chain: a dead letter switches to a fresh one ----------
 {
   const r = fakeRoom(['A', 'B', 'C'], 'wordchain', { lives: 3, turnTime: 10 });
-  const DICT = r.G.DICT;
-  // Use up every listed word starting with "x", then play a word ending in "x".
+  const DICT = require('../server/lexicon').WORDS;
+  // Exhaust the authoritative accepted vocabulary, not the curated prompt list.
   for (const w of DICT) if (w[0] === 'x') r.st.used.add(w);
   const who = () => r.idx(r.st.players[r.st.turn].id);
   r.st.letter = 'b';
