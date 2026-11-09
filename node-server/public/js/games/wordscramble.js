@@ -81,10 +81,12 @@ GameUI.wordscramble = (() => {
       if (first) msg += ` First: ${first.name}.`;
     } else msg = g.solvedByMe ? `Solved! +${g.myGain}. Waiting for the others…` : "Tap the letters or type an answer. Use every tile once.";
     root.querySelector("#ws-status").textContent = msg;
+    if(g.solvedByMe)feedback.clear();
     if (g.round !== lastRound) {
       if (lastRound >= 0 && canType && matchMedia("(pointer:fine)").matches) input.focus({ preventScroll: true });
       lastRound = g.round;
     }
+    clock.set(g.timeLeft);
   }
 
   function unmount() {

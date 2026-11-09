@@ -8,7 +8,6 @@ GameUI.impostor = (() => {
   let S = null;
   let key = "";
   let concealed=false;
-  let repainting=false;
 
   function mount(stage, a) {
     app = a;
@@ -26,7 +25,7 @@ GameUI.impostor = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
-      if(e.target.closest("#im-privacy")){concealed=!concealed;repainting=true;update(S);repainting=false;return;}
+      if(e.target.closest("#im-privacy")){concealed=!concealed;paintRole(S.game);return;}
       const v = e.target.closest("[data-vote]");
       if (v && !v.disabled) app.socket.emit("action", { type: "vote", target: v.dataset.vote });
       if (e.target.closest("#im-ready")) app.socket.emit("action", { type: "ready" });
@@ -38,10 +37,22 @@ GameUI.impostor = (() => {
     return p ? app.esc(p.name) : "?";
   };
 
+  function paintRole(g) {
+    const me=g.myIndex>=0?g.players[g.myIndex]:null;
+    let role;
+    if (!me || me.out) role = `<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
+    else if (g.role === "impostor") role = `<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
+    else role = `<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word || "")}</b>Category: ${app.esc(g.category)}. Give a useful clue without saying the word.</div>`;
+    const roleNode=root.querySelector('#im-role');
+    const roleHTML=concealed&&me&&!me.out?'<div class="im-card"><span class="im-role-tag">FOR YOUR EYES ONLY</span><b class="im-secret">ROLE HIDDEN</b>Your role is saved. Reveal it when you are ready.</div>':role;
+    if(roleNode.innerHTML!==roleHTML)roleNode.innerHTML=roleHTML;
+    const privacy=root.querySelector('#im-privacy');privacy.hidden=!me||me.out;privacy.textContent=concealed?'Show private role':'Hide private role';privacy.setAttribute('aria-pressed',String(concealed));
+  }
+
   function update(state) {
     S = state;
     const g = S.game;
-    if(!repainting)clock.set(g.timeLeft);
+    clock.set(g.timeLeft);
     const me = g.myIndex >= 0 ? g.players[g.myIndex] : null;
     root.querySelector("#im-players").innerHTML = g.players
       .map((p) =>
@@ -53,14 +64,7 @@ GameUI.impostor = (() => {
       .join("");
     const phaseName = { clue: "Clues", discuss: "Discussion", vote: "Vote", guess: "Last chance", result: "Results" }[g.phase];
     root.querySelector("#im-round").innerHTML = `Round ${g.round} of ${g.rounds} · ${phaseName} <span class="fr-timer" data-timer></span>`;
-    let role;
-    if (!me || me.out) role = `<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
-    else if (g.role === "impostor") role = `<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
-    else role = `<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word || "")}</b>Category: ${app.esc(g.category)}. Give a useful clue without saying the word.</div>`;
-    const roleNode=root.querySelector('#im-role');
-    const roleHTML=concealed&&me&&!me.out?'<div class="im-card"><span class="im-role-tag">FOR YOUR EYES ONLY</span><b class="im-secret">ROLE HIDDEN</b>Your role is saved. Reveal it when you are ready.</div>':role;
-    if(roleNode.innerHTML!==roleHTML)roleNode.innerHTML=roleHTML;
-    const privacy=root.querySelector('#im-privacy');privacy.hidden=!me||me.out;privacy.textContent=concealed?'Show private role':'Hide private role';privacy.setAttribute('aria-pressed',String(concealed));
+    paintRole(g);
     root.querySelector("#im-clues").innerHTML = g.clues.map((c) => `<li><b>${nameOf(g, c.id)}</b>: ${app.esc(c.text)}</li>`).join("");
     const body = root.querySelector("#im-body");
     const status = root.querySelector("#im-status");
@@ -105,7 +109,7 @@ GameUI.impostor = (() => {
       : g.phase === "vote" ? (g.myVote ? "Vote locked in." : "Vote for who you think is the impostor.")
       : g.phase === "guess" ? (g.role === "impostor" ? "You were caught! Guess the word to steal the win." : "The impostor is making a last guess…")
       : "";
-    if(!repainting)clock.set(g.timeLeft);
+    clock.set(g.timeLeft);
   }
 
   function unmount() {

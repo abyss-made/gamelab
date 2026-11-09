@@ -89,3 +89,10 @@
 .result-spark{position:absolute;top:0;width:6px;height:10px;border-radius:2px;pointer-events:none;opacity:0}
 /* Keep presets beside their slider on desktop rather than adding a tall extra control row. */
 @media(min-width:1101px){#stage[data-experience=pool] .pl-controls{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(160px,1fr);gap:10px}#stage[data-experience=pool] .power-presets{grid-column:2;grid-row:2}#stage[data-experience=pool] .pl-controls>.board-actions{grid-column:3;grid-row:1/span 2}#stage[data-experience=pool] .pl-controls>.pl-fine{grid-row:1/span 2}}
+/* On phones the hand itself is the rank picker; avoid a second row of identical choices. */
+@media(max-width:700px){
+ #stage[data-experience=gofish] .pgf-opponents{order:1}#stage[data-experience=gofish] .pgf-mid{order:2}#stage[data-experience=gofish] .pgf-status{order:3}
+ #stage[data-experience=gofish] .pgf-handhead{order:4;margin-top:0}#stage[data-experience=gofish] .pgf-hand{order:5}#stage[data-experience=gofish] .pgf-ask{order:6}#stage[data-experience=gofish] .pgf-logwrap{order:7}
+ #stage[data-experience=gofish] .pgf-ask>.pgf-step:first-child{display:none}#stage[data-experience=gofish] .pgf-pond img{width:62px;height:88px}
+ #stage[data-experience=gofish] .pgf-pond{gap:8px}#stage[data-experience=gofish] .pgf-table{gap:8px}
+}

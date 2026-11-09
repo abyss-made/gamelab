@@ -63,7 +63,7 @@ try:
   host.wait_for_function("App.S.game.phase==='vote'");assert host.evaluate('App.S.game.options.every(o=>o.text===o.text.toUpperCase())');host.screenshot(path=str(shots/'bluff-vote-1440.png'));passed('Bluff uppercases actual entry values, submitted answers and anonymous voting options')
   stop(host);switch(host,'gofish');start(host);host.wait_for_function('App.S.game.hand')
   turn=host.evaluate('App.S.game.turnId');asker=next(page for page in pages if page.evaluate('App.S.you')==turn)
-  asker.locator('[data-rank]').first.click();asker.locator('[data-target]').first.click();asker.locator('#gf-go').click();host.wait_for_function('App.S.game.lastMove?.sequence===1')
+  asker.locator('[data-rank]:visible').first.click();asker.locator('[data-target]').first.click();asker.locator('#gf-go').click();host.wait_for_function('App.S.game.lastMove?.sequence===1')
   for page in pages:page.wait_for_selector('#gf-public-action',state='visible');assert 'MOST RECENT ASK' in page.locator('#gf-public-action').inner_text()
   event=host.evaluate('App.S.game.lastMove');assert set(event)<=set(['sequence','askerId','targetId','rank','received','drawn','matched','again','books']);host.screenshot(path=str(shots/'gofish-request-1440.png'));guest.screenshot(path=str(shots/'gofish-request-390.png'))
   guest.reload();wait_room(guest);guest.wait_for_selector('#gf-public-action',state='visible');assert 'transfer' not in guest.locator('#gf-public-action').get_attribute('class');assert 'fish' not in guest.locator('#gf-public-action').get_attribute('class').split()
