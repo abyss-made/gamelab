@@ -363,7 +363,7 @@ GameUI.golf = (() => {
       <div class="gf-between card" id="gf-between" hidden></div>
       <div class="gf-controls card" id="gf-controls"><button type="button" class="btn btn-ghost" id="gf-place">Choose tee position</button><small id="gf-place-note" role="status"></small>
         <div class="pl-slider pl-fine"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost btn-small" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost btn-small" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
-        <label class="pl-slider"><span>Power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label>
+        <label class="pl-slider"><span>Power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label><div class="power-presets" role="group" aria-label="Power presets">${[[20,'Soft'],[50,'Medium'],[85,'Strong']].map(([value,label])=>`<button type="button" class="btn btn-ghost btn-small" data-power="${value}" aria-pressed="false">${label} · ${value}%</button>`).join('')}</div>
         <div class="board-actions"><button type="button" class="btn" id="gf-putt">Putt</button></div>
       </div>
       <div class="gf-card card" id="gf-card"></div>`;
@@ -376,7 +376,8 @@ GameUI.golf = (() => {
     canvas.addEventListener("keydown", (e) => {
       if(placing&&canPlace()){
         const delta={ArrowLeft:[-4,0],ArrowRight:[4,0],ArrowUp:[0,-4],ArrowDown:[0,4]}[e.key];
-        if(delta){e.preventDefault();teeDraft.x+=delta[0];teeDraft.y+=delta[1];return;}
+        if(delta){e.preventDefault();const [dx,dy]=portrait()?[-delta[1],delta[0]]:delta;const a=g.hole.teeArea,r=g.hole.ballR;
+          teeDraft.x=Math.max(a.x+r,Math.min(a.x+a.w-r,teeDraft.x+dx));teeDraft.y=Math.max(a.y+r,Math.min(a.y+a.h-r,teeDraft.y+dy));return;}
         if(e.key==='Enter'){e.preventDefault();app.socket.emit('action',{type:'place',x:teeDraft.x,y:teeDraft.y});placing=false;teeDraft=null;syncControls();return;}
         if(e.key==='Escape'){placing=false;teeDraft=null;syncControls();return;}
       }
@@ -391,6 +392,7 @@ GameUI.golf = (() => {
       syncControls();
     });
     root.querySelector("#gf-aim").addEventListener("input", (e) => { aim = (Number(e.target.value) * Math.PI) / 180; syncControls(); });
+    root.querySelectorAll('[data-power]').forEach(button=>button.addEventListener('click',()=>{if(!canPutt())return;power=Number(button.dataset.power);syncControls();}));
     root.querySelector("#gf-pow").addEventListener("input", (e) => { power = Number(e.target.value); syncControls(); });
     root.querySelector("#gf-putt").addEventListener("click", putt);
     root.querySelectorAll("[data-fine]").forEach((b) => b.addEventListener("click", (e) => {
@@ -419,6 +421,7 @@ GameUI.golf = (() => {
     const powEl = root.querySelector("#gf-pow");
     aimEl.value = deg(aim).toFixed(2);
     powEl.value = power;
+    root.querySelectorAll('[data-power]').forEach(button=>{button.disabled=!mine;button.setAttribute('aria-pressed',String(Number(button.dataset.power)===power));});
     root.querySelector("#gf-aim-val").textContent = deg(aim).toFixed(1) + "°";
     root.querySelectorAll("[data-fine]").forEach((b) => { b.disabled = !mine; });
     root.querySelector("#gf-pow-val").textContent = power + "%";

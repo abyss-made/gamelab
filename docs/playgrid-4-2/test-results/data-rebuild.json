@@ -1,0 +1,14 @@
+{
+  "reproducible": true,
+  "outputsSHA256": {
+    "lexicon-esdb.txt": "a950781187cfb0e77b6cf045a996c95900193e2ba2648065baf3e0869a0ba58e",
+    "city-names.txt": "d53df2ee1decd7a03195337eb941c4db16a13b40016ac495ec45fa7cabefe250",
+    "category-vocabulary.json": "6b085e04d0f0dc25fe383009271f73833b18a6a631019cabd669dcb966b1cbca",
+    "noun-inflections.json": "314d4e8f8d386fcffecbb8efef3d3d2493221d7956b4ebc99724c988067e9059"
+  },
+  "sources": {
+    "ESDBCommit": "1e5b7d3a72f47a71da5d28686c1dd4b397178485",
+    "WordNetZipSHA256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+    "GeoNamesArchiveSHA256": "1cc7007a7a14637f665c7bd7934dc5a04a973daf4d962d789651047aa1a00cb1"
+  }
+}

@@ -1,0 +1,158 @@
+PASS  Telephone: round 1 asks everyone for a prompt, with nothing to look at
+PASS  Telephone: an empty prompt is rejected
+PASS  Telephone: the wrong kind of submission is rejected
+PASS  Telephone: a submission is final
+PASS  Telephone: spectators see who has finished
+PASS  Telephone: others are still writing
+PASS  Telephone: round advances once everyone submits, to a drawing round
+PASS  Telephone: you are shown another player's prompt, never your own
+PASS  Telephone: each chain is passed to a different player
+PASS  Telephone: a player's view contains only the single prompt handed to them
+PASS  Telephone: spectators receive no hidden content mid-game
+PASS  Telephone: a stroke with an invalid colour is rejected
+PASS  Telephone: strokes outside the canvas are rejected
+PASS  Telephone: an oversized drawing is rejected
+PASS  Telephone: a valid drawing (stroke + fill) is accepted
+PASS  Telephone: the draw timer fills missing drawings and moves on
+PASS  Telephone: only the player who timed out is marked skipped
+PASS  Telephone: the guessing round shows the previous drawing
+PASS  Telephone: all rounds done leads to the reveal
+PASS  Telephone: every chain was handled by each player exactly once
+PASS  Telephone: each chain starts with its owner's prompt
+PASS  Telephone: the reveal starts with the first entry of the first chain
+PASS  Telephone: entries that have not been revealed yet cannot be liked
+PASS  Telephone: you cannot like your own entry
+PASS  Telephone: a like scores once per voter
+PASS  Telephone: the reveal runs through every chain and ends the game
+PASS  Telephone: there is a winner or an announced tie
+PASS  Telephone: a player who left does not block the round
+PASS  Telephone: ends if too few players remain
+PASS  Bluff: the real answer is not in the bluffing view
+PASS  Bluff: submitting the real answer is rejected with a notice
+PASS  Bluff: bluffs are length-limited
+PASS  Bluff: a bluff is final once submitted
+PASS  Bluff: voting waits for all bluffs
+PASS  Bluff: voting is closed during the bluffing phase
+PASS  Bluff: voting opens when everyone has bluffed
+PASS  Bluff: identical bluffs are merged into one option
+PASS  Bluff: vote options carry no authorship or real-answer flag
+PASS  Bluff: spectators cannot see authors or the real answer while voting
+PASS  Bluff: voting for your own bluff is rejected
+PASS  Bluff: a merged bluff cannot be voted for by either author
+PASS  Bluff: an invalid option is rejected
+PASS  Bluff: a vote is final
+PASS  Bluff: reveal follows the last vote
+PASS  Bluff: voting for the real answer scores 2 (plus 1 for each vote your bluff earned)
+PASS  Bluff: each vote your bluff earns is worth 1
+PASS  Bluff: member scores are kept in sync
+PASS  Bluff: the reveal shows the real answer and who voted for it
+PASS  Bluff: the game ends after the configured number of rounds
+PASS  Bluff: questions are not repeated within a deck
+PASS  Bluff: with no bluffs at all the question is skipped to the reveal
+PASS  Bluff: ends if fewer than 3 players remain
+PASS  Impostor: the impostor gets their role but no word
+PASS  Impostor: the secret word is nowhere in the impostor's view
+PASS  Impostor: crew members receive the word
+PASS  Impostor: everyone sees the category
+PASS  Impostor: spectators learn neither the word nor the impostor
+PASS  Impostor: no role information about others is sent
+PASS  Impostor: clues out of turn are ignored
+PASS  Impostor: an empty clue is rejected
+PASS  Impostor: a valid clue passes the turn
+PASS  Impostor: a timed-out clue is recorded as no clue
+PASS  Impostor: after the configured clue laps the discussion begins
+PASS  Impostor: discussion continues until all players are ready
+PASS  Impostor: unanimous ready skips ahead to the vote
+PASS  Impostor: self-voting is rejected
+PASS  Impostor: a caught impostor gets a final guess
+PASS  Impostor: the impostor still has no word while guessing
+PASS  Impostor: only the impostor can make the final guess
+PASS  Impostor: a wrong final guess means the crew wins
+PASS  Impostor: crew who found the impostor score 2
+PASS  Impostor: roles and word are revealed to everyone at the results
+PASS  Impostor: the next round secretly assigns an eligible player (repeats are allowed)
+PASS  Impostor: the discussion timer opens the vote
+PASS  Impostor: wrongly accusing a crew member lets the impostor escape (3 pts)
+PASS  Impostor: the word changes between rounds
+PASS  Impostor: the game ends after the configured rounds
+PASS  Impostor: setup for a steal reaches the guess phase
+PASS  Impostor: a correct guess steals the win for the impostor
+PASS  Impostor: if the impostor leaves, the round is void and unscored
+PASS  Impostor: ends if fewer than 3 players remain
+PASS  Liar's Dice: you see your own dice
+PASS  Liar's Dice: other players' dice are not in the view before a challenge
+PASS  Liar's Dice: spectators see no dice
+PASS  Liar's Dice: a bid out of turn is ignored
+PASS  Liar's Dice: you cannot challenge before any bid exists
+PASS  Liar's Dice: invalid quantities and faces are rejected
+PASS  Liar's Dice: a valid bid passes the turn
+PASS  Liar's Dice: bids must strictly increase
+PASS  Liar's Dice: raising only the face value is allowed
+PASS  Liar's Dice: ones are wild and the count is correct (3x5 vs two matches)
+PASS  Liar's Dice: a false bidder loses a die
+PASS  Liar's Dice: all hands are revealed after a challenge
+PASS  Liar's Dice: member score tracks dice left
+PASS  Liar's Dice: the loser opens the next round with fresh dice
+PASS  Liar's Dice: dice counts shrink
+PASS  Liar's Dice: a true bid makes the challenger lose a die
+PASS  Liar's Dice: a timeout with no bid opens with the lowest bid
+PASS  Liar's Dice: a timeout facing a bid counts as a challenge
+PASS  Liar's Dice: turn moved
+PASS  Liar's Dice: ones are not wild when the option is off
+PASS  Liar's Dice: the last player with dice wins
+PASS  Liar's Dice: a leaving player is removed and the turn moves on
+PASS  Liar's Dice: the remaining player wins when everyone else leaves
+PASS  Liar's Dice: a player who times out three times in a row is removed
+PASS  Hot Potato: the hidden fuse is never in a client view
+PASS  Hot Potato: everyone sees the prompt and the current holder
+PASS  Hot Potato: only the holder can pass the bomb
+PASS  Hot Potato: you cannot pass to yourself
+PASS  Hot Potato: you cannot pass to someone who is not playing
+PASS  Hot Potato: an empty answer cannot pass the bomb
+PASS  Hot Potato: a valid answer passes the bomb
+PASS  Hot Potato: a repeated answer is rejected
+PASS  Hot Potato: you cannot pass straight back to the previous holder
+PASS  Hot Potato: passing on to a third player works
+PASS  Hot Potato: holding the bomb past the hold limit makes it explode on the holder
+PASS  Hot Potato: member score shows lives left
+PASS  Hot Potato: a new round starts with a new prompt and fuse
+PASS  Hot Potato: the bomb explodes on its own when the hidden fuse runs out
+PASS  Hot Potato: the last player with lives wins
+PASS  Hot Potato: exactly one player is left standing
+PASS  Hot Potato: a pass that arrives after the hold limit expired explodes on the holder, not the recipient
+PASS  Hot Potato: if the holder leaves the bomb moves on without a penalty
+PASS  Hot Potato: the last remaining player wins when others leave
+PASS  Hot Potato: with only two players you may pass back
+PASS  telephone: invalid settings are ignored
+PASS  telephone: null settings fall back to previous
+PASS  bluff: invalid settings are ignored
+PASS  bluff: null settings fall back to previous
+PASS  impostor: invalid settings are ignored
+PASS  impostor: null settings fall back to previous
+PASS  liarsdice: invalid settings are ignored
+PASS  liarsdice: null settings fall back to previous
+PASS  hotpotato: invalid settings are ignored
+PASS  hotpotato: null settings fall back to previous
+PASS  Impostor (live): exactly one impostor among four players
+PASS  Impostor (live): the whole crew receives the same word
+PASS  Impostor (live): the impostor never receives the word
+PASS  Impostor (live): a spectator gets no role and no word
+PASS  Impostor (live): no one is told who the impostor is
+PASS  Impostor (live): spectators and out-of-turn players cannot give clues
+PASS  Impostor (live): reconnecting restores the same role and word
+PASS  Liar's Dice (live): switching games keeps the room and its members
+PASS  Liar's Dice (live): each player sees five of their own dice
+PASS  Liar's Dice (live): a spectator sees no dice
+PASS  Liar's Dice (live): nobody receives other players' hands before a challenge
+PASS  Liar's Dice (live): an out-of-turn bid does nothing
+PASS  Liar's Dice (live): bids are visible to everyone
+PASS  Liar's Dice (live): a challenge reveals every hand to everyone including spectators
+PASS  Bluff (live): vote state leaks neither the real answer nor authors
+PASS  Bluff (live): options contain every bluff plus the real answer
+PASS  Bluff (live): self-voting is rejected
+PASS  hotpotato (live): starts in the same room with all members
+PASS  Hot Potato (live): the hidden fuse time is never sent
+PASS  telephone (live): starts in the same room with all members
+PASS  Telephone (live): a submitted prompt is not visible to others mid-round
+
+All passed

@@ -1,0 +1,63 @@
+
+> party-games-site@0.1.0 loadtest
+> node scripts/loadtest.js 40 4 10
+
+{
+  "config": {
+    "rooms": 40,
+    "players": 4,
+    "seconds": 10,
+    "node": "v24.19.0",
+    "cpus": 5
+  },
+  "latencyMs": {
+    "join": {
+      "n": 160,
+      "p50": 42.2,
+      "p95": 608.1,
+      "p99": 627.4,
+      "max": 628.4
+    },
+    "rejoin": {
+      "n": 40,
+      "p50": 64.5,
+      "p95": 82.2,
+      "p99": 98.3,
+      "max": 98.3
+    },
+    "chatFanout": {
+      "n": 41,
+      "p50": 1,
+      "p95": 32,
+      "p99": 60,
+      "max": 60
+    }
+  },
+  "throughput": {
+    "gamesStarted": 40,
+    "movesConfirmed": 271,
+    "clientEventsEmitted": 2299,
+    "serverEventsReceivedByClients": 11099,
+    "perSec": 957
+  },
+  "server": {
+    "cpuPercentOfOneCore": 6.4,
+    "rssMbStart": 121.4,
+    "rssMbEnd": 142.6,
+    "healthAtEnd": {
+      "ok": true,
+      "uptimeS": 14,
+      "rooms": 40,
+      "members": 120,
+      "sockets": 160,
+      "rssMb": 142,
+      "heapMb": 66
+    }
+  },
+  "errors": 0
+}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

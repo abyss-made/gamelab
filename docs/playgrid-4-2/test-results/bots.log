@@ -1,0 +1,136 @@
+bots: real server on http://localhost:42105, seed 48
+
+== lobby-rules
+PASS  only the host can add a bot
+PASS  adding a bot to a full party is refused with a reason
+PASS  the view says Add Bot is unavailable because seats are full
+PASS  with a free seat the view enables Add Bot
+PASS  a bot appears marked BOT with its difficulty (Quark Bot)
+PASS  the bot is not the host
+PASS  hosting cannot be handed to a bot
+PASS  the host can change difficulty; invalid values are ignored
+PASS  lobby rules: server state is consistent (no ghosts, no bot hosts)
+PASS  a party with bots cannot be made public
+PASS  the host can remove a bot
+PASS  removing a bot leaves no ghost member and no ban entry
+PASS  public parties do not get bots
+PASS  the public party is listed (sanity)
+PASS  lobby-rules: the server logged no handler or loop errors
+      (lobby-rules: 3031 ms)
+
+== unsupported-and-switch
+PASS  Draw & Guess: Add Bot is disabled with a reason (Bots can't draw or guess meaningfully yet.)
+PASS  Dots & Boxes seats three bots beside the host
+PASS  switching to a 2-seat game trims bots, never benches them as spectators
+PASS  switching to a game without bots removes them
+PASS  the party is told why the bots left
+PASS  switching: server state is consistent (no ghosts, no bot hosts)
+PASS  unsupported-and-switch: the server logged no handler or loop errors
+      (unsupported-and-switch: 977 ms)
+
+== idle-bots
+PASS  Draw & Guess: real bots are off but Add Idle Bot is on
+PASS  an idle bot joins Draw & Guess
+PASS  the idle bot stays when switching games
+PASS  the idle bot never moves (moves: 1)
+PASS  idle bots survive switching to a game with no real bots
+PASS  an idle bot cannot be turned into a real bot in a game without them
+PASS  idle bots: server state is consistent (no ghosts, no bot hosts)
+PASS  idle-bots: the server logged no handler or loop errors
+      (idle-bots: 3006 ms)
+
+== switch-with-queue
+PASS  queued humans plus trimmed bots: no bot ends up spectating (0)
+PASS  switch with queue: server state is consistent (no ghosts, no bot hosts)
+PASS  switch-with-queue: the server logged no handler or loop errors
+      (switch-with-queue: 1001 ms)
+
+== switch-idle-to-smaller-unsupported
+PASS  excess idle bots are removed, not benched (2 seated, 0 watching)
+PASS  idle trim: server state is consistent (no ghosts, no bot hosts)
+PASS  switch-idle-to-smaller-unsupported: the server logged no handler or loop errors
+      (switch-idle-to-smaller-unsupported: 1000 ms)
+
+== switch-bots-no-spectators
+PASS  with spectators off, 1 person + 3 bots can switch to a 2-seat game (bots are trimmed)
+PASS  switch no spectators: server state is consistent (no ghosts, no bot hosts)
+PASS  switch-bots-no-spectators: the server logged no handler or loop errors
+      (switch-bots-no-spectators: 500 ms)
+
+== switch-honours-picked-bots
+PASS  the two bots the host picked play; bot 1 is removed and the host watches (2 seated)
+PASS  only the person is benched; no bot is a spectator
+PASS  picked bots: server state is consistent (no ghosts, no bot hosts)
+PASS  switch-honours-picked-bots: the server logged no handler or loop errors
+      (switch-honours-picked-bots: 1002 ms)
+
+== rps-rematch
+PASS  game 1: two bots threw and finished (rematch included)
+PASS  game 2: two bots threw and finished (rematch included)
+PASS  rps-rematch: the server logged no handler or loop errors
+      (rps-rematch: 8015 ms)
+
+== mixed-ttt-rematch
+PASS  round 1: the bot is still seated for the rematch
+PASS  round 2: the bot is still seated for the rematch
+PASS  two full matches against a bot finished and a rematch started
+PASS  scores are kept (Nova Bot: 2)
+PASS  ttt rematch: server state is consistent (no ghosts, no bot hosts)
+PASS  mixed-ttt-rematch: the server logged no handler or loop errors
+      (mixed-ttt-rematch: 2255 ms)
+
+== bot-removed-midgame
+PASS  removing the bot mid-game ends the match cleanly
+PASS  the bot is gone from the seats
+PASS  midgame removal: server state is consistent (no ghosts, no bot hosts)
+PASS  bot-removed-midgame: the server logged no handler or loop errors
+      (bot-removed-midgame: 499 ms)
+
+== bot-only-games
+PASS  tictactoe: 2 bots played a whole game to the result screen in 69 ms
+PASS  tictactoe: the host (watching) saw only bots seated
+PASS  tictactoe: bots can be started again for a rematch
+PASS  tictactoe bot-only: server state is consistent (no ghosts, no bot hosts)
+PASS  fourrow: 2 bots played a whole game to the result screen in 1026 ms
+PASS  fourrow: the host (watching) saw only bots seated
+PASS  fourrow: bots can be started again for a rematch
+PASS  fourrow bot-only: server state is consistent (no ghosts, no bot hosts)
+PASS  checkers: 2 bots played a whole game to the result screen in 758 ms
+PASS  checkers: the host (watching) saw only bots seated
+PASS  checkers: bots can be started again for a rematch
+PASS  checkers bot-only: server state is consistent (no ghosts, no bot hosts)
+PASS  dotsboxes: 3 bots played a whole game to the result screen in 509 ms
+PASS  dotsboxes: the host (watching) saw only bots seated
+PASS  dotsboxes: bots can be started again for a rematch
+PASS  dotsboxes bot-only: server state is consistent (no ghosts, no bot hosts)
+PASS  rps: 3 bots played a whole game to the result screen in 42575 ms
+PASS  rps: the host (watching) saw only bots seated
+PASS  rps: bots can be started again for a rematch
+PASS  rps bot-only: server state is consistent (no ghosts, no bot hosts)
+PASS  bot-only-games: the server logged no handler or loop errors
+      (bot-only-games: 107441 ms)
+
+== chess-human-vs-bot
+PASS  the chess bot answered e4 with a legal reply
+PASS  resigning ends the match against the bot
+PASS  chess: server state is consistent (no ghosts, no bot hosts)
+PASS  chess-human-vs-bot: the server logged no handler or loop errors
+      (chess-human-vs-bot: 751 ms)
+
+== host-leaves-and-cleanup
+PASS  the bot stays while a person remains
+PASS  when the last person leaves, the bots leave too (no ghost bots)
+PASS  the empty party is deleted
+PASS  host-leaves-and-cleanup: the server logged no handler or loop errors
+      (host-leaves-and-cleanup: 1001 ms)
+
+== no-work-without-people
+PASS  the person moves first in the first game
+PASS  bots stop acting while no person is connected (moves 1 → 1)
+PASS  after the grace period the absent person and the bots are removed
+PASS  isolated bot-disconnect server logged no errors
+PASS  no-work-without-people: the server logged no handler or loop errors
+      (no-work-without-people: 4358 ms)
+PASS  no server errors (0)
+
+bots: 91 passed, 0 failed in 135.2 s

@@ -1,0 +1,48 @@
+GAME drawguess
+PASS drawguess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME fourrow
+PASS fourrow: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME wordchain
+PASS Word Chain retains rejection then accepts a real broad-list word
+PASS wordchain: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME categories
+PASS categories: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME colorstack
+PASS colorstack: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME gofish
+PASS Go Fish actual hand card chooses rank and named Ask synchronizes
+PASS gofish: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME tictactoe
+PASS Tic Tac Toe legal full win, result standings and host rematch
+PASS tictactoe: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME dotsboxes
+PASS dotsboxes: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME wordscramble
+PASS Scramble touch tiles, undo/shuffle, retained invalid guess and valid anagram scoring
+PASS wordscramble: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME trivia
+PASS trivia: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME telephone
+PASS Telephone real write/draw/guess chain, stable reveal entry during likes
+PASS telephone: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME bluff
+PASS bluff: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME impostor
+PASS Impostor hide/show, clue turns, discussion, voting and public reveal
+PASS impostor: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME battleship
+PASS battleship: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME checkers
+PASS checkers: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME ludo
+PASS ludo: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME chess
+PASS Real Chess promotion: focused dialog, Escape restoration, Tab containment and legal queen promotion
+PASS chess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME pool
+PASS pool: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME golf
+PASS Portrait Golf tee arrows follow screen direction; preset Putt uses authoritative replay
+PASS golf: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME tycoon
+PASS tycoon: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match

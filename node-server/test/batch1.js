@@ -503,7 +503,7 @@ async function waitFor(fn, ms = 4000, label = '') {
         ok(ls.length >= 4 && !('word' in a.state.game), 'Word Scramble (live): letters but no answer are sent');
         a.s.emit('action', { type: 'guess', word: 'qqqqqq' });
         await waitFor(() => a.notices.length > 0, 1000, 'notice');
-        ok(a.notices.some((n) => /Not quite/.test(n)) && b.notices.length === 0, 'Word Scramble (live): wrong guess notice goes only to the guesser');
+        ok(a.notices.some((n) => /Use every displayed letter exactly once/.test(n)) && b.notices.length === 0, 'Word Scramble (live): wrong guess notice goes only to the guesser');
       }
       if (gid === 'trivia') {
         const s = JSON.stringify(a.state.game) + JSON.stringify(d.state.game);

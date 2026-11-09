@@ -1,0 +1,27 @@
+PASS  compact game cards show player range and category
+PASS  catalog has search and category filters
+PASS  no spectator queue is claimed
+PASS  Coming Soon tile still present
+PASS  host sees Choose Another Game on the results screen
+PASS  Play Again is disabled with a visible reason when a seat is empty
+PASS  results explain why Play Again is unavailable
+PASS  Play Again keeps the same room code
+PASS  other player is in the new game
+PASS  non-host sees a waiting state, no host buttons
+PASS  eraser keeps its own size when brush was changed
+PASS  brush size restored after using eraser
+PASS  emitted stroke sizes match the active tool (brush 30, eraser 20)
+PASS  phone portrait 390x844: canvas is phone-wide and focus keeps it at least as large (366x275 -> 390x293)
+PASS  phone portrait 390x844: canvas keeps 4:3 (no distortion)
+PASS  phone portrait 390x844: canvas fully on screen
+PASS  phone portrait 390x844: tool strip on screen
+PASS  phone portrait 390x844: touch maps to canvas centre (400,300)
+PASS  phone portrait 390x844: close button exits focus mode
+PASS  phone landscape 844x390: canvas is phone-wide and focus keeps it at least as large (480x360 -> 455x341)
+PASS  phone landscape 844x390: canvas keeps 4:3 (no distortion)
+PASS  phone landscape 844x390: canvas fully on screen
+PASS  phone landscape 844x390: tool strip on screen
+PASS  phone landscape 844x390: touch maps to canvas centre (400,300)
+PASS  phone landscape 844x390: close button exits focus mode
+
+All passed

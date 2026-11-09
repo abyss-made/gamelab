@@ -88,8 +88,10 @@ GameUI.chess = (() => {
       return;
     }
     if (e.target.closest("#ch-promo-cancel")) {
+      const origin=pendingPromo?.from;
       pendingPromo = null;
       root.querySelector("#ch-promo").hidden = true;
+      root.querySelector(`[data-sq="${origin}"]`)?.focus({preventScroll:true});
       return;
     }
     const b = e.target.closest("[data-sq]");
@@ -135,7 +137,9 @@ GameUI.chess = (() => {
   function showPromo(colour) {
     const el = root.querySelector("#ch-promo");
     el.hidden = false;
+    el.setAttribute("role","dialog");el.setAttribute("aria-label","Choose a promotion piece");
     el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.art.chessPiece(t)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    el.querySelector("[data-promo]").focus({preventScroll:true});
   }
 
   function paint() {

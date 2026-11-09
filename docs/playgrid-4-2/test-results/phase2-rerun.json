@@ -1,0 +1,8 @@
+{
+  "command": "node node-server/test/phase2.js",
+  "exitCode": 0,
+  "reason": "Original fixture exhausted only the curated prompt dictionary; corrected to exhaust the authoritative accepted vocabulary. No production behavior changed.",
+  "passLines": 18,
+  "failLines": 0,
+  "skipLines": 0
+}

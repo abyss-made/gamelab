@@ -28,7 +28,7 @@ GameUI.gofish = (() => {
 
   function cardHTML(c, i, n, picked) {
     const red = c.s === "H" || c.s === "D";
-    return `<span class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" role="img" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img src="${FISH}" alt=""><b>${C.rankLabel(c.r)}</b></span>`;
+    return `<button type="button" data-rank="${c.r}" data-hand-card="${c.r}${c.s}" aria-pressed="${picked}" ${S.game.turnId!==S.you||pending?"disabled":""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img src="${FISH}" alt=""><b>${C.rankLabel(c.r)}</b></button>`;
   }
 
   function mount(stage, a) {

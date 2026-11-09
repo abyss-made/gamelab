@@ -1,0 +1,33 @@
+{
+  "checks": [
+    "drawguess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "fourrow: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Word Chain retains rejection then accepts a real broad-list word",
+    "wordchain: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "categories: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "colorstack: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Go Fish actual hand card chooses rank and named Ask synchronizes",
+    "gofish: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Tic Tac Toe legal full win, result standings and host rematch",
+    "tictactoe: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "dotsboxes: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Scramble touch tiles, undo/shuffle, retained invalid guess and valid anagram scoring",
+    "wordscramble: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "trivia: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Telephone real write/draw/guess chain, stable reveal entry during likes",
+    "telephone: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "bluff: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Impostor hide/show, clue turns, discussion, voting and public reveal",
+    "impostor: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "battleship: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "checkers: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "ludo: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Real Chess promotion: focused dialog, Escape restoration, Tab containment and legal queen promotion",
+    "chess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "pool: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Portrait Golf tee arrows follow screen direction; preset Putt uses authoritative replay",
+    "golf: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "tycoon: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match"
+  ],
+  "errors": []
+}

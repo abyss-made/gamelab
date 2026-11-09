@@ -59,6 +59,7 @@ GameUI.colorstack = (() => {
         }
         pendingWild = null;
         root.querySelector("#cs-picker").hidden = true;
+        root.querySelector("#cs-play").focus({preventScroll:true});
         return;
       }
       const card = e.target.closest("[data-card]");

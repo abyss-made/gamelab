@@ -1,0 +1,8 @@
+{
+  "command": "node node-server/test/keyboardui.js",
+  "exitCode": 0,
+  "reason": "Select visible rank controls; mobile intentionally hides duplicate rank chips and uses actual hand cards.",
+  "passLines": 40,
+  "failLines": 0,
+  "skipLines": 0
+}

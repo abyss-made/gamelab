@@ -1,0 +1,130 @@
+PASS  desktop: /games shows the Games catalog
+PASS  desktop: catalog shows 20 games
+PASS  desktop: Coming Soon tile kept
+PASS  desktop: Games has no horizontal overflow
+PASS  desktop: search narrows the catalog
+PASS  desktop: search result count is announced
+PASS  desktop: no-match state names the query
+PASS  desktop: Clear Search restores all games
+PASS  desktop: Drawing filter shows the drawing games
+PASS  desktop: Rooms nav opens /rooms, not Games
+PASS  desktop: Rooms empty state
+PASS  desktop: no current-party card before joining one
+PASS  desktop: malformed code is explained inline
+PASS  desktop: room-code joins confirm the saved identity before taking a seat
+PASS  desktop: #CODE form is accepted and a closed code stays on Rooms with an inline error
+PASS  desktop: Rooms has no horizontal overflow
+PASS  desktop: Create Party has no game, settings or seat fields
+PASS  desktop: private and spectators-allowed are the defaults
+PASS  desktop: party created public with no game
+PASS  desktop: party header shows visibility and name
+PASS  desktop: empty game slot with Choose a Game
+PASS  desktop: Start Game is disabled until a game is chosen
+PASS  desktop: no Game Settings before a game is chosen
+PASS  desktop: host sees Party Settings, not Leave Party, in the header
+PASS  desktop: empty lobby has no horizontal overflow
+PASS  desktop: ready count updates from another player
+PASS  desktop: Ready toggle is pressed and reaches the server
+PASS  desktop: own roster card says Ready in text
+PASS  desktop: votes are listed and never auto-select
+PASS  desktop: picker focuses search
+PASS  desktop: picker lists 20 games
+PASS  desktop: picker has no hidden games
+PASS  desktop: a 2-seat game explains who watches
+PASS  desktop: picker no-match state
+PASS  desktop: picker Clear Search
+PASS  desktop: Fits our party keeps games the party can play
+PASS  desktop: Escape closes the picker and returns focus
+PASS  desktop: Enter selects a game card
+PASS  desktop: confirm button names the game
+PASS  desktop: choosing a game keeps the same party
+PASS  desktop: game slot shows the game and a settings summary
+PASS  desktop: Start Game enabled once a game is chosen
+PASS  desktop: settings are not sent before Save
+PASS  desktop: Save Settings applies the change
+PASS  desktop: Cancel discards changes
+PASS  desktop: Party Settings lock the party
+PASS  desktop: Tic Tac Toe seats two and two watch
+PASS  desktop: activity panel lists the queue in order
+PASS  desktop: participant sees Leave Party, not Party Settings
+PASS  desktop: participant has no Start Game
+PASS  desktop: participant game slot offers Suggest
+PASS  desktop: participant settings are read-only
+PASS  desktop: participant picker is Suggest a Game
+PASS  desktop: participant suggestion is a vote, not a switch
+PASS  desktop: a vote can be undone
+PASS  desktop: participant lobby has no horizontal overflow
+PASS  desktop: Leave Party leaves the server room
+PASS  desktop: Play from Games returns to the party and preselects the game
+PASS  desktop: Rooms shows the current party
+PASS  desktop: public list shows the party and its game
+PASS  desktop: Return goes back to the party
+PASS  desktop: no horizontal overflow
+PASS  desktop: no page errors
+PASS  phone: /games shows the Games catalog
+PASS  phone: catalog shows 20 games
+PASS  phone: Coming Soon tile kept
+PASS  phone: Games has no horizontal overflow
+PASS  phone: search narrows the catalog
+PASS  phone: search result count is announced
+PASS  phone: no-match state names the query
+PASS  phone: Clear Search restores all games
+PASS  phone: Drawing filter shows the drawing games
+PASS  phone: Rooms nav opens /rooms, not Games
+PASS  phone: no current-party card before joining one
+PASS  phone: malformed code is explained inline
+PASS  phone: room-code joins confirm the saved identity before taking a seat
+PASS  phone: #CODE form is accepted and a closed code stays on Rooms with an inline error
+PASS  phone: Rooms has no horizontal overflow
+PASS  phone: Create Party has no game, settings or seat fields
+PASS  phone: private and spectators-allowed are the defaults
+PASS  phone: party created public with no game
+PASS  phone: party header shows visibility and name
+PASS  phone: empty game slot with Choose a Game
+PASS  phone: Start Game is disabled until a game is chosen
+PASS  phone: no Game Settings before a game is chosen
+PASS  phone: host sees Party Settings, not Leave Party, in the header
+PASS  phone: empty lobby has no horizontal overflow
+PASS  phone: ready count updates from another player
+PASS  phone: Ready toggle is pressed and reaches the server
+PASS  phone: own roster card says Ready in text
+PASS  phone: votes are listed and never auto-select
+PASS  phone: picker focuses search
+PASS  phone: picker lists 20 games
+PASS  phone: picker has no hidden games
+PASS  phone: a 2-seat game explains who watches
+PASS  phone: picker no-match state
+PASS  phone: picker Clear Search
+PASS  phone: Fits our party keeps games the party can play
+PASS  phone: Escape closes the picker and returns focus
+PASS  phone: Enter selects a game card
+PASS  phone: confirm button names the game
+PASS  phone: choosing a game keeps the same party
+PASS  phone: game slot shows the game and a settings summary
+PASS  phone: Start Game enabled once a game is chosen
+PASS  phone: settings are not sent before Save
+PASS  phone: Save Settings applies the change
+PASS  phone: Cancel discards changes
+PASS  phone: Party Settings lock the party
+PASS  phone: Tic Tac Toe seats two and two watch
+PASS  phone: Queue & votes sheet lists the queue
+PASS  phone: activity sheet has no horizontal overflow
+PASS  phone: participant sees Leave Party, not Party Settings
+PASS  phone: participant has no Start Game
+PASS  phone: participant game slot offers Suggest
+PASS  phone: participant settings are read-only
+PASS  phone: participant picker is Suggest a Game
+PASS  phone: participant suggestion is a vote, not a switch
+PASS  phone: participant lobby has no horizontal overflow
+PASS  phone: Leave Party leaves the server room
+PASS  phone: Play from Games returns to the party and preselects the game
+PASS  phone: Rooms shows the current party
+PASS  phone: public list shows the party and its game
+PASS  phone: Return goes back to the party
+PASS  phone: no horizontal overflow
+PASS  phone: no page errors
+PASS  participant Back to Lobby hides the results for them
+PASS  results with the same key show again at once after an earlier dismissal
+PASS  dismissal check: no page errors
+
+All party 3.0 UI checks passed

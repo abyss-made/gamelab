@@ -1,0 +1,5 @@
+# Generated offline vocabulary; generator, sources, licences and tests remain expanded in review.
+node-server/server/data/lexicon-esdb.txt linguist-generated=true
+node-server/server/data/city-names.txt linguist-generated=true
+node-server/server/data/category-vocabulary.json linguist-generated=true
+node-server/server/data/noun-inflections.json linguist-generated=true

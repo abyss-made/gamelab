@@ -1,0 +1,44 @@
+PASS  1440px: Avatar Studio opens
+PASS  1440px: 35 characters offered
+PASS  1440px: changing the draft enables Save
+PASS  1440px: draft does not touch the saved profile
+PASS  1440px: Undo restores the previous draft
+PASS  1440px: headphones disabled while a hat is worn
+PASS  1440px: Save stores v3 and keeps the classic e/c fallback
+PASS  1440px: saved config is within 256 bytes
+PASS  1440px: no horizontal overflow
+PASS  1440px: server keeps the validated v3 config
+PASS  1440px: room avatar renders the studio SVG
+PASS  1440px: a saved look reaches the rest of the party live
+PASS  1440px: mid-game avatar save is accepted
+PASS  1440px: a mid-game save updates the in-game player view
+PASS  1440px: the server rejects a malformed avatar and keeps the accepted one
+PASS  1440px: avatar updates are rate limited (ok,ok,slow,slow,slow)
+PASS  1440px: the classic e/c fallback is always kept
+PASS  1440px: a rate-limited save is retried and reaches the party
+PASS  1440px: no page errors
+PASS  390px: Avatar Studio opens
+PASS  390px: 35 characters offered
+PASS  390px: changing the draft enables Save
+PASS  390px: draft does not touch the saved profile
+PASS  390px: Undo restores the previous draft
+PASS  390px: headphones disabled while a hat is worn
+PASS  390px: Save stores v3 and keeps the classic e/c fallback
+PASS  390px: saved config is within 256 bytes
+PASS  390px: no horizontal overflow
+PASS  390px: server keeps the validated v3 config
+PASS  390px: room avatar renders the studio SVG
+PASS  390px: Use classic rolls back and explains when storage fails
+PASS  390px: no page errors
+PASS  360px: Avatar Studio opens
+PASS  360px: 35 characters offered
+PASS  360px: changing the draft enables Save
+PASS  360px: draft does not touch the saved profile
+PASS  360px: Undo restores the previous draft
+PASS  360px: headphones disabled while a hat is worn
+PASS  360px: Save stores v3 and keeps the classic e/c fallback
+PASS  360px: saved config is within 256 bytes
+PASS  360px: no horizontal overflow
+PASS  360px: server keeps the validated v3 config
+PASS  360px: room avatar renders the studio SVG
+PASS  360px: no page errors

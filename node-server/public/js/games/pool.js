@@ -373,7 +373,7 @@ GameUI.pool = (() => {
       <div class="pl-wrap"><canvas id="pl-canvas" class="pl-canvas" tabindex="0" role="application" aria-label="Pool table. Drag to aim. Arrow keys fine tune the aim and power. Enter shoots."></canvas></div>
       <div class="pl-controls card" id="pl-controls">
         <div class="pl-slider pl-fine"><span>Aim <b id="pl-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost btn-small" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="pl-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost btn-small" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
-        <label class="pl-slider"><span>Power <b id="pl-pow-val"></b></span><input type="range" id="pl-pow" min="3" max="100" step="1" aria-label="Shot power percent"></label>
+        <label class="pl-slider"><span>Power <b id="pl-pow-val"></b></span><input type="range" id="pl-pow" min="3" max="100" step="1" aria-label="Shot power percent"></label><div class="power-presets" role="group" aria-label="Power presets">${[[20,'Soft'],[50,'Medium'],[85,'Strong']].map(([value,label])=>`<button type="button" class="btn btn-ghost btn-small" data-power="${value}" aria-pressed="false">${label} · ${value}%</button>`).join('')}</div>
         <div class="board-actions">
           <button type="button" class="btn" id="pl-shoot">Shoot</button>
           <button type="button" class="btn btn-ghost" id="pl-place" hidden>Lock cue ball</button>
@@ -398,6 +398,7 @@ GameUI.pool = (() => {
       syncControls();
     });
     root.querySelector("#pl-aim").addEventListener("input", (e) => { aim = (Number(e.target.value) * Math.PI) / 180; syncControls(true); });
+    root.querySelectorAll('[data-power]').forEach(button=>button.addEventListener('click',()=>{if(!canShoot())return;power=Number(button.dataset.power);syncControls();}));
     root.querySelector("#pl-pow").addEventListener("input", (e) => { power = Number(e.target.value); syncControls(true); });
     root.querySelector("#pl-shoot").addEventListener("click", shoot);
     root.querySelectorAll("[data-fine]").forEach((b) => b.addEventListener("click", (e) => {
@@ -446,6 +447,7 @@ GameUI.pool = (() => {
     const powEl = root.querySelector("#pl-pow");
     aimEl.value = deg(aim).toFixed(2);
     powEl.value = power;
+    root.querySelectorAll('[data-power]').forEach(button=>{button.disabled=!mine;button.setAttribute('aria-pressed',String(Number(button.dataset.power)===power));});
     root.querySelector("#pl-aim-val").textContent = deg(aim).toFixed(1) + "°";
     root.querySelectorAll("[data-fine]").forEach((b) => { b.disabled = !mine; });
     root.querySelector("#pl-pow-val").textContent = power + "%";

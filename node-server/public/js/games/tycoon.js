@@ -59,7 +59,7 @@ GameUI.tycoon = (() => {
       const c = cell(i);
       const o = g.owners[i];
       const lvl = g.levels[i];
-      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="background:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}"></span>` : "")).join("");
+      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span data-pawn="${app.esc(p.id)}" class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="background:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}"></span>` : "")).join("");
       const band = t.group ? `<span class="ty-band" style="background:${g.groups[t.group].color}"></span>` : "";
       const pips = lvl ? `<span class="ty-lvl" aria-hidden="true">${lvl === 4 ? "★" : "▪".repeat(lvl)}</span>` : "";
       const price = t.price ? `<span class="ty-pr">${money(t.price)}</span>` : t.amount ? `<span class="ty-pr">-${money(t.amount)}</span>` : "";
@@ -281,6 +281,7 @@ GameUI.tycoon = (() => {
     clearInterval(stepTimer);
     const differs = () => g.players.some((p) => shown[p.id] !== p.pos);
     if (!differs()) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){g.players.forEach(p=>shown[p.id]=p.pos);html['ty-boardwrap']=null;setPanel('ty-boardwrap',boardHTML());return;}
     stepTimer = setInterval(() => {
       if (!root || !g) return clearInterval(stepTimer);
       let more = false;
@@ -293,8 +294,10 @@ GameUI.tycoon = (() => {
           more = more || shown[p.id] !== p.pos;
         } else shown[p.id] = p.pos;
       }
+      const positions=new Map([...root.querySelectorAll('[data-pawn]')].map(el=>[el.dataset.pawn,el.getBoundingClientRect()]));
       html["ty-boardwrap"] = null;
       setPanel("ty-boardwrap", boardHTML());
+      root.querySelectorAll('[data-pawn]').forEach(el=>{const before=positions.get(el.dataset.pawn),after=el.getBoundingClientRect();if(before)GameExperience.animate(el,[{translate:`${before.x-after.x}px ${before.y-after.y}px`},{translate:'0px 0px'}],{duration:110});});
       if (!more) clearInterval(stepTimer);
     }, 120);
   }
