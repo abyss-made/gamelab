@@ -8,9 +8,17 @@ for(const city of fs.readFileSync(path.join(__dirname,'../data/city-names.txt'),
 proper.Country.add('cote divoire');
 const allProper=new Set(Object.values(proper).flatMap(s=>[...s]));
 const sets=Object.fromEntries(Object.entries(vocabulary).map(([k,v])=>[k,new Set(v)]));
+// Reviewed common answers that WordNet's hypernym walk misses (actor, singer, milkshake, garlic...).
+for(const [k,v] of Object.entries(require('../data/category-supplements.json')))if(sets[k])for(const w of v.split('|'))sets[k].add(plain(w));
 const aliases={Country:{usa:'united states',us:'united states','united states of america':'united states',uk:'united kingdom','great britain':'united kingdom','czech republic':'czechia',turkiye:'turkey','ivory coast':'cote divoire','cote d ivoire':'cote divoire',uae:'united arab emirates'},City:{nyc:'new york','new york city':'new york','washington dc':'washington',kiev:'kyiv',saigon:'ho chi minh city',bombay:'mumbai',peking:'beijing'}};
 function canonicalProper(v,cat){return aliases[cat]?.[v]||v;}
+// Spelling must be a real word before any plural is stripped: "fishs"/"foxs"/"sheeps" are not.
+function realSpelling(value){
+ const w=value.slice(value.lastIndexOf(' ')+1);
+ return lexicon.has(w)||!!inflections[w];
+}
 function forms(value){
+ if(!realSpelling(value))return [];
  const out=[...(inflections[value]||[])],i=value.lastIndexOf(' ')+1,stem=value.slice(0,i),w=value.slice(i);
  for(const form of inflections[w]||[])out.push(stem+form);
  if(w.endsWith('s')&&!w.endsWith('ss'))out.push(stem+w.slice(0,-1));

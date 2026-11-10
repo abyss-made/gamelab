@@ -19,7 +19,7 @@ Normalization handles case, compatibility forms, combining accents, invisible fo
 
 ## Semantic and geographic data
 
-Princeton **WordNet 3.0** noun hypernyms supply ten concrete category vocabularies; `noun.exc` supplies irregular nouns. Full terms in `WORDNET-LICENSE.txt`. Explicit root synsets and reviewed modern additions live in the generator. Plural candidates must resolve to a listed category member. Creative categories retain lexical checks with party-judged meaning. Bluff/drawing invented answers remain unrestricted by this system.
+Princeton **WordNet 3.0** noun hypernyms supply ten concrete category vocabularies; `noun.exc` supplies irregular nouns. Full terms in `WORDNET-LICENSE.txt`. Explicit root synsets and reviewed modern additions live in the generator. Plural candidates must resolve to a listed category member. Reviewed common answers WordNet misses (actor, singer, milkshake, garlic…) live in `category-supplements.json`, merged at load; plural stripping applies only when the submitted spelling is itself a lexicon word or listed irregular (so `fishs`, `foxs`, `sheeps` are rejected). Creative categories retain lexical checks with party-judged meaning. Bluff/drawing invented answers remain unrestricted by this system.
 
 Source https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/wordnet.zip
 SHA256 `cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59`.
