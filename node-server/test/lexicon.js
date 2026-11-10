@@ -127,6 +127,9 @@ ok(!lexicon.has('nasa') && !lexicon.has('london'), 'proper nouns / abbreviations
   ok(score('Body part', 'v', 'venae cavae')[0].points === 2 && score('Body part', 'c', 'corpora lutea')[0].points === 2, 'Categories keeps listed multiword irregular plurals');
   for (const [cat, l, w] of [['Musical instrument', 'h', 'handpans'], ['Musical instrument', 'k', 'keytars'], ['Vehicle', 'e', 'ebikes'], ['Job', 'y', 'youtubers']])
     ok(score(cat, l, w)[0].points === 2, `Categories keeps regular plural of reviewed addition "${w}"`);
+  for (const [cat, l, w] of [['Job', 'c', 'candlemakers'], ['Job', 'm', 'manservants'], ['Body part', 'h', 'hindlimbs'], ['Musical instrument', 'm', 'membranophones']])
+    ok(score(cat, l, w)[0].points === 2, `Categories keeps regular plural of lexicon singular "${w}"`);
+  for (const w of ['sheeps', 'foxs', 'fishs', 'swordfishs']) ok(score('Animal', w[0], w)[0].points === 0, `Categories still rejects "${w}"`);
   ok(score('Animal', 'f', 'fish', 'fishes').every((c) => c.status === 'dup'), 'Categories: fish and fishes are duplicates');
 })();
 

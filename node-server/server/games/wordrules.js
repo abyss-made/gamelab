@@ -13,12 +13,16 @@ for(const [k,v] of Object.entries(require('../data/category-supplements.json')))
 const aliases={Country:{usa:'united states',us:'united states','united states of america':'united states',uk:'united kingdom','great britain':'united kingdom','czech republic':'czechia',turkiye:'turkey','ivory coast':'cote divoire','cote d ivoire':'cote divoire',uae:'united arab emirates'},City:{nyc:'new york','new york city':'new york','washington dc':'washington',kiev:'kyiv',saigon:'ho chi minh city',bombay:'mumbai',peking:'beijing'}};
 function canonicalProper(v,cat){return aliases[cat]?.[v]||v;}
 // Spelling must be a real word before any plural is stripped: "fishs"/"foxs"/"sheeps" are not.
+const noPlainS=new Set('sheep deer moose swine series species aircraft salmon trout bison mouse louse goose man woman child foot tooth ox person'.split(' '));
 function realSpelling(value){
  const w=value.slice(value.lastIndexOf(' ')+1);
  if(lexicon.has(w)||inflections[w]||inflections[value])return true;
- // Reviewed modern additions outside the lexicon (handpan, keytar, ebike, youtuber) take a regular -s;
- // a misspelt plural of a real word ("fishs") never does.
- return w.endsWith('s')&&!w.endsWith('ss')&&!lexicon.has(w.slice(0,-1));
+ // A regular -s plural of a word the lexicon knows is accepted unless that singular cannot take a plain -s:
+ // sibilant endings ("fishs", "foxs"), consonant+y ("babys"), and invariant/irregular base nouns ("sheeps").
+ if(!w.endsWith('s')||w.endsWith('ss'))return false;
+ const sing=w.slice(0,-1);
+ if(!lexicon.has(sing))return true; // reviewed modern additions (handpan, keytar, ebike, youtuber)
+ return !(/(s|x|z|ch|sh)$/.test(sing)||/[^aeiou]y$/.test(sing)||noPlainS.has(sing));
 }
 function forms(value){
  if(!realSpelling(value))return [];
