@@ -108,5 +108,30 @@ ok(!lexicon.has('nasa') && !lexicon.has('london'), 'proper nouns / abbreviations
   ok(r2.st.phase === 'review', 'Categories: timer expiry scores the round');
 })();
 
+// ---- Dictionary 2.0 regressions (issue #75): scored through the real onAction/tick path ----
+(function () {
+  const score = (cat, letter, a, b) => {
+    const r = fakeRoom(['A', 'B'], 'categories', { rounds: 3, roundTime: 30 });
+    r.st.letter = letter; r.st.cats = Array(5).fill(cat);
+    r.act(0, { type: 'answers', answers: [a, '', '', '', ''], done: true });
+    r.act(1, { type: 'answers', answers: [b || '', '', '', '', ''], done: true });
+    return r.st.review.rows.map((row) => row.cells[0]);
+  };
+  const valid = [['Job', 'a', 'actor'], ['Job', 'a', 'Astronaut'], ['Job', 's', 'singer'], ['Job', 'a', 'actors'], ['Drink', 'm', 'milkshake'], ['Drink', 'm', 'milkshakes'],
+    ['Fruit or vegetable', 'g', 'garlic'], ['Animal', 'f', 'fish'], ['Animal', 'f', 'fishes'], ['Animal', 'f', 'foxes'], ['Animal', 'f', 'fox'], ['Animal', 's', 'sheep'], ['Animal', 'm', 'mice'], ['Animal', 'w', 'wolves'], ['Animal', 'd', 'dogs']];
+  for (const [cat, l, w] of valid) ok(score(cat, l, w)[0].points === 2, `Categories scores ${cat} "${w}"`);
+  for (const [cat, l, w] of [['Animal', 'f', 'fishs'], ['Animal', 'f', 'foxs'], ['Animal', 's', 'sheeps'], ['Animal', 'd', 'dogss']])
+    ok(score(cat, l, w)[0].points === 0 && score(cat, l, w)[0].status === 'invalid', `Categories rejects invented spelling "${w}"`);
+  for (const [cat, l, w] of [['Job', 'a', 'apple'], ['Drink', 'a', 'anvil'], ['Fruit or vegetable', 'g', 'granite']])
+    ok(score(cat, l, w)[0].points === 0, `Strict category still rejects ${cat} "${w}"`);
+  ok(score('Body part', 'v', 'venae cavae')[0].points === 2 && score('Body part', 'c', 'corpora lutea')[0].points === 2, 'Categories keeps listed multiword irregular plurals');
+  for (const [cat, l, w] of [['Musical instrument', 'h', 'handpans'], ['Musical instrument', 'k', 'keytars'], ['Vehicle', 'e', 'ebikes'], ['Job', 'y', 'youtubers']])
+    ok(score(cat, l, w)[0].points === 2, `Categories keeps regular plural of reviewed addition "${w}"`);
+  for (const [cat, l, w] of [['Job', 'c', 'candlemakers'], ['Job', 'm', 'manservants'], ['Body part', 'h', 'hindlimbs'], ['Musical instrument', 'm', 'membranophones']])
+    ok(score(cat, l, w)[0].points === 2, `Categories keeps regular plural of lexicon singular "${w}"`);
+  for (const w of ['sheeps', 'foxs', 'fishs', 'swordfishs']) ok(score('Animal', w[0], w)[0].points === 0, `Categories still rejects "${w}"`);
+  ok(score('Animal', 'f', 'fish', 'fishes').every((c) => c.status === 'dup'), 'Categories: fish and fishes are duplicates');
+})();
+
 console.log(failures ? `\n${failures} FAILED` : '\nAll lexicon tests passed');
 process.exit(failures ? 1 : 0);
