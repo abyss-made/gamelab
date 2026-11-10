@@ -124,6 +124,7 @@ ok(!lexicon.has('nasa') && !lexicon.has('london'), 'proper nouns / abbreviations
     ok(score(cat, l, w)[0].points === 0 && score(cat, l, w)[0].status === 'invalid', `Categories rejects invented spelling "${w}"`);
   for (const [cat, l, w] of [['Job', 'a', 'apple'], ['Drink', 'a', 'anvil'], ['Fruit or vegetable', 'g', 'granite']])
     ok(score(cat, l, w)[0].points === 0, `Strict category still rejects ${cat} "${w}"`);
+  ok(score('Body part', 'v', 'venae cavae')[0].points === 2 && score('Body part', 'c', 'corpora lutea')[0].points === 2, 'Categories keeps listed multiword irregular plurals');
   ok(score('Animal', 'f', 'fish', 'fishes').every((c) => c.status === 'dup'), 'Categories: fish and fishes are duplicates');
 })();
 

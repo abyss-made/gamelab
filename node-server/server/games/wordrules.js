@@ -15,7 +15,7 @@ function canonicalProper(v,cat){return aliases[cat]?.[v]||v;}
 // Spelling must be a real word before any plural is stripped: "fishs"/"foxs"/"sheeps" are not.
 function realSpelling(value){
  const w=value.slice(value.lastIndexOf(' ')+1);
- return lexicon.has(w)||!!inflections[w];
+ return lexicon.has(w)||!!inflections[w]||!!inflections[value];
 }
 function forms(value){
  if(!realSpelling(value))return [];
