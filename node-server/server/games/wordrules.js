@@ -15,7 +15,10 @@ function canonicalProper(v,cat){return aliases[cat]?.[v]||v;}
 // Spelling must be a real word before any plural is stripped: "fishs"/"foxs"/"sheeps" are not.
 function realSpelling(value){
  const w=value.slice(value.lastIndexOf(' ')+1);
- return lexicon.has(w)||!!inflections[w]||!!inflections[value];
+ if(lexicon.has(w)||inflections[w]||inflections[value])return true;
+ // Reviewed modern additions outside the lexicon (handpan, keytar, ebike, youtuber) take a regular -s;
+ // a misspelt plural of a real word ("fishs") never does.
+ return w.endsWith('s')&&!w.endsWith('ss')&&!lexicon.has(w.slice(0,-1));
 }
 function forms(value){
  if(!realSpelling(value))return [];
