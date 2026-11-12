@@ -90,3 +90,4 @@
  :is(.pl,.golf) .b2-players{padding:0}
  .pl #pl-controls{padding:6px}
 }
+.pl .p5-pot-note{display:block;color:#c9ed9d;font-size:12px;margin-top:5px}

@@ -497,6 +497,7 @@ GameUI.golf = (() => {
   }
 
   function update(state) {
+    const priorPhase = g?.phase;
     S = state;
     g = state.game;
     if (!g) return;
@@ -524,6 +525,7 @@ GameUI.golf = (() => {
       }
     } else if (g.turnId !== S.you) update.aimed = false;
     paintText();
+    if(priorPhase && priorPhase!=="between" && g.phase==="between") FX.animate(root.querySelector("#gf-between"),[{opacity:0,transform:"translateY(12px)"},{opacity:1,transform:"none"}],420);
     syncControls();
     clearTimeout(tickT);
     const wait = busyUntil - performance.now();

@@ -23,6 +23,7 @@ GameUI.pool = (() => {
   let animT0 = 0;
   let busyUntil = 0;
   let lastShot = -1;
+  let outcomeSeeded = false, outcomeKey = null;
   let dragging = null;
   let pendingCue = null; // { aim, from, until }: cue shown at contact while the server resolves the shot
 
@@ -376,6 +377,7 @@ GameUI.pool = (() => {
 
   function mount(stage, a) {
     visual.reset();
+    outcomeSeeded=false;outcomeKey=null;
     app = a;
     root = document.createElement("div");
     root.className = "b2 pl";
@@ -491,6 +493,7 @@ GameUI.pool = (() => {
       const by = app.esc((g.players.find((p) => p.id === l.by) || {}).name || "");
       msg += ` <span class="warn-text">Foul by ${by}: ${{ scratch: "scratch", "no-contact": "missed every ball", "wrong-ball": "wrong ball first", "no-rail": "no rail or pocket" }[l.foul]}.</span>`;
     }
+    if(l && !busy && !l.foul && l.potted.length) msg += ` <span class="p5-pot-note">${l.potted.length} ball${l.potted.length===1?"":"s"} pocketed.</span>`;
     return msg;
   }
 
@@ -502,6 +505,11 @@ GameUI.pool = (() => {
     const st = root.querySelector("#pl-status");
     st.innerHTML = statusText();
     st.className = "ttt-status" + (canShoot() ? " mine" : "");
+    if(!outcomeSeeded){outcomeSeeded=true;outcomeKey=g.last?.shot;}
+    else if(g.last && performance.now()>=busyUntil && outcomeKey!==g.last.shot){
+      outcomeKey=g.last.shot;
+      if(g.last.foul || g.last.potted.length) FX.animate(st,[{boxShadow:`inset 4px 0 ${g.last.foul?'#f6a78d':'#c4ed8a'}`,background:g.last.foul?'#713b3555':'#42704b66'},{boxShadow:'inset 0 0 transparent',background:'transparent'}],650);
+    }
     root.querySelector("#pl-help").textContent = g.myIndex >= 0 ? "Pocket all of your group, then the 8-ball. Hitting the wrong ball first or missing everything is a foul." : "";
   }
 
