@@ -1,0 +1,28 @@
+{
+  "checks": [
+    "drawguess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "fourrow: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "wordchain: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "categories: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "colorstack: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "gofish: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Tic Tac Toe legal full win, result standings and host rematch",
+    "tictactoe: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "dotsboxes: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "wordscramble: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "trivia: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Telephone real write/draw/guess chain and likes",
+    "telephone: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "bluff: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "Impostor clue turns, discussion, voting and public reveal",
+    "impostor: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "battleship: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "checkers: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "ludo: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "chess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "pool: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "golf: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match",
+    "tycoon: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match"
+  ],
+  "errors": []
+}

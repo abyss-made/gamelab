@@ -1,0 +1,50 @@
+PASS  alpha mode with missing secret refuses to start
+PASS  missing secret: secret not logged
+PASS  alpha mode with short secret refuses to start
+PASS  short secret: secret not logged
+PASS  alpha mode with invalid flag refuses to start
+PASS  invalid flag: secret not logged
+PASS  alpha server starts with valid secret
+PASS  unauthenticated / -> 401 without content
+PASS  unauthenticated /draw-and-guess -> 401 without content
+PASS  unauthenticated /four-in-a-row -> 401 without content
+PASS  unauthenticated /r/ABC123 -> 401 without content
+PASS  unauthenticated /api/rooms -> 401 without content
+PASS  unauthenticated /js/main.js -> 401 without content
+PASS  unauthenticated /style.css -> 401 without content
+PASS  unauthenticated /favicon.svg -> 401 without content
+PASS  unauthenticated /nope -> 401 without content
+PASS  unauthenticated /ads.txt -> 401 without content
+PASS  /healthz open and exposes nothing
+PASS  unauthenticated POST /healthz -> 401 without content
+PASS  unauthenticated PUT /healthz -> 401 without content
+PASS  unauthenticated DELETE /healthz -> 401 without content
+PASS  noindex header set
+PASS  login page served to browsers
+PASS  unauthenticated WebSocket rejected
+PASS  unauthenticated polling rejected
+PASS  direct /socket.io handshake blocked
+PASS  forged cookie WebSocket rejected
+PASS  wrong password rejected, no cookie
+PASS  GET login sets no cookie
+PASS  correct password redirects to /
+PASS  cookie is HttpOnly and SameSite
+PASS  secret not echoed in cookie or URL
+PASS  authorized / -> 200
+PASS  authorized /draw-and-guess -> 200
+PASS  authorized /api/rooms -> 200
+PASS  authorized /js/main.js -> 200
+PASS  authorized /style.css -> 200
+PASS  authorized visitor gets game page
+PASS  authorized socket creates room
+PASS  second authorized socket joins room
+PASS  authorized polling transport connects
+PASS  repeated wrong passwords are rate limited
+PASS  rate limit also blocks further attempts from same IP
+PASS  secret never appears in server logs
+PASS  alpha off: pages open
+PASS  alpha off: API open
+PASS  alpha off: sockets open
+PASS  alpha off: no login endpoint behavior
+
+All passed

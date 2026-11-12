@@ -1,0 +1,56 @@
+PASS  lexicon is broad (115503 words)
+PASS  lexicon accepts "dog" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "dogs" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "running" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "ran" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "jumped" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "children" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "color" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "colour" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "zebra" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "xylophones" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "qi" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "syzygy" (common/inflected/dialect/obscure)
+PASS  lexicon accepts "cafe" (common/inflected/dialect/obscure)
+PASS  lexicon rejects "xqzvk"
+PASS  lexicon rejects "asdfgh"
+PASS  lexicon rejects ""
+PASS  lexicon rejects "a"
+PASS  lexicon rejects "dog9"
+PASS  lexicon normalizes case and whitespace
+PASS  lexicon normalizes full-width Unicode
+PASS  lexicon strips combining accents
+PASS  lexicon strips zero-width characters
+PASS  lexicon ignores non-strings
+PASS  proper nouns / abbreviations are not in the lexicon (use lexicon-extra.txt)
+PASS  Word Chain test word "macabre" is outside the curated list
+PASS  Word Chain accepts a legitimate non-curated word (case/space normalized)
+PASS  Word Chain still rejects non-words
+PASS  Word Chain rejects a repeated word
+PASS  Word Chain accepts inflected form "earbashing"
+PASS  Word Chain dictionary-off mode unchanged
+PASS  scrambled letters do not already spell a lexicon word
+PASS  Word Scramble rejects a wrong guess
+PASS  Word Scramble accepts the answer with case/whitespace/zero-width noise
+PASS  Word Scramble view does not leak the answer mid-round
+PASS  Word Scramble accepts a valid anagram of the answer
+PASS  Word Scramble rejects a non-word rearrangement
+PASS  Categories normalizes plurals/articles via lexicon
+PASS  Categories: "toe" and "toes" match as duplicates
+PASS  Categories: "doe" and "does" match as duplicates
+PASS  Categories: "hoe" and "hoes" match as duplicates
+PASS  Categories: "berry" and "berries" match as duplicates
+PASS  Categories: "box" and "boxes" match as duplicates
+PASS  Categories: "glass" and "glasses" match as duplicates
+PASS  Categories: "fly" and "flies" match as duplicates
+PASS  Categories: "shoe" and "shoes" match as duplicates
+PASS  Categories strips accents
+PASS  Categories: duplicate detection ignores case/plural/whitespace
+PASS  Categories rejects the category name itself as an answer
+PASS  Categories enforces the round letter
+PASS  Categories: matching answers score as duplicates
+PASS  Categories: unique scores, wrong-letter answer is invalid
+PASS  Categories caps answer length
+PASS  Categories: timer expiry scores the round
+
+All lexicon tests passed

@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "1440: curated links, catalog search/empty/reset, no overflow",
+    "390: curated links, catalog search/empty/reset, no overflow",
+    "932: curated links, catalog search/empty/reset, no overflow",
+    "Studio character selection/save survives reload",
+    "Live reduced motion preference honoured"
+  ],
+  "errors": []
+}

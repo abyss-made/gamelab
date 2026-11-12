@@ -1,0 +1,381 @@
+{
+  "programs": 37,
+  "passed": 37,
+  "failed": 0,
+  "skipped": 0,
+  "browserGroups": 23,
+  "discoveryGroups": 5,
+  "poolPostRefinementGroups": 1,
+  "results": [
+    {
+      "program": "avatarv3",
+      "exitCode": 0,
+      "seconds": 0.03,
+      "passLines": 7,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "avatarv3.log",
+      "startupError": false
+    },
+    {
+      "program": "avatarui",
+      "exitCode": 0,
+      "seconds": 20.74,
+      "passLines": 44,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "avatarui-rerun.log"
+    },
+    {
+      "program": "drawguess",
+      "exitCode": 0,
+      "seconds": 2.09,
+      "passLines": 79,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "drawguess.log",
+      "startupError": false
+    },
+    {
+      "program": "smoke",
+      "exitCode": 0,
+      "seconds": 2.5,
+      "passLines": 49,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "smoke.log",
+      "startupError": false
+    },
+    {
+      "program": "safety",
+      "exitCode": 0,
+      "seconds": 11.91,
+      "passLines": 24,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "safety.log",
+      "startupError": false
+    },
+    {
+      "program": "alpha",
+      "exitCode": 0,
+      "seconds": 2.03,
+      "passLines": 48,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "alpha.log",
+      "startupError": false
+    },
+    {
+      "program": "phase1",
+      "exitCode": 0,
+      "seconds": 1.52,
+      "passLines": 17,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "phase1.log",
+      "startupError": false
+    },
+    {
+      "program": "ui",
+      "exitCode": 0,
+      "seconds": 8.92,
+      "passLines": 25,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "ui-rerun.log"
+    },
+    {
+      "program": "phase15",
+      "exitCode": 0,
+      "seconds": 126.67,
+      "passLines": 185,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "phase15-final.log"
+    },
+    {
+      "program": "batch2",
+      "exitCode": 0,
+      "seconds": 1.79,
+      "passLines": 108,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch2-rerun.log"
+    },
+    {
+      "program": "batch2ui",
+      "exitCode": 0,
+      "seconds": 33.27,
+      "passLines": 73,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch2ui-rerun.log"
+    },
+    {
+      "program": "batch1",
+      "exitCode": 0,
+      "seconds": 1.55,
+      "passLines": 155,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "batch1.log",
+      "startupError": false
+    },
+    {
+      "program": "batch1ui",
+      "exitCode": 0,
+      "seconds": 16.76,
+      "passLines": 64,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch1ui-rerun.log"
+    },
+    {
+      "program": "batch3",
+      "exitCode": 0,
+      "seconds": 2.13,
+      "passLines": 156,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch3-rerun.log"
+    },
+    {
+      "program": "batch3ui",
+      "exitCode": 0,
+      "seconds": 22.33,
+      "passLines": 91,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch3ui-rerun.log"
+    },
+    {
+      "program": "batch4",
+      "exitCode": 0,
+      "seconds": 2.9,
+      "passLines": 179,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "batch4.log",
+      "startupError": false
+    },
+    {
+      "program": "batch4ui",
+      "exitCode": 0,
+      "seconds": 24.53,
+      "passLines": 136,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch4ui-rerun.log"
+    },
+    {
+      "program": "batch5",
+      "exitCode": 0,
+      "seconds": 15.16,
+      "passLines": 274,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "batch5-rerun.log"
+    },
+    {
+      "program": "batch5ui",
+      "exitCode": 0,
+      "seconds": 50.26,
+      "passLines": 140,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "batch5ui.log",
+      "startupError": false
+    },
+    {
+      "program": "audit",
+      "exitCode": 0,
+      "seconds": 1.44,
+      "passLines": 0,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "audit.log",
+      "startupError": false
+    },
+    {
+      "program": "qol",
+      "exitCode": 0,
+      "seconds": 115.96,
+      "passLines": 729,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "evidence": "qol-rerun.log"
+    },
+    {
+      "program": "party",
+      "exitCode": 0,
+      "seconds": 11.31,
+      "passLines": 97,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "party.log",
+      "startupError": false
+    },
+    {
+      "program": "partyui",
+      "exitCode": 0,
+      "seconds": 45.65,
+      "passLines": 56,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "partyui.log",
+      "startupError": false
+    },
+    {
+      "program": "party3",
+      "exitCode": 0,
+      "seconds": 1.91,
+      "passLines": 29,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "party3.log",
+      "startupError": false
+    },
+    {
+      "program": "party3ui",
+      "exitCode": 0,
+      "seconds": 22.45,
+      "passLines": 128,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "party3ui.log",
+      "startupError": false
+    },
+    {
+      "program": "phase2",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "passLines": 18,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "phase2.log",
+      "startupError": false
+    },
+    {
+      "program": "phase2ui",
+      "exitCode": 0,
+      "seconds": 14.29,
+      "passLines": 29,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "phase2ui.log",
+      "startupError": false
+    },
+    {
+      "program": "design31ui",
+      "exitCode": 0,
+      "seconds": 77.13,
+      "passLines": 205,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "design31ui.log",
+      "startupError": false
+    },
+    {
+      "program": "reliability",
+      "exitCode": 0,
+      "seconds": 30.11,
+      "passLines": 374,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "reliability-rerun.log",
+      "startupError": false
+    },
+    {
+      "program": "reliabilityui",
+      "exitCode": 0,
+      "seconds": 50.03,
+      "passLines": 49,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "reliabilityui.log",
+      "startupError": false
+    },
+    {
+      "program": "keyboardui",
+      "exitCode": 0,
+      "seconds": 11.68,
+      "passLines": 40,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "keyboardui.log",
+      "startupError": false
+    },
+    {
+      "program": "botsunit",
+      "exitCode": 0,
+      "seconds": 39.75,
+      "passLines": 40,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "botsunit.log",
+      "startupError": false
+    },
+    {
+      "program": "bots",
+      "exitCode": 0,
+      "seconds": 135.62,
+      "passLines": 91,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "bots.log",
+      "startupError": false
+    },
+    {
+      "program": "botsui",
+      "exitCode": 0,
+      "seconds": 6.07,
+      "passLines": 30,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "botsui.log",
+      "startupError": false
+    },
+    {
+      "program": "lexicon",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "passLines": 54,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "lexicon.log",
+      "startupError": false
+    },
+    {
+      "program": "experience41",
+      "exitCode": 0,
+      "seconds": 0.34,
+      "passLines": 15,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "experience41.log",
+      "startupError": false
+    },
+    {
+      "program": "platform",
+      "exitCode": 0,
+      "seconds": 1.91,
+      "passLines": 19,
+      "failLines": 0,
+      "skipLines": 0,
+      "evidence": "platform.log",
+      "startupError": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+PASS  create private Draw & Guess lobby
+PASS  second player joins by code
+PASS  creator is host
+PASS  non-host cannot start
+PASS  host starts game with 2 players
+PASS  drawer gets 6 distinct word choices
+PASS  guesser does not see choices
+PASS  guesser sees blanks, not the word
+PASS  drawer sees the word
+PASS  strokes relay to the guesser
+PASS  guesser's fake drawing was ignored
+PASS  drawer cannot leak the word in chat
+PASS  wrong guess shows in chat
+PASS  correct guess is hidden from others
+PASS  guesser scored (496)
+PASS  turn ends when everyone guessed, word revealed
+PASS  Draw & Guess lets new players join mid-game
+PASS  late joiner receives the current drawing
+PASS  refresh/reconnect rejoins the same seat
+PASS  same player id after reconnect
+PASS  host can end the game
+PASS  switch to 4 in a Row: 2 play, 1 spectates
+PASS  unpicked player became a spectator
+PASS  spectator was told why
+PASS  lobby link stays the same after switching games
+PASS  full 2-player lobby: link joiner spectates with message
+PASS  full lobby with spectators off is rejected with counts
+PASS  locked lobby rejects new people
+PASS  4 in a Row starts
+PASS  out-of-turn move is ignored
+PASS  vertical four wins
+PASS  winner stays: loser swapped with next spectator
+PASS  first spectator in line took the seat
+PASS  leaving mid-match forfeits
+PASS  host passed on when host left
+PASS  quick play pairs two strangers in one public lobby
+PASS  public lobby listed, private one hidden
+PASS  public lobby counts down to auto start
+PASS  vote kick removes a player in public lobby
+PASS  kicked player cannot rejoin
+PASS  GET / -> 200
+PASS  GET /draw-and-guess -> 200
+PASS  GET /four-in-a-row -> 200
+PASS  GET /r/ABCDEF -> 200
+PASS  GET /privacy.html -> 200
+PASS  GET /ads.txt -> 200
+PASS  GET /js/main.js -> 200
+PASS  game page has its own title
+PASS  unknown lobby link says closed
+
+All passed

@@ -1,0 +1,43 @@
+GAME drawguess
+PASS drawguess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME fourrow
+PASS fourrow: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME wordchain
+PASS wordchain: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME categories
+PASS categories: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME colorstack
+PASS colorstack: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME gofish
+PASS gofish: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME tictactoe
+PASS Tic Tac Toe legal full win, result standings and host rematch
+PASS tictactoe: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME dotsboxes
+PASS dotsboxes: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME wordscramble
+PASS wordscramble: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME trivia
+PASS trivia: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME telephone
+PASS Telephone real write/draw/guess chain and likes
+PASS telephone: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME bluff
+PASS bluff: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME impostor
+PASS Impostor clue turns, discussion, voting and public reveal
+PASS impostor: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME battleship
+PASS battleship: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME checkers
+PASS checkers: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME ludo
+PASS ludo: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME chess
+PASS chess: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME pool
+PASS pool: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME golf
+PASS golf: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match
+GAME tycoon
+PASS tycoon: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match

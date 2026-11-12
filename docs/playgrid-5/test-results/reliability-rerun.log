@@ -1,0 +1,424 @@
+reliability: real server on http://localhost:36515, seed 48
+
+== party-sizes
+PASS  party-sizes: 2 players: everyone gets a seat in a no-game party
+PASS  party-sizes: 2 players: every client has its own member id
+PASS  party-sizes: 2 players joined: server state and every client view agree
+PASS  party-sizes: 2 players: a chat line arrives exactly once at every client
+PASS  party-sizes: 2 players → fourrow: same party code and all 2 members kept
+PASS  party-sizes: 2 players → fourrow: 2 seated, 0 watching
+PASS  party-sizes: 2 players → fourrow: server state and every client view agree
+PASS  party-sizes: 2 players → drawguess: same party code and all 2 members kept
+PASS  party-sizes: 2 players → drawguess: 2 seated, 0 watching
+PASS  party-sizes: 2 players → drawguess: server state and every client view agree
+PASS  party-sizes: 2 players → ludo: same party code and all 2 members kept
+PASS  party-sizes: 2 players → ludo: 2 seated, 0 watching
+PASS  party-sizes: 2 players → ludo: server state and every client view agree
+PASS  party-sizes: 2 players → impostor: same party code and all 2 members kept
+PASS  party-sizes: 2 players → impostor: 2 seated, 0 watching
+PASS  party-sizes: 2 players → impostor: server state and every client view agree
+PASS  party-sizes: 2 players → chess: same party code and all 2 members kept
+PASS  party-sizes: 2 players → chess: 2 seated, 0 watching
+PASS  party-sizes: 2 players → chess: server state and every client view agree
+PASS  party-sizes: 2 players: one host change sends exactly one state update per client (1,1)
+PASS  party-sizes: 2 players: leaving empties the party
+PASS  party-sizes: 2 players: the empty party is deleted after its expiry
+PASS  party-sizes: 2 players: the old invite code now reports closed ({"error":"closed"})
+PASS  party-sizes: 4 players: everyone gets a seat in a no-game party
+PASS  party-sizes: 4 players: every client has its own member id
+PASS  party-sizes: 4 players joined: server state and every client view agree
+PASS  party-sizes: 4 players: a chat line arrives exactly once at every client
+PASS  party-sizes: 4 players → fourrow: same party code and all 4 members kept
+PASS  party-sizes: 4 players → fourrow: 2 seated, 2 watching
+PASS  party-sizes: 4 players → fourrow: everyone bumped is first in line for a seat
+PASS  party-sizes: 4 players → fourrow: server state and every client view agree
+PASS  party-sizes: 4 players → drawguess: same party code and all 4 members kept
+PASS  party-sizes: 4 players → drawguess: 4 seated, 0 watching
+PASS  party-sizes: 4 players → drawguess: server state and every client view agree
+PASS  party-sizes: 4 players → ludo: same party code and all 4 members kept
+PASS  party-sizes: 4 players → ludo: 4 seated, 0 watching
+PASS  party-sizes: 4 players → ludo: server state and every client view agree
+PASS  party-sizes: 4 players → impostor: same party code and all 4 members kept
+PASS  party-sizes: 4 players → impostor: 4 seated, 0 watching
+PASS  party-sizes: 4 players → impostor: server state and every client view agree
+PASS  party-sizes: 4 players → chess: same party code and all 4 members kept
+PASS  party-sizes: 4 players → chess: 2 seated, 2 watching
+PASS  party-sizes: 4 players → chess: everyone bumped is first in line for a seat
+PASS  party-sizes: 4 players → chess: server state and every client view agree
+PASS  party-sizes: 4 players: one host change sends exactly one state update per client (1,1,1,1)
+PASS  party-sizes: 4 players: leaving empties the party
+PASS  party-sizes: 4 players: the empty party is deleted after its expiry
+PASS  party-sizes: 4 players: the old invite code now reports closed ({"error":"closed"})
+PASS  party-sizes: 8 players: everyone gets a seat in a no-game party
+PASS  party-sizes: 8 players: every client has its own member id
+PASS  party-sizes: 8 players joined: server state and every client view agree
+PASS  party-sizes: 8 players: a chat line arrives exactly once at every client
+PASS  party-sizes: 8 players → fourrow: same party code and all 8 members kept
+PASS  party-sizes: 8 players → fourrow: 2 seated, 6 watching
+PASS  party-sizes: 8 players → fourrow: everyone bumped is first in line for a seat
+PASS  party-sizes: 8 players → fourrow: server state and every client view agree
+PASS  party-sizes: 8 players → drawguess: same party code and all 8 members kept
+PASS  party-sizes: 8 players → drawguess: 8 seated, 0 watching
+PASS  party-sizes: 8 players → drawguess: server state and every client view agree
+PASS  party-sizes: 8 players → ludo: same party code and all 8 members kept
+PASS  party-sizes: 8 players → ludo: 4 seated, 4 watching
+PASS  party-sizes: 8 players → ludo: everyone bumped is first in line for a seat
+PASS  party-sizes: 8 players → ludo: server state and every client view agree
+PASS  party-sizes: 8 players → impostor: same party code and all 8 members kept
+PASS  party-sizes: 8 players → impostor: 8 seated, 0 watching
+PASS  party-sizes: 8 players → impostor: server state and every client view agree
+PASS  party-sizes: 8 players → chess: same party code and all 8 members kept
+PASS  party-sizes: 8 players → chess: 2 seated, 6 watching
+PASS  party-sizes: 8 players → chess: everyone bumped is first in line for a seat
+PASS  party-sizes: 8 players → chess: server state and every client view agree
+PASS  party-sizes: 8 players: one host change sends exactly one state update per client (1,1,1,1,1,1,1,1)
+PASS  party-sizes: 8 players: leaving empties the party
+PASS  party-sizes: 8 players: the empty party is deleted after its expiry
+PASS  party-sizes: 8 players: the old invite code now reports closed ({"error":"closed"})
+PASS  party-sizes: the server logged no handler or loop errors
+      (party-sizes: 3767 ms)
+
+== fourrow-rematch-cycles
+PASS  fourrow-rematch-cycles: cycle 1: the two seated members play
+PASS  fourrow-rematch-cycles: cycle 1: the scripted vertical line wins
+PASS  fourrow-rematch-cycles: cycle 1: the win is announced exactly once to each client
+PASS  fourrow-rematch-cycles: cycle 1: exactly one game was started (gameCount 1)
+PASS  fourrow-rematch-cycles: cycle 1: winner stays, loser leaves the seat
+PASS  fourrow-rematch-cycles: cycle 1: the first in line takes the seat and the loser joins the back of the line
+PASS  fourrow-rematch-cycles: cycle 1: the winner's score matches the server
+PASS  fourrow-rematch-cycles: cycle 1: server state and every client view agree
+PASS  fourrow-rematch-cycles: cycle 2: the two seated members play
+PASS  fourrow-rematch-cycles: cycle 2: the scripted vertical line wins
+PASS  fourrow-rematch-cycles: cycle 2: the win is announced exactly once to each client
+PASS  fourrow-rematch-cycles: cycle 2: exactly one game was started (gameCount 2)
+PASS  fourrow-rematch-cycles: cycle 2: winner stays, loser leaves the seat
+PASS  fourrow-rematch-cycles: cycle 2: the first in line takes the seat and the loser joins the back of the line
+PASS  fourrow-rematch-cycles: cycle 2: the winner's score matches the server
+PASS  fourrow-rematch-cycles: cycle 2: server state and every client view agree
+PASS  fourrow-rematch-cycles: cycle 3: the two seated members play
+PASS  fourrow-rematch-cycles: cycle 3: the scripted vertical line wins
+PASS  fourrow-rematch-cycles: cycle 3: the win is announced exactly once to each client
+PASS  fourrow-rematch-cycles: cycle 3: exactly one game was started (gameCount 3)
+PASS  fourrow-rematch-cycles: cycle 3: winner stays, loser leaves the seat
+PASS  fourrow-rematch-cycles: cycle 3: the first in line takes the seat and the loser joins the back of the line
+PASS  fourrow-rematch-cycles: cycle 3: the winner's score matches the server
+PASS  fourrow-rematch-cycles: cycle 3: server state and every client view agree
+PASS  fourrow-rematch-cycles: the two bumped members were queued when the party switched to a 2-seat game
+PASS  fourrow-rematch-cycles: the server logged no handler or loop errors
+      (fourrow-rematch-cycles: 115 ms)
+
+== drawguess-secrets
+PASS  drawguess-secrets: turn 1: only the drawer is sent the word choices
+PASS  drawguess-secrets: turn 1: the drawer sees the word
+PASS  drawguess-secrets: turn 1: guessers and spectators are not sent the word
+PASS  drawguess-secrets: a late joiner mid-turn gets a seat
+PASS  drawguess-secrets: the late joiner is sent the canvas drawn so far
+PASS  drawguess-secrets: the late joiner is not sent the word
+PASS  drawguess-secrets: turn 1: a player who guessed is sent the word
+PASS  drawguess-secrets: turn 1: the guesser gets a private confirmation
+PASS  drawguess-secrets: what a guessed player says never reaches players still guessing
+PASS  drawguess-secrets: what a guessed player says never reaches spectators
+PASS  drawguess-secrets: spectator chat never reaches players still guessing
+PASS  drawguess-secrets: turn 1: the reveal shows everyone the word
+PASS  drawguess-secrets: turn 2: only the drawer is sent the word choices
+PASS  drawguess-secrets: turn 2: the drawer sees the word
+PASS  drawguess-secrets: turn 2: guessers and spectators are not sent the word
+PASS  drawguess-secrets: turn 2: a player who guessed is sent the word
+PASS  drawguess-secrets: turn 2: the guesser gets a private confirmation
+PASS  drawguess-secrets: turn 2: the reveal shows everyone the word
+PASS  drawguess-secrets: turn 3: only the drawer is sent the word choices
+PASS  drawguess-secrets: turn 3: the drawer sees the word
+PASS  drawguess-secrets: turn 3: guessers and spectators are not sent the word
+PASS  drawguess-secrets: turn 3: a player who guessed is sent the word
+PASS  drawguess-secrets: turn 3: the guesser gets a private confirmation
+PASS  drawguess-secrets: turn 3: the reveal shows everyone the word
+PASS  drawguess-secrets: turn 4: only the drawer is sent the word choices
+PASS  drawguess-secrets: turn 4: the drawer sees the word
+PASS  drawguess-secrets: turn 4: guessers and spectators are not sent the word
+PASS  drawguess-secrets: turn 4: a player who guessed is sent the word
+PASS  drawguess-secrets: turn 4: the guesser gets a private confirmation
+PASS  drawguess-secrets: turn 4: the reveal shows everyone the word
+PASS  drawguess-secrets: turn 5: only the drawer is sent the word choices
+PASS  drawguess-secrets: turn 5: the drawer sees the word
+PASS  drawguess-secrets: turn 5: guessers and spectators are not sent the word
+PASS  drawguess-secrets: turn 5: a player who guessed is sent the word
+PASS  drawguess-secrets: turn 5: the guesser gets a private confirmation
+PASS  drawguess-secrets: turn 5: the reveal shows everyone the word
+PASS  drawguess-secrets: every seated player drew once, including the late joiner (5 turns)
+PASS  drawguess-secrets: no player drew twice in the round (no duplicate turns)
+PASS  drawguess-secrets: turn ids advance by exactly one
+PASS  drawguess-secrets: the podium lists all five players with points
+PASS  drawguess-secrets: no guesser or spectator was ever sent a word before guessing it or the reveal
+PASS  drawguess-secrets: after the podium: server state and every client view agree
+PASS  drawguess-secrets: the server logged no handler or loop errors
+      (drawguess-secrets: 5215 ms)
+
+== impostor-bluff-secrets
+PASS  impostor-bluff-secrets: every crew member is sent the word and the crew role
+PASS  impostor-bluff-secrets: the impostor is sent their role and no word
+PASS  impostor-bluff-secrets: the spectator is sent neither a role nor the word
+PASS  impostor-bluff-secrets: nobody else is told who the impostor is ()
+PASS  impostor-bluff-secrets: the caught impostor still is not sent the word
+PASS  impostor-bluff-secrets: the result tells everyone the word and the impostor
+PASS  impostor-bluff-secrets: before the result no view carried the impostor's id ()
+PASS  impostor-bluff-secrets: the impostor first sees the word at the result
+PASS  impostor-bluff-secrets: the spectator first sees the word at the result
+PASS  impostor-bluff-secrets: impostor finished: server state and every client view agree
+PASS  impostor-bluff-secrets: switching games gives every spectator a seat when the new game has room (by design)
+PASS  impostor-bluff-secrets: vote options carry only their text (no author, no real-answer flag)
+PASS  impostor-bluff-secrets: each player is told only which option is their own
+PASS  impostor-bluff-secrets: the reveal gives everyone the real answer
+PASS  impostor-bluff-secrets: bluff ended by the host: server state and every client view agree
+PASS  impostor-bluff-secrets: the server logged no handler or loop errors
+      (impostor-bluff-secrets: 212 ms)
+
+== colorstack-full-game
+PASS  colorstack-full-game: hands stayed private across 131 turns
+PASS  colorstack-full-game: the game finished in 131 moves
+PASS  colorstack-full-game: the winner is announced at most once per client
+PASS  colorstack-full-game: colorstack finished: server state and every client view agree
+PASS  colorstack-full-game: the server logged no handler or loop errors
+      (colorstack-full-game: 4001 ms)
+
+== chess-reconnect-identity
+PASS  chess-reconnect-identity: black dropped on their turn: server state and every client view agree
+PASS  chess-reconnect-identity: reconnecting inside the grace period rejoins as the same member
+PASS  chess-reconnect-identity: the reconnected player is still black and still on move
+PASS  chess-reconnect-identity: a refresh (new socket, same tab token) rejoins
+PASS  chess-reconnect-identity: a refresh keeps the same member and colour
+PASS  chess-reconnect-identity: a duplicate tab takes over the same member
+PASS  chess-reconnect-identity: the replaced tab cannot move any more
+PASS  chess-reconnect-identity: after refresh and duplicate tab: server state and every client view agree
+PASS  chess-reconnect-identity: fool's mate ends the game for black
+PASS  chess-reconnect-identity: winner stays; the spectator takes the loser's seat
+PASS  chess-reconnect-identity: after mate: server state and every client view agree
+PASS  chess-reconnect-identity: the server logged no handler or loop errors
+      (chess-reconnect-identity: 1020 ms)
+
+== host-migration
+PASS  host-migration: the creator holds the first seat and hosts
+PASS  host-migration: a host who leaves hands hosting to the next connected member
+PASS  host-migration: host left: server state and every client view agree
+PASS  host-migration: the hand-over is announced once
+PASS  host-migration: the old host returns as a normal member with their seat
+PASS  host-migration: hosting cannot be transferred to an offline member
+PASS  host-migration: hosting can be transferred to a connected spectator
+PASS  host-migration: an idle host hands over to an active member, once
+PASS  host-migration: a kicked member cannot rejoin with the same tab
+PASS  host-migration: after kick: server state and every client view agree
+PASS  host-migration: one vote is not a majority
+PASS  host-migration: two of three votes remove the member and clear their votes
+PASS  host-migration: after vote kick: server state and every client view agree
+PASS  host-migration: after the host leaves mid-game the new host can end the game
+PASS  host-migration: host left mid-game: server state and every client view agree
+PASS  host-migration: the server logged no handler or loop errors
+      (host-migration: 1998 ms)
+
+== spectator-queue
+PASS  spectator-queue: a 2-seat game seats two and lets the rest watch
+PASS  spectator-queue: the line keeps the order people joined it
+PASS  spectator-queue: taking a seat when none is open is refused with a notice
+PASS  spectator-queue: an offline spectator in line is skipped
+PASS  spectator-queue: the spectator who gets the seat is told
+PASS  spectator-queue: seat filled from the line: server state and every client view agree
+PASS  spectator-queue: winner stays seats the first connected spectator in line (got Eli, line was Cy(offline),Eli)
+PASS  spectator-queue: after winner-stays rotation: server state and every client view agree
+PASS  spectator-queue: with only an offline spectator, the loser keeps the seat and nobody is announced as next
+PASS  spectator-queue: no rotation to an offline spectator: server state and every client view agree
+PASS  spectator-queue: the server logged no handler or loop errors
+      (spectator-queue: 53 ms)
+
+== rejoin-cycles
+PASS  rejoin-cycles: 15 cycles later the party still has exactly 3 members (3)
+PASS  rejoin-cycles: leaving and joining again creates a fresh member, as designed
+PASS  rejoin-cycles: no server sockets were left behind (3 → 3)
+PASS  rejoin-cycles: every server socket has the same number of listeners (25)
+PASS  rejoin-cycles: the chat history stays bounded (13)
+PASS  rejoin-cycles: nobody else was replaced or disturbed
+PASS  rejoin-cycles: after 15 cycles: server state and every client view agree
+PASS  rejoin-cycles: the server logged no handler or loop errors
+      (rejoin-cycles: 1229 ms)
+
+== late-join-and-guards
+PASS  late-join-and-guards: joining a running 2-player game makes you a spectator, with a notice (This lobby is playing Checkers (max 2 players). Both seats are taken, so you're spectating.)
+PASS  late-join-and-guards: the game cannot be switched mid-game
+PASS  late-join-and-guards: game settings cannot be changed mid-game
+PASS  late-join-and-guards: the result is recorded as a forfeit
+PASS  late-join-and-guards: the queued late joiner is seated when the game ends
+PASS  late-join-and-guards: after late join: server state and every client view agree
+PASS  late-join-and-guards: the server logged no handler or loop errors
+      (late-join-and-guards: 462 ms)
+
+== timers
+PASS  timers: one timeout gives exactly one random move and one message
+PASS  timers: no second move fires without another timeout
+PASS  timers: running out of time twice forfeits to the opponent
+PASS  timers: no timer fires after the game ended
+PASS  timers: the idle drawer gets exactly one automatic word
+PASS  timers: no turn timer fires after the host ends the game
+PASS  timers: after timers: server state and every client view agree
+PASS  timers: the server logged no handler or loop errors
+      (timers: 4007 ms)
+
+== races
+PASS  races: seven simultaneous joins into one open seat: one player, six spectators
+PASS  races: simultaneous joins: server state and every client view agree
+PASS  races: simultaneous seat grabs never over-fill the game (2 seated)
+PASS  races: seat grabs: server state and every client view agree
+PASS  races: five start requests start one game (gameCount 1)
+PASS  races: spammed moves apply one per turn (2 moves)
+PASS  races: spammed moves: server state and every client view agree
+PASS  races: the server logged no handler or loop errors
+      (races: 1507 ms)
+
+== autostart-lock-abandon
+PASS  autostart-lock-abandon: a public lobby with enough players shows the start countdown
+PASS  autostart-lock-abandon: the countdown stops when a player drops
+PASS  autostart-lock-abandon: nothing starts while a player is missing
+PASS  autostart-lock-abandon: the player comes back as the same member
+PASS  autostart-lock-abandon: the countdown starts exactly one game
+PASS  autostart-lock-abandon: a locked party turns new people away
+PASS  autostart-lock-abandon: a member of a locked party can still reload and rejoin
+PASS  autostart-lock-abandon: someone who left a locked party cannot walk back in
+PASS  autostart-lock-abandon: when the whole table drops, the members time out and the game is closed
+PASS  autostart-lock-abandon: and the empty party expires
+PASS  autostart-lock-abandon: three members were dropped
+PASS  autostart-lock-abandon: the server logged no handler or loop errors
+      (autostart-lock-abandon: 4005 ms)
+
+== smoke-all-games
+PASS  smoke-all-games: 20 games are visible (20)
+PASS  smoke-all-games: drawguess: the spectator gets no private fields ()
+PASS  smoke-all-games: drawguess: every player is placed in the game
+PASS  smoke-all-games: drawguess: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: drawguess reconnect: server state and every client view agree
+PASS  smoke-all-games: drawguess: a rematch starts
+PASS  smoke-all-games: drawguess abandoned: server state and every client view agree
+PASS  smoke-all-games: fourrow: the spectator gets no private fields ()
+PASS  smoke-all-games: fourrow: every player is placed in the game
+PASS  smoke-all-games: fourrow: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: fourrow reconnect: server state and every client view agree
+PASS  smoke-all-games: fourrow: a rematch starts
+PASS  smoke-all-games: fourrow abandoned: server state and every client view agree
+PASS  smoke-all-games: wordchain: the spectator gets no private fields ()
+PASS  smoke-all-games: wordchain: every player is placed in the game
+PASS  smoke-all-games: wordchain: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: wordchain reconnect: server state and every client view agree
+PASS  smoke-all-games: wordchain: a rematch starts
+PASS  smoke-all-games: wordchain abandoned: server state and every client view agree
+PASS  smoke-all-games: categories: the spectator gets no private fields ()
+PASS  smoke-all-games: categories: every player is placed in the game
+PASS  smoke-all-games: categories: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: categories reconnect: server state and every client view agree
+PASS  smoke-all-games: categories: a rematch starts
+PASS  smoke-all-games: categories abandoned: server state and every client view agree
+PASS  smoke-all-games: colorstack: the spectator gets no private fields ()
+PASS  smoke-all-games: colorstack: every player is placed in the game
+PASS  smoke-all-games: colorstack: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: colorstack reconnect: server state and every client view agree
+PASS  smoke-all-games: colorstack: a rematch starts
+PASS  smoke-all-games: colorstack abandoned: server state and every client view agree
+PASS  smoke-all-games: gofish: the spectator gets no private fields ()
+PASS  smoke-all-games: gofish: every player is placed in the game
+PASS  smoke-all-games: gofish: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: gofish reconnect: server state and every client view agree
+PASS  smoke-all-games: gofish: a rematch starts
+PASS  smoke-all-games: gofish abandoned: server state and every client view agree
+PASS  smoke-all-games: tictactoe: the spectator gets no private fields ()
+PASS  smoke-all-games: tictactoe: every player is placed in the game
+PASS  smoke-all-games: tictactoe: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: tictactoe reconnect: server state and every client view agree
+PASS  smoke-all-games: tictactoe: a rematch starts
+PASS  smoke-all-games: tictactoe abandoned: server state and every client view agree
+PASS  smoke-all-games: dotsboxes: the spectator gets no private fields ()
+PASS  smoke-all-games: dotsboxes: every player is placed in the game
+PASS  smoke-all-games: dotsboxes: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: dotsboxes reconnect: server state and every client view agree
+PASS  smoke-all-games: dotsboxes: a rematch starts
+PASS  smoke-all-games: dotsboxes abandoned: server state and every client view agree
+PASS  smoke-all-games: wordscramble: the spectator gets no private fields ()
+PASS  smoke-all-games: wordscramble: every player is placed in the game
+PASS  smoke-all-games: wordscramble: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: wordscramble reconnect: server state and every client view agree
+PASS  smoke-all-games: wordscramble: a rematch starts
+PASS  smoke-all-games: wordscramble abandoned: server state and every client view agree
+PASS  smoke-all-games: trivia: the spectator gets no private fields ()
+PASS  smoke-all-games: trivia: every player is placed in the game
+PASS  smoke-all-games: trivia: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: trivia reconnect: server state and every client view agree
+PASS  smoke-all-games: trivia: a rematch starts
+PASS  smoke-all-games: trivia abandoned: server state and every client view agree
+PASS  smoke-all-games: telephone: the spectator gets no private fields ()
+PASS  smoke-all-games: telephone: every player is placed in the game
+PASS  smoke-all-games: telephone: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: telephone reconnect: server state and every client view agree
+PASS  smoke-all-games: telephone: a rematch starts
+PASS  smoke-all-games: telephone abandoned: server state and every client view agree
+PASS  smoke-all-games: bluff: the spectator gets no private fields ()
+PASS  smoke-all-games: bluff: every player is placed in the game
+PASS  smoke-all-games: bluff: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: bluff reconnect: server state and every client view agree
+PASS  smoke-all-games: bluff: a rematch starts
+PASS  smoke-all-games: bluff abandoned: server state and every client view agree
+PASS  smoke-all-games: impostor: the spectator gets no private fields ()
+PASS  smoke-all-games: impostor: every player is placed in the game
+PASS  smoke-all-games: impostor: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: impostor reconnect: server state and every client view agree
+PASS  smoke-all-games: impostor: a rematch starts
+PASS  smoke-all-games: impostor abandoned: server state and every client view agree
+PASS  smoke-all-games: battleship: the spectator gets no private fields ()
+PASS  smoke-all-games: battleship: every player is placed in the game
+PASS  smoke-all-games: battleship: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: battleship reconnect: server state and every client view agree
+PASS  smoke-all-games: battleship: a rematch starts
+PASS  smoke-all-games: battleship abandoned: server state and every client view agree
+PASS  smoke-all-games: checkers: the spectator gets no private fields ()
+PASS  smoke-all-games: checkers: every player is placed in the game
+PASS  smoke-all-games: checkers: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: checkers reconnect: server state and every client view agree
+PASS  smoke-all-games: checkers: a rematch starts
+PASS  smoke-all-games: checkers abandoned: server state and every client view agree
+PASS  smoke-all-games: ludo: the spectator gets no private fields ()
+PASS  smoke-all-games: ludo: every player is placed in the game
+PASS  smoke-all-games: ludo: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: ludo reconnect: server state and every client view agree
+PASS  smoke-all-games: ludo: a rematch starts
+PASS  smoke-all-games: ludo abandoned: server state and every client view agree
+PASS  smoke-all-games: chess: the spectator gets no private fields ()
+PASS  smoke-all-games: chess: every player is placed in the game
+PASS  smoke-all-games: chess: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: chess reconnect: server state and every client view agree
+PASS  smoke-all-games: chess: a rematch starts
+PASS  smoke-all-games: chess abandoned: server state and every client view agree
+PASS  smoke-all-games: pool: the spectator gets no private fields ()
+PASS  smoke-all-games: pool: every player is placed in the game
+PASS  smoke-all-games: pool: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: pool reconnect: server state and every client view agree
+PASS  smoke-all-games: pool: a rematch starts
+PASS  smoke-all-games: pool abandoned: server state and every client view agree
+PASS  smoke-all-games: golf: the spectator gets no private fields ()
+PASS  smoke-all-games: golf: every player is placed in the game
+PASS  smoke-all-games: golf: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: golf reconnect: server state and every client view agree
+PASS  smoke-all-games: golf: a rematch starts
+PASS  smoke-all-games: golf abandoned: server state and every client view agree
+PASS  smoke-all-games: tycoon: the spectator gets no private fields ()
+PASS  smoke-all-games: tycoon: every player is placed in the game
+PASS  smoke-all-games: tycoon: a dropped player reconnects into the running game as the same member
+PASS  smoke-all-games: tycoon reconnect: server state and every client view agree
+PASS  smoke-all-games: tycoon: a rematch starts
+PASS  smoke-all-games: tycoon abandoned: server state and every client view agree
+PASS  smoke-all-games: the server logged no handler or loop errors
+      (smoke-all-games: 322 ms)
+
+== cleanup
+PASS  cleanup: every server socket is closed (0 → 0)
+PASS  cleanup: every party expired (0 left)
+PASS  cleanup: no timers are left behind (1 at start, 1 now)
+PASS  cleanup: the final server state is consistent
+PASS  cleanup: the server logged no handler or loop errors
+      (cleanup: 936 ms)
+
+metrics {"baseline_timeouts":1,"heap_start_mb":23.9,"join_2_ms":4,"chat_fanout_2_ms":1,"state_fanout_2_ms":1,"join_4_ms":7,"chat_fanout_4_ms":1,"state_fanout_4_ms":1,"join_8_ms":7,"chat_fanout_8_ms":1,"state_fanout_8_ms":1,"colorstack_moves":131,"heap_after_gc_mb":19.4,"rss_mb":95.1,"scenarios":{"party-sizes":3767,"fourrow-rematch-cycles":115,"drawguess-secrets":5215,"impostor-bluff-secrets":212,"colorstack-full-game":4001,"chess-reconnect-identity":1020,"host-migration":1998,"spectator-queue":53,"rejoin-cycles":1229,"late-join-and-guards":462,"timers":4007,"races":1507,"autostart-lock-abandon":4005,"smoke-all-games":322,"cleanup":936}}
+
+reliability: 374 passed, 0 failed in 29.6 s

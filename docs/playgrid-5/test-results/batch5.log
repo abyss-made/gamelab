@@ -1,0 +1,248 @@
+PASS  Physics: the same shot always gives the identical result (deterministic)
+PASS  Physics: replay timestamps are distinct per sample (1/60 s apart for golf)
+PASS  Physics: a head-on collision of equal balls transfers all speed
+PASS  Physics: oblique collisions conserve momentum and (elastic) energy
+PASS  Physics: overlapping balls are pushed apart
+PASS  Physics: a wall reflects the normal speed with restitution and keeps the tangent speed
+PASS  Physics: 40 random Pool shots all settle before the time limit
+PASS  Physics: no ball ever leaves the table or goes NaN in 40 random shots
+PASS  Pool: the rack has the cue ball and balls 1-15, each once
+PASS  Pool: no balls overlap in the rack
+PASS  Pool: the 8-ball sits in the middle of the third row
+PASS  Pool: the back row corners mix a solid and a stripe
+PASS  Pool: the rack order is shuffled
+PASS  Pool: the break cue ball must be behind the head string
+PASS  Pool: ball in hand cannot overlap another ball
+PASS  Pool: ball in hand stays on the table and out of pockets
+PASS  Pool: non-numeric placements are rejected
+PASS  Pool: the game starts with the breaker placing the cue ball
+PASS  Pool: the view describes a six-pocket table
+PASS  Pool: who breaks alternates between games
+PASS  Pool: a ball driven at a corner pocket is pocketed
+PASS  Pool: the first legal pocket on an open table assigns the groups
+PASS  Pool: you shoot again after legally pocketing your ball
+PASS  Pool: the view carries the sampled path for every moving ball
+PASS  Pool: the view reports that the shot is still playing
+PASS  Pool: a shot sent while the balls are still moving is ignored
+PASS  Pool: shooting works again once the shot has finished
+PASS  Pool: pocketing the cue ball is a scratch
+PASS  Pool: after a scratch the other player has ball in hand
+PASS  Pool: ball in hand needs a cue ball position (shot without one is ignored)
+PASS  Pool: an illegal cue ball position (on another ball) is rejected
+PASS  Pool: a non-numeric cue ball position is rejected
+PASS  Pool: a legal placement is accepted and the shot plays from there
+PASS  Pool: hitting no ball is a foul and gives ball in hand
+PASS  Pool: hitting the opponent's ball first is a foul
+PASS  Pool: hitting the 8-ball first on an open table is a foul
+PASS  Pool: your ball can drive the opponent's ball into a pocket without a foul
+PASS  Pool: pocketing only the opponent's ball passes the turn without ball in hand
+PASS  Pool: that ball stays pocketed
+PASS  Pool: a shot where nothing reaches a rail or pocket is a foul
+PASS  Pool: pocketing the 8 too early loses, but the result waits for the shot to play out
+PASS  Pool: the other player is declared the winner after the replay
+PASS  Pool: the winner gets a point and winner-stays rotates the loser out
+PASS  Pool: the result names who plays next
+PASS  Pool: pocketing the 8 after clearing your group wins
+PASS  Pool: pocketing the 8 with your own balls still on the table loses
+PASS  Pool: pocketing the 8 and scratching in the same shot loses
+PASS  Pool rules: the 8 pocketed legally after clearing your group wins
+PASS  Pool rules: pocketing the 8 after hitting a different ball first loses
+PASS  Pool rules: pocketing the 8 with balls of yours left loses
+PASS  Pool rules: pocketing the 8 on an open table loses
+PASS  Pool rules: the 8 on the break is respotted
+PASS  Pool rules: you must hit your own group first while you still have balls on the table
+PASS  Pool rules: once your group is cleared the 8 must be hit first
+PASS  Pool rules: contact without any rail or pocket is a foul
+PASS  Pool rules: a pocketed ball counts as reaching a pocket (no foul)
+PASS  Pool rules: missing every ball is a foul
+PASS  Pool: an 8-ball pocketed on the break is spotted again, not a loss
+PASS  Pool: the breaker continues after pocketing a ball on the break (groups stay open)
+PASS  Pool: a break that pockets nothing (but reaches a rail) just passes the turn
+PASS  Pool: malformed shot messages are all ignored
+PASS  Pool: the player not on turn and spectators cannot shoot
+PASS  Pool: a valid shot from the player on turn is accepted
+PASS  Pool: spectators see the table (there is no secret information)
+PASS  Pool: when the clock runs out a shot is played for the player
+PASS  Pool: running out of time twice forfeits
+PASS  Pool: either player can resign, even out of turn
+PASS  Pool: leaving forfeits
+PASS  Pool: an idle breaker gets a legal automatic break
+PASS  Pool: 6 simulated auto-played games stay on the table (6 reached a result)
+PASS  Golf: four courses of six holes, original 18-hole tour retained
+PASS  Golf: every hole has its own name (no copies)
+PASS  Golf: every tee and cup is on the fairway, clear of walls and bumpers
+PASS  Golf: no tee or cup sits in water
+PASS  Golf: every hole has a sensible par
+PASS  Golf: no hole is a copy of another (no static placeholder holes)
+PASS  Golf: all 18 holes can be completed (found paths of 1-4 strokes, replayed through the real physics)
+PASS  Golf: a putt is deterministic
+PASS  Golf: 1680 random putts on all holes never leave the fairway or pass through walls
+PASS  Golf: every putt comes to rest within the time limit
+PASS  Golf: sand slows the ball down
+PASS  Golf: a ball rolling into water is reported as a water hazard
+PASS  Golf: a ball that arrives slowly drops in; one that arrives too fast rolls past the cup
+PASS  Golf: a full-power putt over the cup does not sink
+PASS  Golf: a ball shot at the end wall bounces off it and stays on the course
+PASS  Golf: the game starts on hole 1 with the first honour to the first player
+PASS  Golf: the view describes the hole geometry for everyone, including spectators
+PASS  Golf: malformed putts, putts out of turn and spectator putts are ignored
+PASS  Golf: hole 1 can be holed in one stroke
+PASS  Golf: a ball that drops in finishes the hole for that player
+PASS  Golf: the turn passes to the player who has not finished
+PASS  Golf: a player who has holed out cannot putt again
+PASS  Golf: putting during the previous ball's roll is ignored
+PASS  Golf: the player still on the hole keeps putting
+PASS  Golf: a gentle backwards putt moves the ball only a little
+PASS  Golf: the hole ends when everyone is down
+PASS  Golf: strokes are recorded per hole on the scorecard
+PASS  Golf: the view carries the hole summary between holes
+PASS  Golf: nobody can putt between holes
+PASS  Golf: the next hole starts fresh after the pause
+PASS  Golf: the honour rotates to the other player on the next hole
+PASS  Golf: a player is picked up at the stroke limit
+PASS  Golf: the limit applies to every player (both picked up at 6)
+PASS  Golf: the capped score is what goes on the card
+PASS  Golf: play continues to hole 3
+PASS  Golf: after the last hole the game ends with a result
+PASS  Golf: the leaderboard is sorted by total strokes
+PASS  Golf: each total equals the sum of the hole scores
+PASS  Golf: the lowest total wins (ties are shared)
+PASS  Golf: winners get a lobby point
+PASS  Golf: hole 5 puts water directly between the tee and the cup
+PASS  Golf: when the clock runs out a putt is played for the player
+PASS  Golf: a player who times out repeatedly is removed from the game
+PASS  Golf: the last player left wins by forfeit
+PASS  Golf: removing the last idle player of a hole broadcasts the hole summary
+PASS  Golf: one player leaving mid-hole does not end a 3-player game
+PASS  Golf: the view marks the player who left
+PASS  Golf: when only one player remains they win
+PASS  Golf: the Playgrid Open tour has 18 holes
+PASS  Golf: invalid host settings are ignored
+PASS  Golf: valid host settings are accepted
+PASS  Golf: after the first player putts, the next player still on the tee goes (farthest away)
+PASS  Golf: then the third player, who is still farthest
+PASS  Golf: the player whose ball is farthest from the cup putts again
+PASS  Tycoon: the board has 36 tiles
+PASS  Tycoon: 21 properties, 4 stations, 2 utilities, 3 surprise tiles and 2 taxes
+PASS  Tycoon: the four corners are Launch Pad, Time Out, Rest Stop and Go To Time Out
+PASS  Tycoon: eight colour districts of two or three properties
+PASS  Tycoon: tile names are unique (apart from the repeated Surprise tiles)
+PASS  Tycoon: no trademarked board names or card text
+PASS  Tycoon: rent rises with every upgrade level
+PASS  Tycoon: prices are sensible
+PASS  Tycoon: twelve different Surprise cards
+PASS  Tycoon: everyone starts on Launch Pad with the starting cash
+PASS  Tycoon: each player has their own token colour
+PASS  Tycoon: the card deck order is never sent to clients
+PASS  Tycoon: only the player on turn can roll
+PASS  Tycoon: buy and end-turn are refused outside their phase
+PASS  Tycoon: landing on an unowned property offers it to the player on turn only
+PASS  Tycoon: everyone sees the server-rolled dice
+PASS  Tycoon: another player cannot buy on your behalf
+PASS  Tycoon: buying costs the list price and moves to the management phase
+PASS  Tycoon: you cannot roll twice in one turn
+PASS  Tycoon: ending the turn passes to the next player
+PASS  Tycoon: landing on an owned property pays the owner rent
+PASS  Tycoon: owning the whole colour doubles the rent on bare lots
+PASS  Tycoon: rent calculation for a complete set
+PASS  Tycoon: upgrades replace the bare-lot rent
+PASS  Tycoon: station rent doubles with each station owned (25/50/100/200)
+PASS  Tycoon: one utility pays 4 times the dice total
+PASS  Tycoon: both utilities pay 10 times the dice total
+PASS  Tycoon: unowned and non-property tiles charge no rent
+PASS  Tycoon: passing Launch Pad pays $200
+PASS  Tycoon: landing exactly on Launch Pad pays $200 too
+PASS  Tycoon: tax tiles take money for the bank
+PASS  Tycoon: rolling doubles gives another roll
+PASS  Tycoon: a non-double roll ends the extra rolls (the next step is the purchase decision)
+PASS  Tycoon: three doubles in a row sends you to Time Out without moving
+PASS  Tycoon: the turn ends after going to Time Out
+PASS  Tycoon: the Go To Time Out tile sends you to Time Out
+PASS  Tycoon: in Time Out you may pay $50 (no card yet)
+PASS  Tycoon: you cannot use a Get-out card you do not have
+PASS  Tycoon: paying $50 frees you and you still roll
+PASS  Tycoon: after paying you move by the roll
+PASS  Tycoon: a Get-out card frees you for free
+PASS  Tycoon: failing to roll doubles in Time Out ends the turn
+PASS  Tycoon: doubles free you from Time Out and you move
+PASS  Tycoon: leaving Time Out on doubles gives no extra roll
+PASS  Tycoon: on the third turn in Time Out you pay $50 and move
+PASS  Tycoon card: tax refund pays $50
+PASS  Tycoon card: wallet pays $30
+PASS  Tycoon card: street fair pays $100
+PASS  Tycoon card: repairs cost nothing without upgrades
+PASS  Tycoon card: repairs cost $10 per upgrade level
+PASS  Tycoon card: advance to Launch Pad pays $200
+PASS  Tycoon card: go straight to Time Out
+PASS  Tycoon card: birthday collects $20 from every other player
+PASS  Tycoon card: party pays $15 to every other player
+PASS  Tycoon card: move forward 3 and resolve the new tile
+PASS  Tycoon card: move back 3 without collecting Launch Pad money
+PASS  Tycoon card: moving back lands on a property that can be bought
+PASS  Tycoon card: advance to Harbor Walk
+PASS  Tycoon card: the Get-out card is kept for later
+PASS  Tycoon: only one Get-out card exists, so it is not redrawn while someone holds it
+PASS  Tycoon: declining a purchase starts an auction
+PASS  Tycoon: everyone sees the auction
+PASS  Tycoon: invalid bids (non-numbers, fractions, negatives, more than your cash) are refused
+PASS  Tycoon: a bid must beat the current high bid
+PASS  Tycoon: the high bidder cannot pass away their bid
+PASS  Tycoon: when everyone else passes the high bidder pays and owns the property
+PASS  Tycoon: if nobody bids the property stays unowned
+PASS  Tycoon: the auction ends by itself when the clock runs out (the decliner can bid too)
+PASS  Tycoon: a new bid extends the auction clock
+PASS  Tycoon: nothing else can be done during an auction
+PASS  Tycoon: no trades during an auction
+PASS  Tycoon: if you cannot afford a property you can only send it to auction
+PASS  Tycoon: a buy you cannot afford is refused
+PASS  Tycoon: you cannot upgrade without the whole colour
+PASS  Tycoon: the whole colour makes every lot of it upgradeable
+PASS  Tycoon: building costs the upgrade price
+PASS  Tycoon: upgrades must be built evenly across the colour
+PASS  Tycoon: evenness lets the next round of upgrades through
+PASS  Tycoon: upgrades stop at Landmark (level 4)
+PASS  Tycoon: selling an upgrade refunds half
+PASS  Tycoon: upgrades are sold evenly too
+PASS  Tycoon: only the owner on turn can build
+PASS  Tycoon: no building while a purchase decision is pending
+PASS  Tycoon: a player who cannot pay a landmark rent goes bankrupt
+PASS  Tycoon: a bankrupt player's properties go to the creditor
+PASS  Tycoon: the creditor also gets the debtor's remaining cash
+PASS  Tycoon: play continues to the next player after a bankruptcy
+PASS  Tycoon: bankrupt players hold no cash
+PASS  Tycoon: debt that cannot be covered even by selling upgrades means bankruptcy
+PASS  Tycoon: upgrades are sold off automatically to pay a debt of $24
+PASS  Tycoon: bankruptcy of all but one player ends the game
+PASS  Tycoon: the winner gets a lobby point
+PASS  Tycoon: the result lists the standings with the bankrupt player last
+PASS  Tycoon: a trade offer is recorded and visible to the table
+PASS  Tycoon: neither a third party nor the proposer can accept a trade for the other player
+PASS  Tycoon: the recipient's acceptance swaps properties and cash
+PASS  Tycoon: an accepted trade is removed
+PASS  Tycoon: malformed, impossible or empty trade offers are all refused
+PASS  Tycoon: properties in a district with upgrades cannot be traded
+PASS  Tycoon: a gift trade (nothing asked) is allowed once the upgrades are gone
+PASS  Tycoon: a proposer has at most one open offer
+PASS  Tycoon: an offer is re-validated when accepted (the proposer no longer has the cash)
+PASS  Tycoon: the recipient can decline an offer
+PASS  Tycoon: a bystander cannot cancel someone else's offer
+PASS  Tycoon: the proposer can withdraw an offer
+PASS  Tycoon: unanswered offers expire
+PASS  Tycoon: an offer for a property that has since changed hands cannot be accepted
+PASS  Tycoon: players can trade on anybody's turn
+PASS  Tycoon: a player's open offers disappear when they leave
+PASS  Tycoon: a quick game ends after the chosen number of rounds
+PASS  Tycoon: the round counter never passes the limit
+PASS  Tycoon: the richest player (cash + properties + upgrades) wins
+PASS  Tycoon: standings are sorted by net worth
+PASS  Tycoon: the dice are rolled for a player who runs out of time
+PASS  Tycoon: a player who keeps timing out is removed
+PASS  Tycoon: when the current player leaves the turn passes on
+PASS  Tycoon: a leaving player's properties return to the bank
+PASS  Tycoon: when everyone else has left the last player wins
+PASS  Tycoon: the auction carries on when a bidder leaves
+PASS  Tycoon: invalid host settings are ignored
+PASS  Tycoon: valid host settings are accepted (0 rounds = classic)
+PASS  Tycoon: 70 randomised full games (2-6 players, all modes) keep every invariant
+PASS  Tycoon: all 70 randomised games reached a result (70/70)
+{"t":"2026-11-12T03:47:12.015Z","level":"error","evt":"server_error","err":{"name":"Error","message":"listen EADDRINUSE: address already in use :::3993","stack":"Error: listen EADDRINUSE: address already in use :::3993\n    at Server.setupListenHandle [as _listen2] (node:net:2167:16)\n    at listenInCluster (node:net:2224:12)\n    at Server.listen (node:net:2344:7)\n    at Object.<anonymous> (/workspace/gamelab/node-server/server/index.js:218:8)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)"}}

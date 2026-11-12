@@ -1,0 +1,90 @@
+PASS  Word Chain: a player acting out of turn is ignored
+PASS  Word Chain: word not in dictionary is rejected
+PASS  Word Chain: a word with the wrong first letter is rejected
+PASS  Word Chain: valid word is accepted and normalized
+PASS  Word Chain: turn passes after a valid word
+PASS  Word Chain: duplicate words are rejected
+PASS  Word Chain: rejected input gets a private notice
+PASS  Word Chain: malformed words are ignored
+PASS  Word Chain: chain continues with the last letter
+PASS  Word Chain: view contains only the public chain
+PASS  Word Chain: timeouts eliminate players until one wins
+PASS  Word Chain: dictionary off accepts any letters
+PASS  Word Chain: remaining player wins when the other leaves
+PASS  Categories: round has 5 categories and a letter
+PASS  Categories: other players' answers are not in a player's view during the round
+PASS  Categories: you see your own answers
+PASS  Categories: round scores when everyone is done
+PASS  Categories: identical answers (case/article-insensitive) score 1 each
+PASS  Categories: unique answers score 2
+PASS  Categories: answers with the wrong letter / too short score 0
+PASS  Categories: a unique answer in every cell scores 2 each
+PASS  Categories: answers after the round ends are ignored
+PASS  Categories: score matches room score
+PASS  Categories: next round starts after review
+PASS  Categories: oversized/malformed answers are capped
+PASS  Categories: game ends after the last round with standings
+PASS  Higher or Lower: next card is not in the view before reveal
+PASS  Higher or Lower: serialized view does not contain the hidden card
+PASS  Higher or Lower: a guess is final
+PASS  Higher or Lower: others see that you locked in but not what you picked
+PASS  Higher or Lower: invalid guess ignored
+PASS  Higher or Lower: round resolves once everyone has guessed
+PASS  Higher or Lower: right/wrong outcomes and first-streak score
+PASS  Higher or Lower: next round starts after the reveal
+PASS  Higher or Lower: streak increases points (1 then 2)
+PASS  Higher or Lower: equal ranks are a push and keep streaks
+PASS  Higher or Lower: game ends after the set rounds
+PASS  Higher or Lower: exhausted deck reshuffles without crashing
+PASS  Color Stack: 108 unique cards
+PASS  Color Stack: everyone is dealt 7
+PASS  Color Stack: no cards lost or duplicated at deal
+PASS  Color Stack: first card is a number card
+PASS  Color Stack: views include own hand
+PASS  Color Stack: a view never contains other players' cards or the draw pile
+PASS  Color Stack: playing out of turn is ignored
+PASS  Color Stack: an unmatching card is rejected
+PASS  Color Stack: a card not in your hand is rejected
+PASS  Color Stack: wild without a color is rejected
+PASS  Color Stack: draw two makes next player draw 2 and lose their turn
+PASS  Color Stack: (blue flip on red 5 is not a match)
+PASS  Color Stack: a blue flip cannot be played on a red draw-two
+PASS  Color Stack: matching color plays and turn moves on
+PASS  Color Stack: wild sets the chosen color
+PASS  Color Stack: yellow card is rejected when color is green
+PASS  Color Stack: blue flip rejected on green wild (no match)
+PASS  Color Stack: flip reverses direction (3 players)
+PASS  Color Stack: cannot pass before drawing
+PASS  Color Stack: a playable drawn card keeps the turn
+PASS  Color Stack: cannot draw twice / play other card after drawing
+PASS  Color Stack: passing after a draw ends the turn
+PASS  Color Stack: emptying your hand wins and scores opponents' card values
+PASS  Color Stack: timeout draws a card and passes the turn
+PASS  Color Stack: idle players are removed and the other wins
+PASS  Color Stack: leaving returns the hand to the deck and the game continues
+PASS  Color Stack: last remaining player wins
+PASS  Color Stack: simulated games finish with all 108 cards conserved (30/30)
+PASS  Go Fish: 3 players are dealt 7 cards each
+PASS  Go Fish: 4+ players are dealt 5 cards each
+PASS  Go Fish: asking out of turn is ignored
+PASS  Go Fish: you cannot ask for a rank you do not hold
+PASS  Go Fish: self / unknown target / malformed rank are ignored
+PASS  Go Fish: a successful ask forms a book, keeps the turn, and scores
+PASS  Go Fish: a miss draws one card and passes the turn
+PASS  Go Fish: view has own hand and only card counts for others
+PASS  Go Fish: books are public
+PASS  Go Fish: spectators get no hand
+PASS  Go Fish: fishing the requested rank lets you go again
+PASS  Go Fish: game continues while 2+ players remain after a leave
+PASS  Go Fish: last remaining player wins
+PASS  Go Fish: simulated games conserve all 52 cards
+PASS  Go Fish: simulated games always end (40/40)
+PASS  Go Fish: nobody acting eventually removes idle players and ends the game
+PASS  Color Stack: a numeric 4 has no draw effect and does not skip
+PASS  Color Stack: a numeric 4 cannot be played on a Wild Draw Four of another color
+PASS  Color Stack: Wild Draw Four still makes the next player draw 4
+PASS  Higher or Lower: reveal shows the previous card and the new card
+PASS  Higher or Lower: revealed card becomes the current card next round
+PASS  Higher or Lower: the player left standing wins a forfeit even with fewer points
+PASS  Categories: the player left standing wins a forfeit even with fewer points
+{"t":"2026-11-12T03:46:46.808Z","level":"error","evt":"server_error","err":{"name":"Error","message":"listen EADDRINUSE: address already in use :::3996","stack":"Error: listen EADDRINUSE: address already in use :::3996\n    at Server.setupListenHandle [as _listen2] (node:net:2167:16)\n    at listenInCluster (node:net:2224:12)\n    at Server.listen (node:net:2344:7)\n    at Object.<anonymous> (/workspace/gamelab/node-server/server/index.js:218:8)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)"}}

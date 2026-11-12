@@ -1,0 +1,128 @@
+PASS  25 games are registered
+PASS  rules exist for exactly the 25 registered games
+PASS  drawguess: goal/players/timer/ending present
+PASS  drawguess: flow/controls/scoring lists present
+PASS  drawguess: special mechanics listed
+PASS  drawguess: controls mention both mouse and touch
+PASS  drawguess: rules player count matches 2-12
+PASS  fourrow: goal/players/timer/ending present
+PASS  fourrow: flow/controls/scoring lists present
+PASS  fourrow: special mechanics listed
+PASS  fourrow: controls mention both mouse and touch
+PASS  fourrow: rules player count matches 2-2
+PASS  wordchain: goal/players/timer/ending present
+PASS  wordchain: flow/controls/scoring lists present
+PASS  wordchain: special mechanics listed
+PASS  wordchain: controls mention both mouse and touch
+PASS  wordchain: rules player count matches 2-8
+PASS  categories: goal/players/timer/ending present
+PASS  categories: flow/controls/scoring lists present
+PASS  categories: special mechanics listed
+PASS  categories: controls mention both mouse and touch
+PASS  categories: rules player count matches 2-12
+PASS  higherlower: goal/players/timer/ending present
+PASS  higherlower: flow/controls/scoring lists present
+PASS  higherlower: special mechanics listed
+PASS  higherlower: controls mention both mouse and touch
+PASS  higherlower: rules player count matches 2-8
+PASS  colorstack: goal/players/timer/ending present
+PASS  colorstack: flow/controls/scoring lists present
+PASS  colorstack: special mechanics listed
+PASS  colorstack: controls mention both mouse and touch
+PASS  colorstack: rules player count matches 2-8
+PASS  gofish: goal/players/timer/ending present
+PASS  gofish: flow/controls/scoring lists present
+PASS  gofish: special mechanics listed
+PASS  gofish: controls mention both mouse and touch
+PASS  gofish: rules player count matches 2-6
+PASS  tictactoe: goal/players/timer/ending present
+PASS  tictactoe: flow/controls/scoring lists present
+PASS  tictactoe: special mechanics listed
+PASS  tictactoe: controls mention both mouse and touch
+PASS  tictactoe: rules player count matches 2-2
+PASS  rps: goal/players/timer/ending present
+PASS  rps: flow/controls/scoring lists present
+PASS  rps: special mechanics listed
+PASS  rps: controls mention both mouse and touch
+PASS  rps: rules player count matches 2-16
+PASS  dotsboxes: goal/players/timer/ending present
+PASS  dotsboxes: flow/controls/scoring lists present
+PASS  dotsboxes: special mechanics listed
+PASS  dotsboxes: controls mention both mouse and touch
+PASS  dotsboxes: rules player count matches 2-4
+PASS  wordscramble: goal/players/timer/ending present
+PASS  wordscramble: flow/controls/scoring lists present
+PASS  wordscramble: special mechanics listed
+PASS  wordscramble: controls mention both mouse and touch
+PASS  wordscramble: rules player count matches 2-12
+PASS  trivia: goal/players/timer/ending present
+PASS  trivia: flow/controls/scoring lists present
+PASS  trivia: special mechanics listed
+PASS  trivia: controls mention both mouse and touch
+PASS  trivia: rules player count matches 2-12
+PASS  telephone: goal/players/timer/ending present
+PASS  telephone: flow/controls/scoring lists present
+PASS  telephone: special mechanics listed
+PASS  telephone: controls mention both mouse and touch
+PASS  telephone: rules player count matches 3-8
+PASS  bluff: goal/players/timer/ending present
+PASS  bluff: flow/controls/scoring lists present
+PASS  bluff: special mechanics listed
+PASS  bluff: controls mention both mouse and touch
+PASS  bluff: rules player count matches 3-10
+PASS  impostor: goal/players/timer/ending present
+PASS  impostor: flow/controls/scoring lists present
+PASS  impostor: special mechanics listed
+PASS  impostor: controls mention both mouse and touch
+PASS  impostor: rules player count matches 3-10
+PASS  liarsdice: goal/players/timer/ending present
+PASS  liarsdice: flow/controls/scoring lists present
+PASS  liarsdice: special mechanics listed
+PASS  liarsdice: controls mention both mouse and touch
+PASS  liarsdice: rules player count matches 2-8
+PASS  hotpotato: goal/players/timer/ending present
+PASS  hotpotato: flow/controls/scoring lists present
+PASS  hotpotato: special mechanics listed
+PASS  hotpotato: controls mention both mouse and touch
+PASS  hotpotato: rules player count matches 2-10
+PASS  battleship: goal/players/timer/ending present
+PASS  battleship: flow/controls/scoring lists present
+PASS  battleship: special mechanics listed
+PASS  battleship: controls mention both mouse and touch
+PASS  battleship: rules player count matches 2-2
+PASS  checkers: goal/players/timer/ending present
+PASS  checkers: flow/controls/scoring lists present
+PASS  checkers: special mechanics listed
+PASS  checkers: controls mention both mouse and touch
+PASS  checkers: rules player count matches 2-2
+PASS  reversi: goal/players/timer/ending present
+PASS  reversi: flow/controls/scoring lists present
+PASS  reversi: special mechanics listed
+PASS  reversi: controls mention both mouse and touch
+PASS  reversi: rules player count matches 2-2
+PASS  ludo: goal/players/timer/ending present
+PASS  ludo: flow/controls/scoring lists present
+PASS  ludo: special mechanics listed
+PASS  ludo: controls mention both mouse and touch
+PASS  ludo: rules player count matches 2-4
+PASS  chess: goal/players/timer/ending present
+PASS  chess: flow/controls/scoring lists present
+PASS  chess: special mechanics listed
+PASS  chess: controls mention both mouse and touch
+PASS  chess: rules player count matches 2-2
+PASS  pool: goal/players/timer/ending present
+PASS  pool: flow/controls/scoring lists present
+PASS  pool: special mechanics listed
+PASS  pool: controls mention both mouse and touch
+PASS  pool: rules player count matches 2-2
+PASS  golf: goal/players/timer/ending present
+PASS  golf: flow/controls/scoring lists present
+PASS  golf: special mechanics listed
+PASS  golf: controls mention both mouse and touch
+PASS  golf: rules player count matches 2-6
+PASS  tycoon: goal/players/timer/ending present
+PASS  tycoon: flow/controls/scoring lists present
+PASS  tycoon: special mechanics listed
+PASS  tycoon: controls mention both mouse and touch
+PASS  tycoon: rules player count matches 2-6
+{"t":"2026-11-12T03:48:04.473Z","level":"error","evt":"server_error","err":{"name":"Error","message":"listen EADDRINUSE: address already in use :::3993","stack":"Error: listen EADDRINUSE: address already in use :::3993\n    at Server.setupListenHandle [as _listen2] (node:net:2167:16)\n    at listenInCluster (node:net:2224:12)\n    at Server.listen (node:net:2344:7)\n    at Object.<anonymous> (/workspace/gamelab/node-server/server/index.js:218:8)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)"}}

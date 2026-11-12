@@ -1,0 +1,6 @@
+{
+  "base": "8846f15",
+  "serverFiles": 54,
+  "identical": true,
+  "scope": "Entire node-server/server tree including dictionary, scoring, mechanics, room/socket code"
+}
