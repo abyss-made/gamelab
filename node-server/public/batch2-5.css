@@ -49,3 +49,14 @@
 .pch .b25-captures{display:flex;align-items:center;gap:6px;border:1px solid #61736f;border-radius:14px;padding:10px;background:#172e37}.pch .b25-captures[hidden]{display:none}.pch .b25-captures small{font-size:9px;letter-spacing:.09em;color:#c0d4c2;margin-right:auto}.pch .b25-captures .ch-piece{width:25px;height:30px}
 .b25-out{display:grid;justify-items:center;align-content:center;margin:18px auto;width:110px;height:145px;border:4px solid #e5dbad;border-radius:18px;background:linear-gradient(140deg,#366e51,#153a3b);box-shadow:5px 6px 0 #a99b70,0 12px 30px #0005;color:#e8fac7;font-size:68px;font-weight:900}.b25-out small{font-size:9px;letter-spacing:.15em}
 .pch .ch-clock.ticking{background:#183b35;color:#e6f4c2;border-color:#b5ca91}
+/* Phone drawing keeps Done beside the prompt and places core tools before the palette. */
+@media(max-width:700px){
+ .ptel .b2-players{display:flex;flex-wrap:nowrap;overflow-x:auto;justify-content:start;padding:5px;gap:6px}
+ .ptel .b2-players .b2-player{flex:0 0 auto;padding:6px;max-width:150px}.ptel .b2-player b{font-size:11px}.ptel .b2-player .avatar{width:28px;height:28px}.ptel .b2-player .muted{font-size:10px}
+ .ptel #tp-head{margin:0 0 10px;padding:0;line-height:1.4;font-size:11px;letter-spacing:.08em}
+ .ptel #tp-body:has(#tp-cwrap){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+ .ptel #tp-body:has(#tp-cwrap)>.tp-prompt{grid-column:1;grid-row:1;padding:10px;margin:0;font-size:13px;align-self:center}
+ .ptel #tp-body:has(#tp-cwrap)>#tp-done{grid-column:2;grid-row:1;min-height:44px;padding:10px 14px;font-size:13px;align-self:center}
+ .ptel #tp-cwrap{grid-column:1/-1;grid-row:2;min-width:0}.ptel #tp-tb{grid-column:1/-1;grid-row:3}.ptel #tp-limit{grid-column:1/-1;grid-row:4;margin:0}
+ .ptel .tp-tools [data-tool]{order:0}.ptel .tp-tools [data-size]{order:1}.ptel .tp-tools [data-color]{order:2}.ptel .tp-tools [data-act]{order:1}.ptel .tp-tools .tp-sep{display:none}
+}
