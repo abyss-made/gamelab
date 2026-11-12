@@ -2,6 +2,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.impostor = (() => {
   const C = GameUI.common;
+  const FX=GameUI.batch2fx;
+  let concealed=false,roleKey="",votePicked=null;
   let root = null;
   let app = null;
   let clock = null;
@@ -22,11 +24,34 @@ GameUI.impostor = (() => {
       </div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
-    root.addEventListener("click", (e) => {
-      const v = e.target.closest("[data-vote]");
-      if (v && !v.disabled) app.socket.emit("action", { type: "vote", target: v.dataset.vote });
-      if (e.target.closest("#im-ready")) app.socket.emit("action", { type: "ready" });
+    root.addEventListener("click", e=>{
+      const g=S?.game;if(!g)return;
+      if(e.target.closest('#im-privacy')){concealed=!concealed;paintRole(g);return;}
+      const v=e.target.closest('[data-vote]');
+      if(v&&!v.disabled&&g.phase==='vote'&&!g.myVote){votePicked=v.dataset.vote;paintVotes(g);root.querySelector(`[data-vote="${CSS.escape(votePicked)}"]`)?.focus();return;}
+      if(e.target.closest('#im-clear-vote')){votePicked=null;paintVotes(g);return;}
+      if(e.target.closest('#im-confirm-vote')&&g.phase==='vote'&&!g.myVote&&g.players.some(p=>p.id===votePicked&&!p.out&&p.id!==S.you)){
+        app.socket.emit('action',{type:'vote',target:votePicked});const b=root.querySelector('#im-confirm-vote');b.disabled=true;b.textContent='Sending vote…';return;
+      }
+      if(e.target.closest('#im-ready'))app.socket.emit('action',{type:'ready'});
     });
+  }
+
+  function paintVotes(g){
+    const me=g.players.find(p=>p.id===S.you),can=me&&!me.out&&!g.myVote;
+    if(!g.players.some(p=>p.id===votePicked&&!p.out&&p.id!==S.you))votePicked=null;
+    root.querySelector('#im-body').innerHTML=`<ul class="im-votes">${g.players.filter(p=>!p.out).map(p=>`<li><button type="button" class="btn btn-ghost ${(g.myVote||votePicked)===p.id?'picked':''}" data-vote="${p.id}" aria-pressed="${(g.myVote||votePicked)===p.id}" ${!can||p.id===S.you?'disabled':''}>${app.avatarHTML(p.avatar)}<span>${app.esc(p.name)}</span></button></li>`).join('')}</ul>${can?`<div class="b25-vote-confirm"><p id="im-vote-note" role="status">${votePicked?`Selected ${nameOf(g,votePicked)}. Confirm to lock your vote.`:'Choose a player, then confirm your vote.'}</p><button class="btn" id="im-confirm-vote" ${votePicked?'':'disabled'}>Confirm vote</button><button class="btn btn-ghost" id="im-clear-vote" ${votePicked?'':'disabled'}>Clear</button></div>`:''}`;
+  }
+
+  function paintRole(g){
+    const me=g.myIndex>=0?g.players[g.myIndex]:null,k=[g.round,g.role,g.word,g.category,concealed,me?.out].join('|');
+    if(k===roleKey)return;const prior=!!roleKey;roleKey=k;let role;
+    if(!me||me.out)role=`<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
+    else if(concealed)role='<div class="im-card b25-concealed"><span class="im-role-tag">FOR YOUR EYES ONLY</span><b class="im-secret">ROLE HIDDEN</b>Your role stays private until you reveal it.</div>';
+    else if(g.role==='impostor')role=`<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
+    else role=`<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word||'')}</b>Category: ${app.esc(g.category)}. Give a clue without saying the word.</div>`;
+    root.querySelector('#im-role').innerHTML=role+(me&&!me.out?`<button type="button" class="btn btn-small btn-ghost" id="im-privacy" aria-pressed="${concealed}">${concealed?'Reveal my role':'Hide my role'}</button>`:'');
+    if(prior&&!concealed)FX.animate(root.querySelector('.im-card'),[{opacity:.3,transform:'perspective(700px) rotateX(-12deg)'},{opacity:1,transform:'none'}],380);
   }
 
   const nameOf = (g, id) => {
@@ -35,6 +60,7 @@ GameUI.impostor = (() => {
   };
 
   function update(state) {
+    const previous=S?.game;
     S = state;
     const g = S.game;
     clock.set(g.timeLeft);
@@ -49,11 +75,7 @@ GameUI.impostor = (() => {
       .join("");
     const phaseName = { clue: "Clues", discuss: "Discussion", vote: "Vote", guess: "Last chance", result: "Results" }[g.phase];
     root.querySelector("#im-round").innerHTML = `Round ${g.round} of ${g.rounds} · ${phaseName} <span class="fr-timer" data-timer></span>`;
-    let role;
-    if (!me || me.out) role = `<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
-    else if (g.role === "impostor") role = `<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
-    else role = `<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word || "")}</b>Category: ${app.esc(g.category)}. Give a useful clue without saying the word.</div>`;
-    root.querySelector("#im-role").innerHTML = role;
+    paintRole(g);
     root.querySelector("#im-clues").innerHTML = g.clues.map((c) => `<li><b>${nameOf(g, c.id)}</b>: ${app.esc(c.text)}</li>`).join("");
     const body = root.querySelector("#im-body");
     const status = root.querySelector("#im-status");
@@ -72,8 +94,7 @@ GameUI.impostor = (() => {
       } else if (g.phase === "discuss") {
         body.innerHTML = me && !me.out ? `<button class="btn" id="im-ready" ${g.ready.includes(S.you) ? "disabled" : ""}>${g.ready.includes(S.you) ? "Waiting for others…" : "I'm ready to vote"}</button>` : "";
       } else if (g.phase === "vote") {
-        const can = me && !me.out && !g.myVote;
-        body.innerHTML = `<ul class="im-votes">${g.players.filter((p) => !p.out).map((p) => `<li><button class="btn ${g.myVote === p.id ? "picked" : "btn-ghost"}" data-vote="${p.id}" ${!can || p.id === S.you ? "disabled" : ""}>${app.esc(p.name)}</button></li>`).join("")}</ul>`;
+        paintVotes(g);
       } else if (g.phase === "guess") {
         if (g.role === "impostor") {
           body.innerHTML = `<form class="ws-form" id="im-gform" autocomplete="off"><label class="sr-only" for="im-guess">Guess the secret word</label><input id="im-guess" type="text" maxlength="30" placeholder="Guess the secret word"><button class="btn" type="submit">Guess</button></form>`;
@@ -92,6 +113,10 @@ GameUI.impostor = (() => {
         if (me) Sound.play(r.gains[S.you] ? "join" : "drop");
       } else body.innerHTML = "";
     }
+    if(previous && previous.phase!==g.phase){
+      votePicked=null;FX.animate(body,[{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'none'}],300);
+      if(g.phase==='result')root.querySelectorAll('.im-vote-results li').forEach((el,i)=>FX.animate(el,[{opacity:.2,transform:'translateX(-12px)'},{opacity:1,transform:'none'}],220+i*35));
+    }
     status.textContent = !me || me.out ? "You're watching."
       : g.phase === "clue" ? (myTurn ? "Your turn: give a clue." : "Waiting for the next clue…")
       : g.phase === "discuss" ? "Discuss in the chat. Who doesn't know the word?"
@@ -105,11 +130,11 @@ GameUI.impostor = (() => {
     if (clock) clock.stop();
     if (root) root.remove();
     root = null;
-    key = "";
+    key = "";concealed=false;roleKey="";votePicked=null;S=null;
   }
   const chatPlaceholder = (st) => (st.game && st.game.phase === "discuss" ? "Discuss who the impostor is…" : null);
   function renderResult(r, state, a) {
-    return `<h2 class="result-title">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">${r.rounds} rounds played.</p>`;
+    return `<h2 class="result-title b25-result">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">${r.rounds} rounds played.</p>`;
   }
   return { mount, update, unmount, renderResult, chatPlaceholder, resultSound: C.resultSound, scoreLabel: "pts" };
 })();
