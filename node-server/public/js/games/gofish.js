@@ -197,7 +197,7 @@ GameUI.gofish = (() => {
   }
 
   function renderResult(r, state, a) {
-    return `<h2 class="result-title">${C.resultTitle(r, state, a)}</h2>${r.forfeit ? '<p class="muted center">Won because the others left.</p>' : ""}
+    return `<h2 class="result-title p5-result-heading">${C.resultTitle(r, state, a)}</h2>${r.forfeit ? '<p class="muted center">Won because the others left.</p>' : ""}
       ${C.podium(r.standings, a, (p) => p.books.length, "books")}`;
   }
   return { mount, update, unmount, renderResult, resultSound: C.resultSound, scoreLabel: "books" };

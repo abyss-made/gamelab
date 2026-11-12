@@ -547,7 +547,7 @@ GameUI.golf = (() => {
       .map((p, i) => `<tr class="${p.id === state.you ? "me" : ""}"><th scope="row">${i + 1}. ${a.esc(p.name)}${p.out ? " (left)" : ""}</th>${r.pars.map((_, h) => `<td>${p.scores[h] === null ? "–" : p.scores[h]}</td>`).join("")}<td><b>${p.total}</b></td></tr>`)
       .join("");
     const head = `<tr><th scope="col">${a.esc(r.course)}</th>${r.pars.map((p, i) => `<th scope="col">${i + 1}<small>par ${p}</small></th>`).join("")}<th scope="col">Total</th></tr>`;
-    return `<h2 class="result-title">${title}</h2><div class="gf-scroll"><table class="gf-table"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><div class="gf-scroll"><table class="gf-table"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
   }
 
   function resultSound(r, state) {

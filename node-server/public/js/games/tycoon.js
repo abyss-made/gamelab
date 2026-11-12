@@ -448,7 +448,7 @@ GameUI.tycoon = (() => {
     const rows = r.standings
       .map((p, i) => `<li class="${p.id === state.you ? "me" : ""}"><span class="rank">${i + 1}</span>${a.avatarHTML(p.avatar)}<b>${a.esc(p.name)}</b><span class="pts">${p.out ? "bankrupt" : `$${p.worth} net worth`}</span></li>`)
       .join("");
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${why}</p><ol class="b2-podium">${rows}</ol>`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><p class="muted center">${why}</p><ol class="b2-podium">${rows}</ol>`;
   }
 
   function resultSound(r, state) {

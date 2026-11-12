@@ -67,3 +67,7 @@
  .pl #pl-controls>.pl-slider{grid-column:1/-1}
  .pl #pl-controls .pl-fine-row input{flex:1;min-width:0}
 }
+.ld2 .ld2-tok.moved{animation:none}
+.p5-result-heading{font-size:clamp(32px,4vw,52px);letter-spacing:-.05em;color:#effacb;animation:p5-result-in .4s ease-out}
+@keyframes p5-result-in{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.p5-result-heading{animation:none}}

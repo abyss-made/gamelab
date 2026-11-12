@@ -559,7 +559,7 @@ GameUI.pool = (() => {
     const why = { eight: "Sank the 8-ball to finish the table.", "eight-early": "The other player pocketed the 8-ball too soon.", "eight-foul": "The other player fouled while pocketing the 8-ball.", "eight-scratch": "The other player scratched on the 8-ball.", resign: "Won by resignation.", time: "Won on time.", abandoned: "The other player left." }[r.reason] || "";
     const rows = r.players.map((p) => `${a.esc(p.name)} (${p.group || "no group"}) <b>${p.left}</b> left`).join(" · ");
     const next = r.nextUp ? `<p class="center next-up">Winner stays: <b>${a.esc(r.nextUp)}</b> plays next.</p>` : "";
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
   }
 
   function resultSound(r, state) {
