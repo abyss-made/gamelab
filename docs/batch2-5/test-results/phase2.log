@@ -1,0 +1,20 @@
+PASS  Ludo: four timeouts inside one missed turn count as one (idle 1, out false)
+PASS  Ludo: a player who misses turn after turn is still removed
+PASS  Color Stack: drawing a card counts as activity (idle reset)
+PASS  Color Stack: going out on +2 still makes the next player draw 2, and they count (pts 11)
+PASS  Color Stack: going out on +4 still makes the next player draw 4, and they count (pts 13)
+PASS  Chess: a move sent after the flag fell is refused and White loses on time (time)
+PASS  Chess: a move inside the clock is still played
+PASS  Word Chain: after "box" with no x-words left, the next letter is a playable one ("g")
+PASS  Word Chain: a word on the fresh letter is accepted ("gain")
+PASS  Word Chain: the chain continues from the new word's last letter
+PASS  Word Chain: nobody lost a life to the dead letter
+PASS  Word Chain: with the dictionary off the chain letter is never changed
+PASS  Telephone: an empty drawing earns no point and is marked skipped (points 1)
+PASS  Telephone: a real drawing still earns its point
+PASS  Mini Golf: a player who left before putting has no scores ([null,null,null,null,null,null])
+PASS  Mini Golf: strokes taken before leaving mid-hole are recorded for that hole
+PASS  Categories Rush: answers sent after "I'm done" are ignored
+PASS  Word Scramble: scrambles of 30 words with listed anagrams never spell a listed word (0 bad)
+
+All passed

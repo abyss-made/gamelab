@@ -1,0 +1,181 @@
+PASS  Chess rules: perft from the start position matches (8902 / 197281)
+PASS  Chess rules: perft "Kiwipete" (castling, pins, en passant, promotion mix) matches
+PASS  Chess rules: perft position 3 (en passant discovered checks) matches
+PASS  Chess rules: perft position 4 (promotions, castling out of check) matches
+PASS  Chess rules: both castling moves are available when clear
+PASS  Chess rules: cannot castle through an attacked square, other side still fine
+PASS  Chess rules: cannot castle out of check
+PASS  Chess rules: moving a rook removes that side's castling right
+PASS  Chess rules: en passant capture is offered right after a double step
+PASS  Chess rules: en passant expires one move later
+PASS  Chess rules: en passant removes the captured pawn
+PASS  Chess rules: a pawn on the seventh rank offers all four promotions
+PASS  Chess rules: a pinned bishop cannot move off the pin line
+PASS  Chess rules: stalemate is detected
+PASS  Chess rules: back-rank checkmate is detected
+PASS  Chess rules: king vs king is a dead position
+PASS  Chess rules: king and bishop vs king is a dead position
+PASS  Chess rules: king and rook vs king is not a dead position
+PASS  Chess rules: fifty-move rule triggers at 100 half moves
+PASS  Chess rules: bishops on the same colour cannot mate
+PASS  Chess rules: bishops on opposite colours can mate
+PASS  Chess: first seat plays White and moves first
+PASS  Chess: only the player to move receives legal moves
+PASS  Chess: spectators receive no move list
+PASS  Chess: moving out of turn is ignored
+PASS  Chess: illegal, malformed and out-of-range moves are rejected
+PASS  Chess: fool's mate ends the game with a checkmate win for Black
+PASS  Chess: move list uses algebraic notation
+PASS  Chess: winner scores and winner-stays rotates the loser
+PASS  Chess: castling moves king and rook
+PASS  Chess: castling notation
+PASS  Chess: underpromotion to a knight is honoured
+PASS  Chess: promotion defaults to a queen
+PASS  Chess: stalemate ends the game as a draw
+PASS  Chess: threefold repetition is an automatic draw
+PASS  Chess: you cannot accept your own draw offer
+PASS  Chess: declining clears the offer
+PASS  Chess: no repeated offers until the opponent has moved
+PASS  Chess: accepted draw offer ends the game as a draw
+PASS  Chess: resigning gives the opponent the win (even off turn)
+PASS  Chess: spectators cannot move or resign
+PASS  Chess: clocks start at the chosen time
+PASS  Chess: the mover's clock runs down only on their own turn
+PASS  Chess: running out of time loses
+PASS  Chess: increment is added after a move
+PASS  Chess: timeout against a bare king is a draw, not a loss
+PASS  Chess: with no clock, 3 minutes without a move forfeits
+PASS  Chess: leaving forfeits the game
+PASS  Chess: colours alternate between games
+PASS  Chess: invalid settings are ignored
+PASS  Checkers: 12 pieces each
+PASS  Checkers: 7 opening moves for the first player
+PASS  Checkers: a capture is compulsory when one exists
+PASS  Checkers: after a jump the same piece must keep jumping
+PASS  Checkers: only the jumping piece may move during a chain
+PASS  Checkers: chain finishes, both victims removed, turn passes
+PASS  Checkers: men only move forward
+PASS  Checkers: men cannot capture backward
+PASS  Checkers: kings capture backward
+PASS  Checkers: a man crowned mid-capture stops there
+PASS  Checkers: a player with no pieces loses
+PASS  Checkers: a blocked player with no legal move loses
+PASS  Checkers: 80 quiet plies is a draw
+PASS  Checkers: only the mover receives legal moves
+PASS  Checkers: out-of-turn moves are ignored
+PASS  Checkers: illegal or malformed moves are ignored
+PASS  Checkers: a legal move passes the turn
+PASS  Checkers: the view tells the mover a jump is compulsory
+PASS  Checkers: a plain step is rejected while a capture is available
+PASS  Checkers: the jumper keeps the turn mid-chain
+PASS  Checkers: turn passes after the chain ends
+PASS  Checkers: capturing the last piece wins
+PASS  Checkers: first timeout plays a random legal move
+PASS  Checkers: repeated timeouts forfeit
+PASS  Checkers: a timeout move completes a multi-jump
+PASS  Checkers: resigning loses
+PASS  Checkers: leaving forfeits
+PASS  Reversi: four opening moves for each side
+PASS  Reversi: flips counted, non-flipping squares are illegal
+PASS  Reversi: only the mover receives legal squares
+PASS  Reversi: out-of-turn placement is ignored
+PASS  Reversi: illegal squares and junk are rejected
+PASS  Reversi: a move flips discs and passes the turn
+PASS  Reversi: game ends when neither player can move, more discs wins
+PASS  Reversi: the turn passes normally when the opponent can move
+PASS  Reversi: a player without a legal move passes automatically and the other continues
+PASS  Reversi: the view marks that a pass happened
+PASS  Reversi: equal discs is a draw and nobody scores
+PASS  Reversi: a timeout plays a random legal move
+PASS  Reversi: repeated timeouts forfeit
+PASS  Reversi: leaving forfeits
+PASS  Reversi: 20 random playouts all finish with consistent disc counts
+PASS  Battleship: a valid layout is accepted
+PASS  Battleship: a layout with a missing ship is rejected
+PASS  Battleship: ships hanging off the board are rejected
+PASS  Battleship: overlapping ships are rejected
+PASS  Battleship: negative coordinates are rejected
+PASS  Battleship: fractional coordinates are rejected
+PASS  Battleship: a non-boolean orientation is rejected
+PASS  Battleship: non-array layouts are rejected
+PASS  Battleship: 200 random fleets are all valid
+PASS  Battleship: starts in placement, nothing placed
+PASS  Battleship: firing during placement does nothing
+PASS  Battleship: an invalid layout does not lock placement
+PASS  Battleship: a valid layout locks the fleet
+PASS  Battleship: a placed fleet cannot be changed
+PASS  Battleship: the opponent cannot see your placement
+PASS  Battleship: spectators cannot see any placement
+PASS  Battleship: readiness (only) is visible to the opponent
+PASS  Battleship: battle starts when both are ready
+PASS  Battleship: firing out of turn is ignored
+PASS  Battleship: out-of-range and malformed shots are ignored
+PASS  Battleship: a miss is recorded and the turn passes
+PASS  Battleship: firing at the same square twice is ignored
+PASS  Battleship: a sunk ship is revealed to everyone
+PASS  Battleship: remaining ships and hits tracked
+PASS  Battleship: spectators never see unsunk ships
+PASS  Battleship: the shooter never sees the opponent's unsunk ships
+PASS  Battleship: you see your own fleet
+PASS  Battleship: sinking the whole fleet wins and both fleets are revealed in the result
+PASS  Battleship: winner scores
+PASS  Battleship: with hit-again on, a hit keeps the turn
+PASS  Battleship: a miss ends the turn
+PASS  Battleship: unplaced fleets are placed randomly when time runs out
+PASS  Battleship: a shot timeout fires a random shot
+PASS  Battleship: repeated timeouts forfeit
+PASS  Battleship: leaving forfeits
+PASS  Battleship: resigning loses
+PASS  Ludo: four tokens each, all in the yard
+PASS  Ludo: each player has a different colour
+PASS  Ludo: two players sit opposite each other
+PASS  Ludo: rolling out of turn is ignored
+PASS  Ludo: spectators cannot roll
+PASS  Ludo: moving before rolling does nothing
+PASS  Ludo: a roll with no legal move shows a notice
+PASS  Ludo: turn passes to the next player
+PASS  Ludo: a six lets any yard token out; only the mover sees movable tokens
+PASS  Ludo: invalid token choices are rejected
+PASS  Ludo: leaving the yard puts the token on its start square, and a six gives another roll
+PASS  Ludo: only tokens on the board can move with a 4
+PASS  Ludo: the token advances and the turn passes
+PASS  Ludo: three sixes in a row forfeit the turn
+PASS  Ludo: the turn passes and the six counter resets
+PASS  Ludo: landing on a lone opponent sends it back to the yard
+PASS  Ludo: the capture is reported
+PASS  Ludo: safe (star) squares cannot be captured on
+PASS  Ludo: two tokens of one colour on a square cannot be captured
+PASS  Ludo: tokens enter the home column after 50
+PASS  Ludo: an overshooting roll is not playable
+PASS  Ludo: an exact roll gets a token home and scores
+PASS  Ludo: all four tokens home wins the game
+PASS  Ludo: a timeout rolls automatically
+PASS  Ludo: a player who stays idle for three turns is removed
+PASS  Ludo: the game continues with the others
+PASS  Ludo: a player who leaves is removed and their tokens leave the board
+PASS  Ludo: the last remaining player wins
+PASS  Ludo: when the current player leaves the turn moves on
+PASS  Ludo: 6000 server rolls are roughly uniform (1002/1030/1025/1035/952/956)
+PASS  Ludo: view carries no internal state
+PASS  Battleship (live): the third person joins as a spectator
+PASS  Battleship (live): your placement is never sent to the opponent or spectators
+PASS  Battleship (live): only the owner receives their own fleet
+PASS  Battleship (live): shots resolve on the server and report hits
+PASS  Battleship (live): a spectator sees shots but never a fleet
+PASS  Battleship (live): out-of-turn and spectator shots are ignored
+PASS  Battleship (live): reconnecting restores your fleet and the battle
+PASS  Chess (live): switching games keeps the room and its members
+PASS  Chess (live): only White receives legal moves at the start
+PASS  Chess (live): Black and spectators cannot move on White's turn
+PASS  Chess (live): the legal move list follows the turn
+PASS  Chess (live): resigning ends the game with a result for the room
+PASS  Chess (live): the result is delivered to the room
+PASS  Chess (live): the room and members persist after a result
+PASS  ludo (live): starts in the same room
+PASS  Ludo (live): the seated players are on the board
+PASS  Ludo (live): the server rolls the dice
+PASS  Ludo (live): spectators see the dice but have no moves
+PASS  checkers (live): starts in the same room
+PASS  reversi (live): starts in the same room
+
+All passed

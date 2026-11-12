@@ -1,0 +1,138 @@
+PASS  catalog lists battleship
+PASS  catalog lists checkers
+PASS  catalog lists reversi
+PASS  catalog lists ludo
+PASS  catalog lists chess
+PASS  catalog lists 25 playable games
+PASS  Coming Soon tile still present and not counted
+PASS  all game card artwork loads
+PASS  battleship: Play opens Create Party with no game settings (issue #38)
+PASS  checkers: Play opens Create Party with no game settings (issue #38)
+PASS  reversi: Play opens Create Party with no game settings (issue #38)
+PASS  ludo: Play opens Create Party with no game settings (issue #38)
+PASS  chess: Play opens Create Party with no game settings (issue #38)
+PASS  battleship/phone: no horizontal overflow
+PASS  battleship/phone: game screen mounts
+PASS  battleship/phone: an off-board placement shows a message
+PASS  battleship/phone: lock-in enables once all five ships are placed
+PASS  battleship/phone: grid squares are at least 24px (29px)
+PASS  battleship/phone: the draft fleet is never sent before locking
+PASS  battleship/phone: battle starts when both fleets are locked
+PASS  battleship/phone: Fire is disabled until a target is aimed
+PASS  battleship/phone: aiming enables Fire
+PASS  battleship/phone: firing is applied on the server
+PASS  battleship/phone: the shot shows as a hit or miss on the board
+PASS  battleship/phone: enemy waters never draw ship art
+PASS  battleship/phone: your fleet shows the five vessel illustrations
+PASS  battleship/phone: hit markers on your fleet paint above the ship illustrations
+PASS  battleship/phone: phone Fleet tab shows your fleet
+PASS  battleship/phone: Back to targeting returns to enemy waters
+PASS  battleship/phone: opponents only receive cells of sunk ships
+PASS  battleship/phone: still no horizontal overflow after playing
+PASS  battleship/phone: no page errors
+PASS  battleship: Game Settings dialog shows its settings
+PASS  battleship/desktop: no horizontal overflow
+PASS  battleship/desktop: game screen mounts
+PASS  battleship/desktop: an off-board placement shows a message
+PASS  battleship/desktop: lock-in enables once all five ships are placed
+PASS  battleship/desktop: grid squares are at least 24px (41px)
+PASS  battleship/desktop: the draft fleet is never sent before locking
+PASS  battleship/desktop: battle starts when both fleets are locked
+PASS  battleship/desktop: Fire is disabled until a target is aimed
+PASS  battleship/desktop: aiming enables Fire
+PASS  battleship/desktop: firing is applied on the server
+PASS  battleship/desktop: the shot shows as a hit or miss on the board
+PASS  battleship/desktop: enemy waters never draw ship art
+PASS  battleship/desktop: your fleet shows the five vessel illustrations
+PASS  battleship/desktop: hit markers on your fleet paint above the ship illustrations
+PASS  battleship/desktop: opponents only receive cells of sunk ships
+PASS  battleship/desktop: still no horizontal overflow after playing
+PASS  battleship/desktop: no page errors
+PASS  checkers/phone: no horizontal overflow
+PASS  checkers/phone: game screen mounts
+PASS  checkers/phone: 24 pieces on the board
+PASS  checkers/phone: squares are touch sized (43px)
+PASS  checkers/phone: selecting a piece highlights its destinations
+PASS  checkers/phone: the move is sent and the turn passes
+PASS  checkers/phone: it is your turn again after the reply
+PASS  checkers/phone: still no horizontal overflow after playing
+PASS  checkers/phone: no page errors
+PASS  checkers: Game Settings dialog shows its settings
+PASS  checkers/desktop: no horizontal overflow
+PASS  checkers/desktop: game screen mounts
+PASS  checkers/desktop: 24 pieces on the board
+PASS  checkers/desktop: squares are touch sized (54px)
+PASS  checkers/desktop: selecting a piece highlights its destinations
+PASS  checkers/desktop: the move is sent and the turn passes
+PASS  checkers/desktop: it is your turn again after the reply
+PASS  checkers/desktop: still no horizontal overflow after playing
+PASS  checkers/desktop: no page errors
+PASS  reversi/phone: no horizontal overflow
+PASS  reversi/phone: game screen mounts
+PASS  reversi/phone: four legal squares are marked at the start
+PASS  reversi/phone: placing a disc adds it to the board and clears the legal markers on the opponent's turn
+PASS  reversi/phone: still no horizontal overflow after playing
+PASS  reversi/phone: no page errors
+PASS  reversi: Game Settings dialog shows its settings
+PASS  reversi/desktop: no horizontal overflow
+PASS  reversi/desktop: game screen mounts
+PASS  reversi/desktop: four legal squares are marked at the start
+PASS  reversi/desktop: placing a disc adds it to the board and clears the legal markers on the opponent's turn
+PASS  reversi/desktop: still no horizontal overflow after playing
+PASS  reversi/desktop: no page errors
+PASS  ludo/phone: no horizontal overflow
+PASS  ludo/phone: game screen mounts
+PASS  ludo/phone: 12 tokens (3 players x 4) in the yards
+PASS  ludo/phone: reached the host's turn
+PASS  ludo/phone: the roll button is touch sized (44px)
+PASS  ludo/phone: the server rolled a 3
+PASS  ludo/phone: the die face is displayed
+PASS  ludo/phone: rolled 3: no legal move, the turn passes
+PASS  ludo/phone: a square shared with an opponent opens a picker
+PASS  ludo/phone: the picker names owner + number and enables only my movable token
+PASS  ludo/phone: an opponent's token in the picker never sends a move
+PASS  ludo/phone: still no horizontal overflow after playing
+PASS  ludo/phone: no page errors
+PASS  ludo: Game Settings dialog shows its settings
+PASS  ludo/desktop: no horizontal overflow
+PASS  ludo/desktop: game screen mounts
+PASS  ludo/desktop: 12 tokens (3 players x 4) in the yards
+PASS  ludo/desktop: reached the host's turn
+PASS  ludo/desktop: the roll button is touch sized (44px)
+PASS  ludo/desktop: the server rolled a 1
+PASS  ludo/desktop: the die face is displayed
+PASS  ludo/desktop: rolled 1: no legal move, the turn passes
+PASS  ludo/desktop: a square shared with an opponent opens a picker
+PASS  ludo/desktop: the picker names owner + number and enables only my movable token
+PASS  ludo/desktop: an opponent's token in the picker never sends a move
+PASS  ludo/desktop: still no horizontal overflow after playing
+PASS  ludo/desktop: no page errors
+PASS  chess/phone: no horizontal overflow
+PASS  chess/phone: game screen mounts
+PASS  chess/phone: squares have accessible labels (e2: White pawn)
+PASS  chess/phone: clocks are shown
+PASS  chess/phone: selecting a pawn shows its two destinations
+PASS  chess/phone: squares are touch sized (40px)
+PASS  chess/phone: the move arrives as e4
+PASS  chess/phone: the move list updates
+PASS  chess/phone: an incoming draw offer shows Accept and Decline
+PASS  chess/phone: declining clears the offer
+PASS  chess/phone: you receive your legal moves on your turn
+PASS  chess/phone: still no horizontal overflow after playing
+PASS  chess/phone: no page errors
+PASS  chess: Game Settings dialog shows its settings
+PASS  chess/desktop: no horizontal overflow
+PASS  chess/desktop: game screen mounts
+PASS  chess/desktop: squares have accessible labels (e2: White pawn)
+PASS  chess/desktop: clocks are shown
+PASS  chess/desktop: selecting a pawn shows its two destinations
+PASS  chess/desktop: squares are touch sized (52px)
+PASS  chess/desktop: the move arrives as e4
+PASS  chess/desktop: the move list updates
+PASS  chess/desktop: an incoming draw offer shows Accept and Decline
+PASS  chess/desktop: declining clears the offer
+PASS  chess/desktop: you receive your legal moves on your turn
+PASS  chess/desktop: still no horizontal overflow after playing
+PASS  chess/desktop: no page errors
+
+All passed

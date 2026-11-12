@@ -1,0 +1,71 @@
+PASS  catalog lists wordchain
+PASS  catalog lists categories
+PASS  catalog lists higherlower
+PASS  catalog lists colorstack
+PASS  catalog lists gofish
+PASS  catalog lists 25 playable games (2 existing + 5 batch 2 + 5 batch 1 + 5 batch 3 + 5 batch 4 + 3 batch 5)
+PASS  Coming Soon tile still present and not counted as a game
+PASS  all game card artwork loads
+PASS  wordchain/phone: no horizontal overflow
+PASS  wordchain/phone: game screen mounts
+PASS  wordchain/phone: no page errors
+PASS  wordchain: Game Settings dialog shows its settings
+PASS  wordchain/desktop: no horizontal overflow
+PASS  wordchain/desktop: game screen mounts
+PASS  wordchain/desktop: word input enabled on your turn
+PASS  wordchain/desktop: a non-dictionary word is rejected in the UI
+PASS  wordchain/desktop: a valid word appears in the chain
+PASS  wordchain/desktop: no page errors
+PASS  categories/phone: no horizontal overflow
+PASS  categories/phone: game screen mounts
+PASS  categories/phone: no page errors
+PASS  categories: Game Settings dialog shows its settings
+PASS  categories/desktop: no horizontal overflow
+PASS  categories/desktop: game screen mounts
+PASS  categories/desktop: five category inputs
+PASS  categories/desktop: the other player's state doesn't contain my typed answer
+PASS  categories/desktop: inputs lock after I'm done
+PASS  categories/desktop: review table shows answers after the round
+PASS  categories/desktop: no page errors
+PASS  higherlower/phone: no horizontal overflow
+PASS  higherlower/phone: game screen mounts
+PASS  higherlower/phone: no page errors
+PASS  higherlower: Game Settings dialog shows its settings
+PASS  higherlower/desktop: no horizontal overflow
+PASS  higherlower/desktop: game screen mounts
+PASS  higherlower/desktop: buttons lock after guessing
+PASS  higherlower/desktop: next card is not revealed before everyone guessed
+PASS  higherlower/desktop: next card flips after both guess
+PASS  higherlower/desktop: no page errors
+PASS  colorstack/phone: no horizontal overflow
+PASS  colorstack/phone: game screen mounts
+PASS  colorstack/phone: no page errors
+PASS  colorstack: Game Settings dialog shows its settings
+PASS  colorstack/desktop: no horizontal overflow
+PASS  colorstack/desktop: game screen mounts
+PASS  colorstack/desktop: host sees their own hand (9 cards)
+PASS  colorstack/desktop: opponent fan shows face-down backs from the public count (6)
+PASS  colorstack/desktop: opponent fans never contain card faces
+PASS  colorstack/desktop: a 30-card hand keeps every card reachable
+PASS  colorstack/desktop: draw button works when nothing is playable
+PASS  colorstack/desktop: the other player's hand is not in the page
+PASS  colorstack/desktop: no page errors
+PASS  gofish/phone: no horizontal overflow
+PASS  gofish/phone: game screen mounts
+PASS  gofish/phone: no page errors
+PASS  gofish: Game Settings dialog shows its settings
+PASS  gofish/desktop: no horizontal overflow
+PASS  gofish/desktop: game screen mounts
+PASS  gofish/desktop: ask button enables once a rank is chosen (single opponent auto-selected)
+PASS  gofish/desktop: the move appears in the log
+PASS  gofish/desktop: a 24-card Go Fish hand keeps every card reachable
+PASS  gofish/desktop: a lost Ask unlocks after 5s so the player can retry
+PASS  gofish/desktop: rank 14 is labelled Ace (A)
+PASS  gofish/desktop: existing books are seeded silently on first view
+PASS  gofish/desktop: Ask sends the chosen rank once
+PASS  gofish/desktop: the named ask stays pending and locked until the view changes
+PASS  gofish/desktop: a duplicate snapshot keeps the ask pending and celebrates nothing
+PASS  gofish/desktop: only the newly observed book animates, and the pending ask clears
+PASS  gofish/desktop: no page errors
+
+All passed

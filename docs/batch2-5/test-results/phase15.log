@@ -1,0 +1,187 @@
+PASS  no return indicator while viewing the room
+PASS  Games tab (lobby): leaves the room view
+PASS  Games tab (lobby): return indicator is shown
+PASS  Games tab (lobby): indicator says "Return to Lobby" and names the room code
+PASS  Games tab (lobby): still seated in the server room (host and roster intact)
+PASS  Rooms tab (lobby): leaves the room view
+PASS  Rooms tab (lobby): return indicator is shown
+PASS  Rooms tab (lobby): indicator says "Return to Lobby" and names the room code
+PASS  Rooms tab (lobby): still seated in the server room (host and roster intact)
+PASS  a room state update while browsing does not switch the view back to the room
+PASS  Play tab (lobby): leaves the room view
+PASS  Play tab (lobby): return indicator is shown
+PASS  Play tab (lobby): indicator says "Return to Lobby" and names the room code
+PASS  Play tab (lobby): still seated in the server room (host and roster intact)
+PASS  Back to Games (game): leaves the room view
+PASS  Back to Games (game): return indicator is shown
+PASS  Back to Games (game): indicator says "Return to Game" and names the room code
+PASS  Back to Games (game): still seated in the server room (host and roster intact)
+PASS  Logo (game): leaves the room view
+PASS  Logo (game): return indicator is shown
+PASS  Logo (game): indicator says "Return to Game" and names the room code
+PASS  Logo (game): still seated in the server room (host and roster intact)
+PASS  browser Back/Forward keep room membership
+PASS  Return button goes back to /r/CODE
+PASS  gameplay state preserved after returning
+PASS  chat history preserved after returning
+PASS  same room code after returning
+PASS  chat works after returning
+PASS  deep link to another room warns before leaving the current one
+PASS  merely opening another invite does not join it or leave the first room
+PASS  joining another room by code asks for confirmation while a game is running
+PASS  declining the confirmation keeps the first room and does not join the second
+PASS  a failed join keeps the current seat, host and roster
+PASS  return indicator remains after a failed join
+PASS  Leave Lobby leaves the server room and passes host on
+PASS  no return indicator after leaving
+PASS  deep link /r/CODE joins the room
+PASS  reload rejoins without duplicate membership
+PASS  390x844: expanded canvas 366x275 -> 390x293
+PASS  390x844: expanded canvas keeps 4:3
+PASS  390x844: expanded canvas fully on screen
+PASS  390x844: no horizontal overflow while expanded
+PASS  390x844: social controls remain available in focus mode
+PASS  390x844: chat panel can be opened while expanded
+PASS  390x844: chat history is kept in focus mode
+PASS  390x844: chat panel does not cover the canvas
+PASS  390x844: chat panel fully on screen
+PASS  390x844: chat input is on screen
+PASS  390x844: message sent from the expanded view reaches the room
+PASS  390x844: chat panel collapses
+PASS  390x844: unread badge appears for new messages
+PASS  390x844: opening chat clears the badge and shows the message
+PASS  390x844: Escape exits focus mode
+PASS  390x844: chat returns to the room layout
+PASS  390x844: chat history survives closing focus mode
+PASS  390x844: canvas returns to its normal size
+PASS  844x390: expanded canvas 480x360 -> 455x341
+PASS  844x390: expanded canvas keeps 4:3
+PASS  844x390: expanded canvas fully on screen
+PASS  844x390: no horizontal overflow while expanded
+PASS  844x390: social controls remain available in focus mode
+PASS  844x390: chat panel can be opened while expanded
+PASS  844x390: chat history is kept in focus mode
+PASS  844x390: chat panel does not cover the canvas
+PASS  844x390: chat panel fully on screen
+PASS  844x390: chat input is on screen
+PASS  844x390: message sent from the expanded view reaches the room
+PASS  844x390: chat panel collapses
+PASS  844x390: unread badge appears for new messages
+PASS  844x390: opening chat clears the badge and shows the message
+PASS  844x390: Escape exits focus mode
+PASS  844x390: chat returns to the room layout
+PASS  844x390: chat history survives closing focus mode
+PASS  844x390: canvas returns to its normal size
+PASS  1280x800: expanded canvas 847x635 -> 847x635
+PASS  1280x800: expanded canvas keeps 4:3
+PASS  1280x800: expanded canvas fully on screen
+PASS  1280x800: no horizontal overflow while expanded
+PASS  1280x800: social controls remain available in focus mode
+PASS  1280x800: chat panel can be opened while expanded
+PASS  1280x800: chat history is kept in focus mode
+PASS  1280x800: chat panel does not cover the canvas
+PASS  1280x800: chat panel fully on screen
+PASS  1280x800: chat input is on screen
+PASS  1280x800: message sent from the expanded view reaches the room
+PASS  1280x800: Escape exits focus mode
+PASS  1280x800: chat returns to the room layout
+PASS  1280x800: chat history survives closing focus mode
+PASS  1280x800: canvas returns to its normal size
+PASS  1440x900: expanded canvas 980x735 -> 980x735
+PASS  1440x900: expanded canvas keeps 4:3
+PASS  1440x900: expanded canvas fully on screen
+PASS  1440x900: no horizontal overflow while expanded
+PASS  1440x900: social controls remain available in focus mode
+PASS  1440x900: chat panel can be opened while expanded
+PASS  1440x900: chat history is kept in focus mode
+PASS  1440x900: chat panel does not cover the canvas
+PASS  1440x900: chat panel fully on screen
+PASS  1440x900: chat input is on screen
+PASS  1440x900: message sent from the expanded view reaches the room
+PASS  1440x900: Escape exits focus mode
+PASS  1440x900: chat returns to the room layout
+PASS  1440x900: chat history survives closing focus mode
+PASS  1440x900: canvas returns to its normal size
+PASS  1280x720: expanded canvas 740x555 -> 740x555
+PASS  1280x720: expanded canvas keeps 4:3
+PASS  1280x720: expanded canvas fully on screen
+PASS  1280x720: no horizontal overflow while expanded
+PASS  1280x720: social controls remain available in focus mode
+PASS  1280x720: chat panel can be opened while expanded
+PASS  1280x720: chat history is kept in focus mode
+PASS  1280x720: chat panel does not cover the canvas
+PASS  1280x720: chat panel fully on screen
+PASS  1280x720: chat input is on screen
+PASS  1280x720: message sent from the expanded view reaches the room
+PASS  1280x720: Escape exits focus mode
+PASS  1280x720: chat returns to the room layout
+PASS  1280x720: chat history survives closing focus mode
+PASS  1280x720: canvas returns to its normal size
+PASS  1440x900: landing page has no vertical scrollbar (900 <= 900)
+PASS  1440x900: app shell spans the full width (1440)
+PASS  1440x900: hero fills the height (764px)
+PASS  1280x800: landing page has no vertical scrollbar (800 <= 800)
+PASS  1280x800: app shell spans the full width (1280)
+PASS  1280x800: hero fills the height (664px)
+PASS  1280x720: landing page has no vertical scrollbar (720 <= 720)
+PASS  1280x720: app shell spans the full width (1280)
+PASS  1280x720: hero fills the height (584px)
+PASS  320px: landing has no horizontal overflow
+PASS  320px: games screen has no horizontal overflow
+PASS  320px: create dialog fits inside the viewport
+PASS  320px: Create lobby button is reachable without scrolling the dialog
+PASS  320px: no clipped control text
+PASS  320px: difficulty buttons do not overlap
+PASS  320px: dialog adds no horizontal overflow
+PASS  375px: landing has no horizontal overflow
+PASS  375px: games screen has no horizontal overflow
+PASS  375px: create dialog fits inside the viewport
+PASS  375px: Create lobby button is reachable without scrolling the dialog
+PASS  375px: no clipped control text
+PASS  375px: difficulty buttons do not overlap
+PASS  375px: dialog adds no horizontal overflow
+PASS  390px: landing has no horizontal overflow
+PASS  390px: games screen has no horizontal overflow
+PASS  390px: create dialog fits inside the viewport
+PASS  390px: Create lobby button is reachable without scrolling the dialog
+PASS  390px: no clipped control text
+PASS  390px: difficulty buttons do not overlap
+PASS  390px: dialog adds no horizontal overflow
+PASS  430px: landing has no horizontal overflow
+PASS  430px: games screen has no horizontal overflow
+PASS  430px: create dialog fits inside the viewport
+PASS  430px: Create lobby button is reachable without scrolling the dialog
+PASS  430px: no clipped control text
+PASS  430px: difficulty buttons do not overlap
+PASS  430px: dialog adds no horizontal overflow
+PASS  600px: landing has no horizontal overflow
+PASS  600px: games screen has no horizontal overflow
+PASS  600px: create dialog fits inside the viewport
+PASS  600px: Create lobby button is reachable without scrolling the dialog
+PASS  600px: no clipped control text
+PASS  600px: difficulty buttons do not overlap
+PASS  600px: dialog adds no horizontal overflow
+PASS  768px: landing has no horizontal overflow
+PASS  768px: games screen has no horizontal overflow
+PASS  768px: create dialog fits inside the viewport
+PASS  768px: Create lobby button is reachable without scrolling the dialog
+PASS  768px: no clipped control text
+PASS  768px: difficulty buttons do not overlap
+PASS  768px: dialog adds no horizontal overflow
+PASS  1280px: landing has no horizontal overflow
+PASS  1280px: games screen has no horizontal overflow
+PASS  1280px: create dialog fits inside the viewport
+PASS  1280px: Create lobby button is reachable without scrolling the dialog
+PASS  1280px: no clipped control text
+PASS  1280px: difficulty buttons do not overlap
+PASS  1280px: dialog adds no horizontal overflow
+PASS  1440px: landing has no horizontal overflow
+PASS  1440px: games screen has no horizontal overflow
+PASS  1440px: create dialog fits inside the viewport
+PASS  1440px: Create lobby button is reachable without scrolling the dialog
+PASS  1440px: no clipped control text
+PASS  1440px: difficulty buttons do not overlap
+PASS  1440px: dialog adds no horizontal overflow
+PASS  short landscape: action buttons stay on screen and the dialog scrolls inside
+
+All passed

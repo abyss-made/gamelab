@@ -1,0 +1,99 @@
+PASS  home page tells the client exactly the five hidden games
+PASS  hidden game modules stay registered (25 total)
+PASS  20 games are selectable
+PASS  /higher-or-lower redirects to the catalog
+PASS  /liars-dice redirects to the catalog
+PASS  /hot-potato redirects to the catalog
+PASS  /reversi redirects to the catalog
+PASS  /rock-paper-scissors redirects to the catalog
+PASS  visible game pages still render
+PASS  createRoom(higherlower) falls back to Draw & Guess
+PASS  quickPlay(higherlower) never lands in higherlower
+PASS  switchGame/voteNext to higherlower are refused
+PASS  createRoom(liarsdice) falls back to Draw & Guess
+PASS  quickPlay(liarsdice) never lands in liarsdice
+PASS  switchGame/voteNext to liarsdice are refused
+PASS  createRoom(hotpotato) falls back to Draw & Guess
+PASS  quickPlay(hotpotato) never lands in hotpotato
+PASS  switchGame/voteNext to hotpotato are refused
+PASS  createRoom(reversi) falls back to Draw & Guess
+PASS  quickPlay(reversi) never lands in reversi
+PASS  switchGame/voteNext to reversi are refused
+PASS  createRoom(rps) falls back to Draw & Guess
+PASS  quickPlay(rps) never lands in rps
+PASS  switchGame/voteNext to rps are refused
+PASS  a prototype key as game id is rejected safely (falls back, no crash)
+PASS  public room list never shows a hidden game
+PASS  switch to tictactoe: same room code for everyone
+PASS  switch to tictactoe: all 5 members stay in the room
+PASS  switch to tictactoe: host role kept
+PASS  switch to tictactoe: 2 seated, within max 2
+PASS  switch to tictactoe: start countdown and votes cleared
+PASS  switch to tictactoe: bumped players are queued for a seat
+PASS  switch to dotsboxes: same room code for everyone
+PASS  switch to dotsboxes: all 5 members stay in the room
+PASS  switch to dotsboxes: host role kept
+PASS  switch to dotsboxes: 4 seated, within max 4
+PASS  switch to dotsboxes: start countdown and votes cleared
+PASS  switch to dotsboxes: bumped players are queued for a seat
+PASS  switch to chess: same room code for everyone
+PASS  switch to chess: all 5 members stay in the room
+PASS  switch to chess: host role kept
+PASS  switch to chess: 2 seated, within max 2
+PASS  switch to chess: start countdown and votes cleared
+PASS  switch to chess: bumped players are queued for a seat
+PASS  switch to golf: same room code for everyone
+PASS  switch to golf: all 5 members stay in the room
+PASS  switch to golf: host role kept
+PASS  switch to golf: 5 seated, within max 6
+PASS  switch to golf: start countdown and votes cleared
+PASS  switch to trivia: same room code for everyone
+PASS  switch to trivia: all 5 members stay in the room
+PASS  switch to trivia: host role kept
+PASS  switch to trivia: 5 seated, within max 12
+PASS  switch to trivia: start countdown and votes cleared
+PASS  reconnect within grace keeps the same member id
+PASS  reconnected member shows as connected again
+PASS  two people beyond 2 seats spectate
+PASS  spectator can join the queue
+PASS  game ends with a result
+PASS  winner stays and the QUEUED spectator (not the longest watcher) takes the seat
+PASS  loser spectates and joins the back of the queue
+PASS  seat count still respects the 2-player max
+PASS  host role survives the rotation
+PASS  Play Again starts a rematch
+PASS  a spectator cannot take a turn
+PASS  a non-host cannot end or restart the game
+PASS  an opened lobby seat goes to the queued spectator, not the idle one
+PASS  seated spectator leaves the queue
+PASS  spectator can leave the queue
+PASS  a seated player cannot join the queue
+PASS  next-game votes are tallied for everyone
+PASS  each member sees their own vote
+PASS  votes can be withdrawn; unknown games are ignored
+PASS  switching games clears the votes
+PASS  host ending a game returns everyone to the lobby
+PASS  only the host can dismiss results
+PASS  Back to Lobby clears results for everyone
+PASS  host who drops hands hosting to the next connected player
+PASS  the dropped host keeps their seat during the grace period
+PASS  returning host rejoins as a member; new host stays
+PASS  a non-host cannot take hosting
+PASS  host can hand hosting to someone else
+PASS  a non-host cannot kick
+PASS  host kick removes the member
+PASS  a kicked member cannot rejoin with the same identity
+PASS  a disconnected member is cleaned up after the grace period
+PASS  host leaving skips the offline member and picks a connected one
+PASS  the new host can end the game (no stuck transition)
+PASS  chat flood is limited per member across reconnects (5/20 delivered)
+PASS  a seated player (not the spectator) is choosing a word
+PASS  drawer receives the word
+PASS  spectator state never contains the secret word
+PASS  guesser state never contains the unrevealed word
+PASS  a host who watched a long game keeps hosting when it ends
+PASS  an idle host hands hosting to an active member
+PASS  the idle host keeps their seat
+PASS  idle-host handover skips an idle member and picks the active one
+
+All party tests passed

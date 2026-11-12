@@ -1,0 +1,22 @@
+{
+  "node-server/server": {
+    "identical": true,
+    "files": 54
+  },
+  "node-server/public/js/main.js": {
+    "identical": true,
+    "files": 1
+  },
+  "node-server/public/js/avatar.js": {
+    "identical": true,
+    "files": 1
+  },
+  "node-server/public/js/games/drawguess.js": {
+    "identical": true,
+    "files": 1
+  },
+  "node-server/public/js/games/fourrow.js": {
+    "identical": true,
+    "files": 1
+  }
+}

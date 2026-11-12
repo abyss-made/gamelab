@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Chess mouse drag, real touch drag, click-to-move capture and authoritative board update",
+    "Chess legal promotion, Queen focus, Escape restoration and actual promoted position",
+    "chess: 3 viewports, identity reconnect, reduced motion and real departure result",
+    "Telephone real prompt/drawing/guess chain, preserved reveal DOM during likes and revealed-entry navigation",
+    "telephone: 3 viewports, identity reconnect, reduced motion and real departure result"
+  ],
+  "errors": []
+}

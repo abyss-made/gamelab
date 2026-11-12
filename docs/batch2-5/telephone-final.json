@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Telephone real prompt/drawing/guess chain, preserved reveal DOM during likes and revealed-entry navigation",
+    "telephone: 3 viewports, identity reconnect, reduced motion and real departure result"
+  ],
+  "errors": []
+}
