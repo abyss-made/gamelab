@@ -261,8 +261,8 @@ const vis = (page, sel) => page.evaluate((s) => { const e = document.querySelect
       await page.goto(URL + '/');
       await page.waitForSelector('.hero');
       await sleep(250);
-      const m = await page.evaluate(() => ({ sh: document.documentElement.scrollHeight, shell: document.querySelector('.site-shell').getBoundingClientRect().width, heroH: document.querySelector('.hero').getBoundingClientRect().height }));
-      ok(m.sh <= h, `${w}x${h}: landing page has no vertical scrollbar (${m.sh} <= ${h})`);
+      const m = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, ctaBottom: document.querySelector('#hero-create').getBoundingClientRect().bottom, picks: document.querySelectorAll('.p5-picks a[href][data-nav]').length, shell: document.querySelector('.site-shell').getBoundingClientRect().width, heroH: document.querySelector('.hero').getBoundingClientRect().height }));
+      ok(m.sw <= w && m.ctaBottom <= h && m.picks === 3, `${w}x${h}: expanded landing fits horizontally, keeps Create visible, and includes three discovery links`);
       ok(m.shell >= w - 1, `${w}x${h}: app shell spans the full width (${Math.round(m.shell)})`);
       ok(m.heroH >= h * 0.6, `${w}x${h}: hero fills the height (${Math.round(m.heroH)}px)`);
       await page.close();
