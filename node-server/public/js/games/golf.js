@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.golf = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
+  const visual = FX.scene();
   const COLORS = ["#ff477b", "#4db8ff", "#ffcd2d", "#adff00", "#b48cff", "#ff9a3d"];
   let root = null;
   let app = null;
@@ -175,7 +177,8 @@ GameUI.golf = (() => {
     drawDeco(ctx);
     // fairway with mowing stripes
     poly(ctx, h.poly);
-    ctx.fillStyle = "#4fae5d";
+    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#59bc70");green.addColorStop(.55,"#29945f");green.addColorStop(1,"#177a56");
+    ctx.fillStyle = green;
     ctx.fill();
     ctx.save();
     poly(ctx, h.poly);
@@ -222,7 +225,8 @@ GameUI.golf = (() => {
     for (const b of h.bumpers) {
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, 7);
-      ctx.fillStyle = "#adff00";
+      const bumper=ctx.createRadialGradient(b.x-b.r*.3,b.y-b.r*.4,1,b.x,b.y,b.r);bumper.addColorStop(0,"#e4ffc1");bumper.addColorStop(.4,"#9be859");bumper.addColorStop(1,"#2b694c");
+      ctx.fillStyle = bumper;
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.strokeStyle = "#030d17";
@@ -272,7 +276,9 @@ GameUI.golf = (() => {
     g.players.forEach((p, i) => {
       if (p.out) return;
       const pos = ballAt(p, now);
+      if(p.holed && !(g.anim && now-animT0<g.anim.duration*1000)) visual.ball(ctx,p.id,{x:p.x,y:p.y,gone:true},now,h.ballR,colorOf(i));
       if (!pos || (p.holed && !(g.anim && (g.anim.by === p.id || g.anim.paths?.[p.id]) && g.anim.shot === animKey && now - animT0 < g.anim.duration * 1000))) return;
+      visual.ball(ctx,p.id,pos,now,h.ballR,colorOf(i));
       ctx.beginPath();
       ctx.arc(pos.x + 1, pos.y + 2, h.ballR, 0, 7);
       ctx.fillStyle = "#0005";
@@ -287,6 +293,7 @@ GameUI.golf = (() => {
       ctx.strokeStyle = colorOf(i);
       ctx.stroke();
     });
+    visual.draw(ctx,now);
     // aim guide
     if (canPutt() && mineIdx >= 0 && t0) {
       const len = 40 + power * 1.6;
@@ -353,6 +360,7 @@ GameUI.golf = (() => {
   }
 
   function mount(stage, a) {
+    visual.reset();
     app = a;
     root = document.createElement("div");
     root.className = "b2 gf golf";
@@ -368,6 +376,9 @@ GameUI.golf = (() => {
       </div>
       <div class="gf-card card" id="gf-card"></div>`;
     stage.appendChild(root);
+    const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
+    root.querySelector('.gf-controls').append(presets);
+    presets.addEventListener('click',e=>{const b=e.target.closest('[data-p5-power]'),slider=root.querySelector('#gf-pow');if(!b||slider.disabled)return;slider.value=b.dataset.p5Power;slider.dispatchEvent(new Event('input',{bubbles:true}));});
     canvas = root.querySelector("#gf-canvas");
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
@@ -426,6 +437,7 @@ GameUI.golf = (() => {
     aimEl.disabled = !mine;
     powEl.disabled = !mine;
     root.querySelector("#gf-putt").disabled = !mine;
+    root.querySelectorAll('[data-p5-power]').forEach(b=>{b.disabled=!mine;b.setAttribute('aria-pressed',String(Number(b.dataset.p5Power)===power));});
   }
 
   function scoreCard() {
@@ -519,6 +531,7 @@ GameUI.golf = (() => {
   }
 
   function unmount() {
+    visual.reset();
     cancelAnimationFrame(raf);
     clearTimeout(tickT);
     window.removeEventListener("resize", fit);
