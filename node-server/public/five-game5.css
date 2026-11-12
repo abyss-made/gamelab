@@ -71,3 +71,18 @@
 .p5-result-heading{font-size:clamp(32px,4vw,52px);letter-spacing:-.05em;color:#effacb;animation:p5-result-in .4s ease-out}
 @keyframes p5-result-in{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.p5-result-heading{animation:none}}
+@media(max-width:700px) and (orientation:portrait){
+ :is(.pl,.golf) .b2-player>div{min-width:0}
+ :is(.pl,.golf) .b2-player b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:105px}
+ :is(.pl,.golf) .b2-player small{display:none}
+ :is(.pl,.golf) .b2-player .muted{font-size:10px;white-space:nowrap}
+ :is(.pl,.golf) .p5-shot-presets{display:none}
+ .pl{gap:4px;padding:8px}
+ .pl .pl-wrap{width:271px;min-width:260px}
+ .pl #pl-controls{padding:8px;gap:4px}
+ .pl #pl-controls>.pl-slider{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:6px}
+ .pl #pl-controls>.pl-slider>span{font-size:11px;display:flex;flex-direction:column}
+ .pl .pl-fine-row{gap:4px}
+ .pl #pl-controls .board-actions .btn{padding:8px;font-size:12px}
+ .pl #pl-status{padding:6px 8px;font-size:12px;line-height:1.25}
+}
