@@ -2,6 +2,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.telephone = (() => {
   const C = GameUI.common;
+  const FX=GameUI.batch2fx;
+  let revealSelection=-1;
   const W = 800;
   const H = 600;
   const COLORS = ["#000000", "#9a9a9a", "#ffffff", "#ef130b", "#ff7100", "#ffe400", "#00cc00", "#00b2ff", "#231fd3", "#a300ba", "#ff8fc8", "#a0522d"];
@@ -78,6 +80,8 @@ GameUI.telephone = (() => {
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
+      const nav=e.target.closest('[data-reveal]');
+      if(nav){const cards=[...root.querySelectorAll('.tp-entry')];revealSelection=nav.dataset.reveal==='latest'?cards.length-1:Math.max(0,Math.min(cards.length-1,revealSelection+(nav.dataset.reveal==='next'?1:-1)));const card=cards[revealSelection];if(card){card.focus({preventScroll:true});card.scrollIntoView({behavior:FX.reduced()?'auto':'smooth',block:'nearest'});}return;}
       const l = e.target.closest("[data-like]");
       if (l && !l.disabled) {
         const [chain, idx] = l.dataset.like.split(":").map(Number);
@@ -142,15 +146,16 @@ GameUI.telephone = (() => {
     };
     cv.addEventListener("pointerup", up);
     cv.addEventListener("pointercancel", up);
+    cv.addEventListener("lostpointercapture", up);
   }
-  const toolsHTML = () => `<div class="tp-tools" role="toolbar" aria-label="Drawing tools">
+  const toolsHTML = () => `<div class="b25-brush-label" role="status">${tool==='eraser'?'Eraser':tool==='fill'?'Fill':'Brush'} · ${tool==='fill'?'Tap a region':curSize()+' px'}</div><div class="tp-tools" role="toolbar" aria-label="Drawing tools">
       ${COLORS.map((c) => `<button type="button" class="tp-sw ${c === color && tool !== "eraser" ? "on" : ""}" data-color="${c}" style="background:${c}" aria-label="Colour ${c}" aria-pressed="${c === color}"></button>`).join("")}
       <span class="tp-sep"></span>
-      ${SIZES.map((s) => `<button type="button" class="btn btn-small btn-ghost ${s === curSize() ? "on" : ""}" data-size="${s}" aria-label="${tool === "eraser" ? "Eraser" : "Brush"} size ${s}">${s === 4 ? "S" : s === 10 ? "M" : "L"}</button>`).join("")}
+      ${SIZES.map((s) => `<button type="button" class="btn btn-small btn-ghost ${s === curSize() ? "on" : ""}" data-size="${s}" aria-pressed="${s===curSize()}" aria-label="${tool === "eraser" ? "Eraser" : "Brush"} size ${s}">${s === 4 ? "S" : s === 10 ? "M" : "L"}</button>`).join("")}
       <span class="tp-sep"></span>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "brush" ? "on" : ""}" data-tool="brush">Brush</button>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "fill" ? "on" : ""}" data-tool="fill">Fill</button>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "eraser" ? "on" : ""}" data-tool="eraser">Eraser</button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "brush" ? "on" : ""}" data-tool="brush" aria-pressed="${tool==='brush'}">Brush</button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "fill" ? "on" : ""}" data-tool="fill" aria-pressed="${tool==='fill'}">Fill</button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "eraser" ? "on" : ""}" data-tool="eraser" aria-pressed="${tool==='eraser'}">Eraser</button>
       <button type="button" class="btn btn-small btn-ghost" data-act="undo">Undo</button>
       <button type="button" class="btn btn-small btn-ghost" data-act="clear">Clear</button>
     </div>`;
@@ -202,28 +207,36 @@ GameUI.telephone = (() => {
     if (i && matchMedia("(pointer:fine)").matches) i.focus();
   }
 
-  function renderReveal(body, g) {
-    const r = g.rev;
-    const owner = g.players.find((p) => p.id === r.owner);
-    body.innerHTML = `<h3 class="tp-chain">${owner ? app.esc(owner.name) + "'s chain" : "Chain"} <small>${r.chain + 1} of ${r.chains}</small></h3><ol class="tp-entries" id="tp-entries"></ol>`;
-    const ol = body.querySelector("#tp-entries");
-    r.entries.forEach((e) => {
-      const who = g.players.find((p) => p.id === e.by);
-      const li = document.createElement("li");
-      li.className = "tp-entry";
-      const label = e.kind === "draw" ? "drew" : e.kind === "prompt" ? (e.generated ? "received a party prompt" : "wrote") : "guessed";
-      li.innerHTML = `<div class="tp-by">${who ? app.avatarHTML(who.avatar) : ""}<b>${who ? app.esc(who.name) : "?"}</b> ${label}</div><div class="tp-content"></div>`;
-      const content = li.querySelector(".tp-content");
-      if (e.kind === "draw") content.appendChild(e.skipped ? Object.assign(document.createElement("em"), { textContent: "(no drawing)" }) : thumb(e.strokes, `Drawing by ${who ? who.name : "a player"}`));
-      else content.innerHTML = `<p class="tp-text">${app.esc(e.text)}</p>`;
-      if (!e.skipped && !e.generated && e.by !== S.you && g.myIndex >= 0) {
-        li.insertAdjacentHTML("beforeend", `<button class="btn btn-small btn-ghost tp-like ${e.liked ? "on" : ""}" data-like="${r.chain}:${e.i}" ${e.liked ? "disabled" : ""} aria-label="Like this entry">${e.liked ? "♥" : "♡"} ${e.likes}</button>`);
-      } else if (e.likes) li.insertAdjacentHTML("beforeend", `<span class="tp-like-n">♥ ${e.likes}</span>`);
-      ol.appendChild(li);
+  function renderReveal(body,g,live){
+    const r=g.rev,owner=g.players.find(p=>p.id===r.owner);
+    if(body.dataset.chain!==String(r.chain)){
+      body.innerHTML=`<div class="b25-reveal-head"><h3 class="tp-chain">${owner?app.esc(owner.name)+"'s chain":'Chain'} <small>${r.chain+1} of ${r.chains}</small></h3><nav class="b25-reveal-nav" aria-label="Revealed contributions"><button class="btn btn-small btn-ghost" data-reveal="prev">Previous</button><button class="btn btn-small btn-ghost" data-reveal="next">Next</button><button class="btn btn-small" data-reveal="latest">Latest reveal</button></nav><p id="tp-revealed-count" role="status"></p></div><ol class="tp-entries" id="tp-entries"></ol>`;
+      body.dataset.chain=String(r.chain);revealSelection=-1;
+    }
+    const ol=body.querySelector('#tp-entries');
+    r.entries.forEach(e=>{
+      let li=ol.querySelector(`[data-entry="${e.i}"]`);const who=g.players.find(p=>p.id===e.by);
+      if(!li){
+        li=document.createElement('li');li.className='tp-entry';li.dataset.entry=e.i;li.tabIndex=-1;
+        const label=e.kind==='draw'?'drew':e.kind==='prompt'?(e.generated?'received a party prompt':'wrote'):'guessed';
+        li.innerHTML=`<div class="tp-by">${who?app.avatarHTML(who.avatar):''}<b>${who?app.esc(who.name):'?'}</b> ${label}<small>${e.i+1}</small></div><div class="tp-content"></div><div class="b25-reaction"></div>`;
+        const content=li.querySelector('.tp-content');
+        if(e.kind==='draw')content.appendChild(e.skipped?Object.assign(document.createElement('em'),{textContent:'(no drawing)'}):thumb(e.strokes,`Drawing by ${who?who.name:'a player'}`));
+        else content.innerHTML=`<p class="tp-text">${app.esc(e.text)}</p>`;
+        ol.append(li);
+        if(live)FX.animate(li,[{opacity:0,transform:'perspective(900px) rotateY(-9deg) translateX(16px)'},{opacity:1,transform:'none'}],380);
+      }
+      const canLike=!e.skipped&&!e.generated&&e.by!==S.you&&g.myIndex>=0,k=[e.likes,e.liked,canLike].join(':');
+      if(li.dataset.reaction!==k){
+        li.dataset.reaction=k;
+        li.querySelector('.b25-reaction').innerHTML=canLike?`<button class="btn btn-small btn-ghost tp-like ${e.liked?'on':''}" data-like="${r.chain}:${e.i}" ${e.liked?'disabled':''} aria-label="Like this entry">${e.liked?'♥':'♡'} ${e.likes}</button>`:e.likes?`<span class="tp-like-n">♥ ${e.likes}</span>`:'';
+      }
     });
+    body.querySelector('#tp-revealed-count').textContent=`${r.entries.length} contribution${r.entries.length===1?'':'s'} revealed. Explore them without losing the next reveal.`;
   }
 
   function update(state) {
+    const previous=S?.game;
     S = state;
     const g = S.game;
     clock.set(g.timeLeft);
@@ -242,10 +255,11 @@ GameUI.telephone = (() => {
         clearTimeout(autoTimer);
         body.replaceWith(Object.assign(body.cloneNode(false), {}));
         const nb = root.querySelector("#tp-body");
-        nb.innerHTML = "";
+        nb.innerHTML = "";delete nb.dataset.chain;
         if (g.mine) {
           if (g.kind === "draw") buildDraw(nb, g);
           else buildText(nb, g);
+          if(previous)FX.animate(nb,[{opacity:.2,transform:"translateY(12px)"},{opacity:1,transform:"none"}],300);
           // Send whatever is there just before time runs out so work isn't lost.
           autoTimer = setTimeout(() => {
             if (g.kind === "draw") send({ type: "draw", strokes: history });
@@ -266,7 +280,7 @@ GameUI.telephone = (() => {
       const k = `r${g.rev.chain}:${g.rev.idx}:${g.rev.entries.map((e) => e.likes + (e.liked ? "y" : "n")).join("")}`;
       if (k !== key) {
         key = k;
-        renderReveal(body, g);
+        renderReveal(body, g,!!previous);
       }
       status.textContent = g.myIndex >= 0 ? "Like entries you enjoy. You can't like your own." : "";
     }
@@ -277,12 +291,12 @@ GameUI.telephone = (() => {
     clearTimeout(autoTimer);
     if (clock) clock.stop();
     if (root) root.remove();
-    root = cv = null;
+    root = cv = null;S=null;revealSelection=-1;
     key = "";
   }
 
   function renderResult(r, state, a) {
-    return `<h2 class="result-title">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">Points come from finishing your turns and from likes.</p>`;
+    return `<h2 class="result-title b25-result">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">Points come from finishing your turns and from likes.</p>`;
   }
   return { mount, update, unmount, renderResult, resultSound: C.resultSound, scoreLabel: "pts" };
 })();
