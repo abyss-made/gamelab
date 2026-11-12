@@ -18,3 +18,11 @@
 .bs .bs-cell.b25-valid{background:#a8d95d88;box-shadow:inset 0 0 0 2px #d6f5a3}.bs .bs-cell.b25-invalid{background:#da736b88;box-shadow:inset 0 0 0 2px #ffb3a3}
 .bs .bs-ctl{gap:10px}.bs .pbs-fire{background:#102b3a;border:1px solid #587a83;border-radius:14px;padding:12px}.bs .bs-fire{background:#d7eea0;color:#18382e}
 @media(prefers-reduced-motion:reduce){:is(.bs,.pcs,.pimp,.pch,.ptel) *,:is(.bs,.pcs,.pimp,.pch,.ptel) *::before,:is(.bs,.pcs,.pimp,.pch,.ptel) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.pcs .pcs-table{background:radial-gradient(ellipse at 50% 35%,#4f3b69,#111c32 80%);border:1px solid #80739a66;box-shadow:inset 0 1px #ebdfff22,0 18px 40px #0004}
+.pcs .pcs-orbit{background-image:repeating-linear-gradient(0deg,#ffffff03 0 1px,transparent 1px 4px),radial-gradient(ellipse,#675477,#342b4b);box-shadow:inset 0 0 35px #24142f66,0 0 0 2px #bda8bf55,0 20px 40px #0006}
+.pcs .pcs-card{box-shadow:inset 0 2px #fff7,2px 4px 0 #d1cdb3,0 12px 12px #0004;background-image:linear-gradient(145deg,#ffffff4d,#ffffff00 60%)}
+.pcs .pcs-card.playable{outline:2px solid #e8ffb1;outline-offset:2px}.pcs .pcs-card:focus-visible,.pcs .pcs-card:hover{z-index:5}.pcs .pcs-card.lift{filter:drop-shadow(0 0 5px #e4ffa0)}
+.pcs .pcs-dock{background:#151e32;border:1px solid #6f658b;border-radius:16px;padding:12px}.pcs .pcs-dock .pcs-sel{color:#e3d5ef}.pcs .pcs-seat .b2-player{border-radius:18px;border-color:#7b698a;background:#1c2138}
+.pcs .b25-flight.pcs-card{position:absolute;width:60px;height:88px;min-height:0;margin:0;z-index:14;pointer-events:none}.pcs .b25-flight.pcs-card b{font-size:26px}.pcs .b25-flight.pcs-card .corner{font-size:11px}.pcs .b25-flight.pcs-card small{font-size:6px}
+.pcs .b25-effect.special{width:90px;height:110px;display:grid;place-items:center;border-color:#ead59c;color:#fff3b5;background:#71528b88;font-weight:900;font-size:28px;border-radius:20px}
+@media(max-width:700px){.pcs .pcs-dock{padding:10px;gap:8px}.pcs .pcs-dock .btn{min-height:44px}.pcs .pcs-fan{overscroll-behavior-x:contain}}

@@ -17,7 +17,7 @@ GameUI.batch2fx=(()=>{
  }
  function fly(root,from,to,src){
   if(!from||!to||preference.matches)return;
-  const box=root.getBoundingClientRect(),a=from.getBoundingClientRect(),b=to.getBoundingClientRect(),el=document.createElement('img');el.src=src;el.alt='';el.className='b25-flight';el.setAttribute('aria-hidden','true');el.style.left=(a.x+a.width/2-box.x-24)+'px';el.style.top=(a.y+a.height/2-box.y-34)+'px';root.append(el);
+  const box=root.getBoundingClientRect(),a=from.getBoundingClientRect?from.getBoundingClientRect():from,b=to.getBoundingClientRect(),el=typeof src==='string'?document.createElement('img'):src.cloneNode(true);if(typeof src==='string'){el.src=src;el.alt='';}else{el.removeAttribute('id');el.tabIndex=-1;}el.classList.add('b25-flight');el.setAttribute('aria-hidden','true');el.style.left=(a.x+a.width/2-box.x-24)+'px';el.style.top=(a.y+a.height/2-box.y-34)+'px';root.append(el);
   const anim=animate(el,[{transform:'rotate(-12deg)',opacity:0},{opacity:1,offset:.1},{transform:`translate(${b.x+b.width/2-a.x-a.width/2}px,${b.y+b.height/2-a.y-a.height/2}px) rotate(8deg)`,opacity:0}],400);if(anim)anim.finished.catch(()=>{}).finally(()=>el.remove());else el.remove();
  }
  function trap(e,dialog){

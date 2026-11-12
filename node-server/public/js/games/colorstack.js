@@ -4,6 +4,7 @@
 window.GameUI = window.GameUI || {};
 GameUI.colorstack = (() => {
   const C = GameUI.common;
+  const FX=GameUI.batch2fx;
   const NAMES = { r: "Red", b: "Blue", g: "Green", y: "Yellow", w: "Wild" };
   const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", P: "+4" };
   const BACK = "/assets/premium/stack-card-back.svg";
@@ -59,6 +60,7 @@ GameUI.colorstack = (() => {
         }
         pendingWild = null;
         root.querySelector("#cs-picker").hidden = true;
+        root.querySelector("#cs-play").focus();
         return;
       }
       const card = e.target.closest("[data-card]");
@@ -72,11 +74,10 @@ GameUI.colorstack = (() => {
       else if (e.target.closest("#cs-pass") && mine) app.socket.emit("action", { type: "pass" });
     });
     window.addEventListener("resize", onResize);
-    root.addEventListener("dblclick", (e) => {
-      const card = e.target.closest("[data-card]");
-      if (card && S) { selected = Number(card.dataset.card); playSelected(); }
-    });
     root.addEventListener("keydown", (e) => {
+      const dialog=root.querySelector('#cs-picker');
+      if(e.key==='Escape'&&!dialog.hidden){e.preventDefault();pendingWild=null;dialog.hidden=true;root.querySelector('#cs-play').focus();return;}
+      FX.trap(e,dialog);
       const card = e.target.closest("[data-card]");
       if (!card || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
       const all = [...root.querySelectorAll("#cs-hand [data-card]")];
@@ -108,10 +109,10 @@ GameUI.colorstack = (() => {
     const w = cards[0].offsetWidth;
     const avail = hand.clientWidth - 24;
     const need = (cards.length * w - avail) / (cards.length - 1);
-    const overlap = Math.max(10, Math.min(w * 0.72, need));
+    const overlap = Math.max(10, Math.min(Math.max(0,w-44), need));
     cards.forEach((c, i) => { c.style.marginLeft = i ? `${-overlap}px` : "0"; });
     // Very long hands can't fit even at the overlap cap: fall back to a horizontal scroller so every card stays reachable.
-    hand.classList.toggle("scroll", need > w * 0.72);
+    hand.classList.toggle("scroll", need > Math.max(0,w-44));
   }
 
   // Repaint only the private fan + dock; keeps keyboard focus on the same card id.
@@ -138,13 +139,14 @@ GameUI.colorstack = (() => {
   }
 
   function update(state) {
+    const before=S?.game,oldCard=before?root.querySelector(`[data-card="${state.game.top.id}"]`):null,from=oldCard?.getBoundingClientRect();
     S = state;
     const g = S.game;
     const mine = g.turnId === S.you;
     clock.set(g.timeLeft);
     root.querySelector("#cs-players").innerHTML = g.players
       .filter((p) => p.id !== S.you)
-      .map((p) => `<div class="pcs-seat">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="cs-count" title="Cards in hand">${p.count}</span>`, sub: p.count === 1 ? "One card left!" : `${p.count} cards` })}<div class="pcs-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
+      .map((p) => `<div data-seat="${p.id}" class="pcs-seat">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="cs-count" title="Cards in hand">${p.count}</span>`, sub: p.count === 1 ? "One card left!" : `${p.count} cards` })}<div class="pcs-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
       .join("");
     const turn = g.players.find((p) => p.id === g.turnId);
     const msg = g.myIndex < 0
@@ -172,6 +174,18 @@ GameUI.colorstack = (() => {
       root.querySelector("#cs-picker").hidden = true;
     }
     paintHand();
+    if(before){
+      if(before.top.id!==g.top.id){
+        const oldActor=before.turnId,origin=from||[...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===oldActor)||root.querySelector('#cs-hand');
+        FX.fly(root,origin,root.querySelector('#cs-top'),root.querySelector('#cs-top .pcs-card'));
+        if(['S','F','D','P','W'].includes(g.top.v))FX.transient(root,root.querySelector('#cs-top'),'special',faceText(g.top));
+      }
+      const previous=new Set((before.hand||[]).map(c=>c.id));
+      (g.hand||[]).filter(c=>!previous.has(c.id)).forEach(c=>{const el=root.querySelector(`[data-card="${c.id}"]`);FX.fly(root,root.querySelector('#cs-draw'),el,BACK);FX.animate(el,[{opacity:.3,transform:'translateY(25px)'},{opacity:1,transform:'rotate(var(--tilt))'}],340);});
+      if(before.color!==g.color)FX.animate(root.querySelector('#cs-match'),[{filter:'brightness(1.8)',transform:'scale(1.08)'},{filter:'brightness(1)',transform:'none'}],420);
+      const me=g.players.find(p=>p.id===S.you),was=before.players.find(p=>p.id===S.you);
+      if(me?.count===1 && was?.count!==1)FX.animate(root.querySelector('.pcs-one'),[{transform:'scale(.8)',opacity:.3},{transform:'scale(1)',opacity:1}],400);
+    }
   }
 
   function onResize() { if (root) fitFan(root.querySelector("#cs-hand")); }
@@ -187,7 +201,7 @@ GameUI.colorstack = (() => {
 
   function renderResult(r, state, a) {
     const w = r.hands.find((h) => h.id === r.winnerId);
-    return `<h2 class="result-title">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
+    return `<h2 class="result-title b25-result">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
       <p class="muted center">${r.forfeit ? "Won because the others left." : `Scored ${r.pts} points from the cards left in other hands.`}</p>
       <ol class="b2-podium">${[...r.hands].sort((x, y) => x.cards - y.cards).map((h) => `<li class="${h.id === state.you ? "me" : ""}"><span class="rank">${h.cards}</span>${a.avatarHTML(h.avatar)}<b>${a.esc(h.name)}</b><span class="pts">${h.cards} cards left (${h.value})</span></li>`).join("")}</ol>`;
   }
