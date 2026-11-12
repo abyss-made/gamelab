@@ -1,0 +1,66 @@
+PASS  catalog lists tictactoe
+PASS  catalog lists rps
+PASS  catalog lists dotsboxes
+PASS  catalog lists wordscramble
+PASS  catalog lists trivia
+PASS  catalog lists 25 playable games (2 existing + 23 new)
+PASS  Coming Soon tile still present and not counted
+PASS  all game card artwork loads
+PASS  tictactoe: Play opens Create Party with no game settings (issue #38)
+PASS  rps: Play opens Create Party with no game settings (issue #38)
+PASS  dotsboxes: Play opens Create Party with no game settings (issue #38)
+PASS  wordscramble: Play opens Create Party with no game settings (issue #38)
+PASS  trivia: Play opens Create Party with no game settings (issue #38)
+PASS  tictactoe/phone: no horizontal overflow
+PASS  tictactoe/phone: game screen mounts
+PASS  tictactoe/phone: no page errors
+PASS  tictactoe: Game Settings dialog shows its settings
+PASS  tictactoe/desktop: no horizontal overflow
+PASS  tictactoe/desktop: game screen mounts
+PASS  tictactoe/desktop: empty squares are tappable on your turn
+PASS  tictactoe/desktop: keyboard selects a square, then the board locks until your next turn
+PASS  tictactoe/desktop: no page errors
+PASS  rps/phone: no horizontal overflow
+PASS  rps/phone: game screen mounts
+PASS  rps/phone: no page errors
+PASS  rps: Game Settings dialog shows its settings
+PASS  rps/desktop: no horizontal overflow
+PASS  rps/desktop: game screen mounts
+PASS  rps/desktop: throw buttons lock after picking
+PASS  rps/desktop: opponent state has no pending pick
+PASS  rps/desktop: both hands are revealed after both pick
+PASS  rps/desktop: revealed throws have accessible names
+PASS  rps/desktop: bracket lists players
+PASS  rps/desktop: no page errors
+PASS  dotsboxes/phone: no horizontal overflow
+PASS  dotsboxes/phone: game screen mounts
+PASS  dotsboxes/phone: no page errors
+PASS  dotsboxes: Game Settings dialog shows its settings
+PASS  dotsboxes/desktop: no horizontal overflow
+PASS  dotsboxes/desktop: game screen mounts
+PASS  dotsboxes/desktop: edges are tappable on your turn (39)
+PASS  dotsboxes/desktop: drawn edge is shown and the board locks
+PASS  dotsboxes/desktop: no page errors
+PASS  wordscramble/phone: no horizontal overflow
+PASS  wordscramble/phone: game screen mounts
+PASS  wordscramble/phone: no page errors
+PASS  wordscramble: Game Settings dialog shows its settings
+PASS  wordscramble/desktop: no horizontal overflow
+PASS  wordscramble/desktop: game screen mounts
+PASS  wordscramble/desktop: scrambled tiles shown (SUEIGN)
+PASS  wordscramble/desktop: a wrong guess leaves the input available
+PASS  wordscramble/desktop: answer is not in the page
+PASS  wordscramble/desktop: no page errors
+PASS  trivia/phone: no horizontal overflow
+PASS  trivia/phone: game screen mounts
+PASS  trivia/phone: no page errors
+PASS  trivia: Game Settings dialog shows its settings
+PASS  trivia/desktop: no horizontal overflow
+PASS  trivia/desktop: game screen mounts
+PASS  trivia/desktop: four answer choices
+PASS  trivia/desktop: keyboard 1-4 picks an answer and locks it
+PASS  trivia/desktop: correct answer is not marked before the reveal
+PASS  trivia/desktop: correct answer highlighted after everyone answered
+PASS  trivia/desktop: no page errors
+
+All passed

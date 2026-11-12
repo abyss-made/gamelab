@@ -1,0 +1,13 @@
+{
+  "programs": 37,
+  "passed": 37,
+  "failed": 0,
+  "skipped": 0,
+  "browserGroups": 8,
+  "browserErrors": 0,
+  "finalFocusedChecks": [
+    "batch5ui-final.log",
+    "keyboardui-final.log"
+  ],
+  "finalSource": "8de8842"
+}

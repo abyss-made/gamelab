@@ -1,0 +1,142 @@
+PASS  catalog lists pool
+PASS  catalog lists golf
+PASS  catalog lists tycoon
+PASS  catalog lists 25 playable games
+PASS  Coming Soon tile still present and not counted
+PASS  all game card artwork loads
+PASS  pool: Play opens Create Party with no game settings (issue #38)
+PASS  golf: Play opens Create Party with no game settings (issue #38)
+PASS  tycoon: Play opens Create Party with no game settings (issue #38)
+PASS  pool/phone: no horizontal overflow
+PASS  pool/phone: game screen mounts
+PASS  pool/phone: the table is a usable size (271x501)
+PASS  pool/phone: the table has an accessible description
+PASS  pool/phone: ball in hand is announced
+PASS  pool/phone: Shoot waits until the cue ball is locked in place
+PASS  pool/phone: the cue ball can be dragged to a legal spot and locked
+PASS  pool/phone: Shoot enables after the cue ball is locked
+PASS  pool/phone: dragging on the table changes the aim
+PASS  pool/phone: phone shows the portrait table
+PASS  pool/phone: portrait drag is inverse-mapped to physical aim (0.0deg)
+PASS  pool/phone: fine aim + button works
+PASS  pool/phone: arrow keys fine-tune the aim
+PASS  pool/phone: the power slider updates the readout
+PASS  pool/phone: the power slider is touch sized
+PASS  pool/phone: Shoot sends the shot and the server plays it
+PASS  pool/phone: the server returns the path of the balls
+PASS  pool/phone: controls lock while the balls roll
+PASS  pool/phone: the table animates the shot
+PASS  pool/phone: the status returns to normal when the balls stop
+PASS  pool/phone: both players are listed
+PASS  pool/phone: Resign asks for a second tap
+PASS  pool/phone: still no horizontal overflow after playing
+PASS  pool/phone: no page errors
+PASS  pool: Game Settings dialog shows its settings
+PASS  pool/desktop: no horizontal overflow
+PASS  pool/desktop: game screen mounts
+PASS  pool/desktop: the table is a usable size (777x420)
+PASS  pool/desktop: the table has an accessible description
+PASS  pool/desktop: ball in hand is announced
+PASS  pool/desktop: Shoot waits until the cue ball is locked in place
+PASS  pool/desktop: the cue ball can be dragged to a legal spot and locked
+PASS  pool/desktop: Shoot enables after the cue ball is locked
+PASS  pool/desktop: dragging on the table changes the aim
+PASS  pool/desktop: fine aim + button works
+PASS  pool/desktop: arrow keys fine-tune the aim
+PASS  pool/desktop: the power slider updates the readout
+PASS  pool/desktop: the power slider is touch sized
+PASS  pool/desktop: Shoot sends the shot and the server plays it
+PASS  pool/desktop: the server returns the path of the balls
+PASS  pool/desktop: controls lock while the balls roll
+PASS  pool/desktop: the table animates the shot
+PASS  pool/desktop: the status returns to normal when the balls stop
+PASS  pool/desktop: both players are listed
+PASS  pool/desktop: Resign asks for a second tap
+PASS  pool/desktop: still no horizontal overflow after playing
+PASS  pool/desktop: no page errors
+PASS  golf/phone: no horizontal overflow
+PASS  golf/phone: game screen mounts
+PASS  golf/phone: the hole is a usable size (240x382)
+PASS  golf/phone: the scorecard lists both players
+PASS  golf/phone: the first player starts hole 1
+PASS  golf/phone: the hole name and par are shown
+PASS  golf/phone: dragging aims the putt
+PASS  golf/phone: phone shows the portrait course
+PASS  golf/phone: portrait drag is inverse-mapped to course aim (0.0deg)
+PASS  golf/phone: the thumb loupe shows while the touch is held
+PASS  golf/phone: releasing the aim never putts
+PASS  golf/phone: the power readout follows the slider
+PASS  golf/phone: a straight 90% putt sinks on hole 1
+PASS  golf/phone: the server reports the ball dropping in
+PASS  golf/phone: the putt animates
+PASS  golf/phone: friend can select the cleared central tee
+PASS  golf/phone: the hole summary appears when everyone is down
+PASS  golf/phone: the scorecard shows the totals
+PASS  golf/phone: play moves on to the next hole
+PASS  golf/phone: still no horizontal overflow after playing
+PASS  golf/phone: no page errors
+PASS  golf: Game Settings dialog shows its settings
+PASS  golf/desktop: no horizontal overflow
+PASS  golf/desktop: game screen mounts
+PASS  golf/desktop: the hole is a usable size (581x365)
+PASS  golf/desktop: the scorecard lists both players
+PASS  golf/desktop: the first player starts hole 1
+PASS  golf/desktop: the hole name and par are shown
+PASS  golf/desktop: dragging aims the putt
+PASS  golf/desktop: the power readout follows the slider
+PASS  golf/desktop: a straight 90% putt sinks on hole 1
+PASS  golf/desktop: the server reports the ball dropping in
+PASS  golf/desktop: the putt animates
+PASS  golf/desktop: friend can select the cleared central tee
+PASS  golf/desktop: the hole summary appears when everyone is down
+PASS  golf/desktop: the scorecard shows the totals
+PASS  golf/desktop: play moves on to the next hole
+PASS  golf/desktop: still no horizontal overflow after playing
+PASS  golf/desktop: no page errors
+PASS  tycoon/phone: no horizontal overflow
+PASS  tycoon/phone: game screen mounts
+PASS  tycoon/phone: all 36 tiles are drawn
+PASS  tycoon/phone: tiles are tappable (31px)
+PASS  tycoon/phone: every player's token is on the board
+PASS  tycoon/phone: every tile has an accessible label
+PASS  tycoon/phone: tapping a tile shows its details
+PASS  tycoon/phone: it becomes the browser player's turn
+PASS  tycoon/phone: the dice are shown
+PASS  tycoon/phone: buy and auction buttons are offered
+PASS  tycoon/phone: sending a property to auction opens the bidding panel
+PASS  tycoon/phone: a bid typed in the browser is placed
+PASS  tycoon/phone: winning the auction gives you the property
+PASS  tycoon/phone: the trade form opens
+PASS  tycoon/phone: the trade offer is sent to the other player
+PASS  tycoon/phone: nothing changes hands until it is accepted
+PASS  tycoon/phone: accepting completes the trade
+PASS  tycoon/phone: reviewing an incoming offer shows both sides
+PASS  tycoon/phone: Accept is enabled while the offer exists
+PASS  tycoon/phone: a vanished offer disables Accept with a neutral reason
+PASS  tycoon/phone: still no horizontal overflow after playing
+PASS  tycoon/phone: no page errors
+PASS  tycoon: Game Settings dialog shows its settings
+PASS  tycoon/desktop: no horizontal overflow
+PASS  tycoon/desktop: game screen mounts
+PASS  tycoon/desktop: all 36 tiles are drawn
+PASS  tycoon/desktop: tiles are tappable (39px)
+PASS  tycoon/desktop: every player's token is on the board
+PASS  tycoon/desktop: every tile has an accessible label
+PASS  tycoon/desktop: tapping a tile shows its details
+PASS  tycoon/desktop: it becomes the browser player's turn
+PASS  tycoon/desktop: the dice are shown
+PASS  tycoon/desktop: buy and auction buttons are offered
+PASS  tycoon/desktop: sending a property to auction opens the bidding panel
+PASS  tycoon/desktop: a bid typed in the browser is placed
+PASS  tycoon/desktop: winning the auction gives you the property
+PASS  tycoon/desktop: the trade form opens
+PASS  tycoon/desktop: the trade offer is sent to the other player
+PASS  tycoon/desktop: nothing changes hands until it is accepted
+PASS  tycoon/desktop: accepting completes the trade
+PASS  tycoon/desktop: reviewing an incoming offer shows both sides
+PASS  tycoon/desktop: Accept is enabled while the offer exists
+PASS  tycoon/desktop: a vanished offer disables Accept with a neutral reason
+PASS  tycoon/desktop: still no horizontal overflow after playing
+PASS  tycoon/desktop: no page errors
+
+All passed

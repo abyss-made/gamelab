@@ -1,0 +1,730 @@
+PASS  25 games are registered
+PASS  rules exist for exactly the 25 registered games
+PASS  drawguess: goal/players/timer/ending present
+PASS  drawguess: flow/controls/scoring lists present
+PASS  drawguess: special mechanics listed
+PASS  drawguess: controls mention both mouse and touch
+PASS  drawguess: rules player count matches 2-12
+PASS  fourrow: goal/players/timer/ending present
+PASS  fourrow: flow/controls/scoring lists present
+PASS  fourrow: special mechanics listed
+PASS  fourrow: controls mention both mouse and touch
+PASS  fourrow: rules player count matches 2-2
+PASS  wordchain: goal/players/timer/ending present
+PASS  wordchain: flow/controls/scoring lists present
+PASS  wordchain: special mechanics listed
+PASS  wordchain: controls mention both mouse and touch
+PASS  wordchain: rules player count matches 2-8
+PASS  categories: goal/players/timer/ending present
+PASS  categories: flow/controls/scoring lists present
+PASS  categories: special mechanics listed
+PASS  categories: controls mention both mouse and touch
+PASS  categories: rules player count matches 2-12
+PASS  higherlower: goal/players/timer/ending present
+PASS  higherlower: flow/controls/scoring lists present
+PASS  higherlower: special mechanics listed
+PASS  higherlower: controls mention both mouse and touch
+PASS  higherlower: rules player count matches 2-8
+PASS  colorstack: goal/players/timer/ending present
+PASS  colorstack: flow/controls/scoring lists present
+PASS  colorstack: special mechanics listed
+PASS  colorstack: controls mention both mouse and touch
+PASS  colorstack: rules player count matches 2-8
+PASS  gofish: goal/players/timer/ending present
+PASS  gofish: flow/controls/scoring lists present
+PASS  gofish: special mechanics listed
+PASS  gofish: controls mention both mouse and touch
+PASS  gofish: rules player count matches 2-6
+PASS  tictactoe: goal/players/timer/ending present
+PASS  tictactoe: flow/controls/scoring lists present
+PASS  tictactoe: special mechanics listed
+PASS  tictactoe: controls mention both mouse and touch
+PASS  tictactoe: rules player count matches 2-2
+PASS  rps: goal/players/timer/ending present
+PASS  rps: flow/controls/scoring lists present
+PASS  rps: special mechanics listed
+PASS  rps: controls mention both mouse and touch
+PASS  rps: rules player count matches 2-16
+PASS  dotsboxes: goal/players/timer/ending present
+PASS  dotsboxes: flow/controls/scoring lists present
+PASS  dotsboxes: special mechanics listed
+PASS  dotsboxes: controls mention both mouse and touch
+PASS  dotsboxes: rules player count matches 2-4
+PASS  wordscramble: goal/players/timer/ending present
+PASS  wordscramble: flow/controls/scoring lists present
+PASS  wordscramble: special mechanics listed
+PASS  wordscramble: controls mention both mouse and touch
+PASS  wordscramble: rules player count matches 2-12
+PASS  trivia: goal/players/timer/ending present
+PASS  trivia: flow/controls/scoring lists present
+PASS  trivia: special mechanics listed
+PASS  trivia: controls mention both mouse and touch
+PASS  trivia: rules player count matches 2-12
+PASS  telephone: goal/players/timer/ending present
+PASS  telephone: flow/controls/scoring lists present
+PASS  telephone: special mechanics listed
+PASS  telephone: controls mention both mouse and touch
+PASS  telephone: rules player count matches 3-8
+PASS  bluff: goal/players/timer/ending present
+PASS  bluff: flow/controls/scoring lists present
+PASS  bluff: special mechanics listed
+PASS  bluff: controls mention both mouse and touch
+PASS  bluff: rules player count matches 3-10
+PASS  impostor: goal/players/timer/ending present
+PASS  impostor: flow/controls/scoring lists present
+PASS  impostor: special mechanics listed
+PASS  impostor: controls mention both mouse and touch
+PASS  impostor: rules player count matches 3-10
+PASS  liarsdice: goal/players/timer/ending present
+PASS  liarsdice: flow/controls/scoring lists present
+PASS  liarsdice: special mechanics listed
+PASS  liarsdice: controls mention both mouse and touch
+PASS  liarsdice: rules player count matches 2-8
+PASS  hotpotato: goal/players/timer/ending present
+PASS  hotpotato: flow/controls/scoring lists present
+PASS  hotpotato: special mechanics listed
+PASS  hotpotato: controls mention both mouse and touch
+PASS  hotpotato: rules player count matches 2-10
+PASS  battleship: goal/players/timer/ending present
+PASS  battleship: flow/controls/scoring lists present
+PASS  battleship: special mechanics listed
+PASS  battleship: controls mention both mouse and touch
+PASS  battleship: rules player count matches 2-2
+PASS  checkers: goal/players/timer/ending present
+PASS  checkers: flow/controls/scoring lists present
+PASS  checkers: special mechanics listed
+PASS  checkers: controls mention both mouse and touch
+PASS  checkers: rules player count matches 2-2
+PASS  reversi: goal/players/timer/ending present
+PASS  reversi: flow/controls/scoring lists present
+PASS  reversi: special mechanics listed
+PASS  reversi: controls mention both mouse and touch
+PASS  reversi: rules player count matches 2-2
+PASS  ludo: goal/players/timer/ending present
+PASS  ludo: flow/controls/scoring lists present
+PASS  ludo: special mechanics listed
+PASS  ludo: controls mention both mouse and touch
+PASS  ludo: rules player count matches 2-4
+PASS  chess: goal/players/timer/ending present
+PASS  chess: flow/controls/scoring lists present
+PASS  chess: special mechanics listed
+PASS  chess: controls mention both mouse and touch
+PASS  chess: rules player count matches 2-2
+PASS  pool: goal/players/timer/ending present
+PASS  pool: flow/controls/scoring lists present
+PASS  pool: special mechanics listed
+PASS  pool: controls mention both mouse and touch
+PASS  pool: rules player count matches 2-2
+PASS  golf: goal/players/timer/ending present
+PASS  golf: flow/controls/scoring lists present
+PASS  golf: special mechanics listed
+PASS  golf: controls mention both mouse and touch
+PASS  golf: rules player count matches 2-6
+PASS  tycoon: goal/players/timer/ending present
+PASS  tycoon: flow/controls/scoring lists present
+PASS  tycoon: special mechanics listed
+PASS  tycoon: controls mention both mouse and touch
+PASS  tycoon: rules player count matches 2-6
+PASS  drawguess/desktop: Rules open from the lobby
+PASS  drawguess/desktop: Escape closes Rules
+PASS  drawguess/desktop: no horizontal overflow in game
+PASS  drawguess/desktop: Rules dialog shows this game's goal mid-game
+PASS  drawguess/desktop: Rules dialog fits the viewport
+PASS  drawguess/desktop: Close returns to the running game
+PASS  drawguess/desktop: Focus button visible during play
+PASS  drawguess/desktop: focus mode on
+PASS  drawguess/desktop: focus stage is not smaller (1114 -> 1114px) and has no overflow
+PASS  drawguess/desktop: focus retains the player rail and guess input
+PASS  drawguess/desktop: Escape leaves focus mode
+PASS  drawguess/desktop: no page errors
+PASS  fourrow/desktop: Rules open from the lobby
+PASS  fourrow/desktop: Escape closes Rules
+PASS  fourrow/desktop: no horizontal overflow in game
+PASS  fourrow/desktop: Rules dialog shows this game's goal mid-game
+PASS  fourrow/desktop: Rules dialog fits the viewport
+PASS  fourrow/desktop: Close returns to the running game
+PASS  fourrow/desktop: Focus button visible during play
+PASS  fourrow/desktop: focus mode on
+PASS  fourrow/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  fourrow/desktop: focus keeps the expected game controls
+PASS  fourrow/desktop: Escape leaves focus mode
+PASS  fourrow/desktop: no page errors
+PASS  wordchain/desktop: Rules open from the lobby
+PASS  wordchain/desktop: Escape closes Rules
+PASS  wordchain/desktop: no horizontal overflow in game
+PASS  wordchain/desktop: Rules dialog shows this game's goal mid-game
+PASS  wordchain/desktop: Rules dialog fits the viewport
+PASS  wordchain/desktop: Close returns to the running game
+PASS  wordchain/desktop: Focus button visible during play
+PASS  wordchain/desktop: focus mode on
+PASS  wordchain/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  wordchain/desktop: focus keeps the expected game controls
+PASS  wordchain/desktop: Escape leaves focus mode
+PASS  wordchain/desktop: no page errors
+PASS  categories/desktop: Rules open from the lobby
+PASS  categories/desktop: Escape closes Rules
+PASS  categories/desktop: no horizontal overflow in game
+PASS  categories/desktop: Rules dialog shows this game's goal mid-game
+PASS  categories/desktop: Rules dialog fits the viewport
+PASS  categories/desktop: Close returns to the running game
+PASS  categories/desktop: Focus button visible during play
+PASS  categories/desktop: focus mode on
+PASS  categories/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  categories/desktop: focus keeps the expected game controls
+PASS  categories/desktop: Escape leaves focus mode
+PASS  categories/desktop: no page errors
+PASS  higherlower/desktop: Rules open from the lobby
+PASS  higherlower/desktop: Escape closes Rules
+PASS  higherlower/desktop: no horizontal overflow in game
+PASS  higherlower/desktop: Rules dialog shows this game's goal mid-game
+PASS  higherlower/desktop: Rules dialog fits the viewport
+PASS  higherlower/desktop: Close returns to the running game
+PASS  higherlower/desktop: Focus button visible during play
+PASS  higherlower/desktop: focus mode on
+PASS  higherlower/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  higherlower/desktop: focus keeps the expected game controls
+PASS  higherlower/desktop: Escape leaves focus mode
+PASS  higherlower/desktop: no page errors
+PASS  colorstack/desktop: Rules open from the lobby
+PASS  colorstack/desktop: Escape closes Rules
+PASS  colorstack/desktop: no horizontal overflow in game
+PASS  colorstack/desktop: Rules dialog shows this game's goal mid-game
+PASS  colorstack/desktop: Rules dialog fits the viewport
+PASS  colorstack/desktop: Close returns to the running game
+PASS  colorstack/desktop: Focus button visible during play
+PASS  colorstack/desktop: focus mode on
+PASS  colorstack/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  colorstack/desktop: focus keeps the expected game controls
+PASS  colorstack/desktop: Escape leaves focus mode
+PASS  colorstack/desktop: no page errors
+PASS  gofish/desktop: Rules open from the lobby
+PASS  gofish/desktop: Escape closes Rules
+PASS  gofish/desktop: no horizontal overflow in game
+PASS  gofish/desktop: Rules dialog shows this game's goal mid-game
+PASS  gofish/desktop: Rules dialog fits the viewport
+PASS  gofish/desktop: Close returns to the running game
+PASS  gofish/desktop: Focus button visible during play
+PASS  gofish/desktop: focus mode on
+PASS  gofish/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  gofish/desktop: focus keeps the expected game controls
+PASS  gofish/desktop: Escape leaves focus mode
+PASS  gofish/desktop: no page errors
+PASS  tictactoe/desktop: Rules open from the lobby
+PASS  tictactoe/desktop: Escape closes Rules
+PASS  tictactoe/desktop: no horizontal overflow in game
+PASS  tictactoe/desktop: Rules dialog shows this game's goal mid-game
+PASS  tictactoe/desktop: Rules dialog fits the viewport
+PASS  tictactoe/desktop: Close returns to the running game
+PASS  tictactoe/desktop: Focus button visible during play
+PASS  tictactoe/desktop: focus mode on
+PASS  tictactoe/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  tictactoe/desktop: focus keeps the expected game controls
+PASS  tictactoe/desktop: Escape leaves focus mode
+PASS  tictactoe/desktop: no page errors
+PASS  rps/desktop: Rules open from the lobby
+PASS  rps/desktop: Escape closes Rules
+PASS  rps/desktop: no horizontal overflow in game
+PASS  rps/desktop: Rules dialog shows this game's goal mid-game
+PASS  rps/desktop: Rules dialog fits the viewport
+PASS  rps/desktop: Close returns to the running game
+PASS  rps/desktop: Focus button visible during play
+PASS  rps/desktop: focus mode on
+PASS  rps/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  rps/desktop: focus keeps the expected game controls
+PASS  rps/desktop: Escape leaves focus mode
+PASS  rps/desktop: no page errors
+PASS  dotsboxes/desktop: Rules open from the lobby
+PASS  dotsboxes/desktop: Escape closes Rules
+PASS  dotsboxes/desktop: no horizontal overflow in game
+PASS  dotsboxes/desktop: Rules dialog shows this game's goal mid-game
+PASS  dotsboxes/desktop: Rules dialog fits the viewport
+PASS  dotsboxes/desktop: Close returns to the running game
+PASS  dotsboxes/desktop: Focus button visible during play
+PASS  dotsboxes/desktop: focus mode on
+PASS  dotsboxes/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  dotsboxes/desktop: focus keeps the expected game controls
+PASS  dotsboxes/desktop: Escape leaves focus mode
+PASS  dotsboxes/desktop: no page errors
+PASS  wordscramble/desktop: Rules open from the lobby
+PASS  wordscramble/desktop: Escape closes Rules
+PASS  wordscramble/desktop: no horizontal overflow in game
+PASS  wordscramble/desktop: Rules dialog shows this game's goal mid-game
+PASS  wordscramble/desktop: Rules dialog fits the viewport
+PASS  wordscramble/desktop: Close returns to the running game
+PASS  wordscramble/desktop: Focus button visible during play
+PASS  wordscramble/desktop: focus mode on
+PASS  wordscramble/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  wordscramble/desktop: focus keeps the expected game controls
+PASS  wordscramble/desktop: Escape leaves focus mode
+PASS  wordscramble/desktop: no page errors
+PASS  trivia/desktop: Rules open from the lobby
+PASS  trivia/desktop: Escape closes Rules
+PASS  trivia/desktop: no horizontal overflow in game
+PASS  trivia/desktop: Rules dialog shows this game's goal mid-game
+PASS  trivia/desktop: Rules dialog fits the viewport
+PASS  trivia/desktop: Close returns to the running game
+PASS  trivia/desktop: Focus button visible during play
+PASS  trivia/desktop: focus mode on
+PASS  trivia/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  trivia/desktop: focus keeps the expected game controls
+PASS  trivia/desktop: Escape leaves focus mode
+PASS  trivia/desktop: no page errors
+PASS  telephone/desktop: Rules open from the lobby
+PASS  telephone/desktop: Escape closes Rules
+PASS  telephone/desktop: no horizontal overflow in game
+PASS  telephone/desktop: Rules dialog shows this game's goal mid-game
+PASS  telephone/desktop: Rules dialog fits the viewport
+PASS  telephone/desktop: Close returns to the running game
+PASS  telephone/desktop: Focus button visible during play
+PASS  telephone/desktop: focus mode on
+PASS  telephone/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  telephone/desktop: focus keeps the expected game controls
+PASS  telephone/desktop: Escape leaves focus mode
+PASS  telephone/desktop: no page errors
+PASS  bluff/desktop: Rules open from the lobby
+PASS  bluff/desktop: Escape closes Rules
+PASS  bluff/desktop: no horizontal overflow in game
+PASS  bluff/desktop: Rules dialog shows this game's goal mid-game
+PASS  bluff/desktop: Rules dialog fits the viewport
+PASS  bluff/desktop: Close returns to the running game
+PASS  bluff/desktop: Focus button visible during play
+PASS  bluff/desktop: focus mode on
+PASS  bluff/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  bluff/desktop: focus keeps the expected game controls
+PASS  bluff/desktop: Escape leaves focus mode
+PASS  bluff/desktop: no page errors
+PASS  impostor/desktop: Rules open from the lobby
+PASS  impostor/desktop: Escape closes Rules
+PASS  impostor/desktop: no horizontal overflow in game
+PASS  impostor/desktop: Rules dialog shows this game's goal mid-game
+PASS  impostor/desktop: Rules dialog fits the viewport
+PASS  impostor/desktop: Close returns to the running game
+PASS  impostor/desktop: Focus button visible during play
+PASS  impostor/desktop: focus mode on
+PASS  impostor/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  impostor/desktop: focus keeps the expected game controls
+PASS  impostor/desktop: chat log stays readable in focus mode (discussion happens in chat)
+PASS  impostor/desktop: Escape leaves focus mode
+PASS  impostor/desktop: no page errors
+PASS  liarsdice/desktop: Rules open from the lobby
+PASS  liarsdice/desktop: Escape closes Rules
+PASS  liarsdice/desktop: no horizontal overflow in game
+PASS  liarsdice/desktop: Rules dialog shows this game's goal mid-game
+PASS  liarsdice/desktop: Rules dialog fits the viewport
+PASS  liarsdice/desktop: Close returns to the running game
+PASS  liarsdice/desktop: Focus button visible during play
+PASS  liarsdice/desktop: focus mode on
+PASS  liarsdice/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  liarsdice/desktop: focus keeps the expected game controls
+PASS  liarsdice/desktop: Escape leaves focus mode
+PASS  liarsdice/desktop: no page errors
+PASS  hotpotato/desktop: Rules open from the lobby
+PASS  hotpotato/desktop: Escape closes Rules
+PASS  hotpotato/desktop: no horizontal overflow in game
+PASS  hotpotato/desktop: Rules dialog shows this game's goal mid-game
+PASS  hotpotato/desktop: Rules dialog fits the viewport
+PASS  hotpotato/desktop: Close returns to the running game
+PASS  hotpotato/desktop: Focus button visible during play
+PASS  hotpotato/desktop: focus mode on
+PASS  hotpotato/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  hotpotato/desktop: focus keeps the expected game controls
+PASS  hotpotato/desktop: Escape leaves focus mode
+PASS  hotpotato/desktop: no page errors
+PASS  battleship/desktop: Rules open from the lobby
+PASS  battleship/desktop: Escape closes Rules
+PASS  battleship/desktop: no horizontal overflow in game
+PASS  battleship/desktop: Rules dialog shows this game's goal mid-game
+PASS  battleship/desktop: Rules dialog fits the viewport
+PASS  battleship/desktop: Close returns to the running game
+PASS  battleship/desktop: Focus button visible during play
+PASS  battleship/desktop: focus mode on
+PASS  battleship/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  battleship/desktop: focus keeps the expected game controls
+PASS  battleship/desktop: Escape leaves focus mode
+PASS  battleship/desktop: no page errors
+PASS  checkers/desktop: Rules open from the lobby
+PASS  checkers/desktop: Escape closes Rules
+PASS  checkers/desktop: no horizontal overflow in game
+PASS  checkers/desktop: Rules dialog shows this game's goal mid-game
+PASS  checkers/desktop: Rules dialog fits the viewport
+PASS  checkers/desktop: Close returns to the running game
+PASS  checkers/desktop: Focus button visible during play
+PASS  checkers/desktop: focus mode on
+PASS  checkers/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  checkers/desktop: focus keeps the expected game controls
+PASS  checkers/desktop: Escape leaves focus mode
+PASS  checkers/desktop: no page errors
+PASS  reversi/desktop: Rules open from the lobby
+PASS  reversi/desktop: Escape closes Rules
+PASS  reversi/desktop: no horizontal overflow in game
+PASS  reversi/desktop: Rules dialog shows this game's goal mid-game
+PASS  reversi/desktop: Rules dialog fits the viewport
+PASS  reversi/desktop: Close returns to the running game
+PASS  reversi/desktop: Focus button visible during play
+PASS  reversi/desktop: focus mode on
+PASS  reversi/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  reversi/desktop: focus keeps the expected game controls
+PASS  reversi/desktop: Escape leaves focus mode
+PASS  reversi/desktop: no page errors
+PASS  ludo/desktop: Rules open from the lobby
+PASS  ludo/desktop: Escape closes Rules
+PASS  ludo/desktop: no horizontal overflow in game
+PASS  ludo/desktop: Rules dialog shows this game's goal mid-game
+PASS  ludo/desktop: Rules dialog fits the viewport
+PASS  ludo/desktop: Close returns to the running game
+PASS  ludo/desktop: Focus button visible during play
+PASS  ludo/desktop: focus mode on
+PASS  ludo/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  ludo/desktop: focus keeps the expected game controls
+PASS  ludo/desktop: Escape leaves focus mode
+PASS  ludo/desktop: no page errors
+PASS  chess/desktop: Rules open from the lobby
+PASS  chess/desktop: Escape closes Rules
+PASS  chess/desktop: no horizontal overflow in game
+PASS  chess/desktop: Rules dialog shows this game's goal mid-game
+PASS  chess/desktop: Rules dialog fits the viewport
+PASS  chess/desktop: Close returns to the running game
+PASS  chess/desktop: Focus button visible during play
+PASS  chess/desktop: focus mode on
+PASS  chess/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  chess/desktop: focus keeps the expected game controls
+PASS  chess/desktop: Escape leaves focus mode
+PASS  chess/desktop: no page errors
+PASS  pool/desktop: Rules open from the lobby
+PASS  pool/desktop: Escape closes Rules
+PASS  pool/desktop: no horizontal overflow in game
+PASS  pool/desktop: Rules dialog shows this game's goal mid-game
+PASS  pool/desktop: Rules dialog fits the viewport
+PASS  pool/desktop: Close returns to the running game
+PASS  pool/desktop: Focus button visible during play
+PASS  pool/desktop: focus mode on
+PASS  pool/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  pool/desktop: focus keeps the expected game controls
+PASS  pool/desktop: Escape leaves focus mode
+PASS  pool/desktop: no page errors
+PASS  golf/desktop: Rules open from the lobby
+PASS  golf/desktop: Escape closes Rules
+PASS  golf/desktop: no horizontal overflow in game
+PASS  golf/desktop: Rules dialog shows this game's goal mid-game
+PASS  golf/desktop: Rules dialog fits the viewport
+PASS  golf/desktop: Close returns to the running game
+PASS  golf/desktop: Focus button visible during play
+PASS  golf/desktop: focus mode on
+PASS  golf/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  golf/desktop: focus keeps the expected game controls
+PASS  golf/desktop: Escape leaves focus mode
+PASS  golf/desktop: no page errors
+PASS  tycoon/desktop: Rules open from the lobby
+PASS  tycoon/desktop: Escape closes Rules
+PASS  tycoon/desktop: no horizontal overflow in game
+PASS  tycoon/desktop: Rules dialog shows this game's goal mid-game
+PASS  tycoon/desktop: Rules dialog fits the viewport
+PASS  tycoon/desktop: Close returns to the running game
+PASS  tycoon/desktop: Focus button visible during play
+PASS  tycoon/desktop: focus mode on
+PASS  tycoon/desktop: focus stage is not smaller (1019 -> 1428px) and has no overflow
+PASS  tycoon/desktop: focus keeps the expected game controls
+PASS  tycoon/desktop: Escape leaves focus mode
+PASS  tycoon/desktop: no page errors
+PASS  drawguess/phone: Rules open from the lobby
+PASS  drawguess/phone: Escape closes Rules
+PASS  drawguess/phone: no horizontal overflow in game
+PASS  drawguess/phone: Rules dialog shows this game's goal mid-game
+PASS  drawguess/phone: Rules dialog fits the viewport
+PASS  drawguess/phone: Close returns to the running game
+PASS  drawguess/phone: Focus button visible during play
+PASS  drawguess/phone: focus mode on
+PASS  drawguess/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  drawguess/phone: focus keeps the expected game controls
+PASS  drawguess/phone: Escape leaves focus mode
+PASS  drawguess/phone: no page errors
+PASS  fourrow/phone: Rules open from the lobby
+PASS  fourrow/phone: Escape closes Rules
+PASS  fourrow/phone: no horizontal overflow in game
+PASS  fourrow/phone: Rules dialog shows this game's goal mid-game
+PASS  fourrow/phone: Rules dialog fits the viewport
+PASS  fourrow/phone: Close returns to the running game
+PASS  fourrow/phone: Focus button visible during play
+PASS  fourrow/phone: focus mode on
+PASS  fourrow/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  fourrow/phone: focus keeps the expected game controls
+PASS  fourrow/phone: Escape leaves focus mode
+PASS  fourrow/phone: no page errors
+PASS  wordchain/phone: Rules open from the lobby
+PASS  wordchain/phone: Escape closes Rules
+PASS  wordchain/phone: no horizontal overflow in game
+PASS  wordchain/phone: Rules dialog shows this game's goal mid-game
+PASS  wordchain/phone: Rules dialog fits the viewport
+PASS  wordchain/phone: Close returns to the running game
+PASS  wordchain/phone: Focus button visible during play
+PASS  wordchain/phone: focus mode on
+PASS  wordchain/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  wordchain/phone: focus keeps the expected game controls
+PASS  wordchain/phone: Escape leaves focus mode
+PASS  wordchain/phone: no page errors
+PASS  categories/phone: Rules open from the lobby
+PASS  categories/phone: Escape closes Rules
+PASS  categories/phone: no horizontal overflow in game
+PASS  categories/phone: Rules dialog shows this game's goal mid-game
+PASS  categories/phone: Rules dialog fits the viewport
+PASS  categories/phone: Close returns to the running game
+PASS  categories/phone: Focus button visible during play
+PASS  categories/phone: focus mode on
+PASS  categories/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  categories/phone: focus keeps the expected game controls
+PASS  categories/phone: Escape leaves focus mode
+PASS  categories/phone: no page errors
+PASS  higherlower/phone: Rules open from the lobby
+PASS  higherlower/phone: Escape closes Rules
+PASS  higherlower/phone: no horizontal overflow in game
+PASS  higherlower/phone: Rules dialog shows this game's goal mid-game
+PASS  higherlower/phone: Rules dialog fits the viewport
+PASS  higherlower/phone: Close returns to the running game
+PASS  higherlower/phone: Focus button visible during play
+PASS  higherlower/phone: focus mode on
+PASS  higherlower/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  higherlower/phone: focus keeps the expected game controls
+PASS  higherlower/phone: Escape leaves focus mode
+PASS  higherlower/phone: no page errors
+PASS  colorstack/phone: Rules open from the lobby
+PASS  colorstack/phone: Escape closes Rules
+PASS  colorstack/phone: no horizontal overflow in game
+PASS  colorstack/phone: Rules dialog shows this game's goal mid-game
+PASS  colorstack/phone: Rules dialog fits the viewport
+PASS  colorstack/phone: Close returns to the running game
+PASS  colorstack/phone: Focus button visible during play
+PASS  colorstack/phone: focus mode on
+PASS  colorstack/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  colorstack/phone: focus keeps the expected game controls
+PASS  colorstack/phone: Escape leaves focus mode
+PASS  colorstack/phone: no page errors
+PASS  gofish/phone: Rules open from the lobby
+PASS  gofish/phone: Escape closes Rules
+PASS  gofish/phone: no horizontal overflow in game
+PASS  gofish/phone: Rules dialog shows this game's goal mid-game
+PASS  gofish/phone: Rules dialog fits the viewport
+PASS  gofish/phone: Close returns to the running game
+PASS  gofish/phone: Focus button visible during play
+PASS  gofish/phone: focus mode on
+PASS  gofish/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  gofish/phone: focus keeps the expected game controls
+PASS  gofish/phone: Escape leaves focus mode
+PASS  gofish/phone: no page errors
+PASS  tictactoe/phone: Rules open from the lobby
+PASS  tictactoe/phone: Escape closes Rules
+PASS  tictactoe/phone: no horizontal overflow in game
+PASS  tictactoe/phone: Rules dialog shows this game's goal mid-game
+PASS  tictactoe/phone: Rules dialog fits the viewport
+PASS  tictactoe/phone: Close returns to the running game
+PASS  tictactoe/phone: Focus button visible during play
+PASS  tictactoe/phone: focus mode on
+PASS  tictactoe/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  tictactoe/phone: focus keeps the expected game controls
+PASS  tictactoe/phone: Escape leaves focus mode
+PASS  tictactoe/phone: no page errors
+PASS  rps/phone: Rules open from the lobby
+PASS  rps/phone: Escape closes Rules
+PASS  rps/phone: no horizontal overflow in game
+PASS  rps/phone: Rules dialog shows this game's goal mid-game
+PASS  rps/phone: Rules dialog fits the viewport
+PASS  rps/phone: Close returns to the running game
+PASS  rps/phone: Focus button visible during play
+PASS  rps/phone: focus mode on
+PASS  rps/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  rps/phone: focus keeps the expected game controls
+PASS  rps/phone: Escape leaves focus mode
+PASS  rps/phone: no page errors
+PASS  dotsboxes/phone: Rules open from the lobby
+PASS  dotsboxes/phone: Escape closes Rules
+PASS  dotsboxes/phone: no horizontal overflow in game
+PASS  dotsboxes/phone: Rules dialog shows this game's goal mid-game
+PASS  dotsboxes/phone: Rules dialog fits the viewport
+PASS  dotsboxes/phone: Close returns to the running game
+PASS  dotsboxes/phone: Focus button visible during play
+PASS  dotsboxes/phone: focus mode on
+PASS  dotsboxes/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  dotsboxes/phone: focus keeps the expected game controls
+PASS  dotsboxes/phone: Escape leaves focus mode
+PASS  dotsboxes/phone: no page errors
+PASS  wordscramble/phone: Rules open from the lobby
+PASS  wordscramble/phone: Escape closes Rules
+PASS  wordscramble/phone: no horizontal overflow in game
+PASS  wordscramble/phone: Rules dialog shows this game's goal mid-game
+PASS  wordscramble/phone: Rules dialog fits the viewport
+PASS  wordscramble/phone: Close returns to the running game
+PASS  wordscramble/phone: Focus button visible during play
+PASS  wordscramble/phone: focus mode on
+PASS  wordscramble/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  wordscramble/phone: focus keeps the expected game controls
+PASS  wordscramble/phone: Escape leaves focus mode
+PASS  wordscramble/phone: no page errors
+PASS  trivia/phone: Rules open from the lobby
+PASS  trivia/phone: Escape closes Rules
+PASS  trivia/phone: no horizontal overflow in game
+PASS  trivia/phone: Rules dialog shows this game's goal mid-game
+PASS  trivia/phone: Rules dialog fits the viewport
+PASS  trivia/phone: Close returns to the running game
+PASS  trivia/phone: Focus button visible during play
+PASS  trivia/phone: focus mode on
+PASS  trivia/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  trivia/phone: focus keeps the expected game controls
+PASS  trivia/phone: Escape leaves focus mode
+PASS  trivia/phone: no page errors
+PASS  telephone/phone: Rules open from the lobby
+PASS  telephone/phone: Escape closes Rules
+PASS  telephone/phone: no horizontal overflow in game
+PASS  telephone/phone: Rules dialog shows this game's goal mid-game
+PASS  telephone/phone: Rules dialog fits the viewport
+PASS  telephone/phone: Close returns to the running game
+PASS  telephone/phone: Focus button visible during play
+PASS  telephone/phone: focus mode on
+PASS  telephone/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  telephone/phone: focus keeps the expected game controls
+PASS  telephone/phone: Escape leaves focus mode
+PASS  telephone/phone: no page errors
+PASS  bluff/phone: Rules open from the lobby
+PASS  bluff/phone: Escape closes Rules
+PASS  bluff/phone: no horizontal overflow in game
+PASS  bluff/phone: Rules dialog shows this game's goal mid-game
+PASS  bluff/phone: Rules dialog fits the viewport
+PASS  bluff/phone: Close returns to the running game
+PASS  bluff/phone: Focus button visible during play
+PASS  bluff/phone: focus mode on
+PASS  bluff/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  bluff/phone: focus keeps the expected game controls
+PASS  bluff/phone: Escape leaves focus mode
+PASS  bluff/phone: no page errors
+PASS  impostor/phone: Rules open from the lobby
+PASS  impostor/phone: Escape closes Rules
+PASS  impostor/phone: no horizontal overflow in game
+PASS  impostor/phone: Rules dialog shows this game's goal mid-game
+PASS  impostor/phone: Rules dialog fits the viewport
+PASS  impostor/phone: Close returns to the running game
+PASS  impostor/phone: Focus button visible during play
+PASS  impostor/phone: focus mode on
+PASS  impostor/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  impostor/phone: focus keeps the expected game controls
+PASS  impostor/phone: chat log stays readable in focus mode (discussion happens in chat)
+PASS  impostor/phone: Escape leaves focus mode
+PASS  impostor/phone: no page errors
+PASS  liarsdice/phone: Rules open from the lobby
+PASS  liarsdice/phone: Escape closes Rules
+PASS  liarsdice/phone: no horizontal overflow in game
+PASS  liarsdice/phone: Rules dialog shows this game's goal mid-game
+PASS  liarsdice/phone: Rules dialog fits the viewport
+PASS  liarsdice/phone: Close returns to the running game
+PASS  liarsdice/phone: Focus button visible during play
+PASS  liarsdice/phone: focus mode on
+PASS  liarsdice/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  liarsdice/phone: focus keeps the expected game controls
+PASS  liarsdice/phone: Escape leaves focus mode
+PASS  liarsdice/phone: no page errors
+PASS  hotpotato/phone: Rules open from the lobby
+PASS  hotpotato/phone: Escape closes Rules
+PASS  hotpotato/phone: no horizontal overflow in game
+PASS  hotpotato/phone: Rules dialog shows this game's goal mid-game
+PASS  hotpotato/phone: Rules dialog fits the viewport
+PASS  hotpotato/phone: Close returns to the running game
+PASS  hotpotato/phone: Focus button visible during play
+PASS  hotpotato/phone: focus mode on
+PASS  hotpotato/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  hotpotato/phone: focus keeps the expected game controls
+PASS  hotpotato/phone: Escape leaves focus mode
+PASS  hotpotato/phone: no page errors
+PASS  battleship/phone: Rules open from the lobby
+PASS  battleship/phone: Escape closes Rules
+PASS  battleship/phone: no horizontal overflow in game
+PASS  battleship/phone: Rules dialog shows this game's goal mid-game
+PASS  battleship/phone: Rules dialog fits the viewport
+PASS  battleship/phone: Close returns to the running game
+PASS  battleship/phone: Focus button visible during play
+PASS  battleship/phone: focus mode on
+PASS  battleship/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  battleship/phone: focus keeps the expected game controls
+PASS  battleship/phone: Escape leaves focus mode
+PASS  battleship/phone: no page errors
+PASS  checkers/phone: Rules open from the lobby
+PASS  checkers/phone: Escape closes Rules
+PASS  checkers/phone: no horizontal overflow in game
+PASS  checkers/phone: Rules dialog shows this game's goal mid-game
+PASS  checkers/phone: Rules dialog fits the viewport
+PASS  checkers/phone: Close returns to the running game
+PASS  checkers/phone: Focus button visible during play
+PASS  checkers/phone: focus mode on
+PASS  checkers/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  checkers/phone: focus keeps the expected game controls
+PASS  checkers/phone: Escape leaves focus mode
+PASS  checkers/phone: no page errors
+PASS  reversi/phone: Rules open from the lobby
+PASS  reversi/phone: Escape closes Rules
+PASS  reversi/phone: no horizontal overflow in game
+PASS  reversi/phone: Rules dialog shows this game's goal mid-game
+PASS  reversi/phone: Rules dialog fits the viewport
+PASS  reversi/phone: Close returns to the running game
+PASS  reversi/phone: Focus button visible during play
+PASS  reversi/phone: focus mode on
+PASS  reversi/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  reversi/phone: focus keeps the expected game controls
+PASS  reversi/phone: Escape leaves focus mode
+PASS  reversi/phone: no page errors
+PASS  ludo/phone: Rules open from the lobby
+PASS  ludo/phone: Escape closes Rules
+PASS  ludo/phone: no horizontal overflow in game
+PASS  ludo/phone: Rules dialog shows this game's goal mid-game
+PASS  ludo/phone: Rules dialog fits the viewport
+PASS  ludo/phone: Close returns to the running game
+PASS  ludo/phone: Focus button visible during play
+PASS  ludo/phone: focus mode on
+PASS  ludo/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  ludo/phone: focus keeps the expected game controls
+PASS  ludo/phone: Escape leaves focus mode
+PASS  ludo/phone: no page errors
+PASS  chess/phone: Rules open from the lobby
+PASS  chess/phone: Escape closes Rules
+PASS  chess/phone: no horizontal overflow in game
+PASS  chess/phone: Rules dialog shows this game's goal mid-game
+PASS  chess/phone: Rules dialog fits the viewport
+PASS  chess/phone: Close returns to the running game
+PASS  chess/phone: Focus button visible during play
+PASS  chess/phone: focus mode on
+PASS  chess/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  chess/phone: focus keeps the expected game controls
+PASS  chess/phone: Escape leaves focus mode
+PASS  chess/phone: no page errors
+PASS  pool/phone: Rules open from the lobby
+PASS  pool/phone: Escape closes Rules
+PASS  pool/phone: no horizontal overflow in game
+PASS  pool/phone: Rules dialog shows this game's goal mid-game
+PASS  pool/phone: Rules dialog fits the viewport
+PASS  pool/phone: Close returns to the running game
+PASS  pool/phone: Focus button visible during play
+PASS  pool/phone: focus mode on
+PASS  pool/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  pool/phone: focus keeps the expected game controls
+PASS  pool/phone: Escape leaves focus mode
+PASS  pool/phone: no page errors
+PASS  golf/phone: Rules open from the lobby
+PASS  golf/phone: Escape closes Rules
+PASS  golf/phone: no horizontal overflow in game
+PASS  golf/phone: Rules dialog shows this game's goal mid-game
+PASS  golf/phone: Rules dialog fits the viewport
+PASS  golf/phone: Close returns to the running game
+PASS  golf/phone: Focus button visible during play
+PASS  golf/phone: focus mode on
+PASS  golf/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  golf/phone: focus keeps the expected game controls
+PASS  golf/phone: Escape leaves focus mode
+PASS  golf/phone: no page errors
+PASS  tycoon/phone: Rules open from the lobby
+PASS  tycoon/phone: Escape closes Rules
+PASS  tycoon/phone: no horizontal overflow in game
+PASS  tycoon/phone: Rules dialog shows this game's goal mid-game
+PASS  tycoon/phone: Rules dialog fits the viewport
+PASS  tycoon/phone: Close returns to the running game
+PASS  tycoon/phone: Focus button visible during play
+PASS  tycoon/phone: focus mode on
+PASS  tycoon/phone: focus stage is not smaller (374 -> 378px) and has no overflow
+PASS  tycoon/phone: focus keeps the expected game controls
+PASS  tycoon/phone: Escape leaves focus mode
+PASS  tycoon/phone: no page errors
+All passed
