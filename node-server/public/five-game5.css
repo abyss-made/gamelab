@@ -91,3 +91,4 @@
  .pl #pl-controls{padding:6px}
 }
 .pl .p5-pot-note{display:block;color:#c9ed9d;font-size:12px;margin-top:5px}
+@media(max-width:700px) and (orientation:portrait){.golf .gf-wrap{max-width:224px}}
