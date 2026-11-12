@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.battleship = (() => {
   const C = GameUI.common;
+  const FX = GameUI.batch2fx;
+  let drag = null, suppressClick = false;
   const resign = C.makeConfirm(); // survives re-renders, so an opponent's shot doesn't disarm it
   const resignHTML = () => `<button type="button" class="btn btn-small btn-ghost" id="bs-resign"${resign.armed ? ' data-armed="1"' : ""}>${resign.armed ? "Tap again to resign" : "Resign"}</button>`;
   const paintResign = () => {
@@ -78,7 +80,8 @@ GameUI.battleship = (() => {
       <div id="bs-main"></div>`;
     stage.appendChild(root);
     clock = C.makeClock(() => root);
-    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+    root.addEventListener("click", (e) => {if(suppressClick){suppressClick=false;return;}C.keepFocus(document.getElementById("stage"), () => onClick(e));});
+    bindDrag();
     // precision picker: arrow keys move between cells of the same chart; Enter/Space selects as usual
     root.addEventListener("keydown", (e) => {
       const b = e.target.closest("[data-cell]");
@@ -96,6 +99,29 @@ GameUI.battleship = (() => {
         if (next && !next.disabled) return next.focus(); // skip cells already fired at
       }
     });
+  }
+
+  function bindDrag(){
+    const clear=()=>root.querySelectorAll('.b25-valid,.b25-invalid').forEach(n=>n.classList.remove('b25-valid','b25-invalid'));
+    const preview=e=>{
+      clear();const b=document.elementFromPoint(e.clientX,e.clientY)?.closest('.bs-place [data-cell]');if(!b)return null;
+      const c=Number(b.dataset.cell),g=S.game,len=g.fleet[drag.index].len,x=c%N,y=Math.floor(c/N),cells=shipCells(len,{x,y,horizontal});
+      const used=new Set(placed.flatMap((p,i)=>p&&i!==drag.index?shipCells(g.fleet[i].len,p):[]));
+      const valid=(horizontal?x+len<=N:y+len<=N)&&!cells.some(n=>used.has(n));
+      cells.forEach(n=>root.querySelector(`.bs-place [data-cell="${n}"]`)?.classList.add(valid?'b25-valid':'b25-invalid'));return {c,valid};
+    };
+    root.addEventListener('pointerdown',e=>{
+      const b=e.target.closest('[data-ship]'),g=S?.game;if(!b||g?.phase!=='place'||g.myIndex<0||g.players[g.myIndex].ready)return;
+      drag={index:Number(b.dataset.ship),x:e.clientX,y:e.clientY,pointer:e.pointerId,moved:false};
+    });
+    root.addEventListener('pointermove',e=>{if(!drag||drag.pointer!==e.pointerId)return;if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>6&&!drag.moved){drag.moved=true;root.setPointerCapture(e.pointerId);}if(drag.moved){e.preventDefault();preview(e);}});
+    root.addEventListener('pointerup',e=>{
+      if(!drag)return;const d=drag,result=d.moved?preview(e):null;drag=null;clear();
+      if(root.hasPointerCapture(e.pointerId))root.releasePointerCapture(e.pointerId);
+      if(!d.moved)return;suppressClick=true;setTimeout(()=>{suppressClick=false;},0);
+      if(result?.valid){pick=d.index;placed[pick]=null;placeAt(result.c,S.game);}else{msg='Drop the ship on a clear group of squares.';paint();}
+    });
+    root.addEventListener('pointercancel',()=>{drag=null;clear();});
   }
 
   function onClick(e) {
@@ -233,6 +259,12 @@ GameUI.battleship = (() => {
       .map((p, i) => C.playerChip(app, p, { active: g.phase === "battle" ? g.turn === i : !p.ready, extra: g.phase === "battle" ? (g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : "") : p.ready ? '<span class="bs-badge">Ready</span>' : '<span class="bs-badge wait">Placing</span>', sub: g.phase === "battle" ? `${p.remaining} ship${p.remaining === 1 ? "" : "s"} left` : "" }))
       .join("");
     paint();
+    if(g.phase==='battle' && g.last && lastMoves>=0 && g.moves!==lastMoves){
+      const target=1-g.last.by,shot=g.players[target].shots[g.last.cell],sunk=g.players[target].sunk.some(s=>s.cells.includes(g.last.cell));
+      const friendly=g.myIndex===target,chart=root.querySelector(friendly?'.pbs-friendly .bs-grid':'.pbs-enemy .bs-grid'),cell=chart?.querySelector(`[data-cell="${g.last.cell}"]`);
+      FX.transient(root,cell,'missile');FX.transient(root,cell,sunk?'sunk':shot===2?'hit':'miss');
+      Sound.play(shot===2?'join':'drop');
+    }
     if (g.moves !== lastMoves && lastMoves >= 0) Sound.play("drop");
     lastMoves = g.moves;
   }
@@ -242,6 +274,7 @@ GameUI.battleship = (() => {
     resign.reset();
     if (root) root.remove();
     root = null;
+    drag=null;suppressClick=false;
     lastMoves = -1;
     aim = -1;
     tab = "target";
@@ -257,7 +290,7 @@ GameUI.battleship = (() => {
         return `<div><h3 class="bs-title">${a.esc(p.name)}'s fleet <small>${p.remaining} left</small></h3><div class="bs-small">${gridHTML({ shots: p.shots, ships, label: `${p.name}'s final fleet` })}</div></div>`;
       })
       .join("");
-    return `<h2 class="result-title">${title}</h2>${r.forfeit ? '<p class="muted center">Won by forfeit.</p>' : ""}<div class="bs-two">${boards}</div>${next}`;
+    return `<h2 class="result-title b25-result">${title}</h2>${r.forfeit ? '<p class="muted center">Won by forfeit.</p>' : ""}<div class="bs-two">${boards}</div>${next}`;
   }
 
   function resultSound(r, state) {

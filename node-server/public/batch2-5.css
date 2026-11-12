@@ -1,0 +1,20 @@
+/* Only Batch 2 games and their explicit effects. No homepage, benchmark or Batch 1 changes. */
+:is(.bs,.pcs,.pimp,.pch,.ptel){position:relative}
+:is(.bs,.pcs,.pimp,.pch,.ptel) .btn{min-height:44px;border-radius:12px;transition:transform .12s,background .15s;box-shadow:0 3px 0 #0004}
+:is(.bs,.pcs,.pimp,.pch,.ptel) .btn:not(:disabled):active{transform:translateY(2px);box-shadow:none}
+:is(.bs,.pcs,.pimp,.pch,.ptel) :where(button,input,summary):focus-visible{outline:3px solid #dcffa4;outline-offset:3px}
+:is(.bs,.pcs,.pimp,.pch,.ptel) .b2-player.active{background:#1b3e3a;border-color:#b4d489;box-shadow:inset 3px 0 #c7ec99}
+.b25-effect,.b25-flight{position:absolute;pointer-events:none;z-index:14}
+.b25-effect{width:34px;height:34px;border-radius:50%;border:3px solid #a4e2f7;box-shadow:0 0 18px #7dcfe955}
+.b25-effect.hit{border-color:#ffc478;background:radial-gradient(#fff6ca,#ff9c3b88,transparent);box-shadow:0 0 25px #f57a3c88}
+.b25-effect.sunk{width:60px;height:60px;border-color:#f0aa7d;border-style:double;border-width:7px}
+.b25-effect.missile{width:5px;height:34px;border:0;border-radius:8px;background:linear-gradient(#fff,#fbc665,#ef7e3100);box-shadow:0 0 10px #fbc665}
+.b25-flight{width:48px;height:68px;filter:drop-shadow(0 8px 8px #0005)}
+.bs .pbs-chart{background:radial-gradient(at 30% 20%,#24566c,#091e36);border:1px solid #668d9c;border-radius:14px;box-shadow:inset 0 0 36px #0004,0 9px 18px #0004}
+.bs .bs-cell{background:linear-gradient(145deg,#84d6d111,#132a4266);border-color:#83bdca30;box-shadow:inset 0 1px #c6e9f508}
+.bs .bs-head{color:#c4e8ec;font-weight:750}.bs .bs-cell.aim{box-shadow:inset 0 0 0 3px #defca5;background:#97be6733}.bs .bs-cell.hit{background:#ad654544}.bs .bs-cell.miss{background:#4d829f33}.bs .bs-cell.sunk{background:#654d5044;box-shadow:inset 0 0 0 1px #f3a879}
+.bs .pbs-ship{filter:drop-shadow(1px 5px 3px #03132488)}.bs .bs-place{background:linear-gradient(140deg,#173a47,#102439);border:1px solid #547883;border-radius:20px}
+.bs .bs-ship{min-height:52px;border-radius:12px}.bs .bs-ship img{filter:drop-shadow(0 4px 3px #0005)}.bs .bs-place [data-ship]{touch-action:none}
+.bs .bs-cell.b25-valid{background:#a8d95d88;box-shadow:inset 0 0 0 2px #d6f5a3}.bs .bs-cell.b25-invalid{background:#da736b88;box-shadow:inset 0 0 0 2px #ffb3a3}
+.bs .bs-ctl{gap:10px}.bs .pbs-fire{background:#102b3a;border:1px solid #587a83;border-radius:14px;padding:12px}.bs .bs-fire{background:#d7eea0;color:#18382e}
+@media(prefers-reduced-motion:reduce){:is(.bs,.pcs,.pimp,.pch,.ptel) *,:is(.bs,.pcs,.pimp,.pch,.ptel) *::before,:is(.bs,.pcs,.pimp,.pch,.ptel) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
