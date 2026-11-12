@@ -86,3 +86,7 @@
  .pl #pl-controls .board-actions .btn{padding:8px;font-size:12px}
  .pl #pl-status{padding:6px 8px;font-size:12px;line-height:1.25}
 }
+@media(max-width:700px) and (orientation:portrait){
+ :is(.pl,.golf) .b2-players{padding:0}
+ .pl #pl-controls{padding:6px}
+}
