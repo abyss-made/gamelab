@@ -1,0 +1,435 @@
+/* The game stage is a frame; each board keeps its own coordinates and hit regions. */
+#stage[data-p5-game] {
+  --p5-accent:#b4ff32;
+  --p5-surface:#132c35
+}
+
+#stage[data-p5-game=drawguess] {
+  --p5-accent:#b4ff32
+}
+
+#stage[data-p5-game=fourrow] {
+  --p5-accent:#7fbdff
+}
+
+#stage[data-p5-game=wordchain] {
+  --p5-accent:#b9e59e
+}
+
+#stage[data-p5-game=categories] {
+  --p5-accent:#77e0ce
+}
+
+#stage[data-p5-game=colorstack] {
+  --p5-accent:#d6adff
+}
+
+#stage[data-p5-game=gofish] {
+  --p5-accent:#9ce1d4
+}
+
+#stage[data-p5-game=tictactoe] {
+  --p5-accent:#c5b3ff
+}
+
+#stage[data-p5-game=dotsboxes] {
+  --p5-accent:#6ae4f1
+}
+
+#stage[data-p5-game=wordscramble] {
+  --p5-accent:#f5d49b
+}
+
+#stage[data-p5-game=trivia] {
+  --p5-accent:#cab5ff
+}
+
+#stage[data-p5-game=telephone] {
+  --p5-accent:#efc4a1
+}
+
+#stage[data-p5-game=bluff] {
+  --p5-accent:#f3a7c6
+}
+
+#stage[data-p5-game=impostor] {
+  --p5-accent:#b7a5ff
+}
+
+#stage[data-p5-game=battleship] {
+  --p5-accent:#90d5ee
+}
+
+#stage[data-p5-game=checkers] {
+  --p5-accent:#edb894
+}
+
+#stage[data-p5-game=ludo] {
+  --p5-accent:#b3e2b5
+}
+
+#stage[data-p5-game=chess] {
+  --p5-accent:#e2d8aa
+}
+
+#stage[data-p5-game=pool] {
+  --p5-accent:#8de4b4
+}
+
+#stage[data-p5-game=golf] {
+  --p5-accent:#c6ee91
+}
+
+#stage[data-p5-game=tycoon] {
+  --p5-accent:#9edbc5
+}
+
+#stage[data-p5-game]:not([data-p5-game=""])>.b2 {
+  border:1px solid color-mix(in srgb,var(--p5-accent) 28%,#12232f);
+  border-radius:24px;
+  box-shadow:0 18px 45px #0004,inset 0 1px #ffffff09;
+  overflow:clip
+}
+
+#stage .b2-players {
+  border:0;
+  background:#06151e88;
+  border-bottom:1px solid #ffffff15;
+  border-radius:16px;
+  padding:10px;
+  gap:10px
+}
+
+#stage .b2-player {
+  border-radius:14px;
+  background:#0d2130;
+  border-color:#344e60;
+  padding:9px 12px;
+  transition:border-color .18s,background .18s;
+  min-width:0
+}
+
+#stage .b2-player.active {
+  border-color:var(--p5-accent);
+  background:color-mix(in srgb,var(--p5-accent) 12%,#0b202c);
+  box-shadow:inset 3px 0 var(--p5-accent),0 0 18px #0002
+}
+
+#stage .b2-player b {
+  font-size:14px;
+  letter-spacing:-.025em
+}
+
+#stage .b2-player small {
+  color:#c1d1da;
+  font-variant-numeric:tabular-nums
+}
+
+#stage .ttt-status {
+  font-size:16px;
+  line-height:1.5;
+  letter-spacing:-.015em;
+  padding:12px 16px;
+  border-radius:12px;
+  background:#04121d66;
+  color:#c3d3dc;
+  margin:10px 0
+}
+
+#stage .ttt-status.mine {
+  color:var(--p5-accent);
+  background:color-mix(in srgb,var(--p5-accent) 9%,#071725);
+  border:1px solid color-mix(in srgb,var(--p5-accent) 30%,transparent)
+}
+
+#stage :where(input[type=text],input:not([type]),textarea) {
+  border-radius:12px;
+  background:#071b29;
+  border-color:#4a6576;
+  font-size:16px
+}
+
+#stage :where(.board-actions,.pl-controls,.gf-controls) {
+  border-radius:16px;
+  gap:10px
+}
+
+#stage :where(.board-actions,.pl-controls,.gf-controls) .btn {
+  min-height:44px
+}
+
+#stage :where(.wc-main,.ws-main,.cr-main,.tb-main) {
+  border-radius:22px;
+  background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--p5-accent) 13%,transparent),transparent 75%),#102330;
+  padding:24px;
+  border-color:#3a5363
+}
+
+#stage .wc-letter {
+  color:#edffcf;
+  text-shadow:0 4px #203f25
+}
+
+#stage .ws-letters {
+  gap:10px
+}
+
+#stage .ws-letter {
+  background:#f5e8c6;
+  color:#26362e;
+  border-radius:12px;
+  box-shadow:0 5px 0 #a39673;
+  font-weight:850
+}
+
+#stage .cr-letter {
+  border-radius:18px;
+  background:#143c3a;
+  color:#bceae0;
+  border:1px solid #538b78
+}
+
+#stage .pimp {
+  background:radial-gradient(ellipse at 50% 0,#48427366,transparent 70%),#0d152b
+}
+
+#stage .pbl {
+  background:radial-gradient(ellipse at 50% 0,#6b345744,transparent 70%),#1b1427
+}
+
+#stage .pws {
+  background:radial-gradient(ellipse at 50% 0,#7b67432b,transparent 70%),#17242a
+}
+
+#stage .pwc {
+  background:radial-gradient(ellipse at 50% 0,#4b6b372b,transparent 70%),#102b28
+}
+
+#stage .ptt {
+  background:radial-gradient(ellipse at 50% 0,#91674e44,transparent 70%),#2d2428
+}
+
+#stage .pl-controls {
+  padding:18px;
+  background:linear-gradient(140deg,#173d32,#0c2429);
+  border:1px solid #668a5d66
+}
+
+#stage .gf-controls {
+  padding:16px;
+  background:#102b2a;
+  border:1px solid #62894c66
+}
+
+#stage .pl-canvas {
+  box-shadow:0 16px 32px #0007,0 0 0 1px #a8bf7a22
+}
+
+#stage .golf canvas {
+  box-shadow:0 16px 32px #0005;
+  border-radius:18px
+}
+
+#stage .ch-board,#stage .ck-board {
+  box-shadow:0 10px 0 #020c14,0 16px 25px #0005
+}
+
+#stage .pcs-orbit {
+  box-shadow:inset 0 0 50px #24123344,0 0 0 2px #ac95b566,0 20px 40px #0006
+}
+
+#stage .pgf-table {
+  box-shadow:inset 0 0 70px #08282e66,0 16px 35px #0004
+}
+
+#stage .db-line:not(:disabled):hover {
+  filter:brightness(1.35)
+}
+
+#stage .ty .ty-board {
+  box-shadow:0 15px 30px #0005
+}
+
+.result-title {
+  font-size:clamp(32px,5vw,56px);
+  letter-spacing:-.055em;
+  color:#f0ffda
+}
+
+.result-actions {
+  gap:12px
+}
+
+.podium {
+  gap:14px
+}
+
+.podium>*,.podium-card {
+  border-radius:20px;
+  box-shadow:0 5px 0 #020b1444
+}
+
+.podium .avatar {
+  filter:drop-shadow(0 5px 7px #0004)
+}
+
+@media(max-width:700px) {
+  #stage[data-p5-game]:not([data-p5-game=""])>.b2 {
+    border-radius:18px
+  }
+
+  #stage .b2-players {
+    padding:6px;
+    gap:6px
+  }
+
+  #stage .b2-player {
+    padding:6px 8px;
+    border-radius:12px
+  }
+
+  #stage .b2-player b {
+    font-size:12px
+  }
+
+  #stage .ttt-status {
+    font-size:14px;
+    padding:10px 12px
+  }
+
+  #stage :where(.wc-main,.ws-main,.cr-main,.tb-main) {
+    padding:16px
+  }
+
+  #stage .pl-controls,#stage .gf-controls {
+    padding:12px
+  }
+
+}
+
+@media(max-height:500px) and (orientation:landscape) {
+  #stage .ttt-status {
+    padding:6px 10px;
+    margin:6px 0;
+    font-size:13px
+  }
+
+  #stage .b2-players {
+    padding:5px
+  }
+
+  #stage .b2-player {
+    padding:4px 8px
+  }
+
+  #stage .pl-controls,#stage .gf-controls {
+    padding:8px
+  }
+
+  .av-studio-hero {
+    position:relative
+  }
+
+  .av-studio-preview .avatar.av-xl {
+    width:100px;
+    height:100px
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  #stage .b2-player {
+    transition:none
+  }
+
+}
+
+/* Keep phone shot controls close to the course rather than below a long player stack. */
+@media(max-width:700px) and (orientation:portrait) {
+  #stage .golf {
+    gap:8px;
+    padding:10px
+  }
+
+  #stage .golf .gf-head {
+    flex-wrap:nowrap;
+    gap:8px
+  }
+
+  #stage .golf .gf-head h2 {
+    font-size:18px
+  }
+
+  #stage .golf .gf-score {
+    padding:6px 9px;
+    gap:8px
+  }
+
+  #stage .golf .gf-score strong {
+    font-size:20px
+  }
+
+  #stage .golf #gf-players {
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    justify-content:start;
+    gap:6px;
+    margin:0
+  }
+
+  #stage .golf #gf-players .b2-player {
+    flex:0 0 auto;
+    padding:5px 7px
+  }
+
+  #stage .golf #gf-players .avatar {
+    width:26px;
+    height:26px
+  }
+
+  #stage .golf #gf-players .b2-player b {
+    font-size:11px
+  }
+
+  #stage .golf #gf-status {
+    font-size:12px;
+    line-height:1.35;
+    padding:7px 9px;
+    margin:0
+  }
+
+  #stage .golf .gf-wrap {
+    width:min(100%,calc((100dvh - 490px)*440/700));
+    min-width:170px;
+    max-width:240px;
+    margin:auto;
+    padding:4px
+  }
+
+  #stage .golf .gf-controls {
+    padding:10px;
+    gap:6px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:center
+  }
+
+  #stage .golf .gf-controls .pl-fine-row {
+    grid-column:1/-1
+  }
+
+  #stage .golf .gf-controls .pl-fine {
+    font-size:12px
+  }
+
+  #stage .golf .gf-controls .btn {
+    font-size:12px;
+    padding:8px;
+    min-height:44px
+  }
+
+  #stage .golf #gf-place-note {
+    font-size:11px
+  }
+
+}
