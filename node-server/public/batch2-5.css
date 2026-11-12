@@ -60,3 +60,6 @@
  .ptel #tp-cwrap{grid-column:1/-1;grid-row:2;min-width:0}.ptel #tp-tb{grid-column:1/-1;grid-row:3}.ptel #tp-limit{grid-column:1/-1;grid-row:4;margin:0}
  .ptel .tp-tools [data-tool]{order:0}.ptel .tp-tools [data-size]{order:1}.ptel .tp-tools [data-color]{order:2}.ptel .tp-tools [data-act]{order:1}.ptel .tp-tools .tp-sep{display:none}
 }
+/* Match the existing chart specificity so the new ocean material actually owns its surface. */
+.bs .bs-grid.pbs-chart{background:radial-gradient(ellipse at 25% 15%,#285e71,#0a2139 80%);border-color:#74959f;box-shadow:inset 0 0 30px #031c2b77,0 9px 18px #0004}
+.bs .pbs-chart .bs-cell{background:linear-gradient(145deg,#91d6d21a,#132a4255);border-color:#83bdca40;box-shadow:inset 0 1px #d7f2f510}.bs .pbs-chart .bs-head{color:#cae5e9}
