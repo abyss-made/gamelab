@@ -93,3 +93,4 @@
 .pl .p5-pot-note{display:block;color:#c9ed9d;font-size:12px;margin-top:5px}
 @media(max-width:700px) and (orientation:portrait){.golf .gf-wrap{max-width:224px}}
 .pgf .p5-book-toast{position:absolute;left:50%;top:48%;translate:-50% 0;z-index:12;max-width:90%;width:max-content;padding:16px 22px;border:2px solid #f2dfa5;border-radius:18px;background:linear-gradient(130deg,#eee2ab,#c6b273);color:#153b33;box-shadow:0 12px 30px #001c2d66;font-weight:800;text-align:center;pointer-events:none}
+.pgf .pgf-card:not(:disabled):hover,.pgf .pgf-card:focus-visible{z-index:6}
