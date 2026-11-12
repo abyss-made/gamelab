@@ -433,3 +433,18 @@
   }
 
 }
+
+/* Fit the entire phone Pool shot dock without non-uniform canvas scaling. */
+@media (max-width:700px) and (orientation:portrait) {
+  #stage .pl { padding:10px; gap:8px; }
+  #stage .pl #pl-players { flex-wrap:nowrap; margin:0; }
+  #stage .pl #pl-players .b2-player { padding:6px; }
+  #stage .pl #pl-players .avatar { width:26px; height:26px; }
+  #stage .pl #pl-status { margin:0; padding:8px; font-size:12px; }
+  #stage .pl .pl-wrap { width:min(100%,calc((100dvh - 440px)*.55)); min-width:180px; max-width:280px; margin-inline:auto; }
+  #stage .pl #pl-controls { grid-template-columns:minmax(0,1fr) minmax(0,1fr); padding:10px; gap:8px; }
+  #stage .pl #pl-controls .board-actions { grid-column:1/-1; margin:0; gap:8px; }
+  #stage .pl #pl-controls .board-actions .btn { flex:1; padding:8px; }
+  #stage .pl .pl-fine-row { gap:4px; }
+  #stage .pl #pl-controls .pl-slider { font-size:12px; }
+}
