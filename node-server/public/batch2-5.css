@@ -48,3 +48,4 @@
 .bs .pbs-ship.wreck{opacity:.55;filter:grayscale(.8) drop-shadow(0 5px 3px #0008)}
 .pch .b25-captures{display:flex;align-items:center;gap:6px;border:1px solid #61736f;border-radius:14px;padding:10px;background:#172e37}.pch .b25-captures[hidden]{display:none}.pch .b25-captures small{font-size:9px;letter-spacing:.09em;color:#c0d4c2;margin-right:auto}.pch .b25-captures .ch-piece{width:25px;height:30px}
 .b25-out{display:grid;justify-items:center;align-content:center;margin:18px auto;width:110px;height:145px;border:4px solid #e5dbad;border-radius:18px;background:linear-gradient(140deg,#366e51,#153a3b);box-shadow:5px 6px 0 #a99b70,0 12px 30px #0005;color:#e8fac7;font-size:68px;font-weight:900}.b25-out small{font-size:9px;letter-spacing:.15em}
+.pch .ch-clock.ticking{background:#183b35;color:#e6f4c2;border-color:#b5ca91}

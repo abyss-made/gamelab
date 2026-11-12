@@ -109,8 +109,8 @@ GameUI.telephone = (() => {
 
   // ---------- drawing tools ----------
   function pos(e) {
-    const r = cv.getBoundingClientRect();
-    return [Math.round(Math.max(0, Math.min(W, ((e.clientX - r.left) * W) / r.width)) * 10) / 10, Math.round(Math.max(0, Math.min(H, ((e.clientY - r.top) * H) / r.height)) * 10) / 10];
+    const r = cv.getBoundingClientRect(),css=getComputedStyle(cv),left=parseFloat(css.borderLeftWidth)||0,right=parseFloat(css.borderRightWidth)||0,top=parseFloat(css.borderTopWidth)||0,bottom=parseFloat(css.borderBottomWidth)||0;
+    return [Math.round(Math.max(0, Math.min(W, ((e.clientX - r.left - left) * W) / Math.max(1,r.width-left-right))) * 10) / 10, Math.round(Math.max(0, Math.min(H, ((e.clientY - r.top - top) * H) / Math.max(1,r.height-top-bottom))) * 10) / 10];
   }
   function bindCanvas() {
     cv.addEventListener("pointerdown", (e) => {
