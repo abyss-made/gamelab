@@ -162,6 +162,14 @@ GameUI.gofish = (() => {
         if (!e.received) FX.animate(root.querySelector('#gf-public-action'),[{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'none'}],250);
       }
       root.querySelectorAll('.pgf-book.new,.gf-books .new').forEach(el=>FX.animate(el,[{transform:'scale(.7)',opacity:.3},{transform:'scale(1.15)',offset:.65},{transform:'scale(1)',opacity:1}],420));
+      // This overlay survives subsequent hand/seat repaints; rapid asks must not erase a book reward.
+      if(!FX.reduced()) fresh.forEach(key=>{
+        const split=key.lastIndexOf(':'),id=key.slice(0,split),rank=Number(key.slice(split+1));
+        const note=document.createElement('div');note.className='p5-book-toast';note.setAttribute('role','status');
+        note.textContent=`${g.players.find(p=>p.id===id)?.name||'A player'} completed a book of ${C.rankWord(rank)}s`;
+        root.append(note);const a=FX.animate(note,[{opacity:0,transform:'translateY(25px) scale(.9)'},{opacity:1,transform:'none',offset:.18},{opacity:1,offset:.8},{opacity:0,transform:'translateY(-12px)'}],1000);
+        if(a)a.finished.catch(()=>{}).finally(()=>note.remove());else note.remove();
+      });
     }
     if(activeCard){const el=root.querySelector(`[data-card="${CSS.escape(activeCard)}"]`);if(el&&!el.disabled)el.focus({preventScroll:true});}
     if (!repainting) clock.set(g.timeLeft);
