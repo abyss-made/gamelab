@@ -29,13 +29,13 @@ GameUI.battleship = (() => {
   // Vessel illustrations for MY fleet only (from my own ship cells / local draft). Enemy ships are never drawn.
   function shipsLayer(list) {
     return list
-      .map(({ i, cells }) => {
+      .map(({ i, cells, sunk=false }) => {
         if (!cells || !cells.length) return "";
         const xs = cells.map((c) => c % N), ys = cells.map((c) => Math.floor(c / N));
         const x = Math.min(...xs), y = Math.min(...ys), len = cells.length;
         const hz = new Set(ys).size === 1;
         const area = hz ? `grid-column:${x + 2}/span ${len};grid-row:${y + 2}` : `grid-column:${x + 2};grid-row:${y + 2}/span ${len}`;
-        return `<span class="pbs-ship ${hz ? "h" : "v"}" style="${area};--len:${len}" aria-hidden="true"><img src="${SHIP_ART[i] || SHIP_ART[2]}" alt=""></span>`;
+        return `<span data-vessel="${i}" class="pbs-ship ${hz ? "h" : "v"} ${sunk?"wreck":""}" style="${area};--len:${len}" aria-hidden="true"><img src="${SHIP_ART[i] || SHIP_ART[2]}" alt=""></span>`;
       })
       .join("");
   }
@@ -233,7 +233,7 @@ GameUI.battleship = (() => {
     const mine = g.players[me];
     const myShipCells = new Set((g.myShips || []).flatMap((s) => s.cells));
     main.innerHTML = `<div class="pbs-tabs" role="group" aria-label="Chart"><button type="button" class="btn btn-small ${tab === "target" ? "" : "btn-ghost"}" data-bstab="target" aria-pressed="${tab === "target"}">Enemy waters</button><button type="button" class="btn btn-small ${tab === "fleet" ? "" : "btn-ghost"}" data-bstab="fleet" aria-pressed="${tab === "fleet"}">Your fleet</button></div>
-      <div class="bs-two pbs" data-tab="${tab}"><div class="card pbs-enemy"><h3 class="bs-title">Enemy waters <small>${foe.remaining} ships left · one target at a time</small></h3>${gridHTML({ shots: foe.shots, sunk: new Set(foe.sunk.flatMap((s) => s.cells)), aimCell: aim, lastCell: g.last && g.last.by === me ? g.last.cell : -1, tappable: myTurn, label: "Enemy waters" })}
+      <div class="bs-two pbs" data-tab="${tab}"><div class="card pbs-enemy"><h3 class="bs-title">Enemy waters <small>${foe.remaining} ships left · one target at a time</small></h3>${gridHTML({ shots: foe.shots, sunk: new Set(foe.sunk.flatMap((s) => s.cells)), aimCell: aim, lastCell: g.last && g.last.by === me ? g.last.cell : -1, tappable: myTurn, label: "Enemy waters", art: shipsLayer(foe.sunk.map(sh=>({i:g.fleet.findIndex(f=>f.name===sh.name),cells:sh.cells,sunk:true}))) })}
       <div class="bs-ctl pbs-fire"><div class="pbs-target"><small>${aim >= 0 ? "Target locked" : "Target"}</small><strong>${aim >= 0 ? cellName(aim) : "–"}</strong></div><button type="button" class="btn bs-fire" id="bs-fire" ${myTurn && aim >= 0 ? "" : "disabled"}>${aim >= 0 ? `Fire at ${cellName(aim)}` : "Fire!"}</button>${resignHTML()}</div></div>
       <div class="card pbs-friendly"><h3 class="bs-title">Your fleet <small>${mine.remaining} ships afloat</small></h3>${gridHTML({ shots: mine.shots, ships: myShipCells, sunk: new Set(mine.sunk.flatMap((s) => s.cells)), lastCell: g.last && g.last.by !== me ? g.last.cell : -1, label: "Your fleet", art: shipsLayer((g.myShips || []).map((sh, i) => ({ i, cells: sh.cells }))) })}${tab === "fleet" ? '<button type="button" class="btn btn-small pbs-back" data-bstab="target">Back to targeting</button>' : ""}</div></div>`;
   }
@@ -263,9 +263,9 @@ GameUI.battleship = (() => {
       const target=1-g.last.by,shot=g.players[target].shots[g.last.cell],sunk=g.players[target].sunk.some(s=>s.cells.includes(g.last.cell));
       const friendly=g.myIndex===target,chart=root.querySelector(friendly?'.pbs-friendly .bs-grid':'.pbs-enemy .bs-grid'),cell=chart?.querySelector(`[data-cell="${g.last.cell}"]`);
       FX.transient(root,cell,'missile');FX.transient(root,cell,sunk?'sunk':shot===2?'hit':'miss');
-      Sound.play(shot===2?'join':'drop');
+      if(sunk){const vessel=g.players[target].sunk.find(s=>s.cells.includes(g.last.cell)),index=g.fleet.findIndex(f=>f.name===vessel.name);FX.animate(chart?.querySelector(`[data-vessel="${index}"]`),[{opacity:1,transform:'translateY(-3px)'},{opacity:.55,transform:'translateY(4px) rotate(-5deg)'}],520);}
     }
-    if (g.moves !== lastMoves && lastMoves >= 0) Sound.play("drop");
+    if (g.moves !== lastMoves && lastMoves >= 0) Sound.play(g.last&&g.players[1-g.last.by].shots[g.last.cell]===2?"join":"drop");
     lastMoves = g.moves;
   }
 

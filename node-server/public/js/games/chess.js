@@ -4,7 +4,7 @@ window.GameUI = window.GameUI || {};
 GameUI.chess = (() => {
   const C = GameUI.common;
   const FX=GameUI.batch2fx;
-  let drag=null,suppressClick=false;
+  let drag=null,suppressClick=false,captures=[];
   const GLYPH = { K: "♚", Q: "♛", R: "♜", B: "♝", N: "♞", P: "♟" };
   const WORD = { K: "king", Q: "queen", R: "rook", B: "bishop", N: "knight", P: "pawn" };
   let root = null;
@@ -64,7 +64,7 @@ GameUI.chess = (() => {
     root.dataset.theme = loadTheme();
     root.innerHTML = `<div class="ch-layout pch-layout"><div class="pch-table" id="ch-top"><div class="pch-player" id="ch-opp"></div><div id="ch-board"></div><div class="pch-player" id="ch-me"></div></div>
       <div class="ch-side pch-notes"><div class="pch-caption"><span class="pch-eyebrow" id="ch-eyebrow">WALNUT &amp; IVORY</span><div class="ttt-status" id="ch-status" aria-live="polite"></div></div>
-      <div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
+      <div class="b25-captures" id="ch-captures" hidden aria-label="Recent captures"></div><div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
       <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Walnut</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
       <div class="board-actions" id="ch-actions"></div><small class="muted">Tap a piece, then a highlighted square.</small></div></div>
       <div class="ch-promo" id="ch-promo" hidden></div>`;
@@ -210,9 +210,16 @@ GameUI.chess = (() => {
     st.className = "ttt-status" + (myTurn ? " mine" : "");
     paint();
     if(before&&g.moves.length>before.moves.length&&g.last){
-      if(before.board[g.last.to])FX.transient(root,root.querySelector(`[data-sq="${g.last.to}"]`),'capture');
+      let taken=before.board[g.last.to];
+      const mover=before.board[g.last.from];
+      if(!taken&&mover?.[1]==='P'&&(g.last.from&7)!==(g.last.to&7))taken=before.board[(g.last.from&~7)+(g.last.to&7)];
+      if(taken && g.moves.length===before.moves.length+1)captures.push(taken);
+      captures=captures.slice(-6);
+      if(taken)FX.transient(root,root.querySelector(`[data-sq="${g.last.to}"]`),'capture');
       if(g.check>=0&&g.check!==before.check)FX.transient(root,root.querySelector(`[data-sq="${g.check}"]`),'check');
     }
+    const tray=root.querySelector('#ch-captures');tray.hidden=!captures.length;
+    tray.innerHTML='<small>RECENT CAPTURES</small>'+captures.map(p=>`<span class="ch-piece ${p[0]}" role="img" aria-label="Captured ${p[0]==='w'?'White':'Black'} ${WORD[p[1]]}">${GameUI.art.chessPiece(p[1])}</span>`).join('');
     const list = root.querySelector("#ch-moves");
     list.innerHTML = g.moves.reduce((h, m, i) => (i % 2 === 0 ? h + `<li><span class="n">${i / 2 + 1}.</span> <span>${app.esc(m)}</span>` : h + ` <span>${app.esc(m)}</span></li>`), "") + (g.moves.length % 2 ? "</li>" : "");
     if (g.moves.length !== lastCount) list.scrollTop = list.scrollHeight;
@@ -233,7 +240,7 @@ GameUI.chess = (() => {
     clearDrag();
     if (root) root.remove();
     root = null;
-    sel = -1;
+    sel = -1;captures=[];
     pendingPromo = null;
     lastCount = -1;
     animatedCount = -1;

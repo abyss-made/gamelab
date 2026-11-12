@@ -3,9 +3,9 @@ window.GameUI=window.GameUI||{};
 GameUI.batch2fx=(()=>{
  const preference=matchMedia('(prefers-reduced-motion: reduce)'),active=new Set();
  preference.addEventListener('change',()=>{if(preference.matches)active.forEach(a=>a.cancel());});
- function animate(el,frames,duration=320){
+ function animate(el,frames,duration=320,delay=0){
   if(!el||preference.matches)return;
-  const a=el.animate(frames,{duration,easing:'cubic-bezier(.2,.75,.2,1)'});active.add(a);a.finished.catch(()=>{}).finally(()=>active.delete(a));return a;
+  const a=el.animate(frames,{duration,delay,easing:'cubic-bezier(.2,.75,.2,1)'});active.add(a);a.finished.catch(()=>{}).finally(()=>active.delete(a));return a;
  }
  function transient(root,anchor,kind,text=''){
   if(!anchor||preference.matches)return;
@@ -13,7 +13,7 @@ GameUI.batch2fx=(()=>{
   el.className='b25-effect '+kind;el.setAttribute('aria-hidden','true');el.textContent=text;
   el.style.left=(r.x+r.width/2-box.x)+'px';el.style.top=(r.y+r.height/2-box.y)+'px';root.append(el);
   const frames=kind==='missile'?[{transform:'translate(-140px,130px) rotate(-45deg)',opacity:0},{opacity:1,offset:.2},{transform:'translate(-50%,-50%) rotate(-45deg)',opacity:0}]:[{transform:'translate(-50%,-50%) scale(.25)',opacity:0},{opacity:1,offset:.15},{transform:'translate(-50%,-50%) scale(2)',opacity:0}];
-  const a=animate(el,frames,kind==='missile'?300:650);if(a)a.finished.catch(()=>{}).finally(()=>el.remove());else el.remove();
+  const a=animate(el,frames,kind==='missile'?300:650,['hit','miss','sunk'].includes(kind)?300:0);if(a)a.finished.catch(()=>{}).finally(()=>el.remove());else el.remove();
  }
  function fly(root,from,to,src){
   if(!from||!to||preference.matches)return;

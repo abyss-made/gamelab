@@ -81,7 +81,7 @@ GameUI.telephone = (() => {
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
       const nav=e.target.closest('[data-reveal]');
-      if(nav){const cards=[...root.querySelectorAll('.tp-entry')];revealSelection=nav.dataset.reveal==='latest'?cards.length-1:Math.max(0,Math.min(cards.length-1,revealSelection+(nav.dataset.reveal==='next'?1:-1)));const card=cards[revealSelection];if(card){card.focus({preventScroll:true});card.scrollIntoView({behavior:FX.reduced()?'auto':'smooth',block:'nearest'});}return;}
+      if(nav){const cards=[...root.querySelectorAll('.tp-entry')];revealSelection=nav.dataset.reveal==='latest'?cards.length-1:Math.max(0,Math.min(cards.length-1,revealSelection+(nav.dataset.reveal==='next'?1:-1)));const card=cards[revealSelection];if(card){card.focus({preventScroll:true});card.scrollIntoView({behavior:FX.reduced()?'auto':'smooth',block:'nearest'});}paintRevealNav();return;}
       const l = e.target.closest("[data-like]");
       if (l && !l.disabled) {
         const [chain, idx] = l.dataset.like.split(":").map(Number);
@@ -207,6 +207,12 @@ GameUI.telephone = (() => {
     if (i && matchMedia("(pointer:fine)").matches) i.focus();
   }
 
+  function paintRevealNav(){
+    const cards=root.querySelectorAll('.tp-entry');if(!cards.length)return;
+    revealSelection=Math.max(0,Math.min(cards.length-1,revealSelection));
+    root.querySelector('[data-reveal="prev"]').disabled=revealSelection===0;
+    root.querySelector('[data-reveal="next"]').disabled=revealSelection===cards.length-1;
+  }
   function renderReveal(body,g,live){
     const r=g.rev,owner=g.players.find(p=>p.id===r.owner);
     if(body.dataset.chain!==String(r.chain)){
@@ -232,6 +238,7 @@ GameUI.telephone = (() => {
         li.querySelector('.b25-reaction').innerHTML=canLike?`<button class="btn btn-small btn-ghost tp-like ${e.liked?'on':''}" data-like="${r.chain}:${e.i}" ${e.liked?'disabled':''} aria-label="Like this entry">${e.liked?'♥':'♡'} ${e.likes}</button>`:e.likes?`<span class="tp-like-n">♥ ${e.likes}</span>`:'';
       }
     });
+    paintRevealNav();
     body.querySelector('#tp-revealed-count').textContent=`${r.entries.length} contribution${r.entries.length===1?'':'s'} revealed. Explore them without losing the next reveal.`;
   }
 

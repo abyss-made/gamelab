@@ -113,6 +113,7 @@ GameUI.impostor = (() => {
         if (me) Sound.play(r.gains[S.you] ? "join" : "drop");
       } else body.innerHTML = "";
     }
+    if(previous && !previous.myVote && g.myVote)Sound.play('drop');
     if(previous && previous.phase!==g.phase){
       votePicked=null;FX.animate(body,[{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'none'}],300);
       if(g.phase==='result')root.querySelectorAll('.im-vote-results li').forEach((el,i)=>FX.animate(el,[{opacity:.2,transform:'translateX(-12px)'},{opacity:1,transform:'none'}],220+i*35));

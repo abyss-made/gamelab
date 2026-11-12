@@ -176,9 +176,14 @@ GameUI.colorstack = (() => {
     paintHand();
     if(before){
       if(before.top.id!==g.top.id){
+        Sound.play('drop');
         const oldActor=before.turnId,origin=from||[...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===oldActor)||root.querySelector('#cs-hand');
         FX.fly(root,origin,root.querySelector('#cs-top'),root.querySelector('#cs-top .pcs-card'));
         if(['S','F','D','P','W'].includes(g.top.v))FX.transient(root,root.querySelector('#cs-top'),'special',faceText(g.top));
+      }
+      for(const player of g.players.filter(p=>p.id!==S.you)){
+        const old=before.players.find(p=>p.id===player.id),seat=[...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===player.id);
+        if(old&&player.count>old.count)FX.fly(root,root.querySelector('#cs-draw'),seat,BACK);
       }
       const previous=new Set((before.hand||[]).map(c=>c.id));
       (g.hand||[]).filter(c=>!previous.has(c.id)).forEach(c=>{const el=root.querySelector(`[data-card="${c.id}"]`);FX.fly(root,root.querySelector('#cs-draw'),el,BACK);FX.animate(el,[{opacity:.3,transform:'translateY(25px)'},{opacity:1,transform:'rotate(var(--tilt))'}],340);});
@@ -202,6 +207,7 @@ GameUI.colorstack = (() => {
   function renderResult(r, state, a) {
     const w = r.hands.find((h) => h.id === r.winnerId);
     return `<h2 class="result-title b25-result">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
+      ${!r.forfeit?'<div class="b25-out" aria-label="Winner has no cards remaining">0<small>CARDS LEFT</small></div>':''}
       <p class="muted center">${r.forfeit ? "Won because the others left." : `Scored ${r.pts} points from the cards left in other hands.`}</p>
       <ol class="b2-podium">${[...r.hands].sort((x, y) => x.cards - y.cards).map((h) => `<li class="${h.id === state.you ? "me" : ""}"><span class="rank">${h.cards}</span>${a.avatarHTML(h.avatar)}<b>${a.esc(h.name)}</b><span class="pts">${h.cards} cards left (${h.value})</span></li>`).join("")}</ol>`;
   }
