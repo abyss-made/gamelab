@@ -8,6 +8,8 @@ GameUI.gofish = (() => {
   const FISH = "/assets/premium/marine-fish.svg";
   const MAX_BACKS = 7;
   const SUIT = { S: "♠", H: "♥", D: "♦", C: "♣" };
+  const FX = GameUI.premium5;
+  let oldHand = null;
   let root = null;
   let app = null;
   let clock = null;
@@ -28,7 +30,7 @@ GameUI.gofish = (() => {
 
   function cardHTML(c, i, n, picked) {
     const red = c.s === "H" || c.s === "D";
-    return `<span class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" role="img" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img src="${FISH}" alt=""><b>${C.rankLabel(c.r)}</b></span>`;
+    return `<button type="button" data-card="${c.r}-${c.s}" data-rank="${c.r}" aria-pressed="${picked}" ${S.game.turnId !== S.you || pending ? "disabled" : ""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img src="${FISH}" alt=""><b>${C.rankLabel(c.r)}</b></button>`;
   }
 
   function mount(stage, a) {
@@ -86,9 +88,11 @@ GameUI.gofish = (() => {
   }
 
   function update(state) {
+    const activeCard = document.activeElement?.dataset.card;
     S = state;
     const g = S.game;
     const mine = g.turnId === S.you;
+    const newEvent = !repainting && seenMove !== null && g.lastMove && seenMove !== g.lastMove.sequence;
     if (!repainting) clock.set(g.timeLeft);
     // pending ask resolves on any meaningful view change (turn, pond, log, hand)
     if (pending && (viewKey(g) !== pending.key || !mine)) { pending = null; pickRank = null; pickTarget = null; clearTimeout(pendingTimer); }
@@ -101,7 +105,7 @@ GameUI.gofish = (() => {
 
     root.querySelector("#gf-players").innerHTML = g.players
       .filter((p) => p.id !== S.you)
-      .map((p) => `<div class="pgf-seat ${g.lastMove?.askerId===p.id?"asker":""} ${g.lastMove?.targetId===p.id?"target":""}">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-books" title="Books">${p.books.map((r) => `<i class="${fresh.has(`${p.id}:${r}`) ? "new" : ""}">${C.rankLabel(r)}</i>`).join("")}</span>`, sub: `${p.count} cards · ${p.books.length} ${p.books.length === 1 ? "book" : "books"}` })}<div class="pgf-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
+      .map((p) => `<div data-seat="${p.id}" class="pgf-seat ${g.lastMove?.askerId===p.id?"asker":""} ${g.lastMove?.targetId===p.id?"target":""}">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-books" title="Books">${p.books.map((r) => `<i class="${fresh.has(`${p.id}:${r}`) ? "new" : ""}">${C.rankLabel(r)}</i>`).join("")}</span>`, sub: `${p.count} cards · ${p.books.length} ${p.books.length === 1 ? "book" : "books"}` })}<div class="pgf-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
       .join("");
     const event=g.lastMove,action=root.querySelector('#gf-public-action');
     if(event && action.dataset.sequence!==String(event.sequence)){
@@ -146,6 +150,28 @@ GameUI.gofish = (() => {
       ? hand.map((c, i) => cardHTML(c, i, hand.length, c.r === (pending ? pending.rank : pickRank))).join("") || '<p class="muted">No cards in hand.</p>'
       : '<p class="muted">You\'re watching. Hands are private.</p>';
     fitHand();
+    if (!repainting) {
+      const keys = new Set((g.hand || []).map(c=>`${c.r}-${c.s}`));
+      if (oldHand) root.querySelectorAll('[data-card]').forEach(el=>{
+        if (!oldHand.has(el.dataset.card)) FX.animate(el,[{opacity:0,transform:'translateY(45px) rotate(-12deg)'},{opacity:1,transform:'translateY(0) rotate(var(--tilt))'}],360);
+      });
+      oldHand = keys;
+      if (newEvent) {
+        const e=g.lastMove, seat=id=>id===S.you ? root.querySelector('#gf-hand') : [...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===id);
+        FX.fly(root,e.received?seat(e.targetId):root.querySelector('.pgf-pond'),seat(e.askerId),e.received||e.drawn);
+        if (!e.received) FX.animate(root.querySelector('#gf-public-action'),[{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'none'}],250);
+      }
+      root.querySelectorAll('.pgf-book.new,.gf-books .new').forEach(el=>FX.animate(el,[{transform:'scale(.7)',opacity:.3},{transform:'scale(1.15)',offset:.65},{transform:'scale(1)',opacity:1}],420));
+      // This overlay survives subsequent hand/seat repaints; rapid asks must not erase a book reward.
+      if(!FX.reduced()) fresh.forEach(key=>{
+        const split=key.lastIndexOf(':'),id=key.slice(0,split),rank=Number(key.slice(split+1));
+        const note=document.createElement('div');note.className='p5-book-toast';note.setAttribute('role','status');
+        note.textContent=`${g.players.find(p=>p.id===id)?.name||'A player'} completed a book of ${C.rankWord(rank)}s`;
+        root.append(note);const a=FX.animate(note,[{opacity:0,transform:'translateY(25px) scale(.9)'},{opacity:1,transform:'none',offset:.18},{opacity:1,offset:.8},{opacity:0,transform:'translateY(-12px)'}],1000);
+        if(a)a.finished.catch(()=>{}).finally(()=>note.remove());else note.remove();
+      });
+    }
+    if(activeCard){const el=root.querySelector(`[data-card="${CSS.escape(activeCard)}"]`);if(el&&!el.disabled)el.focus({preventScroll:true});}
     if (!repainting) clock.set(g.timeLeft);
   }
 
@@ -157,10 +183,10 @@ GameUI.gofish = (() => {
     if (cards.length < 2) return;
     const w = cards[0].offsetWidth;
     const need = (cards.length * w - (hand.clientWidth - 24)) / (cards.length - 1);
-    const overlap = Math.max(-12, Math.min(w * 0.7, need));
+    const overlap = Math.max(-12, Math.min(Math.max(0, w - 44), need));
     cards.forEach((c, i) => { c.style.marginLeft = i ? `${-overlap}px` : "0"; });
     // Hands too long even at the overlap cap scroll horizontally so every card stays reachable.
-    hand.classList.toggle("scroll", need > w * 0.7);
+    hand.classList.toggle("scroll", need > Math.max(0, w - 44));
   }
 
   function unmount() {
@@ -173,12 +199,13 @@ GameUI.gofish = (() => {
     pickRank = pickTarget = null;
     pending = null;
     seenMove = null;
+    oldHand = null;
     seen = null; // reset the ledger per game instance
     fresh = new Set();
   }
 
   function renderResult(r, state, a) {
-    return `<h2 class="result-title">${C.resultTitle(r, state, a)}</h2>${r.forfeit ? '<p class="muted center">Won because the others left.</p>' : ""}
+    return `<h2 class="result-title p5-result-heading">${C.resultTitle(r, state, a)}</h2>${r.forfeit ? '<p class="muted center">Won because the others left.</p>' : ""}
       ${C.podium(r.standings, a, (p) => p.books.length, "books")}`;
   }
   return { mount, update, unmount, renderResult, resultSound: C.resultSound, scoreLabel: "books" };

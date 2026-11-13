@@ -1,0 +1,96 @@
+/* Five-game premium batch. Every selector is scoped; homepage and other games are untouched. */
+:is(.golf,.pl,.pgf,.ld2,.ty){--five-lime:#b9f66e;--five-line:#49665d;position:relative}
+:is(.golf,.pl,.pgf,.ld2,.ty) .btn{min-height:44px;border-radius:12px;font-weight:750;transition:transform .12s,background .15s;box-shadow:0 3px 0 #0004}
+:is(.golf,.pl,.pgf,.ld2,.ty) .btn:not(:disabled):active{transform:translateY(2px);box-shadow:none}
+:is(.golf,.pl,.pgf,.ld2,.ty) :where(button,input,summary):focus-visible{outline:3px solid #ddffad;outline-offset:3px}
+:is(.golf,.pl,.pgf,.ld2,.ty) .b2-player.active{box-shadow:inset 3px 0 #c7f58a,0 0 0 1px #c7f58a44;background:#183c33}
+:is(.golf,.pl) .ttt-status{border-radius:12px;padding:10px 12px;background:#071c24aa;font-size:14px;line-height:1.4}
+:is(.golf,.pl) input[type=range]{accent-color:#c5f98a;min-height:30px;touch-action:pan-x}
+.p5-shot-presets{display:flex;gap:8px;grid-column:1/-1}
+.p5-shot-presets .btn{flex:1;min-width:0;font-size:11px;padding:6px}
+.p5-shot-presets [aria-pressed=true]{background:#bce67b;color:#142922;border-color:#e2ffc0}
+/* Botanical links */
+.golf{background:radial-gradient(at 50% 20%,#315f49,#102e2c);border:1px solid #58785c;box-shadow:inset 0 1px #cfecbd33,0 20px 40px #0004}
+.golf .gf-head h2{font-family:Georgia,serif;font-size:29px;letter-spacing:-.04em;color:#fff0ca}
+.golf .gf-score{background:#17382c;border-color:#819b68;box-shadow:inset 0 1px #ffffff12}
+.golf .gf-controls{background:linear-gradient(145deg,#203f33,#102c2d);border:1px solid #79915c66;border-radius:18px;padding:14px}
+.golf .gf-canvas{filter:drop-shadow(0 12px 12px #041e1b66)}
+.golf .gf-between{border:1px solid #e6c27c;border-radius:18px;background:linear-gradient(120deg,#34492c,#153931);padding:20px;color:#fff0c0}
+/* Walnut billiards club */
+.pl{border:1px solid #597265;background:radial-gradient(at 50% 20%,#28473b,#071d25);box-shadow:0 18px 45px #0005}
+.pl .pl-canvas{filter:drop-shadow(0 12px 14px #0005)}
+.pl .pl-controls{background:linear-gradient(140deg,#203b32,#0d252a);border:1px solid #75866a66;border-radius:18px;padding:14px}
+.pl .pl-controls .board-actions .btn:first-child{background:#d6bb7f;color:#17291e;border-color:#f4e0ac}
+.pl .warn-text{display:block;padding:8px 10px;border-left:3px solid #efac91;background:#5b352e66;margin-top:7px;color:#ffd2ba}
+/* Marine salon: playable private cards and public face-down transfers */
+.pgf{position:relative}.pgf-table{background:radial-gradient(ellipse at 50% 30%,#337d7d,#123c48 80%);border:1px solid #8bb5ad66;box-shadow:inset 0 0 60px #041c3066,0 20px 40px #0004}
+.pgf .pgf-oval{border-color:#b4bda055}.pgf-seat .b2-player{border-radius:16px;background:#082b36dd;border-color:#658a89}
+.pgf .pgf-card{appearance:none;font-family:inherit;cursor:pointer;padding:0;color:#214852;text-align:left;background:linear-gradient(130deg,#fffbea,#eae0c1);box-shadow:2px 5px 0 #c7bd9a,0 12px 16px #02151b55;border-color:#d3cbaa;transition:transform .18s,filter .18s}
+.pgf .pgf-card.red{color:#b23f56}.pgf .pgf-card:disabled{opacity:1;cursor:default}.pgf .pgf-card.lift{filter:drop-shadow(0 0 5px #dcffa2);border-color:#c9fc7d}
+.pgf .pgf-card:not(:disabled):hover{filter:brightness(1.08);transform:translateY(-14px) rotate(var(--tilt))}
+.pgf .pgf-ask{background:#092d39dd;border:1px solid #72978b66;border-radius:16px}.pgf .gf-chip{min-width:44px;min-height:44px;border-radius:12px}.pgf .gf-chip[aria-pressed=true]{background:#d5edac;color:#193d39;border-color:#eaffc9}
+.pgf .pgf-book{background:linear-gradient(130deg,#f2e5ad,#d1ba7a);color:#263d30;box-shadow:2px 3px 0 #8d855c}.pgf .pgf-book.empty{background:transparent;color:#bbd1c8;box-shadow:none}
+.pgf .pgf-action{background:#163b46;border:1px solid #92b8a5;border-radius:16px;color:#effbdc}.pgf .pgf-action.transfer{border-color:#dceca2}.p5-flying-card{position:absolute;width:36px;height:50px;z-index:10;pointer-events:none;filter:drop-shadow(0 7px 6px #0005)}
+/* Ludo: lacquered board, pearl track and numbered glass tokens */
+.ld2 .pld-main{background:radial-gradient(at 50% 0,#294953,#102330);border:1px solid #56717b;border-radius:22px}
+.ld2 .ld2-board{border:8px solid #213b48;border-radius:22px;box-shadow:0 7px 0 #07151c,0 18px 24px #0005,inset 0 0 0 2px #e5f4e444;background:#eee9d5}
+.ld2 .ld2-cell.track,.ld2 .ld2-cell.homecol{box-shadow:inset 0 0 0 1px #243c4326,inset 0 2px #fff8}
+.ld2 .pld-yard{box-shadow:inset 0 0 0 2px #ffffff55,inset 0 -8px 18px #193b4433;background-image:linear-gradient(145deg,#ffffff45,#ffffff00 60%)}
+.ld2 .pld-well{box-shadow:inset 0 3px 10px #193a4344,0 1px #ffffff99}
+.ld2 .ld2-tok{position:relative;z-index:3;border:2px solid #fffb;border-radius:50%;background-image:radial-gradient(circle at 35% 28%,#ffffffcc,#ffffff00 45%),linear-gradient(#ffffff00,#0005);box-shadow:0 3px 0 #16343b99,0 5px 6px #16343b55;color:#122b35;font-weight:900}
+.ld2 .ld2-tok.can{outline:2px solid #faffc0;outline-offset:2px;cursor:pointer}.ld2 .ld2-tok.can:hover{filter:brightness(1.15)}
+.ld2 .pld-pod{background:linear-gradient(140deg,#233d48,#112731);border:1px solid #61726c;border-radius:18px}.ld2 .ld2-die{box-shadow:inset 0 3px #fff9,0 5px 0 #b5a578,0 9px 14px #0006;background:linear-gradient(135deg,#fff7d9,#e4d4a3);border-radius:17px}.ld2 .ld2-status{line-height:1.5}.ld2 .ld2-ctl .btn{min-height:44px}
+/* Property Tycoon: printed property deeds and dimensional map */
+.ty{background:radial-gradient(at 50% 0,#24463c,#0b202b);border:1px solid #537168;border-radius:22px;padding:14px}
+.ty .pty-strip{background:linear-gradient(120deg,#284536,#123332);border:1px solid #75966d;border-radius:16px;padding:14px}.ty .pty-strip strong{color:#f2edc5;font-variant-numeric:tabular-nums}
+.ty .ty-board{box-shadow:0 8px 0 #071d22,0 20px 35px #0005;border:5px solid #2c504a;border-radius:18px}.ty .ty-tile{background-image:linear-gradient(140deg,#ffffff3d,#ffffff00 65%);box-shadow:inset 0 0 0 1px #27483c33}.ty .ty-tile.sel{outline:3px solid #e4ffaf;z-index:2}.ty .ty-band{box-shadow:inset 0 2px #fff5,inset 0 -2px #0002}
+.ty .ty-tok{position:relative;z-index:5;border:2px solid #ffffc0;background-image:radial-gradient(at 30% 20%,#fff9,#fff0 65%);box-shadow:0 3px 0 #152d36,0 4px 5px #0005}
+.ty .ty-die{display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);gap:2px;padding:6px;width:36px;height:36px;background:linear-gradient(135deg,#fff9df,#d3c798);border:1px solid #e9debd;border-radius:9px;box-shadow:0 3px 0 #97875a;color:#183a36}.ty .ty-die i{width:5px;height:5px;background:#193d38;border-radius:50%;align-self:center;justify-self:center}
+.ty .ty-cash{display:inline-block;border-radius:8px;padding:4px;font-variant-numeric:tabular-nums}.ty #ty-info{background:#eee7c7;color:#1b3834;border-radius:18px;border:2px solid #b8b187}.ty #ty-info .muted{color:#4c655d}.ty #ty-info:empty{display:none}
+@media(max-width:700px){
+ .pgf .pgf-handhead{order:3}.pgf .pgf-hand{order:4}.pgf .pgf-ask{order:5}.pgf .pgf-logwrap{order:6}.pgf .pgf-ask .pgf-step:first-child{display:none}.pgf .pgf-card{min-width:0}.pgf .pgf-mid{gap:12px}
+ .ld2 .ld2-board{border-width:5px;border-radius:16px}.ld2 .pld-pod{padding:12px}.ld2 .ld2-status{font-size:12px}.ty{padding:8px}.ty .ty-board{border-width:3px;border-radius:12px}.ty .ty-die{width:28px;height:28px;padding:4px}.ty .ty-die i{width:4px;height:4px}
+ .p5-shot-presets{gap:5px}.p5-shot-presets .btn{min-height:40px;font-size:10px}
+}
+@media(max-width:700px) and (orientation:portrait){
+ :is(.golf,.pl){gap:8px;padding:10px}:is(.golf,.pl) .b2-players{display:flex;flex-wrap:nowrap;overflow-x:auto;justify-content:start;margin:0;gap:6px}:is(.golf,.pl) .b2-player{padding:6px;flex-shrink:0}:is(.golf,.pl) .b2-player .avatar{width:26px;height:26px}:is(.golf,.pl) .ttt-status{margin:0;padding:8px;font-size:12px}
+ .golf .gf-head{flex-wrap:nowrap}.golf .gf-head h2{font-size:18px}.golf .gf-score{padding:6px 8px;gap:6px}.golf .gf-score strong{font-size:20px}
+ .golf .gf-wrap{width:min(100%,calc((100dvh - 530px)*440/700));min-width:165px;max-width:240px;margin:auto;padding:4px}
+ .pl .pl-wrap{width:min(100%,calc((100dvh - 480px)*.55));min-width:180px;max-width:280px;margin:auto}
+ :is(.pl,.golf) :is(.pl-controls,.gf-controls){grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:10px;gap:8px}:is(.pl,.golf) .board-actions{grid-column:1/-1;gap:7px;margin:0}:is(.pl,.golf) .board-actions .btn{flex:1;padding:8px}:is(.pl,.golf) .pl-fine-row{gap:4px}.golf #gf-place-note{font-size:10px}.golf .pl-fine-row{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){:is(.golf,.pl,.pgf,.ld2,.ty) *, :is(.golf,.pl,.pgf,.ld2,.ty) *::before,:is(.golf,.pl,.pgf,.ld2,.ty) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Preserve a readable playing surface and full-width touch power slider. */
+@media(max-width:700px) and (orientation:portrait){
+ .pl .pl-wrap{width:min(100%,280px);min-width:260px;max-width:none}
+ .golf .gf-wrap{width:min(100%,240px);min-width:220px}
+ .pl #pl-controls>.pl-slider{grid-column:1/-1}
+ .pl #pl-controls .pl-fine-row input{flex:1;min-width:0}
+}
+.ld2 .ld2-tok.moved{animation:none}
+.p5-result-heading{font-size:clamp(32px,4vw,52px);letter-spacing:-.05em;color:#effacb;animation:p5-result-in .4s ease-out}
+@keyframes p5-result-in{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.p5-result-heading{animation:none}}
+@media(max-width:700px) and (orientation:portrait){
+ :is(.pl,.golf) .b2-player>div{min-width:0}
+ :is(.pl,.golf) .b2-player b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:105px}
+ :is(.pl,.golf) .b2-player small{display:none}
+ :is(.pl,.golf) .b2-player .muted{font-size:10px;white-space:nowrap}
+ :is(.pl,.golf) .p5-shot-presets{display:none}
+ .pl{gap:4px;padding:8px}
+ .pl .pl-wrap{width:271px;min-width:260px}
+ .pl #pl-controls{padding:8px;gap:4px}
+ .pl #pl-controls>.pl-slider{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:6px}
+ .pl #pl-controls>.pl-slider>span{font-size:11px;display:flex;flex-direction:column}
+ .pl .pl-fine-row{gap:4px}
+ .pl #pl-controls .board-actions .btn{padding:8px;font-size:12px}
+ .pl #pl-status{padding:6px 8px;font-size:12px;line-height:1.25}
+}
+@media(max-width:700px) and (orientation:portrait){
+ :is(.pl,.golf) .b2-players{padding:0}
+ .pl #pl-controls{padding:6px}
+}
+.pl .p5-pot-note{display:block;color:#c9ed9d;font-size:12px;margin-top:5px}
+@media(max-width:700px) and (orientation:portrait){.golf .gf-wrap{max-width:224px}}
+.pgf .p5-book-toast{position:absolute;left:50%;top:48%;translate:-50% 0;z-index:12;max-width:90%;width:max-content;padding:16px 22px;border:2px solid #f2dfa5;border-radius:18px;background:linear-gradient(130deg,#eee2ab,#c6b273);color:#153b33;box-shadow:0 12px 30px #001c2d66;font-weight:800;text-align:center;pointer-events:none}
+.pgf .pgf-card:not(:disabled):hover,.pgf .pgf-card:focus-visible{z-index:6}

@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.pool = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
+  const visual = FX.scene();
   const PAD = 44;
   const COLORS = { 1: "#f6c90e", 2: "#2b6fe0", 3: "#e0393e", 4: "#7b3fb8", 5: "#f08a24", 6: "#1f9d57", 7: "#8a2a2a", 8: "#111", 9: "#f6c90e", 10: "#2b6fe0", 11: "#e0393e", 12: "#7b3fb8", 13: "#f08a24", 14: "#1f9d57", 15: "#8a2a2a" };
   let root = null;
@@ -21,6 +23,7 @@ GameUI.pool = (() => {
   let animT0 = 0;
   let busyUntil = 0;
   let lastShot = -1;
+  let outcomeSeeded = false, outcomeKey = null;
   let dragging = null;
   let pendingCue = null; // { aim, from, until }: cue shown at contact while the server resolves the shot
 
@@ -132,6 +135,9 @@ GameUI.pool = (() => {
       c.fillRect(x - r, y - r * 0.55, r * 2, r * 1.1);
       c.restore();
     }
+    const shade=c.createRadialGradient(x-r*.35,y-r*.4,r*.1,x+r*.2,y+r*.3,r*1.25);
+    shade.addColorStop(0,'#ffffff55');shade.addColorStop(.5,'#ffffff00');shade.addColorStop(1,'#00000099');
+    c.fillStyle=shade;c.beginPath();c.arc(x,y,r,0,7);c.fill();
     if (b.id !== 0) {
       c.beginPath();
       c.arc(x, y, r * 0.5, 0, 7);
@@ -216,8 +222,13 @@ GameUI.pool = (() => {
       ctx.fillStyle = pg;
       ctx.fill();
     }
+    ctx.save();ctx.strokeStyle='#d3f5dd09';ctx.lineWidth=.6;
+    for(let y=4;y<t.h;y+=8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(t.w,y);ctx.stroke();}
+    ctx.restore();
     const cur = currentBalls(now);
     const mine = canShoot();
+    for (const b of cur.balls) visual.ball(ctx,b.id,b,now,t.r,b.id===0?"#ebffe0":COLORS[b.id]);
+    visual.draw(ctx,now);
     // guide
     if (mine && !cur.moving && !(g.inHand && placing)) {
       const from = cueXY();
@@ -365,6 +376,8 @@ GameUI.pool = (() => {
   }
 
   function mount(stage, a) {
+    visual.reset();
+    outcomeSeeded=false;outcomeKey=null;
     app = a;
     root = document.createElement("div");
     root.className = "b2 pl";
@@ -382,6 +395,9 @@ GameUI.pool = (() => {
       </div>
       <p class="muted center pl-help" id="pl-help"></p>`;
     stage.appendChild(root);
+    const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
+    root.querySelector('#pl-controls').append(presets);
+    presets.addEventListener('click',e=>{const b=e.target.closest('[data-p5-power]'),slider=root.querySelector('#pl-pow');if(!b||slider.disabled)return;slider.value=b.dataset.p5Power;slider.dispatchEvent(new Event('input',{bubbles:true}));});
     canvas = root.querySelector("#pl-canvas");
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
@@ -460,6 +476,7 @@ GameUI.pool = (() => {
     place.textContent = placing ? "Lock cue ball" : "Move cue ball";
     place.disabled = placing && !(cuePos && legalSpot(cuePos.x, cuePos.y));
     root.querySelector("#pl-resign").hidden = g.myIndex < 0;
+    root.querySelectorAll('[data-p5-power]').forEach(b=>{b.disabled=!mine;b.setAttribute('aria-pressed',String(Number(b.dataset.p5Power)===power));});
   }
 
   function statusText() {
@@ -476,6 +493,7 @@ GameUI.pool = (() => {
       const by = app.esc((g.players.find((p) => p.id === l.by) || {}).name || "");
       msg += ` <span class="warn-text">Foul by ${by}: ${{ scratch: "scratch", "no-contact": "missed every ball", "wrong-ball": "wrong ball first", "no-rail": "no rail or pocket" }[l.foul]}.</span>`;
     }
+    if(l && !busy && !l.foul && l.potted.length) msg += ` <span class="p5-pot-note">${l.potted.length} ball${l.potted.length===1?"":"s"} pocketed.</span>`;
     return msg;
   }
 
@@ -487,6 +505,11 @@ GameUI.pool = (() => {
     const st = root.querySelector("#pl-status");
     st.innerHTML = statusText();
     st.className = "ttt-status" + (canShoot() ? " mine" : "");
+    if(!outcomeSeeded){outcomeSeeded=true;outcomeKey=g.last?.shot;}
+    else if(g.last && performance.now()>=busyUntil && outcomeKey!==g.last.shot){
+      outcomeKey=g.last.shot;
+      if(g.last.foul || g.last.potted.length) FX.animate(st,[{boxShadow:`inset 4px 0 ${g.last.foul?'#f6a78d':'#c4ed8a'}`,background:g.last.foul?'#713b3555':'#42704b66'},{boxShadow:'inset 0 0 transparent',background:'transparent'}],650);
+    }
     root.querySelector("#pl-help").textContent = g.myIndex >= 0 ? "Pocket all of your group, then the 8-ball. Hitting the wrong ball first or missing everything is a foul." : "";
   }
 
@@ -529,6 +552,7 @@ GameUI.pool = (() => {
   }
 
   function unmount() {
+    visual.reset();
     cancelAnimationFrame(raf);
     clearTimeout(update.t);
     window.removeEventListener("resize", fit);
@@ -543,7 +567,7 @@ GameUI.pool = (() => {
     const why = { eight: "Sank the 8-ball to finish the table.", "eight-early": "The other player pocketed the 8-ball too soon.", "eight-foul": "The other player fouled while pocketing the 8-ball.", "eight-scratch": "The other player scratched on the 8-ball.", resign: "Won by resignation.", time: "Won on time.", abandoned: "The other player left." }[r.reason] || "";
     const rows = r.players.map((p) => `${a.esc(p.name)} (${p.group || "no group"}) <b>${p.left}</b> left`).join(" · ");
     const next = r.nextUp ? `<p class="center next-up">Winner stays: <b>${a.esc(r.nextUp)}</b> plays next.</p>` : "";
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
   }
 
   function resultSound(r, state) {

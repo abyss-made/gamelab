@@ -229,8 +229,8 @@ async function goFish(t, T) {
   }
   await mine(t.page);
   await waitPage(t.page, () => App.S.game.turnId === App.S.you && document.querySelector('[data-rank]'), null, 'my turn with chips');
-  const rank = await t.page.evaluate(() => document.querySelector('[data-rank]').dataset.rank);
-  await press(t.page, `[data-rank="${rank}"]`);
+  const rank = await t.page.locator('[data-rank]:visible').first().getAttribute('data-rank');
+  await press(t.page, `[data-rank="${rank}"]:visible`);
   await waitPage(t.page, (rk) => document.querySelector(`[data-rank="${rk}"]`).getAttribute('aria-pressed') === 'true', rank, 'rank picked');
   const chip = await focused(t.page);
   ok(chip.where === 'control' && chip.rank === rank, `${T}: Go Fish: picking a rank keeps focus on the chip (${JSON.stringify(chip)})`);

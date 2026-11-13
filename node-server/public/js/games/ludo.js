@@ -2,6 +2,7 @@
 window.GameUI = window.GameUI || {};
 GameUI.ludo = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
   const PIPS = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
   const HEX = ["#ff477b", "#adff00", "#ffcd2d", "#4db8ff"];
   const NAMES = ["Red", "Green", "Yellow", "Blue"];
@@ -143,6 +144,7 @@ GameUI.ludo = (() => {
   }
 
   function update(state) {
+    const before = FX.rects(root,"[data-tok]","tok");
     S = state;
     const g = S.game;
     if (!g) return;
@@ -182,6 +184,17 @@ GameUI.ludo = (() => {
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.phase !== "move" || g.turnId !== S.you) pickCell = null;
     paintPicker();
+    if (animateMove && ev) {
+      const player=g.players.find(p=>p.id===ev.by), el=root.querySelector(`[data-tok="${player?.colour}-${ev.token}"]`);
+      if(el && player) {
+        const dest=pos(player.colour,ev.token,ev.to), unit=root.querySelector('.ld2-board').getBoundingClientRect().width/15;
+        const route=ev.from>=0 && ev.to>ev.from ? Array.from({length:ev.to-ev.from+1},(_,i)=>pos(player.colour,ev.token,ev.from+i)) : [pos(player.colour,ev.token,ev.from),dest];
+        FX.animate(el,route.map(([x,y])=>({transform:`translate(${(x-dest[0])*unit}px,${(y-dest[1])*unit}px)`})),Math.min(650,route.length*85));
+      }
+      // Captured tokens visibly return to their own yards.
+      if(ev.captured) FX.flip(root,'[data-tok]','tok',new Map([...before].filter(([key])=>!key.startsWith(player?.colour+'-'))),340);
+    }
+    if(g.rolls!==lastRolls && lastRolls>=0) FX.animate(die,[{transform:'translateY(-12px) rotate(-25deg)'},{transform:'translateY(2px) rotate(8deg)',offset:.75},{transform:'none'}],420);
     if (fk) root.querySelector(fk)?.focus();
     root.querySelector("#ld2-eyebrow").textContent = mine && g.phase === "move" ? "YOU ROLLED" : g.dice ? "LAST ROLL" : "DICE";
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");
@@ -202,7 +215,7 @@ GameUI.ludo = (() => {
   function renderResult(r, state, a) {
     const w = r.standings.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
-    return `<h2 class="result-title">${title}</h2>${r.forfeit ? '<p class="muted center">Everyone else left the game.</p>' : ""}${C.podium(r.standings, a, (p) => `${p.home}/4`, "home")}`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2>${r.forfeit ? '<p class="muted center">Everyone else left the game.</p>' : ""}${C.podium(r.standings, a, (p) => `${p.home}/4`, "home")}`;
   }
 
   function resultSound(r, state) {
