@@ -297,9 +297,9 @@ GameUI.pool = (() => {
   // Walnut rail, brass diamonds, jewel-green cloth (material only; geometry is the server's table).
   function drawTable(t, w, h) {
     const wood = ctx.createLinearGradient(0, 0, 0, h);
-    wood.addColorStop(0, "#9a6a3f");
-    wood.addColorStop(0.5, "#7a4f2c");
-    wood.addColorStop(1, "#5e3a1f");
+    wood.addColorStop(0, "#52616a");
+    wood.addColorStop(0.5, "#172735");
+    wood.addColorStop(1, "#091c2b");
     ctx.fillStyle = wood;
     ctx.beginPath();
     ctx.roundRect ? ctx.roundRect(0, 0, w, h, 30) : ctx.rect(0, 0, w, h);
@@ -309,7 +309,7 @@ GameUI.pool = (() => {
     ctx.stroke();
     ctx.save();
     ctx.globalAlpha = 0.12;
-    ctx.strokeStyle = "#2b1a0e";
+    ctx.strokeStyle = "#d8e4e0";
     ctx.lineWidth = 1;
     for (let i = 6; i < h; i += 9) { ctx.beginPath(); ctx.moveTo(8, i); ctx.bezierCurveTo(w * 0.3, i + 3, w * 0.6, i - 3, w - 8, i + 1); ctx.stroke(); }
     ctx.restore();
@@ -324,14 +324,16 @@ GameUI.pool = (() => {
       for (const x of [PAD / 2, w - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
     }
     ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#2f8b5f";
+    ctx.fillStyle = "#163e68";
     ctx.fillRect(-10, -10, t.w + 20, t.h + 20);
     const cloth = ctx.createRadialGradient(t.w / 2, t.h * 0.45, 20, t.w / 2, t.h / 2, t.w * 0.62);
-    cloth.addColorStop(0, "#1f7a6a");
-    cloth.addColorStop(1, "#0b4a43");
+    cloth.addColorStop(0, "#327ca7");
+    cloth.addColorStop(1, "#12395e");
     ctx.fillStyle = cloth;
     ctx.fillRect(0, 0, t.w, t.h);
-    ctx.strokeStyle = "#0a3a33";
+    ctx.save();ctx.strokeStyle='#aac5ce55';ctx.lineWidth=2;ctx.strokeRect(-18,-18,t.w+36,t.h+36);
+    ctx.fillStyle='#d5e2df14';ctx.font='800 30px Arial';ctx.textAlign='center';ctx.fillText('P G',t.w/2,t.h/2-4);ctx.font='10px Arial';ctx.fillText('THE MIDNIGHT CLUB',t.w/2,t.h/2+16);ctx.restore();
+    ctx.strokeStyle = "#08263b";
     ctx.lineWidth = 2;
     ctx.strokeRect(0, 0, t.w, t.h);
   }
@@ -394,6 +396,8 @@ GameUI.pool = (() => {
         </div>
       </div>
       <p class="muted center pl-help" id="pl-help"></p>`;
+    root.dataset.ten='pool';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('pool'));
     stage.appendChild(root);
     const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
     root.querySelector('#pl-controls').append(presets);

@@ -77,6 +77,8 @@ GameUI.telephone = (() => {
     root = document.createElement("div");
     root.className = "b2 tp ptel";
     root.innerHTML = `<div class="b2-players card" id="tp-players"></div><div class="card tp-main"><div class="hl-round" id="tp-head"></div><div id="tp-body"></div><div class="hl-status" id="tp-status" aria-live="polite"></div></div>`;
+    root.dataset.ten='telephone';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('telephone'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
@@ -153,9 +155,9 @@ GameUI.telephone = (() => {
       <span class="tp-sep"></span>
       ${SIZES.map((s) => `<button type="button" class="btn btn-small btn-ghost ${s === curSize() ? "on" : ""}" data-size="${s}" aria-pressed="${s===curSize()}" aria-label="${tool === "eraser" ? "Eraser" : "Brush"} size ${s}">${s === 4 ? "S" : s === 10 ? "M" : "L"}</button>`).join("")}
       <span class="tp-sep"></span>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "brush" ? "on" : ""}" data-tool="brush" aria-pressed="${tool==='brush'}">Brush</button>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "fill" ? "on" : ""}" data-tool="fill" aria-pressed="${tool==='fill'}">Fill</button>
-      <button type="button" class="btn btn-small btn-ghost ${tool === "eraser" ? "on" : ""}" data-tool="eraser" aria-pressed="${tool==='eraser'}">Eraser</button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "brush" ? "on" : ""}" data-tool="brush" aria-pressed="${tool==='brush'}">${GameUI.tenArt.tool("brush")}<span>Brush</span></button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "fill" ? "on" : ""}" data-tool="fill" aria-pressed="${tool==='fill'}">${GameUI.tenArt.tool("fill")}<span>Fill</span></button>
+      <button type="button" class="btn btn-small btn-ghost ${tool === "eraser" ? "on" : ""}" data-tool="eraser" aria-pressed="${tool==='eraser'}">${GameUI.tenArt.tool("eraser")}<span>Eraser</span></button>
       <button type="button" class="btn btn-small btn-ghost" data-act="undo">Undo</button>
       <button type="button" class="btn btn-small btn-ghost" data-act="clear">Clear</button>
     </div>`;

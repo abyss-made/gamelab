@@ -97,17 +97,17 @@ GameUI.golf = (() => {
     return out;
   }
   function drawDeco(c) {
-    for (const d of deco) {
-      if (d.t === "tree") {
-        c.beginPath(); c.arc(d.x + 3, d.y + 5, d.r, 0, 7); c.fillStyle = "#0b2e2655"; c.fill();
-        c.beginPath(); c.arc(d.x, d.y, d.r, 0, 7); c.fillStyle = "#2f7a46"; c.fill();
-        c.beginPath(); c.arc(d.x - d.r * 0.25, d.y - d.r * 0.25, d.r * 0.62, 0, 7); c.fillStyle = "#4f9a52"; c.fill();
-        c.beginPath(); c.moveTo(d.x - d.r * 0.5, d.y); c.quadraticCurveTo(d.x, d.y - d.r * 0.5, d.x + d.r * 0.4, d.y - d.r * 0.2); c.strokeStyle = "#9fd07a66"; c.lineWidth = 1.5; c.stroke();
-      } else {
-        c.fillStyle = "#3d7a3a"; c.beginPath(); c.ellipse(d.x, d.y, 14, 7, 0, 0, 7); c.fill();
-        c.fillStyle = d.c;
-        for (const [ox, oy] of [[-8, -1], [-3, 2], [3, -2], [8, 1]]) { c.beginPath(); c.arc(d.x + ox, d.y + oy, 2.6, 0, 7); c.fill(); }
+    for(const d of deco){
+      c.save();c.translate(d.x,d.y);
+      if(d.t==='tree'){
+        c.fillStyle='#031b2a77';c.beginPath();c.ellipse(6,9,d.r*1.1,d.r*.9,0,0,7);c.fill();
+        for(let j=0;j<7;j++){const a=j*Math.PI*2/7,x=Math.cos(a)*d.r*.42,y=Math.sin(a)*d.r*.42,g=c.createRadialGradient(x-3,y-4,1,x,y,d.r*.65);g.addColorStop(0,j%2?'#6aa793':'#93bf92');g.addColorStop(1,'#1c5b65');c.fillStyle=g;c.beginPath();c.arc(x,y,d.r*.65,0,7);c.fill();}
+        c.strokeStyle='#c5deaa77';c.lineWidth=1;c.beginPath();c.arc(-3,-4,d.r*.5,3.4,5.5);c.stroke();
+      }else{
+        c.fillStyle='#193f50';c.beginPath();c.ellipse(0,3,15,8,0,0,7);c.fill();
+        for(const [x,y] of [[-8,-1],[-2,2],[4,-2],[9,1]]){c.strokeStyle='#88c7b3';c.lineWidth=1;c.beginPath();c.moveTo(x,y+4);c.lineTo(x,y-2);c.stroke();for(let k=0;k<5;k++){c.fillStyle=d.c;c.beginPath();c.arc(x+Math.cos(k*1.25)*2,y+Math.sin(k*1.25)*2,2,0,7);c.fill();}c.fillStyle='#f2d58f';c.beginPath();c.arc(x,y,1.4,0,7);c.fill();}
       }
+      c.restore();
     }
   }
 
@@ -170,14 +170,14 @@ GameUI.golf = (() => {
   function scene(now) {
     const h = g.hole;
     const lawn = ctx.createLinearGradient(0, 0, 0, g.size.h);
-    lawn.addColorStop(0, "#88bd5e");
-    lawn.addColorStop(1, "#588b43");
+    lawn.addColorStop(0, "#123e50");
+    lawn.addColorStop(1, "#071f35");
     ctx.fillStyle = lawn;
     ctx.fillRect(-400, -400, g.size.w + 800, g.size.h + 800);
     drawDeco(ctx);
     // fairway with mowing stripes
     poly(ctx, h.poly);
-    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#59bc70");green.addColorStop(.55,"#29945f");green.addColorStop(1,"#177a56");
+    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#72d7b2");green.addColorStop(.55,"#3baf92");green.addColorStop(1,"#267c79");
     ctx.fillStyle = green;
     ctx.fill();
     ctx.save();
@@ -190,10 +190,10 @@ GameUI.golf = (() => {
     cupGlow.addColorStop(1, "#7fd07a00");
     ctx.fillStyle = cupGlow;
     ctx.fillRect(h.cup[0] - 70, h.cup[1] - 70, 140, 140);
-    for (const z of h.sand) { ctx.fillStyle = "#ead7a0"; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(z.x, z.y, z.w, z.h, 14) : ctx.rect(z.x, z.y, z.w, z.h); ctx.fill(); ctx.strokeStyle = "#c9ae66"; ctx.lineWidth = 2; ctx.stroke(); }
+    for (const z of h.sand) { ctx.fillStyle = "#dfc399"; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(z.x, z.y, z.w, z.h, 14) : ctx.rect(z.x, z.y, z.w, z.h); ctx.fill(); ctx.strokeStyle = "#c9ae66"; ctx.lineWidth = 2; ctx.stroke(); }
     for (const z of h.water) {
       const wg = ctx.createLinearGradient(z.x, z.y, z.x + z.w, z.y + z.h);
-      wg.addColorStop(0, "#59b7b2"); wg.addColorStop(1, "#267e8f");
+      wg.addColorStop(0, "#234c7e"); wg.addColorStop(1, "#102a51");
       ctx.fillStyle = wg; ctx.fillRect(z.x, z.y, z.w, z.h);
       ctx.strokeStyle = "#cfeee966"; ctx.lineWidth = 1.5;
       for (let y = z.y + 10; y < z.y + z.h; y += 14) { ctx.beginPath(); ctx.moveTo(z.x + 8, y); ctx.bezierCurveTo(z.x + z.w * 0.3, y - 4, z.x + z.w * 0.6, y + 4, z.x + z.w - 8, y); ctx.stroke(); }
@@ -202,23 +202,23 @@ GameUI.golf = (() => {
     // jointed limestone curbs
     ctx.lineJoin = "round";
     poly(ctx, h.poly);
-    ctx.strokeStyle = "#2c5f3f";
+    ctx.strokeStyle = "#173343";
     ctx.lineWidth = 12;
     ctx.stroke();
-    ctx.strokeStyle = "#e9e2c4";
+    ctx.strokeStyle = "#c2d7c8";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.save();
     ctx.setLineDash([1.2, 16]);
-    ctx.strokeStyle = "#9d987c";
+    ctx.strokeStyle = "#728b87";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.restore();
     for (const w of h.walls) {
       poly(ctx, w);
-      ctx.fillStyle = "#d9d1b0";
+      ctx.fillStyle = "#587789";
       ctx.fill();
-      ctx.strokeStyle = "#7d7759";
+      ctx.strokeStyle = "#b4c8c8";
       ctx.lineWidth = 3;
       ctx.stroke();
     }
@@ -375,6 +375,8 @@ GameUI.golf = (() => {
         <div class="board-actions"><button type="button" class="btn" id="gf-putt">Putt</button></div>
       </div>
       <div class="gf-card card" id="gf-card"></div>`;
+    root.dataset.ten='golf';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('golf'));
     stage.appendChild(root);
     const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
     root.querySelector('.gf-controls').append(presets);

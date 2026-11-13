@@ -22,6 +22,8 @@ GameUI.impostor = (() => {
         <div id="im-body"></div>
         <div class="hl-status" id="im-status" aria-live="polite"></div>
       </div>`;
+    root.dataset.ten='impostor';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('impostor'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", e=>{
@@ -48,8 +50,8 @@ GameUI.impostor = (() => {
     if(k===roleKey)return;const prior=!!roleKey;roleKey=k;let role;
     if(!me||me.out)role=`<div class="im-card">You're watching. Category: <b>${app.esc(g.category)}</b></div>`;
     else if(concealed)role='<div class="im-card b25-concealed"><span class="im-role-tag">FOR YOUR EYES ONLY</span><b class="im-secret">ROLE HIDDEN</b>Your role stays private until you reveal it.</div>';
-    else if(g.role==='impostor')role=`<div class="im-card impostor"><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
-    else role=`<div class="im-card crew"><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word||'')}</b>Category: ${app.esc(g.category)}. Give a clue without saying the word.</div>`;
+    else if(g.role==='impostor')role=`<div class="im-card impostor"><img class="ten-role-art" src="/assets/ten/case-mask.svg" alt=""><span class="im-role-tag">YOUR PRIVATE ROLE</span><b class="im-secret">IMPOSTOR</b>Category: <b>${app.esc(g.category)}</b>. Listen, blend in, and keep your role to yourself.</div>`;
+    else role=`<div class="im-card crew"><img class="ten-role-art" src="/assets/ten/fingerprint.svg" alt=""><span class="im-role-tag">CREW · SECRET WORD · FOR YOUR EYES ONLY</span><b class="im-secret">${app.esc(g.word||'')}</b>Category: ${app.esc(g.category)}. Give a clue without saying the word.</div>`;
     root.querySelector('#im-role').innerHTML=role+(me&&!me.out?`<button type="button" class="btn btn-small btn-ghost" id="im-privacy" aria-pressed="${concealed}">${concealed?'Reveal my role':'Hide my role'}</button>`:'');
     if(prior&&!concealed)FX.animate(root.querySelector('.im-card'),[{opacity:.3,transform:'perspective(700px) rotateX(-12deg)'},{opacity:1,transform:'none'}],380);
   }
@@ -106,7 +108,7 @@ GameUI.impostor = (() => {
         } else body.innerHTML = "";
       } else if (g.phase === "result") {
         const r = g.result;
-        body.innerHTML = `<div class="im-result"><p>The impostor was <b>${nameOf(g, r.impostorId)}</b>. The word was <b>${app.esc(r.word)}</b>.</p>
+        body.innerHTML = `<div class="im-result"><div class="ten-case-label">ROUND REVEAL</div><p>The impostor was <b>${nameOf(g, r.impostorId)}</b>. The word was <b>${app.esc(r.word)}</b>.</p>
           <p>${r.voided ? "The impostor left, so this round doesn't count." : r.stole ? `${nameOf(g, r.impostorId)} guessed the word and steals it!` : r.caught ? "The crew caught the impostor!" : "The impostor got away!"}${r.guess && !r.stole ? ` (Guessed “${app.esc(r.guess)}”.)` : ""}</p>
           <ul class="im-vote-results">${g.players.map(player=>`<li>${app.avatarHTML(player.avatar)}<span>${app.esc(player.name)}${player.id===r.impostorId?' · Impostor':''}</span><strong>${Object.values(r.votes).filter(id=>id===player.id).length} votes</strong></li>`).join('')}</ul>
           <ul class="bl-gains">${g.players.filter((p) => r.gains[p.id]).map((p) => `<li>${app.esc(p.name)} <b>+${r.gains[p.id]}</b></li>`).join("")}</ul></div>`;

@@ -4,7 +4,7 @@
 window.GameUI = window.GameUI || {};
 GameUI.gofish = (() => {
   const C = GameUI.common;
-  const BACK = "/assets/premium/marine-card-back.svg";
+  const BACK = "/assets/ten/marine-back.svg";
   const FISH = "/assets/premium/marine-fish.svg";
   const MAX_BACKS = 7;
   const SUIT = { S: "♠", H: "♥", D: "♦", C: "♣" };
@@ -30,7 +30,7 @@ GameUI.gofish = (() => {
 
   function cardHTML(c, i, n, picked) {
     const red = c.s === "H" || c.s === "D";
-    return `<button type="button" data-card="${c.r}-${c.s}" data-rank="${c.r}" aria-pressed="${picked}" ${S.game.turnId !== S.you || pending ? "disabled" : ""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img src="${FISH}" alt=""><b>${C.rankLabel(c.r)}</b></button>`;
+    return `<button type="button" data-card="${c.r}-${c.s}" data-rank="${c.r}" aria-pressed="${picked}" ${S.game.turnId !== S.you || pending ? "disabled" : ""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img class="ten-fish" src="/assets/ten/fish-${c.r}.svg" alt=""><b>${C.rankLabel(c.r)}</b></button>`;
   }
 
   function mount(stage, a) {
@@ -38,7 +38,7 @@ GameUI.gofish = (() => {
     root = document.createElement("div");
     root.className = "b2 gf pgf";
     root.innerHTML = `<div class="pgf-table">
-        <div class="pgf-oval" aria-hidden="true"><span class="pgf-orn">THE MARINE SALON<small>A LITTLE LUCK. A GOOD MEMORY.</small></span></div>
+        <div class="pgf-oval" aria-hidden="true"><span class="pgf-orn">THE CORAL COLLECTION<small>A LITTLE LUCK. A GOOD MEMORY.</small></span></div>
         <div class="pgf-opponents" id="gf-players"></div>
         <div class="pgf-mid">
           <div class="pgf-pond"><img src="${BACK}" alt=""><small id="gf-deck"></small></div>
@@ -50,6 +50,8 @@ GameUI.gofish = (() => {
         <div class="gf-hand pgf-hand" id="gf-hand" aria-label="Your hand"></div>
         <details class="pgf-logwrap"><summary>Recent moves</summary><ul class="gf-log" id="gf-log" aria-label="Recent moves"></ul></details>
       </div>`;
+    root.dataset.ten='gofish';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('gofish'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));

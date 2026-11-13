@@ -85,7 +85,7 @@ GameUI.ludo = (() => {
             const moved = animateMove && g.lastEvent && g.lastEvent.kind === "move" && g.lastEvent.by === p.id && g.lastEvent.token === ti ? " moved" : "";
             // On a square shared by several players, tapping opens the owner+number picker instead.
             const act = shared && toks.some((x) => x.p.id === S.you && g.movable.includes(x.ti)) ? `data-cell="${key(c, r)}"` : can ? `data-token="${ti}"` : "disabled";
-            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${moved}" ${act} data-tok="${p.colour}-${ti}" aria-label="${label}${act.startsWith("data-cell") ? ", shared square: choose" : ""}">${ti + 1}</button>`;
+            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${moved}" ${act} data-tok="${p.colour}-${ti}" aria-label="${label}${act.startsWith("data-cell") ? ", shared square: choose" : ""}"><img src="/assets/ten/rocket-${p.colour}.svg" alt=""><span>${ti + 1}</span></button>`;
           })
           .join("");
         html += `<div class="ld2-cell ${b.cls} ${toks.length > 1 ? "multi" : ""} ${shared ? "shared" : ""}" style="grid-column:${c + 1};grid-row:${r + 1}">${inner}</div>`;
@@ -113,6 +113,8 @@ GameUI.ludo = (() => {
       <div class="card ld2-main pld-main"><div class="pld-boardwrap"><div id="ld2-board"></div><div id="ld2-picker"></div></div>
       <aside class="pld-pod"><span class="pld-eyebrow" id="ld2-eyebrow">DICE</span><div class="ld2-die" id="ld2-die" role="img" aria-label="Dice"></div>
       <div class="ld2-status" id="ld2-status" aria-live="polite"></div><div class="ld2-ctl" id="ld2-ctl"></div><small class="muted">A six gives you another roll.</small></aside></div>`;
+    root.dataset.ten='ludo';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('ludo'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {

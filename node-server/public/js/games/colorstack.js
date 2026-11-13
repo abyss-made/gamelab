@@ -7,7 +7,7 @@ GameUI.colorstack = (() => {
   const FX=GameUI.batch2fx;
   const NAMES = { r: "Red", b: "Blue", g: "Green", y: "Yellow", w: "Wild" };
   const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", P: "+4" };
-  const BACK = "/assets/premium/stack-card-back.svg";
+  const BACK = "/assets/ten/stack-back.svg";
   const MAX_BACKS = 7; // long fans compress; the exact count stays in text
   let root = null;
   let app = null;
@@ -19,9 +19,9 @@ GameUI.colorstack = (() => {
   const faceText = (c) => LABEL[c.v] || c.v;
   const tilt = (i, n) => (n <= 1 ? 0 : Math.round((i - (n - 1) / 2) * Math.min(5, 34 / n) * 10) / 10);
   function cardHTML(c, i, n, { playable, sel }) {
-    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><i class="corner">${faceText(c)}</i><b>${faceText(c)}</b><small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></button>`;
+    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></button>`;
   }
-  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><i class="corner">${faceText(c)}</i><b>${faceText(c)}</b><small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></span>`;
+  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></span>`;
   const backs = (n) => Array.from({ length: Math.min(n, MAX_BACKS) }, (_, i) => `<img src="${BACK}" alt="" style="--tilt:${tilt(i, Math.min(n, MAX_BACKS))}deg">`).join("");
 
   function mount(stage, a) {
@@ -29,7 +29,7 @@ GameUI.colorstack = (() => {
     root = document.createElement("div");
     root.className = "b2 cs pcs";
     root.innerHTML = `<div class="pcs-table">
-        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>THE NEON SOCIAL CLUB</small></span></div>
+        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>THE SPECTRUM CLUB</small></span></div>
         <div class="pcs-opponents" id="cs-players"></div>
         <div class="pcs-center">
           <div class="pcs-pile"><button type="button" class="cs-deck pcs-deck" id="cs-draw" aria-label="Draw a card"><img src="${BACK}" alt=""></button><small id="cs-deckn"></small></div>
@@ -46,6 +46,8 @@ GameUI.colorstack = (() => {
         </div>
       </div>
       <div class="cs-picker" id="cs-picker" hidden role="dialog" aria-label="Choose a color"><p>Choose a color</p>${["r", "b", "g", "y"].map((c) => `<button type="button" class="cs-pick c-${c}" data-color="${c}">${NAMES[c]}</button>`).join("")}<button type="button" class="btn btn-ghost btn-small" data-color="">Cancel</button></div>`;
+    root.dataset.ten='colorstack';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('colorstack'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {

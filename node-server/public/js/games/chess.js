@@ -46,7 +46,7 @@ GameUI.chess = (() => {
         const cls = ["ch-sq", (r + f) % 2 === 0 ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? (p ? "cap" : "target") : "", g.check === i ? "check" : ""].join(" ");
         const who = p ? `${p[0] === "w" ? "White" : "Black"} ${WORD[p[1]]}` : "empty";
         const coord = (col === 0 ? `<i class="rk">${r + 1}</i>` : "") + (row === 7 ? `<i class="fl">${"abcdefgh"[f]}</i>` : "");
-        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}${animate && g.last && g.last.to === i && g.last.from !== undefined ? " slid" : ""}"${animate && g.last && g.last.to === i && g.last.from !== undefined ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${GameUI.art.chessPiece(p[1])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
+        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}${animate && g.last && g.last.to === i && g.last.from !== undefined ? " slid" : ""}"${animate && g.last && g.last.to === i && g.last.from !== undefined ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${GameUI.tenArt.chessPiece(p[1],p[0])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
       }
     }
     return html + "</div>";
@@ -68,6 +68,8 @@ GameUI.chess = (() => {
       <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Walnut</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
       <div class="board-actions" id="ch-actions"></div><small class="muted">Tap a piece, then a highlighted square.</small></div></div>
       <div class="ch-promo" id="ch-promo" hidden></div>`;
+    root.dataset.ten='chess';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('chess'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     tickTimer = setInterval(drawClocks, 250);
@@ -160,7 +162,7 @@ GameUI.chess = (() => {
   function showPromo(colour) {
     const el = root.querySelector("#ch-promo");
     el.hidden = false;el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","Choose promotion piece");
-    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.art.chessPiece(t)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.tenArt.chessPiece(t,colour)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
     FX.animate(el.firstElementChild,[{opacity:.2,transform:"translateY(14px)"},{opacity:1,transform:"none"}],260);
     el.querySelector("[data-promo]").focus();
   }
@@ -219,7 +221,7 @@ GameUI.chess = (() => {
       if(g.check>=0&&g.check!==before.check)FX.transient(root,root.querySelector(`[data-sq="${g.check}"]`),'check');
     }
     const tray=root.querySelector('#ch-captures');tray.hidden=!captures.length;
-    tray.innerHTML='<small>RECENT CAPTURES</small>'+captures.map(p=>`<span class="ch-piece ${p[0]}" role="img" aria-label="Captured ${p[0]==='w'?'White':'Black'} ${WORD[p[1]]}">${GameUI.art.chessPiece(p[1])}</span>`).join('');
+    tray.innerHTML='<small>RECENT CAPTURES</small>'+captures.map(p=>`<span class="ch-piece ${p[0]}" role="img" aria-label="Captured ${p[0]==='w'?'White':'Black'} ${WORD[p[1]]}">${GameUI.tenArt.chessPiece(p[1],p[0])}</span>`).join('');
     const list = root.querySelector("#ch-moves");
     list.innerHTML = g.moves.reduce((h, m, i) => (i % 2 === 0 ? h + `<li><span class="n">${i / 2 + 1}.</span> <span>${app.esc(m)}</span>` : h + ` <span>${app.esc(m)}</span></li>`), "") + (g.moves.length % 2 ? "</li>" : "");
     if (g.moves.length !== lastCount) list.scrollTop = list.scrollHeight;

@@ -1,0 +1,180 @@
+/* Original visual revision for the ten selected games. All board coordinates remain native. */
+[data-ten]{--ten-ink:#102a3c;--ten-paper:#f2eedc;--ten-accent:#d8ed9f}
+[data-ten]>.ten-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;border:1px solid #55716e;border-radius:18px;background:#102a37;color:#f1f1de}
+.ten-heading span{font-size:10px;letter-spacing:.2em;font-weight:800;color:var(--ten-accent)}.ten-heading h2{font-size:29px;letter-spacing:-.045em;line-height:1.1;margin:5px 0 0}.ten-heading p{font-size:12px;color:#c0d2d0;margin:0}
+[data-ten] .btn{font-family:inherit;font-weight:750;letter-spacing:-.015em}
+/* 01. Night Garden • actual 2D course rendered in an illuminated botanical landscape */
+[data-ten=golf]{padding:16px;background:linear-gradient(145deg,#133b4c,#081f34);border:1px solid #4e8c93;border-radius:24px;box-shadow:0 25px 50px #0005}
+[data-ten=golf]>.ten-heading{border:0;background:none;padding:4px 4px 16px}
+[data-ten=golf] .gf-head{padding:14px 18px;background:#d5e4d0;color:#163b43;border-radius:16px;box-shadow:0 4px 0 #7a9b94}
+[data-ten=golf] .gf-head h2{font-family:Georgia,serif;color:#163b43;font-size:28px}[data-ten=golf] .gf-eyebrow{color:#4c726e;letter-spacing:.12em}
+[data-ten=golf] .gf-score{background:#173a48;border-color:#507d83}[data-ten=golf] .gf-score strong{color:#f2e4b6}
+[data-ten=golf] .gf-canvas{border:2px solid #83b1ad;border-radius:22px;box-shadow:0 6px 0 #0a1c2b,0 16px 25px #0005;filter:none}
+[data-ten=golf] .gf-controls{background:linear-gradient(145deg,#d4e2d0,#a9c6bd);color:#163b43;border:1px solid #e5e9ce;border-radius:18px;box-shadow:0 4px 0 #668e87;padding:16px}
+[data-ten=golf] .gf-controls span,[data-ten=golf] #gf-place-note{color:#284e52}[data-ten=golf] .gf-controls .btn{background:#153b4a;color:#f1edce;border-color:#537b7b}
+[data-ten=golf] #gf-putt:not(:disabled){background:#eec889;color:#16383c;border:2px solid #fff2cd;box-shadow:0 4px 0 #8d9269}
+[data-ten=golf] .b2-players{background:none;border:0}[data-ten=golf] .b2-player{background:#0b273c;border:1px solid #537e86;border-radius:14px}
+/* 02. The Midnight Club • cobalt tournament cloth and machined charcoal rails */
+[data-ten=pool]{background:radial-gradient(at 50% 0,#2c5264,#081c2f 75%);border:1px solid #6b8e96;border-radius:24px;padding:16px;box-shadow:0 20px 40px #0005}
+[data-ten=pool]>.ten-heading{border:0;background:none;padding:4px 6px 16px}
+[data-ten=pool] .b2-players{padding:8px;background:#0a2638;border-radius:16px;border:1px solid #476577}
+[data-ten=pool] .b2-player{border-radius:12px;background:#18374d;border-color:#547589}[data-ten=pool] .b2-player.active{background:#d7debd;color:#163247;box-shadow:inset 4px 0 #d1a96c}
+[data-ten=pool] .b2-player.active .muted{color:#45606b}
+[data-ten=pool] .pl-canvas{border-radius:24px;filter:drop-shadow(0 14px 18px #0006);box-shadow:none}
+[data-ten=pool] .pl-controls{border:1px solid #8aa3a2;background:linear-gradient(120deg,#c7d3cc,#91adb3);border-radius:18px;padding:16px;color:#102e43;box-shadow:0 4px 0 #4b7080}
+[data-ten=pool] .pl-controls .btn{background:#16364c;border-color:#5b7b8d;color:#f1edce}[data-ten=pool] #pl-shoot:not(:disabled){background:#e6c68e;color:#173549;border-color:#fff0c6}
+[data-ten=pool] .ttt-status{background:#0c263b;border-left:3px solid #b9c79b;color:#dbe5dd}
+/* 03. The Boroughs • navy architecture on a printed city board */
+[data-ten=tycoon]{padding:18px;background:#e7e7d6;border:1px solid #fbf6de;border-radius:24px;box-shadow:0 18px 40px #0005;color:#173a47}
+[data-ten=tycoon]>.ten-heading{background:none;border:0;color:#16394a;padding:2px 2px 16px}[data-ten=tycoon]>.ten-heading span{color:#59766d}[data-ten=tycoon]>.ten-heading p{color:#5b7778}
+[data-ten=tycoon] .pty-strip{background:#163a4a;border:1px solid #799490;border-radius:14px;box-shadow:0 4px 0 #a5b7a5;color:#f0ead1}[data-ten=tycoon] .pty-strip strong{color:#fff0bd}
+[data-ten=tycoon] .ty-players{background:#c9d6cb;border:0;border-radius:14px;padding:8px}[data-ten=tycoon] .b2-player{color:#214654;background:#dfe5d5;border:1px solid #9ab3aa;border-radius:12px}[data-ten=tycoon] .b2-player .muted{color:#4c7172}[data-ten=tycoon] .b2-player.active{background:#173f4d;color:#f1eed7}[data-ten=tycoon] .b2-player.active .muted{color:#b5d0cc}
+[data-ten=tycoon] .ty-board{background:#102f43;border:7px solid #17394b;border-radius:16px;gap:3px;box-shadow:0 7px 0 #7f9a96,0 18px 30px #18384c55;overflow:hidden}
+[data-ten=tycoon] .ty-tile{border:1px solid #e1dac1;border-radius:5px;background:#f3eedc;color:#163e4e;box-shadow:inset 0 0 0 1px #ffffff55;padding:4px 2px}
+[data-ten=tycoon] .ty-tile .ty-nm{font-weight:850;font-size:9px;line-height:1.15;letter-spacing:-.02em;color:#153b4b}
+[data-ten=tycoon] .ty-tile .ty-pr{font-size:8px;font-weight:750;color:#52736d}[data-ten=tycoon] .ty-tile .ty-band{height:8px;box-shadow:inset 0 -1px #0002}[data-ten=tycoon] .ty-tile .ty-ic{display:grid;place-items:center;min-height:0}[data-ten=tycoon] .ty-ic img{width:20px;height:20px;max-width:100%;object-fit:contain}
+[data-ten=tycoon] .ty-tile.corner{background:#c8dacb}[data-ten=tycoon] .ty-tile.t-surprise{background:#efdbc1}[data-ten=tycoon] .ty-center.pty-city{background:radial-gradient(at 50% 20%,#2d5969,#102c43);border:0;border-radius:10px;overflow:hidden}
+[data-ten=tycoon] .pty-art{width:108%;height:108%;object-fit:contain;opacity:1;inset:-4%;filter:drop-shadow(0 15px 8px #071f3266)}
+[data-ten=tycoon] .pty-plaque{position:absolute;left:8%;right:8%;bottom:5%;top:auto;background:#e9e4cbf2;border:1px solid #fcf3d5;border-radius:12px;padding:12px;color:#173b4a;box-shadow:0 4px 0 #9da994}
+[data-ten=tycoon] .ty-logo{color:#17394a;font-size:clamp(14px,1.8vw,26px);letter-spacing:-.04em}[data-ten=tycoon] .ty-turn{color:#254b58}[data-ten=tycoon] .ty-round{color:#5a7475}[data-ten=tycoon] .ty-card{background:#fff5db;color:#284b50}
+[data-ten=tycoon] .ty-side .card,[data-ten=tycoon] .ty-side>details{background:#183b4a;color:#f2edda;border-color:#8ba397;border-radius:16px}
+/* 04. The Coral Collection • illustrated rank-specific fish, an ocean play surface */
+[data-ten=gofish]>.ten-heading{margin-bottom:14px;background:#133d4b}
+[data-ten=gofish] .pgf-table{padding:22px 20px;background:#0c3a4d url('/assets/ten/ocean-chart.svg') center/cover;border:2px solid #98bdb0;border-radius:28px;box-shadow:inset 0 0 0 6px #0a2c3d,inset 0 0 0 8px #74958c66,0 20px 35px #0005;gap:12px}
+[data-ten=gofish] .pgf-oval{display:none}[data-ten=gofish] .pgf-opponents{gap:14px;width:100%}[data-ten=gofish] .pgf-seat{padding:10px;border:1px solid #7ea49766;border-radius:18px;background:#072e43bb}
+[data-ten=gofish] .pgf-seat .b2-player{background:none;border:0;padding:0;color:#e4edda;border-radius:0;box-shadow:none}[data-ten=gofish] .pgf-seat.asker{border-color:#e9d39e}
+[data-ten=gofish] .pgf-backs{height:76px}[data-ten=gofish] .pgf-backs img{width:44px;height:63px;filter:drop-shadow(0 4px 3px #02162666)}
+[data-ten=gofish] .pgf-mid{position:relative;display:grid;grid-template-columns:100px minmax(0,1fr) 140px;gap:16px;width:100%;min-height:170px;align-items:center;padding:12px 4px}
+[data-ten=gofish] .pgf-mid::before{content:'';position:absolute;left:28%;right:28%;top:0;bottom:0;background:url('/assets/ten/fish-14.svg') center/contain no-repeat;opacity:.13;pointer-events:none}
+[data-ten=gofish] .pgf-pond{grid-column:1}[data-ten=gofish] .pgf-pond>img{width:82px;height:116px;transform:rotate(-7deg);box-shadow:3px 3px 0 #b2b79a,6px 6px 0 #738c88}
+[data-ten=gofish] .pgf-books{grid-column:3;position:relative}[data-ten=gofish] .pgf-action{grid-column:2;grid-row:1;position:relative;margin:0;background:#e5dfbc;color:#193d48;border:2px solid #f5ebcb;border-radius:18px;padding:14px;font-size:13px}
+[data-ten=gofish] .pgf-status{padding:12px 16px;background:#082c3d;border:1px solid #9cb69c66;border-radius:13px;color:#d8e9d9;width:100%;font-size:15px}
+[data-ten=gofish] .pgf-handhead{width:100%;padding:4px 8px;color:#d1e1cd;letter-spacing:.12em}
+[data-ten=gofish] .pgf-card{background:#fff7e1;color:#194b58;border:2px solid #c6c6a5;border-radius:13px;box-shadow:2px 4px 0 #b7b391,0 10px 15px #011d2b66;overflow:hidden}
+[data-ten=gofish] .pgf-card::before{content:'';position:absolute;inset:25px 8px;border:1px solid #829e9133;border-radius:50%}
+[data-ten=gofish] .pgf-card.red{color:#b84a57}[data-ten=gofish] .pgf-card img.ten-fish{width:100%;height:80%;max-height:none;left:0;top:15%;opacity:1;object-fit:contain;transform:none;position:absolute;filter:none}
+[data-ten=gofish] .pgf-card .pgf-idx{font-size:20px;left:7px;top:6px;line-height:1}[data-ten=gofish] .pgf-card>b{font-size:20px;bottom:6px;right:8px}
+[data-ten=gofish] .pgf-ask{padding:14px;background:#c8dccb;border:1px solid #f0e9ca;border-radius:18px;color:#153f4d;width:100%;box-shadow:0 4px 0 #739b91}
+[data-ten=gofish] .pgf-step small{color:#41696b}[data-ten=gofish] .gf-chip{background:#edf0dc;color:#163f4c;border-color:#73968e}[data-ten=gofish] .gf-chip[aria-pressed=true]{background:#193e4c;color:#eef1cf;border-color:#d9dbaa}[data-ten=gofish] .pgf-go{background:#e2c58a;color:#183b43;border-color:#fcf0c8}
+/* 05. Orbital Rally • original rocket pieces and launch stations on the actual Ludo grid */
+[data-ten=ludo]{padding:18px;background:radial-gradient(at 50% 0,#243f62,#0b203a);border:1px solid #71849a;border-radius:24px}
+[data-ten=ludo]>.ten-heading{border:0;background:none;padding:0 0 16px}
+[data-ten=ludo] .pld-main{background:none;border:0;padding:0;gap:20px}
+[data-ten=ludo] .ld2-board{background:#112a44;border:9px solid #193650;border-radius:22px;box-shadow:0 0 0 2px #b5c0ae,0 8px 0 #091c31,0 20px 25px #0004;overflow:visible}
+[data-ten=ludo] .pld-yard{border:2px solid #92abb277;border-radius:18px;box-shadow:inset 0 0 0 8px #0a223b55,inset 0 0 20px #0005}
+[data-ten=ludo] .pld-yard.c0{background:radial-gradient(at 50% 20%,#854e6d,#25334e)}[data-ten=ludo] .pld-yard.c1{background:radial-gradient(at 50% 20%,#6b8d60,#203e4b)}[data-ten=ludo] .pld-yard.c2{background:radial-gradient(at 50% 20%,#b19358,#43425a)}[data-ten=ludo] .pld-yard.c3{background:radial-gradient(at 50% 20%,#447f9b,#243b60)}
+[data-ten=ludo] .pld-well{background:#122a43aa;border:2px solid #ccdec477;border-radius:50%;box-shadow:inset 0 0 0 4px #081f3444,inset 0 4px 12px #0004}
+[data-ten=ludo] .ld2-cell.yardspot{background:#18364e;border:1px solid #d5d9ac55;box-shadow:0 0 0 3px #0b203544,inset 0 2px 5px #0004}
+[data-ten=ludo] .ld2-cell.track{background:linear-gradient(135deg,#efebd6,#becbc2);border:1px solid #39596c;box-shadow:inset 0 1px #fff9}
+[data-ten=ludo] .ld2-cell.homecol{filter:saturate(.65);border:1px solid #3e5d6c}
+[data-ten=ludo] .pld-centre{background:#183951 url('/assets/ten/orbit-crest.svg') center/cover no-repeat;border:0;border-radius:50%;z-index:1}
+[data-ten=ludo] .ld2-tok{background:none!important;border:0;box-shadow:none;position:relative;overflow:visible;border-radius:50%}
+[data-ten=ludo] .ld2-tok img{position:absolute;left:0;top:-20%;width:100%;height:140%;object-fit:contain;filter:drop-shadow(0 3px 2px #00182c77)}
+[data-ten=ludo] .ld2-tok>span{position:absolute;right:-3px;top:-3px;width:13px;height:13px;display:grid;place-items:center;border-radius:50%;background:#f3eccf;color:#18324a;border:1px solid #244458;font-size:9px;z-index:2;line-height:1}
+[data-ten=ludo] .ld2-tok.can{outline:2px solid #f0e6b1;outline-offset:3px;background:#c1d9a322!important}
+[data-ten=ludo] .pld-pod{background:#e1dfc5;color:#183951;border:2px solid #f9edcc;border-radius:20px;box-shadow:0 5px 0 #6f8b8f;padding:20px}
+[data-ten=ludo] .pld-pod .muted,[data-ten=ludo] .pld-eyebrow{color:#486b74}[data-ten=ludo] .ld2-status{color:#193d51}[data-ten=ludo] .ld2-die{background:#f7edd0;color:#183f54;border-color:#91aaa8;box-shadow:0 6px 0 #849e9d,0 12px 15px #17334733}
+/* 06. Admiralty Command • cartographic water, miniature ships and a primary targeting chart */
+[data-ten=battleship]{padding:18px;background:linear-gradient(135deg,#c7d6cc,#9cb7b8);border:2px solid #e9ead6;border-radius:24px;box-shadow:0 20px 40px #0004;color:#153b4a}
+[data-ten=battleship]>.ten-heading{background:none;border:0;padding:0 0 14px;color:#173a49}[data-ten=battleship]>.ten-heading span{color:#446e72}[data-ten=battleship]>.ten-heading p{color:#446e72}
+[data-ten=battleship] .bs-two.pbs{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px}
+[data-ten=battleship] .pbs-enemy{background:#edead5;border:1px solid #f5efdb;border-radius:18px;padding:14px;box-shadow:0 5px 0 #78979a}
+[data-ten=battleship] .pbs-friendly{background:#143b4b;border:1px solid #709797;border-radius:18px;padding:14px;align-self:start}
+[data-ten=battleship] .pbs-enemy .bs-title{color:#153b4a}[data-ten=battleship] .pbs-enemy .bs-title small{color:#557977}[data-ten=battleship] .pbs-friendly .bs-title{color:#e4ecd7}
+[data-ten=battleship] .bs-grid.pbs-chart{padding:8px;background:#0b4255 url('/assets/ten/ocean-chart.svg') center/cover;border:3px solid #1e4e5f;border-radius:10px;box-shadow:inset 0 0 0 3px #b3cdc433,0 4px 0 #0c2b3d}
+[data-ten=battleship] .pbs-chart .bs-cell{background:#0b3b4b11;border:1px solid #9ac4c14d;box-shadow:none}
+[data-ten=battleship] .pbs-chart .bs-head{color:#c6ddd5;font:750 11px monospace}
+[data-ten=battleship] .pbs-chart .bs-cell.hit{background:#bd7c4255}[data-ten=battleship] .pbs-chart .bs-cell.miss{background:#8fb6c022}[data-ten=battleship] .pbs-chart .bs-cell.aim{background:#b7d48d66;outline-color:#e6f2a5}
+[data-ten=battleship] .pbs-chart .bs-cell.hit .pbs-mark{background:#f7b876;box-shadow:0 0 0 2px #ffcba855,0 0 10px #f2845966;border-color:#ffd6a3}
+[data-ten=battleship] .pbs-chart .bs-cell.miss .pbs-mark{background:#d6ebe7;box-shadow:0 0 0 3px #c0d8d333}
+[data-ten=battleship] .pbs-ship img{filter:drop-shadow(0 3px 2px #06253788)}
+[data-ten=battleship] .bs-place{padding:18px;background:#e8e7d2;color:#193f4b;border-color:#f9efd2;box-shadow:0 5px 0 #7b9a99;border-radius:20px}
+[data-ten=battleship] .bs-ship{background:#163f4e;color:#e9e8ce;border:1px solid #567e83;border-radius:12px}[data-ten=battleship] .bs-ship img{height:22px;width:68px}
+[data-ten=battleship] .bs-place .pbs-label{color:#214c53}[data-ten=battleship] .pbs-fire{background:none;border:0;padding:12px 0 0}[data-ten=battleship] .pbs-target{color:#1d4652}[data-ten=battleship] .bs-fire{background:#173e4c;color:#f1e5bd;border-color:#77978f}
+[data-ten=battleship] .ttt-status{background:#183f4d;color:#dbe7d6;border-radius:14px;padding:12px;font-size:14px}[data-ten=battleship] .ttt-status.mine{color:#e0f0b5}
+/* 07. Spectrum Club • new editorial card faces and a folded ivory playmat */
+[data-ten=colorstack]>.ten-heading{padding:10px 16px;background:#173e3e;border-color:#7d9a84}
+[data-ten=colorstack]>.ten-heading h2{font-size:24px}
+[data-ten=colorstack] .pcs-table{min-height:0;padding:14px 18px;gap:6px;border:2px solid #8faaa0;border-radius:24px;background:repeating-linear-gradient(45deg,#254c4611 0 18px,#eff0d405 18px 36px),#123d3b;box-shadow:inset 0 0 0 6px #082b2f66,0 18px 35px #0004}
+[data-ten=colorstack] .pcs-orbit{inset:112px 14px 174px;border:1px solid #ecedd0;border-radius:18px;background:linear-gradient(130deg,#f1edcf,#cfdcc5);box-shadow:0 5px 0 #78998d,inset 0 0 0 7px #faf1d533}
+[data-ten=colorstack] .pcs-label{color:#506f66;font-size:10px;letter-spacing:.2em;top:8px}[data-ten=colorstack] .pcs-label small{color:#68877a;font-size:7px}
+[data-ten=colorstack] .pcs-opponents{gap:16px}[data-ten=colorstack] .pcs-seat .b2-player{background:#092e33;border-color:#5f8982;border-radius:13px;padding:5px 10px;color:#e4edda}
+[data-ten=colorstack] .pcs-backs{height:58px}[data-ten=colorstack] .pcs-backs img{width:36px;height:51px;margin:0 -6px}
+[data-ten=colorstack] .pcs-center{gap:40px;margin-top:8px}[data-ten=colorstack] .pcs-pile{gap:5px}[data-ten=colorstack] .pcs-pile>small{color:#365e59;font-size:11px}
+[data-ten=colorstack] .pcs-deck{border:0;border-radius:13px;box-shadow:3px 3px 0 #b5bc9b,6px 6px 0 #758f83}[data-ten=colorstack] .pcs-deck img{width:112px;height:158px}
+[data-ten=colorstack] .pcs-dir{color:#5e7f6d;font-size:32px;right:-48px;top:60px}
+[data-ten=colorstack] .pcs-card{--card-tone:#2d696b;position:relative;width:100px;height:144px;background:#fff7df!important;background-image:none!important;color:#123b48;border:2px solid #e3d7b4;border-radius:13px;box-shadow:2px 4px 0 #bcad88,0 8px 12px #092b2b66;overflow:hidden;font-family:Arial,sans-serif}
+[data-ten=colorstack] .pcs-card.c-r{--card-tone:#d76452}[data-ten=colorstack] .pcs-card.c-b{--card-tone:#3d83a5}[data-ten=colorstack] .pcs-card.c-g{--card-tone:#39856c}[data-ten=colorstack] .pcs-card.c-y{--card-tone:#d1a244}[data-ten=colorstack] .pcs-card.c-w{--card-tone:#ac7c50}
+[data-ten=colorstack] .pcs-card::before{content:none}[data-ten=colorstack] .pcs-card::after{content:'';position:absolute;inset:0 0 auto;height:7px;background:var(--card-tone)}[data-ten=colorstack] .pcs-card.c-w::after{background:linear-gradient(90deg,#d76452 25%,#3d83a5 25% 50%,#39856c 50% 75%,#d1a244 75%)}
+[data-ten=colorstack] .pcs-card b{position:absolute;left:0;right:0;top:48%;transform:translateY(-50%);font-size:62px;font-weight:900;letter-spacing:-.08em;color:#153d48;text-align:center;text-shadow:2px 2px #fff4d7}
+[data-ten=colorstack] .pcs-card .corner{font-size:12px;font-weight:850;left:8px;top:12px;color:var(--card-tone)}[data-ten=colorstack] .pcs-card .corner.bottom{right:8px;bottom:9px;left:auto;top:auto}
+[data-ten=colorstack] .pcs-card small{position:absolute;bottom:16px;left:0;right:0;line-height:1;font-size:7px;color:#52756e;letter-spacing:.08em}
+[data-ten=colorstack] .ten-card-symbol{position:absolute;inset:20% 10% 24%;color:var(--card-tone);opacity:.17}[data-ten=colorstack] .ten-card-symbol svg{width:100%;height:100%}
+[data-ten=colorstack] .ten-card-brand{position:absolute;bottom:7px;left:0;right:0;font-size:5px;letter-spacing:.2em;text-align:center;color:#698379}
+[data-ten=colorstack] .pcs-card.word .ten-card-symbol{opacity:1;inset:20% 16% 32%}[data-ten=colorstack] .pcs-card.word b{font-size:17px;top:auto;bottom:28px;transform:none;letter-spacing:-.03em}
+[data-ten=colorstack] .pcs-card.big{width:112px;height:158px}[data-ten=colorstack] .pcs-card.big b{font-size:68px}[data-ten=colorstack] .pcs-card.big.word b{font-size:20px}
+[data-ten=colorstack] .pcs-card.playable{outline:2px solid #b6e990;outline-offset:2px}[data-ten=colorstack] .pcs-fan{min-height:0;padding:16px 12px 10px}
+[data-ten=colorstack] .pcs-status{font-size:13px;color:#1e534f;padding:5px;margin:0;z-index:1}[data-ten=colorstack] .pcs-status.mine{color:#173e3d}
+[data-ten=colorstack] .pcs-dock{background:#092d33;border:1px solid #739890;border-radius:16px;padding:10px 14px;gap:10px}[data-ten=colorstack] .pcs-sel{font-size:12px;color:#d3e2cb}[data-ten=colorstack] #cs-play{background:#d4e6a0;color:#173f42;border-color:#f3ecc4;min-height:44px}
+[data-ten=colorstack] .cs-picker{background:#0b293ccc;backdrop-filter:blur(6px)}
+/* 08. The Case Files • private dossiers and a real evidence board */
+[data-ten=impostor]{padding:18px;background:linear-gradient(140deg,#163849,#102338);border:1px solid #68888a;border-radius:24px}
+[data-ten=impostor]>.ten-heading{background:none;border:0;padding:0 0 14px}
+[data-ten=impostor] .im-main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);grid-template-areas:'round round' 'role clues' 'body body' 'status status';gap:18px;padding:22px;border:1px solid #c5b98e;background:repeating-linear-gradient(0deg,#1b474511 0 1px,transparent 1px 26px),#dedac3;color:#193e49;border-radius:20px;box-shadow:0 6px 0 #76928f}
+[data-ten=impostor] #im-round{grid-area:round;color:#557268;font-size:12px;letter-spacing:.12em;margin:0;padding-bottom:10px;border-bottom:1px solid #7e988966}
+[data-ten=impostor] #im-role{grid-area:role;min-width:0}[data-ten=impostor] #im-clues{grid-area:clues;min-width:0;margin:0;padding:16px 12px 12px 22px;border:1px solid #aba88a;border-radius:6px;background:#f3eacc;box-shadow:4px 4px 0 #a9ad8b}
+[data-ten=impostor] #im-clues::before{content:'FIELD NOTES';display:block;font-size:10px;letter-spacing:.18em;font-weight:850;color:#56746a;padding-bottom:10px;border-bottom:1px solid #78928555;margin-bottom:10px}
+[data-ten=impostor] .im-clues li{background:none;color:#2b514e;border:0;border-bottom:1px dashed #829c8b66;border-radius:0;padding:12px 4px;font-size:14px;line-height:1.5}
+[data-ten=impostor] #im-body{grid-area:body}[data-ten=impostor] #im-status{grid-area:status;color:#425f59;border:0;margin:0;font-size:13px}
+[data-ten=impostor] .im-card{min-height:280px;background:#173b4a;color:#e7edcf;border:1px solid #829d91;border-radius:14px;padding:22px;box-shadow:0 5px 0 #768b7b;text-align:left;display:flex;flex-direction:column;align-items:start;justify-content:center}
+[data-ten=impostor] .im-card .ten-role-art{height:120px;width:145px;object-fit:contain;align-self:center;margin:0 auto 12px;opacity:1}
+[data-ten=impostor] .im-card.crew{background:radial-gradient(at 50% 0,#31564f,#122d40);color:#e5edc8}[data-ten=impostor] .im-card.impostor{background:linear-gradient(145deg,#733e49,#1a3046);color:#f4debf;border-color:#c6a48c}
+[data-ten=impostor] .im-secret{font-family:Georgia,serif;font-size:36px;letter-spacing:-.04em;line-height:1.15;margin:10px 0 14px;max-width:100%;overflow-wrap:anywhere}
+[data-ten=impostor] .im-role-tag{font-size:9px;letter-spacing:.13em;color:#b9c7ab}
+[data-ten=impostor] .b25-concealed{background:#18384c url('/assets/ten/fingerprint.svg') center/50% no-repeat;color:#d3dec4}
+[data-ten=impostor] #im-privacy{background:#c5d3b6;color:#173a47;border-color:#eef0cf}
+[data-ten=impostor] .im-votes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}[data-ten=impostor] .im-votes .btn{background:#f7edce;color:#203e49;border:1px solid #acae8d;border-radius:12px;box-shadow:3px 4px 0 #a5b193;padding:16px;min-height:132px}
+[data-ten=impostor] .im-votes .avatar{width:64px;height:64px}[data-ten=impostor] .im-votes .picked{background:#183e4d;color:#ebedce;border:2px solid #b8d68e;box-shadow:0 0 0 3px #c5d9a366}
+[data-ten=impostor] .b25-vote-confirm{background:#c8d4bc;color:#23484a;border-color:#8da18b}[data-ten=impostor] .b25-vote-confirm p{color:#345953}
+[data-ten=impostor] .im-result{background:#183749;color:#e7e5c9;border:2px solid #b5b58f;border-radius:18px;padding:22px}[data-ten=impostor] .ten-case-label{color:#d7b283;font-size:11px;letter-spacing:.2em;font-weight:850;border-bottom:1px solid #a2b59944;padding-bottom:12px;margin-bottom:14px}
+/* 09. The Ivory Atelier • new sculpted vector pieces on cedar and ink squares */
+[data-ten=chess]{padding:16px;background:#d2d9cb;border:1px solid #f4edcf;border-radius:24px;box-shadow:0 18px 40px #0004}
+[data-ten=chess]>.ten-heading{background:none;border:0;color:#173a46;padding:0 0 14px}[data-ten=chess]>.ten-heading span{color:#5d7768}[data-ten=chess]>.ten-heading p{color:#55756e}
+[data-ten=chess] .pch-table{background:#173c46;border:1px solid #73958d;border-radius:18px;padding:12px;box-shadow:0 5px 0 #879f93}
+[data-ten=chess] .ch-board{border:8px solid #173a43;border-radius:8px;box-shadow:0 0 0 1px #cccea6,0 5px 0 #071f31;overflow:hidden}
+[data-ten=chess] .ch-sq.light{background:linear-gradient(135deg,#f5efd9,#ddd9bd)}[data-ten=chess] .ch-sq.dark{background:linear-gradient(135deg,#466e68,#274f50)}
+[data-ten=chess][data-theme=slate] .ch-sq.light{background:linear-gradient(135deg,#e6e5db,#c7d1cc)}[data-ten=chess][data-theme=slate] .ch-sq.dark{background:linear-gradient(135deg,#586d87,#324b65)}
+[data-ten=chess] .ch-piece .ten-piece{width:96%;height:96%;filter:drop-shadow(0 3px 1px #14323c77)}
+[data-ten=chess] .ch-sq.last{box-shadow:inset 0 0 0 3px #d8bb6c88}[data-ten=chess] .ch-sq.sel{outline:3px solid #dbefa5;outline-offset:-4px;background:#b7cc91}
+[data-ten=chess] .ch-sq.target .ck-dot{width:24%;height:24%;border:2px solid #bdd6a8;background:#193f4755}
+[data-ten=chess] .ch-sq.cap{outline:3px solid #dfaa80;outline-offset:-4px}[data-ten=chess] .ch-sq.check{background:#bb7e69;box-shadow:inset 0 0 0 3px #eedcb1}
+[data-ten=chess] .pch-player{background:#c3d2c2;color:#183b46;border:0;border-radius:12px}[data-ten=chess] .pch-player .b2-player{background:none;color:#193f48;box-shadow:none}[data-ten=chess] .pch-player .muted{color:#52716b}
+[data-ten=chess] .ch-clock{background:#183a48;color:#edebcf;border-radius:10px;padding:8px 12px;font-variant-numeric:tabular-nums}[data-ten=chess] .ch-clock.ticking{background:#e7dfb8;color:#183e47;border:2px solid #b1c58f}
+[data-ten=chess] .pch-notes{background:#e9e6ce;color:#244852;border:1px solid #abbda7;border-radius:16px;padding:16px}[data-ten=chess] .pch-caption .ttt-status{color:#264c52}[data-ten=chess] .pch-eyebrow{color:#5e7a6c}[data-ten=chess] .ch-moves{color:#2b5158;font-family:monospace}[data-ten=chess] .ch-moves .n{color:#7e926e}
+[data-ten=chess] .b25-captures{background:#cbd8c4;color:#214650;border-color:#a0b49f}[data-ten=chess] .b25-captures small{color:#526f64}
+[data-ten=chess] .ch-promo>.card{background:#e3e2cc;color:#20434d;border:2px solid #f6ebc8;border-radius:18px}[data-ten=chess] .ch-promo-btn{background:#234c53;border-color:#809c87}
+/* 10. Sketchbook Social • a bound artist's folio, not a dashboard card */
+[data-ten=telephone]{padding:18px;background:linear-gradient(135deg,#d9ddcf,#abbfb8);border:1px solid #f5edce;border-radius:24px;box-shadow:0 18px 40px #0004;color:#21464d}
+[data-ten=telephone]>.ten-heading{background:none;border:0;color:#1a3f4b;padding:0 0 14px}[data-ten=telephone]>.ten-heading span{color:#54766c}[data-ten=telephone]>.ten-heading p{color:#54766c}
+[data-ten=telephone] .tp-main{background:#eee9d7;border:1px solid #bdc4ac;border-radius:18px;padding:22px;color:#264b51;box-shadow:0 5px 0 #8ea799}
+[data-ten=telephone] #tp-head{font-size:12px;letter-spacing:.12em;color:#577566;border-bottom:2px solid #9ab29f;padding:0 0 10px;margin:0 0 18px}
+[data-ten=telephone] .b2-players{background:#153c49;border:0;border-radius:14px;padding:10px}[data-ten=telephone] .b2-player{background:none;border-radius:10px;color:#e5ecd7}[data-ten=telephone] .b2-player .muted{color:#acc8bc}
+[data-ten=telephone] #tp-body:has(#tp-cwrap){display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px 22px;align-items:start}
+[data-ten=telephone] #tp-body:has(#tp-cwrap)>.tp-prompt{grid-column:1;grid-row:1;background:#d0ddc8;border:1px solid #a7bba4;color:#224952;margin:0;transform:none;box-shadow:none;padding:12px 16px;font-size:15px;border-radius:12px}
+[data-ten=telephone] #tp-body:has(#tp-cwrap)>#tp-done{grid-column:2;grid-row:1;align-self:stretch;font-size:14px;min-height:44px;margin:0;background:#193e4a;color:#eff0d1;border-color:#85a18c}
+[data-ten=telephone] #tp-cwrap{grid-column:1;grid-row:2;min-width:0;width:min(100%,calc((100dvh - 350px)*4/3));margin:auto;position:relative;padding-left:16px}
+[data-ten=telephone] #tp-cwrap::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:24px;background:url('/assets/ten/spiral.svg') top center/24px 240px repeat-y;z-index:2;pointer-events:none}
+[data-ten=telephone] #tp-cwrap .tp-canvas{width:100%;max-width:none;border:5px solid #faf5e1;border-left-width:12px;border-radius:3px 14px 14px 3px;box-shadow:3px 4px 0 #d1c9a9,6px 8px 0 #9aab96,0 14px 20px #193d4a44;background:#fff}
+[data-ten=telephone] #tp-tb{grid-column:2;grid-row:2;min-width:0}[data-ten=telephone] #tp-limit{grid-column:1/-1;grid-row:3;color:#65745c;font-size:12px}
+[data-ten=telephone] .b25-brush-label{color:#46695f;font-size:12px;font-weight:850;margin:0 0 10px}
+[data-ten=telephone] .tp-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px;background:#163d4a;border:1px solid #70968c;border-radius:14px}
+[data-ten=telephone] .tp-tools .tp-sep{display:none}[data-ten=telephone] .tp-tools .btn{font-size:11px;padding:7px;min-width:0;min-height:36px;background:#244e55;border-color:#658c7e;color:#e7eed0}
+[data-ten=telephone] .tp-tools [data-tool]{grid-column:1/-1;display:flex;align-items:center;gap:10px;min-height:42px;text-align:left}
+[data-ten=telephone] .ten-tool-icon{width:25px;height:25px;flex-shrink:0}[data-ten=telephone] .tp-tools [data-act]{grid-column:1/-1}
+[data-ten=telephone] .tp-sw{width:100%;height:30px;min-width:0;min-height:30px;border-radius:50%;border:2px solid #a6bca099}
+[data-ten=telephone] .tp-tools [aria-pressed=true]{outline:2px solid #dcf1a4;outline-offset:1px;background-color:#3d665c}
+[data-ten=telephone] #tp-status{color:#4a705f}
+[data-ten=telephone] .b25-reveal-head{background:#193e4b;border:1px solid #6f948a;border-radius:14px;color:#e8e9ce}[data-ten=telephone] .tp-chain{font-family:Georgia,serif;font-size:25px;letter-spacing:-.04em;color:#f0e5bf}
+[data-ten=telephone] .tp-entry{position:relative;padding:24px 24px 24px 42px;background:repeating-linear-gradient(0deg,#69866d12 0 1px,transparent 1px 27px),#fff6de;border:1px solid #b6b599;border-radius:4px 18px 18px 4px;box-shadow:4px 4px 0 #c9c3a4,8px 8px 0 #8da38f;color:#274c50}
+[data-ten=telephone] .tp-entry::before{content:'';position:absolute;left:-5px;top:10px;bottom:10px;width:24px;background:url('/assets/ten/spiral.svg') top center/24px 240px repeat-y;pointer-events:none}
+[data-ten=telephone] .tp-by{color:#4e7464;border-bottom-color:#a4b897;font-size:13px}[data-ten=telephone] .tp-text{font-family:Georgia,serif;font-size:30px;color:#264b50;line-height:1.5}[data-ten=telephone] .tp-entry .tp-canvas{border:1px solid #c9c5a9;border-radius:8px;box-shadow:none}

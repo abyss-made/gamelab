@@ -1,0 +1,18 @@
+// Original ten-game art adapters. Presentation only; identities/numbers come from each renderer.
+window.GameUI=window.GameUI||{};
+GameUI.tenArt=(()=>{
+ let seq=0;
+ const themes={golf:['NIGHT GARDEN','Mini Golf','Take your shot'],pool:['THE MIDNIGHT CLUB','Pool','Eight-ball billiards'],tycoon:['THE BOROUGHS','Property Tycoon','Build your city'],gofish:['THE CORAL COLLECTION','Go Fish','Ask. Collect. Make a book.'],ludo:['ORBITAL RALLY','Ludo','Race your crew home'],battleship:['ADMIRALTY COMMAND','Battleship','Place your fleet. Pick your target.'],colorstack:['THE SPECTRUM CLUB','Color Stack','Pick a card. Make your move.'],impostor:['THE CASE FILES','The Impostor','Listen closely. Trust carefully.'],chess:['THE IVORY ATELIER','Chess','Every move matters'],telephone:['THE SKETCHBOOK SOCIAL','Drawing Telephone','Draw. Pass. Reveal.']};
+ const heading=id=>`<header class="ten-heading"><div><span>${themes[id][0]}</span><h2>${themes[id][1]}</h2></div><p>${themes[id][2]}</p></header>`;
+ function chessPiece(type,colour='w'){
+  const id='ten-piece-'+(++seq),light=colour==='w',a=light?'#fff8df':'#54717a',b=light?'#d1b886':'#142e42',edge=light?'#76623f':'#091f31';
+  const shape={P:'<circle cx="32" cy="18" r="9"/><path d="M26 28h12l5 22H21Z"/>',R:'<path d="M17 8h7v7h5V8h6v7h5V8h7v17l-6 5v20H23V30l-6-5Z"/>',N:'<path d="M18 49q1-11 13-22l-14 5-5-7L29 9l3-6 4 7q15 3 16 16v23Z"/><path d="m27 17 7-2" fill="none"/><circle cx="35" cy="19" r="2.5" fill="'+edge+'" stroke="none"/>',B:'<path d="M32 6q14 14 14 23 0 7-9 9l5 12H22l5-12q-9-2-9-9 0-9 14-23Z"/><path d="m29 15 9 10" fill="none"/>',Q:'<path d="m14 18 11 9 7-17 7 17 11-9-6 23H20Z"/><circle cx="13" cy="15" r="4"/><circle cx="32" cy="7" r="4"/><circle cx="51" cy="15" r="4"/><path d="M23 43h18l3 7H20Z"/>',K:'<path d="M29 4h6v7h7v5h-7v8h-6v-8h-7v-5h7Z"/><path d="M32 24q20-12 20 6 0 8-13 12l4 8H21l4-8Q12 38 12 30q0-18 20-6Z"/>'}[type]||'';
+  return `<svg class="ch-svg ten-piece" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="${a}"/><stop offset=".4" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><ellipse cx="32" cy="59" rx="23" ry="4" fill="#071d2c55"/><g fill="url(#${id})" stroke="${edge}" stroke-width="2" stroke-linejoin="round">${shape}<path d="M20 49h24l5 5H15Z"/><rect x="13" y="54" width="38" height="6" rx="3"/></g><path d="M18 56h24" stroke="${a}" stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/></svg>`;
+ }
+ function stackFace(c,label){
+  const special=['S','F','W','P','D'].includes(c.v),icon=c.v==='S'?'<circle cx="50" cy="50" r="27"/><path d="m31 69 38-38"/>':c.v==='F'?'<path d="M21 38h54L59 22m20 40H25l16 16"/>':c.v==='W'||c.v==='P'?'<path d="m50 9 11 29 30 12-30 11-11 30-12-30L9 50l29-12Z"/>':'<path d="M20 22h42v56H20Zm18-10h42v56"/>';
+  return `<span class="ten-card-symbol" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">${special?icon:'<path d="m50 5 40 45-40 45L10 50Z"/>'}</svg></span><b>${label}</b><span class="ten-card-brand" aria-hidden="true">PLAYGRID</span>`;
+ }
+ const tool=kind=>{const paths={brush:'M7 28 23 9l9 8-16 17Z M22 10l5-6 9 8-5 6 M15 30q-12-2-11 8 9 1 12-8',fill:'m8 21 13-13 15 15-14 13Z M8 22h26 M17 7l-5-5 M35 29q10 10 0 11-8-2 0-11',eraser:'m4 27 19-23 14 13-19 23H11Z M14 17l14 13 M18 40h20'};return `<svg class="ten-tool-icon" viewBox="0 0 44 44" aria-hidden="true"><path d="${paths[kind]}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>`;};
+ return {heading,chessPiece,stackFace,tool};
+})();

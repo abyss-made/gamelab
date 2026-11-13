@@ -67,11 +67,11 @@ GameUI.tycoon = (() => {
       const price = t.price ? `<span class="ty-pr">${money(t.price)}</span>` : t.amount ? `<span class="ty-pr">-${money(t.amount)}</span>` : "";
       const nm = corner(t) || t.type === "surprise" || t.type === "tax" ? SHORT[t.type] : t.name;
       const own = o >= 0 ? `<span class="ty-own" style="background:${col(o)}"></span>` : "";
-      out += `<button type="button" class="ty-tile s-${c.side} t-${t.type} ${corner(t) ? "corner" : ""} ${selTile === i ? "sel" : ""}" style="grid-row:${c.row + 1};grid-column:${c.col + 1}" data-tile="${i}" aria-label="${app.esc(tileLabel(i))}">${band}<span class="ty-ic" aria-hidden="true">${ICON[t.type] && t.type !== "prop" ? ICON[t.type] : ""}</span><span class="ty-nm">${app.esc(nm)}</span>${price}${pips}${own}<span class="ty-toks">${tokens}</span></button>`;
+      out += `<button type="button" class="ty-tile s-${c.side} t-${t.type} ${corner(t) ? "corner" : ""} ${selTile === i ? "sel" : ""}" style="grid-row:${c.row + 1};grid-column:${c.col + 1}" data-tile="${i}" aria-label="${app.esc(tileLabel(i))}">${band}<span class="ty-ic" aria-hidden="true"><img src="/assets/ten/tile-${['prop','station','util','tax','surprise','rest','jail','goto','start'].includes(t.type)?t.type:'start'}.svg" alt=""></span><span class="ty-nm">${app.esc(nm)}</span>${price}${pips}${own}<span class="ty-toks">${tokens}</span></button>`;
     }
     const cur = pById(g.turnId);
     const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[0])}</span><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[1])}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/premium/tycoon-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
+    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/ten/borough-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Boroughs</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
   }
 
@@ -319,6 +319,8 @@ GameUI.tycoon = (() => {
       <details class="card ty-sect"><summary>Your properties</summary><div id="ty-props"></div></details>
       <details class="card ty-sect"><summary>Trades</summary><div id="ty-trades"></div></details>
       <details class="card ty-sect"><summary>Game log</summary><div id="ty-log" class="ty-log"></div></details>`;
+    root.dataset.ten='tycoon';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('tycoon'));
     stage.appendChild(root);
     window.addEventListener("resize", fitBoard);
     clock = C.makeClock(() => root);

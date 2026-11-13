@@ -24,7 +24,7 @@ GameUI.battleship = (() => {
   let msg = "";
   let lastMoves = -1;
   let tab = "target"; // phone battle view: target | fleet
-  const SHIP_ART = ["ship-carrier", "ship-battleship", "ship-destroyer", "ship-submarine", "ship-patrol"].map((n) => `/assets/premium/${n}.svg`);
+  const SHIP_ART = ["carrier", "battleship", "destroyer", "submarine", "patrol"].map((n) => `/assets/ten/fleet-${n}.svg`);
 
   // Vessel illustrations for MY fleet only (from my own ship cells / local draft). Enemy ships are never drawn.
   function shipsLayer(list) {
@@ -78,6 +78,8 @@ GameUI.battleship = (() => {
     root.innerHTML = `<div class="b2-players card" id="bs-players"></div>
       <div class="ttt-status" id="bs-status" aria-live="polite"></div>
       <div id="bs-main"></div>`;
+    root.dataset.ten='battleship';
+    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('battleship'));
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {if(suppressClick){suppressClick=false;return;}C.keepFocus(document.getElementById("stage"), () => onClick(e));});
