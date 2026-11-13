@@ -212,15 +212,20 @@ GameUI.pool = (() => {
     for (const p of t.pockets) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82 + 5, 0, 7);
-      ctx.fillStyle = "#9c7a45";
+      ctx.fillStyle = "#071826";
       ctx.fill();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82, 0, 7);
       const pg = ctx.createRadialGradient(p.x, p.y, 2, p.x, p.y, p.r);
       pg.addColorStop(0, "#000");
-      pg.addColorStop(1, "#14110d");
+      pg.addColorStop(1, "#152d3d");
       ctx.fillStyle = pg;
       ctx.fill();
+      // Recessed leather collars and stitching stay concentric with the server pockets.
+      ctx.strokeStyle='#83989d';ctx.lineWidth=1.2;ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*.82+6,0,Math.PI*2);ctx.stroke();
+      ctx.save();ctx.setLineDash([2,3]);ctx.strokeStyle='#cccebd66';ctx.lineWidth=.8;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*.82+3,0,Math.PI*2);ctx.stroke();ctx.restore();
     }
     ctx.save();ctx.strokeStyle='#d3f5dd09';ctx.lineWidth=.6;
     for(let y=4;y<t.h;y+=8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(t.w,y);ctx.stroke();}
@@ -336,6 +341,26 @@ GameUI.pool = (() => {
     ctx.strokeStyle = "#08263b";
     ctx.lineWidth = 2;
     ctx.strokeRect(0, 0, t.w, t.h);
+    // Six beveled cushion segments end at the real pocket mouths. They never enter the
+    // playable surface: physics, guides and pointer coordinates keep their native bounds.
+    function cushion(points,vertical=false){
+      ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();
+      const gr=vertical?ctx.createLinearGradient(-20,0,0,0):ctx.createLinearGradient(0,-20,0,0);
+      gr.addColorStop(0,'#1a4059');gr.addColorStop(.45,'#408cb1');gr.addColorStop(1,'#0e334e');
+      ctx.fillStyle=gr;ctx.fill();ctx.strokeStyle='#85bac066';ctx.lineWidth=1;ctx.stroke();
+    }
+    const gap=t.pockets[0].r*.92;
+    for(const [a,b] of [[gap,t.w/2-gap],[t.w/2+gap,t.w-gap]]){
+      cushion([[a-8,-20],[b+8,-20],[b,0],[a,0]]);
+      cushion([[a,t.h],[b,t.h],[b+8,t.h+20],[a-8,t.h+20]]);
+    }
+    cushion([[-20,gap-8],[0,gap],[0,t.h-gap],[-20,t.h-gap+8]],true);
+    cushion([[t.w,gap],[t.w+20,gap-8],[t.w+20,t.h-gap+8],[t.w,t.h-gap]],true);
+    ctx.save();ctx.strokeStyle='#bdd0cd55';ctx.lineWidth=1.4;
+    ctx.beginPath();ctx.roundRect(-PAD+5,-PAD+5,t.w+PAD*2-10,t.h+PAD*2-10,25);ctx.stroke();
+    for(const x of [-PAD+11,t.w+PAD-11])for(const y of [-PAD+11,t.h+PAD-11]){
+      ctx.fillStyle='#a4b4b3';ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill();
+    }ctx.restore();
   }
 
   function loop(now) {

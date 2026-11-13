@@ -54,5 +54,8 @@ for kind in ['prop','station','util','tax','surprise','rest','jail','goto','star
  elif kind=='util':body='<path d="m36 6-23 29h17l-3 23 24-31H34Z" fill="#f2ca7c" stroke="#234854" stroke-width="3"/>'
  elif kind=='surprise':body='<path d="m32 5 8 17 19 3-14 14 3 19-16-9-17 9 3-19L4 25l20-3Z" fill="#e3bd89" stroke="#234854" stroke-width="3"/>'
  elif kind=='tax':body='<circle cx="32" cy="32" r="24" fill="#d8c79a" stroke="#234854" stroke-width="3"/><path d="M40 20H28q-12 0-12 10t16 6q16-4 16 6t-14 9H22M32 12v42" stroke="#234854" stroke-width="4"/>'
+ elif kind=='jail':body='<rect x="10" y="8" width="44" height="48" rx="5" fill="#ccd8bf" stroke="#234854" stroke-width="3"/><path d="M20 9v46M32 9v46M44 9v46M11 39h42" stroke="#234854" stroke-width="3"/>'
+ elif kind=='rest':body='<path d="M12 18h40v18H12Z" fill="#b3cbb4" stroke="#234854" stroke-width="3"/><path d="M8 40h48M16 40v14M48 40v14M12 27h40" stroke="#234854" stroke-width="4" stroke-linecap="round"/>'
+ elif kind=='goto':body='<path d="M8 32h28M26 20l12 12-12 12M44 12h12v40H44" stroke="#234854" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
  else:body='<path d="M10 32h40M36 16l16 16-16 16" stroke="#234854" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>'
  svg('tile-'+kind,64,64,body)

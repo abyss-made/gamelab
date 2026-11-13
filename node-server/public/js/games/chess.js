@@ -65,7 +65,7 @@ GameUI.chess = (() => {
     root.innerHTML = `<div class="ch-layout pch-layout"><div class="pch-table" id="ch-top"><div class="pch-player" id="ch-opp"></div><div id="ch-board"></div><div class="pch-player" id="ch-me"></div></div>
       <div class="ch-side pch-notes"><div class="pch-caption"><span class="pch-eyebrow" id="ch-eyebrow">WALNUT &amp; IVORY</span><div class="ttt-status" id="ch-status" aria-live="polite"></div></div>
       <div class="b25-captures" id="ch-captures" hidden aria-label="Recent captures"></div><div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
-      <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Walnut</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
+      <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Ivory</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
       <div class="board-actions" id="ch-actions"></div><small class="muted">Tap a piece, then a highlighted square.</small></div></div>
       <div class="ch-promo" id="ch-promo" hidden></div>`;
     root.dataset.ten='chess';
@@ -144,7 +144,7 @@ GameUI.chess = (() => {
     if (th) {
       root.dataset.theme = th.dataset.theme;
       try { localStorage.setItem("pg_chess_theme", th.dataset.theme); } catch (err) { /* private mode */ }
-      root.querySelector("#ch-eyebrow").textContent = th.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
+      root.querySelector("#ch-eyebrow").textContent = th.dataset.theme === "slate" ? "SLATE & IVORY" : "CEDAR & IVORY";
       root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b === th)));
       return;
     }
@@ -204,7 +204,7 @@ GameUI.chess = (() => {
     root.querySelector("#ch-opp").innerHTML = chip(order[1]);
     root.querySelector("#ch-me").innerHTML = chip(order[0]);
     root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.theme === root.dataset.theme)));
-    root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
+    root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "CEDAR & IVORY";
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ch-status");
     const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">Check — protect your king</b>' : "";
