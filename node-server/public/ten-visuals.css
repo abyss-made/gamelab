@@ -315,3 +315,15 @@ body[data-game=tycoon] [data-ten=tycoon]>#ty-actions{background:#c9d9c8;color:#2
  [data-ten=chess] .pch-table{width:min(100%,max(350px,calc(100dvh - 435px)));margin:auto}
 }
 @media(max-width:700px){[data-ten=chess] .pch-layout{padding:8px;gap:12px}}
+[data-ten=battleship] .b2-player{color:#183e4a}[data-ten=battleship] .b2-player .muted{color:#4b7474}
+[data-ten=battleship] .b2-player.active{background:#163e4b;color:#edf0d7;border-color:#9fb98e}
+[data-ten=battleship] .b2-player.active .muted{color:#bdd4c6}
+[data-ten=battleship] .pbs-target,[data-ten=battleship] .pbs-target b{color:#244e56}
+@media(min-width:701px){
+ [data-ten=battleship] .bs-two.pbs{grid-template-areas:'enemy friendly'}
+ [data-ten=battleship] .pbs-enemy{grid-area:enemy}[data-ten=battleship] .pbs-friendly{grid-area:friendly}
+}
+@media(min-width:1101px){
+ body[data-game=battleship] [data-ten=battleship] .bs-grid.pbs-chart{max-width:min(100%,max(300px,calc(100dvh - 535px)))}
+}
+[data-ten=battleship] .pbs-target strong{color:#244e56}
