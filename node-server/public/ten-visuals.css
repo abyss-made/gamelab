@@ -339,3 +339,19 @@ body[data-game=tycoon] [data-ten=tycoon]>#ty-actions{background:#c9d9c8;color:#2
  [data-ten=ludo] .b2-player .ld2-key{width:10px;height:10px;flex-shrink:0}
  [data-ten=ludo] .b2-player .fr-timer{font-size:11px}
 }
+@media(min-width:701px) and (max-width:1100px) and (max-height:500px) and (orientation:landscape){
+ [data-ten=pool]{display:grid;grid-template-columns:minmax(0,1fr) 216px;gap:6px;padding:8px;align-items:start}
+ [data-ten=pool]>.b2-players,[data-ten=pool]>.ttt-status{grid-column:1/-1;margin:0;padding:4px 8px;font-size:11px}
+ [data-ten=pool]>.pl-wrap{grid-column:1;grid-row:3;width:100%;min-width:0;align-self:center}
+ [data-ten=pool]>.pl-controls{grid-column:2;grid-row:3;width:100%;display:flex;flex-direction:column;gap:6px;padding:8px;margin:0}
+ [data-ten=pool] .pl-slider{width:100%;min-width:0;gap:0}[data-ten=pool] .pl-slider>span{font-size:11px}
+ [data-ten=pool] .pl-fine-row input{min-width:0;width:0;flex:1}
+ [data-ten=pool] .pl-slider input{height:28px}
+ [data-ten=pool] .board-actions{display:flex;flex-wrap:wrap;gap:5px;margin:0}
+ [data-ten=pool] .board-actions .btn{flex:1;min-width:80px;font-size:11px;padding:8px;min-height:40px}
+ [data-ten=pool] .pl-fine-row .btn{min-height:36px;padding:6px 10px}
+ [data-ten=pool] .p5-shot-presets,[data-ten=pool]>.pl-help{display:none}
+ [data-ten=pool] .b2-player{padding:3px 6px;gap:6px}
+ [data-ten=pool] .b2-player .avatar{width:24px;height:24px}
+ [data-ten=pool] .b2-player b{font-size:11px}[data-ten=pool] .b2-player .muted{font-size:9px}
+}
