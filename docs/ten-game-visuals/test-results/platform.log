@@ -1,0 +1,21 @@
+PASS  /healthz returns 200 ok
+PASS  nosniff header set
+PASS  referrer policy set
+PASS  frame options set
+PASS  /api/health reports aggregates
+PASS  /api/health exposes no room/player fields
+PASS  prototype pollution payload had no effect
+PASS  server alive after junk events without a room
+PASS  join flood is rate limited
+PASS  room created: {"ok":true,"code":"5G2ME2","role":"player","notice":null}
+PASS  server alive after junk events inside a room
+PASS  abusive-but-small client still connected (no crash on its payloads)
+PASS  oversize (>64KB) packet closes the connection
+PASS  unknown room code is refused
+PASS  logs never contain member tokens
+PASS  logs never contain the raw room code
+PASS  EADDRINUSE exits with code 1 (got 1)
+PASS  SIGTERM exits cleanly with code 0 (got 0)
+PASS  shutdown logged as structured JSON
+
+all passed

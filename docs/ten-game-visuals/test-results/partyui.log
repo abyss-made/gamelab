@@ -1,0 +1,58 @@
+PASS  desktop: catalog shows 20 games (got 20)
+PASS  desktop: no hidden game tile in the catalog
+PASS  desktop: Coming Soon tile kept
+PASS  desktop: no Play or Quick Play button for a hidden game
+PASS  desktop: old /reversi link lands on the catalog
+PASS  desktop: no reversi card after the redirect
+PASS  desktop: Create Party asks no game question and names the preselected game
+PASS  desktop: host game picker has 20 games, none hidden
+PASS  desktop: spectator sees Join the Queue when seats are full
+PASS  desktop: spectator sees their queue position
+PASS  desktop: game finished
+PASS  desktop: host sees Play Again
+PASS  desktop: host sees Back to Lobby
+PASS  desktop: non-host has no Play Again button
+PASS  desktop: vote picker lists 20 games, none hidden
+PASS  desktop: participant picker offers Suggest, not Choose
+PASS  desktop: a vote from the phone reaches the server
+PASS  desktop: host sees the vote tally
+PASS  desktop: queued spectator role is player after winner-stays
+PASS  desktop: Choose Another Game lists 20 games, none hidden
+PASS  desktop: Choose Another Game shows vote counts
+PASS  desktop: Back to Lobby returns the host view to the lobby
+PASS  desktop: and everyone else's view too
+PASS  desktop: results card is replaced even while the vote picker was open
+PASS  desktop: host can hand hosting to another player from the roster
+PASS  desktop: former host's view updates
+PASS  desktop: no horizontal overflow
+PASS  desktop: no page errors
+PASS  phone: catalog shows 20 games (got 20)
+PASS  phone: no hidden game tile in the catalog
+PASS  phone: Coming Soon tile kept
+PASS  phone: no Play or Quick Play button for a hidden game
+PASS  phone: old /reversi link lands on the catalog
+PASS  phone: no reversi card after the redirect
+PASS  phone: Create Party asks no game question and names the preselected game
+PASS  phone: host game picker has 20 games, none hidden
+PASS  phone: spectator sees Join the Queue when seats are full
+PASS  phone: spectator sees their queue position
+PASS  phone: game finished
+PASS  phone: host sees Play Again
+PASS  phone: host sees Back to Lobby
+PASS  phone: non-host has no Play Again button
+PASS  phone: vote picker lists 20 games, none hidden
+PASS  phone: participant picker offers Suggest, not Choose
+PASS  phone: a vote from the phone reaches the server
+PASS  phone: host sees the vote tally
+PASS  phone: queued spectator role is player after winner-stays
+PASS  phone: Choose Another Game lists 20 games, none hidden
+PASS  phone: Choose Another Game shows vote counts
+PASS  phone: Back to Lobby returns the host view to the lobby
+PASS  phone: and everyone else's view too
+PASS  phone: results card is replaced even while the vote picker was open
+PASS  phone: host can hand hosting to another player from the roster
+PASS  phone: former host's view updates
+PASS  phone: no horizontal overflow
+PASS  phone: no page errors
+
+All party UI checks passed

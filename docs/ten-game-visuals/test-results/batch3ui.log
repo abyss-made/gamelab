@@ -1,0 +1,93 @@
+PASS  catalog lists telephone
+PASS  catalog lists bluff
+PASS  catalog lists impostor
+PASS  catalog lists liarsdice
+PASS  catalog lists hotpotato
+PASS  Coming Soon tile still present and not counted
+PASS  all game card artwork loads
+PASS  telephone: Play opens Create Party with no game settings (issue #38)
+PASS  bluff: Play opens Create Party with no game settings (issue #38)
+PASS  impostor: Play opens Create Party with no game settings (issue #38)
+PASS  liarsdice: Play opens Create Party with no game settings (issue #38)
+PASS  hotpotato: Play opens Create Party with no game settings (issue #38)
+PASS  telephone/phone: no horizontal overflow
+PASS  telephone/phone: game screen mounts
+PASS  telephone/phone: drawing round shows the canvas
+PASS  telephone/phone: you are shown another player's prompt
+PASS  telephone/phone: canvas fits the screen (318px)
+PASS  telephone/phone: drawing with the pointer puts ink on the canvas
+PASS  telephone/phone: hitting the fill limit shows a message instead of silently over-collecting
+PASS  telephone/phone: submitted drawing is recorded
+PASS  telephone/phone: others only receive the single entry handed to them
+PASS  telephone/phone: no page errors
+PASS  telephone: Game Settings dialog shows its settings
+PASS  telephone/desktop: no horizontal overflow
+PASS  telephone/desktop: game screen mounts
+PASS  telephone/desktop: drawing round shows the canvas
+PASS  telephone/desktop: you are shown another player's prompt
+PASS  telephone/desktop: canvas fits the screen (584px)
+PASS  telephone/desktop: drawing with the pointer puts ink on the canvas
+PASS  telephone/desktop: hitting the fill limit shows a message instead of silently over-collecting
+PASS  telephone/desktop: submitted drawing is recorded
+PASS  telephone/desktop: others only receive the single entry handed to them
+PASS  telephone/desktop: no page errors
+PASS  bluff/phone: no horizontal overflow
+PASS  bluff/phone: game screen mounts
+PASS  bluff/phone: voting lists every bluff plus the real answer
+PASS  bluff/phone: your own bluff cannot be voted for
+PASS  bluff/phone: tapping an option locks your vote
+PASS  bluff/phone: other clients see no authorship during voting
+PASS  bluff/phone: no page errors
+PASS  bluff: Game Settings dialog shows its settings
+PASS  bluff/desktop: no horizontal overflow
+PASS  bluff/desktop: game screen mounts
+PASS  bluff/desktop: voting lists every bluff plus the real answer
+PASS  bluff/desktop: your own bluff cannot be voted for
+PASS  bluff/desktop: tapping an option locks your vote
+PASS  bluff/desktop: other clients see no authorship during voting
+PASS  bluff/desktop: no page errors
+PASS  impostor/phone: no horizontal overflow
+PASS  impostor/phone: game screen mounts
+PASS  impostor/phone: role card shows the secret word to the crew
+PASS  impostor/phone: exactly one impostor in the room
+PASS  impostor/phone: no page errors
+PASS  impostor: Game Settings dialog shows its settings
+PASS  impostor/desktop: no horizontal overflow
+PASS  impostor/desktop: game screen mounts
+PASS  impostor/desktop: role card shows the secret word to the crew
+PASS  impostor/desktop: exactly one impostor in the room
+PASS  impostor/desktop: no page errors
+PASS  liarsdice/phone: no horizontal overflow
+PASS  liarsdice/phone: game screen mounts
+PASS  liarsdice/phone: you see your five dice
+PASS  liarsdice/phone: bid controls appear on your turn
+PASS  liarsdice/phone: placing a bid updates the table
+PASS  liarsdice/phone: controls hide when it is not your turn
+PASS  liarsdice/phone: opponents' dice are not sent
+PASS  liarsdice/phone: no page errors
+PASS  liarsdice: Game Settings dialog shows its settings
+PASS  liarsdice/desktop: no horizontal overflow
+PASS  liarsdice/desktop: game screen mounts
+PASS  liarsdice/desktop: you see your five dice
+PASS  liarsdice/desktop: bid controls appear on your turn
+PASS  liarsdice/desktop: placing a bid updates the table
+PASS  liarsdice/desktop: controls hide when it is not your turn
+PASS  liarsdice/desktop: opponents' dice are not sent
+PASS  liarsdice/desktop: no page errors
+PASS  hotpotato/phone: no horizontal overflow
+PASS  hotpotato/phone: game screen mounts
+PASS  hotpotato/phone: the holder gets an answer box
+PASS  hotpotato/phone: no fuse info in game state
+PASS  hotpotato/phone: choosing a recipient keeps the typed answer
+PASS  hotpotato/phone: answering passes the bomb on
+PASS  hotpotato/phone: no page errors
+PASS  hotpotato: Game Settings dialog shows its settings
+PASS  hotpotato/desktop: no horizontal overflow
+PASS  hotpotato/desktop: game screen mounts
+PASS  hotpotato/desktop: the holder gets an answer box
+PASS  hotpotato/desktop: no fuse info in game state
+PASS  hotpotato/desktop: choosing a recipient keeps the typed answer
+PASS  hotpotato/desktop: answering passes the bomb on
+PASS  hotpotato/desktop: no page errors
+
+All passed

@@ -1,0 +1,42 @@
+PASS  desktop: 4 in a Row: after my drop, focus waits on the board area instead of <body> (stage)
+PASS  desktop: 4 in a Row: focus returns to the same column when it is my turn ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"col":"3"})
+PASS  desktop: 4 in a Row: Enter on the restored focus drops again, with no mouse
+PASS  desktop: Tic Tac Toe: placing a mark does not drop focus to <body>
+PASS  desktop: Tic Tac Toe: an opponent's move does not drop focus to <body>
+PASS  desktop: Checkers: selecting a piece keeps focus on it ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"sq":"41"})
+PASS  desktop: Checkers: after my move focus waits on the board area
+PASS  desktop: Checkers: an opponent's move keeps Resign armed and focused ({"where":"control","id":"ck-resign","tag":"BUTTON","text":"Tap again to resign","disabled":false,"armed":"1"})
+PASS  desktop: Checkers: the second Enter resigns
+PASS  desktop: Chess: selecting a piece keeps focus on it ({"where":"control","id":"","tag":"BUTTON","text":"b","disabled":false,"sq":"1"})
+PASS  desktop: Chess: after my move focus does not drop to <body>
+PASS  desktop: Chess: an opponent's move keeps Resign armed and focused ({"where":"control","id":"","tag":"BUTTON","text":"Tap again to resign","disabled":false,"act":"resign","armed":"1"})
+PASS  desktop: Chess: the second Enter resigns
+PASS  desktop: Battleship: aiming keeps focus on the target square ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"cell":"0"})
+PASS  desktop: Battleship: firing does not drop focus to <body>
+PASS  desktop: Battleship: an opponent's shot keeps Resign armed and focused ({"where":"control","id":"bs-resign","tag":"BUTTON","text":"Tap again to resign","disabled":false,"armed":"1"})
+PASS  desktop: Battleship: the second Enter resigns
+PASS  desktop: Go Fish: picking a rank keeps focus on the chip ({"where":"control","id":"","tag":"BUTTON","text":"4","disabled":false,"rank":"4"})
+PASS  desktop: Go Fish: picking who to ask keeps focus on that chip
+PASS  desktop: no page errors ()
+PASS  phone: 4 in a Row: after my drop, focus waits on the board area instead of <body> (stage)
+PASS  phone: 4 in a Row: focus returns to the same column when it is my turn ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"col":"3"})
+PASS  phone: 4 in a Row: Enter on the restored focus drops again, with no mouse
+PASS  phone: Tic Tac Toe: placing a mark does not drop focus to <body>
+PASS  phone: Tic Tac Toe: an opponent's move does not drop focus to <body>
+PASS  phone: Checkers: selecting a piece keeps focus on it ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"sq":"41"})
+PASS  phone: Checkers: after my move focus waits on the board area
+PASS  phone: Checkers: an opponent's move keeps Resign armed and focused ({"where":"control","id":"ck-resign","tag":"BUTTON","text":"Tap again to resign","disabled":false,"armed":"1"})
+PASS  phone: Checkers: the second Enter resigns
+PASS  phone: Chess: selecting a piece keeps focus on it ({"where":"control","id":"","tag":"BUTTON","text":"b","disabled":false,"sq":"1"})
+PASS  phone: Chess: after my move focus does not drop to <body>
+PASS  phone: Chess: an opponent's move keeps Resign armed and focused ({"where":"control","id":"","tag":"BUTTON","text":"Tap again to resign","disabled":false,"act":"resign","armed":"1"})
+PASS  phone: Chess: the second Enter resigns
+PASS  phone: Battleship: aiming keeps focus on the target square ({"where":"control","id":"","tag":"BUTTON","text":"","disabled":false,"cell":"0"})
+PASS  phone: Battleship: firing does not drop focus to <body>
+PASS  phone: Battleship: an opponent's shot keeps Resign armed and focused ({"where":"control","id":"bs-resign","tag":"BUTTON","text":"Tap again to resign","disabled":false,"armed":"1"})
+PASS  phone: Battleship: the second Enter resigns
+PASS  phone: Go Fish: picking a rank keeps focus on the chip ({"where":"control","id":"","tag":"BUTTON","text":"3♠3","disabled":false,"card":"3-S","rank":"3"})
+PASS  phone: Go Fish: picking who to ask keeps focus on that chip
+PASS  phone: no page errors ()
+
+keyboardui: 40 passed, 0 failed in 4.5 s

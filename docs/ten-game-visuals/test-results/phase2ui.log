@@ -1,0 +1,31 @@
+PASS  phone: the drawer is offered six words
+PASS  phone: the guesser never receives the word choices
+PASS  phone: canvas is 366px wide
+PASS  phone: canvas keeps 4:3
+PASS  phone: no horizontal overflow while drawing
+PASS  phone: all 22 colours are visible and tappable
+PASS  phone: colour swatches are at least 28px
+PASS  phone: tool buttons are 44px touch targets (44,44,44,44,44)
+PASS  phone: tools sit under the canvas, not beside it
+PASS  phone: brush (28) and eraser (16) sizes survive a reload (28, 16)
+PASS  phone: replaying 100 fills takes 150 ms
+PASS  phone: no page errors ()
+PASS  phone: guessers do not get the drawing tools
+PASS  phone: guesser canvas is 366px wide
+PASS  phone: guesser has no horizontal overflow
+PASS  desktop: the drawer is offered six words
+PASS  desktop: the guesser never receives the word choices
+PASS  desktop: canvas is 980px wide
+PASS  desktop: canvas keeps 4:3
+PASS  desktop: no horizontal overflow while drawing
+PASS  desktop: all 22 colours are visible and tappable
+PASS  desktop: brush (28) and eraser (16) sizes survive a reload (28, 16)
+PASS  desktop: replaying 100 fills takes 175 ms
+PASS  desktop: no page errors ()
+PASS  4 in a Row phone: the status names your colour ("Your turn! You are  Red. Tap a column to drop a disc.")
+PASS  4 in a Row phone: each player chip shows its disc colour (14,14)
+PASS  4 in a Row: turn changes are announced (aria-live)
+PASS  4 in a Row phone: nothing in the game stage overflows
+PASS  RPS phone: the duel card fits with 16-character names ()
+
+All phase 2 UI checks passed
