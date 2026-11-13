@@ -327,3 +327,15 @@ body[data-game=tycoon] [data-ten=tycoon]>#ty-actions{background:#c9d9c8;color:#2
  body[data-game=battleship] [data-ten=battleship] .bs-grid.pbs-chart{max-width:min(100%,max(300px,calc(100dvh - 535px)))}
 }
 [data-ten=battleship] .pbs-target strong{color:#244e56}
+/* Two compact phone roster columns keep the dice action above the initial fold. */
+@media(max-width:700px){
+ [data-ten=ludo]>.b2-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:6px}
+ [data-ten=ludo] .b2-player{padding:6px;gap:5px;min-width:0}
+ [data-ten=ludo] .b2-player>.avatar{width:26px;height:26px;flex-shrink:0}
+ [data-ten=ludo] .b2-player>div{min-width:0;flex:1}
+ [data-ten=ludo] .b2-player b{font-size:11px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ [data-ten=ludo] .b2-player small{font-size:9px}
+ [data-ten=ludo] .b2-player .muted{font-size:9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+ [data-ten=ludo] .b2-player .ld2-key{width:10px;height:10px;flex-shrink:0}
+ [data-ten=ludo] .b2-player .fr-timer{font-size:11px}
+}
