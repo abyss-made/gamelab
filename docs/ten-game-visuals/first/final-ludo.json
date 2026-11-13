@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Ludo actual server dice and legal token move, with routed presentation",
+    "ludo: real action, 3 viewport screenshots, identity reconnect, reduced motion, departure ending and fresh match"
+  ],
+  "errors": []
+}

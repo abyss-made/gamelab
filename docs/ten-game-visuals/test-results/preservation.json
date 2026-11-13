@@ -1,0 +1,36 @@
+{
+  "baseline": "8846f1514b2bbb8e807ba1b3954e136327b27fa4",
+  "sourceCommit": "2ba014516314385114a3c0128bf0f98489d6b1b9",
+  "checks": [
+    {
+      "path": "node-server/server",
+      "identical": true,
+      "objects": 54
+    },
+    {
+      "path": "node-server/server/data",
+      "identical": true,
+      "objects": 9
+    },
+    {
+      "path": "node-server/public/js/main.js",
+      "identical": true,
+      "objects": 1
+    },
+    {
+      "path": "node-server/public/js/avatar.js",
+      "identical": true,
+      "objects": 1
+    },
+    {
+      "path": "node-server/public/js/games/drawguess.js",
+      "identical": true,
+      "objects": 1
+    },
+    {
+      "path": "node-server/public/js/games/fourrow.js",
+      "identical": true,
+      "objects": 1
+    }
+  ]
+}
