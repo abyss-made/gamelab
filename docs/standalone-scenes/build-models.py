@@ -160,3 +160,10 @@ for i,(x,y,w,h) in enumerate([(-2,-1,.8,1),(-1.1,1,.8,2.2),(.1,1.4,.7,1.7),(1.4,
 for x,y in [(-2.4,-1.9),(-1.6,.3),(.7,.5),(2.4,.2)]:
  cube((x,y,.23),(.08,.08,.4),bark,.01);sphere((x,y,.52),.26,leaflight,scale=(1,1,1.1))
 render('exchange-city',pos=(7,-10,10),target=(0,0,.45),ortho=8.8,res=(640,512))
+# Billiard enamel spheres: real studio-lit materials, including actual stripe bands.
+ball_hex=['f4f3e8','f6c90e','2b6fe0','e0393e','7b3fb8','f08a24','1f9d57','8a2a2a','101820','f6c90e','2b6fe0','e0393e','7b3fb8','f08a24','1f9d57','8a2a2a']
+for num,hx in enumerate(ball_hex):
+ clear();rgb=[int(hx[i:i+2],16)/255 for i in [0,2,4]];rgb=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in rgb];enamel=material('billiard enamel '+str(num),rgb,.14);bsdf=enamel.node_tree.nodes.get('Principled BSDF');bsdf.inputs['Coat Weight'].default_value=.4;bsdf.inputs['Coat Roughness'].default_value=.12
+ if num>8:
+  nodes=enamel.node_tree.nodes;links=enamel.node_tree.links;coord=nodes.new('ShaderNodeTexCoord');xyz=nodes.new('ShaderNodeSeparateXYZ');links.new(coord.outputs['Generated'],xyz.inputs[0]);sub=nodes.new('ShaderNodeMath');sub.operation='SUBTRACT';sub.inputs[1].default_value=.5;links.new(xyz.outputs['Z'],sub.inputs[0]);ab=nodes.new('ShaderNodeMath');ab.operation='ABSOLUTE';links.new(sub.outputs[0],ab.inputs[0]);comp=nodes.new('ShaderNodeMath');comp.operation='LESS_THAN';comp.inputs[1].default_value=.27;links.new(ab.outputs[0],comp.inputs[0]);mix=nodes.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.86,.88,.82,1);mix.inputs[2].default_value=(*rgb,1);links.new(comp.outputs[0],mix.inputs[0]);links.new(mix.outputs[0],bsdf.inputs['Base Color'])
+ sphere((0,0,0),1,enamel);render('pool-ball-'+str(num),pos=(0,-8,2),target=(0,0,0),ortho=2.2,res=(160,160))

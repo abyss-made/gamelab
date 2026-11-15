@@ -122,6 +122,9 @@ GameUI.pool = (() => {
     c.arc(x + 1.5, y + 2.5, r, 0, 7);
     c.fillStyle = "#0006";
     c.fill();
+    const sprite=GameUI.scenes.image('pool-ball-'+b.id);
+    if(sprite)c.drawImage(sprite,x-r*1.1,y-r*1.1,r*2.2,r*2.2);
+    else {
     c.beginPath();
     c.arc(x, y, r, 0, 7);
     c.fillStyle = b.id === 0 ? "#f6f8fb" : b.id > 8 ? "#f6f8fb" : COLORS[b.id];
@@ -138,6 +141,7 @@ GameUI.pool = (() => {
     const shade=c.createRadialGradient(x-r*.35,y-r*.4,r*.1,x+r*.2,y+r*.3,r*1.25);
     shade.addColorStop(0,'#ffffff55');shade.addColorStop(.5,'#ffffff00');shade.addColorStop(1,'#00000099');
     c.fillStyle=shade;c.beginPath();c.arc(x,y,r,0,7);c.fill();
+    }
     if (b.id !== 0) {
       c.beginPath();
       c.arc(x, y, r * 0.5, 0, 7);
@@ -153,10 +157,7 @@ GameUI.pool = (() => {
       c.fillText(String(b.id), 0, 0.5);
       c.restore();
     }
-    c.beginPath();
-    c.arc(x - r * 0.32, y - r * 0.34, r * 0.22, 0, 7);
-    c.fillStyle = "#ffffff80";
-    c.fill();
+    if(!sprite){c.beginPath();c.arc(x-r*.32,y-r*.34,r*.22,0,7);c.fillStyle='#ffffff80';c.fill();}
     c.lineWidth = 1;
     c.strokeStyle = "#0008";
     c.beginPath();
