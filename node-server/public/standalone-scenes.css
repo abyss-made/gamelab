@@ -460,3 +460,25 @@ body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card.lift .sc
 /* Leave a real inset at either end; proximity snapping can clip the final card after focus scroll. */
 body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}
 body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}
+
+/* Large meetings use a readable seating grid instead of overlapping portraits. */
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]){display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;height:auto;padding:4px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk{position:static;grid-column:1/-1;display:flex;flex-direction:row;gap:16px;min-height:54px;border-width:5px;border-radius:16px;padding:8px;box-shadow:0 5px 0 #0b1b30}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat{position:static;left:auto!important;top:auto!important;transform:none;width:100%;max-width:none;gap:4px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>.avatar{width:48px;height:48px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>b,body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>small{max-width:100%}
+@media(max-width:700px){body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]){grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 7px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk{gap:9px;min-height:44px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk>b{font-size:14px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>.avatar{width:36px;height:36px}
+}
+/* Water is a material beneath the targeting information, not visual noise over it. */
+body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{background-image:linear-gradient(#062b45a8,#062b45bb),url('/assets/scenes/ocean.png')}
+body[data-game] .room [data-scene=battleship] .bs-head{background:#0c3045;color:#dfecdc;font-weight:850}
+@media(min-width:701px){
+ body[data-game] .room [data-scene=battleship] .pbs-enemy{display:flex;flex-direction:column}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.bs-title{order:0}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.pbs-fire{order:1;margin:0 0 12px}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.bs-grid{order:2}
+ body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{max-width:min(100%,max(280px,calc(100dvh - 430px)))}
+}
