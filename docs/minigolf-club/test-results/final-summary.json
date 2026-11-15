@@ -1,0 +1,22 @@
+{
+  "sourceCommit": "3b148a286d6258e0c1011660f256ca734a228af3",
+  "comparisonBaseline": "b4a7e9d8960d6387a0af19519f9f2c019d83f794",
+  "branch": "codex/minigolf-club-rebuild",
+  "parentPR": 77,
+  "latestPassingPrograms": 37,
+  "initialFullRun": "36/37; five-browser reliability timed out while other GPU captures ran",
+  "unmodifiedReliabilityRerun": "49 passed, 0 failed serially",
+  "realMatch": {
+    "players": 2,
+    "holesCompletedByEach": 6,
+    "nativeUIShots": 24,
+    "forfeit": false,
+    "waterPenaltyVerified": true
+  },
+  "renderedHolesVerified": 30,
+  "inverseCameraChecks": 2424,
+  "actualGamePNGs": 74,
+  "actualRecordings": 4,
+  "mergePerformed": false,
+  "deploymentPerformed": false
+}

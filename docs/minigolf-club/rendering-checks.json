@@ -1,0 +1,276 @@
+{
+  "fixtures": [
+    {
+      "course": "meadow",
+      "hole": "Straight Shot",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "meadow",
+      "hole": "Dogleg",
+      "inverseProjections": 96,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "meadow",
+      "hole": "Bumper Park",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "meadow",
+      "hole": "Sand Trap",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "meadow",
+      "hole": "Water Bridge",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 1,
+      "finiteGeometry": true
+    },
+    {
+      "course": "meadow",
+      "hole": "The Gate",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "S-Bend",
+      "inverseProjections": 120,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "Island Hop",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "Sand Valley",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "Zigzag",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "Pinball",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "canyon",
+      "hole": "The Moat",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 2,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "Switchback",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "Bumper Alley",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "Pillars & Pond",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 1,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "The Funnel",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "Double Dogleg",
+      "inverseProjections": 120,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "skyline",
+      "hole": "Grand Finale",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 1,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Breeze Lane",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Split Current",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 1,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Quay Corner",
+      "inverseProjections": 96,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Tide Pools",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 2,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Bankers Bend",
+      "inverseProjections": 120,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "harbor",
+      "hole": "Lighthouse",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Palm Promenade",
+      "inverseProjections": 96,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Crate Escape",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Lagoon Bend",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 1,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Sandy Shortcut",
+      "inverseProjections": 120,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Split Decision",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    },
+    {
+      "course": "coastal",
+      "hole": "Clubhouse Finish",
+      "inverseProjections": 72,
+      "teeOnTurf": true,
+      "cupRecessed": true,
+      "waterCutouts": 0,
+      "finiteGeometry": true
+    }
+  ],
+  "errors": [],
+  "description": "Renderer unit fixtures only; no gameplay screenshots"
+}

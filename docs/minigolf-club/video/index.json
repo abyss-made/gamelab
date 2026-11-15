@@ -1,0 +1,74 @@
+[
+  {
+    "file": "video/full-course.mp4",
+    "sha256": "cf556d88f446ffa00da3716c5a0ac9e4d73824d4e6f1512af5362e25106d04b4",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1440,
+        "height": 900,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "349.200000",
+      "size": "13381942"
+    }
+  },
+  {
+    "file": "video/input-1440.webm",
+    "sha256": "13a71e9dedd48e28983747be8a0bca201ea79967af55ecdbe320df83c67e5ec1",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1440,
+        "height": 900,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "68.120000",
+      "size": "7481984"
+    }
+  },
+  {
+    "file": "video/input-390.webm",
+    "sha256": "c1482cc422efcdc2bacf0b122f34b5b2a316849991da7fdfa83e2e632df6e1dc",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 390,
+        "height": 844,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "38.960000",
+      "size": "2946328"
+    }
+  },
+  {
+    "file": "video/input-932.webm",
+    "sha256": "d83c676d5b1a557ff78e97256e6be002f6398ca534bcb4f03823c3f2c0354ac2",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 932,
+        "height": 430,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "53.680000",
+      "size": "4696084"
+    }
+  }
+]

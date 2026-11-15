@@ -1,0 +1,318 @@
+{
+  "states": [
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 1,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 2,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 3,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 4,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 5,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "course",
+      "hole": 6,
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "meadow",
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "1440",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "1440",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "390",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "390",
+      "camera": "overview"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "932",
+      "camera": "follow"
+    },
+    {
+      "mode": "comparison",
+      "course": "harbor",
+      "width": "932",
+      "camera": "overview"
+    },
+    {
+      "mode": "result",
+      "width": "1440"
+    },
+    {
+      "mode": "result",
+      "width": "390"
+    },
+    {
+      "mode": "result",
+      "width": "932"
+    },
+    {
+      "mode": "water",
+      "width": "1440"
+    },
+    {
+      "mode": "water",
+      "width": "390"
+    },
+    {
+      "mode": "water",
+      "width": "932"
+    }
+  ],
+  "errors": [],
+  "navigationZoomEscapeFocusAndMobile": true
+}

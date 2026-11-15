@@ -1,0 +1,39 @@
+{
+  "file": "full-course.mp4",
+  "originalFile": "full-course.webm",
+  "originalSha256": "2fe98a88fed2501fb149ff6eda95f2efc003102f336374631e974e7ecc915a29",
+  "originalProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1440,
+        "height": 900,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "349.200000",
+      "size": "41482059"
+    }
+  },
+  "publishedProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1440,
+        "height": 900,
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "349.200000",
+      "size": "13381942"
+    }
+  },
+  "publishedSha256": "cf556d88f446ffa00da3716c5a0ac9e4d73824d4e6f1512af5362e25106d04b4",
+  "transformation": "Codec compression only; native dimensions, frame rate and duration preserved; no gameplay or image edits"
+}
