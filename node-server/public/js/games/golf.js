@@ -411,8 +411,12 @@ GameUI.golf = (() => {
     syncControls();paintText();
   }
 
+  function syncCameraControl(){
+    if(!root)return;const button=root.querySelector('#gf-view'),overview=!!scene3d?.overview;
+    button.textContent=overview?'Follow ball':'Overview';button.setAttribute('aria-pressed',String(overview));button.setAttribute('aria-label',overview?'Follow the current ball':'Show entire hole');
+  }
   function onKey(e){
-    if(scene3d&&['[',']','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home')scene3d.center();else scene3d.rotate(e.key==='['?-.2:.2);return;}
+    if(scene3d&&['[',']','Home'].includes(e.key)){e.preventDefault();if(e.key==='Home'){scene3d.center();syncCameraControl();}else scene3d.rotate(e.key==='['?-.2:.2);return;}
 
       if(e.key==='Escape'&&gesture){e.preventDefault();cancelPull();return;}
       if(placing&&canPlace()){
@@ -473,8 +477,8 @@ GameUI.golf = (() => {
       const replacement=canvas.cloneNode(false);canvas.replaceWith(replacement);canvas=replacement;ctx=canvas.getContext('2d');root.dataset.renderer='2d';bindCanvas();fit();
       root.querySelector('#gf-input-help').textContent='Top-down compatibility view. Drag back from your ball and release to putt.';
     });
-    root.querySelector('#gf-view').addEventListener('click',e=>{if(!scene3d)return;const overview=scene3d.toggleView();e.currentTarget.textContent=overview?'Follow ball':'Overview';e.currentTarget.setAttribute('aria-pressed',String(overview));});
-    root.querySelector('#gf-center').addEventListener('click',()=>{if(scene3d){scene3d.center();root.querySelector('#gf-view').textContent='Overview';root.querySelector('#gf-view').setAttribute('aria-pressed','false');}});
+    root.querySelector('#gf-view').addEventListener('click',e=>{if(!scene3d)return;scene3d.toggleView();syncCameraControl();});
+    root.querySelector('#gf-center').addEventListener('click',()=>{if(scene3d){scene3d.center();syncCameraControl();}});
     root.querySelectorAll('[data-camera-rotate]').forEach(b=>b.addEventListener('click',()=>scene3d?.rotate(Number(b.dataset.cameraRotate)*Math.PI/4)));
     root.querySelectorAll('[data-camera-zoom]').forEach(b=>b.addEventListener('click',()=>scene3d?.zoomBy(Number(b.dataset.cameraZoom))));
     clock = C.makeClock(() => root);
