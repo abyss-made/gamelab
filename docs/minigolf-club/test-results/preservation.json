@@ -1,0 +1,113 @@
+{
+  "baseline": "b4a7e9d8960d6387a0af19519f9f2c019d83f794",
+  "sourceCommit": "3b148a286d6258e0c1011660f256ca734a228af3",
+  "preserved": [
+    {
+      "path": "node-server/server/index.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/server/rooms.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/server/games/physics.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/server/data",
+      "identical": true
+    },
+    {
+      "path": "node-server/public/js/avatar.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/public/js/games/drawguess.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/public/js/games/fourrow.js",
+      "identical": true
+    },
+    {
+      "path": "node-server/package.json",
+      "identical": true
+    },
+    {
+      "path": "node-server/package-lock.json",
+      "identical": true
+    }
+  ],
+  "originalCourses": [
+    {
+      "course": "meadow",
+      "identical": true
+    },
+    {
+      "course": "canyon",
+      "identical": true
+    },
+    {
+      "course": "skyline",
+      "identical": true
+    },
+    {
+      "course": "harbor",
+      "identical": true
+    },
+    {
+      "course": "tour",
+      "identical": true
+    }
+  ],
+  "serverChanges": [
+    "node-server/server/games/golf.js",
+    "node-server/server/games/golfcourses.js"
+  ],
+  "assets": [
+    {
+      "file": "node-server/public/assets/golf-club/palm.svg",
+      "bytes": 1278,
+      "sha256": "213efa6adcc3a12d124fb3d5ff601a3ff22ee5a0d353a7f3faa216da5bb1ab47"
+    },
+    {
+      "file": "node-server/public/assets/golf-club/sand.png",
+      "bytes": 243391,
+      "sha256": "fc5672f3578dc207e8c00735e57ceac4e14a2012fe68baf08ef1e533f7b0892d"
+    },
+    {
+      "file": "node-server/public/assets/golf-club/stone.png",
+      "bytes": 188042,
+      "sha256": "2836accf89b8bb61f09248bf3bffb34b1ef0a7060e569c40ba571fbd6d725fce"
+    },
+    {
+      "file": "node-server/public/assets/golf-club/turf.png",
+      "bytes": 369210,
+      "sha256": "72c8fcf486ecf9ee0e01907e1b7265bd9db0bfde203f259be9b2e30ad1b65101"
+    },
+    {
+      "file": "node-server/public/assets/golf-club/water.png",
+      "bytes": 128880,
+      "sha256": "8d0bebc1bb39cd77c711bb3f2a8b5551742db19b949f6075d6317a2e39e7dc0c"
+    },
+    {
+      "file": "node-server/public/assets/golf-club/wood.png",
+      "bytes": 295651,
+      "sha256": "d6550da1937407d17e83099309d55cd50499eead533bf5b4e1038514d846fe31"
+    }
+  ],
+  "threeVersion": "0.160.1",
+  "vendorChecksumVerified": true,
+  "syntaxPassed": [
+    "node-server/public/js/games/golf.js",
+    "node-server/public/js/games/golf-scene.js",
+    "node-server/public/js/main.js",
+    "node-server/public/js/rules/rules-c.js",
+    "node-server/server/games/golf.js",
+    "node-server/server/games/golfcourses.js",
+    "node-server/test/batch5.js",
+    "node-server/test/batch5ui.js",
+    "node-server/test/experience41.js"
+  ]
+}

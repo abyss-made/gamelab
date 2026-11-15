@@ -1,0 +1,8 @@
+PASS Spectator has a real 3D camera and no shot controls
+PASS Six-player scene at all three sizes; rotate, overview zoom and Center genuinely change the camera
+PASS Right-drag rotates the actual camera without putting
+PASS Resizing during a held shot cancels without a stroke
+PASS Reduced motion settles water, flag, camera and decorative effects
+PASS Three remounts retain one live scene and one label layer
+PASS Unavailable WebGL recovers to a working, explicitly labeled top-down renderer and accepts a real server putt
+PASS 7 camera/party/accessibility/compatibility groups

@@ -1,0 +1,732 @@
+{
+  "sourceCommit": "3b148a286d6258e0c1011660f256ca734a228af3",
+  "views": [
+    {
+      "state": "hole-01-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-01-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-01-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "coastal"
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    }
+  ],
+  "shots": [
+    {
+      "hole": 1,
+      "player": "e119a4f0a1bb",
+      "angle": 19.25,
+      "power": 0.3,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 1,
+      "player": "76b7877752bd",
+      "angle": 323.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 1
+    },
+    {
+      "hole": 1,
+      "player": "e119a4f0a1bb",
+      "angle": 308.75,
+      "power": 0.9,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 2,
+      "player": "76b7877752bd",
+      "angle": 339.5,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 2,
+      "player": "e119a4f0a1bb",
+      "angle": 337.25,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 2,
+      "player": "76b7877752bd",
+      "angle": 331.5,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 2,
+      "player": "76b7877752bd",
+      "angle": 331.0,
+      "power": 0.7,
+      "outcome": "cup",
+      "strokes": 3
+    },
+    {
+      "hole": 2,
+      "player": "e119a4f0a1bb",
+      "angle": 334.25,
+      "power": 0.7,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 3,
+      "player": "e119a4f0a1bb",
+      "angle": 0.0,
+      "power": 0.5,
+      "outcome": "water",
+      "strokes": 2
+    },
+    {
+      "hole": 3,
+      "player": "76b7877752bd",
+      "angle": 128.75,
+      "power": 0.7,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 3,
+      "player": "e119a4f0a1bb",
+      "angle": 38.75,
+      "power": 1,
+      "outcome": "rest",
+      "strokes": 3
+    },
+    {
+      "hole": 3,
+      "player": "e119a4f0a1bb",
+      "angle": 23.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 4
+    },
+    {
+      "hole": 3,
+      "player": "76b7877752bd",
+      "angle": 279.5,
+      "power": 0.5,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 4,
+      "player": "76b7877752bd",
+      "angle": 342.0,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 4,
+      "player": "e119a4f0a1bb",
+      "angle": 339.5,
+      "power": 0.3,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 4,
+      "player": "e119a4f0a1bb",
+      "angle": 345.0,
+      "power": 0.9,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 4,
+      "player": "76b7877752bd",
+      "angle": 60.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 5,
+      "player": "e119a4f0a1bb",
+      "angle": 323.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 1
+    },
+    {
+      "hole": 5,
+      "player": "76b7877752bd",
+      "angle": 23.75,
+      "power": 0.7,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 5,
+      "player": "76b7877752bd",
+      "angle": 30.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 6,
+      "player": "76b7877752bd",
+      "angle": 128.75,
+      "power": 1,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 6,
+      "player": "e119a4f0a1bb",
+      "angle": 53.75,
+      "power": 1,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 6,
+      "player": "76b7877752bd",
+      "angle": 300.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 6,
+      "player": "e119a4f0a1bb",
+      "angle": 345.0,
+      "power": 0.7,
+      "outcome": "cup",
+      "strokes": 2
+    }
+  ],
+  "result": {
+    "type": "golf",
+    "course": "Coastal Club",
+    "pars": [
+      3,
+      3,
+      3,
+      4,
+      3,
+      4
+    ],
+    "standings": [
+      {
+        "id": "76b7877752bd",
+        "name": "Nova",
+        "avatar": {
+          "e": 6,
+          "c": 3,
+          "v3": {
+            "v": 3,
+            "id": "h01",
+            "palette": "lime",
+            "expression": "smile",
+            "eyes": "default",
+            "hat": "none",
+            "glasses": "sunglasses",
+            "accessory": "none",
+            "detail": "signature"
+          }
+        },
+        "scores": [
+          1,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "total": 12,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "e119a4f0a1bb",
+        "name": "CosmicGecko",
+        "avatar": {
+          "e": 1,
+          "c": 9
+        },
+        "scores": [
+          2,
+          2,
+          4,
+          2,
+          1,
+          2
+        ],
+        "total": 13,
+        "out": false,
+        "played": 6
+      }
+    ],
+    "winnerId": "76b7877752bd",
+    "winners": [
+      "76b7877752bd"
+    ],
+    "tie": false,
+    "forfeit": false
+  },
+  "waterPenaltyVerified": true,
+  "errors": []
+}

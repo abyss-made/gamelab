@@ -1,0 +1,48 @@
+{
+  "sourceCommit": "b4a7e9d8960d6387a0af19519f9f2c019d83f794",
+  "views": [
+    {
+      "file": "meadow-follow-1440.png",
+      "course": "meadow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "file": "meadow-follow-390.png",
+      "course": "meadow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "file": "meadow-follow-932.png",
+      "course": "meadow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    },
+    {
+      "file": "harbor-follow-1440.png",
+      "course": "harbor",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "file": "harbor-follow-390.png",
+      "course": "harbor",
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "file": "harbor-follow-932.png",
+      "course": "harbor",
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    }
+  ],
+  "errors": []
+}

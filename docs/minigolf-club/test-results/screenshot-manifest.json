@@ -1,0 +1,298 @@
+[
+  {
+    "file": "screenshots/after/harbor-follow-1440.png",
+    "sha256": "545198a3d5c6bba833a20d66afde1df25ab713ce6d3fd7748190896a8f281811"
+  },
+  {
+    "file": "screenshots/after/harbor-follow-390.png",
+    "sha256": "bbe1325c78483558d579a68fd2a510b08bbf48e6677ec7de76b8592a6456a836"
+  },
+  {
+    "file": "screenshots/after/harbor-follow-932.png",
+    "sha256": "7fa85e3443656a89bab7d9f143d8758d065289e83d5a0ac6891a57f555afa948"
+  },
+  {
+    "file": "screenshots/after/harbor-overview-1440.png",
+    "sha256": "26988329ae84a539c44d8535d5589b2dcb69dea9cbb0deafa2aa30d97324a178"
+  },
+  {
+    "file": "screenshots/after/harbor-overview-390.png",
+    "sha256": "0e1d1c19fbfa4a0c9e3f49d98b257cd4625764107d74aa3525dda60c735233d3"
+  },
+  {
+    "file": "screenshots/after/harbor-overview-932.png",
+    "sha256": "c46c090c1daa669303172f413207b64f7f75df0d0f2544359e8907a5f2a3949f"
+  },
+  {
+    "file": "screenshots/after/meadow-follow-1440.png",
+    "sha256": "d0efce95c2899132be540ee7fa577d2988e396d5bfec94067dbe1a97285e7691"
+  },
+  {
+    "file": "screenshots/after/meadow-follow-390.png",
+    "sha256": "210575edc11358bbb0959f6530840118458f49992e10208ecfc2a60e35972450"
+  },
+  {
+    "file": "screenshots/after/meadow-follow-932.png",
+    "sha256": "56ef8a6af288a52730a094df37e569987f4c333a63dd7c4dbc8e0b05f21a53b0"
+  },
+  {
+    "file": "screenshots/after/meadow-overview-1440.png",
+    "sha256": "984dcf4c41186ce8b32fa050f1df2df0de31b769891c84624481068e8697e0a0"
+  },
+  {
+    "file": "screenshots/after/meadow-overview-390.png",
+    "sha256": "df6ca0ed5c31d54ed997038e8ce92d30a6114a80bfb54ea352633afaac2da990"
+  },
+  {
+    "file": "screenshots/after/meadow-overview-932.png",
+    "sha256": "e67543392140eca9a0d8e302475c32242d18d8928464d7942c5d11759767267f"
+  },
+  {
+    "file": "screenshots/before/harbor-follow-1440.png",
+    "sha256": "ea83adc042f124f0afce7b0569da185467ca68a8f5f4f5ec4c869f78a2783d52"
+  },
+  {
+    "file": "screenshots/before/harbor-follow-390.png",
+    "sha256": "98e59f5902705c7d62d9f2fc97ffe1e76bde37abb3cea427dc4f18cc3be6512a"
+  },
+  {
+    "file": "screenshots/before/harbor-follow-932.png",
+    "sha256": "e1a20e04eb184c3b052db3542a8120f12cff13d4a6edff0dfda30697b5095edf"
+  },
+  {
+    "file": "screenshots/before/meadow-follow-1440.png",
+    "sha256": "7184d16975a33cd7787c1df8f700f0f054998df82d62c2f035d139bae4369e50"
+  },
+  {
+    "file": "screenshots/before/meadow-follow-390.png",
+    "sha256": "ef1128e33b9f11e6278736f9096be57ec914c908ce1c6af4ac10886e807a3917"
+  },
+  {
+    "file": "screenshots/before/meadow-follow-932.png",
+    "sha256": "a915a2a8350922bbda6e2ad573948e94aac0e65d939483c64cffc7d8ef84a6bc"
+  },
+  {
+    "file": "screenshots/compatibility-390.png",
+    "sha256": "3e66e4523af51ae6561dd3a2f86aef2731bbb4ff9b959626108e5920e1cafbfc"
+  },
+  {
+    "file": "screenshots/full-course-result-1440.png",
+    "sha256": "12ef343b3ab34307b757979fc2b878c56a5623155c0c121a07a3b9cdce72cb2b"
+  },
+  {
+    "file": "screenshots/full-course-result-390.png",
+    "sha256": "b5f0aea0c597e689445377b756f6263f9b27aa4e6cf699bc4f35b523387fe596"
+  },
+  {
+    "file": "screenshots/full-course-result-932.png",
+    "sha256": "364a5fd429ce3b8b783831ca7630d8f1e221ecf9fc8c5745ec078d2f9c6c361a"
+  },
+  {
+    "file": "screenshots/held-pull-1440.png",
+    "sha256": "beba7cb83fed0a1d2f2374ce83c82438160802029bc84da66309ff96005811a8"
+  },
+  {
+    "file": "screenshots/held-pull-390.png",
+    "sha256": "b8a20f04f1ae0e88215db3ccfbe0714664a6d90b31af9cbe5afe72b5facad995"
+  },
+  {
+    "file": "screenshots/held-pull-932.png",
+    "sha256": "3eaf9e803752c52ec02f885e3c7d7c3622dc98d80e0616d5c0286c01f06ce2ea"
+  },
+  {
+    "file": "screenshots/hole-01-follow-1440.png",
+    "sha256": "abd4aa7efcafadcca10a7b41a6fcb73e92f49ef2523eaec74b9bc5671e9b807c"
+  },
+  {
+    "file": "screenshots/hole-01-follow-390.png",
+    "sha256": "c5a47385699b22ded9977e76e018c646498c503203b679f3a9b456102ccf198a"
+  },
+  {
+    "file": "screenshots/hole-01-follow-932.png",
+    "sha256": "d99de46433bd9e55c3c857c7cb0c49ac71a758acf77dd89627116ce560cbf8b7"
+  },
+  {
+    "file": "screenshots/hole-01-overview-1440.png",
+    "sha256": "afaecf1469f16c88ea3e33b761d0eef577bf122da98c06cd5ec2448254f87da4"
+  },
+  {
+    "file": "screenshots/hole-01-overview-390.png",
+    "sha256": "ffa4191d76873e6e7f011593439a8ff50910b6e578ee66dbd44852b74b04d443"
+  },
+  {
+    "file": "screenshots/hole-01-overview-932.png",
+    "sha256": "8ee586676f4024c70b5419c6931121d5284f33e9fb2f1f0dd807b36d2cf0a302"
+  },
+  {
+    "file": "screenshots/hole-02-follow-1440.png",
+    "sha256": "fe27d12bd0c33817ac8480a8e66a1700beb4dfa72ce0f7bfa20905ea53dea9d5"
+  },
+  {
+    "file": "screenshots/hole-02-follow-390.png",
+    "sha256": "557f1661bb230fa7dea44b107fa207af5960d0347c5e4aa2c8c0c4a7db7b3015"
+  },
+  {
+    "file": "screenshots/hole-02-follow-932.png",
+    "sha256": "5401e9812dbd684cc60d8ed3e5a75b451b97e0332ee9368c617c58b50bea3243"
+  },
+  {
+    "file": "screenshots/hole-02-overview-1440.png",
+    "sha256": "6d491f24f323ba9515ad088346fdf4dd2e60ae420f82b247cf2147f4e1a68b7b"
+  },
+  {
+    "file": "screenshots/hole-02-overview-390.png",
+    "sha256": "a141a99b222d0d2ba1f423f86a7ef602dacc884bb41c5fb6b510c31bbf5ae99b"
+  },
+  {
+    "file": "screenshots/hole-02-overview-932.png",
+    "sha256": "3bfd5532679ada77075e9f5596f42788902aafacbce59d28681fef9beccd55d4"
+  },
+  {
+    "file": "screenshots/hole-03-follow-1440.png",
+    "sha256": "ddd9faf1289c89ba66c7f4dec29c0169bf69d58b611cdfe3351226f7591d1573"
+  },
+  {
+    "file": "screenshots/hole-03-follow-390.png",
+    "sha256": "3d602dff5ce4d81a8598c8be0b942f8c91cbf6c733e4ee02845264dbf46c1114"
+  },
+  {
+    "file": "screenshots/hole-03-follow-932.png",
+    "sha256": "0e2d9844f666fabcffde9c0c0d0e40eb6de49e265e86240233d403ba68b744d5"
+  },
+  {
+    "file": "screenshots/hole-03-overview-1440.png",
+    "sha256": "af889540cb563a5bc4b9e78e59ee90d145fa74df8412c7c1c4ee4c43f7d3eef8"
+  },
+  {
+    "file": "screenshots/hole-03-overview-390.png",
+    "sha256": "81aeb795ecb6fd1cefb6ded1fc46be09749afa74dd3e550d060d195cb6f8b8a2"
+  },
+  {
+    "file": "screenshots/hole-03-overview-932.png",
+    "sha256": "f7796a70340212911ca9b03f071251aeb4c67e38eadac52782fd01d3e7ffa37e"
+  },
+  {
+    "file": "screenshots/hole-04-follow-1440.png",
+    "sha256": "cc086916904d006deb5394a92c3aac6cf7d57119a6129c4b0ef380ca00e5a29b"
+  },
+  {
+    "file": "screenshots/hole-04-follow-390.png",
+    "sha256": "5f27c513c3ad57e06da55fd06bff5f8c43600d4c6b8853da0d1b50bd185d61af"
+  },
+  {
+    "file": "screenshots/hole-04-follow-932.png",
+    "sha256": "362fe2d591494ab5e28033e017c3df2f39b17b586a952cd747068871d5fb44a3"
+  },
+  {
+    "file": "screenshots/hole-04-overview-1440.png",
+    "sha256": "b8d790af122f28be4a58562a503ddf2cda7ccbf312e3e6f1c506c6ae884ce860"
+  },
+  {
+    "file": "screenshots/hole-04-overview-390.png",
+    "sha256": "16c7a08628b2d0eaa336c2bc29e4c008ccaf4ab952d278d16a37b946a950d521"
+  },
+  {
+    "file": "screenshots/hole-04-overview-932.png",
+    "sha256": "bb77055fb2fd7ab485da5c7dbafd318408f60db58b3879d08a5a866e510c079b"
+  },
+  {
+    "file": "screenshots/hole-05-follow-1440.png",
+    "sha256": "bd07a50a152fa2692191ae437b610d950c7f6bd4f990d9e92a26a6a210035b8e"
+  },
+  {
+    "file": "screenshots/hole-05-follow-390.png",
+    "sha256": "4bb0bfcd0d89ea8bc93093ae0c1170b1122ad7fbc127a13663f8bf061aa596e0"
+  },
+  {
+    "file": "screenshots/hole-05-follow-932.png",
+    "sha256": "ac9e516b6c3824f68e56b2732bd096899709fdae5eacf3cf53e00b82b1464ab9"
+  },
+  {
+    "file": "screenshots/hole-05-overview-1440.png",
+    "sha256": "fa9b0274e5d385331268001fabfafa5f7bfcca3d1004fd9b6a2504877c324c59"
+  },
+  {
+    "file": "screenshots/hole-05-overview-390.png",
+    "sha256": "2e429a08cde94f333fc99f6ab35f76472dbe529cecd90de3a742537e80dea029"
+  },
+  {
+    "file": "screenshots/hole-05-overview-932.png",
+    "sha256": "c1e5d30dc3aaef3c63cce3e5e6fd99ec83ab25068cba5f55e93f7e8f0f4b0bed"
+  },
+  {
+    "file": "screenshots/hole-06-follow-1440.png",
+    "sha256": "2eaa20ce81d458700258f7cb64c06638f517867a06fae0fa1099ec349df60e0f"
+  },
+  {
+    "file": "screenshots/hole-06-follow-390.png",
+    "sha256": "783cb5afce950a34496d8dcab003298f0c588b2e581be766d12fa6a56ce7947f"
+  },
+  {
+    "file": "screenshots/hole-06-follow-932.png",
+    "sha256": "7d05b1a490685a94ff507aa8f82be6a6d17bdb140d26274197d2b94c72613de7"
+  },
+  {
+    "file": "screenshots/hole-06-overview-1440.png",
+    "sha256": "58bab6b33b615d7949b690f275ee66035537a199df2c073bb678dfbb8e42004f"
+  },
+  {
+    "file": "screenshots/hole-06-overview-390.png",
+    "sha256": "50317638dc0ad9ec8571477724539a12a37d6cb97569f702958c1d24a536dab1"
+  },
+  {
+    "file": "screenshots/hole-06-overview-932.png",
+    "sha256": "28fa48b58450bb2693b69cb6670c85cbf323e20b31635155e0cf9b578193fbaf"
+  },
+  {
+    "file": "screenshots/opening-1440.png",
+    "sha256": "013ac217ac6a0ca70239b82005f552721c5e737782da5a7662f121a2e5ddfb02"
+  },
+  {
+    "file": "screenshots/opening-390.png",
+    "sha256": "eb48c8a25b072d4308c084d7713a701c57c6e4655025d0f3a48359e2475ad816"
+  },
+  {
+    "file": "screenshots/opening-932.png",
+    "sha256": "8d97de46f80bf557c45767f509ecc7b0f04a05cafec3988e95311492dad646c4"
+  },
+  {
+    "file": "screenshots/real-shot-1440.png",
+    "sha256": "e723ff2a02966c9cd31fa9228bfee056a2b6d62ffac8da8f625bb28adb51f36a"
+  },
+  {
+    "file": "screenshots/real-shot-390.png",
+    "sha256": "1daecbbc55f334c6304ebc6a98169cd3bdc59d8630a12039da23a15e04c02b19"
+  },
+  {
+    "file": "screenshots/real-shot-932.png",
+    "sha256": "a2b88eb28c65b4be694b3f4c0016676a276d2843e2e9a969790a961b83bd45df"
+  },
+  {
+    "file": "screenshots/reduced-motion-390.png",
+    "sha256": "9c190b6c05422349c1eb06fd710eb698359f427a0b6dadf97e4f3aa4f29cdb1e"
+  },
+  {
+    "file": "screenshots/six-players-1440.png",
+    "sha256": "efb033e25cd32a4f3ef3f3b245e5af7de44aa876fbc7edfc442ca4fca77c72a4"
+  },
+  {
+    "file": "screenshots/six-players-390.png",
+    "sha256": "21156377401ff95cf34c570d258220a52c267ddb40fed6fdefc0df746a434d70"
+  },
+  {
+    "file": "screenshots/six-players-932.png",
+    "sha256": "c2912ed35b693ed35785f83ff2e2a7ce788c1380300a08a39ab885be317a4c69"
+  },
+  {
+    "file": "screenshots/water-penalty-1440.png",
+    "sha256": "d76a1b251f26f6dfa99ef40b1d86698df29da9c3afd80b5327211ed2bfa446c8"
+  },
+  {
+    "file": "screenshots/water-penalty-390.png",
+    "sha256": "47175a804a573a5f9529d0c3d8bf7826de32143b353ccd686e98a3db28ad8b05"
+  },
+  {
+    "file": "screenshots/water-penalty-932.png",
+    "sha256": "1afc15072366dca1552ea9eced96f21881a18458536b2715dec49dcb73e3f923"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "sourceCommit": "3b148a286d6258e0c1011660f256ca734a228af3",
+  "browserVersion": "154.0.8037.57",
+  "checks": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "cupGuidanceClearsControls": true,
+      "tapDoesNotShoot": true,
+      "escapeCancels": true,
+      "touchCancelAndMultitouch": false,
+      "releaseSendsOneAuthoritativeShot": true,
+      "sameReplayForOpponent": true,
+      "scorecardAndChat": true,
+      "reconnectKeepsStroke": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "cupGuidanceClearsControls": true,
+      "tapDoesNotShoot": true,
+      "escapeCancels": true,
+      "touchCancelAndMultitouch": true,
+      "releaseSendsOneAuthoritativeShot": true,
+      "sameReplayForOpponent": true,
+      "scorecardAndChat": true,
+      "reconnectKeepsStroke": true
+    },
+    {
+      "viewport": [
+        932,
+        430
+      ],
+      "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "cupGuidanceClearsControls": true,
+      "tapDoesNotShoot": true,
+      "escapeCancels": true,
+      "touchCancelAndMultitouch": true,
+      "releaseSendsOneAuthoritativeShot": true,
+      "sameReplayForOpponent": true,
+      "scorecardAndChat": true,
+      "reconnectKeepsStroke": true
+    }
+  ],
+  "errors": [],
+  "status": "Angled 3D course and authoritative input checks"
+}

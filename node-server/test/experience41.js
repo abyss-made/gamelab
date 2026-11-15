@@ -67,13 +67,13 @@ test('Impostor views keep role, word and ballots private until the result',()=>{
  for(let i=0;i<3;i++)r.tick();for(let i=0;i<3;i++)r.act(i,{type:'ready'});assert.equal(r.st.phase,'vote');
  r.act(0,{type:'vote',target:'p1'});assert(!('result' in r.view(2)));assert(!('votes' in r.view(2)));r.tick();if(r.st.phase==='guess')r.tick();assert(r.view(0).result.impostorId);
 });
-test('Golf all 24 holes offer six safe non-overlapping tee positions',()=>{
+test('Golf all 30 holes offer six safe non-overlapping tee positions',()=>{
  const G=GAMES.golf.rules;for(const course of require('../server/games/golfcourses').COURSES)for(const hole of course.holes){
   const points=[];for(let i=0;i<6;i++){const pos=G.startPosition(hole,points);assert(G.onFairway(hole,pos.x,pos.y));assert(points.every(p=>Math.hypot(p.x-pos.x,p.y-pos.y)>=13));points.push(pos);}
  }
 });
 test('Golf placement validates ownership, bounds, overlap and first-stroke restriction',()=>{
- const r=room('golf',{},3);const p=r.st.players[0],before={x:p.x,y:p.y};
+ const r=room('golf',{course:'meadow'},3);const p=r.st.players[0],before={x:p.x,y:p.y};
  r.act(0,{type:'place',x:999,y:999});assert.equal(p.x,before.x);
  r.act(0,{type:'place',x:r.st.players[1].x,y:r.st.players[1].y});assert.equal(p.x,before.x);
  r.act(0,{type:'place',x:142,y:220});assert(p.placed);assert.equal(p.x,142);
