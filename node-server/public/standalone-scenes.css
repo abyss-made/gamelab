@@ -457,3 +457,6 @@ body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card.lift .sc
  body[data-game] .room [data-scene=colorstack] .scene-stack-face::before{inset:14px 3px}
  body[data-game] .room [data-scene=colorstack] .pcs-card.big{height:126px}
 }
+/* Leave a real inset at either end; proximity snapping can clip the final card after focus scroll. */
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}

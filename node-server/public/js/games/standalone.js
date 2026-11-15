@@ -1,6 +1,7 @@
 // Scene presentation primitives. Every value and position still comes from the native game view.
 window.GameUI=window.GameUI||{};
 GameUI.scenes=(()=>{
+ let courtSeq=0;
  const cache=new Map();
  const image=name=>{if(!cache.has(name)){const i=new Image();i.src="/assets/scenes/"+name+".png";cache.set(name,i);}const i=cache.get(name);return i.complete&&i.naturalWidth?i:null;};
  const root='/assets/scenes/';
@@ -13,9 +14,11 @@ GameUI.scenes=(()=>{
  function card(c){
   const rank=c.r===14?'A':({11:'J',12:'Q',13:'K'}[c.r]||String(c.r)),s=pip[c.s],ink=['H','D'].includes(c.s)?'#c72b40':'#142b3d';let body='';
   if(c.r>10&&c.r<14){
-   // Original mirrored court illustration. Symbols and rank remain the real card's.
-   const figure=`<path d="m31 25 7 18 9-12 9 12 7-18-3 28H34Z" fill="#dfb55e" stroke="#493a30"/><path d="M34 55q-4 35 13 42 19-9 13-42Z" fill="#f3cfaa" stroke="#564432"/><path d="M35 62q12-13 23 0M41 70h2m11 0h2M43 83q5 4 10 0" fill="none" stroke="#48382c" stroke-width="2"/><path d="M27 103q20-25 41 0l6 32H21Z" fill="${ink}" stroke="#dfb55e" stroke-width="3"/><path d="m26 103 42 27m-42-10 38-15" stroke="#e9c574" stroke-width="5"/>`;
-   body=`<rect x="20" y="26" width="58" height="115" rx="3" fill="#f3e4bc" stroke="#d8b77a"/>${figure}<g transform="translate(98 168) rotate(180)">${figure}</g>`;
+   // Original duplex court engraving: each portrait has its own clipped half.
+   const clip='scene-court-'+(++courtSeq),royal=c.r===13,queen=c.r===12;
+   const crown=royal?'<path d="m32 35 5 13h24l5-13-12 7-5-12-6 12Z" fill="#d6af56" stroke="#57412d"/>':queen?'<path d="m33 39 5 10h22l5-10-10 4-6-10-6 10Z" fill="#e4c570" stroke="#57412d"/><circle cx="49" cy="32" r="2" fill="#b94445"/>':'<path d="M31 44q18-23 36-2l-7 7H36Z" fill="#376779" stroke="#263d42"/><path d="M52 34q7-15 13-12-3 11-13 18" fill="#bb3a4a"/>';
+   const figure=`<path d="M26 91q4-18 23-18t23 18v20H26Z" fill="${ink}" stroke="#d7b263" stroke-width="2"/><path d="m28 87 39 20m-32-27 35 18m-42 2 34-20" stroke="#d7b263" stroke-width="3"/><path d="M39 70h20v12H39Z" fill="#d7ab83"/><path d="M34 47q-4 7 0 20l7 10h16l7-10V47Z" fill="#f0cd9f" stroke="#674e35"/><path d="M33 47q15-18 31 0v8l-8-7-17 7-6 14Z" fill="#493a30"/>${crown}<path d="M39 59h5m10 0h5m-11 3-2 6h5m-8 4q7 3 12-1" fill="none" stroke="#5f4331" stroke-width="1.5"/>${royal?'<path d="m37 66 7 5h10l8-7-2 13-11 6-10-6Z" fill="#795038"/><path d="m45 70 8 0" stroke="#eac59b"/>':''}`;
+   body=`<defs><clipPath id="${clip}"><rect x="21" y="27" width="56" height="57"/></clipPath></defs><rect x="20" y="26" width="58" height="116" rx="3" fill="#f0e2ba" stroke="#c5a56d"/><g clip-path="url(#${clip})">${figure}</g><g transform="translate(98 168) rotate(180)" clip-path="url(#${clip})">${figure}</g><path d="M21 84h56" stroke="#c5a56d" stroke-width="2"/>`;
   }else{
    const n=c.r===14?1:c.r,rows={1:[[49,84]],2:[[49,45],[49,123]],3:[[49,44],[49,84],[49,124]],4:[[33,45],[65,45],[33,123],[65,123]],5:[[33,45],[65,45],[49,84],[33,123],[65,123]],6:[[33,43],[65,43],[33,84],[65,84],[33,125],[65,125]],7:[[33,43],[65,43],[49,63],[33,84],[65,84],[33,125],[65,125]],8:[[33,43],[65,43],[49,63],[33,84],[65,84],[49,105],[33,125],[65,125]],9:[[33,39],[65,39],[33,69],[65,69],[49,84],[33,99],[65,99],[33,129],[65,129]],10:[[33,37],[65,37],[49,54],[33,67],[65,67],[33,101],[65,101],[49,116],[33,131],[65,131]]}[n];
    body=rows.map(([x,y])=>`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-size="${n===1?46:23}" fill="${ink}">${s}</text>`).join('');
