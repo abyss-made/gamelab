@@ -141,7 +141,13 @@ class ClubScene{
   if(this.flag&&!this.reduced.matches){const a=this.flag.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setZ(i,Math.sin(now*.003+this.flagBase[i*3]*.14)*this.flagBase[i*3]*.06);a.needsUpdate=true;this.ocean.material.map.offset.x=(now*.000006)%1;this.ocean.material.map.offset.y=(now*.000003)%1;}
   for(let i=this.particles.length-1;i>=0;i--){const p=this.particles[i];p.life-=dt;if(p.life<=0){this.effects.remove(p.m);p.m.geometry.dispose();p.m.material.dispose();this.particles.splice(i,1);continue;}p.vy-=130*dt;p.m.position.x+=p.vx*dt;p.m.position.y+=p.vy*dt;p.m.position.z+=p.vz*dt;p.m.rotation.x+=dt*3;p.m.rotation.z+=dt*4;}
   if(now>this.toastUntil)this.toast.hidden=true;
-  const cp=this.project(...g.hole.cup,10),r=this.canvas.getBoundingClientRect();this.cupMarker.hidden=cp.visible;const arrows=['→','↘','↓','↙','←','↖','↑','↗'],heading=Math.round(Math.atan2(cp.y-r.top-r.height/2,cp.x-r.left-r.width/2)/(Math.PI/4));this.cupMarker.textContent='Cup '+arrows[(heading+8)%8];this.cupMarker.style.left=Math.max(65,Math.min(r.width-65,cp.x-r.left))+'px';this.cupMarker.style.top=Math.max(45,Math.min(r.height-60,cp.y-r.top))+'px';
+  const cp=this.project(...g.hole.cup,10),r=this.canvas.getBoundingClientRect();this.cupMarker.hidden=cp.visible;const arrows=['→','↘','↓','↙','←','↖','↑','↗'],heading=Math.round(Math.atan2(cp.y-r.top-r.height/2,cp.x-r.left-r.width/2)/(Math.PI/4));this.cupMarker.textContent='Cup '+arrows[(heading+8)%8];let markerX=Math.max(65,Math.min(r.width-65,cp.x-r.left)),markerY=Math.max(45,Math.min(r.height-60,cp.y-r.top));
+  if(!cp.visible){
+   const box=this.cupMarker.getBoundingClientRect(),halfW=box.width/2,halfH=box.height/2,controls=this.arena.querySelector('.club-camera-controls')?.getBoundingClientRect(),players=this.arena.querySelector('.club-standings')?.getBoundingClientRect();
+   if(controls&&markerX+halfW>controls.left-r.left&&markerX-halfW<controls.right-r.left&&markerY-halfH<controls.bottom-r.top+8)markerY=controls.bottom-r.top+halfH+10;
+   if(players&&markerX-halfW<players.right-r.left+8&&markerY-halfH<players.bottom-r.top+8&&markerY+halfH>players.top-r.top)markerX=Math.min(r.width-halfW-10,players.right-r.left+halfW+12);
+  }
+  this.cupMarker.style.left=markerX+'px';this.cupMarker.style.top=markerY+'px';
   this.renderer.render(this.scene,this.camera);
  }
  dispose(){this.labelLayer.remove();this.toast.remove();this.cupMarker.remove();const geos=new Set(),mats=new Set(),textures=new Set(Object.values(this.textures));this.scene.traverse(o=>{if(o.geometry)geos.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])mats.add(m);});for(const g of geos)g.dispose();for(const m of mats){for(const k of ['map','bumpMap'])if(m[k])textures.add(m[k]);m.dispose();}for(const t of [...textures,...this.resources])t.dispose();this.renderer.dispose();this.renderer.forceContextLoss();}
