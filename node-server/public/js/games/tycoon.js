@@ -311,7 +311,7 @@ GameUI.tycoon = (() => {
     root = document.createElement("div");
     root.className = "b2 ty";
     root.dataset.view = "map";
-    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players"></div>
+    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players" role="group" aria-label="Player balances" tabindex="0"></div>
       <div class="ty-views" role="group" aria-label="Phone view"><button type="button" class="btn btn-small" data-tyview="map" aria-pressed="true">Map</button><button type="button" class="btn btn-small btn-ghost" data-tyview="props" aria-pressed="false">Properties &amp; trades</button></div>
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>
