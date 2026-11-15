@@ -67,7 +67,7 @@ async function start(browser, vp, game) {
         ok(await page.evaluate(() => !!getComputedStyle(document.documentElement).getPropertyValue('--pg-focus').trim()), `${T}: gameplay31.css tokens loaded`);
 
         if (g === 'chess') {
-          ok((await page.$$('.ch-piece .ch-svg')).length === 32, `${T}: 32 SVG chess pieces (no emoji glyphs)`);
+          ok((await page.$$eval('.ch-piece', ns=>ns.filter(n=>n.querySelector('svg')||[...n.querySelectorAll('img')].some(i=>i.complete&&i.naturalWidth>0)).length)) === 32, `${T}: 32 loaded rendered chess pieces (no emoji glyphs)`);
           const labels = await page.$$eval('.ch-sq', (els) => els.every((e) => /: (empty|White|Black)/.test(e.getAttribute('aria-label'))));
           ok(labels, `${T}: every square has an accessible name`);
           // Select the first legal piece and check the three markers coexist as specified.

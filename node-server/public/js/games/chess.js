@@ -144,7 +144,7 @@ GameUI.chess = (() => {
     if (th) {
       root.dataset.theme = th.dataset.theme;
       try { localStorage.setItem("pg_chess_theme", th.dataset.theme); } catch (err) { /* private mode */ }
-      root.querySelector("#ch-eyebrow").textContent = th.dataset.theme === "slate" ? "SLATE & IVORY" : "CEDAR & IVORY";
+      root.querySelector("#ch-eyebrow").textContent = th.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
       root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b === th)));
       return;
     }
@@ -204,7 +204,7 @@ GameUI.chess = (() => {
     root.querySelector("#ch-opp").innerHTML = chip(order[1]);
     root.querySelector("#ch-me").innerHTML = chip(order[0]);
     root.querySelectorAll("button[data-theme]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.theme === root.dataset.theme)));
-    root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "CEDAR & IVORY";
+    root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ch-status");
     const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">Check — protect your king</b>' : "";

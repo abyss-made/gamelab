@@ -413,3 +413,8 @@ body[data-game] .room [data-scene=tycoon] .pty-plaque{top:65%;padding:10px}
 body[data-game] .room [data-scene=tycoon] .scene-deed-strip{margin:-10px -14px 12px;padding:12px 40px 12px 14px;font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;border-radius:11px 11px 0 0;color:#102b34;border-bottom:2px solid #173c3d33}
 body[data-game] .room [data-scene=tycoon] .scene-deed-model{display:block;width:150px;height:110px;object-fit:contain;margin:auto}
 @media(max-width:700px){body[data-game] .room [data-scene=tycoon] .pty-plaque{top:62%;padding:6px}}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{overflow-x:auto;justify-content:flex-start;padding-bottom:18px}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)),body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)){justify-content:flex-start;overflow-x:auto;padding:4px 6px 10px;scroll-snap-type:x proximity}
+ body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)) .pcs-seat,body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)) .pgf-seat{flex:0 0 120px;scroll-snap-align:center}
+}

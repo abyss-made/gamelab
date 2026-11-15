@@ -22,7 +22,7 @@ GameUI.premium5 = (() => {
     if (!from || !to || motion.matches) return;
     const a=from.getBoundingClientRect(), b=to.getBoundingClientRect(), box=root.getBoundingClientRect();
     for(let i=0;i<Math.min(4,count);i++) {
-      const el=document.createElement('img');el.className='p5-flying-card';el.src='/assets/premium/marine-card-back.svg';el.alt='';el.setAttribute('aria-hidden','true');
+      const el=document.createElement('img');el.className='p5-flying-card';el.src=root.querySelector('.pgf-pond img')?.src||'/assets/premium/marine-card-back.svg';el.alt='';el.setAttribute('aria-hidden','true');
       el.style.left=(a.x+a.width/2-box.x-18)+'px';el.style.top=(a.y+a.height/2-box.y-25)+'px';root.append(el);
       const anim=animate(el,[{transform:'translate(0,0) rotate(-12deg)',opacity:0},{offset:.15,opacity:1},{transform:`translate(${b.x+b.width/2-a.x-a.width/2+i*3}px,${b.y+b.height/2-a.y-a.height/2}px) rotate(8deg)`,opacity:0}],420+i*45);
       if(anim) anim.finished.catch(()=>{}).finally(()=>el.remove()); else el.remove();

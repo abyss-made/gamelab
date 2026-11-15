@@ -38,7 +38,7 @@ GameUI.gofish = (() => {
     root = document.createElement("div");
     root.className = "b2 gf pgf";
     root.innerHTML = `<div class="pgf-table">
-        <div class="pgf-oval" aria-hidden="true"><span class="pgf-orn">THE CORAL COLLECTION<small>A LITTLE LUCK. A GOOD MEMORY.</small></span></div>
+        <div class="pgf-oval" aria-hidden="true"><span class="pgf-orn">GO FISH<small>PLAYGRID CARD CLUB</small></span></div>
         <div class="pgf-opponents" id="gf-players"></div>
         <div class="pgf-mid">
           <div class="pgf-pond"><img src="${BACK}" alt=""><small id="gf-deck"></small></div>

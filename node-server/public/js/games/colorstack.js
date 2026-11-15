@@ -29,7 +29,7 @@ GameUI.colorstack = (() => {
     root = document.createElement("div");
     root.className = "b2 cs pcs";
     root.innerHTML = `<div class="pcs-table">
-        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>THE SPECTRUM CLUB</small></span></div>
+        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>PLAYGRID CARD CLUB</small></span></div>
         <div class="pcs-opponents" id="cs-players"></div>
         <div class="pcs-center">
           <div class="pcs-pile"><button type="button" class="cs-deck pcs-deck" id="cs-draw" aria-label="Draw a card"><img src="${BACK}" alt=""></button><small id="cs-deckn"></small></div>

@@ -71,7 +71,7 @@ GameUI.tycoon = (() => {
     }
     const cur = pById(g.turnId);
     const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[0])}</span><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[1])}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center pty-city"><img class="scene-exchange-art" src="/assets/scenes/exchange-city.png" alt="" aria-hidden="true" draggable="false"><div class="pty-plaque"><div class="ty-logo">Playgrid Boroughs</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
+    out += `<div class="ty-center pty-city"><img class="scene-exchange-art" src="/assets/scenes/exchange-city.png" alt="" aria-hidden="true" draggable="false"><div class="pty-plaque"><div class="ty-logo">Property Tycoon</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
   }
 
