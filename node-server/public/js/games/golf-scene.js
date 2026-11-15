@@ -114,7 +114,7 @@ class ClubScene{
  frame(data){
   if(document.hidden||!this.canvas.getClientRects().length)return;
   const {g,now,positions,aim,power,mine,pulling,placing,teeDraft}=data,T=this.T;if(this.key!==g.course.id+':'+g.holeIndex)this.build(g);this.resize();if(!this.width)return;
-  const dt=this.lastNow?Math.min(.06,(now-this.lastNow)/1000):.016;this.lastNow=now;const moving=g.anim&&data.animating;const actorId=moving?g.anim.by:g.turnId;const actor=positions.find(v=>v.p.id===actorId)||positions.find(v=>v.pos)||positions[0];const focus=actor?.pos||{x:g.hole.tee[0],y:g.hole.tee[1]};
+  const dt=this.lastNow?Math.min(.06,(now-this.lastNow)/1000):.016;this.lastNow=now;const moving=g.anim&&data.animating;const actorId=moving?g.anim.by:g.turnId;const actor=positions.find(v=>v.p.id===actorId)||positions.find(v=>v.pos)||positions[0];const fallback=g.phase==='between'?g.hole.cup:g.hole.tee;const focus=actor?.pos||{x:fallback[0],y:fallback[1]};
   const aspect=this.width/this.height,tan=Math.tan(this.camera.fov*Math.PI/360),direction=new T.Vector3(Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),Math.cos(this.yaw)*Math.cos(this.pitch));
   let distance;
   if(this.overview){
