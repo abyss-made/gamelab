@@ -491,3 +491,10 @@ body[data-game] .room [data-scene=battleship] .bs-head{background:#0c3045;color:
  body[data-game] .room [data-scene=battleship] .pbs-enemy>.bs-grid{order:2}
  body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{max-width:min(100%,max(280px,calc(100dvh - 430px)))}
 }
+
+@media(min-width:701px) and (max-height:500px){
+ /* Keep square games readable in short landscape windows; the page may scroll. */
+ body[data-game] .room [data-scene=ludo] .ld2-board.pld{width:min(100%,max(340px,calc(100dvh - 270px)))}
+ body[data-game] .room [data-scene=tycoon] .ty-board{width:min(100%,max(360px,var(--ty-board-max,calc(100dvh - 315px))))}
+ body[data-game] .room [data-scene=chess] .pch-table{width:min(100%,360px)}
+}
