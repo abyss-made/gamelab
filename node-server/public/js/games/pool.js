@@ -418,6 +418,7 @@ GameUI.pool = (() => {
       if (!cuePos || !legalSpot(cuePos.x, cuePos.y)) return;
       placing = !placing;
       syncControls();
+      root.querySelector("#pl-status").innerHTML = statusText();
     });
     root.querySelector("#pl-resign").addEventListener("click", (e) => {
       const r = e.currentTarget;
