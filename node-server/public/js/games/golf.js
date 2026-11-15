@@ -550,7 +550,7 @@ GameUI.golf = (() => {
     root = null; canvas = null; ctx = null; g = null; placing = false; teeDraft = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const top = r.standings[0];
     const title = r.tie ? (r.winners.includes(state.you) ? "It's a tie, and you're in it!" : "It's a tie!") : r.winnerId === state.you ? "You win!" : `${a.esc(top ? top.name : "Someone")} wins!`;
     const rows = r.standings
@@ -565,5 +565,5 @@ GameUI.golf = (() => {
     return r.winners.includes(state.you) ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('golf',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

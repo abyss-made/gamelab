@@ -206,12 +206,12 @@ GameUI.colorstack = (() => {
     selected = null;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.hands.find((h) => h.id === r.winnerId);
     return `<h2 class="result-title b25-result">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
       ${!r.forfeit?'<div class="b25-out" aria-label="Winner has no cards remaining">0<small>CARDS LEFT</small></div>':''}
       <p class="muted center">${r.forfeit ? "Won because the others left." : `Scored ${r.pts} points from the cards left in other hands.`}</p>
       <ol class="b2-podium">${[...r.hands].sort((x, y) => x.cards - y.cards).map((h) => `<li class="${h.id === state.you ? "me" : ""}"><span class="rank">${h.cards}</span>${a.avatarHTML(h.avatar)}<b>${a.esc(h.name)}</b><span class="pts">${h.cards} cards left (${h.value})</span></li>`).join("")}</ol>`;
   }
-  return { mount, update, unmount, renderResult, resultSound: (r, s) => C.resultSound({ ...r, standings: r.hands }, s), scoreLabel: "pts" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('colorstack',renderLegacyResult(r,s,a)), resultSound: (r, s) => C.resultSound({ ...r, standings: r.hands }, s), scoreLabel: "pts" };
 })();

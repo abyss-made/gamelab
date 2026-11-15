@@ -130,8 +130,8 @@ GameUI.impostor = (() => {
     key = "";concealed=false;roleKey="";votePicked=null;S=null;
   }
   const chatPlaceholder = (st) => (st.game && st.game.phase === "discuss" ? "Discuss who the impostor is…" : null);
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     return `<h2 class="result-title b25-result">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">${r.rounds} rounds played.</p>`;
   }
-  return { mount, update, unmount, renderResult, chatPlaceholder, resultSound: C.resultSound, scoreLabel: "pts" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('impostor',renderLegacyResult(r,s,a)), chatPlaceholder, resultSound: C.resultSound, scoreLabel: "pts" };
 })();

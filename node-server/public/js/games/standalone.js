@@ -32,5 +32,9 @@ GameUI.scenes=(()=>{
    return `<div class="scene-meeting-seat ${active?'speaking':''} ${p.out?'out':''}" style="left:${x}%;top:${y}%">${a.avatarHTML(p.avatar)}<b>${a.esc(p.name)}</b><small>${p.out?'Out':clue?a.esc(clue.text):active?'Giving a clue':p.voted?'Vote cast':'Listening'}</small></div>`;}).join('');
   return `<div class="scene-meeting" data-count="${g.players.length}"><div class="scene-meeting-desk"><span>THE MEETING</span><b>${a.esc(g.category)}</b><small>ROUND ${g.round}</small></div>${seats}</div>`;
  }
- return {mount,piece,pawn,car,card,rack,steps,image,meeting};
+ function result(id,markup){
+  const art={pool:'ball-eight.svg',golf:'golf-flag.svg',tycoon:'car-2.png',gofish:'card-back.svg',ludo:'pawn-1.png',battleship:'ship-battleship.png',colorstack:'stack-back.svg',chess:'chess-wK.png'}[id];
+  return `<article class="scene-results" data-scene-result="${id}"><div class="scene-result-heading">${art?`<img src="${root}${art}" alt="" class="scene-result-mark">`:''}<span>${names[id]}</span></div><div class="scene-results-body">${markup}</div></article>`;
+ }
+ return {mount,piece,pawn,car,card,rack,steps,image,meeting,result};
 })();

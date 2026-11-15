@@ -214,7 +214,7 @@ GameUI.ludo = (() => {
     pickCell = null;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.standings.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
     return `<h2 class="result-title p5-result-heading">${title}</h2>${r.forfeit ? '<p class="muted center">Everyone else left the game.</p>' : ""}${C.podium(r.standings, a, (p) => `${p.home}/4`, "home")}`;
@@ -225,5 +225,5 @@ GameUI.ludo = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "home" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('ludo',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "home" };
 })();

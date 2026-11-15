@@ -418,3 +418,22 @@ body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{overflow-x:auto;ju
  body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)),body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)){justify-content:flex-start;overflow-x:auto;padding:4px 6px 10px;scroll-snap-type:x proximity}
  body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)) .pcs-seat,body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)) .pgf-seat{flex:0 0 120px;scroll-snap-align:center}
 }
+/* Hover must not move a card out from under the pointer. Selection provides the lift. */
+body[data-game] .room [data-scene=gofish] .pgf-card:hover:not(:disabled){transform:rotate(var(--tilt))}
+body[data-game] .room [data-scene=gofish] .pgf-card.lift:hover:not(:disabled){transform:translateY(-20px) rotate(var(--tilt))}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{overflow-x:auto;overflow-y:hidden;padding-top:28px;align-items:center}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card,body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card:hover:not(:disabled){transform:none}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card.lift,body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card.lift:hover:not(:disabled){transform:translateY(-8px)}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card{transform:none}
+.scene-results{padding:18px;background:radial-gradient(at 50% 0,#2a4c4b,#102a3c 70%);border:1px solid #789787;border-radius:18px;box-shadow:0 7px 0 #081d2d,0 18px 35px #0005;overflow:hidden}
+.scene-result-heading{display:flex;justify-content:center;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:12px;border-bottom:1px solid #7e9e8744;font-size:11px;font-weight:850;letter-spacing:.15em;text-transform:uppercase;color:#c5dfb4}
+.scene-result-mark{width:64px;height:64px;object-fit:contain;filter:drop-shadow(1px 4px 2px #071b2d88);animation:scene-result-arrive .3s ease-out both}
+.scene-results .result-title{font-size:clamp(26px,4vw,46px);line-height:1.15;letter-spacing:-.04em;color:#e8efcf}
+.scene-results .b2-podium li{background:#1a3f43;border:1px solid #6a9584;border-radius:14px;color:#e1ead1;box-shadow:0 4px 0 #0a2232}
+.scene-results .b2-podium li.me{background:#305549;border-color:#c5e18f}
+@keyframes scene-result-arrive{from{opacity:0;transform:translateY(-18px) scale(.8)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+ body[data-screen=room] .room[data-phase=game]:has([data-scene]){grid-template-rows:auto auto auto minmax(130px,1fr)}
+ .scene-results{padding:12px}.scene-result-mark{width:50px;height:50px}
+}
+@media(prefers-reduced-motion:reduce){.scene-result-mark{animation:none}}

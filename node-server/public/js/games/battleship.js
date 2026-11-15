@@ -282,7 +282,7 @@ GameUI.battleship = (() => {
     tab = "target";
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.players.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
     const next = r.nextUp ? `<p class="center next-up">Winner stays: <b>${a.esc(r.nextUp)}</b> plays next.</p>` : "";
@@ -300,5 +300,5 @@ GameUI.battleship = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('battleship',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

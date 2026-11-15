@@ -553,7 +553,7 @@ GameUI.pool = (() => {
     root = null; canvas = null; ctx = null; g = null; pendingCue = null; animKey = -1; lastShot = -1; busyUntil = 0; cuePos = null; placing = true;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.players.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
     const why = { eight: "Sank the 8-ball to finish the table.", "eight-early": "The other player pocketed the 8-ball too soon.", "eight-foul": "The other player fouled while pocketing the 8-ball.", "eight-scratch": "The other player scratched on the 8-ball.", resign: "Won by resignation.", time: "Won on time.", abandoned: "The other player left." }[r.reason] || "";
@@ -567,5 +567,5 @@ GameUI.pool = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('pool',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

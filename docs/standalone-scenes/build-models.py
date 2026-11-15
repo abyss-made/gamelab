@@ -1,7 +1,7 @@
 """Original Playgrid miniature models. Run: blender -b --python this-file.py.
 Offline asset build only. Blender is not a runtime dependency. No imported models/textures.
 """
-import bpy, math
+import bpy, math, sys
 from pathlib import Path
 from mathutils import Vector
 OUT=Path(__file__).resolve().parents[2]/'node-server/public/assets/scenes';OUT.mkdir(parents=True,exist_ok=True)
@@ -51,7 +51,7 @@ def camera(pos,target,ortho,res):
   bpy.ops.object.light_add(type='AREA',location=loc);l=bpy.context.object;l.data.energy=power;l.data.shape='DISK';l.data.size=size;l.rotation_euler=(Vector(target)-l.location).to_track_quat('-Z','Y').to_euler()
 
 def render(name,pos=(5,-8,6),target=(0,0,1),ortho=3,res=(256,320)):
- if (OUT/(name+'.png')).exists():return
+ if (OUT/(name+'.png')).exists() and '--force' not in sys.argv:return
  camera(pos,target,ortho,res);scene.render.filepath=str(OUT/(name+'.png'));bpy.ops.render.render(write_still=True);print('ASSET',name,flush=True)
 
 base=[(0,0),(.49,0),(.53,.07),(.53,.16),(.48,.22),(.44,.28),(.4,.32),(.42,.36),(.34,.42),(.25,.65),(.2,.9),(.22,1.02),(.34,1.08),(.34,1.16),(.26,1.22)]
@@ -104,7 +104,6 @@ for kind,length in [('carrier',6),('battleship',5),('destroyer',4.2),('submarine
   else:
    cube((-.35,0,.68),(1,.56,.45),steel,.04);cube((-.25,0,.98),(.6,.42,.24),window,.03);cube((-.4,0,1.3),(.05,.05,.5),steel,.015)
    for x in [-L*.33,L*.27]:
-    lathe([(0,0),(.23,0),(.25,.12),(.2,.23),(0,.23)],steel);tur=bpy.context.scene.objects[-1] if False else None
     # Turret housing and twin barrels, all within the ship silhouette.
     cube((x,0,.64),(.4,.42,.25),steel,.06)
     for y in [-.1,.1]:cube((x+.3,y,.7),(.58,.045,.045),steel,.015)

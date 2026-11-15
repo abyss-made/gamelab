@@ -304,8 +304,8 @@ GameUI.telephone = (() => {
     key = "";
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     return `<h2 class="result-title b25-result">${C.resultTitle(r, state, a)}</h2>${C.podium(r.standings, a, (p) => p.points, "pts")}<p class="muted center">Points come from finishing your turns and from likes.</p>`;
   }
-  return { mount, update, unmount, renderResult, resultSound: C.resultSound, scoreLabel: "pts" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('telephone',renderLegacyResult(r,s,a)), resultSound: C.resultSound, scoreLabel: "pts" };
 })();
