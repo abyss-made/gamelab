@@ -24,7 +24,7 @@ GameUI.battleship = (() => {
   let msg = "";
   let lastMoves = -1;
   let tab = "target"; // phone battle view: target | fleet
-  const SHIP_ART = ["carrier", "battleship", "destroyer", "submarine", "patrol"].map((n) => `/assets/ten/fleet-${n}.svg`);
+  const SHIP_ART = ["carrier", "battleship", "destroyer", "submarine", "patrol"].map((n) => `/assets/scenes/ship-${n}.png`);
 
   // Vessel illustrations for MY fleet only (from my own ship cells / local draft). Enemy ships are never drawn.
   function shipsLayer(list) {
@@ -79,7 +79,7 @@ GameUI.battleship = (() => {
       <div class="ttt-status" id="bs-status" aria-live="polite"></div>
       <div id="bs-main"></div>`;
     root.dataset.ten='battleship';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('battleship'));
+    GameUI.scenes.mount(root,'battleship');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {if(suppressClick){suppressClick=false;return;}C.keepFocus(document.getElementById("stage"), () => onClick(e));});
@@ -194,7 +194,7 @@ GameUI.battleship = (() => {
   }
 
   function legend(g) {
-    return `<ul class="bs-fleet">${g.fleet.map((s, i) => `<li><button type="button" class="bs-ship ${i === pick ? "cur" : ""} ${placed[i] ? "done" : ""}" data-ship="${i}" aria-pressed="${i === pick}"><img src="${SHIP_ART[i]}" alt="" aria-hidden="true">${s.name} <small>${s.len} cells</small>${placed[i] ? " ✓" : ""}</button></li>`).join("")}</ul>`;
+    return `<ul class="bs-fleet">${g.fleet.map((s, i) => `<li><button type="button" class="bs-ship ${i === pick ? "cur" : ""} ${placed[i] ? "done" : ""}" data-ship="${i}" aria-pressed="${i === pick}"><img src="${SHIP_ART[i]}" alt="" aria-hidden="true" draggable="false">${s.name} <small>${s.len} cells</small>${placed[i] ? " ✓" : ""}</button></li>`).join("")}</ul>`;
   }
 
   function paint() {

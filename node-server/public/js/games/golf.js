@@ -99,7 +99,9 @@ GameUI.golf = (() => {
   function drawDeco(c) {
     for(const d of deco){
       c.save();c.translate(d.x,d.y);
-      if(d.t==='tree'){
+      const sprite=GameUI.scenes.image(d.t==='tree'?'garden-tree':'garden-rock');
+      if(sprite&&d.t==='tree'){c.drawImage(sprite,-d.r*1.7,-d.r*1.9,d.r*3.4,d.r*3.4);}
+      else if(d.t==='tree'){
         c.fillStyle='#031b2a77';c.beginPath();c.ellipse(6,9,d.r*1.1,d.r*.9,0,0,7);c.fill();
         for(let j=0;j<7;j++){const a=j*Math.PI*2/7,x=Math.cos(a)*d.r*.42,y=Math.sin(a)*d.r*.42,g=c.createRadialGradient(x-3,y-4,1,x,y,d.r*.65);g.addColorStop(0,j%2?'#6aa793':'#93bf92');g.addColorStop(1,'#1c5b65');c.fillStyle=g;c.beginPath();c.arc(x,y,d.r*.65,0,7);c.fill();}
         c.strokeStyle='#c5deaa77';c.lineWidth=1;c.beginPath();c.arc(-3,-4,d.r*.5,3.4,5.5);c.stroke();
@@ -170,21 +172,23 @@ GameUI.golf = (() => {
   function scene(now) {
     const h = g.hole;
     const lawn = ctx.createLinearGradient(0, 0, 0, g.size.h);
-    lawn.addColorStop(0, "#123e50");
-    lawn.addColorStop(1, "#071f35");
+    lawn.addColorStop(0, "#265d47");
+    lawn.addColorStop(1, "#123b36");
     ctx.fillStyle = lawn;
     ctx.fillRect(-400, -400, g.size.w + 800, g.size.h + 800);
     drawDeco(ctx);
+    // Raised miniature course base. Its top edge remains the exact collision polygon.
+    ctx.save();ctx.translate(0,7);poly(ctx,h.poly);ctx.shadowColor='#041f25aa';ctx.shadowBlur=16;ctx.shadowOffsetY=8;ctx.fillStyle='#314b30';ctx.fill();ctx.strokeStyle='#173b2a';ctx.lineWidth=15;ctx.lineJoin='round';ctx.stroke();ctx.restore();
     // fairway with mowing stripes
     poly(ctx, h.poly);
-    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#72d7b2");green.addColorStop(.55,"#3baf92");green.addColorStop(1,"#267c79");
+    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#8acb59");green.addColorStop(.55,"#62b447");green.addColorStop(1,"#328b43");
     ctx.fillStyle = green;
     ctx.fill();
     ctx.save();
     poly(ctx, h.poly);
     ctx.clip();
     ctx.fillStyle = "#ffffff10";
-    for (let x = 0; x < g.size.w; x += 44) ctx.fillRect(x, 0, 22, g.size.h);
+    for(let y=0;y<g.size.h;y+=40)for(let x=0;x<g.size.w;x+=40)if((x/40+y/40)%2===0)ctx.fillRect(x,y,40,40);
     const cupGlow = ctx.createRadialGradient(h.cup[0], h.cup[1], 4, h.cup[0], h.cup[1], 70);
     cupGlow.addColorStop(0, "#7fd07a55");
     cupGlow.addColorStop(1, "#7fd07a00");
@@ -205,20 +209,22 @@ GameUI.golf = (() => {
     ctx.strokeStyle = "#173343";
     ctx.lineWidth = 12;
     ctx.stroke();
-    ctx.strokeStyle = "#c2d7c8";
+    ctx.strokeStyle = "#cfb681";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.save();
     ctx.setLineDash([1.2, 16]);
-    ctx.strokeStyle = "#728b87";
+    ctx.strokeStyle = "#7d7550";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.restore();
     for (const w of h.walls) {
+      ctx.save();ctx.translate(2,5);poly(ctx,w);ctx.fillStyle='#1d412c';ctx.shadowColor='#17372988';ctx.shadowBlur=7;ctx.fill();ctx.restore();
       poly(ctx, w);
-      ctx.fillStyle = "#587789";
+      const wg=ctx.createLinearGradient(0,0,g.size.w,g.size.h);wg.addColorStop(0,'#dbbd7d');wg.addColorStop(1,'#88643e');
+      ctx.fillStyle = wg;
       ctx.fill();
-      ctx.strokeStyle = "#b4c8c8";
+      ctx.strokeStyle = "#f2d69b";
       ctx.lineWidth = 3;
       ctx.stroke();
     }
@@ -376,7 +382,7 @@ GameUI.golf = (() => {
       </div>
       <div class="gf-card card" id="gf-card"></div>`;
     root.dataset.ten='golf';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('golf'));
+    GameUI.scenes.mount(root,'golf');
     stage.appendChild(root);
     const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
     root.querySelector('.gf-controls').append(presets);

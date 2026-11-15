@@ -7,7 +7,7 @@ GameUI.colorstack = (() => {
   const FX=GameUI.batch2fx;
   const NAMES = { r: "Red", b: "Blue", g: "Green", y: "Yellow", w: "Wild" };
   const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", P: "+4" };
-  const BACK = "/assets/ten/stack-back.svg";
+  const BACK = "/assets/scenes/stack-back.svg";
   const MAX_BACKS = 7; // long fans compress; the exact count stays in text
   let root = null;
   let app = null;
@@ -47,7 +47,7 @@ GameUI.colorstack = (() => {
       </div>
       <div class="cs-picker" id="cs-picker" hidden role="dialog" aria-label="Choose a color"><p>Choose a color</p>${["r", "b", "g", "y"].map((c) => `<button type="button" class="cs-pick c-${c}" data-color="${c}">${NAMES[c]}</button>`).join("")}<button type="button" class="btn btn-ghost btn-small" data-color="">Cancel</button></div>`;
     root.dataset.ten='colorstack';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('colorstack'));
+    GameUI.scenes.mount(root,'colorstack');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {

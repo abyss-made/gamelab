@@ -16,14 +16,14 @@ GameUI.impostor = (() => {
     root.className = "b2 im pimp";
     root.innerHTML = `<div class="b2-players card" id="im-players"></div>
       <div class="card im-main">
-        <div class="hl-round" id="im-round"></div>
+        <div id="im-progress"></div><div class="hl-round" id="im-round"></div>
         <div class="im-role" id="im-role" aria-live="polite"></div>
         <ul class="im-clues" id="im-clues"></ul>
         <div id="im-body"></div>
         <div class="hl-status" id="im-status" aria-live="polite"></div>
       </div>`;
     root.dataset.ten='impostor';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('impostor'));
+    GameUI.scenes.mount(root,'impostor');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", e=>{
@@ -67,16 +67,10 @@ GameUI.impostor = (() => {
     const g = S.game;
     clock.set(g.timeLeft);
     const me = g.myIndex >= 0 ? g.players[g.myIndex] : null;
-    root.querySelector("#im-players").innerHTML = g.players
-      .map((p) =>
-        C.playerChip(app, p, {
-          active: p.id === g.turnId,
-          sub: `${p.points} pts` + (p.id === g.turnId ? " · giving a clue" : "") + (g.phase === "vote" && p.voted ? " · voted" : "") + (g.phase === "discuss" && g.ready.includes(p.id) ? " · ready" : ""),
-        }),
-      )
-      .join("");
+    root.querySelector("#im-players").innerHTML=GameUI.scenes.meeting(g,app,S.you,votePicked);
     const phaseName = { clue: "Clues", discuss: "Discussion", vote: "Vote", guess: "Last chance", result: "Results" }[g.phase];
     root.querySelector("#im-round").innerHTML = `Round ${g.round} of ${g.rounds} · ${phaseName} <span class="fr-timer" data-timer></span>`;
+    root.querySelector("#im-progress").innerHTML=GameUI.scenes.steps(g.phase);
     paintRole(g);
     root.querySelector("#im-clues").innerHTML = g.clues.map((c) => `<li><b>${nameOf(g, c.id)}</b>: ${app.esc(c.text)}</li>`).join("");
     const body = root.querySelector("#im-body");

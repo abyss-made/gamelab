@@ -78,7 +78,7 @@ GameUI.telephone = (() => {
     root.className = "b2 tp ptel";
     root.innerHTML = `<div class="b2-players card" id="tp-players"></div><div class="card tp-main"><div class="hl-round" id="tp-head"></div><div id="tp-body"></div><div class="hl-status" id="tp-status" aria-live="polite"></div></div>`;
     root.dataset.ten='telephone';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('telephone'));
+    GameUI.scenes.mount(root,'telephone');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
@@ -193,7 +193,7 @@ GameUI.telephone = (() => {
 
   function buildText(body, g) {
     const prompt = g.kind === "prompt";
-    body.innerHTML = `${g.source && g.source.kind === "draw" ? '<div id="tp-src"></div>' : ""}
+    body.innerHTML = `<div class="scene-writing-title"><span>${prompt?'START THE STORY':'PASS IT ON'}</span><h2>${prompt?'What should they draw?':'What do you see?'}</h2><p>${prompt?'Give the next player a scene worth drawing.':'Describe the drawing in a few words. The next player will draw your description.'}</p></div>${g.source && g.source.kind === "draw" ? '<div id="tp-src"></div>' : ""}
       <form class="ws-form" id="tp-form" autocomplete="off">
         <label class="sr-only" for="tp-input">${prompt ? "Your prompt" : "What is this a drawing of?"}</label>
         <input id="tp-input" type="text" maxlength="60" placeholder="${prompt ? "Write something fun to draw…" : "Describe the drawing"}" autocapitalize="sentences">

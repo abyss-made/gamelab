@@ -61,9 +61,9 @@ GameUI.tycoon = (() => {
       const c = cell(i);
       const o = g.owners[i];
       const lvl = g.levels[i];
-      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span data-p5-token="${p.colour}" class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="background:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}"></span>` : "")).join("");
+      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span data-p5-token="${p.colour}" class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="--token-color:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}">${GameUI.scenes.car(p.colour)}</span>` : "")).join("");
       const band = t.group ? `<span class="ty-band" style="background:${g.groups[t.group].color}"></span>` : "";
-      const pips = lvl ? `<span class="ty-lvl" aria-hidden="true">${lvl === 4 ? "★" : "▪".repeat(lvl)}</span>` : "";
+      const pips = lvl ? `<span class="ty-lvl" aria-hidden="true"><img src="/assets/scenes/building-${lvl}.png" alt=""></span>` : "";
       const price = t.price ? `<span class="ty-pr">${money(t.price)}</span>` : t.amount ? `<span class="ty-pr">-${money(t.amount)}</span>` : "";
       const nm = corner(t) || t.type === "surprise" || t.type === "tax" ? SHORT[t.type] : t.name;
       const own = o >= 0 ? `<span class="ty-own" style="background:${col(o)}"></span>` : "";
@@ -71,7 +71,7 @@ GameUI.tycoon = (() => {
     }
     const cur = pById(g.turnId);
     const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[0])}</span><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[1])}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/ten/borough-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Boroughs</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
+    out += `<div class="ty-center pty-city"><img class="scene-exchange-art" src="/assets/scenes/exchange-city.png" alt="" aria-hidden="true" draggable="false"><div class="pty-plaque"><div class="ty-logo">Playgrid Boroughs</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
   }
 
@@ -109,7 +109,7 @@ GameUI.tycoon = (() => {
     else if (t.type === "surprise") rows = '<p class="muted">Draw a Surprise card.</p>';
     const owner = o >= 0 ? `Owned by <b>${app.esc(g.players[o].name)}</b>${g.levels[i] ? ` · ${g.levelNames[g.levels[i]]}` : ""}` : t.price ? `Unowned · ${money(t.price)}` : "";
     const band = t.group ? `<span class="ty-sw" style="background:${g.groups[t.group].color}"></span>${g.groups[t.group].name} district · ` : "";
-    return `<div class="ty-info"><button type="button" class="btn btn-small btn-ghost ty-x" data-close-info aria-label="Close tile details">✕</button><b>${app.esc(t.name)}</b><div class="muted">${band}${owner}</div>${rows}</div>`;
+    return `<div class="ty-info"><div class="scene-deed-strip" style="background:${t.group?g.groups[t.group].color:'#496c6a'}">${t.group?app.esc(g.groups[t.group].name):app.esc(t.type)}</div>${g.levels[i]>0?`<img class="scene-deed-model" src="/assets/scenes/building-${g.levels[i]}.png" alt="${g.levelNames[g.levels[i]]}" >`:""}<button type="button" class="btn btn-small btn-ghost ty-x" data-close-info aria-label="Close tile details">✕</button><b>${app.esc(t.name)}</b><div class="muted">${band}${owner}</div>${rows}</div>`;
   }
 
   function myIdx() {
@@ -320,7 +320,7 @@ GameUI.tycoon = (() => {
       <details class="card ty-sect"><summary>Trades</summary><div id="ty-trades"></div></details>
       <details class="card ty-sect"><summary>Game log</summary><div id="ty-log" class="ty-log"></div></details>`;
     root.dataset.ten='tycoon';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('tycoon'));
+    GameUI.scenes.mount(root,'tycoon');
     stage.appendChild(root);
     window.addEventListener("resize", fitBoard);
     clock = C.makeClock(() => root);

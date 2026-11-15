@@ -4,7 +4,7 @@
 window.GameUI = window.GameUI || {};
 GameUI.gofish = (() => {
   const C = GameUI.common;
-  const BACK = "/assets/ten/marine-back.svg";
+  const BACK = "/assets/scenes/card-back.svg";
   const FISH = "/assets/premium/marine-fish.svg";
   const MAX_BACKS = 7;
   const SUIT = { S: "♠", H: "♥", D: "♦", C: "♣" };
@@ -30,7 +30,7 @@ GameUI.gofish = (() => {
 
   function cardHTML(c, i, n, picked) {
     const red = c.s === "H" || c.s === "D";
-    return `<button type="button" data-card="${c.r}-${c.s}" data-rank="${c.r}" aria-pressed="${picked}" ${S.game.turnId !== S.you || pending ? "disabled" : ""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}"><span class="pgf-idx">${C.rankLabel(c.r)}<i>${SUIT[c.s]}</i></span><img class="ten-fish" src="/assets/ten/fish-${c.r}.svg" alt=""><b>${C.rankLabel(c.r)}</b></button>`;
+    return `<button type="button" data-card="${c.r}-${c.s}" data-rank="${c.r}" aria-pressed="${picked}" ${S.game.turnId !== S.you || pending ? "disabled" : ""} class="pgf-card ${red ? "red" : ""} ${picked ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" aria-label="${C.rankWord(c.r)} of ${{ S: "spades", H: "hearts", D: "diamonds", C: "clubs" }[c.s]}">${GameUI.scenes.card(c)}</button>`;
   }
 
   function mount(stage, a) {
@@ -51,7 +51,7 @@ GameUI.gofish = (() => {
         <details class="pgf-logwrap"><summary>Recent moves</summary><ul class="gf-log" id="gf-log" aria-label="Recent moves"></ul></details>
       </div>`;
     root.dataset.ten='gofish';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('gofish'));
+    GameUI.scenes.mount(root,'gofish');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
@@ -146,7 +146,7 @@ GameUI.gofish = (() => {
     ask.hidden = !mine;
     root.querySelector("#gf-log").innerHTML = g.log.slice().reverse().map((l) => `<li>${app.esc(l)}</li>`).join("");
     const hand = g.hand ? g.hand.slice().sort((x, y) => x.r - y.r || x.s.localeCompare(y.s)) : null;
-    root.querySelector("#gf-handlabel").textContent = hand ? `YOUR HAND · ${hand.length} CARDS` : "";
+    root.querySelector("#gf-handlabel").innerHTML = hand&&me ? `${app.avatarHTML(me.avatar)}<span>YOUR HAND · ${hand.length} CARDS</span>` : "";
     root.querySelector("#gf-bookcount").textContent = me ? `${me.books.length} book${me.books.length === 1 ? "" : "s"} collected` : "";
     root.querySelector("#gf-hand").innerHTML = hand
       ? hand.map((c, i) => cardHTML(c, i, hand.length, c.r === (pending ? pending.rank : pickRank))).join("") || '<p class="muted">No cards in hand.</p>'

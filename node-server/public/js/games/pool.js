@@ -212,7 +212,7 @@ GameUI.pool = (() => {
     for (const p of t.pockets) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82 + 5, 0, 7);
-      ctx.fillStyle = "#071826";
+      ctx.fillStyle = "#1d1715";
       ctx.fill();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82, 0, 7);
@@ -222,7 +222,7 @@ GameUI.pool = (() => {
       ctx.fillStyle = pg;
       ctx.fill();
       // Recessed leather collars and stitching stay concentric with the server pockets.
-      ctx.strokeStyle='#83989d';ctx.lineWidth=1.2;ctx.beginPath();
+      ctx.strokeStyle='#b48c58';ctx.lineWidth=1.2;ctx.beginPath();
       ctx.arc(p.x,p.y,p.r*.82+6,0,Math.PI*2);ctx.stroke();
       ctx.save();ctx.setLineDash([2,3]);ctx.strokeStyle='#cccebd66';ctx.lineWidth=.8;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r*.82+3,0,Math.PI*2);ctx.stroke();ctx.restore();
@@ -300,67 +300,28 @@ GameUI.pool = (() => {
   }
 
   // Walnut rail, brass diamonds, jewel-green cloth (material only; geometry is the server's table).
-  function drawTable(t, w, h) {
-    const wood = ctx.createLinearGradient(0, 0, 0, h);
-    wood.addColorStop(0, "#52616a");
-    wood.addColorStop(0.5, "#172735");
-    wood.addColorStop(1, "#091c2b");
-    ctx.fillStyle = wood;
-    ctx.beginPath();
-    ctx.roundRect ? ctx.roundRect(0, 0, w, h, 30) : ctx.rect(0, 0, w, h);
-    ctx.fill();
-    ctx.strokeStyle = "#d8b98a66";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.save();
-    ctx.globalAlpha = 0.12;
-    ctx.strokeStyle = "#d8e4e0";
-    ctx.lineWidth = 1;
-    for (let i = 6; i < h; i += 9) { ctx.beginPath(); ctx.moveTo(8, i); ctx.bezierCurveTo(w * 0.3, i + 3, w * 0.6, i - 3, w - 8, i + 1); ctx.stroke(); }
-    ctx.restore();
-    ctx.fillStyle = "#e8cf8f";
-    for (let i = 1; i < 8; i++) {
-      if (i === 4) continue;
-      const x = PAD + (t.w * i) / 8;
-      for (const y of [PAD / 2, h - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
-    }
-    for (let i = 1; i < 4; i++) {
-      const y = PAD + (t.h * i) / 4;
-      for (const x of [PAD / 2, w - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
-    }
-    ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#163e68";
-    ctx.fillRect(-10, -10, t.w + 20, t.h + 20);
-    const cloth = ctx.createRadialGradient(t.w / 2, t.h * 0.45, 20, t.w / 2, t.h / 2, t.w * 0.62);
-    cloth.addColorStop(0, "#327ca7");
-    cloth.addColorStop(1, "#12395e");
-    ctx.fillStyle = cloth;
-    ctx.fillRect(0, 0, t.w, t.h);
-    ctx.save();ctx.strokeStyle='#aac5ce55';ctx.lineWidth=2;ctx.strokeRect(-18,-18,t.w+36,t.h+36);
-    ctx.fillStyle='#d5e2df14';ctx.font='800 30px Arial';ctx.textAlign='center';ctx.fillText('P G',t.w/2,t.h/2-4);ctx.font='10px Arial';ctx.fillText('THE MIDNIGHT CLUB',t.w/2,t.h/2+16);ctx.restore();
-    ctx.strokeStyle = "#08263b";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(0, 0, t.w, t.h);
-    // Six beveled cushion segments end at the real pocket mouths. They never enter the
-    // playable surface: physics, guides and pointer coordinates keep their native bounds.
-    function cushion(points,vertical=false){
-      ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();
-      const gr=vertical?ctx.createLinearGradient(-20,0,0,0):ctx.createLinearGradient(0,-20,0,0);
-      gr.addColorStop(0,'#1a4059');gr.addColorStop(.45,'#408cb1');gr.addColorStop(1,'#0e334e');
-      ctx.fillStyle=gr;ctx.fill();ctx.strokeStyle='#85bac066';ctx.lineWidth=1;ctx.stroke();
-    }
-    const gap=t.pockets[0].r*.92;
-    for(const [a,b] of [[gap,t.w/2-gap],[t.w/2+gap,t.w-gap]]){
-      cushion([[a-8,-20],[b+8,-20],[b,0],[a,0]]);
-      cushion([[a,t.h],[b,t.h],[b+8,t.h+20],[a-8,t.h+20]]);
-    }
-    cushion([[-20,gap-8],[0,gap],[0,t.h-gap],[-20,t.h-gap+8]],true);
-    cushion([[t.w,gap],[t.w+20,gap-8],[t.w+20,t.h-gap+8],[t.w,t.h-gap]],true);
-    ctx.save();ctx.strokeStyle='#bdd0cd55';ctx.lineWidth=1.4;
-    ctx.beginPath();ctx.roundRect(-PAD+5,-PAD+5,t.w+PAD*2-10,t.h+PAD*2-10,25);ctx.stroke();
-    for(const x of [-PAD+11,t.w+PAD-11])for(const y of [-PAD+11,t.h+PAD-11]){
-      ctx.fillStyle='#a4b4b3';ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill();
-    }ctx.restore();
+  function drawTable(t,w,h){
+    // Physical walnut cabinet, inset cushion bed and six pocket mouths. Native bounds are untouched.
+    ctx.save();ctx.shadowColor='#000b';ctx.shadowBlur=18;ctx.shadowOffsetY=9;
+    ctx.fillStyle='#130d0a';ctx.beginPath();ctx.roundRect(1,3,w-2,h-6,34);ctx.fill();ctx.restore();
+    const timber=ctx.createLinearGradient(0,0,0,h);timber.addColorStop(0,'#b77337');timber.addColorStop(.12,'#613319');timber.addColorStop(.7,'#3d2015');timber.addColorStop(1,'#a05c2e');ctx.fillStyle=timber;ctx.beginPath();ctx.roundRect(3,2,w-6,h-8,31);ctx.fill();
+    const wood=GameUI.scenes.image('walnut');if(wood){ctx.save();ctx.beginPath();ctx.roundRect(5,4,w-10,h-12,29);ctx.clip();ctx.globalAlpha=.8;ctx.drawImage(wood,0,0,w,h);ctx.restore();}
+    for(const [inset,color] of [[5,'#e2b47488'],[10,'#2b160ee0'],[16,'#e5b97744']]){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(inset,inset,w-inset*2,h-inset*2,Math.max(9,31-inset));ctx.stroke();}
+    ctx.translate(PAD,PAD);
+    // Deep cyan tournament cloth; fine weave is drawn inside the playable surface only.
+    ctx.fillStyle='#072d3d';ctx.fillRect(-18,-18,t.w+36,t.h+36);
+    const cloth=ctx.createRadialGradient(t.w*.48,t.h*.34,0,t.w*.5,t.h*.5,t.w*.67);cloth.addColorStop(0,'#3298af');cloth.addColorStop(.65,'#16748d');cloth.addColorStop(1,'#0c4d68');ctx.fillStyle=cloth;ctx.fillRect(0,0,t.w,t.h);
+    ctx.save();ctx.strokeStyle='#a3d9d909';ctx.lineWidth=.5;
+    for(let x=3;x<t.w;x+=5){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,t.h);ctx.stroke();}ctx.restore();
+    const cushion=(points,vertical=false)=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();const c=vertical?ctx.createLinearGradient(-20,0,0,0):ctx.createLinearGradient(0,-20,0,0);c.addColorStop(0,'#071f2a');c.addColorStop(.35,'#145e77');c.addColorStop(.65,'#4296a7');c.addColorStop(1,'#073f55');ctx.fillStyle=c;ctx.fill();ctx.strokeStyle='#76bcc477';ctx.lineWidth=1.2;ctx.stroke();};
+    const gap=t.pockets[0].r*1.08;
+    for(const [a,b]of [[gap,t.w/2-gap],[t.w/2+gap,t.w-gap]]){cushion([[a-9,-22],[b+9,-22],[b,0],[a,0]]);cushion([[a,t.h],[b,t.h],[b+9,t.h+22],[a-9,t.h+22]]);}
+    cushion([[-22,gap-9],[0,gap],[0,t.h-gap],[-22,t.h-gap+9]],true);cushion([[t.w,gap],[t.w+22,gap-9],[t.w+22,t.h-gap+9],[t.w,t.h-gap]],true);
+    // Inlaid mother-of-pearl diamonds on the cabinet, away from collision bounds.
+    ctx.fillStyle='#ede0b8';ctx.shadowColor='#000a';ctx.shadowBlur=1.5;
+    const diamond=(x,y)=>{ctx.beginPath();ctx.moveTo(x,y-3);ctx.lineTo(x+2.5,y);ctx.lineTo(x,y+3);ctx.lineTo(x-2.5,y);ctx.fill();};
+    for(let i=1;i<8;i++){if(i===4)continue;diamond(t.w*i/8,-32);diamond(t.w*i/8,t.h+32);}for(let i=1;i<4;i++){diamond(-32,t.h*i/4);diamond(t.w+32,t.h*i/4);}ctx.shadowBlur=0;
+    ctx.fillStyle='#d2e8e00d';ctx.font='800 25px Arial';ctx.textAlign='center';ctx.fillText('PLAYGRID',t.w/2,t.h/2+8);
   }
 
   function loop(now) {
@@ -422,11 +383,13 @@ GameUI.pool = (() => {
       </div>
       <p class="muted center pl-help" id="pl-help"></p>`;
     root.dataset.ten='pool';
-    root.insertAdjacentHTML('afterbegin',GameUI.tenArt.heading('pool'));
+    GameUI.scenes.mount(root,'pool');
     stage.appendChild(root);
     const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
     root.querySelector('#pl-controls').append(presets);
     presets.addEventListener('click',e=>{const b=e.target.closest('[data-p5-power]'),slider=root.querySelector('#pl-pow');if(!b||slider.disabled)return;slider.value=b.dataset.p5Power;slider.dispatchEvent(new Event('input',{bubbles:true}));});
+    const powerDesk=root.querySelector('#pl-pow').closest('label');
+    powerDesk.classList.add('scene-power');root.querySelector('.pl-wrap').prepend(powerDesk);
     canvas = root.querySelector("#pl-canvas");
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
@@ -529,7 +492,7 @@ GameUI.pool = (() => {
   function paintText() {
     if (!root || !g) return;
     root.querySelector("#pl-players").innerHTML = g.players
-      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : "", sub: p.group ? `${p.group === "solids" ? "Solids (1–7)" : "Stripes (9–15)"} · ${p.left} left` : "Table open" }))
+      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : "", sub: (p.group ? `${p.group === "solids" ? "Solids" : "Stripes"} · ${p.left} left` : "Table open")+GameUI.scenes.rack(p,g.balls) }))
       .join("");
     const st = root.querySelector("#pl-status");
     st.innerHTML = statusText();
