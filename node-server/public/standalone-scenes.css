@@ -437,3 +437,23 @@ body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card{transfor
  .scene-results{padding:12px}.scene-result-mark{width:50px;height:50px}
 }
 @media(prefers-reduced-motion:reduce){.scene-result-mark{animation:none}}
+/* The hit rectangle stays stable while the physical card face fans and lifts inside it. */
+body[data-game] .room [data-scene=colorstack] .pcs-card{height:174px;transform:none;background:none!important;border:0;box-shadow:none;overflow:visible;outline:0}
+body[data-game] .room [data-scene=colorstack] .pcs-card.c-w{background:none!important}
+body[data-game] .room [data-scene=colorstack] .pcs-card::before{display:none}
+body[data-game] .room [data-scene=colorstack] .scene-stack-face{position:absolute;left:0;right:0;bottom:0;height:calc(100% - 20px);display:block;background:var(--card-tone);border:5px solid #f5f3e6;border-radius:12px;box-shadow:0 4px 0 #c2c2b0,0 8px 12px #03142a88;overflow:hidden;transform:rotate(clamp(-8deg,var(--tilt,0deg),8deg));transform-origin:50% 100%;pointer-events:none;transition:transform .15s}
+body[data-game] .room [data-scene=colorstack] .pcs-card.c-w .scene-stack-face{background:conic-gradient(from 30deg,#df3546,#e6ad1b,#3baf62,#2686d9,#df3546)}
+body[data-game] .room [data-scene=colorstack] .scene-stack-face::before{content:'';position:absolute;inset:18px 5px;background:#fff6e5;border-radius:50%;transform:rotate(28deg);border:1px solid #fff7;box-shadow:0 2px 3px #15233d44}
+body[data-game] .room [data-scene=colorstack] .pcs-card.lift{transform:none;outline:0}
+body[data-game] .room [data-scene=colorstack] .pcs-card.lift .scene-stack-face{transform:translateY(-20px) rotate(clamp(-8deg,var(--tilt,0deg),8deg));outline:3px solid #e0ff9c;outline-offset:2px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.playable .scene-stack-face{outline:2px solid #c5ee6b;outline-offset:2px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.big{height:168px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.big .scene-stack-face{height:100%}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .scene-stack-face{transform:none}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card.lift .scene-stack-face{transform:translateY(-12px)}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=colorstack] .pcs-card{height:140px}
+ body[data-game] .room [data-scene=colorstack] .scene-stack-face{border-width:4px;border-radius:9px}
+ body[data-game] .room [data-scene=colorstack] .scene-stack-face::before{inset:14px 3px}
+ body[data-game] .room [data-scene=colorstack] .pcs-card.big{height:126px}
+}

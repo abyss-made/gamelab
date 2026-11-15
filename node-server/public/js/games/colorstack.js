@@ -19,9 +19,9 @@ GameUI.colorstack = (() => {
   const faceText = (c) => LABEL[c.v] || c.v;
   const tilt = (i, n) => (n <= 1 ? 0 : Math.round((i - (n - 1) / 2) * Math.min(5, 34 / n) * 10) / 10);
   function cardHTML(c, i, n, { playable, sel }) {
-    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></button>`;
+    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><span class="scene-stack-face" aria-hidden="true"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom">${faceText(c)}</i></span></button>`;
   }
-  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></span>`;
+  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><span class="scene-stack-face" aria-hidden="true"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom">${faceText(c)}</i></span></span>`;
   const backs = (n) => Array.from({ length: Math.min(n, MAX_BACKS) }, (_, i) => `<img src="${BACK}" alt="" style="--tilt:${tilt(i, Math.min(n, MAX_BACKS))}deg">`).join("");
 
   function mount(stage, a) {
