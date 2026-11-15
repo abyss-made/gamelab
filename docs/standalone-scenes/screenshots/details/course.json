@@ -1,0 +1,26 @@
+{
+  "views": [
+    {
+      "width": 1440,
+      "height": 900,
+      "course": "Canyon Run",
+      "hole": "S-Bend",
+      "overflow": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "course": "Canyon Run",
+      "hole": "S-Bend",
+      "overflow": 0
+    },
+    {
+      "width": 932,
+      "height": 430,
+      "course": "Canyon Run",
+      "hole": "S-Bend",
+      "overflow": 0
+    }
+  ],
+  "errors": []
+}

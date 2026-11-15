@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Battleship mouse/touch fleet dragging, explicit Fire, actual miss/hits and sunk ship",
+    "battleship: 3 viewports, identity reconnect, reduced motion and real departure result"
+  ],
+  "errors": []
+}

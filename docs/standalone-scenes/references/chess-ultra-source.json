@@ -1,0 +1,21 @@
+{
+  "reference": "Chess Ultra",
+  "source": "https://store.steampowered.com/app/518060/",
+  "screenshots": [
+    {
+      "id": 0,
+      "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_7ac7c3f80e0a8055f61ef64362223f51085d8cb6.600x338.jpg?t=1764082204",
+      "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_7ac7c3f80e0a8055f61ef64362223f51085d8cb6.1920x1080.jpg?t=1764082204"
+    },
+    {
+      "id": 1,
+      "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_d4bea0368757ac237e9a54934abd42c8c71cf32b.600x338.jpg?t=1764082204",
+      "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_d4bea0368757ac237e9a54934abd42c8c71cf32b.1920x1080.jpg?t=1764082204"
+    },
+    {
+      "id": 2,
+      "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_9b62ac94aff0772124b669c3add7e14172a17257.600x338.jpg?t=1764082204",
+      "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/518060/ss_9b62ac94aff0772124b669c3add7e14172a17257.1920x1080.jpg?t=1764082204"
+    }
+  ]
+}

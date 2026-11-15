@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Color Stack select-before-Play, actual discard/draw and optional wild dialog cancel",
+    "colorstack: 3 viewports, identity reconnect, reduced motion and real departure result"
+  ],
+  "errors": []
+}

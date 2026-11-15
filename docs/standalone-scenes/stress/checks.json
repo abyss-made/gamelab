@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "game": "gofish",
+      "players": 6,
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "game": "gofish",
+      "players": 6,
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "game": "gofish",
+      "players": 6,
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    },
+    {
+      "game": "colorstack",
+      "players": 8,
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "game": "colorstack",
+      "players": 8,
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "game": "colorstack",
+      "players": 8,
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    },
+    {
+      "game": "ludo",
+      "players": 4,
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "game": "ludo",
+      "players": 4,
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "game": "ludo",
+      "players": 4,
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    },
+    {
+      "game": "tycoon",
+      "players": 6,
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "game": "tycoon",
+      "players": 6,
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "game": "tycoon",
+      "players": 6,
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    },
+    {
+      "game": "impostor",
+      "players": 10,
+      "width": 1440,
+      "height": 900,
+      "overflow": 0
+    },
+    {
+      "game": "impostor",
+      "players": 10,
+      "width": 390,
+      "height": 844,
+      "overflow": 0
+    },
+    {
+      "game": "impostor",
+      "players": 10,
+      "width": 932,
+      "height": 430,
+      "overflow": 0
+    }
+  ],
+  "errors": []
+}

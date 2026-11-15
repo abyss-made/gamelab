@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "viewport": "1440",
+      "state": "opening",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "1440",
+      "state": "played",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "1440",
+      "state": "result",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "1440",
+      "state": "detail",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "390",
+      "state": "opening",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "390",
+      "state": "played",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "390",
+      "state": "result",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "390",
+      "state": "detail",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "932",
+      "state": "opening",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "932",
+      "state": "played",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "932",
+      "state": "result",
+      "loadedPairs": 10
+    },
+    {
+      "viewport": "932",
+      "state": "detail",
+      "loadedPairs": 10
+    },
+    "Ten attributed publisher reference images load",
+    "Previous/next, arrow navigation, zoom, Escape and focus return",
+    "Viewer has no horizontal overflow at 390px"
+  ],
+  "errors": []
+}

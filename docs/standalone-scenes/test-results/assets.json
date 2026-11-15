@@ -1,0 +1,482 @@
+{
+  "assets": [
+    {
+      "file": "ball-eight.svg",
+      "bytes": 545,
+      "sha256": "0659822288b394182e61575359ac5c550145264f63d5a563202735761644fbf2"
+    },
+    {
+      "file": "building-1.png",
+      "bytes": 39974,
+      "sha256": "ebce9659f81787b4db13a3c75727dbd9020fa4378f8d1b8995766b990316e68a",
+      "width": 256,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "building-2.png",
+      "bytes": 49558,
+      "sha256": "92198c66f576f0ca78788d5a3c6f9513fa650e9cd836ec12d0648ccfe38b7c99",
+      "width": 256,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "building-3.png",
+      "bytes": 57563,
+      "sha256": "6048f5ef4a59da771525cb1f6510af9c8bf369ef1d137da8abcdb163c386be93",
+      "width": 256,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "building-4.png",
+      "bytes": 60692,
+      "sha256": "6a8a4dfeb72603ff40365aacda88de963a84bc06bd01bffa61c97fcaee012102",
+      "width": 256,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-0.png",
+      "bytes": 30873,
+      "sha256": "28556ab786b7fecd68d0b4a443978d6a715e2ca36bca8b4d413c59ab98e17960",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-1.png",
+      "bytes": 31245,
+      "sha256": "f4c67b1af63257ae29d03e87af3d65caaa2c7ae73690dcd2e74f4e7fd672121d",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-2.png",
+      "bytes": 31530,
+      "sha256": "aa4bfc6a219ef681e0e56ce8064f39275e0bb2bede05988c62f328f4f727dfc5",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-3.png",
+      "bytes": 31701,
+      "sha256": "4e3231ecfd41895c4a95685056df0f95ed5a2bfa2059edd5f4bc90307771cbc6",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-4.png",
+      "bytes": 30348,
+      "sha256": "a97f46e766db7b4d49c441f942ac76aeeb62037067fc9b4bfdb4fcfbfd723d7e",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "car-5.png",
+      "bytes": 30128,
+      "sha256": "95a9e9b2d716c9b4c191b2ccbf0129d45353f1e54c00377c8a45d9b25bf54309",
+      "width": 192,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "card-back.svg",
+      "bytes": 1017,
+      "sha256": "47183f335dff97427aa98dd969d4778d369aa5867aa197ecba95793d6fed0939"
+    },
+    {
+      "file": "chess-bB.png",
+      "bytes": 73190,
+      "sha256": "c83456d306410edf8dba1103b1ca18f9967768f57bfdfbaf2c8fb7db22376384",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-bK.png",
+      "bytes": 77218,
+      "sha256": "50014a49276b1b5dbf12df70a708b4b9c4180f847d2fdfc5838136f97146dc43",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-bN.png",
+      "bytes": 76122,
+      "sha256": "95a7ebf8fe6e004d0e279e0c4a51c97bde77b8f2ecfdf03ddb29a8900e91ec59",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-bP.png",
+      "bytes": 63421,
+      "sha256": "9db45269f89125f68e3bd8afe491ec0ee0cfc84d0614d0d605aeafad439a7e10",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-bQ.png",
+      "bytes": 78031,
+      "sha256": "e7ec034153f7842f1365e9d1a076bf1912e6b2db6ac5db390b5af066a229ce2e",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-bR.png",
+      "bytes": 75311,
+      "sha256": "b68343ee027f70f3807d43337be25d971be92b65fa1f3eeb21eef24c0e550bb7",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wB.png",
+      "bytes": 73849,
+      "sha256": "3ab6997a49558980ede2010d940a00894ec36228125cbc0f77514efaf9da93db",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wK.png",
+      "bytes": 76700,
+      "sha256": "86c0abc1098686daffab18bb8a5209eaf8c1666a5eec2cf27277eed596c7db08",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wN.png",
+      "bytes": 76616,
+      "sha256": "96e1906d0d3dc776c4ba1ecdfa44768b07c1f72bf80f3571ef5369d9c3477e9e",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wP.png",
+      "bytes": 62862,
+      "sha256": "4c9fb06643dbe197fed2dccc1a8f4367cc8b122e5db2afa9d1fc793db0866fe0",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wQ.png",
+      "bytes": 77682,
+      "sha256": "0311abc8aa6325cf39eaa9803b1bf2b004a12906acc3aa07f64d1c3362b03f0e",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "chess-wR.png",
+      "bytes": 75933,
+      "sha256": "b5017315f584382e177493db6b847f6e7ab23106c1cacf30ac33e746ee19c7b3",
+      "width": 256,
+      "height": 320,
+      "mode": "RGBA"
+    },
+    {
+      "file": "exchange-city.png",
+      "bytes": 387807,
+      "sha256": "a6e84dab2f49c32b7398dee3692de5777c8e4b267c8d0ed4bbb305e10966d709",
+      "width": 640,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "file": "garden-bumper.png",
+      "bytes": 72690,
+      "sha256": "eda5c791d524a85bab109fb8ba8cf7b6b58153a78b66a615a311d57b6fe9a784",
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "garden-rock.png",
+      "bytes": 49568,
+      "sha256": "f66efaf2b2e1baa1ecf774de2db03e1bab8354cfd6e4fd698e3cc2711a442c76",
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "garden-tree.png",
+      "bytes": 71224,
+      "sha256": "f2731578298ba99c0fdfed1fed4dc26dbe184d94a3f6bb32a6864011ec0a7fa1",
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "golf-flag.svg",
+      "bytes": 349,
+      "sha256": "59343eff073d0e26c9b1e783beee0b681883e13f30bfb997a7b4b17e1fa280bf"
+    },
+    {
+      "file": "ocean.png",
+      "bytes": 795865,
+      "sha256": "48346fa734ae9ecbf8eb5a09482ded9dae2dce31cb194e6dd6dd96c093e9a691",
+      "width": 640,
+      "height": 640,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pawn-0.png",
+      "bytes": 48069,
+      "sha256": "165cbb95ef54ac86bc4ba71c47a18e17baafa2c7784e137e5ce4c3c23e695f5a",
+      "width": 192,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pawn-1.png",
+      "bytes": 48909,
+      "sha256": "9abe76b58e07822a2f93373ca672d340c65ad34fdc6e7908cc1404622c2b6a84",
+      "width": 192,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pawn-2.png",
+      "bytes": 49543,
+      "sha256": "c20aaab4c72a240eacc0fbd060ac18b1d1632edfa894b12036fa4efd10b89f39",
+      "width": 192,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pawn-3.png",
+      "bytes": 48509,
+      "sha256": "62252fc515ab29b359cead79c948d6690aeb47b8e4a89147b788d79306260e96",
+      "width": 192,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-0.png",
+      "bytes": 32037,
+      "sha256": "3c299d2e1a42158cff95b1f23229c3701924d4717b4399c6e9a27743e468047e",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-1.png",
+      "bytes": 39994,
+      "sha256": "e5f9ec12a4d2c290b35f353f2998c7de7b1c8191c1b5d45fa344b6df1d77ecaa",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-10.png",
+      "bytes": 36339,
+      "sha256": "bab0dd513ddf6963e6b41ae886b189d252847b85923f3e719f2800450d15a8e1",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-11.png",
+      "bytes": 36239,
+      "sha256": "9a3f64b72a39a946d2c0ace68c965397386813e78458df1c4b6a3af6d945ff1d",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-12.png",
+      "bytes": 34982,
+      "sha256": "2c5085f62a6125118a616e2708007d2255f82b482cdaaaf31e4e4c165827fbbf",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-13.png",
+      "bytes": 37970,
+      "sha256": "06c542016e872819fe28a6b7221ba5d27e8f8a6cf8f14746ccb80b78bf25ccb8",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-14.png",
+      "bytes": 35899,
+      "sha256": "323e6865aec2ea04fd01cbf0b8c6ee38df8d3f7f33a788b1bfd9e462421282cb",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-15.png",
+      "bytes": 34868,
+      "sha256": "d545eb609bf215fd3ffdaa6386ed74601c61825eb8b7d5d05b3ac6bbd549645c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-2.png",
+      "bytes": 38515,
+      "sha256": "5313278f8e9034e119971d5a0c15327130e706e32b983d9dd527c8c291e746da",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-3.png",
+      "bytes": 38648,
+      "sha256": "9e957bcd920c799a664d0ea520b3a5ab09723e2cebe703010ad4a4e1ef390c89",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-4.png",
+      "bytes": 36952,
+      "sha256": "1d415c082b2826bde3fd4be81fd5de99d4bde39b0c07c2776c87e848db18a3a6",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-5.png",
+      "bytes": 40434,
+      "sha256": "c96ad4d195eb517e0e94f2f08c46a316e20127559ba8f46a9857eb579977a595",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-6.png",
+      "bytes": 38071,
+      "sha256": "c0b9edaa8852aaa9b685e92d55d8977299a3fb8174ff3ace1e6cebdd92ecf1e6",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-7.png",
+      "bytes": 37191,
+      "sha256": "1acdde3c8ea73dd15ef9cd698cdc621c88328863c452ebc5c30dd3f35bcfc0d9",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-8.png",
+      "bytes": 32317,
+      "sha256": "954c1e7c3df6970c017f8e7925261c3fed2126478eee12da6f3d62780babf1ce",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "pool-ball-9.png",
+      "bytes": 37670,
+      "sha256": "ab9b36f4336d45ed0afd08f3a6cf4933f2e2dbda7fb54a4bc252526e7a276f1a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "file": "ship-battleship.png",
+      "bytes": 109988,
+      "sha256": "a3c9fe34e786e52fd0214c4b69ddc3d8e42e3c46a1ae48ce5ca8b3fde26202bc",
+      "width": 640,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "file": "ship-carrier.png",
+      "bytes": 118030,
+      "sha256": "7e7245b4f869cda158356c459eb771412f9edab905ff94e07561d8dc16b2adeb",
+      "width": 640,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "file": "ship-destroyer.png",
+      "bytes": 104100,
+      "sha256": "6055ca9d145f477945b156e94b5bc8b46436196dc4b11832c65a5624b99b61d8",
+      "width": 640,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "file": "ship-patrol.png",
+      "bytes": 92833,
+      "sha256": "80d3dd0be9f7527e36e36d937f36d644f62d77f77ef988f8ab4411f017be0e43",
+      "width": 640,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "file": "ship-submarine.png",
+      "bytes": 85291,
+      "sha256": "dd2eb9bb536e262b176a97f84fa7c7e617fceff12235b1c022ce611d129f7134",
+      "width": 640,
+      "height": 180,
+      "mode": "RGBA"
+    },
+    {
+      "file": "stack-back.svg",
+      "bytes": 1017,
+      "sha256": "ff7bddcab53cbfe30dd56268b29cc885fadde0765fed2244b3b264a7ec791ecf"
+    },
+    {
+      "file": "walnut.png",
+      "bytes": 407509,
+      "sha256": "63a0c85ff45cc28a88c85c9bc36763515a6f9f39e7a286d4804a119ef591f324",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    }
+  ],
+  "syntaxPassed": [
+    "node-server/public/js/games/art31.js",
+    "node-server/public/js/games/batch2fx.js",
+    "node-server/public/js/games/battleship.js",
+    "node-server/public/js/games/bluff.js",
+    "node-server/public/js/games/categories.js",
+    "node-server/public/js/games/checkers.js",
+    "node-server/public/js/games/chess.js",
+    "node-server/public/js/games/colorstack.js",
+    "node-server/public/js/games/common.js",
+    "node-server/public/js/games/dotsboxes.js",
+    "node-server/public/js/games/drawguess.js",
+    "node-server/public/js/games/fill.js",
+    "node-server/public/js/games/fourrow.js",
+    "node-server/public/js/games/gofish.js",
+    "node-server/public/js/games/golf.js",
+    "node-server/public/js/games/higherlower.js",
+    "node-server/public/js/games/hotpotato.js",
+    "node-server/public/js/games/impostor.js",
+    "node-server/public/js/games/liarsdice.js",
+    "node-server/public/js/games/ludo.js",
+    "node-server/public/js/games/pool.js",
+    "node-server/public/js/games/premium5.js",
+    "node-server/public/js/games/reversi.js",
+    "node-server/public/js/games/rps.js",
+    "node-server/public/js/games/standalone.js",
+    "node-server/public/js/games/telephone.js",
+    "node-server/public/js/games/ten-art.js",
+    "node-server/public/js/games/tictactoe.js",
+    "node-server/public/js/games/trivia.js",
+    "node-server/public/js/games/tycoon.js",
+    "node-server/public/js/games/wordchain.js",
+    "node-server/public/js/games/wordscramble.js"
+  ]
+}
