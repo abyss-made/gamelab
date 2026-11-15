@@ -130,7 +130,7 @@ class ClubScene{
 
   for(const [index,{p,pos}] of positions.entries()){
    const b=this.balls.get(p.id)||this.makeBall(p,index);let point=pos;
-   if(!point&&b.visible&&p.holed&&g.anim?.outcome==='cup'&&g.anim.by===p.id&&!b.dropAt){b.dropAt=now;this.burst(...g.hole.cup);const delta=p.strokes-g.hole.par;this.toast.textContent=p.strokes===1?'HOLE IN ONE!':delta<0?'BIRDIE!':delta===0?'PAR!':'NICE FINISH!';this.toast.hidden=false;this.toastUntil=now+2200;}
+   if(!point&&b.visible&&p.holed&&g.anim?.outcome==='cup'&&g.anim.by===p.id&&!b.dropAt){b.dropAt=now;this.burst(...g.hole.cup);const delta=p.strokes-g.hole.par;this.toast.textContent=p.strokes===1?'HOLE IN ONE!':delta<=-3?'ALBATROSS!':delta===-2?'EAGLE!':delta===-1?'BIRDIE!':delta===0?'PAR!':'NICE FINISH!';this.toast.hidden=false;this.toastUntil=now+2200;}
    if(!point&&b.dropAt&&now-b.dropAt<350){const u=(now-b.dropAt)/350;point={x:g.hole.cup[0],y:g.hole.cup[1]};b.mesh.scale.setScalar(1-u*.8);b.mesh.position.y=6-u*18;}else if(point){b.mesh.scale.setScalar(1);b.mesh.position.y=6;}
    b.mesh.visible=!!point&&!p.out;b.ring.visible=!!pos&&!p.out;b.shadow.visible=b.mesh.visible;
    if(point){b.mesh.position.x=point.x-350;b.mesh.position.z=point.y-220;b.ring.position.set(point.x-350,.65,point.y-220);b.shadow.position.set(point.x-348,.22,point.y-221);if(b.last){const dx=point.x-b.last.x,dz=point.y-b.last.y,len=Math.hypot(dx,dz);if(len>.01&&len<80)b.mesh.rotateOnWorldAxis(new T.Vector3(dz,0,-dx).normalize(),len/6);}b.last={x:point.x,y:point.y};}
