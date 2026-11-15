@@ -1,0 +1,32 @@
+PASS  desktop: Add Bot is offered to the host
+PASS  desktop: Add Bot is a full-size tap target inside the screen (44px high)
+PASS  desktop: the bot shows a BOT badge in the roster
+PASS  desktop: the bot has a distinctive name
+PASS  desktop: Add Bot is disabled once seats are full
+PASS  desktop: the disabled button explains why
+PASS  desktop: the host sets the bot to Hard
+PASS  desktop: no horizontal overflow with a bot in the lobby
+PASS  desktop: Remove Bot takes it out of the roster
+PASS  desktop: a full Tic Tac Toe game against the bot reaches the result screen
+PASS  desktop: the bot is still in the party after the game
+PASS  desktop: bots are removed when the game cannot use them
+PASS  desktop: Draw & Guess shows Add Bot disabled with the reason
+PASS  desktop: no horizontal overflow on the disabled state
+PASS  desktop: no page errors
+PASS  phone: Add Bot is offered to the host
+PASS  phone: Add Bot is a full-size tap target inside the screen (44px high)
+PASS  phone: the bot shows a BOT badge in the roster
+PASS  phone: the bot has a distinctive name
+PASS  phone: Add Bot is disabled once seats are full
+PASS  phone: the disabled button explains why
+PASS  phone: the host sets the bot to Hard
+PASS  phone: no horizontal overflow with a bot in the lobby
+PASS  phone: Remove Bot takes it out of the roster
+PASS  phone: a full Tic Tac Toe game against the bot reaches the result screen
+PASS  phone: the bot is still in the party after the game
+PASS  phone: bots are removed when the game cannot use them
+PASS  phone: Draw & Guess shows Add Bot disabled with the reason
+PASS  phone: no horizontal overflow on the disabled state
+PASS  phone: no page errors
+
+botsui: all checks passed

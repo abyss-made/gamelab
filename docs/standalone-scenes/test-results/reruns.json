@@ -1,0 +1,20 @@
+[
+  {
+    "program": "batch2ui",
+    "exitCode": 0,
+    "log": "batch2ui.log",
+    "sourceAtFinalCollection": "d315b03434feeba51bc8ed31d1c68d2c08072a97"
+  },
+  {
+    "program": "batch5ui",
+    "exitCode": 0,
+    "log": "batch5ui.log",
+    "sourceAtFinalCollection": "5fa16390038a1d3219705cc337ceece0072227c8"
+  },
+  {
+    "program": "design31ui",
+    "exitCode": 0,
+    "log": "design31ui.log",
+    "sourceAtFinalCollection": "d315b03434feeba51bc8ed31d1c68d2c08072a97"
+  }
+]

@@ -1,0 +1,500 @@
+/* Standalone game scenes. Coordinates and rules remain in the native renderers. */
+body[data-screen=room] .room[data-phase=game]:has([data-scene]){grid-template-columns:minmax(0,1fr) 240px;grid-template-areas:'bar bar' 'stage side' 'stage chat';grid-template-rows:auto auto minmax(150px,1fr);gap:14px;max-width:1520px;margin:auto;padding:14px}
+.room[data-phase=game]:has([data-scene])>.game-word-slot{display:none}
+body[data-game] .room [data-scene]{position:relative;min-width:0;--scene-line:#698391;--scene-paper:#f0ebdb;--scene-dark:#0a1b2e;--scene-lime:#adf63e;border-radius:20px;overflow:visible;font-family:inherit}
+body[data-game] .room [data-scene] .btn{border-radius:10px;min-height:44px;font-weight:750}
+body[data-game] .room [data-scene] .btn:focus-visible,body[data-game] .room [data-scene] button:focus-visible{outline:3px solid #d3ff7a;outline-offset:3px}
+body[data-game] .room [data-scene] .b2-players{border:0;background:none;padding:8px;gap:8px;align-items:stretch}
+body[data-game] .room [data-scene] .b2-player{border-radius:12px;border:1px solid #7a99a44d;background:#112b3c;color:#ebf1eb;min-width:0;box-shadow:none}
+body[data-game] .room [data-scene] .b2-player .muted{color:#a9bfc2}
+body[data-game] .room [data-scene] .b2-player.active{border-color:#b8ed65;box-shadow:inset 0 -3px #b8ed65;background:#183d3e}
+body[data-game] .room [data-scene] .ttt-status{margin:0;padding:10px 14px;line-height:1.45;font-size:13px;background:#0b2234;color:#cfdfdf;border:1px solid #738f9c44;border-radius:12px}
+body[data-game] .room [data-scene] .ttt-status.mine{color:#c9f499;border-color:#9fce5c77}
+/* POOL: real cabinet, scoreboard, vertical power rail and shot desk. */
+body[data-game] .room [data-scene=pool]{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:12px;padding:18px;background:radial-gradient(ellipse at 50% 35%,#243a4a,#071827 80%);border:1px solid #526a77;box-shadow:0 20px 50px #0006}
+body[data-game] .room [data-scene=pool]>.b2-players{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:0;background:none}
+body[data-game] .room [data-scene=pool] .b2-player{padding:10px 14px;align-items:center;gap:12px;background:#0a1c30;border:1px solid #66838c;border-bottom:3px solid #3f6171}
+body[data-game] .room [data-scene=pool] .b2-player.active{border-bottom-color:#b8ed65;box-shadow:0 0 20px #a6ff1922}
+body[data-game] .room [data-scene=pool] .b2-player>.avatar{width:54px;height:54px;border:3px solid #c4d7b9}
+body[data-game] .room [data-scene=pool] .b2-player>div{flex:1;min-width:0}body[data-game] .room [data-scene=pool] .b2-player b{font-size:15px}
+body[data-game] .room [data-scene=pool] .scene-ball-rack{display:flex;gap:4px;margin-top:7px;min-height:20px}
+body[data-game] .room [data-scene=pool] .scene-ball{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#192a36;font:800 8px Arial;background:radial-gradient(at 35% 24%,#fff,#ecdf4b 45%,#877b21);border:1px solid #c4d4dc;box-shadow:0 2px 3px #0008}
+body[data-game] .room [data-scene=pool] .scene-ball.n2{background:radial-gradient(at 30% 20%,#fff,#3b82df 45%,#12366a)}body[data-game] .room [data-scene=pool] .scene-ball.n3{background:radial-gradient(at 30% 20%,#fff,#e9535c 45%,#7b1824)}body[data-game] .room [data-scene=pool] .scene-ball.n4{background:radial-gradient(at 30% 20%,#fff,#a26cc7 45%,#38205b)}body[data-game] .room [data-scene=pool] .scene-ball.n5{background:radial-gradient(at 30% 20%,#fff,#ed9941 45%,#8a4619)}body[data-game] .room [data-scene=pool] .scene-ball.n6{background:radial-gradient(at 30% 20%,#fff,#54b586 45%,#174d3c)}body[data-game] .room [data-scene=pool] .scene-ball.n7{background:radial-gradient(at 30% 20%,#fff,#ae5651 45%,#59272e)}body[data-game] .room [data-scene=pool] .scene-ball.stripe{box-shadow:inset 0 4px #fff,inset 0 -4px #fff,0 2px 3px #0008}body[data-game] .room [data-scene=pool] .scene-ball.potted{opacity:.18}
+body[data-game] .room [data-scene=pool] .scene-open-table{display:block;font-size:9px;letter-spacing:.17em;color:#b2c4bb;margin-top:7px}
+body[data-game] .room [data-scene=pool]>.ttt-status{grid-column:1/-1;text-align:center;padding:8px}
+body[data-game] .room [data-scene=pool]>.pl-wrap{grid-column:1;grid-row:3;position:relative;width:100%;padding-left:54px;min-width:0;align-self:center}
+body[data-game] .room [data-scene=pool] .pl-canvas{width:100%;border:0;border-radius:24px;box-shadow:0 12px 20px #0008;filter:none}
+body[data-game] .room [data-scene=pool] .scene-power{position:absolute;left:0;top:0;bottom:0;width:42px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0;background:linear-gradient(90deg,#071326,#18354a,#071326);border:1px solid #5f7b8c;border-radius:16px;box-shadow:inset 0 0 10px #0008;color:#dbe8d2}
+body[data-game] .room [data-scene=pool] .scene-power>span{font-size:9px;display:flex;align-items:center;flex-direction:column;gap:4px;color:#bed0ca}
+body[data-game] .room [data-scene=pool] .scene-power b{font-size:13px;color:#e6f5cc}
+body[data-game] .room [data-scene=pool] .scene-power input{writing-mode:vertical-lr;direction:rtl;width:32px;height:calc(100% - 42px);min-height:200px;flex:1;accent-color:#b0eb43;margin:0}
+body[data-game] .room [data-scene=pool]>.pl-controls{grid-column:2;grid-row:3;display:flex;flex-direction:column;gap:20px;background:linear-gradient(145deg,#19364a,#0b1f31);padding:16px;border:1px solid #5a7887;border-radius:16px;width:100%;color:#d3e1d9;box-shadow:inset 0 1px #9cb8bd33,0 6px 0 #061120}
+body[data-game] .room [data-scene=pool] .pl-slider span{color:#b5c9c9;font-size:12px}body[data-game] .room [data-scene=pool] .pl-slider b{color:#e9f3d2}
+body[data-game] .room [data-scene=pool] .pl-fine-row{display:flex;gap:5px;align-items:center}body[data-game] .room [data-scene=pool] .pl-fine-row input{min-width:0;width:0;flex:1}
+body[data-game] .room [data-scene=pool] .pl-controls .board-actions{display:flex;flex-direction:column;gap:9px;margin:0}
+body[data-game] .room [data-scene=pool] .pl-controls .btn{background:#25465a;color:#dfebd8;border-color:#638294}
+body[data-game] .room [data-scene=pool] #pl-shoot:not(:disabled){background:linear-gradient(#c8f560,#8ecb28);color:#10282e;border-color:#dbfa94;box-shadow:0 4px 0 #4b781e}
+body[data-game] .room [data-scene=pool] .p5-shot-presets{display:flex;flex-wrap:wrap;gap:5px}body[data-game] .room [data-scene=pool] .p5-shot-presets .btn{font-size:10px;padding:7px;min-height:34px}
+body[data-game] .room [data-scene=pool]>.pl-help{grid-column:1/-1;margin:0;font-size:11px;color:#8faab3}
+/* MINI GOLF: a real illuminated miniature course with the native authoritative geometry. */
+body[data-game] .room [data-scene=golf]{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:10px;padding:14px;background:linear-gradient(140deg,#123d35,#0b2834);border:1px solid #608c7a}
+body[data-game] .room [data-scene=golf]>.gf-head{grid-column:1/-1;display:flex;justify-content:space-between;padding:8px 14px;background:#0a292b;border:1px solid #7aa48d66;border-radius:12px;color:#f1edd9}
+body[data-game] .room [data-scene=golf] .gf-head h2{font-size:24px;margin:2px 0;color:#f1edd9}body[data-game] .room [data-scene=golf] .gf-eyebrow{font-size:10px;letter-spacing:.15em;color:#a1c8b3}body[data-game] .room [data-scene=golf] .gf-score{background:none;padding:0;border:0}body[data-game] .room [data-scene=golf] .gf-score strong{font-size:28px;color:#cff884}
+body[data-game] .room [data-scene=golf]>.b2-players{grid-column:1/-1;padding:0}body[data-game] .room [data-scene=golf] .b2-player{flex:1;background:#124132;border-color:#688d6d}body[data-game] .room [data-scene=golf]>.ttt-status{grid-column:1/-1;background:#082d2c}
+body[data-game] .room [data-scene=golf]>.gf-wrap{grid-column:1;grid-row:4;width:min(100%,calc((100dvh - 335px)*700/440));padding:0;min-width:0;align-self:center}
+body[data-game] .room [data-scene=golf] .gf-canvas{border:4px solid #315b44;border-radius:20px;box-shadow:0 8px 0 #082528,0 16px 28px #0006}
+body[data-game] .room [data-scene=golf]>.gf-controls{grid-column:2;grid-row:4;grid-template-columns:1fr;display:grid;gap:15px;background:#143c35;border:1px solid #719f7c;padding:14px;width:100%;border-radius:16px;color:#d4e3c9}
+body[data-game] .room [data-scene=golf] .gf-controls span,body[data-game] .room [data-scene=golf] .gf-controls b{color:#e2efd1}body[data-game] .room [data-scene=golf] #gf-place-note{color:#a5c3a8;font-size:11px}
+body[data-game] .room [data-scene=golf] #gf-putt{background:linear-gradient(#c5f75e,#8ec729);border-color:#dbf5a6;color:#183324;box-shadow:0 4px 0 #527729;min-height:48px;font-size:16px}
+body[data-game] .room [data-scene=golf] .pl-fine-row{display:flex;gap:5px}body[data-game] .room [data-scene=golf] .pl-fine-row input{width:0;min-width:0;flex:1}body[data-game] .room [data-scene=golf] .p5-shot-presets{display:flex;gap:4px;flex-wrap:wrap}body[data-game] .room [data-scene=golf] .p5-shot-presets .btn{font-size:10px;padding:6px;min-height:34px}
+body[data-game] .room [data-scene=golf]>.gf-card,body[data-game] .room [data-scene=golf]>.gf-between{grid-column:1/-1;background:#0b2c2c;border-color:#618b71}
+/* Shared physical card-table structure. */
+body[data-game] .room [data-scene=gofish],body[data-game] .room [data-scene=colorstack]{background:#061a28;border:1px solid #516875;padding:12px;overflow:hidden}
+body[data-game] .room [data-scene=gofish] .pgf-table,body[data-game] .room [data-scene=colorstack] .pcs-table{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:10px;padding:16px 18px 12px;min-height:640px;border-radius:18px;background:radial-gradient(ellipse at 50% 35%,#1e5860,#082f3e 75%);border:1px solid #547f87;overflow:visible}
+body[data-game] .room [data-scene=gofish] .pgf-oval,body[data-game] .room [data-scene=colorstack] .pcs-orbit{display:block;position:absolute;z-index:-1;inset:84px 30px 150px;border:18px solid #2b1d17;border-radius:45%;background:radial-gradient(ellipse,#287967,#0f554d 70%,#073a3c);box-shadow:inset 0 0 0 2px #bd9c62,inset 0 0 24px #0009,0 0 0 2px #a77d44,0 12px 18px #0008;pointer-events:none}
+body[data-game] .room [data-scene=gofish] .pgf-orn,body[data-game] .room [data-scene=colorstack] .pcs-label{position:absolute;left:25%;right:25%;top:35%;text-align:center;color:#c1d4ad23;font-size:27px;letter-spacing:.1em;font-weight:850;transform:none}
+body[data-game] .room [data-scene=gofish] .pgf-orn small,body[data-game] .room [data-scene=colorstack] .pcs-label small{display:block;font-size:8px;letter-spacing:.18em;margin-top:5px}
+body[data-game] .room [data-scene=gofish] .pgf-opponents,body[data-game] .room [data-scene=colorstack] .pcs-opponents{position:relative;display:flex;width:100%;min-height:135px;justify-content:space-around;gap:15px;align-items:start;z-index:2}
+body[data-game] .room [data-scene=gofish] .pgf-seat,body[data-game] .room [data-scene=colorstack] .pcs-seat{background:none;border:0;box-shadow:none;border-radius:0;flex:1;max-width:220px;min-width:0;position:relative;padding:0;text-align:center}
+body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player{justify-content:center;display:flex;padding:6px 10px;min-width:0;border-radius:40px;background:#082330;border:1px solid #82a99c66;box-shadow:0 5px 10px #00111d66}
+body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player>div,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player>div{min-width:0;text-align:left}
+body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player b,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player.active,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player.active{border-color:#c3f37b;box-shadow:0 0 0 2px #a6eb4a55,0 5px 12px #0006}
+body[data-game] .room [data-scene=gofish] .pgf-backs,body[data-game] .room [data-scene=colorstack] .pcs-backs{display:flex;justify-content:center;align-items:center;height:90px;margin-top:6px}
+body[data-game] .room [data-scene=gofish] .pgf-backs img,body[data-game] .room [data-scene=colorstack] .pcs-backs img{width:48px;height:76px;object-fit:contain;margin:0 -14px;transform:rotate(var(--tilt));filter:drop-shadow(0 3px 2px #00182188)}
+body[data-game] .room [data-scene=gofish] .pgf-mid{display:grid;grid-template-columns:90px minmax(0,1fr) 130px;align-items:center;min-height:160px;gap:15px;width:80%;margin:auto}
+body[data-game] .room [data-scene=gofish] .pgf-pond{grid-column:1;position:relative}body[data-game] .room [data-scene=gofish] .pgf-pond>img{width:76px;height:124px;border-radius:7px;transform:rotate(-7deg);box-shadow:2px 2px #dfdbc4,4px 4px #a5afaa,6px 6px #082532}
+body[data-game] .room [data-scene=gofish] .pgf-pond small{font-size:10px;color:#c1d5c8;display:block;margin-top:8px}
+body[data-game] .room [data-scene=gofish] .pgf-books{grid-column:3;position:relative}body[data-game] .room [data-scene=gofish] .pgf-book{background:#eef0d8;color:#193e48;border:1px solid #ddc48a;box-shadow:2px 3px #828f72;border-radius:6px}body[data-game] .room [data-scene=gofish] .pgf-book.empty{background:#0a383c44;color:#91b3a3;border:1px dashed #82a695;box-shadow:none}
+body[data-game] .room [data-scene=gofish] .pgf-action{grid-column:2;grid-row:1;position:relative;margin:0;background:#092c37e8;color:#e4e9cd;border:1px solid #95b68c;border-radius:14px;padding:12px;font-size:12px}
+body[data-game] .room [data-scene=gofish] .pgf-status{background:#092c37cc;color:#e1ecd5;border:1px solid #87ae8b66;border-radius:30px;padding:9px 18px;margin:0 auto;font-size:13px}
+body[data-game] .room [data-scene=gofish] .pgf-handhead{order:3;display:flex;justify-content:space-between;width:100%;padding:4px 10px;font-size:10px;letter-spacing:.12em;color:#b9d3c2}
+body[data-game] .room [data-scene=gofish] .pgf-hand{order:4;width:100%;display:flex;justify-content:center;align-items:end;min-height:180px;padding:18px 12px 10px;overflow:visible}
+body[data-game] .room [data-scene=gofish] .pgf-card{position:relative;flex-shrink:0;width:98px;height:168px;background:#fffaf0;padding:0;border:0;border-radius:9px;color:#183947;transform:rotate(var(--tilt));transform-origin:50% 100%;box-shadow:0 3px 0 #c5bda3,0 8px 12px #001d2b99;overflow:visible;transition:transform .15s,filter .15s}
+body[data-game] .room [data-scene=gofish] .pgf-card::before{display:none}body[data-game] .room [data-scene=gofish] .scene-card-face{display:block;position:absolute;inset:0;width:100%;height:100%;border-radius:8px}
+body[data-game] .room [data-scene=gofish] .pgf-card.lift{transform:translateY(-20px) rotate(var(--tilt));outline:3px solid #bdf26c;z-index:5}
+body[data-game] .room [data-scene=gofish] .pgf-card:hover:not(:disabled){transform:translateY(-12px) rotate(var(--tilt));z-index:6}body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{overflow-x:auto;justify-content:start;padding-bottom:18px}
+body[data-game] .room [data-scene=gofish] .pgf-ask{order:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;background:#071f31;border:1px solid #80a8a0;border-radius:14px;padding:12px;width:100%;box-shadow:0 4px 0 #03131f}
+body[data-game] .room [data-scene=gofish] .pgf-step small{color:#9bbdb4}body[data-game] .room [data-scene=gofish] .gf-chip{background:#244b57;color:#e4eedc;border-color:#789f97;border-radius:8px;min-height:38px}body[data-game] .room [data-scene=gofish] .gf-chip.on{background:#c4ed7e;color:#13332c}
+body[data-game] .room [data-scene=gofish] .pgf-go{background:#b7ed62;color:#173c2b;border-color:#d9f8a3}
+body[data-game] .room [data-scene=gofish] .pgf-logwrap{order:6;color:#aac7bf;font-size:12px}
+/* Color Stack is a real four-sided arena with large action faces and a private lower hand. */
+body[data-game] .room [data-scene=colorstack] .pcs-table{background:radial-gradient(at 50% 40%,#1d5177,#0a223d 72%);min-height:650px;padding-top:12px}
+body[data-game] .room [data-scene=colorstack] .pcs-orbit{background:radial-gradient(ellipse,#2a6991,#153f67 75%);border-color:#10233a;box-shadow:inset 0 0 0 2px #6088a4,inset 0 0 55px #06172e,0 0 0 2px #506c8c,0 12px 18px #0008;inset:76px 22px 145px}
+body[data-game] .room [data-scene=colorstack] .pcs-center{display:flex;justify-content:center;align-items:center;gap:54px;min-height:170px;margin:0;position:relative}
+body[data-game] .room [data-scene=colorstack] .pcs-deck img{width:100px;height:154px;object-fit:fill;border-radius:9px;box-shadow:2px 2px #dde2d7,4px 4px #a8b1ad,6px 6px #082039}
+body[data-game] .room [data-scene=colorstack] .pcs-deck small,body[data-game] .room [data-scene=colorstack] .pcs-discard small{font-size:10px;color:#a9ccda;margin-top:8px}
+body[data-game] .room [data-scene=colorstack] .pcs-card{--card-tone:#2388d7;position:relative;width:100px;height:154px;flex-shrink:0;background:var(--card-tone)!important;border:5px solid #f5f3e6;border-radius:12px;box-shadow:0 4px 0 #c2c2b0,0 8px 12px #03142a88;overflow:hidden;color:white;transform:rotate(var(--tilt));transform-origin:50% 100%;transition:transform .15s}
+body[data-game] .room [data-scene=colorstack] .pcs-card.c-r{--card-tone:#df3546}body[data-game] .room [data-scene=colorstack] .pcs-card.c-g{--card-tone:#3baf62}body[data-game] .room [data-scene=colorstack] .pcs-card.c-y{--card-tone:#e6ad1b}body[data-game] .room [data-scene=colorstack] .pcs-card.c-b{--card-tone:#2686d9}body[data-game] .room [data-scene=colorstack] .pcs-card.c-w{--card-tone:#202b40;background:conic-gradient(from 30deg,#df3546,#e6ad1b,#3baf62,#2686d9,#df3546)!important}
+body[data-game] .room [data-scene=colorstack] .pcs-card::before{content:'';display:block;position:absolute;inset:18px 5px;background:#fff6e5;border-radius:50%;transform:rotate(28deg);border:1px solid #fff7;box-shadow:0 2px 3px #15233d44}
+body[data-game] .room [data-scene=colorstack] .pcs-card b{position:absolute;left:0;right:0;top:48%;transform:translateY(-50%);font:bold italic 72px/1 Arial,sans-serif;letter-spacing:-.1em;color:var(--card-tone);text-align:center;text-shadow:2px 2px #172c42}
+body[data-game] .room [data-scene=colorstack] .pcs-card .corner{position:absolute;left:3px;top:3px;font-size:12px;line-height:1;font-weight:850;color:white;text-shadow:1px 1px #16364f}
+body[data-game] .room [data-scene=colorstack] .pcs-card .corner.bottom{left:auto;top:auto;right:3px;bottom:3px;transform:rotate(180deg)}
+body[data-game] .room [data-scene=colorstack] .pcs-card small{display:none}body[data-game] .room [data-scene=colorstack] .ten-card-brand{display:none}body[data-game] .room [data-scene=colorstack] .ten-card-symbol{display:none}
+body[data-game] .room [data-scene=colorstack] .pcs-card.word b{font-size:24px;letter-spacing:-.05em;text-shadow:1px 1px #172c42}
+body[data-game] .room [data-scene=colorstack] .pcs-card.big{width:112px;height:168px}body[data-game] .room [data-scene=colorstack] .pcs-card.playable{outline:2px solid #c5ee6b;outline-offset:2px}body[data-game] .room [data-scene=colorstack] .pcs-card.lift{transform:translateY(-24px) rotate(var(--tilt));z-index:5;outline:3px solid #d8ff87}
+body[data-game] .room [data-scene=colorstack] .pcs-status{font-size:14px;color:#e6eddd;margin:0;text-align:center;padding:9px;background:#0b2c4a99;border-radius:20px}
+body[data-game] .room [data-scene=colorstack] .pcs-fan{display:flex;justify-content:center;align-items:end;min-height:175px;padding:15px 14px 10px;width:100%;overflow:visible}
+body[data-game] .room [data-scene=colorstack] .pcs-dock{display:flex;align-items:center;gap:10px;border:1px solid #6e92a0;background:#0a2137;border-radius:14px;padding:12px;z-index:6}
+body[data-game] .room [data-scene=colorstack] .pcs-sel{color:#c9dedd;font-size:12px}body[data-game] .room [data-scene=colorstack] #cs-play{background:#b5ef56;color:#143629;border-color:#def7a6;min-width:100px;min-height:46px}
+/* LUDO: an actual raised wood board, inset enamel homes and sculpted pawns. */
+body[data-game] .room [data-scene=ludo]{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:16px;background:radial-gradient(at 50% 35%,#365b50,#142f3b 80%);border:1px solid #658879}
+body[data-game] .room [data-scene=ludo]>.b2-players{justify-content:center;padding:0}body[data-game] .room [data-scene=ludo] .b2-player{flex:1;justify-content:center;background:#112b3b}
+body[data-game] .room [data-scene=ludo] .pld-main{display:flex;align-items:center;justify-content:center;gap:30px;background:none;border:0;padding:6px}
+body[data-game] .room [data-scene=ludo] .pld-boardwrap{max-width:650px;min-width:0;flex:1;perspective:1100px;padding:0 8px 14px}
+body[data-game] .room [data-scene=ludo] .ld2-board.pld{width:min(100%,calc(100dvh - 270px));aspect-ratio:1;background:#e8ddba;border:14px solid #68432c;border-image:none;outline:2px solid #b7996a;border-radius:14px;padding:5px;box-shadow:0 12px 0 #301e1a,0 14px 0 #a7885e,0 22px 28px #0009,inset 0 0 0 2px #d9c899;transform:rotateX(8deg);transform-origin:50% 70%;gap:0;overflow:visible}
+body[data-game] .room [data-scene=ludo] .pld-yard{margin:4px;border-radius:14px;border:1px solid #fff5;box-shadow:inset 0 3px 6px #0005,0 1px #fff8}
+body[data-game] .room [data-scene=ludo] .pld-yard.c0{background:linear-gradient(145deg,#db485b,#a2223a)}body[data-game] .room [data-scene=ludo] .pld-yard.c1{background:linear-gradient(145deg,#7fbd56,#347b47)}body[data-game] .room [data-scene=ludo] .pld-yard.c2{background:linear-gradient(145deg,#edc257,#be812c)}body[data-game] .room [data-scene=ludo] .pld-yard.c3{background:linear-gradient(145deg,#70b7d5,#2c6f9a)}
+body[data-game] .room [data-scene=ludo] .pld-well{width:75%;height:75%;background:#f0e6c9;border:5px solid #ffffff55;border-radius:14px;box-shadow:inset 0 3px 7px #283c3a44,0 1px #fff9}
+body[data-game] .room [data-scene=ludo] .ld2-cell.track{background:#f9f0d9;border:1px solid #b9b49b;box-shadow:inset 0 1px #fff8}
+body[data-game] .room [data-scene=ludo] .ld2-cell.homecol{border:1px solid #f3e5bd77}body[data-game] .room [data-scene=ludo] .ld2-cell.yardspot{background:none;border:0}
+body[data-game] .room [data-scene=ludo] .pld-centre{background:conic-gradient(from 45deg,#d6ac4a 0 25%,#5092b3 0 50%,#d55b66 0 75%,#71a660 0);border:1px solid #e9ddb8;border-radius:2px;clip-path:none}
+body[data-game] .room [data-scene=ludo] .ld2-tok{position:relative;z-index:4;width:86%;height:86%;background:none!important;border:0;box-shadow:none;border-radius:50%;overflow:visible}
+body[data-game] .room [data-scene=ludo] .ld2-tok img{position:absolute;width:150%;height:185%;max-width:none;left:-25%;bottom:2%;object-fit:contain;filter:drop-shadow(2px 4px 2px #142b3977);pointer-events:none}
+body[data-game] .room [data-scene=ludo] .ld2-tok>span{position:absolute;bottom:3%;right:-4px;min-width:12px;height:12px;font:800 8px Arial;display:grid;place-items:center;border-radius:50%;color:#173143;background:#fff3c6;border:1px solid #6d7255;z-index:5}
+body[data-game] .room [data-scene=ludo] .ld2-tok.can{outline:3px solid #edffac;outline-offset:2px;background:#d1f28255!important;cursor:pointer}
+body[data-game] .room [data-scene=ludo] .pld-pod{width:215px;flex-shrink:0;background:linear-gradient(130deg,#173e48,#0b2638);border:1px solid #88a09c;border-radius:18px;padding:22px;box-shadow:0 6px 0 #061e2c;color:#e0ebd4}
+body[data-game] .room [data-scene=ludo] .ld2-die{width:84px;height:84px;border:2px solid #f5e3ae;border-radius:18px;background:linear-gradient(145deg,#fff5d6,#d9cbab);color:#153a49;box-shadow:5px 8px 0 #8d896c,0 16px 20px #0006;transform:rotate(-6deg)}
+body[data-game] .room [data-scene=ludo] .ld2-status{color:#e4edcf;font-size:15px;line-height:1.5}body[data-game] .room [data-scene=ludo] .pld-eyebrow,body[data-game] .room [data-scene=ludo] .pld-pod .muted{color:#a6c3b6}body[data-game] .room [data-scene=ludo] .ld2-ctl .btn{width:100%;background:#b7ef5c;color:#173d2d;box-shadow:0 4px 0 #538337}
+/* TYCOON: miniature property plots, physical tokens, deeds and the central exchange. */
+body[data-game] .room [data-scene=tycoon]{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:12px;padding:16px;background:linear-gradient(135deg,#244c43,#102d3c);border:1px solid #6e8f7e;border-radius:20px}
+body[data-game] .room [data-scene=tycoon]>#ty-strip,body[data-game] .room [data-scene=tycoon]>#ty-players{grid-column:1/-1}
+body[data-game] .room [data-scene=tycoon] .pty-strip{background:#092c36;color:#dce8d6;border:1px solid #80a18c;border-radius:12px;padding:10px 16px;box-shadow:none}
+body[data-game] .room [data-scene=tycoon] .pty-strip strong{color:#d5eea8}body[data-game] .room [data-scene=tycoon] .ty-players{padding:0;gap:8px;background:none}body[data-game] .room [data-scene=tycoon] .ty-cash{color:#c7ed83}
+body[data-game] .room [data-scene=tycoon]>#ty-boardwrap{grid-column:1;grid-row:3/span 5;min-width:0;perspective:1000px;align-self:start;padding:0 8px 14px}
+body[data-game] .room [data-scene=tycoon] .ty-board{width:min(100%,var(--ty-board-max,calc(100dvh - 315px)));min-width:0;aspect-ratio:1;background:#07333a;border:10px solid #4b3827;outline:2px solid #c3ab78;border-radius:10px;gap:2px;box-shadow:0 11px 0 #2d241e,0 13px 0 #9c875b,0 22px 26px #0008;transform:rotateX(9deg);transform-origin:50% 80%;overflow:visible}
+body[data-game] .room [data-scene=tycoon] .ty-tile{background:linear-gradient(#fff7dd,#e0dcc1);border:1px solid #c5bda1;border-radius:2px;color:#203c40;padding:7px 2px 3px;justify-content:center;gap:2px;overflow:visible}
+body[data-game] .room [data-scene=tycoon] .ty-tile .ty-nm{font-size:8px;line-height:1.1;font-weight:800;max-width:100%;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:#18363b}
+body[data-game] .room [data-scene=tycoon] .ty-tile .ty-pr{font-size:7px;color:#4b6d5b;line-height:1.1}
+body[data-game] .room [data-scene=tycoon] .ty-tile.t-prop .ty-ic{display:none}body[data-game] .room [data-scene=tycoon] .ty-ic img{width:16px;height:16px}
+body[data-game] .room [data-scene=tycoon] .ty-band{left:0;right:0;top:0;bottom:auto;width:auto;height:6px;box-shadow:inset 0 1px #fff6}
+body[data-game] .room [data-scene=tycoon] .ty-own{border:1px solid #102c38;border-radius:2px;box-shadow:0 1px #fff8}
+body[data-game] .room [data-scene=tycoon] .ty-center{background:radial-gradient(at 50% 20%,#c1d4b6,#7da99b);border:1px solid #335c59;border-radius:0;overflow:visible;display:grid;place-items:center}
+body[data-game] .room [data-scene=tycoon] .scene-city-emblem{position:absolute;top:10%;left:0;right:0;text-align:center;transform:rotate(-12deg);color:#164a47}
+body[data-game] .room [data-scene=tycoon] .scene-city-emblem span{display:block;font:900 clamp(30px,5vw,74px)/1 Georgia;letter-spacing:-.1em;text-shadow:0 2px #dfebc4}
+body[data-game] .room [data-scene=tycoon] .scene-city-emblem i{display:block;font:800 9px Arial;letter-spacing:.2em;margin-top:8px}
+body[data-game] .room [data-scene=tycoon] .pty-plaque{position:absolute;top:47%;left:8%;right:8%;bottom:auto;max-width:none;margin:0;background:#0e3a3deb;border:2px solid #d8dbac;box-shadow:0 5px 0 #638277;padding:12px;border-radius:12px;color:#e9edcf;font-size:12px}
+body[data-game] .room [data-scene=tycoon] .pty-plaque .ty-logo{color:#f2edce;font-size:clamp(14px,1.8vw,26px);letter-spacing:-.04em}body[data-game] .room [data-scene=tycoon] .ty-turn,body[data-game] .room [data-scene=tycoon] .ty-turn b,body[data-game] .room [data-scene=tycoon] .ty-round{color:#c3ddc6}
+body[data-game] .room [data-scene=tycoon] .ty-toks{overflow:visible;z-index:6;inset:auto 0 0;justify-content:center}
+body[data-game] .room [data-scene=tycoon] .ty-tok{width:30px;height:25px;background:none!important;border:0;box-shadow:none;position:relative;overflow:visible;border-radius:0;z-index:6}
+body[data-game] .room [data-scene=tycoon] .ty-tok img{position:absolute;bottom:0;left:-15%;width:130%;height:150%;max-width:none;object-fit:contain;filter:drop-shadow(1px 4px 2px #132e3488)}
+body[data-game] .room [data-scene=tycoon] .ty-tok.turn{outline:2px solid #edff9c;border-radius:40%;outline-offset:2px}
+body[data-game] .room [data-scene=tycoon] .ty-lvl{position:absolute;top:-12px;right:0;width:42px;height:38px;z-index:5;pointer-events:none}
+body[data-game] .room [data-scene=tycoon] .ty-lvl img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(1px 4px 2px #173d3b88)}
+body[data-game] .room [data-scene=tycoon]>#ty-info,body[data-game] .room [data-scene=tycoon]>#ty-actions,body[data-game] .room [data-scene=tycoon]>.ty-sect{grid-column:2;margin:0;width:100%;background:#f1edd7;color:#193e43;border:1px solid #9fb29c;border-radius:13px;padding:14px}
+body[data-game] .room [data-scene=tycoon] #ty-actions .ttt-status,body[data-game] .room [data-scene=tycoon] .ty-sect .muted{color:#31574d;background:none;border:0}
+body[data-game] .room [data-scene=tycoon] .ty-info{background:#fff5db;color:#1c4447;box-shadow:0 6px 0 #789481;border-color:#c4c397;border-radius:12px}
+body[data-game] .room [data-scene=tycoon] .ty-info b{color:#193e43}body[data-game] .room [data-scene=tycoon] .ty-log ol{color:#45695a}
+/* BATTLESHIP: a command console with real steel miniatures on the actual grid. */
+body[data-game] .room [data-scene=battleship]{display:grid;gap:12px;padding:16px;background:linear-gradient(#1b3c54,#081e34);border:1px solid #6a8ca0;border-radius:18px;box-shadow:inset 0 0 0 3px #10263c}
+body[data-game] .room [data-scene=battleship]>.b2-players{padding:0;background:none}
+body[data-game] .room [data-scene=battleship] .bs-two.pbs{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-areas:'enemy friendly';gap:16px;background:none;padding:0}
+body[data-game] .room [data-scene=battleship] .pbs-enemy{grid-area:enemy;background:#142e43;border:1px solid #7e9baa;border-radius:12px;padding:14px;box-shadow:0 6px 0 #061629}
+body[data-game] .room [data-scene=battleship] .pbs-friendly{grid-area:friendly;background:#0d2639;border:1px solid #587d94;border-radius:12px;padding:14px;align-self:start;box-shadow:0 6px 0 #061629}
+body[data-game] .room [data-scene=battleship] .bs-title{color:#dcebdc;letter-spacing:.1em;font-size:12px}body[data-game] .room [data-scene=battleship] .bs-title small{color:#8fb4c1;font-size:10px;letter-spacing:0}
+body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{width:100%;max-width:min(100%,calc(100dvh - 360px));padding:7px;background:radial-gradient(at 40% 10%,#286888,#0e3d59 65%,#082d47);border:8px solid #173c55;border-radius:10px;outline:1px solid #82a0ac;box-shadow:inset 0 0 0 1px #73a3b5,0 5px 0 #06182c;overflow:hidden}
+body[data-game] .room [data-scene=battleship] .bs-cell{background:linear-gradient(135deg,#c7efff08,#56b6de0b);border:1px solid #8ac1d44a;box-shadow:none;position:relative}
+body[data-game] .room [data-scene=battleship] .bs-head{color:#b5d9dd;font:bold 10px monospace}
+body[data-game] .room [data-scene=battleship] .bs-cell.ship{background:#5d8da844}body[data-game] .room [data-scene=battleship] .pbs-ship{background:none;border:0;box-shadow:none;z-index:2;pointer-events:none}
+body[data-game] .room [data-scene=battleship] .pbs-ship img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 5px 2px #031b2d99)}
+body[data-game] .room [data-scene=battleship] .pbs-ship.wreck img{filter:grayscale(1) brightness(.5) drop-shadow(0 0 3px #ef8e53)}
+body[data-game] .room [data-scene=battleship] .bs-cell.hit{background:radial-gradient(#e7954c88,#783a2544)}body[data-game] .room [data-scene=battleship] .bs-cell.miss{background:#89d0df12}
+body[data-game] .room [data-scene=battleship] .pbs-mark{z-index:4}body[data-game] .room [data-scene=battleship] .bs-cell.miss .pbs-mark{background:#e2f5e5;box-shadow:0 0 0 4px #caeff233}
+body[data-game] .room [data-scene=battleship] .bs-cell.hit .pbs-mark{background:#ffc269;border-color:#ffd69a;box-shadow:0 0 8px #ff9c5866}
+body[data-game] .room [data-scene=battleship] .bs-place{display:grid;grid-template-columns:minmax(0,1fr) 185px;gap:12px;background:#142e43;border:1px solid #7a9ba7;padding:16px;border-radius:14px}
+body[data-game] .room [data-scene=battleship] .bs-place>.pbs-label{grid-column:1/-1;color:#d8e8d5;letter-spacing:.12em}
+body[data-game] .room [data-scene=battleship] .bs-place>.bs-boardwrap{grid-column:1;grid-row:2/span 3;min-width:0}
+body[data-game] .room [data-scene=battleship] .bs-place>.bs-fleet,body[data-game] .room [data-scene=battleship] .bs-place>.bs-ctl,body[data-game] .room [data-scene=battleship] .bs-place>.bs-lock{grid-column:2;margin:0}
+body[data-game] .room [data-scene=battleship] .bs-place>.bs-ctl{display:flex;flex-direction:column;gap:8px}
+body[data-game] .room [data-scene=battleship] .bs-fleet{display:grid;gap:7px}
+body[data-game] .room [data-scene=battleship] .bs-ship{display:grid;grid-template-columns:70px 1fr;gap:3px 7px;align-items:center;background:#082238;border:1px solid #588093;color:#dce8d6;border-radius:9px;padding:8px;text-align:left;font-size:12px}
+body[data-game] .room [data-scene=battleship] .bs-ship img{grid-row:1/span 2;width:70px;height:30px;object-fit:contain}body[data-game] .room [data-scene=battleship] .bs-ship small{font-size:10px;color:#91b7bd}body[data-game] .room [data-scene=battleship] .bs-ship.cur{background:#245068;border-color:#b9e77a;box-shadow:0 0 0 1px #b9e77a}
+body[data-game] .room [data-scene=battleship] .pbs-fire{background:#082235;border:1px solid #567c90;border-radius:10px;padding:10px;margin-top:12px;gap:8px}body[data-game] .room [data-scene=battleship] .pbs-target{color:#b6d6d2}body[data-game] .room [data-scene=battleship] .pbs-target strong{color:#c7ef91}
+/* CHESS: polished Staunton miniatures and an inset physical board. */
+body[data-game] .room [data-scene=chess]{padding:14px;background:radial-gradient(at 40% 15%,#3c4545,#172e3b 70%);border:1px solid #83988f;box-shadow:0 16px 40px #0005}
+body[data-game] .room [data-scene=chess] .pch-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:24px;padding:10px;background:none;align-items:center}
+body[data-game] .room [data-scene=chess] .pch-table{padding:0;max-width:min(100%,calc(100dvh - 230px));margin:auto;background:none;border:0;box-shadow:none;gap:10px}
+body[data-game] .room [data-scene=chess] .pch-player{padding:6px 10px;background:#102a37;color:#e3ead7;border:1px solid #7a968c;border-radius:12px;min-height:50px;box-shadow:0 3px 0 #081c2c}
+body[data-game] .room [data-scene=chess] .pch-player .b2-player{background:none;border:0;box-shadow:none;padding:0}
+body[data-game] .room [data-scene=chess] .ch-clock{font:800 24px/1.2 monospace;color:#cfddcd;background:#081c2c;border:1px solid #63877e;border-radius:8px;min-width:104px;text-align:center;padding:8px}
+body[data-game] .room [data-scene=chess] .ch-clock.ticking{background:#d9e4b9;color:#183b3e;border-color:#c9ed8e;box-shadow:0 3px 0 #799c60}
+body[data-game] .room [data-scene=chess] .ch-board{width:100%;max-width:min(620px,calc(100dvh - 350px));aspect-ratio:1;padding:15px;background:#694a30 url('/assets/scenes/walnut.png') center/cover;border:3px solid #b89d6d;border-radius:9px;box-shadow:0 9px 0 #241f1b,0 11px 0 #8e734b,0 18px 24px #0008;overflow:visible;position:relative}
+body[data-game] .room [data-scene=chess][data-theme=slate] .ch-board{background:#213b46;border-color:#77938d}
+body[data-game] .room [data-scene=chess] .ch-sq.light{background:linear-gradient(145deg,#f1e6c8,#dfd1ab)}body[data-game] .room [data-scene=chess] .ch-sq.dark{background:linear-gradient(145deg,#638477,#3f625e)}
+body[data-game] .room [data-scene=chess][data-theme=slate] .ch-sq.light{background:linear-gradient(145deg,#e2ded0,#bac5bc)}body[data-game] .room [data-scene=chess][data-theme=slate] .ch-sq.dark{background:linear-gradient(145deg,#5b7990,#36556d)}
+body[data-game] .room [data-scene=chess] .ch-sq{overflow:visible;border:1px solid #2d473b22}body[data-game] .room [data-scene=chess] .ch-piece{overflow:visible;position:relative;z-index:3}
+body[data-game] .room [data-scene=chess] .scene-piece{display:block;position:absolute;left:-14%;bottom:0;width:128%;height:145%;max-width:none;object-fit:contain;filter:drop-shadow(1px 3px 1px #192c3b66);pointer-events:none}
+body[data-game] .room [data-scene=chess] .ch-sq .rk,body[data-game] .room [data-scene=chess] .ch-sq .fl{z-index:4;font-size:9px;opacity:.8}
+body[data-game] .room [data-scene=chess] .ch-sq.sel{background:#adbc7c;outline:3px solid #d8f2a3;outline-offset:-3px;z-index:4}
+body[data-game] .room [data-scene=chess] .ch-sq.last{box-shadow:inset 0 0 0 3px #e6d17188}body[data-game] .room [data-scene=chess] .ch-sq.check{background:#c0755f;box-shadow:inset 0 0 0 3px #f9d7a4}
+body[data-game] .room [data-scene=chess] .ch-sq.target .ck-dot{width:24%;height:24%;border:2px solid #b7d898;background:#193c4755;z-index:4}
+body[data-game] .room [data-scene=chess] .pch-notes{background:#102a38;color:#d6e5d6;border:1px solid #7a968e;border-radius:15px;padding:18px;gap:18px}
+body[data-game] .room [data-scene=chess] .pch-eyebrow{color:#bad6ad}body[data-game] .room [data-scene=chess] .ch-moves,body[data-game] .room [data-scene=chess] .pch-caption .ttt-status{color:#e3eddb}
+body[data-game] .room [data-scene=chess] .pch-caption .ttt-status{background:none;border:0;padding:0}body[data-game] .room [data-scene=chess] .pch-notes .muted{color:#abc3b5}
+body[data-game] .room [data-scene=chess] .b25-captures{background:#1f413e;border-color:#729784;padding:10px;min-height:48px}body[data-game] .room [data-scene=chess] .b25-captures .ch-piece{display:inline-block;width:24px;height:32px}body[data-game] .room [data-scene=chess] .b25-captures small{color:#aac6ac}
+body[data-game] .room [data-scene=chess] .ch-promo>.card{background:#15383e;border:2px solid #c4d497;color:#e4e6ca;border-radius:16px}body[data-game] .room [data-scene=chess] .ch-promo-btn{background:#a6b5a0;border:1px solid #e3e6c9;position:relative;min-width:64px;min-height:84px}
+/* IMPOSTOR: private identity cards face a public meeting table. */
+body[data-game] .room [data-scene=impostor]{background:radial-gradient(at 50% 35%,#333f65,#101f36 75%);border:1px solid #70839c;padding:18px;display:grid;gap:16px}
+body[data-game] .room [data-scene=impostor]>.b2-players{padding:0;justify-content:center;background:none}body[data-game] .room [data-scene=impostor] .b2-player{flex:1;justify-content:center;background:#162b44;border-radius:14px}
+body[data-game] .room [data-scene=impostor]>.im-main{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-areas:'steps steps' 'round round' 'role clues' 'body body' 'status status';gap:18px;background:none;border:0;box-shadow:none;padding:0}
+body[data-game] .room [data-scene=impostor] #im-progress{grid-area:steps}
+body[data-game] .room [data-scene=impostor] .scene-phase{display:flex;list-style:none;justify-content:center;gap:28px;padding:12px;margin:0;background:#0c1f34;border:1px solid #526681;border-radius:12px}
+body[data-game] .room [data-scene=impostor] .scene-phase li{display:flex;gap:8px;align-items:center;font-size:12px;color:#8a9db5}
+body[data-game] .room [data-scene=impostor] .scene-phase li>span{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;border:1px solid #70889b;font-weight:800}
+body[data-game] .room [data-scene=impostor] .scene-phase .current{color:#d4ef9b}body[data-game] .room [data-scene=impostor] .scene-phase .current>span{background:#bddf70;color:#183a3c;border-color:#e1f7a9}
+body[data-game] .room [data-scene=impostor] #im-round{grid-area:round;font-size:11px;letter-spacing:.13em;margin:0;color:#adc3d0;text-align:center}
+body[data-game] .room [data-scene=impostor] #im-role{grid-area:role;display:flex;flex-direction:column;gap:12px;min-width:0}
+body[data-game] .room [data-scene=impostor] .im-card{position:relative;transform:none;max-width:none;margin:0;min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(140deg,#536f83,#163c50);border:2px solid #9fbab8;border-radius:18px;padding:24px;box-shadow:0 6px 0 #0a1b30,0 18px 25px #0004;color:#dce9da}
+body[data-game] .room [data-scene=impostor] .im-card::before{display:none}body[data-game] .room [data-scene=impostor] .im-card b{color:#edf3d3}body[data-game] .room [data-scene=impostor] .im-card.impostor{background:linear-gradient(140deg,#96544f,#422e48);border-color:#e0a99a;box-shadow:0 6px 0 #341d31}
+body[data-game] .room [data-scene=impostor] .ten-role-art{height:100px;width:130px;object-fit:contain;margin:0 auto 12px}
+body[data-game] .room [data-scene=impostor] .im-role-tag{font-size:9px;letter-spacing:.14em;color:#b7d0c7}
+body[data-game] .room [data-scene=impostor] .im-card.crew b.im-secret,body[data-game] .room [data-scene=impostor] .im-card.impostor b.im-secret,body[data-game] .room [data-scene=impostor] .im-secret{font:900 32px/1.1 system-ui;letter-spacing:-.04em;text-transform:uppercase;color:#f0f3d5;margin:12px 0;display:block;overflow-wrap:anywhere}
+body[data-game] .room [data-scene=impostor] .im-card.b25-concealed{background:#142e48 url('/assets/ten/fingerprint.svg') center/55% no-repeat}
+body[data-game] .room [data-scene=impostor] #im-clues{grid-area:clues;min-width:0;max-width:none;display:flex;flex-direction:column;gap:10px;padding:18px;margin:0;background:#0b2035;border:1px solid #6e8196;border-radius:16px;min-height:300px}
+body[data-game] .room [data-scene=impostor] #im-clues::before{content:'THE MEETING';display:block;padding:0 0 12px;border-bottom:1px solid #69869a44;font-size:10px;font-weight:850;letter-spacing:.16em;color:#afc5c7}
+body[data-game] .room [data-scene=impostor] #im-clues:empty{display:flex}body[data-game] .room [data-scene=impostor] #im-clues:empty::after{content:'Each player gives a clue. Listen for the one that does not fit.';color:#94aebd;font-size:14px;line-height:1.7;margin:auto;text-align:center;max-width:240px}
+body[data-game] .room [data-scene=impostor] .im-clues li{display:block;background:#213b53;color:#ebead8;border:1px solid #526c7c;border-left:3px solid #9dc66f;border-radius:4px 14px 14px;padding:12px 16px;font-size:17px;line-height:1.4}
+body[data-game] .room [data-scene=impostor] .im-clues li b{display:block;color:#a6cfa1;font-size:11px;letter-spacing:.05em;margin-bottom:4px}
+body[data-game] .room [data-scene=impostor] #im-body{grid-area:body}body[data-game] .room [data-scene=impostor] #im-status{grid-area:status;color:#a3bfca;text-align:center;margin:0}
+body[data-game] .room [data-scene=impostor] .im-votes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;list-style:none;padding:0}
+body[data-game] .room [data-scene=impostor] .im-votes .btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:160px;background:#18374f;color:#edf0d7;border:2px solid #73968f;border-radius:16px;box-shadow:0 6px 0 #071b30}
+body[data-game] .room [data-scene=impostor] .im-votes .avatar{width:76px;height:76px}body[data-game] .room [data-scene=impostor] .im-votes .picked{background:#3b594a;border-color:#cef69c;transform:translateY(-4px)}
+body[data-game] .room [data-scene=impostor] .b25-vote-confirm{background:#0c2238;border-color:#7b9d94;border-radius:12px;padding:16px}
+/* TELEPHONE: a purpose-built illustrator workspace and an ordered chain reveal. */
+body[data-game] .room [data-scene=telephone]{padding:14px;background:#17364b;border:1px solid #73909e;border-radius:18px;display:grid;gap:12px}
+body[data-game] .room [data-scene=telephone]>.b2-players{padding:0;background:none;display:flex;flex-wrap:wrap;justify-content:center}
+body[data-game] .room [data-scene=telephone] .b2-player{flex:1;justify-content:center;background:#0a2437;border-radius:40px;padding:6px 12px}
+body[data-game] .room [data-scene=telephone]>.tp-main{background:#e5e9df;border:1px solid #a3b6ac;border-radius:14px;color:#244754;padding:16px;box-shadow:0 6px 0 #0a2337}
+body[data-game] .room [data-scene=telephone] #tp-head{font-size:11px;letter-spacing:.12em;color:#496c6c;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid #8ca6a055}
+body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap){display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px 18px}
+body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap)>.tp-prompt{grid-column:1/-1;grid-row:1;background:#102f44;color:#e4edd8;border:1px solid #668e92;border-radius:12px;margin:0;padding:12px 130px 12px 18px;box-shadow:none;transform:none;font-size:16px;min-height:48px}
+body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap)>#tp-done{grid-column:2;grid-row:1;justify-self:end;align-self:center;min-width:105px;min-height:40px;margin:4px;background:#b5eb65;color:#1d3e34;border-color:#d8f4a3;z-index:2}
+body[data-game] .room [data-scene=telephone] #tp-cwrap{grid-column:2;grid-row:2;width:min(100%,calc((100dvh - 320px)*4/3));margin:0 auto;min-width:0}
+body[data-game] .room [data-scene=telephone] .tp-canvas{display:block;width:100%;max-width:none;border:1px solid #b9c3b7;border-radius:3px;background:white;box-shadow:0 3px 0 #bac4b5,0 10px 20px #1d3a4033}
+body[data-game] .room [data-scene=telephone] #tp-tb{grid-column:1;grid-row:2;min-width:0;background:#183a4d;padding:10px;border-radius:12px;border:1px solid #5f8490;color:#c8e1d4}
+body[data-game] .room [data-scene=telephone] .b25-brush-label{font-size:11px;color:#b9d5cb;margin:0 0 8px}
+body[data-game] .room [data-scene=telephone] .tp-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:none;border:0;padding:0}
+body[data-game] .room [data-scene=telephone] .tp-tools .tp-sep{display:none}body[data-game] .room [data-scene=telephone] .tp-tools .btn{font-size:11px;min-width:0;min-height:36px;padding:5px;background:#264d60;color:#dcebd8;border-color:#668d93}
+body[data-game] .room [data-scene=telephone] .tp-tools [data-tool],body[data-game] .room [data-scene=telephone] .tp-tools [data-act]{grid-column:1/-1;display:flex;align-items:center;gap:8px;min-height:38px;text-align:left}
+body[data-game] .room [data-scene=telephone] .ten-tool-icon{width:23px;height:23px}body[data-game] .room [data-scene=telephone] .tp-sw{width:100%;height:30px;min-height:30px;min-width:0;border:2px solid #bfcec277;border-radius:50%}
+body[data-game] .room [data-scene=telephone] .tp-tools [aria-pressed=true]{outline:2px solid #cbf48c;outline-offset:1px;background-color:#416c64}
+body[data-game] .room [data-scene=telephone] #tp-limit{grid-column:1/-1;grid-row:3;color:#53706a;font-size:11px}body[data-game] .room [data-scene=telephone] #tp-status{color:#456d60}
+body[data-game] .room [data-scene=telephone] .tp-entry{padding:18px;background:#faf8ed;border:1px solid #a4b7a6;border-radius:14px;box-shadow:0 5px 0 #b2c4ae,0 10px 20px #1d3e4822;color:#224951;margin-bottom:18px}
+body[data-game] .room [data-scene=telephone] .tp-by{color:#54786c}body[data-game] .room [data-scene=telephone] .tp-text{font-size:25px;font-weight:750;line-height:1.4;color:#234e55}
+body[data-game] .room [data-scene=telephone] .b25-reveal-head{background:#14384c;color:#e7edd5;border-radius:14px;border-color:#7d9b94}body[data-game] .room [data-scene=telephone] .tp-chain{color:#e7edd5}
+/* Responsive scenes keep native coordinates, readable playing surfaces and real controls. */
+@media(max-width:1100px){
+ body[data-screen=room] .room[data-phase=game]:has([data-scene]){grid-template-columns:minmax(0,1fr) 200px;padding:8px;gap:10px}
+ body[data-game] .room [data-scene=pool]{grid-template-columns:minmax(0,1fr) 165px;padding:12px}
+ body[data-game] .room [data-scene=pool]>.pl-controls{padding:10px;gap:12px}
+ body[data-game] .room [data-scene=golf]{grid-template-columns:minmax(0,1fr) 180px}
+ body[data-game] .room [data-scene=tycoon]{grid-template-columns:minmax(0,1fr) 230px;padding:12px}
+ body[data-game] .room [data-scene=ludo] .pld-main{gap:16px}body[data-game] .room [data-scene=ludo] .pld-pod{width:180px;padding:14px}
+ body[data-game] .room [data-scene=chess] .pch-layout{grid-template-columns:minmax(0,1fr) 180px;padding:4px;gap:16px}
+ body[data-game] .room [data-scene=chess] .pch-notes{padding:12px}
+}
+@media(max-width:700px){
+ body[data-screen=room] .room[data-phase=game]:has([data-scene]){grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'stage' 'side' 'chat';padding:8px;gap:10px}
+ body[data-game] .room [data-scene]{border-radius:16px}
+ body[data-game] .room [data-scene] .b2-players{gap:6px}body[data-game] .room [data-scene] .b2-player b{font-size:11px}body[data-game] .room [data-scene] .b2-player .muted{font-size:9px}body[data-game] .room [data-scene] .b2-player small{font-size:9px}
+ body[data-game] .room [data-scene=pool]{grid-template-columns:minmax(0,1fr);padding:8px;gap:7px}
+ body[data-game] .room [data-scene=pool]>.b2-players{gap:10px}body[data-game] .room [data-scene=pool] .b2-player{padding:6px;gap:6px}body[data-game] .room [data-scene=pool] .b2-player>.avatar{width:30px;height:30px;border-width:1px}
+ body[data-game] .room [data-scene=pool] .scene-open-table{font-size:7px;margin-top:3px}body[data-game] .room [data-scene=pool] .scene-ball-rack{gap:2px;margin-top:3px}body[data-game] .room [data-scene=pool] .scene-ball{width:13px;height:13px;font-size:6px}
+ body[data-game] .room [data-scene=pool]>.ttt-status{padding:5px;font-size:11px}
+ body[data-game] .room [data-scene=pool]>.pl-wrap{grid-column:1;grid-row:3;width:100%;max-width:none;min-width:0;padding-left:44px;min-height:0}
+ body[data-game] .room [data-scene=pool] .pl-canvas.portrait{max-width:100%;margin:auto;box-shadow:0 8px 18px #0008}
+ body[data-game] .room [data-scene=pool] .scene-power{width:36px;top:0;bottom:0;border-radius:12px;padding:6px 0}body[data-game] .room [data-scene=pool] .scene-power input{width:30px;min-height:200px}
+ body[data-game] .room [data-scene=pool]>.pl-controls{grid-column:1;grid-row:4;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px;padding:8px}
+ body[data-game] .room [data-scene=pool] .pl-fine{min-width:0}body[data-game] .room [data-scene=pool] .pl-fine>span{font-size:10px}body[data-game] .room [data-scene=pool] .pl-fine-row .btn{min-height:34px;padding:6px 10px}
+ body[data-game] .room [data-scene=pool] .pl-controls .board-actions{flex-direction:row;align-items:end;gap:5px}body[data-game] .room [data-scene=pool] .pl-controls .board-actions .btn{min-height:38px;padding:8px;font-size:10px}
+ body[data-game] .room [data-scene=pool] #pl-resign{display:none}body[data-game] .room [data-scene=pool] .p5-shot-presets,body[data-game] .room [data-scene=pool]>.pl-help{display:none}
+ body[data-game] .room [data-scene=golf]{grid-template-columns:minmax(0,1fr);padding:8px;gap:7px}
+ body[data-game] .room [data-scene=golf]>.gf-head{padding:7px 10px}body[data-game] .room [data-scene=golf] .gf-head h2{font-size:19px}body[data-game] .room [data-scene=golf] .gf-score strong{font-size:23px}
+ body[data-game] .room [data-scene=golf]>.b2-players{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:5px}body[data-game] .room [data-scene=golf] .b2-player{padding:5px;flex:1;gap:5px}body[data-game] .room [data-scene=golf] .b2-player>.avatar{width:24px;height:24px}
+ body[data-game] .room [data-scene=golf]>.ttt-status{padding:6px;font-size:11px}body[data-game] .room [data-scene=golf]>.gf-wrap{grid-row:4;grid-column:1;width:min(100%,240px);max-width:240px;min-width:220px;padding:0}
+ body[data-game] .room [data-scene=golf]>.gf-controls{grid-column:1;grid-row:5;grid-template-columns:1fr 1fr;gap:7px;padding:8px}
+ body[data-game] .room [data-scene=golf] .gf-controls .board-actions{grid-column:1/-1}body[data-game] .room [data-scene=golf] .gf-controls .btn{min-height:36px;padding:7px;font-size:11px}body[data-game] .room [data-scene=golf] .gf-controls .pl-fine-row{grid-column:1/-1}
+ body[data-game] .room [data-scene=golf] .p5-shot-presets{display:none}body[data-game] .room [data-scene=golf] .gf-controls span{font-size:11px}body[data-game] .room [data-scene=golf] #gf-putt{width:100%}
+ body[data-game] .room [data-scene=gofish],body[data-game] .room [data-scene=colorstack]{padding:6px}
+ body[data-game] .room [data-scene=gofish] .pgf-table,body[data-game] .room [data-scene=colorstack] .pcs-table{padding:12px 8px;gap:8px;min-height:580px;border-radius:14px}
+ body[data-game] .room [data-scene=gofish] .pgf-oval,body[data-game] .room [data-scene=colorstack] .pcs-orbit{inset:80px 0 135px;border-width:10px;border-radius:40%}
+ body[data-game] .room [data-scene=gofish] .pgf-opponents,body[data-game] .room [data-scene=colorstack] .pcs-opponents{gap:12px;min-height:120px}
+ body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player{padding:5px;gap:5px;font-size:10px}
+ body[data-game] .room [data-scene=gofish] .pgf-seat .b2-player .avatar,body[data-game] .room [data-scene=colorstack] .pcs-seat .b2-player .avatar{width:28px;height:28px}
+ body[data-game] .room [data-scene=gofish] .pgf-backs,body[data-game] .room [data-scene=colorstack] .pcs-backs{height:70px}
+ body[data-game] .room [data-scene=gofish] .pgf-backs img,body[data-game] .room [data-scene=colorstack] .pcs-backs img{width:36px;height:57px;margin:0 -11px}
+ body[data-game] .room [data-scene=gofish] .pgf-mid{grid-template-columns:60px minmax(0,1fr) 75px;min-height:125px;gap:10px;width:90%}
+ body[data-game] .room [data-scene=gofish] .pgf-pond>img{width:55px;height:90px}body[data-game] .room [data-scene=gofish] .pgf-pond small{font-size:9px}body[data-game] .room [data-scene=gofish] .pgf-action{padding:8px;font-size:10px}
+ body[data-game] .room [data-scene=gofish] .pgf-status{font-size:11px;padding:7px 12px}
+ body[data-game] .room [data-scene=gofish] .pgf-card{width:76px;height:130px;border-radius:7px}body[data-game] .room [data-scene=gofish] .pgf-hand{min-height:150px;padding:16px 6px 10px}
+ body[data-game] .room [data-scene=gofish] .pgf-handhead{font-size:8px;letter-spacing:.08em}body[data-game] .room [data-scene=gofish] .pgf-ask{gap:8px;padding:9px}body[data-game] .room [data-scene=gofish] .pgf-step small{font-size:10px}
+ body[data-game] .room [data-scene=gofish] .gf-chip{font-size:11px;min-height:36px;padding:7px}body[data-game] .room [data-scene=gofish] .pgf-go{min-height:42px;font-size:12px}
+ body[data-game] .room [data-scene=colorstack] .pcs-center{gap:32px;min-height:135px}body[data-game] .room [data-scene=colorstack] .pcs-deck img{width:77px;height:120px}
+ body[data-game] .room [data-scene=colorstack] .pcs-card{width:78px;height:120px;border-width:4px;border-radius:9px}body[data-game] .room [data-scene=colorstack] .pcs-card b{font-size:56px}
+ body[data-game] .room [data-scene=colorstack] .pcs-card.big{width:82px;height:126px}body[data-game] .room [data-scene=colorstack] .pcs-card.word b{font-size:19px}
+ body[data-game] .room [data-scene=colorstack] .pcs-card .corner{font-size:10px}body[data-game] .room [data-scene=colorstack] .pcs-card::before{inset:14px 3px}
+ body[data-game] .room [data-scene=colorstack] .pcs-status{font-size:12px;padding:7px}body[data-game] .room [data-scene=colorstack] .pcs-fan{min-height:145px;padding:16px 6px 8px}
+ body[data-game] .room [data-scene=colorstack] .pcs-dock{padding:9px;gap:6px;flex-wrap:wrap}body[data-game] .room [data-scene=colorstack] .pcs-sel{font-size:11px;width:100%}body[data-game] .room [data-scene=colorstack] .pcs-dock .btn{font-size:12px;flex:1}
+ body[data-game] .room [data-scene=ludo]{padding:8px;gap:8px}body[data-game] .room [data-scene=ludo]>.b2-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ body[data-game] .room [data-scene=ludo] .b2-player{padding:5px;gap:5px;justify-content:start}body[data-game] .room [data-scene=ludo] .b2-player>.avatar{width:24px;height:24px;flex-shrink:0}body[data-game] .room [data-scene=ludo] .b2-player>div{min-width:0;flex:1}
+ body[data-game] .room [data-scene=ludo] .b2-player b{white-space:nowrap;display:block;overflow:hidden;text-overflow:ellipsis}body[data-game] .room [data-scene=ludo] .b2-player .muted{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ body[data-game] .room [data-scene=ludo] .pld-main{flex-direction:column;gap:18px;padding:0}body[data-game] .room [data-scene=ludo] .pld-boardwrap{width:100%;padding:0 3px 10px}
+ body[data-game] .room [data-scene=ludo] .ld2-board.pld{width:100%;border-width:7px;outline-width:1px;border-radius:10px;padding:3px;box-shadow:0 7px 0 #301e1a,0 9px 0 #a7885e,0 14px 20px #0008}
+ body[data-game] .room [data-scene=ludo] .pld-yard{margin:2px;border-radius:8px}body[data-game] .room [data-scene=ludo] .pld-well{border-width:2px;border-radius:8px}
+ body[data-game] .room [data-scene=ludo] .ld2-tok>span{font-size:7px;min-width:10px;height:10px;right:-3px}
+ body[data-game] .room [data-scene=ludo] .pld-pod{width:100%;padding:12px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px}
+ body[data-game] .room [data-scene=ludo] .pld-eyebrow{grid-column:1/-1;font-size:9px;text-align:center}body[data-game] .room [data-scene=ludo] .ld2-die{width:60px;height:60px;grid-column:1;grid-row:2/span 2;margin:0}
+ body[data-game] .room [data-scene=ludo] .ld2-status{grid-column:2;grid-row:2;font-size:12px;margin:0}body[data-game] .room [data-scene=ludo] .ld2-ctl{grid-column:2;grid-row:3;margin:0}body[data-game] .room [data-scene=ludo] .pld-pod>.muted{grid-column:1/-1;font-size:10px;text-align:center}
+ body[data-game] .room [data-scene=tycoon]{grid-template-columns:minmax(0,1fr);padding:8px;gap:8px}
+ body[data-game] .room [data-scene=tycoon]>#ty-strip,body[data-game] .room [data-scene=tycoon]>#ty-players,body[data-game] .room [data-scene=tycoon]>#ty-boardwrap,body[data-game] .room [data-scene=tycoon]>#ty-info,body[data-game] .room [data-scene=tycoon]>#ty-actions,body[data-game] .room [data-scene=tycoon]>.ty-sect{grid-column:1;grid-row:auto}
+ body[data-game] .room [data-scene=tycoon]>#ty-boardwrap{padding:0 4px 10px}body[data-game] .room [data-scene=tycoon] .ty-board{width:100%;border-width:6px;outline-width:1px;gap:1px;transform:rotateX(5deg)}
+ body[data-game] .room [data-scene=tycoon] .ty-players{display:flex;flex-wrap:nowrap;overflow-x:auto;align-items:start;padding-bottom:4px}
+ body[data-game] .room [data-scene=tycoon] .ty-players .b2-player{flex:0 0 210px;display:grid;grid-template-columns:25px minmax(0,1fr) auto;padding:7px;gap:3px 7px;align-items:center}
+ body[data-game] .room [data-scene=tycoon] .ty-players .avatar{width:25px;height:25px;grid-column:1;grid-row:1/3}
+ body[data-game] .room [data-scene=tycoon] .ty-players .b2-player>div{grid-column:2;grid-row:1;min-width:0}
+ body[data-game] .room [data-scene=tycoon] .ty-players .b2-player>div>b{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+ body[data-game] .room [data-scene=tycoon] .ty-players .b2-player small{display:none}
+ body[data-game] .room [data-scene=tycoon] .ty-players .b2-player .muted{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ body[data-game] .room [data-scene=tycoon] .ty-players .ty-sw{display:none}
+ body[data-game] .room [data-scene=tycoon] .ty-players .ty-cash{grid-column:2;grid-row:2}
+ body[data-game] .room [data-scene=tycoon] .ty-players .fr-timer{grid-column:3;grid-row:1/3}
+ body[data-game] .room [data-scene=tycoon] .ty-tile{padding:5px 1px 2px;gap:0}body[data-game] .room [data-scene=tycoon] .ty-tile .ty-nm{font-size:6px;line-height:6px}body[data-game] .room [data-scene=tycoon] .ty-tile .ty-pr{font-size:6px;line-height:6px}
+ body[data-game] .room [data-scene=tycoon] .ty-band{height:3px}body[data-game] .room [data-scene=tycoon] .ty-ic img{width:10px;height:10px}
+ body[data-game] .room [data-scene=tycoon] .ty-tok{width:20px;height:17px}body[data-game] .room [data-scene=tycoon] .ty-lvl{width:25px;height:22px;top:-8px}
+ body[data-game] .room [data-scene=tycoon] .scene-city-emblem span{font-size:43px}body[data-game] .room [data-scene=tycoon] .scene-city-emblem i{font-size:6px}
+ body[data-game] .room [data-scene=tycoon] .pty-plaque{padding:8px;top:46%;left:6%;right:6%;border-width:1px;border-radius:7px}body[data-game] .room [data-scene=tycoon] .pty-plaque .ty-logo{font-size:17px}body[data-game] .room [data-scene=tycoon] .ty-turn,body[data-game] .room [data-scene=tycoon] .ty-round{font-size:10px}
+ body[data-game] .room [data-scene=battleship]{padding:8px;gap:8px}body[data-game] .room [data-scene=battleship] .bs-place{display:flex;flex-direction:column;padding:10px;gap:10px}
+ body[data-game] .room [data-scene=battleship] .bs-boardwrap{width:100%}body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{max-width:100%;border-width:5px;padding:4px}
+ body[data-game] .room [data-scene=battleship] .bs-fleet{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:6px}body[data-game] .room [data-scene=battleship] .bs-ship{grid-template-columns:45px 1fr;font-size:10px;padding:7px;gap:3px}
+ body[data-game] .room [data-scene=battleship] .bs-ship img{width:45px;height:22px}body[data-game] .room [data-scene=battleship] .bs-ship small{font-size:9px}
+ body[data-game] .room [data-scene=battleship] .bs-place>.bs-ctl{display:flex;flex-direction:row;flex-wrap:wrap;width:100%}body[data-game] .room [data-scene=battleship] .bs-two.pbs{display:block}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy,body[data-game] .room [data-scene=battleship] .pbs-friendly{padding:10px}
+ body[data-game] .room [data-scene=chess]{padding:8px}body[data-game] .room [data-scene=chess] .pch-layout{grid-template-columns:minmax(0,1fr);padding:0;gap:18px}
+ body[data-game] .room [data-scene=chess] .pch-table{width:100%;max-width:100%;gap:8px}body[data-game] .room [data-scene=chess] .ch-board{max-width:100%;padding:8px;border-width:2px;border-radius:6px;box-shadow:0 5px 0 #241f1b,0 7px 0 #8e734b,0 12px 18px #0006}
+ body[data-game] .room [data-scene=chess] .pch-player{min-height:42px;padding:4px 8px}body[data-game] .room [data-scene=chess] .ch-clock{font-size:18px;min-width:80px;padding:6px}
+ body[data-game] .room [data-scene=chess] .pch-notes{padding:14px;gap:14px}
+ body[data-game] .room [data-scene=impostor]{padding:10px;gap:12px}body[data-game] .room [data-scene=impostor] .b2-player{padding:5px;gap:5px}body[data-game] .room [data-scene=impostor] .b2-player>.avatar{width:28px;height:28px}
+ body[data-game] .room [data-scene=impostor]>.im-main{grid-template-columns:minmax(0,1fr);grid-template-areas:'steps' 'round' 'role' 'body' 'clues' 'status';gap:12px}
+ body[data-game] .room [data-scene=impostor] .scene-phase{gap:12px;padding:10px 6px}body[data-game] .room [data-scene=impostor] .scene-phase li{font-size:10px;gap:4px}body[data-game] .room [data-scene=impostor] .scene-phase li>span{width:18px;height:18px}
+ body[data-game] .room [data-scene=impostor] .im-card{min-height:240px;padding:18px}body[data-game] .room [data-scene=impostor] .ten-role-art{height:80px;width:100px}body[data-game] .room [data-scene=impostor] .im-card.crew b.im-secret,body[data-game] .room [data-scene=impostor] .im-card.impostor b.im-secret{font-size:28px}
+ body[data-game] .room [data-scene=impostor] #im-clues{min-height:0;padding:12px}body[data-game] .room [data-scene=impostor] #im-clues:empty{display:none}body[data-game] .room [data-scene=impostor] .im-votes{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}body[data-game] .room [data-scene=impostor] .im-votes .btn{min-height:130px}body[data-game] .room [data-scene=impostor] .im-votes .avatar{width:55px;height:55px}
+ body[data-game] .room [data-scene=telephone]{padding:8px;gap:9px}body[data-game] .room [data-scene=telephone]>.tp-main{padding:12px}
+ body[data-game] .room [data-scene=telephone] .b2-player{padding:5px;gap:5px}body[data-game] .room [data-scene=telephone] .b2-player>.avatar{width:25px;height:25px}
+ body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap){grid-template-columns:minmax(0,1fr) auto;gap:10px}
+ body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap)>.tp-prompt{grid-column:1;grid-row:1;font-size:13px;padding:10px;min-height:44px}
+ body[data-game] .room [data-scene=telephone] #tp-body:has(#tp-cwrap)>#tp-done{grid-column:2;grid-row:1;min-width:65px;font-size:12px;padding:10px;margin:0;align-self:stretch}
+ body[data-game] .room [data-scene=telephone] #tp-cwrap{grid-column:1/-1;grid-row:2;width:100%}
+ body[data-game] .room [data-scene=telephone] #tp-tb{grid-column:1/-1;grid-row:3;padding:10px}body[data-game] .room [data-scene=telephone] #tp-limit{grid-row:4}
+ body[data-game] .room [data-scene=telephone] .tp-tools{display:flex;flex-wrap:wrap;gap:7px}body[data-game] .room [data-scene=telephone] .tp-tools .btn{min-height:40px;padding:7px;font-size:12px}
+ body[data-game] .room [data-scene=telephone] .tp-sw{width:36px;height:36px;min-width:36px;min-height:36px}body[data-game] .room [data-scene=telephone] .ten-tool-icon{width:20px;height:20px}
+}
+@media(min-width:701px) and (max-height:500px){
+ body[data-game] .room [data-scene=pool]{grid-template-columns:minmax(0,1fr) 165px;padding:8px;gap:6px}body[data-game] .room [data-scene=pool] .b2-player{padding:4px;gap:6px}body[data-game] .room [data-scene=pool] .b2-player>.avatar{width:28px;height:28px}
+ body[data-game] .room [data-scene=pool] .scene-open-table{font-size:7px;margin-top:2px}body[data-game] .room [data-scene=pool] .b2-player b{font-size:11px}
+ body[data-game] .room [data-scene=pool] .pl-controls{padding:8px;gap:8px}body[data-game] .room [data-scene=pool] .pl-controls .board-actions{gap:5px}body[data-game] .room [data-scene=pool] .pl-controls .btn{min-height:34px;font-size:11px;padding:6px}
+ body[data-game] .room [data-scene=pool] .p5-shot-presets,body[data-game] .room [data-scene=pool]>.pl-help{display:none}body[data-game] .room [data-scene=pool] .pl-wrap{padding-left:44px}body[data-game] .room [data-scene=pool] .scene-power{width:36px;min-height:245px;bottom:auto;height:100%}
+ body[data-game] .room [data-scene=pool] .scene-power input{min-height:200px}body[data-game] .room [data-scene=pool] .ttt-status{padding:5px;font-size:10px}
+ body[data-game] .room [data-scene=telephone] #tp-cwrap{width:100%}
+}
+@media(prefers-reduced-motion:reduce){body[data-game] .room [data-scene] *,body[data-game] .room [data-scene] *::before,body[data-game] .room [data-scene] *::after{animation:none!important;transition:none!important}}
+/* Flex-column screens with auto margins otherwise shrink to min-content width. */
+body[data-screen=room] .room[data-phase=game]:has([data-scene]){width:min(100%,1520px)}
+body[data-game] .room [data-scene]{max-width:none;width:100%;margin:0}
+/* The public meeting is a composed scene, using only real players and public clues. */
+body[data-game] .room [data-scene=impostor]>.b2-players{display:block;padding:0}
+body[data-game] .room [data-scene=impostor] .scene-meeting{position:relative;height:260px;width:min(100%,760px);margin:auto}
+body[data-game] .room [data-scene=impostor] .scene-meeting-desk{position:absolute;left:18%;right:18%;top:22%;bottom:15%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border:12px solid #26364b;border-radius:50%;background:radial-gradient(ellipse,#526578,#213b50);box-shadow:inset 0 0 0 1px #a4b6b1,0 0 0 1px #a4b6b1,0 9px 0 #0b1b30,0 16px 22px #0007;color:#cddac1}
+body[data-game] .room [data-scene=impostor] .scene-meeting-desk>span{font-size:9px;letter-spacing:.17em;color:#93b1b7}
+body[data-game] .room [data-scene=impostor] .scene-meeting-desk>b{font-size:20px;color:#e1e9ca}
+body[data-game] .room [data-scene=impostor] .scene-meeting-desk>small{font-size:9px;letter-spacing:.12em}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat{position:absolute;transform:translate(-50%,-45%);width:115px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;z-index:2}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat>.avatar{width:64px;height:64px;box-shadow:0 5px 10px #0006;border:3px solid #90a6aa;border-radius:50%;background:#143247}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat>b{font-size:11px;color:#e0e9cf;text-shadow:0 2px #0c1a31;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat>small{font-size:10px;border:1px solid #687e8d;background:#102b3e;border-radius:10px;padding:3px 8px;color:#b8cfd0;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat.speaking>.avatar{border-color:#cef59a;box-shadow:0 0 0 4px #b7ef6e33,0 5px 10px #0006}
+body[data-game] .room [data-scene=impostor] .scene-meeting-seat.out{opacity:.45}
+body[data-game] .room [data-scene=impostor] .im-card{min-height:220px;padding:18px}
+body[data-game] .room [data-scene=impostor] .ten-role-art{height:65px;width:85px}
+body[data-game] .room [data-scene=impostor] #im-clues{min-height:220px;max-height:300px;overflow:auto}
+body[data-game] .room [data-scene=telephone] .scene-writing-title{text-align:center;padding:30px 16px 20px}
+body[data-game] .room [data-scene=telephone] .scene-writing-title>span{font-size:10px;letter-spacing:.2em;font-weight:850;color:#547b72}
+body[data-game] .room [data-scene=telephone] .scene-writing-title>h2{font-size:clamp(24px,3vw,38px);letter-spacing:-.04em;color:#173f4c;margin:10px 0}
+body[data-game] .room [data-scene=telephone] .scene-writing-title>p{font-size:14px;color:#658076;max-width:420px;margin:0 auto}
+body[data-game] .room [data-scene=telephone] #tp-form{display:flex;gap:12px;max-width:720px;margin:12px auto 40px}
+body[data-game] .room [data-scene=telephone] #tp-input{flex:1;min-width:0;background:#fffdf3;color:#214754;border:2px solid #8caa9a;border-radius:12px;padding:16px;font-size:16px;min-height:58px;box-shadow:0 5px 0 #bec8b2}
+body[data-game] .room [data-scene=telephone] #tp-form .btn{padding:14px 20px;border-radius:12px;background:#b8eb65;color:#163e34;border-color:#739c48;box-shadow:0 5px 0 #72934f}
+body[data-game] .room [data-scene=gofish] #gf-handlabel{display:flex;align-items:center;gap:8px}
+body[data-game] .room [data-scene=gofish] #gf-handlabel>.avatar{width:32px;height:32px;border-radius:50%;border:1px solid #b3d794}
+body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{background:#0b3e5a url('/assets/scenes/ocean.png') center/cover}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=pool]>.pl-controls{grid-template-columns:minmax(0,1fr);gap:6px}
+ body[data-game] .room [data-scene=pool] .pl-controls .board-actions{flex-direction:row;grid-column:1;gap:6px}
+ body[data-game] .room [data-scene=pool] .pl-controls .board-actions .btn{flex:1;min-width:0}
+ body[data-game] .room [data-scene=pool] #pl-resign{display:inline-flex}
+ body[data-game] .room [data-scene=impostor] .scene-meeting{height:210px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-seat{width:88px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-seat>.avatar{width:45px;height:45px;border-width:2px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-seat>b{font-size:10px;max-width:90px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-seat>small{font-size:8px;max-width:90px;padding:2px 5px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-desk{left:12%;right:12%;border-width:8px}
+ body[data-game] .room [data-scene=impostor] .scene-meeting-desk>b{font-size:17px}
+ body[data-game] .room [data-scene=impostor] .im-card{min-height:0;padding:15px;font-size:13px}
+ body[data-game] .room [data-scene=impostor] .ten-role-art{height:48px;width:65px}
+ body[data-game] .room [data-scene=impostor] .scene-phase{gap:8px}
+ body[data-game] .room [data-scene=telephone] .scene-writing-title{padding:20px 5px 10px}
+ body[data-game] .room [data-scene=telephone] .scene-writing-title>p{font-size:12px}
+ body[data-game] .room [data-scene=telephone] #tp-form{flex-direction:column;margin:12px auto 24px}
+ body[data-game] .room [data-scene=telephone] #tp-input{padding:12px;min-height:50px;font-size:14px}
+}
+body[data-game] .room [data-scene=chess] .pch-table{width:min(100%,calc(100dvh - 300px));max-width:650px}
+body[data-game] .room [data-scene=chess] .ch-board{max-width:100%}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=chess] .pch-table{width:100%;max-width:100%}
+ body[data-game] .room [data-scene=battleship] .bs-place>.pbs-label{order:0}
+ body[data-game] .room [data-scene=battleship] .bs-place>.bs-fleet{order:1}
+ body[data-game] .room [data-scene=battleship] .bs-place>.bs-ctl{order:2}
+ body[data-game] .room [data-scene=battleship] .bs-place>.bs-boardwrap{order:3}
+ body[data-game] .room [data-scene=battleship] .bs-place>.bs-lock{order:4}
+}
+body[data-game] .room [data-scene=battleship] .bs-ship img{pointer-events:none;user-select:none;-webkit-user-drag:none}
+body[data-game] .room [data-scene=tycoon] .scene-exchange-art{position:absolute;left:-8%;top:-8%;width:116%;height:82%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 8px 4px #26483c66)}
+body[data-game] .room [data-scene=tycoon] .pty-plaque{top:65%;padding:10px}
+body[data-game] .room [data-scene=tycoon] .scene-deed-strip{margin:-10px -14px 12px;padding:12px 40px 12px 14px;font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;border-radius:11px 11px 0 0;color:#102b34;border-bottom:2px solid #173c3d33}
+body[data-game] .room [data-scene=tycoon] .scene-deed-model{display:block;width:150px;height:110px;object-fit:contain;margin:auto}
+@media(max-width:700px){body[data-game] .room [data-scene=tycoon] .pty-plaque{top:62%;padding:6px}}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{overflow-x:auto;justify-content:flex-start;padding-bottom:18px}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)),body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)){justify-content:flex-start;overflow-x:auto;padding:4px 6px 10px;scroll-snap-type:x proximity}
+ body[data-game] .room [data-scene=colorstack] .pcs-opponents:has(.pcs-seat:nth-child(4)) .pcs-seat,body[data-game] .room [data-scene=gofish] .pgf-opponents:has(.pgf-seat:nth-child(4)) .pgf-seat{flex:0 0 120px;scroll-snap-align:center}
+}
+/* Hover must not move a card out from under the pointer. Selection provides the lift. */
+body[data-game] .room [data-scene=gofish] .pgf-card:hover:not(:disabled){transform:rotate(var(--tilt))}
+body[data-game] .room [data-scene=gofish] .pgf-card.lift:hover:not(:disabled){transform:translateY(-20px) rotate(var(--tilt))}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{overflow-x:auto;overflow-y:hidden;padding-top:28px;align-items:center}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card,body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card:hover:not(:disabled){transform:none}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card.lift,body[data-game] .room [data-scene=gofish] .pgf-hand.scroll .pgf-card.lift:hover:not(:disabled){transform:translateY(-8px)}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card{transform:none}
+.scene-results{padding:18px;background:radial-gradient(at 50% 0,#2a4c4b,#102a3c 70%);border:1px solid #789787;border-radius:18px;box-shadow:0 7px 0 #081d2d,0 18px 35px #0005;overflow:hidden}
+.scene-result-heading{display:flex;justify-content:center;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:12px;border-bottom:1px solid #7e9e8744;font-size:11px;font-weight:850;letter-spacing:.15em;text-transform:uppercase;color:#c5dfb4}
+.scene-result-mark{width:64px;height:64px;object-fit:contain;filter:drop-shadow(1px 4px 2px #071b2d88);animation:scene-result-arrive .3s ease-out both}
+.scene-results .result-title{font-size:clamp(26px,4vw,46px);line-height:1.15;letter-spacing:-.04em;color:#e8efcf}
+.scene-results .b2-podium li{background:#1a3f43;border:1px solid #6a9584;border-radius:14px;color:#e1ead1;box-shadow:0 4px 0 #0a2232}
+.scene-results .b2-podium li.me{background:#305549;border-color:#c5e18f}
+@keyframes scene-result-arrive{from{opacity:0;transform:translateY(-18px) scale(.8)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+ body[data-screen=room] .room[data-phase=game]:has([data-scene]){grid-template-rows:auto auto auto minmax(130px,1fr)}
+ .scene-results{padding:12px}.scene-result-mark{width:50px;height:50px}
+}
+@media(prefers-reduced-motion:reduce){.scene-result-mark{animation:none}}
+/* The hit rectangle stays stable while the physical card face fans and lifts inside it. */
+body[data-game] .room [data-scene=colorstack] .pcs-card{height:174px;transform:none;background:none!important;border:0;box-shadow:none;overflow:visible;outline:0}
+body[data-game] .room [data-scene=colorstack] .pcs-card.c-w{background:none!important}
+body[data-game] .room [data-scene=colorstack] .pcs-card::before{display:none}
+body[data-game] .room [data-scene=colorstack] .scene-stack-face{position:absolute;left:0;right:0;bottom:0;height:calc(100% - 20px);display:block;background:var(--card-tone);border:5px solid #f5f3e6;border-radius:12px;box-shadow:0 4px 0 #c2c2b0,0 8px 12px #03142a88;overflow:hidden;transform:rotate(clamp(-8deg,var(--tilt,0deg),8deg));transform-origin:50% 100%;pointer-events:none;transition:transform .15s}
+body[data-game] .room [data-scene=colorstack] .pcs-card.c-w .scene-stack-face{background:conic-gradient(from 30deg,#df3546,#e6ad1b,#3baf62,#2686d9,#df3546)}
+body[data-game] .room [data-scene=colorstack] .scene-stack-face::before{content:'';position:absolute;inset:18px 5px;background:#fff6e5;border-radius:50%;transform:rotate(28deg);border:1px solid #fff7;box-shadow:0 2px 3px #15233d44}
+body[data-game] .room [data-scene=colorstack] .pcs-card.lift{transform:none;outline:0}
+body[data-game] .room [data-scene=colorstack] .pcs-card.lift .scene-stack-face{transform:translateY(-20px) rotate(clamp(-8deg,var(--tilt,0deg),8deg));outline:3px solid #e0ff9c;outline-offset:2px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.playable .scene-stack-face{outline:2px solid #c5ee6b;outline-offset:2px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.big{height:168px}
+body[data-game] .room [data-scene=colorstack] .pcs-card.big .scene-stack-face{height:100%}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .scene-stack-face{transform:none}
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll .pcs-card.lift .scene-stack-face{transform:translateY(-12px)}
+@media(max-width:700px){
+ body[data-game] .room [data-scene=colorstack] .pcs-card{height:140px}
+ body[data-game] .room [data-scene=colorstack] .scene-stack-face{border-width:4px;border-radius:9px}
+ body[data-game] .room [data-scene=colorstack] .scene-stack-face::before{inset:14px 3px}
+ body[data-game] .room [data-scene=colorstack] .pcs-card.big{height:126px}
+}
+/* Leave a real inset at either end; proximity snapping can clip the final card after focus scroll. */
+body[data-game] .room [data-scene=colorstack] .pcs-fan.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}
+body[data-game] .room [data-scene=gofish] .pgf-hand.scroll{scroll-snap-type:none;scroll-padding-inline:20px;scroll-behavior:auto}
+
+/* Large meetings use a readable seating grid instead of overlapping portraits. */
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]){display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;height:auto;padding:4px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk{position:static;grid-column:1/-1;display:flex;flex-direction:row;gap:16px;min-height:54px;border-width:5px;border-radius:16px;padding:8px;box-shadow:0 5px 0 #0b1b30}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat{position:static;left:auto!important;top:auto!important;transform:none;width:100%;max-width:none;gap:4px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>.avatar{width:48px;height:48px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>b,body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>small{max-width:100%}
+@media(max-width:700px){body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]){grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 7px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk{gap:9px;min-height:44px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-desk>b{font-size:14px}
+body[data-game] .room [data-scene=impostor] .scene-meeting:is([data-count="7"],[data-count="8"],[data-count="9"],[data-count="10"]) .scene-meeting-seat>.avatar{width:36px;height:36px}
+}
+/* Water is a material beneath the targeting information, not visual noise over it. */
+body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{background-image:linear-gradient(#062b45a8,#062b45bb),url('/assets/scenes/ocean.png')}
+body[data-game] .room [data-scene=battleship] .bs-head{background:#0c3045;color:#dfecdc;font-weight:850}
+@media(min-width:701px){
+ body[data-game] .room [data-scene=battleship] .pbs-enemy{display:flex;flex-direction:column}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.bs-title{order:0}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.pbs-fire{order:1;margin:0 0 12px}
+ body[data-game] .room [data-scene=battleship] .pbs-enemy>.bs-grid{order:2}
+ body[data-game] .room [data-scene=battleship] .bs-grid.pbs-chart{max-width:min(100%,max(280px,calc(100dvh - 430px)))}
+}
+
+@media(min-width:701px) and (max-height:500px){
+ /* Keep square games readable in short landscape windows; the page may scroll. */
+ body[data-game] .room [data-scene=ludo] .ld2-board.pld{width:min(100%,max(340px,calc(100dvh - 270px)))}
+ body[data-game] .room [data-scene=tycoon] .ty-board{width:min(100%,max(360px,var(--ty-board-max,calc(100dvh - 315px))))}
+ body[data-game] .room [data-scene=chess] .pch-table{width:min(100%,360px)}
+}

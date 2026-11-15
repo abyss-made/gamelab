@@ -1,0 +1,243 @@
+{
+  "commit": "5fa16390038a1d3219705cc337ceece0072227c8",
+  "views": [
+    {
+      "game": "golf",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "golf",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "golf",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "pool",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "pool",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "pool",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "tycoon",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 563.4482421875,
+        "boardHeight": 533.5632934570312
+      }
+    },
+    {
+      "game": "tycoon",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 350.12384033203125,
+        "boardHeight": 343.4902648925781
+      }
+    },
+    {
+      "game": "tycoon",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 364.1009521484375,
+        "boardHeight": 349.6195983886719
+      }
+    },
+    {
+      "game": "gofish",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "gofish",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "gofish",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "ludo",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 630,
+        "boardHeight": 623.868896484375
+      }
+    },
+    {
+      "game": "ludo",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 350,
+        "boardHeight": 346.59381103515625
+      }
+    },
+    {
+      "game": "ludo",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 340,
+        "boardHeight": 336.6911315917969
+      }
+    },
+    {
+      "game": "battleship",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "battleship",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "battleship",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "colorstack",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "colorstack",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "colorstack",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "impostor",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "impostor",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "impostor",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "chess",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 600,
+        "boardHeight": 600
+      }
+    },
+    {
+      "game": "chess",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 356,
+        "boardHeight": 356
+      }
+    },
+    {
+      "game": "chess",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": {
+        "boardWidth": 360,
+        "boardHeight": 360
+      }
+    },
+    {
+      "game": "telephone",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "telephone",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "layout": null
+    },
+    {
+      "game": "telephone",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "layout": null
+    }
+  ],
+  "errors": []
+}

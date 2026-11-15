@@ -1,0 +1,75 @@
+RUN avatarv3
+{"program": "avatarv3", "exitCode": 0, "seconds": 0.06, "passLines": 7, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN avatarui
+{"program": "avatarui", "exitCode": 0, "seconds": 12.04, "passLines": 44, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN drawguess
+{"program": "drawguess", "exitCode": 0, "seconds": 2.3, "passLines": 79, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN smoke
+{"program": "smoke", "exitCode": 0, "seconds": 2.41, "passLines": 49, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN safety
+{"program": "safety", "exitCode": 0, "seconds": 11.99, "passLines": 24, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN alpha
+{"program": "alpha", "exitCode": 0, "seconds": 1.45, "passLines": 48, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN phase1
+{"program": "phase1", "exitCode": 0, "seconds": 1.23, "passLines": 17, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN ui
+{"program": "ui", "exitCode": 0, "seconds": 7.11, "passLines": 25, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN phase15
+{"program": "phase15", "exitCode": 0, "seconds": 102.97, "passLines": 185, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch2
+{"program": "batch2", "exitCode": 0, "seconds": 1.41, "passLines": 108, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch2ui
+{"program": "batch2ui", "exitCode": 0, "seconds": 54.55, "passLines": 69, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch1
+{"program": "batch1", "exitCode": 0, "seconds": 1.2, "passLines": 155, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch1ui
+{"program": "batch1ui", "exitCode": 0, "seconds": 18.96, "passLines": 64, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch3
+{"program": "batch3", "exitCode": 0, "seconds": 2.62, "passLines": 157, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch3ui
+{"program": "batch3ui", "exitCode": 0, "seconds": 21.25, "passLines": 91, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch4
+{"program": "batch4", "exitCode": 0, "seconds": 2.39, "passLines": 179, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch4ui
+{"program": "batch4ui", "exitCode": 0, "seconds": 25.08, "passLines": 136, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch5
+{"program": "batch5", "exitCode": 0, "seconds": 17.92, "passLines": 274, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN batch5ui
+{"program": "batch5ui", "exitCode": 0, "seconds": 52.22, "passLines": 133, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN audit
+{"program": "audit", "exitCode": 0, "seconds": 0.64, "passLines": 0, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN qol
+{"program": "qol", "exitCode": 0, "seconds": 117.29, "passLines": 729, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN party
+{"program": "party", "exitCode": 0, "seconds": 11.02, "passLines": 97, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN partyui
+{"program": "partyui", "exitCode": 0, "seconds": 43.82, "passLines": 56, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN party3
+{"program": "party3", "exitCode": 0, "seconds": 1.62, "passLines": 29, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN party3ui
+{"program": "party3ui", "exitCode": 0, "seconds": 14.22, "passLines": 128, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN phase2
+{"program": "phase2", "exitCode": 0, "seconds": 0.39, "passLines": 18, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN phase2ui
+{"program": "phase2ui", "exitCode": 0, "seconds": 12.23, "passLines": 29, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN design31ui
+{"program": "design31ui", "exitCode": 0, "seconds": 59.97, "passLines": 205, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN reliability
+{"program": "reliability", "exitCode": 0, "seconds": 29.01, "passLines": 374, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN reliabilityui
+{"program": "reliabilityui", "exitCode": 0, "seconds": 32.1, "passLines": 49, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN keyboardui
+{"program": "keyboardui", "exitCode": 0, "seconds": 5.1, "passLines": 40, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN botsunit
+{"program": "botsunit", "exitCode": 0, "seconds": 19.03, "passLines": 40, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN bots
+{"program": "bots", "exitCode": 0, "seconds": 135.25, "passLines": 91, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN botsui
+{"program": "botsui", "exitCode": 0, "seconds": 4.99, "passLines": 30, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN lexicon
+{"program": "lexicon", "exitCode": 0, "seconds": 0.12, "passLines": 54, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN experience41
+{"program": "experience41", "exitCode": 0, "seconds": 0.14, "passLines": 15, "failLines": 0, "startupError": false, "skipLines": 0}
+RUN platform
+{"program": "platform", "exitCode": 0, "seconds": 1.9, "passLines": 19, "failLines": 0, "startupError": false, "skipLines": 0}
+ALL PASS

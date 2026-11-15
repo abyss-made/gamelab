@@ -1,0 +1,207 @@
+PASS  drawguess/desktop: game started in the live client
+PASS  drawguess/desktop: no horizontal page overflow (0)
+PASS  drawguess/desktop: no page errors
+PASS  drawguess/desktop: gameplay31.css tokens loaded
+PASS  drawguess/desktop: tools are labelled and the size shows its number (10)
+PASS  drawguess/desktop: every tool button is >=44px (45,45,45,45,45)
+PASS  drawguess/mobile: game started in the live client
+PASS  drawguess/mobile: no horizontal page overflow (0)
+PASS  drawguess/mobile: no page errors
+PASS  drawguess/mobile: gameplay31.css tokens loaded
+PASS  drawguess/mobile: tools are labelled and the size shows its number (10)
+PASS  drawguess/mobile: every tool button is >=44px (44,44,44,44,44)
+PASS  fourrow/desktop: game started in the live client
+PASS  fourrow/desktop: no horizontal page overflow (0)
+PASS  fourrow/desktop: no page errors
+PASS  fourrow/desktop: gameplay31.css tokens loaded
+PASS  fourrow/desktop: column button reads "Drop Red in column 1"
+PASS  fourrow/desktop: cabinet raised top edge (rgb(143, 179, 223), 3px)
+PASS  fourrow/desktop: keyboard focus ring is 3px (3px)
+PASS  fourrow/mobile: game started in the live client
+PASS  fourrow/mobile: no horizontal page overflow (0)
+PASS  fourrow/mobile: no page errors
+PASS  fourrow/mobile: gameplay31.css tokens loaded
+PASS  fourrow/mobile: column button reads "Drop Red in column 1"
+PASS  fourrow/mobile: cabinet raised top edge (rgb(143, 179, 223), 3px)
+PASS  fourrow/mobile: keyboard focus ring is 3px (3px)
+PASS  chess/desktop: game started in the live client
+PASS  chess/desktop: no horizontal page overflow (0)
+PASS  chess/desktop: no page errors
+PASS  chess/desktop: gameplay31.css tokens loaded
+PASS  chess/desktop: 32 SVG chess pieces (no emoji glyphs)
+PASS  chess/desktop: every square has an accessible name
+PASS  chess/desktop: selected origin is marked
+PASS  chess/desktop: legal empty targets show a dot
+PASS  chess/mobile: game started in the live client
+PASS  chess/mobile: no horizontal page overflow (0)
+PASS  chess/mobile: no page errors
+PASS  chess/mobile: gameplay31.css tokens loaded
+PASS  chess/mobile: 32 SVG chess pieces (no emoji glyphs)
+PASS  chess/mobile: every square has an accessible name
+PASS  chess/mobile: selected origin is marked
+PASS  chess/mobile: legal empty targets show a dot
+PASS  checkers/desktop: game started in the live client
+PASS  checkers/desktop: no horizontal page overflow (0)
+PASS  checkers/desktop: no page errors
+PASS  checkers/desktop: gameplay31.css tokens loaded
+PASS  checkers/desktop: 24 layered checkers discs
+PASS  checkers/mobile: game started in the live client
+PASS  checkers/mobile: no horizontal page overflow (0)
+PASS  checkers/mobile: no page errors
+PASS  checkers/mobile: gameplay31.css tokens loaded
+PASS  checkers/mobile: 24 layered checkers discs
+PASS  ludo/desktop: game started in the live client
+PASS  ludo/desktop: no horizontal page overflow (0)
+PASS  ludo/desktop: no page errors
+PASS  ludo/desktop: gameplay31.css tokens loaded
+PASS  ludo/desktop: die shows 0 pips for server value none yet
+PASS  ludo/desktop: token pick buttons are >=44px and name the step count
+PASS  ludo/desktop: only a new confirmed move animates a token, not later rolls (0,1,0,0,1)
+PASS  ludo/mobile: game started in the live client
+PASS  ludo/mobile: no horizontal page overflow (0)
+PASS  ludo/mobile: no page errors
+PASS  ludo/mobile: gameplay31.css tokens loaded
+PASS  ludo/mobile: die shows 0 pips for server value none yet
+PASS  ludo/mobile: token pick buttons are >=44px and name the step count
+PASS  ludo/mobile: only a new confirmed move animates a token, not later rolls (0,1,0,0,1)
+PASS  pool/desktop: game started in the live client
+PASS  pool/desktop: no horizontal page overflow (0)
+PASS  pool/desktop: no page errors
+PASS  pool/desktop: gameplay31.css tokens loaded
+PASS  pool/desktop: pool table canvas present
+PASS  pool/mobile: game started in the live client
+PASS  pool/mobile: no horizontal page overflow (0)
+PASS  pool/mobile: no page errors
+PASS  pool/mobile: gameplay31.css tokens loaded
+PASS  pool/mobile: pool table canvas present
+PASS  colorstack/desktop: game started in the live client
+PASS  colorstack/desktop: no horizontal page overflow (0)
+PASS  colorstack/desktop: no page errors
+PASS  colorstack/desktop: gameplay31.css tokens loaded
+PASS  colorstack/desktop: every card shows its colour name
+PASS  colorstack/mobile: game started in the live client
+PASS  colorstack/mobile: no horizontal page overflow (0)
+PASS  colorstack/mobile: no page errors
+PASS  colorstack/mobile: gameplay31.css tokens loaded
+PASS  colorstack/mobile: every card shows its colour name
+PASS  gofish/desktop: game started in the live client
+PASS  gofish/desktop: no horizontal page overflow (0)
+PASS  gofish/desktop: no page errors
+PASS  gofish/desktop: gameplay31.css tokens loaded
+PASS  gofish/mobile: game started in the live client
+PASS  gofish/mobile: no horizontal page overflow (0)
+PASS  gofish/mobile: no page errors
+PASS  gofish/mobile: gameplay31.css tokens loaded
+PASS  wordchain/desktop: game started in the live client
+PASS  wordchain/desktop: no horizontal page overflow (0)
+PASS  wordchain/desktop: no page errors
+PASS  wordchain/desktop: gameplay31.css tokens loaded
+PASS  wordchain/mobile: game started in the live client
+PASS  wordchain/mobile: no horizontal page overflow (0)
+PASS  wordchain/mobile: no page errors
+PASS  wordchain/mobile: gameplay31.css tokens loaded
+PASS  categories/desktop: game started in the live client
+PASS  categories/desktop: no horizontal page overflow (0)
+PASS  categories/desktop: no page errors
+PASS  categories/desktop: gameplay31.css tokens loaded
+PASS  categories/mobile: game started in the live client
+PASS  categories/mobile: no horizontal page overflow (0)
+PASS  categories/mobile: no page errors
+PASS  categories/mobile: gameplay31.css tokens loaded
+PASS  tictactoe/desktop: game started in the live client
+PASS  tictactoe/desktop: no horizontal page overflow (0)
+PASS  tictactoe/desktop: no page errors
+PASS  tictactoe/desktop: gameplay31.css tokens loaded
+PASS  tictactoe/mobile: game started in the live client
+PASS  tictactoe/mobile: no horizontal page overflow (0)
+PASS  tictactoe/mobile: no page errors
+PASS  tictactoe/mobile: gameplay31.css tokens loaded
+PASS  rps/desktop: game started in the live client
+PASS  rps/desktop: no horizontal page overflow (0)
+PASS  rps/desktop: no page errors
+PASS  rps/desktop: gameplay31.css tokens loaded
+PASS  rps/desktop: throws use original vector icons
+PASS  rps/mobile: game started in the live client
+PASS  rps/mobile: no horizontal page overflow (0)
+PASS  rps/mobile: no page errors
+PASS  rps/mobile: gameplay31.css tokens loaded
+PASS  rps/mobile: throws use original vector icons
+PASS  dotsboxes/desktop: game started in the live client
+PASS  dotsboxes/desktop: no horizontal page overflow (0)
+PASS  dotsboxes/desktop: no page errors
+PASS  dotsboxes/desktop: gameplay31.css tokens loaded
+PASS  dotsboxes/mobile: game started in the live client
+PASS  dotsboxes/mobile: no horizontal page overflow (0)
+PASS  dotsboxes/mobile: no page errors
+PASS  dotsboxes/mobile: gameplay31.css tokens loaded
+PASS  wordscramble/desktop: game started in the live client
+PASS  wordscramble/desktop: no horizontal page overflow (0)
+PASS  wordscramble/desktop: no page errors
+PASS  wordscramble/desktop: gameplay31.css tokens loaded
+PASS  wordscramble/mobile: game started in the live client
+PASS  wordscramble/mobile: no horizontal page overflow (0)
+PASS  wordscramble/mobile: no page errors
+PASS  wordscramble/mobile: gameplay31.css tokens loaded
+PASS  trivia/desktop: game started in the live client
+PASS  trivia/desktop: no horizontal page overflow (0)
+PASS  trivia/desktop: no page errors
+PASS  trivia/desktop: gameplay31.css tokens loaded
+PASS  trivia/mobile: game started in the live client
+PASS  trivia/mobile: no horizontal page overflow (0)
+PASS  trivia/mobile: no page errors
+PASS  trivia/mobile: gameplay31.css tokens loaded
+PASS  telephone/desktop: game started in the live client
+PASS  telephone/desktop: no horizontal page overflow (0)
+PASS  telephone/desktop: no page errors
+PASS  telephone/desktop: gameplay31.css tokens loaded
+PASS  telephone/mobile: game started in the live client
+PASS  telephone/mobile: no horizontal page overflow (0)
+PASS  telephone/mobile: no page errors
+PASS  telephone/mobile: gameplay31.css tokens loaded
+PASS  bluff/desktop: game started in the live client
+PASS  bluff/desktop: no horizontal page overflow (0)
+PASS  bluff/desktop: no page errors
+PASS  bluff/desktop: gameplay31.css tokens loaded
+PASS  bluff/mobile: game started in the live client
+PASS  bluff/mobile: no horizontal page overflow (0)
+PASS  bluff/mobile: no page errors
+PASS  bluff/mobile: gameplay31.css tokens loaded
+PASS  impostor/desktop: game started in the live client
+PASS  impostor/desktop: no horizontal page overflow (0)
+PASS  impostor/desktop: no page errors
+PASS  impostor/desktop: gameplay31.css tokens loaded
+PASS  impostor/mobile: game started in the live client
+PASS  impostor/mobile: no horizontal page overflow (0)
+PASS  impostor/mobile: no page errors
+PASS  impostor/mobile: gameplay31.css tokens loaded
+PASS  battleship/desktop: game started in the live client
+PASS  battleship/desktop: no horizontal page overflow (0)
+PASS  battleship/desktop: no page errors
+PASS  battleship/desktop: gameplay31.css tokens loaded
+PASS  battleship/mobile: game started in the live client
+PASS  battleship/mobile: no horizontal page overflow (0)
+PASS  battleship/mobile: no page errors
+PASS  battleship/mobile: gameplay31.css tokens loaded
+PASS  golf/desktop: game started in the live client
+PASS  golf/desktop: no horizontal page overflow (0)
+PASS  golf/desktop: no page errors
+PASS  golf/desktop: gameplay31.css tokens loaded
+PASS  golf/mobile: game started in the live client
+PASS  golf/mobile: no horizontal page overflow (0)
+PASS  golf/mobile: no page errors
+PASS  golf/mobile: gameplay31.css tokens loaded
+PASS  tycoon/desktop: game started in the live client
+PASS  tycoon/desktop: no horizontal page overflow (0)
+PASS  tycoon/desktop: no page errors
+PASS  tycoon/desktop: gameplay31.css tokens loaded
+PASS  tycoon/desktop: switch hidden on desktop
+PASS  tycoon/mobile: game started in the live client
+PASS  tycoon/mobile: no horizontal page overflow (0)
+PASS  tycoon/mobile: no page errors
+PASS  tycoon/mobile: gameplay31.css tokens loaded
+PASS  tycoon/mobile: Map / Properties switch is shown
+PASS  tycoon/mobile: map view hides the property sheets
+PASS  tycoon/mobile: properties view shows sheets instead of the map
+PASS  reduced-motion media query honoured by the stylesheet context
+
+All design 3.1 checks passed

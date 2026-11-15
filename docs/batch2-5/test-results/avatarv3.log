@@ -1,0 +1,8 @@
+PASS  valid config round-trips
+PASS  extra fields are dropped
+PASS  unknown id / version rejected
+PASS  non-enum values (urls, markup, objects) rejected
+PASS  non-objects rejected
+PASS  hat + headphones keeps hat, clears headphones
+PASS  per-base compatibility enforced (robot has no headphones)
+avatarv3: all passed

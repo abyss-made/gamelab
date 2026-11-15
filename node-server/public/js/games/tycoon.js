@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.tycoon = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
+  let ledger = null;
   const TOKEN = ["#ff477b", "#4db8ff", "#adff00", "#ffcd2d", "#b48cff", "#2fd6c1"];
   let root = null;
   let app = null;
@@ -59,17 +61,17 @@ GameUI.tycoon = (() => {
       const c = cell(i);
       const o = g.owners[i];
       const lvl = g.levels[i];
-      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="background:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}"></span>` : "")).join("");
+      const tokens = g.players.map((p, pi) => (!p.out && shown[p.id] === i ? `<span data-p5-token="${p.colour}" class="ty-tok ${p.id === g.turnId ? "turn" : ""}" style="--token-color:${TOKEN[p.colour % TOKEN.length]}" title="${app.esc(p.name)}">${GameUI.scenes.car(p.colour)}</span>` : "")).join("");
       const band = t.group ? `<span class="ty-band" style="background:${g.groups[t.group].color}"></span>` : "";
-      const pips = lvl ? `<span class="ty-lvl" aria-hidden="true">${lvl === 4 ? "★" : "▪".repeat(lvl)}</span>` : "";
+      const pips = lvl ? `<span class="ty-lvl" aria-hidden="true"><img src="/assets/scenes/building-${lvl}.png" alt=""></span>` : "";
       const price = t.price ? `<span class="ty-pr">${money(t.price)}</span>` : t.amount ? `<span class="ty-pr">-${money(t.amount)}</span>` : "";
       const nm = corner(t) || t.type === "surprise" || t.type === "tax" ? SHORT[t.type] : t.name;
       const own = o >= 0 ? `<span class="ty-own" style="background:${col(o)}"></span>` : "";
-      out += `<button type="button" class="ty-tile s-${c.side} t-${t.type} ${corner(t) ? "corner" : ""} ${selTile === i ? "sel" : ""}" style="grid-row:${c.row + 1};grid-column:${c.col + 1}" data-tile="${i}" aria-label="${app.esc(tileLabel(i))}">${band}<span class="ty-ic" aria-hidden="true">${ICON[t.type] && t.type !== "prop" ? ICON[t.type] : ""}</span><span class="ty-nm">${app.esc(nm)}</span>${price}${pips}${own}<span class="ty-toks">${tokens}</span></button>`;
+      out += `<button type="button" class="ty-tile s-${c.side} t-${t.type} ${corner(t) ? "corner" : ""} ${selTile === i ? "sel" : ""}" style="grid-row:${c.row + 1};grid-column:${c.col + 1}" data-tile="${i}" aria-label="${app.esc(tileLabel(i))}">${band}<span class="ty-ic" aria-hidden="true"><img src="/assets/ten/tile-${t.type==='gototimeout'?'goto':t.type==='timeout'?'jail':(['prop','station','util','tax','surprise','rest','jail','goto','start'].includes(t.type)?t.type:'start')}.svg" alt=""></span><span class="ty-nm">${app.esc(nm)}</span>${price}${pips}${own}<span class="ty-toks">${tokens}</span></button>`;
     }
     const cur = pById(g.turnId);
-    const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die">${g.dice[0]}</span><span class="ty-die">${g.dice[1]}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
-    out += `<div class="ty-center pty-city"><img class="pty-art" src="/assets/premium/tycoon-city.svg" alt="" aria-hidden="true"><div class="pty-plaque"><div class="ty-logo">Playgrid Plaza</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
+    const dice = g.dice[0] ? `<span class="ty-dice ${g.rollNo !== lastRoll ? "roll" : ""}" role="img" aria-label="Dice: ${g.dice[0]} and ${g.dice[1]}"><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[0])}</span><span class="ty-die" aria-hidden="true">${GameUI.art.dieFace(g.dice[1])}</span></span>` : '<span class="ty-dice muted">Roll the dice</span>';
+    out += `<div class="ty-center pty-city"><img class="scene-exchange-art" src="/assets/scenes/exchange-city.png" alt="" aria-hidden="true" draggable="false"><div class="pty-plaque"><div class="ty-logo">Property Tycoon</div>${dice}<div class="ty-turn">${cur ? `<b>${app.esc(cur.name)}</b>'s turn` : ""}</div><div class="ty-round">${g.rounds ? `Round ${g.round} of ${g.rounds}` : `Round ${g.round}`}</div>${g.card ? `<div class="ty-card" role="status">${app.esc(g.card.text)}</div>` : ""}</div></div>`;
     return out + "</div>";
   }
 
@@ -86,7 +88,7 @@ GameUI.tycoon = (() => {
       .map((p, i) => {
         const where = tile(p.pos).name;
         const status = p.out ? "Bankrupt" : p.jail ? `Time Out (turn ${p.jail})` : where;
-        return C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="ty-sw" style="background:${TOKEN[p.colour % TOKEN.length]}" aria-hidden="true"></span><b class="ty-cash">${p.out ? "–" : money(p.cash)}</b>` + (p.id === g.turnId && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.colourName} · ${status} · ${p.props} propert${p.props === 1 ? "y" : "ies"}${p.cards ? " · Get-out card" : ""}` });
+        return C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="ty-sw" style="background:${TOKEN[p.colour % TOKEN.length]}" aria-hidden="true"></span><b data-cash="${p.colour}" class="ty-cash">${p.out ? "–" : money(p.cash)}</b>` + (p.id === g.turnId && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: `${p.colourName} · ${status} · ${p.props} propert${p.props === 1 ? "y" : "ies"}${p.cards ? " · Get-out card" : ""}` });
       })
       .join("");
   }
@@ -107,7 +109,7 @@ GameUI.tycoon = (() => {
     else if (t.type === "surprise") rows = '<p class="muted">Draw a Surprise card.</p>';
     const owner = o >= 0 ? `Owned by <b>${app.esc(g.players[o].name)}</b>${g.levels[i] ? ` · ${g.levelNames[g.levels[i]]}` : ""}` : t.price ? `Unowned · ${money(t.price)}` : "";
     const band = t.group ? `<span class="ty-sw" style="background:${g.groups[t.group].color}"></span>${g.groups[t.group].name} district · ` : "";
-    return `<div class="ty-info"><button type="button" class="btn btn-small btn-ghost ty-x" data-close-info aria-label="Close tile details">✕</button><b>${app.esc(t.name)}</b><div class="muted">${band}${owner}</div>${rows}</div>`;
+    return `<div class="ty-info"><div class="scene-deed-strip" style="background:${t.group?g.groups[t.group].color:'#496c6a'}">${t.group?app.esc(g.groups[t.group].name):app.esc(t.type)}</div>${g.levels[i]>0?`<img class="scene-deed-model" src="/assets/scenes/building-${g.levels[i]}.png" alt="${g.levelNames[g.levels[i]]}" >`:""}<button type="button" class="btn btn-small btn-ghost ty-x" data-close-info aria-label="Close tile details">✕</button><b>${app.esc(t.name)}</b><div class="muted">${band}${owner}</div>${rows}</div>`;
   }
 
   function myIdx() {
@@ -243,7 +245,9 @@ GameUI.tycoon = (() => {
 
   function paint() {
     if (!root || !g) return;
+    const previous = FX.rects(root,"[data-p5-token]","p5Token");
     setPanel("ty-boardwrap", boardHTML());
+    FX.flip(root,"[data-p5-token]","p5Token",previous,115);
     setPanel("ty-players", playersHTML());
     setPanel("ty-strip", stripHTML());
     setPanel("ty-actions", actionHTML());
@@ -279,6 +283,7 @@ GameUI.tycoon = (() => {
   // Walks each token forward one tile at a time so moves are easy to follow.
   function stepTokens() {
     clearInterval(stepTimer);
+    if(FX.reduced()){g.players.forEach(p=>shown[p.id]=p.pos);html["ty-boardwrap"]=null;setPanel("ty-boardwrap",boardHTML());return;}
     const differs = () => g.players.some((p) => shown[p.id] !== p.pos);
     if (!differs()) return;
     stepTimer = setInterval(() => {
@@ -294,7 +299,9 @@ GameUI.tycoon = (() => {
         } else shown[p.id] = p.pos;
       }
       html["ty-boardwrap"] = null;
+      const previous = FX.rects(root,"[data-p5-token]","p5Token");
       setPanel("ty-boardwrap", boardHTML());
+      FX.flip(root,"[data-p5-token]","p5Token",previous,115);
       if (!more) clearInterval(stepTimer);
     }, 120);
   }
@@ -304,7 +311,7 @@ GameUI.tycoon = (() => {
     root = document.createElement("div");
     root.className = "b2 ty";
     root.dataset.view = "map";
-    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players"></div>
+    root.innerHTML = `<div id="ty-strip"></div><div class="b2-players card ty-players" id="ty-players" role="group" aria-label="Player balances" tabindex="0"></div>
       <div class="ty-views" role="group" aria-label="Phone view"><button type="button" class="btn btn-small" data-tyview="map" aria-pressed="true">Map</button><button type="button" class="btn btn-small btn-ghost" data-tyview="props" aria-pressed="false">Properties &amp; trades</button></div>
       <div id="ty-boardwrap"></div>
       <div id="ty-info" aria-live="polite"></div>
@@ -312,6 +319,8 @@ GameUI.tycoon = (() => {
       <details class="card ty-sect"><summary>Your properties</summary><div id="ty-props"></div></details>
       <details class="card ty-sect"><summary>Trades</summary><div id="ty-trades"></div></details>
       <details class="card ty-sect"><summary>Game log</summary><div id="ty-log" class="ty-log"></div></details>`;
+    root.dataset.ten='tycoon';
+    GameUI.scenes.mount(root,'tycoon');
     stage.appendChild(root);
     window.addEventListener("resize", fitBoard);
     clock = C.makeClock(() => root);
@@ -407,6 +416,15 @@ GameUI.tycoon = (() => {
     wasMyTurn = myTurn;
     if (g.rollNo !== lastRoll && lastRoll >= 0) Sound.play("drop");
     paint();
+    if(lastRoll>=0 && lastRoll!==g.rollNo) root.querySelectorAll('.ty-die').forEach(el=>FX.animate(el,[{transform:'translateY(-16px) rotate(-30deg)'},{transform:'translateY(3px) rotate(10deg)',offset:.7},{transform:'none'}],380));
+    if(ledger){
+      g.players.forEach(p=>{const old=ledger.cash[p.id],el=root.querySelector(`[data-cash="${p.colour}"]`);if(old!==undefined && old!==p.cash){
+        FX.animate(el,[{background:p.cash>old?'#658e32':'#934e4e',transform:'scale(1.15)'},{background:'transparent',transform:'none'}],500);
+        if(el){el.title=`${p.cash>old?'+':''}${money(p.cash-old)} this update`;}
+      }});
+      g.owners.forEach((owner,i)=>{if(owner!==ledger.owners[i])FX.animate(root.querySelector(`[data-tile="${i}"]`),[{filter:'brightness(1.8)'},{filter:'brightness(1)'}],650);});
+    }
+    ledger={cash:Object.fromEntries(g.players.map(p=>[p.id,p.cash])),owners:[...g.owners]};
     lastRoll = g.rollNo;
     stepTokens();
   }
@@ -419,19 +437,20 @@ GameUI.tycoon = (() => {
     clearInterval(auctionTimer);
     if (clock) clock.stop();
     if (root) root.remove();
+    ledger = null;
     root = null; g = null; selTile = -1; lastRoll = -1; shown = {}; wasMyTurn = false; bidText = "";
     for (const k of Object.keys(html)) delete html[k];
     reviewId = null; tf.open = false; tf.giveProps.clear(); tf.askProps.clear(); tf.giveCash = ""; tf.askCash = "";
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const top = r.standings[0];
     const title = r.tie ? (r.winners.includes(state.you) ? "It's a tie, and you're in it!" : "It's a tie!") : r.winnerId === state.you ? "You win!" : `${a.esc(top ? top.name : "Someone")} wins!`;
     const why = r.reason === "rounds" ? `After ${r.rounds} rounds, the richest player wins.` : "Everyone else went bankrupt or left.";
     const rows = r.standings
       .map((p, i) => `<li class="${p.id === state.you ? "me" : ""}"><span class="rank">${i + 1}</span>${a.avatarHTML(p.avatar)}<b>${a.esc(p.name)}</b><span class="pts">${p.out ? "bankrupt" : `$${p.worth} net worth`}</span></li>`)
       .join("");
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${why}</p><ol class="b2-podium">${rows}</ol>`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><p class="muted center">${why}</p><ol class="b2-podium">${rows}</ol>`;
   }
 
   function resultSound(r, state) {
@@ -439,5 +458,5 @@ GameUI.tycoon = (() => {
     return r.winners.includes(state.you) ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('tycoon',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

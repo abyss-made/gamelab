@@ -1,0 +1,586 @@
+[
+  {
+    "file": "first/screenshots/played/gofish-1440.png",
+    "sha256": "4cd785ea7b4c0d1e37ae01bf9d930c40c79af0ddce83886cb0bee5d7d44b951d"
+  },
+  {
+    "file": "first/screenshots/played/gofish-390.png",
+    "sha256": "c62393142ea8cecb74ade46930cca69fee51a637eeac6efc35b3c2a9ebbe67c4"
+  },
+  {
+    "file": "first/screenshots/played/gofish-932.png",
+    "sha256": "9afb4bcd169bf1be88b0df7052e7e77528258c34c904bdfb1627ec988a7d8f07"
+  },
+  {
+    "file": "first/screenshots/played/gofish-result-1440.png",
+    "sha256": "908db0219312405a230f3a8d65b94388783a19e80d2375ece037447d3501f454"
+  },
+  {
+    "file": "first/screenshots/played/gofish-result-390.png",
+    "sha256": "3f2f9deed234e1d553ca619c2b616abd92c31332e6f9b8f2dfd1ed89d0899c15"
+  },
+  {
+    "file": "first/screenshots/played/gofish-result-932.png",
+    "sha256": "9a07dbe10e37e189285b34e5b4108db51a5db4c1d2aa49b72b471ba7ff8975b8"
+  },
+  {
+    "file": "first/screenshots/played/golf-1440.png",
+    "sha256": "a2a82f71632d18d3b2e554cb72b10ba9ac35fdf6c7250e44ce9db27e1b309eb9"
+  },
+  {
+    "file": "first/screenshots/played/golf-390.png",
+    "sha256": "bfd98b43bb25417cff2b3e58b07bf8da8236a84e766b3aa214967cd5f8d1940d"
+  },
+  {
+    "file": "first/screenshots/played/golf-932.png",
+    "sha256": "0e18291f55018903a4657003f097f39354cbf5843933218863fc8ab81a2b353d"
+  },
+  {
+    "file": "first/screenshots/played/golf-result-1440.png",
+    "sha256": "8f9cf2f8d271eb60cb98e50f71e40c53922768ea1025ab931f4ce67bdb39f8ec"
+  },
+  {
+    "file": "first/screenshots/played/golf-result-390.png",
+    "sha256": "c6cc5f1fc5cd54255e7641ae5596bcd5da46e5b0463cd81ee7c7303613773d45"
+  },
+  {
+    "file": "first/screenshots/played/golf-result-932.png",
+    "sha256": "f18bc413ed29dcbf2f8852bb6fe783f83a0885129f4336198e4c2c436e42aa70"
+  },
+  {
+    "file": "first/screenshots/played/ludo-1440.png",
+    "sha256": "65fbb7933407d6733c63a5eec206ac3c9bd5ebb170964bd2f3a60cc199a0e8ec"
+  },
+  {
+    "file": "first/screenshots/played/ludo-390.png",
+    "sha256": "b6b50c564c672f77a309671e2d55ace4240fda36a8f3c06a8a8c383ca142e732"
+  },
+  {
+    "file": "first/screenshots/played/ludo-932.png",
+    "sha256": "645de79e1d4cf6325667184ff24f8e8ac6a7202bc98160b89ff108d4acf40401"
+  },
+  {
+    "file": "first/screenshots/played/ludo-result-1440.png",
+    "sha256": "df44b0bb2a962e11dd4746e5a1649cdae48a1d5de1de76ff4ab06d54bf38f720"
+  },
+  {
+    "file": "first/screenshots/played/ludo-result-390.png",
+    "sha256": "6facd2f3a289ebf5953964dd0afff0181e0b927d1c5da93fc7cb5a0ff0a0578b"
+  },
+  {
+    "file": "first/screenshots/played/ludo-result-932.png",
+    "sha256": "1abaf5c2c28032f3646c695bc349010668da26293154dd9b84d1aea6b64d5cdc"
+  },
+  {
+    "file": "first/screenshots/played/pool-1440.png",
+    "sha256": "5ff8bc56b8094bedcab7d4c88aef1dd067c5047905bded5bcf4ef4b072c8dd0b"
+  },
+  {
+    "file": "first/screenshots/played/pool-390.png",
+    "sha256": "aff7d03712c631fd5d237a8ced81c22f1e48070f3a7e96d657f13e479efd3869"
+  },
+  {
+    "file": "first/screenshots/played/pool-932.png",
+    "sha256": "79a98971569c269b3dd22bde7ff1e94922764e73d91fca800a1a8ca44ca33ace"
+  },
+  {
+    "file": "first/screenshots/played/pool-result-1440.png",
+    "sha256": "c293253e9b0420379a929fc595e932e59cb68b566ff8b45928bdb9c564f20dfb"
+  },
+  {
+    "file": "first/screenshots/played/pool-result-390.png",
+    "sha256": "77f10c03fa3467019eff8ec0d2e010e7b29706341c07b2ceab5ccec6906ab12f"
+  },
+  {
+    "file": "first/screenshots/played/pool-result-932.png",
+    "sha256": "a622e629496a45bd89fb9e8abb45053634ce9cfb5d8a2f0068f268fe38a52cf9"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-1440.png",
+    "sha256": "924a1f5de375d6c5d48175010dd6809d4f273a6f5f31c3818ac9bf413f61c1c5"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-390.png",
+    "sha256": "ca3afc1fcd7088ebde53c991c78731008806cfa6a9e0d274683ae6c7bd4dbd38"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-932.png",
+    "sha256": "0bb60c36289668e6653bae9fe1fb00e6983a127c28b976f2cd894e4bce6d5a34"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-result-1440.png",
+    "sha256": "fad66965b2400cfb521992a1fb105c91564f0e0054cfc440ccb1d3a8130aac8b"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-result-390.png",
+    "sha256": "e61b97bbe78221036790b28a5380f7c9a7c9b81c9a40ab3057162f360f1bf8bf"
+  },
+  {
+    "file": "first/screenshots/played/tycoon-result-932.png",
+    "sha256": "d0ea42db3bed85c68900a9c68cce3b5eb03a84b1a949af4536c154b9a866f97b"
+  },
+  {
+    "file": "screenshots/after/battleship-1440.png",
+    "sha256": "95b6e6295640df9f10be70804c97c52a8cab74425fb562cac6d0426bf2ac99d2"
+  },
+  {
+    "file": "screenshots/after/battleship-390.png",
+    "sha256": "bf0083c899743e39a691ea8817ff04d820e829b89a84a9e0ac3844fb86f73a6a"
+  },
+  {
+    "file": "screenshots/after/battleship-932.png",
+    "sha256": "8aad9d04f037f3e5c4879ecf29586e3b2d02d7adf55c51ffeaf1ec1718b97c2e"
+  },
+  {
+    "file": "screenshots/after/chess-1440.png",
+    "sha256": "5a095ad37336bdcde68ad0087fc6f97e833cd77f4529d00b3cf30b0d8e819df5"
+  },
+  {
+    "file": "screenshots/after/chess-390.png",
+    "sha256": "786f501f317e31abd5a9f36fdbbbfeb4435f44f2e108f4b13ece99d1fff8f665"
+  },
+  {
+    "file": "screenshots/after/chess-932.png",
+    "sha256": "512483511c095ec2d22d6bd9172e307455875c7b6f2319439ffa45218a6f2ece"
+  },
+  {
+    "file": "screenshots/after/colorstack-1440.png",
+    "sha256": "bb41f15735746ea453f52022115f7fb82ffde9139109cd342adaac25dbfc809b"
+  },
+  {
+    "file": "screenshots/after/colorstack-390.png",
+    "sha256": "0ac30bff41207023329f1c41911d0f4c43f75d5f0aeace799be4a64a0fdea75a"
+  },
+  {
+    "file": "screenshots/after/colorstack-932.png",
+    "sha256": "0d22f0da1306dea13b6557618e6ae38f0821135c50df1c64202ec84ec233553d"
+  },
+  {
+    "file": "screenshots/after/gofish-1440.png",
+    "sha256": "cc21a1921286964a80e84d605bdbef221bd48ffaa9a955207b10897e57a3f8f8"
+  },
+  {
+    "file": "screenshots/after/gofish-390.png",
+    "sha256": "6512b71640ff5582b4367bac397d38bf6f1db0bcb238d6172362e58da853745c"
+  },
+  {
+    "file": "screenshots/after/gofish-932.png",
+    "sha256": "a7be808e5c91ba344445dd07ded76f56e99fa780bd68f78a67742d8c06bce8fc"
+  },
+  {
+    "file": "screenshots/after/golf-1440.png",
+    "sha256": "b212f80b12123dcd0390dd9041f3b9bebfb717e403638ab3aa7f51ca381f056d"
+  },
+  {
+    "file": "screenshots/after/golf-390.png",
+    "sha256": "dafb3e8cb559c9c2fb5c608ad646ea3de1a45bc0bffcdac75d8d71c2355692e5"
+  },
+  {
+    "file": "screenshots/after/golf-932.png",
+    "sha256": "72c5967058ebb89419d030a5b27fcd723c996d4bed048d8ea103604a9c1d3898"
+  },
+  {
+    "file": "screenshots/after/impostor-1440.png",
+    "sha256": "65b8fa5caee5288fcc8f98138708fe878d2277981c1d5120f594b261e4178964"
+  },
+  {
+    "file": "screenshots/after/impostor-390.png",
+    "sha256": "64e19c1122e7f8b3b2faccdfaff41e546edb1b61e4edb27061c580ef7600e892"
+  },
+  {
+    "file": "screenshots/after/impostor-932.png",
+    "sha256": "104594de5fe42e437d0182e017211c170f4c29a357417be049b2fdab7f288c5f"
+  },
+  {
+    "file": "screenshots/after/ludo-1440.png",
+    "sha256": "63f2034e40811cfe0a81910ca47dad522db22e71fb4032ecf7958e29a3174c82"
+  },
+  {
+    "file": "screenshots/after/ludo-390.png",
+    "sha256": "1cd6e6c4112c2a5c33c20a10832da29ad935d4fcc13dc52842d97fc2dc2dafe8"
+  },
+  {
+    "file": "screenshots/after/ludo-932.png",
+    "sha256": "89f9ac5001812e23e35f1f2e1d394b38ea348989c8b32f2ed91512b94ecbdf2d"
+  },
+  {
+    "file": "screenshots/after/pool-1440.png",
+    "sha256": "1282efeeee29bbc498e22ba45927df01f6551ac5d672110dcacf9cc68059f245"
+  },
+  {
+    "file": "screenshots/after/pool-390.png",
+    "sha256": "7776ce6c10bb34015812e1348b47815fc2082f12f1e04ff956aa287a4341a51d"
+  },
+  {
+    "file": "screenshots/after/pool-932.png",
+    "sha256": "8a928a58d7bd0eae9fabd7d44ad3a4250afed88d45ef12572c12ec1fe71d9e61"
+  },
+  {
+    "file": "screenshots/after/telephone-1440.png",
+    "sha256": "ac3861801b30919506fce576e0e2c7895801de283c40fa2f4ed9fd11c42ccd7a"
+  },
+  {
+    "file": "screenshots/after/telephone-390.png",
+    "sha256": "177f9576b13a466bf31b4b7fb8ff9b1497c62c57785b1285c4a8151966910274"
+  },
+  {
+    "file": "screenshots/after/telephone-932.png",
+    "sha256": "c6b9b973b82cc55abec7301697f9e1e91a1d7462ee67a24868477b3cad92b273"
+  },
+  {
+    "file": "screenshots/after/tycoon-1440.png",
+    "sha256": "d944c50c8c003431100a73296d1781d2305e849b0a727d7d8731b4d0862d6e8d"
+  },
+  {
+    "file": "screenshots/after/tycoon-390.png",
+    "sha256": "d6d781f627fb2caf4a98e1ff647c35504cf652294654acd75e5150bd045d21fa"
+  },
+  {
+    "file": "screenshots/after/tycoon-932.png",
+    "sha256": "e4d695966df7294fcc02837e492d2be57e3bb035dc14e8a80ec4aa0188252fb1"
+  },
+  {
+    "file": "screenshots/before/battleship-1440.png",
+    "sha256": "b9f93e136a7e81c585489403f76fda035839fc6d22bedc6db7f17f19bd3041b0"
+  },
+  {
+    "file": "screenshots/before/battleship-390.png",
+    "sha256": "62a16c81e3eec186bf0c7b2caf5a9018f0f9877ac80a680377545fa1e2a5b791"
+  },
+  {
+    "file": "screenshots/before/battleship-932.png",
+    "sha256": "c457e2ec03286d64cb1b99a570082f93d2563ea7e43fe412caf60ffcd326049e"
+  },
+  {
+    "file": "screenshots/before/chess-1440.png",
+    "sha256": "8c1079b23db11172629b9e7bc2e1a33ca0ce70810feecce95fbf33f86432d1dc"
+  },
+  {
+    "file": "screenshots/before/chess-390.png",
+    "sha256": "240e4170825938e2d5d8a52f0d70e45250790216da3f8e3c95696771dca9e900"
+  },
+  {
+    "file": "screenshots/before/chess-932.png",
+    "sha256": "b013d5d478af5eb16728806fd8abf128d600d234b57606b582c778835a4cd4ba"
+  },
+  {
+    "file": "screenshots/before/colorstack-1440.png",
+    "sha256": "586c07200fd4481aa83f3c40bca85baf6d4a5d962961248651f17898e7878005"
+  },
+  {
+    "file": "screenshots/before/colorstack-390.png",
+    "sha256": "2b7e943398e66e2de9b90bd2c6e8cd6e08ef716e97a8d916f2a234d1ff9fbaec"
+  },
+  {
+    "file": "screenshots/before/colorstack-932.png",
+    "sha256": "a0d2ce62aa566f7fd9f651ba35ce6b5e56fde321049aa169cda79d27a435ea0b"
+  },
+  {
+    "file": "screenshots/before/gofish-1440.png",
+    "sha256": "81581e87111cc009d7620329ab14c67333291a606f493f211a610ee4187fb1ac"
+  },
+  {
+    "file": "screenshots/before/gofish-390.png",
+    "sha256": "b51b89ff607983e26cdba071c0d4d7614305bbf333e869588c54866d990a98ea"
+  },
+  {
+    "file": "screenshots/before/gofish-932.png",
+    "sha256": "39b75d0efb492d379bd662ec184adab6cd685ef0e4665bdd06f73f1a77aff8e4"
+  },
+  {
+    "file": "screenshots/before/golf-1440.png",
+    "sha256": "5b0a3eb72e544379fab2705eb9e6000bc92dae2019d12620de135c492a11fb12"
+  },
+  {
+    "file": "screenshots/before/golf-390.png",
+    "sha256": "19f027c7edfc3d29db2ca71b187457a5c7f51ccda7f4d0d081de03536ee1cc4a"
+  },
+  {
+    "file": "screenshots/before/golf-932.png",
+    "sha256": "9835320d54fe123bfe4c03d6aee76eff322a9c5cd00710f12558ae355ef4b38e"
+  },
+  {
+    "file": "screenshots/before/impostor-1440.png",
+    "sha256": "3fd4816594d0470c9864633274fcb404120d1627e91a093c9f031a0e919ac774"
+  },
+  {
+    "file": "screenshots/before/impostor-390.png",
+    "sha256": "c79c0743fcf2c6f48695054b7f9d93e6b1acd6fc325c0e962fc5d011e4f7bee0"
+  },
+  {
+    "file": "screenshots/before/impostor-932.png",
+    "sha256": "71dc5db7afdcb17442d385ba98af82ed8b8f58ff23ef3a2714c9fb27e0c3ddf1"
+  },
+  {
+    "file": "screenshots/before/ludo-1440.png",
+    "sha256": "a7b3dab8366645744ad43d8cbe48386cae2a6fa30f0e2223add52906e6920ab9"
+  },
+  {
+    "file": "screenshots/before/ludo-390.png",
+    "sha256": "acf59c075bb1df982a92a07c8c7e3a8c6885cc36588436f2c75ebde253297cf7"
+  },
+  {
+    "file": "screenshots/before/ludo-932.png",
+    "sha256": "0658866cbc390d3a1e41a22d681f8d604c52709d1eda4d6103b9d392250bdd95"
+  },
+  {
+    "file": "screenshots/before/pool-1440.png",
+    "sha256": "03b08a8945158e95bd2034e2a23132a728c534cbf86262da240c5817adf40793"
+  },
+  {
+    "file": "screenshots/before/pool-390.png",
+    "sha256": "831eaed1b41315b9a4ac7115483e6387f3dcf55e86e231b444be4ab23e10014d"
+  },
+  {
+    "file": "screenshots/before/pool-932.png",
+    "sha256": "b2157e71a630d3698e83130addc0a766d3a831f4abca750873a91df9c2586df8"
+  },
+  {
+    "file": "screenshots/before/telephone-1440.png",
+    "sha256": "b7b5d866acb12db3bb9b9d58626031d4e9082521a441c06dc73b78b0c2d83ed3"
+  },
+  {
+    "file": "screenshots/before/telephone-390.png",
+    "sha256": "af822413a933729d138945bba9100efd021b6459951fcbf216ac3378324d66e6"
+  },
+  {
+    "file": "screenshots/before/telephone-932.png",
+    "sha256": "eb68e2091060642d8513648efbd59f77a58192cb2ab117ed86bf0513ec52d47e"
+  },
+  {
+    "file": "screenshots/before/tycoon-1440.png",
+    "sha256": "04d3fda2e041399ffc697395905b89336c0a4ceba9983b0161c0044eb24615f1"
+  },
+  {
+    "file": "screenshots/before/tycoon-390.png",
+    "sha256": "35ce587fbc126d325ba1d83d7ebc30667824d121324856242448c754cbe7c602"
+  },
+  {
+    "file": "screenshots/before/tycoon-932.png",
+    "sha256": "4063f2d954264d305697d7e7e56abf0ac810ca4470fc21b147c011b356782d77"
+  },
+  {
+    "file": "screenshots/details/golf-canyon-1440.png",
+    "sha256": "e2ba88449bc189df04fc5eb34cbe0b088c97832d7f905b5f4b3ad6658d61f62d"
+  },
+  {
+    "file": "screenshots/details/golf-canyon-390.png",
+    "sha256": "9144d5773c7e2419cee93168fc5ff8deb6d1921e19d9a28ce320a9bb53c37871"
+  },
+  {
+    "file": "screenshots/details/golf-canyon-932.png",
+    "sha256": "d8e3d8f6a87b99f643ca0a19b3e7e02535fae27d7ca722d104149873d946cbf5"
+  },
+  {
+    "file": "second/placement-0.png",
+    "sha256": "69fdebe97493d016e830e359633779505cb54416d537408458ccc5778fce8d15"
+  },
+  {
+    "file": "second/placement-1.png",
+    "sha256": "cd8aa32628ea52370caeed3eba183c48986e356471f123b582146fe74117a435"
+  },
+  {
+    "file": "second/screenshots/played/battleship-1440.png",
+    "sha256": "c27a25af2a84f1c666225e4aaa51c4f6338ca1596202ec48d7e0c98c5b7a08bb"
+  },
+  {
+    "file": "second/screenshots/played/battleship-390.png",
+    "sha256": "ffd19fde3fd954b4d762c9df91f4953ed2474ef501e65415de290a4591db980d"
+  },
+  {
+    "file": "second/screenshots/played/battleship-932.png",
+    "sha256": "dccd229dcdfe9df32f764d8189e65aa8b8025300ea86df1e9f59bcf6dddd6144"
+  },
+  {
+    "file": "second/screenshots/played/battleship-result-1440.png",
+    "sha256": "a6b91a6585e5c4568cdcab8eb213e7a1470b74d9c89fc48c04555b043cc69157"
+  },
+  {
+    "file": "second/screenshots/played/battleship-result-390.png",
+    "sha256": "54dedd38baa04187fd719aecdf7cc493ee2c03c1c59969327d27dd7f1ddf24e1"
+  },
+  {
+    "file": "second/screenshots/played/battleship-result-932.png",
+    "sha256": "ee5cfce407b6df9d1873f3c6b28064ab809b920dfaafd30a46f074e9926de6db"
+  },
+  {
+    "file": "second/screenshots/played/chess-1440.png",
+    "sha256": "4b1b9ec818940d57407f08616049b992f61fc8a919df136853de9d701253e8cd"
+  },
+  {
+    "file": "second/screenshots/played/chess-390.png",
+    "sha256": "f2f62bc8f2f8bcd1eda2a24970615f9078ab364604f04d71e6ba153a35f35e21"
+  },
+  {
+    "file": "second/screenshots/played/chess-932.png",
+    "sha256": "686a039c4f991c6bea89be0398ff46f4981905d644fc4cc3318e5746c8d033b4"
+  },
+  {
+    "file": "second/screenshots/played/chess-promotion-1440.png",
+    "sha256": "05def20538a74d5e1a64b6a8a40341cc8baea44c42ef7db56677fdb525ed1e3c"
+  },
+  {
+    "file": "second/screenshots/played/chess-promotion-390.png",
+    "sha256": "557c86841cee398c590cd38ec2ee40108dc19e227104b3a5d82e0d1ce0fb9772"
+  },
+  {
+    "file": "second/screenshots/played/chess-promotion-932.png",
+    "sha256": "ebd1b80d8817fc9c288e79293f1552e44af06869c10129200f15ee4dc5737e72"
+  },
+  {
+    "file": "second/screenshots/played/chess-result-1440.png",
+    "sha256": "a433d6b32ca252d60fe2a5cb160113f0b8acb0b2d39537c22f8d765c72536d17"
+  },
+  {
+    "file": "second/screenshots/played/chess-result-390.png",
+    "sha256": "3d207728b9c4234e9e4eb86b95fd84fe61fabc156a22f366939107046a781d8a"
+  },
+  {
+    "file": "second/screenshots/played/chess-result-932.png",
+    "sha256": "0094a022668ca54bb7cd54bbed56b47f811f0b4b8a4f8f3d7195a4fc1ff2e20f"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-1440.png",
+    "sha256": "afc778030d6ec6871640f2a77f4a8bb4a575de75e356c6dc45d4cceeeb361587"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-390.png",
+    "sha256": "151e8de45aaacc4b578124bbe058c71af864d3c47820a70b902bd158e7ff3e49"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-932.png",
+    "sha256": "fc5ebd007c238d6431b1cfc37ec43ccf5f002bb3e0ca4aeb63da0801bec6b9f7"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-result-1440.png",
+    "sha256": "81a1f0dce08e1de04202b516dd4d9ab740acfd73f70823d41a1f3a06b1b8380f"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-result-390.png",
+    "sha256": "c6d0cb0bc1949506e138ff6488c50a885efc55062686548775dc2af4b12a3afc"
+  },
+  {
+    "file": "second/screenshots/played/colorstack-result-932.png",
+    "sha256": "a2b790012773055547acc689f6d73b5cd3c38870449266e4770fb0450975f3ed"
+  },
+  {
+    "file": "second/screenshots/played/impostor-1440.png",
+    "sha256": "a1fba84ff72b54aff21567f6eefb5e36e1b68ff95d31c43cb5c2e7397bf05590"
+  },
+  {
+    "file": "second/screenshots/played/impostor-390.png",
+    "sha256": "5221313ea4c6180504c3413987d0b96fbdbe68483220da110972a01c560c6bcc"
+  },
+  {
+    "file": "second/screenshots/played/impostor-932.png",
+    "sha256": "82f529053654f70ba52730236ef4b9011ac283482756acadd53faef57ff6b63b"
+  },
+  {
+    "file": "second/screenshots/played/impostor-result-1440.png",
+    "sha256": "1967f93d50e9af89ac1fb807b93c8e8515b15037f40eabb5eea55f71a855136e"
+  },
+  {
+    "file": "second/screenshots/played/impostor-result-390.png",
+    "sha256": "1848f921e8b73f968b9b1e497f07e2709d5f0a5636361c4a5537fa5ea13829ac"
+  },
+  {
+    "file": "second/screenshots/played/impostor-result-932.png",
+    "sha256": "b0623871d05bd24daf1b2eba825fc9614d11890a2d0e468a034dc3e081f93c62"
+  },
+  {
+    "file": "second/screenshots/played/telephone-1440.png",
+    "sha256": "98b5ca97d77a02e7334faab105c7d310671fc2989ac50bffe0a5f1931dfcaf57"
+  },
+  {
+    "file": "second/screenshots/played/telephone-390.png",
+    "sha256": "b6fc5585d3f90fa829d724f01e5a3277e12fe91186e5bc5d4e62669c34541e12"
+  },
+  {
+    "file": "second/screenshots/played/telephone-932.png",
+    "sha256": "d0cea71015497c6faffd8aafbc36f6f1271129f8eac8f1ace322bc1cf36cbd81"
+  },
+  {
+    "file": "second/screenshots/played/telephone-drawing-1440.png",
+    "sha256": "e2c8d230ff4140ff22e0f510037f2dbb0d35753fce079c6d8778ab257688a7ea"
+  },
+  {
+    "file": "second/screenshots/played/telephone-drawing-390.png",
+    "sha256": "ed22769eb29e9925c97bad2f723e020e89c5e88d09267685cb692b42855ab6b8"
+  },
+  {
+    "file": "second/screenshots/played/telephone-drawing-932.png",
+    "sha256": "6ad7dc1a4441c43091af25cea9ddb94804b73f9cd7393f8bea3d4aae880fd725"
+  },
+  {
+    "file": "second/screenshots/played/telephone-result-1440.png",
+    "sha256": "695ca6c36c77b0f41ec9bf9e413aee2e8eddec959b3919b1164e579f91ac5133"
+  },
+  {
+    "file": "second/screenshots/played/telephone-result-390.png",
+    "sha256": "3155a35cb0a53d526fda04c18fd1a9a4a3f56e8984e1391313fdea30d4adb2b7"
+  },
+  {
+    "file": "second/screenshots/played/telephone-result-932.png",
+    "sha256": "17b435314b1d4ce6e4e115b92339aa1b01b69aecc27b58ed62597956ecfd8865"
+  },
+  {
+    "file": "stress/colorstack-1440.png",
+    "sha256": "4ca545e3c5e5574dff32af666203381bda7582e467c371dc716d0a8cae1e6f45"
+  },
+  {
+    "file": "stress/colorstack-390.png",
+    "sha256": "eadcdaf61de50f7d6284694b09a27c08f8959da4b36480ca2c4144cf83dab4f4"
+  },
+  {
+    "file": "stress/colorstack-932.png",
+    "sha256": "f434e33792e7a8add280e33b22d8bc25b35eeadfb3804ce4dde879d628f29b1e"
+  },
+  {
+    "file": "stress/gofish-1440.png",
+    "sha256": "7d648e46c01e03009cdade5e59750eebafbffb70cb5342cc438b517ee8ad73fd"
+  },
+  {
+    "file": "stress/gofish-390.png",
+    "sha256": "eb62535f40086ded3d7a13474faf41dd65bb38255207bfad3a777756842e1412"
+  },
+  {
+    "file": "stress/gofish-932.png",
+    "sha256": "febc85d77f9c788fdaf35bb2bafddcb3f711aa351884b18b6dee78e006edd829"
+  },
+  {
+    "file": "stress/impostor-1440.png",
+    "sha256": "fef72fb03c78701c6b09576db4f13d364e6c341f2c61f42e4f8f858cd796f983"
+  },
+  {
+    "file": "stress/impostor-390.png",
+    "sha256": "d2f56acaa70751e7dfcbabc2a0fc9f574d525c2d051b73b879976ad7fdae7ce6"
+  },
+  {
+    "file": "stress/impostor-932.png",
+    "sha256": "7f0560159e014c8ebfacfc0304f810d67766348accfdcf576ce3398dd3e5d249"
+  },
+  {
+    "file": "stress/ludo-1440.png",
+    "sha256": "3818aaae173195590f1e97f484d2f8dc5f2fda6dfc5f1ce75be7af9a372a81ab"
+  },
+  {
+    "file": "stress/ludo-390.png",
+    "sha256": "346b89c9da2dfb611b562477a752b1f0862aa13520d7d5c199fc2aa2a9f2881f"
+  },
+  {
+    "file": "stress/ludo-932.png",
+    "sha256": "905c39fbcc792b62b979d91436b993d7993b99d6150fadc94bd748ccbc0fb5ba"
+  },
+  {
+    "file": "stress/tycoon-1440.png",
+    "sha256": "9882eb81f800e8b81292ddcbf751be6ecd01067376a908d4e7faf4d48052a23c"
+  },
+  {
+    "file": "stress/tycoon-390.png",
+    "sha256": "289c2e923a6c645b9901b877bd4fe878a65912c5cfae295ac43a4e4d02eb0be1"
+  },
+  {
+    "file": "stress/tycoon-932.png",
+    "sha256": "428748ef1b31a8d87f2e9433e371f35e0b99b9e5f1ed871adffc1617f8f380e9"
+  }
+]

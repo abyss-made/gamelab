@@ -2,6 +2,7 @@
 window.GameUI = window.GameUI || {};
 GameUI.ludo = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
   const PIPS = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
   const HEX = ["#ff477b", "#adff00", "#ffcd2d", "#4db8ff"];
   const NAMES = ["Red", "Green", "Yellow", "Blue"];
@@ -84,7 +85,7 @@ GameUI.ludo = (() => {
             const moved = animateMove && g.lastEvent && g.lastEvent.kind === "move" && g.lastEvent.by === p.id && g.lastEvent.token === ti ? " moved" : "";
             // On a square shared by several players, tapping opens the owner+number picker instead.
             const act = shared && toks.some((x) => x.p.id === S.you && g.movable.includes(x.ti)) ? `data-cell="${key(c, r)}"` : can ? `data-token="${ti}"` : "disabled";
-            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${moved}" ${act} data-tok="${p.colour}-${ti}" aria-label="${label}${act.startsWith("data-cell") ? ", shared square: choose" : ""}">${ti + 1}</button>`;
+            return `<button type="button" class="ld2-tok c${p.colour} ${can ? "can" : ""} ${turnId === p.id ? "turn" : ""}${moved}" ${act} data-tok="${p.colour}-${ti}" aria-label="${label}${act.startsWith("data-cell") ? ", shared square: choose" : ""}">${GameUI.scenes.pawn(p.colour)}<span>${ti + 1}</span></button>`;
           })
           .join("");
         html += `<div class="ld2-cell ${b.cls} ${toks.length > 1 ? "multi" : ""} ${shared ? "shared" : ""}" style="grid-column:${c + 1};grid-row:${r + 1}">${inner}</div>`;
@@ -112,6 +113,8 @@ GameUI.ludo = (() => {
       <div class="card ld2-main pld-main"><div class="pld-boardwrap"><div id="ld2-board"></div><div id="ld2-picker"></div></div>
       <aside class="pld-pod"><span class="pld-eyebrow" id="ld2-eyebrow">DICE</span><div class="ld2-die" id="ld2-die" role="img" aria-label="Dice"></div>
       <div class="ld2-status" id="ld2-status" aria-live="polite"></div><div class="ld2-ctl" id="ld2-ctl"></div><small class="muted">A six gives you another roll.</small></aside></div>`;
+    root.dataset.ten='ludo';
+    GameUI.scenes.mount(root,'ludo');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
@@ -143,6 +146,7 @@ GameUI.ludo = (() => {
   }
 
   function update(state) {
+    const before = FX.rects(root,"[data-tok]","tok");
     S = state;
     const g = S.game;
     if (!g) return;
@@ -182,6 +186,17 @@ GameUI.ludo = (() => {
     root.querySelector("#ld2-board").innerHTML = boardHTML(g);
     if (g.phase !== "move" || g.turnId !== S.you) pickCell = null;
     paintPicker();
+    if (animateMove && ev) {
+      const player=g.players.find(p=>p.id===ev.by), el=root.querySelector(`[data-tok="${player?.colour}-${ev.token}"]`);
+      if(el && player) {
+        const dest=pos(player.colour,ev.token,ev.to), unit=root.querySelector('.ld2-board').getBoundingClientRect().width/15;
+        const route=ev.from>=0 && ev.to>ev.from ? Array.from({length:ev.to-ev.from+1},(_,i)=>pos(player.colour,ev.token,ev.from+i)) : [pos(player.colour,ev.token,ev.from),dest];
+        FX.animate(el,route.map(([x,y])=>({transform:`translate(${(x-dest[0])*unit}px,${(y-dest[1])*unit}px)`})),Math.min(650,route.length*85));
+      }
+      // Captured tokens visibly return to their own yards.
+      if(ev.captured) FX.flip(root,'[data-tok]','tok',new Map([...before].filter(([key])=>!key.startsWith(player?.colour+'-'))),340);
+    }
+    if(g.rolls!==lastRolls && lastRolls>=0) FX.animate(die,[{transform:'translateY(-12px) rotate(-25deg)'},{transform:'translateY(2px) rotate(8deg)',offset:.75},{transform:'none'}],420);
     if (fk) root.querySelector(fk)?.focus();
     root.querySelector("#ld2-eyebrow").textContent = mine && g.phase === "move" ? "YOU ROLLED" : g.dice ? "LAST ROLL" : "DICE";
     if (g.rolls !== lastRolls && lastRolls >= 0) Sound.play("drop");
@@ -199,10 +214,10 @@ GameUI.ludo = (() => {
     pickCell = null;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.standings.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
-    return `<h2 class="result-title">${title}</h2>${r.forfeit ? '<p class="muted center">Everyone else left the game.</p>' : ""}${C.podium(r.standings, a, (p) => `${p.home}/4`, "home")}`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2>${r.forfeit ? '<p class="muted center">Everyone else left the game.</p>' : ""}${C.podium(r.standings, a, (p) => `${p.home}/4`, "home")}`;
   }
 
   function resultSound(r, state) {
@@ -210,5 +225,5 @@ GameUI.ludo = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "home" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('ludo',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "home" };
 })();

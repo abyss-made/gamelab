@@ -1,0 +1,16 @@
+PASS Categories rejects nonsense and explains why
+PASS Categories accepts proper names without corrupting final S and canonicalizes aliases
+PASS Categories review retains server invalid reasons and private submissions
+PASS Hot Potato rejects nonsense without passing or extending the fuse; normalized duplicates are blocked
+PASS Telephone sanitizes every new setting and rejects type coercion
+PASS Telephone configured steps finish exactly at the limit and reveal never invents a round
+PASS Telephone custom/curated sources seed private prompts with no human-submission credit
+PASS Bluff stores and exposes uppercase answers without leaking authors before reveal
+PASS Impostor views keep role, word and ballots private until the result
+PASS Golf all 24 holes offer six safe non-overlapping tee positions
+PASS Golf placement validates ownership, bounds, overlap and first-stroke restriction
+PASS Golf collision paths are deterministic and replay every moving ball
+PASS Golf slopes change a deterministic path and the original tour stays at 18 holes
+PASS Go Fish public transitions identify requests without leaking private draws
+PASS Configured round counters stay bounded and finish at the selected total
+experience41: 15 checks passed

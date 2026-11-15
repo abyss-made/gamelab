@@ -1,0 +1,69 @@
+reliabilityui: real server on http://localhost:40799, seed 48, Chromium 154.0.8037.57
+
+== invite-join
+PASS  invite-join: Create Party opens a party with a code (FXY8SG)
+PASS  invite-join: the invite link shows the party code before joining
+PASS  invite-join: joining by /r/CODE link, #CODE, a pasted link and a typed lower-case code all reach the same party
+PASS  invite-join: every page lists the same five people (5,5,5,5,5)
+PASS  invite-join: the server has five distinct members
+PASS  invite-join: only the host sees Start Game
+PASS  invite-join: phones have no horizontal overflow in the lobby (0,0)
+PASS  invite-join: five pages joined: every page agrees with the server
+PASS  invite-join: the server logged no handler or loop errors
+      (invite-join: 3034 ms)
+
+== drawguess-live
+PASS  drawguess-live: every page shows the game
+PASS  drawguess-live: turn 1: the drawer's page shows the word
+PASS  drawguess-live: a reload mid-game rejoins as the same member
+PASS  drawguess-live: the reloaded page replays the drawing so far (743 painted samples)
+PASS  drawguess-live: the reloaded page still does not show the word
+PASS  drawguess-live: the reload left no duplicate member
+PASS  drawguess-live: going offline shows Reconnecting to the others and a connection note on the page
+PASS  drawguess-live: coming back online rejoins automatically as the same member
+PASS  drawguess-live: after reload and offline: every page agrees with the server
+PASS  drawguess-live: turn 1: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 2: the drawer's page shows the word
+PASS  drawguess-live: turn 2: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 3: the drawer's page shows the word
+PASS  drawguess-live: turn 3: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 4: the drawer's page shows the word
+PASS  drawguess-live: turn 4: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: over 4 turns no page showed the word to anyone who had not guessed it
+PASS  drawguess-live: each of the four seated players drew once (4 turns)
+PASS  drawguess-live: the podium appears on every page
+PASS  drawguess-live: no page errors during the live game
+PASS  drawguess-live: after the podium: every page agrees with the server
+PASS  drawguess-live: the server logged no handler or loop errors
+      (drawguess-live: 12805 ms)
+
+== fourrow-switch-play
+PASS  fourrow-switch-play: switching to Four in a Row seats two and moves three to watch
+PASS  fourrow-switch-play: the two players the host ticked in "Pick who plays" are the ones seated
+PASS  fourrow-switch-play: everyone moved to watching is told why
+PASS  fourrow-switch-play: game 1: four clicks in a column win for the first player
+PASS  fourrow-switch-play: game 1: every page shows who plays next
+PASS  fourrow-switch-play: four in a row game 1: every page agrees with the server
+PASS  fourrow-switch-play: game 2: four clicks in a column win for the first player
+PASS  fourrow-switch-play: game 2: every page shows who plays next
+PASS  fourrow-switch-play: four in a row game 2: every page agrees with the server
+PASS  fourrow-switch-play: the server logged no handler or loop errors
+      (fourrow-switch-play: 1749 ms)
+
+== no-leaks-across-cycles
+PASS  no-leaks-across-cycles: after 8 more game cycles nothing grew on any page ({"intervals":0,"frames":0,"listeners":33,"socketCallbacks":10})
+PASS  no-leaks-across-cycles: no animation frame loop keeps running in the lobby
+PASS  no-leaks-across-cycles: no page errors across 16 game cycles
+PASS  no-leaks-across-cycles: the server logged no handler or loop errors
+      (no-leaks-across-cycles: 6798 ms)
+
+== smoke-21-multi-client
+PASS  smoke-21-multi-client: all 20 games start and end on two desktops and three phones without overflow
+PASS  smoke-21-multi-client: no page errors or console errors across the smoke pass
+PASS  smoke-21-multi-client: after the smoke pass: every page agrees with the server
+PASS  smoke-21-multi-client: the server logged no handler or loop errors
+      (smoke-21-multi-client: 5497 ms)
+
+metrics {"page_resources_after_cycles":[{"page":"Ana","intervals":0,"frames":0,"listeners":33,"socketCallbacks":10},{"page":"Ben","intervals":0,"frames":0,"listeners":33,"socketCallbacks":10},{"page":"Cy","intervals":1,"frames":0,"listeners":33,"socketCallbacks":10},{"page":"Dee","intervals":0,"frames":0,"listeners":33,"socketCallbacks":10},{"page":"Eli","intervals":1,"frames":0,"listeners":33,"socketCallbacks":10}],"host_page_heap_mb":5.1}
+
+reliabilityui: 49 passed, 0 failed in 30.9 s

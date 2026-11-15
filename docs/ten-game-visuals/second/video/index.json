@@ -1,0 +1,37 @@
+[
+  {
+    "file": "battleship-actual-play.webm",
+    "seconds": 12.64,
+    "codec": "vp8",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "file": "chess-actual-play.webm",
+    "seconds": 9.52,
+    "codec": "vp8",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "file": "colorstack-actual-play.webm",
+    "seconds": 7.6,
+    "codec": "vp8",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "file": "impostor-actual-play.webm",
+    "seconds": 10.32,
+    "codec": "vp8",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "file": "telephone-actual-play.webm",
+    "seconds": 19.28,
+    "codec": "vp8",
+    "width": 800,
+    "height": 500
+  }
+]

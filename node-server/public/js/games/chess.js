@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.chess = (() => {
   const C = GameUI.common;
+  const FX=GameUI.batch2fx;
+  let drag=null,suppressClick=false,captures=[];
   const GLYPH = { K: "♚", Q: "♛", R: "♜", B: "♝", N: "♞", P: "♟" };
   const WORD = { K: "king", Q: "queen", R: "rook", B: "bishop", N: "knight", P: "pawn" };
   let root = null;
@@ -44,7 +46,7 @@ GameUI.chess = (() => {
         const cls = ["ch-sq", (r + f) % 2 === 0 ? "dark" : "light", g.last && (g.last.from === i || g.last.to === i) ? "last" : "", i === selected ? "sel" : "", isT ? (p ? "cap" : "target") : "", g.check === i ? "check" : ""].join(" ");
         const who = p ? `${p[0] === "w" ? "White" : "Black"} ${WORD[p[1]]}` : "empty";
         const coord = (col === 0 ? `<i class="rk">${r + 1}</i>` : "") + (row === 7 ? `<i class="fl">${"abcdefgh"[f]}</i>` : "");
-        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}${animate && g.last && g.last.to === i && g.last.from !== undefined ? " slid" : ""}"${animate && g.last && g.last.to === i && g.last.from !== undefined ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${GameUI.art.chessPiece(p[1])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
+        html += `<button type="button" class="${cls}" data-sq="${i}" aria-label="${name(i)}: ${who}${isT ? ", legal destination" : ""}" ${can ? "" : "disabled"}>${coord}${p ? `<span class="ch-piece ${p[0]}${animate && g.last && g.last.to === i && g.last.from !== undefined ? " slid" : ""}"${animate && g.last && g.last.to === i && g.last.from !== undefined ? ` style="${GameUI.art.slide(g.last.from, i, flip)}"` : ""}>${GameUI.scenes.piece(p[1],p[0])}</span>` : isT ? '<span class="ck-dot"></span>' : ""}</button>`;
       }
     }
     return html + "</div>";
@@ -62,14 +64,47 @@ GameUI.chess = (() => {
     root.dataset.theme = loadTheme();
     root.innerHTML = `<div class="ch-layout pch-layout"><div class="pch-table" id="ch-top"><div class="pch-player" id="ch-opp"></div><div id="ch-board"></div><div class="pch-player" id="ch-me"></div></div>
       <div class="ch-side pch-notes"><div class="pch-caption"><span class="pch-eyebrow" id="ch-eyebrow">WALNUT &amp; IVORY</span><div class="ttt-status" id="ch-status" aria-live="polite"></div></div>
-      <div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
-      <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Walnut</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
+      <div class="b25-captures" id="ch-captures" hidden aria-label="Recent captures"></div><div id="ch-offer"></div><div class="pch-moves"><span class="pch-eyebrow">MOVES</span><ol class="ch-moves" id="ch-moves" aria-label="Move list"></ol></div>
+      <div class="pch-theme" role="group" aria-label="Board style"><span>Board style</span><button type="button" class="btn btn-small btn-ghost" data-theme="walnut">Ivory</button><button type="button" class="btn btn-small btn-ghost" data-theme="slate">Slate</button></div>
       <div class="board-actions" id="ch-actions"></div><small class="muted">Tap a piece, then a highlighted square.</small></div></div>
       <div class="ch-promo" id="ch-promo" hidden></div>`;
+    root.dataset.ten='chess';
+    GameUI.scenes.mount(root,'chess');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     tickTimer = setInterval(drawClocks, 250);
-    root.addEventListener("click", (e) => C.keepFocus(document.getElementById("stage"), () => onClick(e)));
+    root.addEventListener("click", e=>{if(suppressClick)return;C.keepFocus(document.getElementById("stage"),()=>onClick(e));});
+    bindDrag();
+    root.addEventListener('keydown',e=>{
+      const dialog=root.querySelector('#ch-promo');FX.trap(e,dialog);
+      if(e.key==='Escape'&&!dialog.hidden){e.preventDefault();cancelPromo();}
+    });
+  }
+
+  function cancelPromo(){const from=pendingPromo?.from;pendingPromo=null;root.querySelector('#ch-promo').hidden=true;if(from!==undefined)root.querySelector(`[data-sq="${from}"]`)?.focus();}
+  function moveTo(from,to){
+    const g=S?.game;if(!g||g.myIndex!==g.turn||!g.legal[from]?.includes(to))return;
+    const p=g.board[from];if(p?.[1]==='P'&&(to>>3===7||to>>3===0)){pendingPromo={from,to};showPromo(p[0]);return;}
+    send(from,to);sel=-1;
+  }
+  function clearDrag(){
+    drag?.ghost?.remove();root?.querySelectorAll('.b25-drag-target,.b25-drag-source').forEach(n=>n.classList.remove('b25-drag-target','b25-drag-source'));drag=null;
+  }
+  function bindDrag(){
+    root.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-sq]'),g=S?.game;if(!b||g?.myIndex!==g?.turn||!g.legal[b.dataset.sq])return;drag={from:Number(b.dataset.sq),x:e.clientX,y:e.clientY,pointer:e.pointerId,moved:false};});
+    root.addEventListener('pointermove',e=>{
+      if(!drag||drag.pointer!==e.pointerId)return;
+      if(!drag.moved&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>6){drag.moved=true;root.setPointerCapture(e.pointerId);sel=drag.from;paint();const p=root.querySelector(`[data-sq="${sel}"] .ch-piece`);drag.ghost=p?.cloneNode(true);if(drag.ghost){drag.ghost.classList.add('b25-chess-ghost');drag.ghost.setAttribute('aria-hidden','true');root.append(drag.ghost);}root.querySelector(`[data-sq="${sel}"]`)?.classList.add('b25-drag-source');}
+      if(!drag.moved)return;e.preventDefault();if(drag.ghost){drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';}
+      root.querySelectorAll('.b25-drag-target').forEach(n=>n.classList.remove('b25-drag-target'));
+      const b=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-sq]');if(b&&S.game.legal[drag.from]?.includes(Number(b.dataset.sq)))b.classList.add('b25-drag-target');
+    });
+    root.addEventListener('pointerup',e=>{
+      if(!drag)return;const d=drag,b=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-sq]');clearDrag();if(!d.moved)return;
+      suppressClick=true;setTimeout(()=>suppressClick=false,0);if(root.hasPointerCapture(e.pointerId))root.releasePointerCapture(e.pointerId);
+      if(b)moveTo(d.from,Number(b.dataset.sq));
+    });
+    root.addEventListener('pointercancel',clearDrag);
   }
 
   function send(from, to, promo) {
@@ -88,22 +123,14 @@ GameUI.chess = (() => {
       return;
     }
     if (e.target.closest("#ch-promo-cancel")) {
-      pendingPromo = null;
-      root.querySelector("#ch-promo").hidden = true;
+      cancelPromo();
       return;
     }
     const b = e.target.closest("[data-sq]");
     if (b && !b.disabled && g.myIndex === g.turn) {
       const i = Number(b.dataset.sq);
       if (sel >= 0 && g.legal[sel] && g.legal[sel].includes(i)) {
-        const piece = g.board[sel];
-        if (piece && piece[1] === "P" && (i >> 3 === 7 || i >> 3 === 0)) {
-          pendingPromo = { from: sel, to: i };
-          showPromo(piece[0]);
-          return;
-        }
-        send(sel, i);
-        sel = -1;
+        moveTo(sel,i);
       } else if (g.legal[i]) {
         sel = i;
         paint();
@@ -134,8 +161,10 @@ GameUI.chess = (() => {
 
   function showPromo(colour) {
     const el = root.querySelector("#ch-promo");
-    el.hidden = false;
-    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.art.chessPiece(t)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    el.hidden = false;el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","Choose promotion piece");
+    el.innerHTML = `<div class="card"><b>Promote to</b><div class="ch-promo-row">${["Q", "R", "B", "N"].map((t) => `<button type="button" class="btn ch-promo-btn" data-promo="${t}" aria-label="${WORD[t]}"><span class="ch-piece ${colour}">${GameUI.scenes.piece(t,colour)}</span></button>`).join("")}</div><button type="button" class="btn btn-small btn-ghost" id="ch-promo-cancel">Cancel</button></div>`;
+    FX.animate(el.firstElementChild,[{opacity:.2,transform:"translateY(14px)"},{opacity:1,transform:"none"}],260);
+    el.querySelector("[data-promo]").focus();
   }
 
   function paint() {
@@ -157,6 +186,8 @@ GameUI.chess = (() => {
   }
 
   function update(state) {
+    const before=S?.game;
+    clearDrag();
     S = state;
     const g = S.game;
     if (!g) return;
@@ -176,10 +207,21 @@ GameUI.chess = (() => {
     root.querySelector("#ch-eyebrow").textContent = root.dataset.theme === "slate" ? "SLATE & IVORY" : "WALNUT & IVORY";
     const turnName = app.esc(g.players[g.turn].name);
     const st = root.querySelector("#ch-status");
-    const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">⚠ Check!</b>' : "";
+    const chk = g.check >= 0 ? ' <b class="ch-check-banner" role="status">Check — protect your king</b>' : "";
     st.innerHTML = (g.myIndex < 0 ? `You're watching. <b>${turnName}</b> is up.` : myTurn ? "<b>Your turn!</b> Tap a piece, then a square." : `Waiting for <b>${turnName}</b>...`) + chk;
     st.className = "ttt-status" + (myTurn ? " mine" : "");
     paint();
+    if(before&&g.moves.length>before.moves.length&&g.last){
+      let taken=before.board[g.last.to];
+      const mover=before.board[g.last.from];
+      if(!taken&&mover?.[1]==='P'&&(g.last.from&7)!==(g.last.to&7))taken=before.board[(g.last.from&~7)+(g.last.to&7)];
+      if(taken && g.moves.length===before.moves.length+1)captures.push(taken);
+      captures=captures.slice(-6);
+      if(taken)FX.transient(root,root.querySelector(`[data-sq="${g.last.to}"]`),'capture');
+      if(g.check>=0&&g.check!==before.check)FX.transient(root,root.querySelector(`[data-sq="${g.check}"]`),'check');
+    }
+    const tray=root.querySelector('#ch-captures');tray.hidden=!captures.length;
+    tray.innerHTML='<small>RECENT CAPTURES</small>'+captures.map(p=>`<span class="ch-piece ${p[0]}" role="img" aria-label="Captured ${p[0]==='w'?'White':'Black'} ${WORD[p[1]]}">${GameUI.scenes.piece(p[1],p[0])}</span>`).join('');
     const list = root.querySelector("#ch-moves");
     list.innerHTML = g.moves.reduce((h, m, i) => (i % 2 === 0 ? h + `<li><span class="n">${i / 2 + 1}.</span> <span>${app.esc(m)}</span>` : h + ` <span>${app.esc(m)}</span></li>`), "") + (g.moves.length % 2 ? "</li>" : "");
     if (g.moves.length !== lastCount) list.scrollTop = list.scrollHeight;
@@ -197,19 +239,20 @@ GameUI.chess = (() => {
     if (clock) clock.stop();
     resign.reset();
     clearInterval(tickTimer);
+    clearDrag();
     if (root) root.remove();
     root = null;
-    sel = -1;
+    sel = -1;captures=[];
     pendingPromo = null;
     lastCount = -1;
     animatedCount = -1;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.players.find((p) => p.id === r.winnerId);
     const title = r.draw ? "It's a draw!" : r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
     const next = r.nextUp ? `<p class="center next-up">Winner stays: <b>${a.esc(r.nextUp)}</b> plays next.</p>` : "";
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${a.esc(r.reasonText)} · ${Math.ceil(r.moves.length / 2)} moves</p><div class="ch-small">${boardHTML({ board: r.board, last: r.last, legal: {}, check: -1 }, { label: "Final chess board" })}</div><p class="ch-final-moves muted">${r.moves.map((m, i) => (i % 2 ? "" : `${i / 2 + 1}. `) + a.esc(m)).join(" ")}</p>${next}`;
+    return `<h2 class="result-title b25-result">${title}</h2><p class="muted center">${a.esc(r.reasonText)} · ${Math.ceil(r.moves.length / 2)} moves</p><div class="ch-small">${boardHTML({ board: r.board, last: r.last, legal: {}, check: -1 }, { label: "Final chess board" })}</div><p class="ch-final-moves muted">${r.moves.map((m, i) => (i % 2 ? "" : `${i / 2 + 1}. `) + a.esc(m)).join(" ")}</p>${next}`;
   }
 
   function resultSound(r, state) {
@@ -217,5 +260,5 @@ GameUI.chess = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('chess',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

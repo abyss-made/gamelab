@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.golf = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
+  const visual = FX.scene();
   const COLORS = ["#ff477b", "#4db8ff", "#ffcd2d", "#adff00", "#b48cff", "#ff9a3d"];
   let root = null;
   let app = null;
@@ -95,17 +97,19 @@ GameUI.golf = (() => {
     return out;
   }
   function drawDeco(c) {
-    for (const d of deco) {
-      if (d.t === "tree") {
-        c.beginPath(); c.arc(d.x + 3, d.y + 5, d.r, 0, 7); c.fillStyle = "#0b2e2655"; c.fill();
-        c.beginPath(); c.arc(d.x, d.y, d.r, 0, 7); c.fillStyle = "#2f7a46"; c.fill();
-        c.beginPath(); c.arc(d.x - d.r * 0.25, d.y - d.r * 0.25, d.r * 0.62, 0, 7); c.fillStyle = "#4f9a52"; c.fill();
-        c.beginPath(); c.moveTo(d.x - d.r * 0.5, d.y); c.quadraticCurveTo(d.x, d.y - d.r * 0.5, d.x + d.r * 0.4, d.y - d.r * 0.2); c.strokeStyle = "#9fd07a66"; c.lineWidth = 1.5; c.stroke();
-      } else {
-        c.fillStyle = "#3d7a3a"; c.beginPath(); c.ellipse(d.x, d.y, 14, 7, 0, 0, 7); c.fill();
-        c.fillStyle = d.c;
-        for (const [ox, oy] of [[-8, -1], [-3, 2], [3, -2], [8, 1]]) { c.beginPath(); c.arc(d.x + ox, d.y + oy, 2.6, 0, 7); c.fill(); }
+    for(const d of deco){
+      c.save();c.translate(d.x,d.y);
+      const sprite=GameUI.scenes.image(d.t==='tree'?'garden-tree':'garden-rock');
+      if(sprite&&d.t==='tree'){c.drawImage(sprite,-d.r*1.7,-d.r*1.9,d.r*3.4,d.r*3.4);}
+      else if(d.t==='tree'){
+        c.fillStyle='#031b2a77';c.beginPath();c.ellipse(6,9,d.r*1.1,d.r*.9,0,0,7);c.fill();
+        for(let j=0;j<7;j++){const a=j*Math.PI*2/7,x=Math.cos(a)*d.r*.42,y=Math.sin(a)*d.r*.42,g=c.createRadialGradient(x-3,y-4,1,x,y,d.r*.65);g.addColorStop(0,j%2?'#6aa793':'#93bf92');g.addColorStop(1,'#1c5b65');c.fillStyle=g;c.beginPath();c.arc(x,y,d.r*.65,0,7);c.fill();}
+        c.strokeStyle='#c5deaa77';c.lineWidth=1;c.beginPath();c.arc(-3,-4,d.r*.5,3.4,5.5);c.stroke();
+      }else{
+        c.fillStyle='#193f50';c.beginPath();c.ellipse(0,3,15,8,0,0,7);c.fill();
+        for(const [x,y] of [[-8,-1],[-2,2],[4,-2],[9,1]]){c.strokeStyle='#88c7b3';c.lineWidth=1;c.beginPath();c.moveTo(x,y+4);c.lineTo(x,y-2);c.stroke();for(let k=0;k<5;k++){c.fillStyle=d.c;c.beginPath();c.arc(x+Math.cos(k*1.25)*2,y+Math.sin(k*1.25)*2,2,0,7);c.fill();}c.fillStyle='#f2d58f';c.beginPath();c.arc(x,y,1.4,0,7);c.fill();}
       }
+      c.restore();
     }
   }
 
@@ -168,29 +172,32 @@ GameUI.golf = (() => {
   function scene(now) {
     const h = g.hole;
     const lawn = ctx.createLinearGradient(0, 0, 0, g.size.h);
-    lawn.addColorStop(0, "#88bd5e");
-    lawn.addColorStop(1, "#588b43");
+    lawn.addColorStop(0, "#265d47");
+    lawn.addColorStop(1, "#123b36");
     ctx.fillStyle = lawn;
     ctx.fillRect(-400, -400, g.size.w + 800, g.size.h + 800);
     drawDeco(ctx);
+    // Raised miniature course base. Its top edge remains the exact collision polygon.
+    ctx.save();ctx.translate(0,7);poly(ctx,h.poly);ctx.shadowColor='#041f25aa';ctx.shadowBlur=16;ctx.shadowOffsetY=8;ctx.fillStyle='#314b30';ctx.fill();ctx.strokeStyle='#173b2a';ctx.lineWidth=15;ctx.lineJoin='round';ctx.stroke();ctx.restore();
     // fairway with mowing stripes
     poly(ctx, h.poly);
-    ctx.fillStyle = "#4fae5d";
+    const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#8acb59");green.addColorStop(.55,"#62b447");green.addColorStop(1,"#328b43");
+    ctx.fillStyle = green;
     ctx.fill();
     ctx.save();
     poly(ctx, h.poly);
     ctx.clip();
     ctx.fillStyle = "#ffffff10";
-    for (let x = 0; x < g.size.w; x += 44) ctx.fillRect(x, 0, 22, g.size.h);
+    for(let y=0;y<g.size.h;y+=40)for(let x=0;x<g.size.w;x+=40)if((x/40+y/40)%2===0)ctx.fillRect(x,y,40,40);
     const cupGlow = ctx.createRadialGradient(h.cup[0], h.cup[1], 4, h.cup[0], h.cup[1], 70);
     cupGlow.addColorStop(0, "#7fd07a55");
     cupGlow.addColorStop(1, "#7fd07a00");
     ctx.fillStyle = cupGlow;
     ctx.fillRect(h.cup[0] - 70, h.cup[1] - 70, 140, 140);
-    for (const z of h.sand) { ctx.fillStyle = "#ead7a0"; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(z.x, z.y, z.w, z.h, 14) : ctx.rect(z.x, z.y, z.w, z.h); ctx.fill(); ctx.strokeStyle = "#c9ae66"; ctx.lineWidth = 2; ctx.stroke(); }
+    for (const z of h.sand) { ctx.fillStyle = "#dfc399"; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(z.x, z.y, z.w, z.h, 14) : ctx.rect(z.x, z.y, z.w, z.h); ctx.fill(); ctx.strokeStyle = "#c9ae66"; ctx.lineWidth = 2; ctx.stroke(); }
     for (const z of h.water) {
       const wg = ctx.createLinearGradient(z.x, z.y, z.x + z.w, z.y + z.h);
-      wg.addColorStop(0, "#59b7b2"); wg.addColorStop(1, "#267e8f");
+      wg.addColorStop(0, "#234c7e"); wg.addColorStop(1, "#102a51");
       ctx.fillStyle = wg; ctx.fillRect(z.x, z.y, z.w, z.h);
       ctx.strokeStyle = "#cfeee966"; ctx.lineWidth = 1.5;
       for (let y = z.y + 10; y < z.y + z.h; y += 14) { ctx.beginPath(); ctx.moveTo(z.x + 8, y); ctx.bezierCurveTo(z.x + z.w * 0.3, y - 4, z.x + z.w * 0.6, y + 4, z.x + z.w - 8, y); ctx.stroke(); }
@@ -199,30 +206,33 @@ GameUI.golf = (() => {
     // jointed limestone curbs
     ctx.lineJoin = "round";
     poly(ctx, h.poly);
-    ctx.strokeStyle = "#2c5f3f";
+    ctx.strokeStyle = "#173343";
     ctx.lineWidth = 12;
     ctx.stroke();
-    ctx.strokeStyle = "#e9e2c4";
+    ctx.strokeStyle = "#cfb681";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.save();
     ctx.setLineDash([1.2, 16]);
-    ctx.strokeStyle = "#9d987c";
+    ctx.strokeStyle = "#7d7550";
     ctx.lineWidth = 7;
     ctx.stroke();
     ctx.restore();
     for (const w of h.walls) {
+      ctx.save();ctx.translate(2,5);poly(ctx,w);ctx.fillStyle='#1d412c';ctx.shadowColor='#17372988';ctx.shadowBlur=7;ctx.fill();ctx.restore();
       poly(ctx, w);
-      ctx.fillStyle = "#d9d1b0";
+      const wg=ctx.createLinearGradient(0,0,g.size.w,g.size.h);wg.addColorStop(0,'#dbbd7d');wg.addColorStop(1,'#88643e');
+      ctx.fillStyle = wg;
       ctx.fill();
-      ctx.strokeStyle = "#7d7759";
+      ctx.strokeStyle = "#f2d69b";
       ctx.lineWidth = 3;
       ctx.stroke();
     }
     for (const b of h.bumpers) {
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, 7);
-      ctx.fillStyle = "#adff00";
+      const bumper=ctx.createRadialGradient(b.x-b.r*.3,b.y-b.r*.4,1,b.x,b.y,b.r);bumper.addColorStop(0,"#e4ffc1");bumper.addColorStop(.4,"#9be859");bumper.addColorStop(1,"#2b694c");
+      ctx.fillStyle = bumper;
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.strokeStyle = "#030d17";
@@ -272,7 +282,9 @@ GameUI.golf = (() => {
     g.players.forEach((p, i) => {
       if (p.out) return;
       const pos = ballAt(p, now);
+      if(p.holed && !(g.anim && now-animT0<g.anim.duration*1000)) visual.ball(ctx,p.id,{x:p.x,y:p.y,gone:true},now,h.ballR,colorOf(i));
       if (!pos || (p.holed && !(g.anim && (g.anim.by === p.id || g.anim.paths?.[p.id]) && g.anim.shot === animKey && now - animT0 < g.anim.duration * 1000))) return;
+      visual.ball(ctx,p.id,pos,now,h.ballR,colorOf(i));
       ctx.beginPath();
       ctx.arc(pos.x + 1, pos.y + 2, h.ballR, 0, 7);
       ctx.fillStyle = "#0005";
@@ -287,6 +299,7 @@ GameUI.golf = (() => {
       ctx.strokeStyle = colorOf(i);
       ctx.stroke();
     });
+    visual.draw(ctx,now);
     // aim guide
     if (canPutt() && mineIdx >= 0 && t0) {
       const len = 40 + power * 1.6;
@@ -353,6 +366,7 @@ GameUI.golf = (() => {
   }
 
   function mount(stage, a) {
+    visual.reset();
     app = a;
     root = document.createElement("div");
     root.className = "b2 gf golf";
@@ -367,7 +381,12 @@ GameUI.golf = (() => {
         <div class="board-actions"><button type="button" class="btn" id="gf-putt">Putt</button></div>
       </div>
       <div class="gf-card card" id="gf-card"></div>`;
+    root.dataset.ten='golf';
+    GameUI.scenes.mount(root,'golf');
     stage.appendChild(root);
+    const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
+    root.querySelector('.gf-controls').append(presets);
+    presets.addEventListener('click',e=>{const b=e.target.closest('[data-p5-power]'),slider=root.querySelector('#gf-pow');if(!b||slider.disabled)return;slider.value=b.dataset.p5Power;slider.dispatchEvent(new Event('input',{bubbles:true}));});
     canvas = root.querySelector("#gf-canvas");
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
@@ -426,6 +445,7 @@ GameUI.golf = (() => {
     aimEl.disabled = !mine;
     powEl.disabled = !mine;
     root.querySelector("#gf-putt").disabled = !mine;
+    root.querySelectorAll('[data-p5-power]').forEach(b=>{b.disabled=!mine;b.setAttribute('aria-pressed',String(Number(b.dataset.p5Power)===power));});
   }
 
   function scoreCard() {
@@ -485,6 +505,7 @@ GameUI.golf = (() => {
   }
 
   function update(state) {
+    const priorPhase = g?.phase;
     S = state;
     g = state.game;
     if (!g) return;
@@ -512,6 +533,7 @@ GameUI.golf = (() => {
       }
     } else if (g.turnId !== S.you) update.aimed = false;
     paintText();
+    if(priorPhase && priorPhase!=="between" && g.phase==="between") FX.animate(root.querySelector("#gf-between"),[{opacity:0,transform:"translateY(12px)"},{opacity:1,transform:"none"}],420);
     syncControls();
     clearTimeout(tickT);
     const wait = busyUntil - performance.now();
@@ -519,6 +541,7 @@ GameUI.golf = (() => {
   }
 
   function unmount() {
+    visual.reset();
     cancelAnimationFrame(raf);
     clearTimeout(tickT);
     window.removeEventListener("resize", fit);
@@ -527,14 +550,14 @@ GameUI.golf = (() => {
     root = null; canvas = null; ctx = null; g = null; placing = false; teeDraft = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const top = r.standings[0];
     const title = r.tie ? (r.winners.includes(state.you) ? "It's a tie, and you're in it!" : "It's a tie!") : r.winnerId === state.you ? "You win!" : `${a.esc(top ? top.name : "Someone")} wins!`;
     const rows = r.standings
       .map((p, i) => `<tr class="${p.id === state.you ? "me" : ""}"><th scope="row">${i + 1}. ${a.esc(p.name)}${p.out ? " (left)" : ""}</th>${r.pars.map((_, h) => `<td>${p.scores[h] === null ? "–" : p.scores[h]}</td>`).join("")}<td><b>${p.total}</b></td></tr>`)
       .join("");
     const head = `<tr><th scope="col">${a.esc(r.course)}</th>${r.pars.map((p, i) => `<th scope="col">${i + 1}<small>par ${p}</small></th>`).join("")}<th scope="col">Total</th></tr>`;
-    return `<h2 class="result-title">${title}</h2><div class="gf-scroll"><table class="gf-table"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><div class="gf-scroll"><table class="gf-table"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
   }
 
   function resultSound(r, state) {
@@ -542,5 +565,5 @@ GameUI.golf = (() => {
     return r.winners.includes(state.you) ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('golf',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

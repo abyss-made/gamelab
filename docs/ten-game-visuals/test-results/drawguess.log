@@ -1,0 +1,81 @@
+PASS  each difficulty tier has 100+ words
+PASS  word bank has 700+ entries (1517)
+PASS  no duplicate entries after normalizing
+PASS  entries are 3-30 plain characters
+PASS  hard tier has many multi-word concepts
+PASS  bank has 1400+ words, 450+ per tier (497/533/487)
+PASS  no word is altered by the chat filter, so every word can be guessed ()
+PASS  defaults: medium difficulty, 80s
+PASS  drawTime 30 accepted
+PASS  drawTime 45 accepted
+PASS  drawTime 60 accepted
+PASS  drawTime 80 accepted
+PASS  drawTime 100 accepted
+PASS  drawTime 120 accepted
+PASS  drawTime 150 accepted
+PASS  drawTime 180 accepted
+PASS  drawTime 240 accepted
+PASS  drawTime 300 accepted
+PASS  drawTime 0 rejected
+PASS  drawTime 29 rejected
+PASS  drawTime 181 rejected
+PASS  drawTime 250 rejected
+PASS  drawTime 301 rejected
+PASS  drawTime 9999 rejected
+PASS  drawTime -5 rejected
+PASS  drawTime "120" rejected
+PASS  drawTime null rejected
+PASS  drawTime null rejected
+PASS  drawTime {} rejected
+PASS  drawTime [120] rejected
+PASS  difficulty easy accepted
+PASS  difficulty medium accepted
+PASS  difficulty hard accepted
+PASS  difficulty mixed accepted
+PASS  difficulty "EASY" rejected
+PASS  difficulty "extreme" rejected
+PASS  difficulty "" rejected
+PASS  difficulty null rejected
+PASS  difficulty 1 rejected
+PASS  difficulty {} rejected
+PASS  difficulty ["hard"] rejected
+PASS  custom-only refused with no custom words
+PASS  custom-only refused with 5 custom words
+PASS  custom-only accepted with 6 custom words
+PASS  custom-only counts normalized duplicates once
+PASS  custom-only switches off when custom words drop below 6
+PASS  easy: always 6 distinct words, all from the easy tier
+PASS  medium: always 6 distinct words, all from the medium tier
+PASS  hard: always 6 distinct words, all from the hard tier
+PASS  mixed: 6 distinct words spanning all three tiers
+PASS  mixed: every choice set has easy, medium and hard words
+PASS  custom-only: 6 distinct custom words, no built-in words
+PASS  custom-only with a short pool never substitutes built-in words
+PASS  custom words are an extra pool alongside the chosen difficulty
+PASS  near exhaustion: unplayed words first, then repeats, never duplicates
+PASS  fully exhausted tier still yields 6 distinct words
+PASS  played words are matched by normalized form
+PASS  fills are capped at 100 per turn
+PASS  rejected fills send the real canvas back to the drawer only
+PASS  turn starts with 6 choices
+PASS  only the drawer receives the choices
+PASS  spectator view does not contain any choice
+PASS  300s timer drives the draw deadline
+PASS  hints are scheduled inside the longer turn
+PASS  reconnect view reports remaining time against the full 300s
+PASS  fill paints the clicked area
+PASS  fill does not leak outside a closed outline
+PASS  outline core is untouched
+PASS  anti-aliased rim inside the outline is tinted by the fill, no white halo (219,70,70)
+PASS  rim pixels outside the shape are untouched
+PASS  filling outside leaves the inside of a closed shape alone
+PASS  a 1px line separates two areas
+PASS  an outline with a gap leaks, as expected
+PASS  out-of-range clicks are ignored
+PASS  filling with the same color is a no-op
+PASS  same history produces identical canvases
+PASS  full 800x600 fill is bounded (37 ms)
+PASS  optimized fill matches the original algorithm pixel for pixel on 120 random canvases
+PASS  full-canvas fill is faster than before (13.8 ms vs 32.5 ms per fill)
+
+All passed

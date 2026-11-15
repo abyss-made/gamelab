@@ -183,7 +183,7 @@ const GAMES = ['pool', 'golf', 'tycoon'];
           await page.evaluate(() => { const e = document.querySelector('#pl-pow'); e.value = 85; e.dispatchEvent(new Event('input', { bubbles: true })); });
           ok((await page.textContent('#pl-pow-val')).includes('85'), `${t}: the power slider updates the readout`);
           const sliderBox = await page.locator('#pl-pow').boundingBox();
-          ok(sliderBox.height >= 28 && sliderBox.width >= 200, `${t}: the power slider is touch sized`);
+          ok(Math.min(sliderBox.height,sliderBox.width) >= 28 && Math.max(sliderBox.height,sliderBox.width) >= 200, `${t}: the power slider is touch sized`);
           await shot('-aim');
           const shotsBefore = await page.evaluate(() => window.App.S.game.shots);
           await page.click('#pl-shoot');

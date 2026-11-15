@@ -1,0 +1,32 @@
+{
+  "sourceCommit": "5fa16390038a1d3219705cc337ceece0072227c8",
+  "comparisonBaseline": "600d87bbfb0b2d29f1b3c8ed312cb3dbf44fe491",
+  "latestPassingTestPrograms": 37,
+  "initialFullRun": "36 passed; batch2ui failed long-hand reachability; production fix and affected program rerun passed",
+  "affectedProgramReruns": [
+    "batch2ui",
+    "batch5ui",
+    "design31ui"
+  ],
+  "actualGamePNGs": 146,
+  "videos": 10,
+  "originalScenePNGs": 53,
+  "originalSceneSVGs": 4,
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      932,
+      430
+    ]
+  ],
+  "maxPartyViews": 15,
+  "merged": false,
+  "deployed": false
+}

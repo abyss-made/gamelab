@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "Battleship mouse/touch fleet dragging, explicit Fire, actual miss/hits and sunk ship",
+    "battleship: 3 viewports, identity reconnect, reduced motion and real departure result",
+    "Color Stack select-before-Play, actual discard/draw and optional wild dialog cancel",
+    "colorstack: 3 viewports, identity reconnect, reduced motion and real departure result",
+    "Impostor local concealment preserves countdown, legal clues, explicit vote confirmation and public reveal",
+    "impostor: 3 viewports, identity reconnect, reduced motion and real departure result",
+    "Chess mouse drag, real touch drag, click-to-move capture and authoritative board update",
+    "Chess legal promotion, Queen focus, Escape restoration and actual promoted position",
+    "chess: 3 viewports, identity reconnect, reduced motion and real departure result",
+    "Telephone real prompt/drawing/guess chain, preserved reveal DOM during likes and revealed-entry navigation",
+    "telephone: 3 viewports, identity reconnect, reduced motion and real departure result"
+  ],
+  "errors": []
+}

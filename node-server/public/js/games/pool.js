@@ -3,6 +3,8 @@
 window.GameUI = window.GameUI || {};
 GameUI.pool = (() => {
   const C = GameUI.common;
+  const FX = GameUI.premium5;
+  const visual = FX.scene();
   const PAD = 44;
   const COLORS = { 1: "#f6c90e", 2: "#2b6fe0", 3: "#e0393e", 4: "#7b3fb8", 5: "#f08a24", 6: "#1f9d57", 7: "#8a2a2a", 8: "#111", 9: "#f6c90e", 10: "#2b6fe0", 11: "#e0393e", 12: "#7b3fb8", 13: "#f08a24", 14: "#1f9d57", 15: "#8a2a2a" };
   let root = null;
@@ -21,6 +23,7 @@ GameUI.pool = (() => {
   let animT0 = 0;
   let busyUntil = 0;
   let lastShot = -1;
+  let outcomeSeeded = false, outcomeKey = null;
   let dragging = null;
   let pendingCue = null; // { aim, from, until }: cue shown at contact while the server resolves the shot
 
@@ -119,6 +122,9 @@ GameUI.pool = (() => {
     c.arc(x + 1.5, y + 2.5, r, 0, 7);
     c.fillStyle = "#0006";
     c.fill();
+    const sprite=GameUI.scenes.image('pool-ball-'+b.id);
+    if(sprite)c.drawImage(sprite,x-r*1.1,y-r*1.1,r*2.2,r*2.2);
+    else {
     c.beginPath();
     c.arc(x, y, r, 0, 7);
     c.fillStyle = b.id === 0 ? "#f6f8fb" : b.id > 8 ? "#f6f8fb" : COLORS[b.id];
@@ -131,6 +137,10 @@ GameUI.pool = (() => {
       c.fillStyle = COLORS[b.id];
       c.fillRect(x - r, y - r * 0.55, r * 2, r * 1.1);
       c.restore();
+    }
+    const shade=c.createRadialGradient(x-r*.35,y-r*.4,r*.1,x+r*.2,y+r*.3,r*1.25);
+    shade.addColorStop(0,'#ffffff55');shade.addColorStop(.5,'#ffffff00');shade.addColorStop(1,'#00000099');
+    c.fillStyle=shade;c.beginPath();c.arc(x,y,r,0,7);c.fill();
     }
     if (b.id !== 0) {
       c.beginPath();
@@ -147,10 +157,7 @@ GameUI.pool = (() => {
       c.fillText(String(b.id), 0, 0.5);
       c.restore();
     }
-    c.beginPath();
-    c.arc(x - r * 0.32, y - r * 0.34, r * 0.22, 0, 7);
-    c.fillStyle = "#ffffff80";
-    c.fill();
+    if(!sprite){c.beginPath();c.arc(x-r*.32,y-r*.34,r*.22,0,7);c.fillStyle='#ffffff80';c.fill();}
     c.lineWidth = 1;
     c.strokeStyle = "#0008";
     c.beginPath();
@@ -206,18 +213,28 @@ GameUI.pool = (() => {
     for (const p of t.pockets) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82 + 5, 0, 7);
-      ctx.fillStyle = "#9c7a45";
+      ctx.fillStyle = "#1d1715";
       ctx.fill();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 0.82, 0, 7);
       const pg = ctx.createRadialGradient(p.x, p.y, 2, p.x, p.y, p.r);
       pg.addColorStop(0, "#000");
-      pg.addColorStop(1, "#14110d");
+      pg.addColorStop(1, "#152d3d");
       ctx.fillStyle = pg;
       ctx.fill();
+      // Recessed leather collars and stitching stay concentric with the server pockets.
+      ctx.strokeStyle='#b48c58';ctx.lineWidth=1.2;ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*.82+6,0,Math.PI*2);ctx.stroke();
+      ctx.save();ctx.setLineDash([2,3]);ctx.strokeStyle='#cccebd66';ctx.lineWidth=.8;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*.82+3,0,Math.PI*2);ctx.stroke();ctx.restore();
     }
+    ctx.save();ctx.strokeStyle='#d3f5dd09';ctx.lineWidth=.6;
+    for(let y=4;y<t.h;y+=8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(t.w,y);ctx.stroke();}
+    ctx.restore();
     const cur = currentBalls(now);
     const mine = canShoot();
+    for (const b of cur.balls) visual.ball(ctx,b.id,b,now,t.r,b.id===0?"#ebffe0":COLORS[b.id]);
+    visual.draw(ctx,now);
     // guide
     if (mine && !cur.moving && !(g.inHand && placing)) {
       const from = cueXY();
@@ -284,45 +301,28 @@ GameUI.pool = (() => {
   }
 
   // Walnut rail, brass diamonds, jewel-green cloth (material only; geometry is the server's table).
-  function drawTable(t, w, h) {
-    const wood = ctx.createLinearGradient(0, 0, 0, h);
-    wood.addColorStop(0, "#9a6a3f");
-    wood.addColorStop(0.5, "#7a4f2c");
-    wood.addColorStop(1, "#5e3a1f");
-    ctx.fillStyle = wood;
-    ctx.beginPath();
-    ctx.roundRect ? ctx.roundRect(0, 0, w, h, 30) : ctx.rect(0, 0, w, h);
-    ctx.fill();
-    ctx.strokeStyle = "#d8b98a66";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.save();
-    ctx.globalAlpha = 0.12;
-    ctx.strokeStyle = "#2b1a0e";
-    ctx.lineWidth = 1;
-    for (let i = 6; i < h; i += 9) { ctx.beginPath(); ctx.moveTo(8, i); ctx.bezierCurveTo(w * 0.3, i + 3, w * 0.6, i - 3, w - 8, i + 1); ctx.stroke(); }
-    ctx.restore();
-    ctx.fillStyle = "#e8cf8f";
-    for (let i = 1; i < 8; i++) {
-      if (i === 4) continue;
-      const x = PAD + (t.w * i) / 8;
-      for (const y of [PAD / 2, h - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
-    }
-    for (let i = 1; i < 4; i++) {
-      const y = PAD + (t.h * i) / 4;
-      for (const x of [PAD / 2, w - PAD / 2]) { ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 4, y); ctx.lineTo(x, y + 4); ctx.lineTo(x - 4, y); ctx.fill(); }
-    }
-    ctx.translate(PAD, PAD);
-    ctx.fillStyle = "#2f8b5f";
-    ctx.fillRect(-10, -10, t.w + 20, t.h + 20);
-    const cloth = ctx.createRadialGradient(t.w / 2, t.h * 0.45, 20, t.w / 2, t.h / 2, t.w * 0.62);
-    cloth.addColorStop(0, "#1f7a6a");
-    cloth.addColorStop(1, "#0b4a43");
-    ctx.fillStyle = cloth;
-    ctx.fillRect(0, 0, t.w, t.h);
-    ctx.strokeStyle = "#0a3a33";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(0, 0, t.w, t.h);
+  function drawTable(t,w,h){
+    // Physical walnut cabinet, inset cushion bed and six pocket mouths. Native bounds are untouched.
+    ctx.save();ctx.shadowColor='#000b';ctx.shadowBlur=18;ctx.shadowOffsetY=9;
+    ctx.fillStyle='#130d0a';ctx.beginPath();ctx.roundRect(1,3,w-2,h-6,34);ctx.fill();ctx.restore();
+    const timber=ctx.createLinearGradient(0,0,0,h);timber.addColorStop(0,'#b77337');timber.addColorStop(.12,'#613319');timber.addColorStop(.7,'#3d2015');timber.addColorStop(1,'#a05c2e');ctx.fillStyle=timber;ctx.beginPath();ctx.roundRect(3,2,w-6,h-8,31);ctx.fill();
+    const wood=GameUI.scenes.image('walnut');if(wood){ctx.save();ctx.beginPath();ctx.roundRect(5,4,w-10,h-12,29);ctx.clip();ctx.globalAlpha=.8;ctx.drawImage(wood,0,0,w,h);ctx.restore();}
+    for(const [inset,color] of [[5,'#e2b47488'],[10,'#2b160ee0'],[16,'#e5b97744']]){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(inset,inset,w-inset*2,h-inset*2,Math.max(9,31-inset));ctx.stroke();}
+    ctx.translate(PAD,PAD);
+    // Deep cyan tournament cloth; fine weave is drawn inside the playable surface only.
+    ctx.fillStyle='#072d3d';ctx.fillRect(-18,-18,t.w+36,t.h+36);
+    const cloth=ctx.createRadialGradient(t.w*.48,t.h*.34,0,t.w*.5,t.h*.5,t.w*.67);cloth.addColorStop(0,'#3298af');cloth.addColorStop(.65,'#16748d');cloth.addColorStop(1,'#0c4d68');ctx.fillStyle=cloth;ctx.fillRect(0,0,t.w,t.h);
+    ctx.save();ctx.strokeStyle='#a3d9d909';ctx.lineWidth=.5;
+    for(let x=3;x<t.w;x+=5){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,t.h);ctx.stroke();}ctx.restore();
+    const cushion=(points,vertical=false)=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();const c=vertical?ctx.createLinearGradient(-20,0,0,0):ctx.createLinearGradient(0,-20,0,0);c.addColorStop(0,'#071f2a');c.addColorStop(.35,'#145e77');c.addColorStop(.65,'#4296a7');c.addColorStop(1,'#073f55');ctx.fillStyle=c;ctx.fill();ctx.strokeStyle='#76bcc477';ctx.lineWidth=1.2;ctx.stroke();};
+    const gap=t.pockets[0].r*1.08;
+    for(const [a,b]of [[gap,t.w/2-gap],[t.w/2+gap,t.w-gap]]){cushion([[a-9,-22],[b+9,-22],[b,0],[a,0]]);cushion([[a,t.h],[b,t.h],[b+9,t.h+22],[a-9,t.h+22]]);}
+    cushion([[-22,gap-9],[0,gap],[0,t.h-gap],[-22,t.h-gap+9]],true);cushion([[t.w,gap],[t.w+22,gap-9],[t.w+22,t.h-gap+9],[t.w,t.h-gap]],true);
+    // Inlaid mother-of-pearl diamonds on the cabinet, away from collision bounds.
+    ctx.fillStyle='#ede0b8';ctx.shadowColor='#000a';ctx.shadowBlur=1.5;
+    const diamond=(x,y)=>{ctx.beginPath();ctx.moveTo(x,y-3);ctx.lineTo(x+2.5,y);ctx.lineTo(x,y+3);ctx.lineTo(x-2.5,y);ctx.fill();};
+    for(let i=1;i<8;i++){if(i===4)continue;diamond(t.w*i/8,-32);diamond(t.w*i/8,t.h+32);}for(let i=1;i<4;i++){diamond(-32,t.h*i/4);diamond(t.w+32,t.h*i/4);}ctx.shadowBlur=0;
+    ctx.fillStyle='#d2e8e00d';ctx.font='800 25px Arial';ctx.textAlign='center';ctx.fillText('PLAYGRID',t.w/2,t.h/2+8);
   }
 
   function loop(now) {
@@ -365,6 +365,8 @@ GameUI.pool = (() => {
   }
 
   function mount(stage, a) {
+    visual.reset();
+    outcomeSeeded=false;outcomeKey=null;
     app = a;
     root = document.createElement("div");
     root.className = "b2 pl";
@@ -381,7 +383,14 @@ GameUI.pool = (() => {
         </div>
       </div>
       <p class="muted center pl-help" id="pl-help"></p>`;
+    root.dataset.ten='pool';
+    GameUI.scenes.mount(root,'pool');
     stage.appendChild(root);
+    const presets=document.createElement('div');presets.className='p5-shot-presets';presets.setAttribute('role','group');presets.setAttribute('aria-label','Shot power presets');presets.innerHTML=[['Soft',25],['Medium',50],['Strong',80]].map(([label,value])=>`<button type="button" class="btn btn-small btn-ghost" data-p5-power="${value}">${label}</button>`).join('');
+    root.querySelector('#pl-controls').append(presets);
+    presets.addEventListener('click',e=>{const b=e.target.closest('[data-p5-power]'),slider=root.querySelector('#pl-pow');if(!b||slider.disabled)return;slider.value=b.dataset.p5Power;slider.dispatchEvent(new Event('input',{bubbles:true}));});
+    const powerDesk=root.querySelector('#pl-pow').closest('label');
+    powerDesk.classList.add('scene-power');root.querySelector('.pl-wrap').prepend(powerDesk);
     canvas = root.querySelector("#pl-canvas");
     ctx = canvas.getContext("2d");
     clock = C.makeClock(() => root);
@@ -409,6 +418,7 @@ GameUI.pool = (() => {
       if (!cuePos || !legalSpot(cuePos.x, cuePos.y)) return;
       placing = !placing;
       syncControls();
+      root.querySelector("#pl-status").innerHTML = statusText();
     });
     root.querySelector("#pl-resign").addEventListener("click", (e) => {
       const r = e.currentTarget;
@@ -460,6 +470,7 @@ GameUI.pool = (() => {
     place.textContent = placing ? "Lock cue ball" : "Move cue ball";
     place.disabled = placing && !(cuePos && legalSpot(cuePos.x, cuePos.y));
     root.querySelector("#pl-resign").hidden = g.myIndex < 0;
+    root.querySelectorAll('[data-p5-power]').forEach(b=>{b.disabled=!mine;b.setAttribute('aria-pressed',String(Number(b.dataset.p5Power)===power));});
   }
 
   function statusText() {
@@ -476,17 +487,23 @@ GameUI.pool = (() => {
       const by = app.esc((g.players.find((p) => p.id === l.by) || {}).name || "");
       msg += ` <span class="warn-text">Foul by ${by}: ${{ scratch: "scratch", "no-contact": "missed every ball", "wrong-ball": "wrong ball first", "no-rail": "no rail or pocket" }[l.foul]}.</span>`;
     }
+    if(l && !busy && !l.foul && l.potted.length) msg += ` <span class="p5-pot-note">${l.potted.length} ball${l.potted.length===1?"":"s"} pocketed.</span>`;
     return msg;
   }
 
   function paintText() {
     if (!root || !g) return;
     root.querySelector("#pl-players").innerHTML = g.players
-      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : "", sub: p.group ? `${p.group === "solids" ? "Solids (1–7)" : "Stripes (9–15)"} · ${p.left} left` : "Table open" }))
+      .map((p, i) => C.playerChip(app, p, { active: g.turn === i, extra: g.turn === i && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : "", sub: (p.group ? `${p.group === "solids" ? "Solids" : "Stripes"} · ${p.left} left` : "Table open")+GameUI.scenes.rack(p,g.balls) }))
       .join("");
     const st = root.querySelector("#pl-status");
     st.innerHTML = statusText();
     st.className = "ttt-status" + (canShoot() ? " mine" : "");
+    if(!outcomeSeeded){outcomeSeeded=true;outcomeKey=g.last?.shot;}
+    else if(g.last && performance.now()>=busyUntil && outcomeKey!==g.last.shot){
+      outcomeKey=g.last.shot;
+      if(g.last.foul || g.last.potted.length) FX.animate(st,[{boxShadow:`inset 4px 0 ${g.last.foul?'#f6a78d':'#c4ed8a'}`,background:g.last.foul?'#713b3555':'#42704b66'},{boxShadow:'inset 0 0 transparent',background:'transparent'}],650);
+    }
     root.querySelector("#pl-help").textContent = g.myIndex >= 0 ? "Pocket all of your group, then the 8-ball. Hitting the wrong ball first or missing everything is a foul." : "";
   }
 
@@ -529,6 +546,7 @@ GameUI.pool = (() => {
   }
 
   function unmount() {
+    visual.reset();
     cancelAnimationFrame(raf);
     clearTimeout(update.t);
     window.removeEventListener("resize", fit);
@@ -537,13 +555,13 @@ GameUI.pool = (() => {
     root = null; canvas = null; ctx = null; g = null; pendingCue = null; animKey = -1; lastShot = -1; busyUntil = 0; cuePos = null; placing = true;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.players.find((p) => p.id === r.winnerId);
     const title = r.winnerId === state.you ? "You win!" : `${a.esc(w ? w.name : "Someone")} wins!`;
     const why = { eight: "Sank the 8-ball to finish the table.", "eight-early": "The other player pocketed the 8-ball too soon.", "eight-foul": "The other player fouled while pocketing the 8-ball.", "eight-scratch": "The other player scratched on the 8-ball.", resign: "Won by resignation.", time: "Won on time.", abandoned: "The other player left." }[r.reason] || "";
     const rows = r.players.map((p) => `${a.esc(p.name)} (${p.group || "no group"}) <b>${p.left}</b> left`).join(" · ");
     const next = r.nextUp ? `<p class="center next-up">Winner stays: <b>${a.esc(r.nextUp)}</b> plays next.</p>` : "";
-    return `<h2 class="result-title">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
+    return `<h2 class="result-title p5-result-heading">${title}</h2><p class="muted center">${why}</p><p class="center">${rows}</p>${next}`;
   }
 
   function resultSound(r, state) {
@@ -551,5 +569,5 @@ GameUI.pool = (() => {
     return r.winnerId === state.you ? "win" : "lose";
   }
 
-  return { mount, update, unmount, renderResult, resultSound, scoreLabel: "wins" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('pool',renderLegacyResult(r,s,a)), resultSound, scoreLabel: "wins" };
 })();

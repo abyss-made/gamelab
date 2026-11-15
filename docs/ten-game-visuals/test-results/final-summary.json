@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "2ba014516314385114a3c0128bf0f98489d6b1b9",
+  "programs": 37,
+  "allPassed": true,
+  "failures": 0,
+  "skips": 0,
+  "startupErrors": 0,
+  "passLines": 3852,
+  "seconds": 820.92,
+  "note": "PASS-line totals are not necessarily counts of individual assertions."
+}

@@ -1,0 +1,44 @@
+PASS  tictactoe easy/easy: 6 bot actions, none illegal (0), slowest decision 1 ms, 2 ms total
+PASS  tictactoe easy/easy: the game finished by itself (3 steps)
+PASS  tictactoe normal/hard: 9 bot actions, none illegal (0), slowest decision 52 ms, 58 ms total
+PASS  tictactoe normal/hard: the game finished by itself (5 steps)
+PASS  tictactoe hard/normal: 9 bot actions, none illegal (0), slowest decision 39 ms, 40 ms total
+PASS  tictactoe hard/normal: the game finished by itself (5 steps)
+PASS  tictactoe hard/hard: 9 bot actions, none illegal (0), slowest decision 37 ms, 42 ms total
+PASS  tictactoe hard/hard: the game finished by itself (5 steps)
+PASS  fourrow easy/easy: 30 bot actions, none illegal (0), slowest decision 3 ms, 18 ms total
+PASS  fourrow easy/easy: the game finished by itself (15 steps)
+PASS  fourrow normal/hard: 24 bot actions, none illegal (0), slowest decision 56 ms, 380 ms total
+PASS  fourrow normal/hard: the game finished by itself (12 steps)
+PASS  fourrow hard/normal: 27 bot actions, none illegal (0), slowest decision 65 ms, 430 ms total
+PASS  fourrow hard/normal: the game finished by itself (14 steps)
+PASS  fourrow hard/hard: 37 bot actions, none illegal (0), slowest decision 70 ms, 854 ms total
+PASS  fourrow hard/hard: the game finished by itself (19 steps)
+PASS  dotsboxes easy/easy/easy: 40 bot actions, none illegal (0), slowest decision 1 ms, 9 ms total
+PASS  dotsboxes easy/easy/easy: the game finished by itself (23 steps)
+PASS  dotsboxes normal/hard/normal: 40 bot actions, none illegal (0), slowest decision 4 ms, 10 ms total
+PASS  dotsboxes normal/hard/normal: the game finished by itself (23 steps)
+PASS  dotsboxes hard/normal/hard: 40 bot actions, none illegal (0), slowest decision 1 ms, 11 ms total
+PASS  dotsboxes hard/normal/hard: the game finished by itself (24 steps)
+PASS  dotsboxes hard/hard/hard: 40 bot actions, none illegal (0), slowest decision 1 ms, 8 ms total
+PASS  dotsboxes hard/hard/hard: the game finished by itself (24 steps)
+PASS  checkers easy/easy: 42 bot actions, none illegal (0), slowest decision 2 ms, 15 ms total
+PASS  checkers easy/easy: the game finished by itself (22 steps)
+PASS  checkers normal/hard: 81 bot actions, none illegal (0), slowest decision 174 ms, 396 ms total
+PASS  checkers normal/hard: the game finished by itself (42 steps)
+PASS  checkers hard/normal: 88 bot actions, none illegal (0), slowest decision 20 ms, 169 ms total
+PASS  checkers hard/normal: the game finished by itself (46 steps)
+PASS  checkers hard/hard: 310 bot actions, none illegal (0), slowest decision 37 ms, 1520 ms total
+PASS  checkers hard/hard: the game finished by itself (156 steps)
+PASS  chess easy/easy: 279 bot actions, none illegal (0), slowest decision 181 ms, 1166 ms total
+PASS  chess normal/hard: 46 bot actions, none illegal (0), slowest decision 432 ms, 3247 ms total
+PASS  chess hard/normal: 51 bot actions, none illegal (0), slowest decision 247 ms, 2675 ms total
+PASS  chess hard/hard: 84 bot actions, none illegal (0), slowest decision 312 ms, 6613 ms total
+PASS  rps normal/normal/normal: 51 bot actions, none illegal (0), slowest decision 0 ms, 2 ms total
+PASS  rps normal/normal/normal: the game finished by itself (35 steps)
+PASS  hard Tic Tac Toe lost 0 of 40 games against easy
+PASS  RPS bot code never touches the picks or matches
+
+botsunit: seed 33
+
+botsunit: 40 passed, 0 failed in 18.9 s

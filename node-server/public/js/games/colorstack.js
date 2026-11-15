@@ -4,9 +4,10 @@
 window.GameUI = window.GameUI || {};
 GameUI.colorstack = (() => {
   const C = GameUI.common;
+  const FX=GameUI.batch2fx;
   const NAMES = { r: "Red", b: "Blue", g: "Green", y: "Yellow", w: "Wild" };
   const LABEL = { S: "Skip", F: "Flip", D: "+2", W: "Wild", P: "+4" };
-  const BACK = "/assets/premium/stack-card-back.svg";
+  const BACK = "/assets/scenes/stack-back.svg";
   const MAX_BACKS = 7; // long fans compress; the exact count stays in text
   let root = null;
   let app = null;
@@ -18,9 +19,9 @@ GameUI.colorstack = (() => {
   const faceText = (c) => LABEL[c.v] || c.v;
   const tilt = (i, n) => (n <= 1 ? 0 : Math.round((i - (n - 1) / 2) * Math.min(5, 34 / n) * 10) / 10);
   function cardHTML(c, i, n, { playable, sel }) {
-    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><i class="corner">${faceText(c)}</i><b>${faceText(c)}</b><small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></button>`;
+    return `<button type="button" class="cs-card pcs-card c-${c.c} ${faceText(c).length > 2 ? "word" : ""} ${playable ? "playable" : ""} ${sel ? "lift" : ""}" style="--tilt:${tilt(i, n)}deg" data-card="${c.id}" aria-pressed="${sel ? "true" : "false"}" aria-label="${NAMES[c.c]} ${faceText(c)}${playable ? ", playable" : ""}"><span class="scene-stack-face" aria-hidden="true"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom">${faceText(c)}</i></span></button>`;
   }
-  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><i class="corner">${faceText(c)}</i><b>${faceText(c)}</b><small>${NAMES[c.c]}</small><i class="corner bottom" aria-hidden="true">${faceText(c)}</i></span>`;
+  const topHTML = (c, color) => `<span class="cs-card pcs-card big static c-${c.c} ${faceText(c).length > 2 ? "word" : ""}" role="img" aria-label="Top card: ${NAMES[c.c]} ${faceText(c)}"><span class="scene-stack-face" aria-hidden="true"><i class="corner">${faceText(c)}</i>${GameUI.tenArt.stackFace(c,faceText(c))}<small>${NAMES[c.c]}</small><i class="corner bottom">${faceText(c)}</i></span></span>`;
   const backs = (n) => Array.from({ length: Math.min(n, MAX_BACKS) }, (_, i) => `<img src="${BACK}" alt="" style="--tilt:${tilt(i, Math.min(n, MAX_BACKS))}deg">`).join("");
 
   function mount(stage, a) {
@@ -28,8 +29,8 @@ GameUI.colorstack = (() => {
     root = document.createElement("div");
     root.className = "b2 cs pcs";
     root.innerHTML = `<div class="pcs-table">
-        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>THE NEON SOCIAL CLUB</small></span></div>
-        <div class="pcs-opponents" id="cs-players"></div>
+        <div class="pcs-orbit" aria-hidden="true"><span class="pcs-label">COLOR STACK<small>PLAYGRID CARD CLUB</small></span></div>
+        <div class="pcs-opponents" id="cs-players" tabindex="0" role="group" aria-label="Other players and card counts"></div>
         <div class="pcs-center">
           <div class="pcs-pile"><button type="button" class="cs-deck pcs-deck" id="cs-draw" aria-label="Draw a card"><img src="${BACK}" alt=""></button><small id="cs-deckn"></small></div>
           <div class="pcs-pile"><div class="cs-top" id="cs-top"></div><small id="cs-match"></small></div>
@@ -45,6 +46,8 @@ GameUI.colorstack = (() => {
         </div>
       </div>
       <div class="cs-picker" id="cs-picker" hidden role="dialog" aria-label="Choose a color"><p>Choose a color</p>${["r", "b", "g", "y"].map((c) => `<button type="button" class="cs-pick c-${c}" data-color="${c}">${NAMES[c]}</button>`).join("")}<button type="button" class="btn btn-ghost btn-small" data-color="">Cancel</button></div>`;
+    root.dataset.ten='colorstack';
+    GameUI.scenes.mount(root,'colorstack');
     stage.appendChild(root);
     clock = C.makeClock(() => root);
     root.addEventListener("click", (e) => {
@@ -59,6 +62,7 @@ GameUI.colorstack = (() => {
         }
         pendingWild = null;
         root.querySelector("#cs-picker").hidden = true;
+        root.querySelector("#cs-play").focus();
         return;
       }
       const card = e.target.closest("[data-card]");
@@ -72,11 +76,10 @@ GameUI.colorstack = (() => {
       else if (e.target.closest("#cs-pass") && mine) app.socket.emit("action", { type: "pass" });
     });
     window.addEventListener("resize", onResize);
-    root.addEventListener("dblclick", (e) => {
-      const card = e.target.closest("[data-card]");
-      if (card && S) { selected = Number(card.dataset.card); playSelected(); }
-    });
     root.addEventListener("keydown", (e) => {
+      const dialog=root.querySelector('#cs-picker');
+      if(e.key==='Escape'&&!dialog.hidden){e.preventDefault();pendingWild=null;dialog.hidden=true;root.querySelector('#cs-play').focus();return;}
+      FX.trap(e,dialog);
       const card = e.target.closest("[data-card]");
       if (!card || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
       const all = [...root.querySelectorAll("#cs-hand [data-card]")];
@@ -108,10 +111,10 @@ GameUI.colorstack = (() => {
     const w = cards[0].offsetWidth;
     const avail = hand.clientWidth - 24;
     const need = (cards.length * w - avail) / (cards.length - 1);
-    const overlap = Math.max(10, Math.min(w * 0.72, need));
+    const overlap = Math.max(10, Math.min(Math.max(0,w-44), need));
     cards.forEach((c, i) => { c.style.marginLeft = i ? `${-overlap}px` : "0"; });
     // Very long hands can't fit even at the overlap cap: fall back to a horizontal scroller so every card stays reachable.
-    hand.classList.toggle("scroll", need > w * 0.72);
+    hand.classList.toggle("scroll", need > Math.max(0,w-44));
   }
 
   // Repaint only the private fan + dock; keeps keyboard focus on the same card id.
@@ -138,13 +141,14 @@ GameUI.colorstack = (() => {
   }
 
   function update(state) {
+    const before=S?.game,oldCard=before?root.querySelector(`[data-card="${state.game.top.id}"]`):null,from=oldCard?.getBoundingClientRect();
     S = state;
     const g = S.game;
     const mine = g.turnId === S.you;
     clock.set(g.timeLeft);
     root.querySelector("#cs-players").innerHTML = g.players
       .filter((p) => p.id !== S.you)
-      .map((p) => `<div class="pcs-seat">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="cs-count" title="Cards in hand">${p.count}</span>`, sub: p.count === 1 ? "One card left!" : `${p.count} cards` })}<div class="pcs-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
+      .map((p) => `<div data-seat="${p.id}" class="pcs-seat">${C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="cs-count" title="Cards in hand">${p.count}</span>`, sub: p.count === 1 ? "One card left!" : `${p.count} cards` })}<div class="pcs-backs" aria-hidden="true">${backs(p.count)}</div></div>`)
       .join("");
     const turn = g.players.find((p) => p.id === g.turnId);
     const msg = g.myIndex < 0
@@ -172,6 +176,23 @@ GameUI.colorstack = (() => {
       root.querySelector("#cs-picker").hidden = true;
     }
     paintHand();
+    if(before){
+      if(before.top.id!==g.top.id){
+        Sound.play('drop');
+        const oldActor=before.turnId,origin=from||[...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===oldActor)||root.querySelector('#cs-hand');
+        FX.fly(root,origin,root.querySelector('#cs-top'),root.querySelector('#cs-top .pcs-card'));
+        if(['S','F','D','P','W'].includes(g.top.v))FX.transient(root,root.querySelector('#cs-top'),'special',faceText(g.top));
+      }
+      for(const player of g.players.filter(p=>p.id!==S.you)){
+        const old=before.players.find(p=>p.id===player.id),seat=[...root.querySelectorAll('[data-seat]')].find(n=>n.dataset.seat===player.id);
+        if(old&&player.count>old.count)FX.fly(root,root.querySelector('#cs-draw'),seat,BACK);
+      }
+      const previous=new Set((before.hand||[]).map(c=>c.id));
+      (g.hand||[]).filter(c=>!previous.has(c.id)).forEach(c=>{const el=root.querySelector(`[data-card="${c.id}"]`);FX.fly(root,root.querySelector('#cs-draw'),el,BACK);FX.animate(el,[{opacity:.3,transform:'translateY(25px)'},{opacity:1,transform:'rotate(var(--tilt))'}],340);});
+      if(before.color!==g.color)FX.animate(root.querySelector('#cs-match'),[{filter:'brightness(1.8)',transform:'scale(1.08)'},{filter:'brightness(1)',transform:'none'}],420);
+      const me=g.players.find(p=>p.id===S.you),was=before.players.find(p=>p.id===S.you);
+      if(me?.count===1 && was?.count!==1)FX.animate(root.querySelector('.pcs-one'),[{transform:'scale(.8)',opacity:.3},{transform:'scale(1)',opacity:1}],400);
+    }
   }
 
   function onResize() { if (root) fitFan(root.querySelector("#cs-hand")); }
@@ -185,11 +206,12 @@ GameUI.colorstack = (() => {
     selected = null;
   }
 
-  function renderResult(r, state, a) {
+  function renderLegacyResult(r, state, a) {
     const w = r.hands.find((h) => h.id === r.winnerId);
-    return `<h2 class="result-title">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
+    return `<h2 class="result-title b25-result">${r.winnerId === state.you ? "You win!" : a.esc(w ? w.name : "Someone") + " wins!"}</h2>
+      ${!r.forfeit?'<div class="b25-out" aria-label="Winner has no cards remaining">0<small>CARDS LEFT</small></div>':''}
       <p class="muted center">${r.forfeit ? "Won because the others left." : `Scored ${r.pts} points from the cards left in other hands.`}</p>
       <ol class="b2-podium">${[...r.hands].sort((x, y) => x.cards - y.cards).map((h) => `<li class="${h.id === state.you ? "me" : ""}"><span class="rank">${h.cards}</span>${a.avatarHTML(h.avatar)}<b>${a.esc(h.name)}</b><span class="pts">${h.cards} cards left (${h.value})</span></li>`).join("")}</ol>`;
   }
-  return { mount, update, unmount, renderResult, resultSound: (r, s) => C.resultSound({ ...r, standings: r.hands }, s), scoreLabel: "pts" };
+  return { mount, update, unmount, renderResult:(r,s,a)=>GameUI.scenes.result('colorstack',renderLegacyResult(r,s,a)), resultSound: (r, s) => C.resultSound({ ...r, standings: r.hands }, s), scoreLabel: "pts" };
 })();
