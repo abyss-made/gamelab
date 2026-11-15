@@ -94,6 +94,11 @@ const GAMES = ['pool', 'golf', 'tycoon'];
         fakes.push(...group);
         for (const f of group) await f.emit('joinRoom', { code, token: f.token, profile: f.profile });
         await until(() => group.every((f) => f.state && f.state.players.length === group.length + 1));
+        // Preserve the established Meadow hole-in-one regression independently of the new default course.
+        if(game==='golf'){
+          await page.evaluate(()=>App.socket.emit('hostUpdate',{settings:{course:'meadow'}}));
+          await page.waitForFunction(()=>App.S.settings.course==='meadow');
+        }
         await page.click('#lobby-start');
         await page.waitForFunction(() => document.body.dataset.phase === 'game', null, { timeout: 5000 });
         await sleep(500);
@@ -208,6 +213,7 @@ const GAMES = ['pool', 'golf', 'tycoon'];
 
         // ================= GOLF =================
         if (game === 'golf') {
+          await page.waitForFunction(()=>document.querySelector('.golf-club')?.dataset.renderer==='webgl');
           const canvas = page.locator('#gf-canvas');
           const box = await canvas.boundingBox();
           ok(Math.max(box.width, box.height) >= 340 && Math.min(box.width, box.height) >= 200, `${t}: the hole is a usable size (${Math.round(box.width)}x${Math.round(box.height)})`);
@@ -225,30 +231,26 @@ const GAMES = ['pool', 'golf', 'tycoon'];
           await page.mouse.up();
           ok((await page.inputValue('#gf-aim')) !== a0, `${t}: dragging aims the putt`);
           if (vp.tag === 'phone') {
-            ok(await page.evaluate(() => document.querySelector('#gf-canvas').classList.contains('portrait')), `${t}: phone shows the portrait course`);
+            ok(await page.evaluate(()=>document.querySelector('.golf-club').dataset.renderer==='webgl'), `${t}: phone renders the actual angled 3D course`);
             await canvas.scrollIntoViewIfNeeded();
-            const b2 = await canvas.boundingBox();
-            const ball = await page.evaluate(() => { const g = window.App.S.game; return g.players.find((p) => p.id === window.App.S.you); });
-            // portrait: screen = (y/440, (700-x)/700); dragging toward screen-up from the ball aims at physical 0deg
-            const sx = b2.x + (ball.y / 440) * b2.width, sy = b2.y + ((700 - ball.x) / 700) * b2.height;
-            await page.mouse.move(sx, sy - 20);
-            await page.mouse.down();
-            await page.mouse.move(sx, sy - 90, { steps: 4 });
-            await page.mouse.up();
-            const a = Number(await page.inputValue('#gf-aim'));
-            ok(a < 3 || a > 357, `${t}: portrait drag is inverse-mapped to course aim (${a.toFixed(1)}deg)`);
-            // thumb loupe: appears while a touch is held, and release removes it without putting
+            const ball=await page.evaluate(()=>App.S.game.players.find(p=>p.id===App.S.you));
+            const [start,end]=await page.evaluate(b=>[GameUI.golf.project(b.x+80,b.y,0),GameUI.golf.project(b.x+140,b.y,0)],ball);
+            await page.mouse.move(start.x,start.y);await page.mouse.down();await page.mouse.move(end.x,end.y,{steps:4});await page.mouse.up();
+            const a=Number(await page.inputValue('#gf-aim'));
+            ok(a<3||a>357,`${t}: projected 3D drag maps back to physical 0deg (${a.toFixed(1)}deg)`);
+            const point=await page.evaluate(b=>GameUI.golf.project(b.x,b.y),ball),sx=point.x,sy=point.y;
+            // The actual 3D aiming preview follows a held pull; cancellation never puts.
             const strokes0 = ball.strokes;
             const frame = () => page.evaluate(() => document.querySelector('#gf-canvas').toDataURL());
             const before = await frame();
-            await page.evaluate(([x, y]) => { const c = document.querySelector('#gf-canvas'); const o = { pointerId: 7, pointerType: 'touch', clientX: x, clientY: y, bubbles: true }; c.dispatchEvent(new PointerEvent('pointerdown', o)); c.dispatchEvent(new PointerEvent('pointermove', { ...o, clientY: y - 60 })); }, [sx, sy - 20]);
+            await page.evaluate(([x, y]) => { const c = document.querySelector('#gf-canvas'); const o = { pointerId: 7, pointerType: 'touch', isPrimary: true, clientX: x, clientY: y, bubbles: true }; c.dispatchEvent(new PointerEvent('pointerdown', o)); c.dispatchEvent(new PointerEvent('pointermove', { ...o, clientY: y - 60 })); }, [sx, sy]);
             await sleep(150);
             const held = await frame();
-            await page.evaluate(([x, y]) => { document.querySelector('#gf-canvas').dispatchEvent(new PointerEvent('pointerup', { pointerId: 7, pointerType: 'touch', clientX: x, clientY: y - 60, bubbles: true })); }, [sx, sy - 20]);
+            await page.evaluate(([x, y]) => { document.querySelector('#gf-canvas').dispatchEvent(new PointerEvent('pointercancel', { pointerId: 7, pointerType: 'touch', clientX: x, clientY: y - 60, bubbles: true })); }, [sx, sy]);
             await sleep(150);
             const after = await frame();
-            ok(held !== before && held !== after, `${t}: the thumb loupe shows while the touch is held`);
-            ok(await page.evaluate(() => window.App.S.game.players.find((p) => p.id === window.App.S.you).strokes) === strokes0, `${t}: releasing the aim never putts`);
+            ok(held !== before && held !== after, `${t}: the 3D shot preview changes during a held pull and cancellation`);
+            ok(await page.evaluate(() => window.App.S.game.players.find((p) => p.id === window.App.S.you).strokes) === strokes0, `${t}: cancelling a held pull never putts`);
             await page.click('[data-fine="1"]');
           }
           await shot('-aim');

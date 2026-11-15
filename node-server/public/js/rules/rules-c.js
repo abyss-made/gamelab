@@ -163,9 +163,9 @@ Object.assign(window.GameRules, {
       "A scorecard is shown for a few seconds between holes, then the next hole starts automatically.",
     ],
     controls: [
-      "Mouse: drag on the course to aim (the putt goes toward the pointer). Adjust the Aim and Power sliders, then press Putt.",
-      "Touch: drag a finger to aim, set power with the slider, tap Putt. Nothing happens until you press Putt.",
-      "Keyboard: arrows adjust aim and power (Shift for bigger steps), Enter putts.",
+      "Mouse: drag back from your ball and release to putt. Drag elsewhere to aim without shooting, or adjust Aim and Power and press Putt.",
+      "Touch: drag back from your ball; the distance controls power. Release to putt. A tap, cancelled gesture or second finger never shoots. Sliders and Putt are also available.",
+      "Keyboard: arrows adjust aim and power (Shift for bigger steps), Enter putts, Escape cancels a held shot.",
     ],
     scoring: [
       "Each putt is 1 stroke. Lowest total strokes over the whole course wins.",

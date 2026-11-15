@@ -1,4 +1,4 @@
-// Original Mini Golf courses for Playgrid (18 holes in three courses of six). Every hole is drawn on a 700x440
+// Original Mini Golf courses for Playgrid (30 holes in five courses, plus the stable original tour). Every hole uses a 700x440
 // board. Geometry:
 //   poly      fairway outline (the boundary is a solid wall)
 //   walls     extra solid obstacles (polygons, also solid on the inside)
@@ -62,6 +62,18 @@ COURSES.push({id:'harbor',name:'Harbor Links',blurb:'Slopes, piers and tidal haz
  {name:'Lighthouse',par:4,poly:rect(60,60,640,380),walls:[rect(290,120,410,320)],bumpers:[{x:540,y:120,r:25}],slopes:[{x:450,y:180,w:80,h:80,ax:180,ay:0}],tee:[110,220],cup:[560,220]}
 ]});
 const BY_ID = Object.fromEntries(COURSES.map((c) => [c.id, c]));
+// Coastal Club is an original course for the rebuilt game. All artwork and collision
+// geometry share these definitions; the established courses/tour remain unchanged.
+const COASTAL = { id: 'coastal', name: 'Coastal Club', blurb: 'Island fairways, crate banks and lagoon shortcuts', holes: [
+  { name: 'Palm Promenade', par: 3, poly: [[65,70],[610,70],[610,350],[410,350],[410,235],[65,235]], tee: [115,150], cup: [530,295], bumpers: [{x:350,y:150,r:18}] },
+  { name: 'Crate Escape', par: 3, poly: rect(60,60,640,380), walls: [rect(250,100,330,230),rect(420,235,500,340)], tee: [110,310], cup: [585,110] },
+  { name: 'Lagoon Bend', par: 3, poly: rect(60,60,640,380), water: [{x:215,y:150,w:270,h:140}], tee: [110,220], cup: [590,220] },
+  { name: 'Sandy Shortcut', par: 4, poly: [[60,110],[110,60],[590,60],[640,110],[640,330],[590,380],[110,380],[60,330]], sand: [{x:245,y:60,w:180,h:130}], walls: [rect(300,245,330,380)], tee: [115,295], cup: [585,120] },
+  { name: 'Split Decision', par: 3, poly: rect(60,60,640,380), walls: [rect(310,140,390,300)], slopes: [{x:170,y:75,w:120,h:60,ax:100,ay:0}], sand: [{x:400,y:305,w:110,h:75}], tee: [110,220], cup: [590,220] },
+  { name: 'Clubhouse Finish', par: 4, poly: rect(60,60,640,380), walls: [rect(260,60,285,250),rect(430,220,455,380)], bumpers: [{x:550,y:150,r:22}], tee: [110,130], cup: [585,310] },
+] };
+COURSES.push(COASTAL);
+BY_ID.coastal = COASTAL;
 const TOUR = { id: 'tour', name: 'Playgrid Open (18 holes)', blurb: 'All three courses', holes: ORIGINAL_COURSES.flatMap((c) => c.holes.map((h) => ({ ...h, course: c.name }))) };
 BY_ID.tour = TOUR;
 

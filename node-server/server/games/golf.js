@@ -10,8 +10,8 @@ const COURSES = require('./golfcourses');
 const meta = { id: 'golf', name: 'Mini Golf', minPlayers: 2, maxPlayers: 6, midJoin: false, resetScores: false, scoreLabel: 'wins' };
 
 const TURN_TIMES = [20, 30, 45, 60];
-const COURSE_IDS = ['meadow', 'canyon', 'skyline', 'harbor', 'tour'];
-const defaults = { course: 'meadow', maxStrokes: 8, turnTime: 45 };
+const COURSE_IDS = ['coastal', 'meadow', 'canyon', 'skyline', 'harbor', 'tour'];
+const defaults = { course: 'coastal', maxStrokes: 8, turnTime: 45 };
 
 const BALL_R = 6;
 const CUP_R = 10;
