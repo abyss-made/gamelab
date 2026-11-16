@@ -164,7 +164,7 @@ GameUI.golf = (() => {
     if(scene3d){
       fit();const animating=!!(g.anim&&now-animT0<g.anim.duration*1000);
       const positions=g.players.map(p=>({p,pos:p.out||p.holed&&!(animating&&(g.anim.by===p.id||g.anim.paths?.[p.id]))?null:ballAt(p,now)}));
-      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',canPutt:canPutt(),placing,teeDraft,animating,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
+      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',aiming:gesture?.mode==='pull'||gesture?.mode==='aim',canPutt:canPutt(),placing,teeDraft,animating,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
     }
     if(!ctx)return;
     const h = g.hole;

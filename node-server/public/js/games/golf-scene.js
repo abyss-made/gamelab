@@ -173,7 +173,8 @@ class ClubScene{
   }else{
    const cup=g.hole.cup,dx=cup[0]-focus.x,dz=cup[1]-focus.y,len=Math.hypot(dx,dz)||1;this.desired.set(focus.x-350+dx/len*55,0,focus.y-220+dz/len*55);distance=(this.width<700?420:390)/(2*tan*this.zoom);
   }
-  if(!this.ready||this.reduced.matches){this.target.copy(this.desired);this.distance=distance;this.ready=true;}else{this.target.lerp(this.desired,1-Math.exp(-dt*5));this.distance+=(distance-this.distance)*(1-Math.exp(-dt*5));}
+  if(!this.ready){this.target.copy(this.desired);this.distance=distance;this.ready=true;}
+  else if(!data.aiming){if(this.reduced.matches){this.target.copy(this.desired);this.distance=distance;}else{this.target.lerp(this.desired,1-Math.exp(-dt*5));this.distance+=(distance-this.distance)*(1-Math.exp(-dt*5));}}
   this.camera.position.copy(this.target).addScaledVector(direction,this.distance);this.camera.lookAt(this.target);this.camera.aspect=aspect;this.camera.updateProjectionMatrix();this.camera.updateMatrixWorld();
 
   for(const [index,{p,pos}] of positions.entries()){
