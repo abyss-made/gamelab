@@ -15,7 +15,7 @@ class ClubScene{
   this.textures={};const loader=new T.TextureLoader();for(const name of ['turf','stone','wood','water','sand']){const tx=loader.load('/assets/golf-club/'+name+'.png');tx.colorSpace=T.SRGBColorSpace;tx.wrapS=tx.wrapT=T.RepeatWrapping;tx.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());tx.repeat.set(1/180,1/180);this.textures[name]=tx;}
   this.textures.stone.repeat.set(1/90,1/90);this.textures.wood.repeat.set(1/95,1/95);
   this.mat={grass:new T.MeshStandardMaterial({map:this.textures.turf,roughness:.98}),stone:new T.MeshStandardMaterial({map:this.textures.stone,color:'#d7e0d9',roughness:.85}),wood:new T.MeshStandardMaterial({map:this.textures.wood,color:'#d4b681',roughness:.85}),sand:new T.MeshStandardMaterial({map:this.textures.sand,color:'#edd39b',roughness:1}),dark:new T.MeshStandardMaterial({color:'#143340',roughness:.8}),white:new T.MeshStandardMaterial({color:'#edf1df',roughness:.5}),red:new T.MeshStandardMaterial({color:'#f14d50',roughness:.7,side:T.DoubleSide}),trunk:new T.MeshStandardMaterial({color:'#ac8653',roughness:1}),leaf:new T.MeshStandardMaterial({color:'#4d9c52',roughness:.8,side:T.DoubleSide}),leafLight:new T.MeshStandardMaterial({color:'#91bb57',roughness:.85,side:T.DoubleSide}),rock:new T.MeshStandardMaterial({color:'#b5b8a0',roughness:1,flatShading:true}),beam:new T.MeshStandardMaterial({color:'#9a713f',roughness:.9})};
-  for(const [name,color] of Object.entries({arena:'#368cda',navy:'#263856',pink:'#f04d9f',cyan:'#45ded9',yellow:'#ffda54',purple:'#8160ce',slime:'#8bef5f'}))this.mat[name]=new T.MeshStandardMaterial({color,roughness:.55,metalness:.03});
+  for(const [name,color] of Object.entries({arena:'#368cda',navy:'#263856',pink:'#f04d9f',cyan:'#45ded9',yellow:'#ffda54',purple:'#8160ce',slime:'#168849'}))this.mat[name]=new T.MeshStandardMaterial({color,roughness:.55,metalness:.03});
   this.ocean=new T.Mesh(new T.PlaneGeometry(6000,6000),new T.MeshPhysicalMaterial({color:'#65d6e1',map:this.textures.water,roughness:.3,metalness:.05,clearcoat:.5,transparent:true,opacity:.96}));this.ocean.rotation.x=-Math.PI/2;this.ocean.position.y=-26;this.ocean.receiveShadow=true;this.scene.add(this.ocean);
   // Plane geometry uses normalized UVs; give the ocean its own repeat scale.
   this.ocean.material.map=this.textures.water.clone();this.ocean.material.map.repeat.set(24,24);this.ocean.material.map.needsUpdate=true;this.oceanMap=this.ocean.material.map;this.resources.add(this.oceanMap);
@@ -62,7 +62,15 @@ class ClubScene{
    }
   }
   for(const z of h.sand)this.box(z.x+z.w/2,z.y+z.h/2,z.w,z.h,.35,.05,this.mat.sand);
-  for(const z of h.water){const water=this.mesh(new T.PlaneGeometry(z.w,z.h),this.party?this.mat.slime:this.ocean.material);water.rotation.x=-Math.PI/2;water.position.set(z.x+z.w/2-350,-6,z.y+z.h/2-220);water.castShadow=false;}
+  for(const z of h.water){
+   const water=this.mesh(new T.PlaneGeometry(z.w,z.h),this.party?this.mat.slime:this.ocean.material);water.rotation.x=-Math.PI/2;water.position.set(z.x+z.w/2-350,-6,z.y+z.h/2-220);water.castShadow=false;
+   if(this.party){
+    // Surface paint identifies the recessed penalty area without adding colliders.
+    for(let x=z.x+4;x<z.x+z.w-3;x+=12)for(const y of [z.y-1.5,z.y+z.h+1.5]){const m=this.box(x,y,6,3,.25,.15,this.mat.yellow);m.castShadow=false;}
+    for(let y=z.y+4;y<z.y+z.h-3;y+=12)for(const x of [z.x-1.5,z.x+z.w+1.5]){const m=this.box(x,y,3,6,.25,.15,this.mat.yellow);m.castShadow=false;}
+    for(let i=0;i<5;i++){const x=z.x+14+((i*29)%(z.w-28)),y=z.y+18+((i*43)%(z.h-36)),bubble=this.mesh(new T.SphereGeometry(4+i%3,12,8),this.mat.cyan);bubble.position.set(x-350,-6,y-220);bubble.scale.y=.35;bubble.castShadow=false;}
+   }
+  }
   for(const [i,b] of h.bumpers.entries()){
    const mat=this.party?(i%2?this.mat.pink:this.mat.yellow):this.mat.stone;
    this.cylinder(b.x,b.y,b.r,13,0,mat);this.cylinder(b.x,b.y,b.r*.87,3,13,this.party?this.mat.white:this.mat.white);this.cylinder(b.x,b.y,b.r*.54,2,16,this.party?this.mat.purple:this.mat.dark);

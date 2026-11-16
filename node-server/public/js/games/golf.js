@@ -219,7 +219,7 @@ GameUI.golf = (() => {
     for (const z of h.water) {
       const wg = ctx.createLinearGradient(z.x, z.y, z.x + z.w, z.y + z.h);
       wg.addColorStop(0, "#234c7e"); wg.addColorStop(1, "#102a51");
-      ctx.fillStyle = party?'#8bef5f':material('water',.3,wg); ctx.fillRect(z.x, z.y, z.w, z.h);
+      ctx.fillStyle = party?'#168849':material('water',.3,wg); ctx.fillRect(z.x, z.y, z.w, z.h);
       ctx.strokeStyle = "#cfeee966"; ctx.lineWidth = 1.5;
       for (let y = z.y + 10; y < z.y + z.h; y += 14) { ctx.beginPath(); ctx.moveTo(z.x + 8, y); ctx.bezierCurveTo(z.x + z.w * 0.3, y - 4, z.x + z.w * 0.6, y + 4, z.x + z.w - 8, y); ctx.stroke(); }
     }
