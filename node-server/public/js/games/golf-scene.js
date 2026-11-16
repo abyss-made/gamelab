@@ -153,7 +153,7 @@ class ClubScene{
  frame(data){
   if(document.hidden||!this.canvas.getClientRects().length)return;
   const {g,now,positions,aim,power,mine,pulling,placing,teeDraft}=data,T=this.T;if(this.key!==g.course.id+':'+g.holeIndex)this.build(g);this.resize();if(!this.width)return;
-  const dt=this.lastNow?Math.min(.06,(now-this.lastNow)/1000):.016;this.lastNow=now;const moving=g.anim&&data.animating;const actorId=moving?g.anim.by:g.turnId;const actor=positions.find(v=>v.p.id===actorId)||positions.find(v=>v.pos)||positions[0];const fallback=g.phase==='between'?g.hole.cup:g.hole.tee;const focus=actor?.pos||{x:fallback[0],y:fallback[1]};
+  const dt=this.lastNow?Math.min(.06,(now-this.lastNow)/1000):.016;this.lastNow=now;const moving=!!(g.anim&&data.animating);const actorId=moving?g.anim.by:g.turnId;const actor=positions.find(v=>v.p.id===actorId)||positions.find(v=>v.pos)||positions[0];const fallback=g.phase==='between'?g.hole.cup:g.hole.tee;const focus=actor?.pos||this.balls.get(actorId)?.last||{x:fallback[0],y:fallback[1]};
   const gates=moving?(g.anim.gates||g.hole.gates||[]):(g.hole.gates||[]);for(const gate of this.gates){const state=gates.find(v=>v.id===gate.id),target=state?.closed?0:55;if(Math.abs(target-gate.group.position.y)>.01){gate.group.position.y=this.reduced.matches?target:gate.group.position.y+(target-gate.group.position.y)*(1-Math.exp(-dt*24));this.sun.shadow.needsUpdate=true;}}
   const shotTime=data.shotTime??((g.anim?.elapsedMs||0)/1000),motorTime=GolfMotion.clock(g.hole,g.anim,shotTime);
   for(const motor of this.motors){motor.group.rotation.y=-GolfMotion.pose(motor.definition,motorTime).angle;}
@@ -173,8 +173,12 @@ class ClubScene{
   }else{
    const cup=g.hole.cup,dx=cup[0]-focus.x,dz=cup[1]-focus.y,len=Math.hypot(dx,dz)||1;this.desired.set(focus.x-350+dx/len*55,0,focus.y-220+dz/len*55);distance=(this.width<700?420:390)/(2*tan*this.zoom);
   }
-  if(!this.ready){this.target.copy(this.desired);this.distance=distance;this.ready=true;}
+  // Finish the camera handoff during the existing post-shot pause. A ball must
+  // be a stationary touch target before Putt becomes available to its owner.
+  const handoff=this.cameraActor!==actorId||this.wasMoving&&!moving;
+  if(!this.ready||handoff&&!data.aiming){this.target.copy(this.desired);this.distance=distance;this.ready=true;}
   else if(!data.aiming){if(this.reduced.matches){this.target.copy(this.desired);this.distance=distance;}else{this.target.lerp(this.desired,1-Math.exp(-dt*5));this.distance+=(distance-this.distance)*(1-Math.exp(-dt*5));}}
+  this.cameraActor=actorId;this.wasMoving=moving;
   this.camera.position.copy(this.target).addScaledVector(direction,this.distance);this.camera.lookAt(this.target);this.camera.aspect=aspect;this.camera.updateProjectionMatrix();this.camera.updateMatrixWorld();
 
   for(const [index,{p,pos}] of positions.entries()){
