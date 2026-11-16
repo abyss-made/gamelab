@@ -15,9 +15,10 @@ class ClubScene{
   this.textures={};const loader=new T.TextureLoader();for(const name of ['turf','stone','wood','water','sand']){const tx=loader.load('/assets/golf-club/'+name+'.png');tx.colorSpace=T.SRGBColorSpace;tx.wrapS=tx.wrapT=T.RepeatWrapping;tx.anisotropy=Math.min(8,this.renderer.capabilities.getMaxAnisotropy());tx.repeat.set(1/180,1/180);this.textures[name]=tx;}
   this.textures.stone.repeat.set(1/90,1/90);this.textures.wood.repeat.set(1/95,1/95);
   this.mat={grass:new T.MeshStandardMaterial({map:this.textures.turf,roughness:.98}),stone:new T.MeshStandardMaterial({map:this.textures.stone,color:'#d7e0d9',roughness:.85}),wood:new T.MeshStandardMaterial({map:this.textures.wood,color:'#d4b681',roughness:.85}),sand:new T.MeshStandardMaterial({map:this.textures.sand,color:'#edd39b',roughness:1}),dark:new T.MeshStandardMaterial({color:'#143340',roughness:.8}),white:new T.MeshStandardMaterial({color:'#edf1df',roughness:.5}),red:new T.MeshStandardMaterial({color:'#f14d50',roughness:.7,side:T.DoubleSide}),trunk:new T.MeshStandardMaterial({color:'#ac8653',roughness:1}),leaf:new T.MeshStandardMaterial({color:'#4d9c52',roughness:.8,side:T.DoubleSide}),leafLight:new T.MeshStandardMaterial({color:'#91bb57',roughness:.85,side:T.DoubleSide}),rock:new T.MeshStandardMaterial({color:'#b5b8a0',roughness:1,flatShading:true}),beam:new T.MeshStandardMaterial({color:'#9a713f',roughness:.9})};
+  for(const [name,color] of Object.entries({arena:'#368cda',navy:'#263856',pink:'#f04d9f',cyan:'#45ded9',yellow:'#ffda54',purple:'#8160ce',slime:'#8bef5f'}))this.mat[name]=new T.MeshStandardMaterial({color,roughness:.55,metalness:.03});
   this.ocean=new T.Mesh(new T.PlaneGeometry(6000,6000),new T.MeshPhysicalMaterial({color:'#65d6e1',map:this.textures.water,roughness:.3,metalness:.05,clearcoat:.5,transparent:true,opacity:.96}));this.ocean.rotation.x=-Math.PI/2;this.ocean.position.y=-26;this.ocean.receiveShadow=true;this.scene.add(this.ocean);
   // Plane geometry uses normalized UVs; give the ocean its own repeat scale.
-  this.ocean.material.map=this.textures.water.clone();this.ocean.material.map.repeat.set(24,24);this.ocean.material.map.needsUpdate=true;
+  this.ocean.material.map=this.textures.water.clone();this.ocean.material.map.repeat.set(24,24);this.ocean.material.map.needsUpdate=true;this.oceanMap=this.ocean.material.map;this.resources.add(this.oceanMap);
   this.world=new T.Group();this.scene.add(this.world);this.effects=new T.Group();this.scene.add(this.effects);this.particles=[];
   this.guide=new T.Group();this.scene.add(this.guide);const lineGeo=new T.BufferGeometry();lineGeo.setAttribute('position',new T.BufferAttribute(new Float32Array(6),3));this.guideLine=new T.Line(lineGeo,new T.LineDashedMaterial({color:'#ffffed',dashSize:8,gapSize:6,transparent:true,opacity:.95,depthTest:false}));this.guideLine.renderOrder=5;this.guide.add(this.guideLine);this.ghost=new T.Mesh(new T.SphereGeometry(6.1,20,12),new T.MeshBasicMaterial({color:'#f3ffdb',wireframe:true,transparent:true,opacity:.55,depthTest:false}));this.guide.add(this.ghost);
   this.labelLayer=document.createElement('div');this.labelLayer.className='club-ball-labels';this.arena.append(this.labelLayer);
@@ -32,19 +33,22 @@ class ClubScene{
  cylinder(x,z,r,h,y,material,parent=this.world){const m=this.mesh(new this.T.CylinderGeometry(r,r,h,28),material,parent);m.position.set(x-350,y+h/2,z-220);return m;}
  disposeGroup(group){const geometries=new Set(),materials=new Set(),shared=new Set(Object.values(this.mat||{}));group.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])if(!shared.has(m)&&m!==this.ocean?.material)materials.add(m);});for(const g of geometries)g.dispose();for(const m of materials){if(m.bumpMap){m.bumpMap.dispose();this.resources.delete(m.bumpMap);}m.dispose();}group.clear();}
  build(g){
-  const T=this.T,h=g.hole;this.disposeGroup(this.world);this.balls.clear();for(const l of this.labels.values())l.remove();this.labels.clear();this.particles=[];this.disposeGroup(this.effects);this.key=g.course.id+':'+g.holeIndex;this.sun.shadow.needsUpdate=true;this.ready=false;this.toast.hidden=true;this.lastShot=-1;
+  const T=this.T,h=g.hole;this.party=g.course.id==='gauntlet';this.gates=[];this.disposeGroup(this.world);this.balls.clear();for(const l of this.labels.values())l.remove();this.labels.clear();this.particles=[];this.disposeGroup(this.effects);this.key=g.course.id+':'+g.holeIndex;this.sun.shadow.needsUpdate=true;this.ready=false;this.toast.hidden=true;this.lastShot=-1;
+  this.scene.background.set(this.party?'#c7def5':'#83cedc');this.scene.fog.color.copy(this.scene.background);this.ocean.material.color.set(this.party?'#a5badb':'#65d6e1');this.ocean.material.map=this.party?null:this.oceanMap;this.ocean.material.needsUpdate=true;this.ocean.position.y=this.party?-90:-26;
   const holes=(h.water||[]).map(z=>[[z.x,z.y],[z.x+z.w,z.y],[z.x+z.w,z.y+z.h],[z.x,z.y+z.h]]);const cup=[];for(let i=0;i<48;i++)cup.push([h.cup[0]+Math.cos(i*Math.PI/24)*h.cupR,h.cup[1]+Math.sin(i*Math.PI/24)*h.cupR]);holes.push(cup);
-  const base=this.extrude(h.poly,27,-27,[this.mat.grass,this.mat.stone],holes);base.receiveShadow=true;base.userData.kind='fairway';
+  const base=this.extrude(h.poly,27,-27,this.party?[this.mat.arena,this.mat.navy]:[this.mat.grass,this.mat.stone],holes);base.receiveShadow=true;base.userData.kind='fairway';
+  if(this.party){this.extrude(h.poly,5,-32,this.mat.yellow,holes);this.extrude(h.poly,12,-44,this.mat.navy,holes);}
   // Boundary walls stand OUTSIDE their collision plane; their inner face is exact.
   const area=h.poly.reduce((v,p,i)=>{const q=h.poly[(i+1)%h.poly.length];return v+p[0]*q[1]-q[0]*p[1];},0),sign=area>0?1:-1;
   for(let i=0;i<h.poly.length;i++){
    const a=h.poly[i],b=h.poly[(i+1)%h.poly.length],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz),ox=sign*dz/len*6,oz=-sign*dx/len*6;
-   const wall=this.box((a[0]+b[0])/2+ox,(a[1]+b[1])/2+oz,len+2,12,20,0,this.mat.stone);wall.rotation.y=-Math.atan2(dz,dx);wall.userData.kind='boundary';
-   const cap=this.box((a[0]+b[0])/2+ox,(a[1]+b[1])/2+oz,len+4,14,3.5,20,this.mat.white);cap.rotation.y=wall.rotation.y;
+   const wall=this.box((a[0]+b[0])/2+ox,(a[1]+b[1])/2+oz,len+2,12,20,0,this.party?this.mat.purple:this.mat.stone);wall.rotation.y=-Math.atan2(dz,dx);wall.userData.kind='boundary';
+   const cap=this.box((a[0]+b[0])/2+ox,(a[1]+b[1])/2+oz,len+4,14,3.5,20,this.party?this.mat.cyan:this.mat.white);cap.rotation.y=wall.rotation.y;
    // Visible block joints subdivide each masonry run into believable stones.
-   for(let t=30;t<len-10;t+=36){const joint=this.box(a[0]+dx*t/len+ox,a[1]+dz*t/len+oz,1.2,14.2,2,22,this.mat.stone);joint.rotation.y=wall.rotation.y;}
+   for(let t=30;t<len-10;t+=36){const joint=this.box(a[0]+dx*t/len+ox,a[1]+dz*t/len+oz,this.party?5:1.2,14.2,2,22,this.party?this.mat.white:this.mat.stone);joint.rotation.y=wall.rotation.y;}
   }
   for(const p of h.walls){
+   if(this.party){this.extrude(p,30,0,this.mat.pink);this.extrude(p,4,30,this.mat.yellow);continue;}
    this.extrude(p,38,0,this.mat.wood);
    const minX=Math.min(...p.map(v=>v[0])),maxX=Math.max(...p.map(v=>v[0])),minZ=Math.min(...p.map(v=>v[1])),maxZ=Math.max(...p.map(v=>v[1]));
    // Braced wooden crate/fence faces sit within the actual solid footprint.
@@ -58,8 +62,21 @@ class ClubScene{
    }
   }
   for(const z of h.sand)this.box(z.x+z.w/2,z.y+z.h/2,z.w,z.h,.35,.05,this.mat.sand);
-  for(const z of h.water){const water=this.mesh(new T.PlaneGeometry(z.w,z.h),this.ocean.material);water.rotation.x=-Math.PI/2;water.position.set(z.x+z.w/2-350,-6,z.y+z.h/2-220);water.castShadow=false;}
-  for(const b of h.bumpers){this.cylinder(b.x,b.y,b.r,13,0,this.mat.stone);this.cylinder(b.x,b.y,b.r*.87,3,13,this.mat.white);this.cylinder(b.x,b.y,b.r*.54,2,16,this.mat.dark);}
+  for(const z of h.water){const water=this.mesh(new T.PlaneGeometry(z.w,z.h),this.party?this.mat.slime:this.ocean.material);water.rotation.x=-Math.PI/2;water.position.set(z.x+z.w/2-350,-6,z.y+z.h/2-220);water.castShadow=false;}
+  for(const [i,b] of h.bumpers.entries()){
+   const mat=this.party?(i%2?this.mat.pink:this.mat.yellow):this.mat.stone;
+   this.cylinder(b.x,b.y,b.r,13,0,mat);this.cylinder(b.x,b.y,b.r*.87,3,13,this.party?this.mat.white:this.mat.white);this.cylinder(b.x,b.y,b.r*.54,2,16,this.party?this.mat.purple:this.mat.dark);
+   if(this.party){const ring=this.mesh(new T.TorusGeometry(b.r*.73,2,8,32),mat);ring.rotation.x=Math.PI/2;ring.position.set(b.x-350,18,b.y-220);}
+  }
+  for(const gate of h.gates||[]){
+   const xs=gate.poly.map(p=>p[0]),zs=gate.poly.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,z=(Math.min(...zs)+Math.max(...zs))/2,w=Math.max(...xs)-Math.min(...xs),d=Math.max(...zs)-Math.min(...zs);
+   const group=new T.Group();this.world.add(group);const panel=this.box(x,z,w,d,27,0,this.mat.pink,group);panel.userData.kind='gate';panel.userData.gate=gate.id;
+   this.box(x,z,w+1,d+1,4,27,this.mat.yellow,group);
+   const wide=w>d;for(let t=8;t<(wide?w:d);t+=15){const stripe=this.box(wide?Math.min(...xs)+t:x,wide?z:Math.min(...zs)+t,wide?3:w+.3,wide?d+.3:3,20,3,this.mat.white,group);stripe.castShadow=false;}
+   group.position.y=gate.closed?0:55;this.gates.push({id:gate.id,group});
+   // Overhead supports sit above ball height; only the panel has a collision footprint.
+   this.box(x,z,w+8,d+8,4,88,this.mat.navy);
+  }
   for(const z of h.slopes||[]){const panel=this.box(z.x+z.w/2,z.y+z.h/2,z.w,z.h,.2,.2,new T.MeshStandardMaterial({color:'#d4c66d',roughness:.9,transparent:true,opacity:.65}));panel.castShadow=false;for(let x=z.x+18;x<z.x+z.w;x+=28)for(let y=z.y+18;y<z.y+z.h;y+=28){const arrow=new T.Shape();arrow.moveTo(-7,-5);arrow.lineTo(1,0);arrow.lineTo(-7,5);arrow.lineTo(-3,0);arrow.closePath();const m=this.mesh(new T.ShapeGeometry(arrow),this.mat.white);m.rotation.x=-Math.PI/2;m.rotation.z=-Math.atan2(z.ay,z.ax);m.position.set(x-350,.6,y-220);m.castShadow=false;}}
   // An actual recessed cup and original red flag.
   const cupSide=new T.Mesh(new T.CylinderGeometry(h.cupR,h.cupR,18,40,1,true),new T.MeshStandardMaterial({color:'#10292c',roughness:1,side:T.BackSide}));cupSide.position.set(h.cup[0]-350,-9,h.cup[1]-220);this.world.add(cupSide);this.cylinder(h.cup[0],h.cup[1],h.cupR,1,-18,this.mat.dark);
@@ -68,8 +85,22 @@ class ClubScene{
   // The tee marking denotes a legal placement area, not an extra collision object.
   const a=h.teeArea;if(a){const pts=[[a.x,a.y],[a.x+a.w,a.y],[a.x+a.w,a.y+a.h],[a.x,a.y+a.h],[a.x,a.y]].map(([x,z])=>new T.Vector3(x-350,.5,z-220));const mark=new T.Line(new T.BufferGeometry().setFromPoints(pts),new T.LineDashedMaterial({color:'#edffb3',dashSize:4,gapSize:3,transparent:true,opacity:.75}));mark.computeLineDistances();this.world.add(mark);}
   this.teeGhost=this.mesh(new T.SphereGeometry(h.ballR,20,12),new T.MeshBasicMaterial({color:'#d9f89a',transparent:true,opacity:.6}));this.teeGhost.visible=false;
-  this.decorate(h);
+  if(this.party)this.decorateParty(h);else this.decorate(h);
   this.bounds=new T.Box3().setFromPoints(h.poly.map(([x,z])=>new T.Vector3(x-350,0,z-220)));this.bounds.expandByScalar(55);
+ }
+ decorateParty(h){
+  const T=this.T;
+  // Original arena props, safely outside the collision polygon: grandstand pylons,
+  // suspended hoops and pennants rather than extra, invisible fairway obstacles.
+  for(const [i,[x,z]] of [[-35,30],[735,80],[-35,400],[735,420]].entries()){
+   this.cylinder(x,z,22,76,-70,this.mat.navy);this.cylinder(x,z,25,6,6,i%2?this.mat.pink:this.mat.cyan);
+   const ring=this.mesh(new T.TorusGeometry(24,5,10,32),i%2?this.mat.yellow:this.mat.pink);ring.position.set(x-350,55,z-220);ring.rotation.y=.4;
+   for(let n=0;n<3;n++)this.box(x+(n-1)*11,z,7,7,8+n*5,17,this.mat.white);
+  }
+  const x=h.cup[0],z=h.cup[1];
+  for(let i=0;i<12;i++){const angle=i*Math.PI/6;const tile=this.box(x+Math.cos(angle)*21,z+Math.sin(angle)*21,7,7,.25,.25,i%2?this.mat.white:this.mat.navy);tile.rotation.y=-angle;tile.castShadow=false;}
+  // Start chevrons are surface paint and have no extra collision geometry.
+  for(let i=0;i<3;i++){const arrow=new T.Shape();arrow.moveTo(-7,-5);arrow.lineTo(2,0);arrow.lineTo(-7,5);arrow.lineTo(-3,0);arrow.closePath();const m=this.mesh(new T.ShapeGeometry(arrow),this.mat.yellow);m.rotation.x=-Math.PI/2;m.position.set(h.tee[0]-350+(i-1)*14,.4,h.tee[1]-220-34);m.castShadow=false;}
  }
  decorate(h){
   const T=this.T;let seed=17;for(const c of h.name)seed=(seed*31+c.charCodeAt(0))>>>0;const rnd=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);
@@ -102,7 +133,7 @@ class ClubScene{
  }
  trace(h,b,angle,limit){
   const dx=Math.cos(angle),dz=Math.sin(angle);let dist=limit;
-  for(const polygon of [h.poly,...h.walls])for(let i=0;i<polygon.length;i++){
+  for(const polygon of [h.poly,...h.walls,...(h.gates||[]).filter(g=>g.closed).map(g=>g.poly)])for(let i=0;i<polygon.length;i++){
    const a=polygon[i],c=polygon[(i+1)%polygon.length],ex=c[0]-a[0],ez=c[1]-a[1],den=dx*ez-dz*ex;if(Math.abs(den)<1e-7)continue;
    const ax=a[0]-b.x,az=a[1]-b.y,t=(ax*ez-az*ex)/den,u=(ax*dz-az*dx)/den;
    if(t>0&&u>=0&&u<=1)dist=Math.min(dist,Math.max(0,t-h.ballR/Math.max(.1,Math.abs((dx*ez-dz*ex)/Math.hypot(ex,ez)))));
@@ -115,6 +146,7 @@ class ClubScene{
   if(document.hidden||!this.canvas.getClientRects().length)return;
   const {g,now,positions,aim,power,mine,pulling,placing,teeDraft}=data,T=this.T;if(this.key!==g.course.id+':'+g.holeIndex)this.build(g);this.resize();if(!this.width)return;
   const dt=this.lastNow?Math.min(.06,(now-this.lastNow)/1000):.016;this.lastNow=now;const moving=g.anim&&data.animating;const actorId=moving?g.anim.by:g.turnId;const actor=positions.find(v=>v.p.id===actorId)||positions.find(v=>v.pos)||positions[0];const fallback=g.phase==='between'?g.hole.cup:g.hole.tee;const focus=actor?.pos||{x:fallback[0],y:fallback[1]};
+  const gates=moving?(g.anim.gates||g.hole.gates||[]):(g.hole.gates||[]);for(const gate of this.gates){const state=gates.find(v=>v.id===gate.id),target=state?.closed?0:55;if(Math.abs(target-gate.group.position.y)>.01){gate.group.position.y=this.reduced.matches?target:gate.group.position.y+(target-gate.group.position.y)*(1-Math.exp(-dt*24));this.sun.shadow.needsUpdate=true;}}
   const aspect=this.width/this.height,tan=Math.tan(this.camera.fov*Math.PI/360),direction=new T.Vector3(Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),Math.cos(this.yaw)*Math.cos(this.pitch));
   let distance;
   if(this.overview){
@@ -138,7 +170,7 @@ class ClubScene{
   }
   this.teeGhost.visible=!!(placing&&teeDraft);if(this.teeGhost.visible)this.teeGhost.position.set(teeDraft.x-350,6,teeDraft.y-220);
   const player=positions.find(v=>v.p.id===mine);this.guide.visible=!!(data.canPutt&&player?.pos&&!placing);if(this.guide.visible){const b=player.pos,end=this.trace(g.hole,b,aim,65+power*1.8),a=this.guideLine.geometry.attributes.position;a.setXYZ(0,b.x-350,6,b.y-220);a.setXYZ(1,end.x-350,6,end.y-220);a.needsUpdate=true;this.guideLine.geometry.computeBoundingSphere();this.guideLine.computeLineDistances();this.ghost.position.set(end.x-350,6,end.y-220);this.ghost.visible=end.hit;}
-  if(this.flag&&!this.reduced.matches){const a=this.flag.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setZ(i,Math.sin(now*.003+this.flagBase[i*3]*.14)*this.flagBase[i*3]*.06);a.needsUpdate=true;this.ocean.material.map.offset.x=(now*.000006)%1;this.ocean.material.map.offset.y=(now*.000003)%1;}
+  if(this.flag&&!this.reduced.matches){const a=this.flag.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setZ(i,Math.sin(now*.003+this.flagBase[i*3]*.14)*this.flagBase[i*3]*.06);a.needsUpdate=true;this.oceanMap.offset.x=(now*.000006)%1;this.oceanMap.offset.y=(now*.000003)%1;}
   for(let i=this.particles.length-1;i>=0;i--){const p=this.particles[i];p.life-=dt;if(p.life<=0){this.effects.remove(p.m);p.m.geometry.dispose();p.m.material.dispose();this.particles.splice(i,1);continue;}p.vy-=130*dt;p.m.position.x+=p.vx*dt;p.m.position.y+=p.vy*dt;p.m.position.z+=p.vz*dt;p.m.rotation.x+=dt*3;p.m.rotation.z+=dt*4;}
   if(now>this.toastUntil)this.toast.hidden=true;
   const cp=this.project(...g.hole.cup,10),r=this.canvas.getBoundingClientRect();this.cupMarker.hidden=cp.visible;const arrows=['→','↘','↓','↙','←','↖','↑','↗'],heading=Math.round(Math.atan2(cp.y-r.top-r.height/2,cp.x-r.left-r.width/2)/(Math.PI/4));this.cupMarker.textContent='Cup '+arrows[(heading+8)%8];let markerX=Math.max(65,Math.min(r.width-65,cp.x-r.left)),markerY=Math.max(45,Math.min(r.height-60,cp.y-r.top));

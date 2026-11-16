@@ -378,7 +378,7 @@ function bfsPath(hole, maxDepth = 7) {
 
 (function golfPhysics() {
   const all = COURSES.COURSES.flatMap((c) => c.holes.map((h) => ({ c, h })));
-  ok(COURSES.COURSES.length === 5 && all.length === 30 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: five courses of six holes, original 18-hole tour retained');
+  ok(COURSES.COURSES.length === 6 && all.length === 36 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: six courses of six holes, original 18-hole tour retained');
   ok(new Set(all.map((x) => x.h.name)).size === all.length, 'Golf: every hole has its own name (no copies)');
   ok(all.every(({ h }) => GR.onFairway(h, h.tee[0], h.tee[1]) && GR.onFairway(h, h.cup[0], h.cup[1])), 'Golf: every tee and cup is on the fairway, clear of walls and bumpers');
   ok(all.every(({ h }) => !(h.water || []).some((z) => h.tee[0] >= z.x && h.tee[0] <= z.x + z.w && h.tee[1] >= z.y && h.tee[1] <= z.y + z.h) && !(h.water || []).some((z) => h.cup[0] >= z.x && h.cup[0] <= z.x + z.w && h.cup[1] >= z.y && h.cup[1] <= z.y + z.h)), 'Golf: no tee or cup sits in water');
@@ -400,7 +400,7 @@ function bfsPath(hole, maxDepth = 7) {
       if (!res || res.outcome !== 'cup') unsolved.push('replay:' + h.name);
     }
   }
-  ok(unsolved.length === 0, `Golf: all 30 holes can be completed (found paths of ${Math.min(...lens)}-${Math.max(...lens)} strokes, replayed through the real physics)${unsolved.length ? ' UNSOLVED: ' + unsolved.join(', ') : ''}`);
+  ok(unsolved.length === 0, `Golf: all 36 holes can be completed (found paths of ${Math.min(...lens)}-${Math.max(...lens)} strokes, replayed through the real physics)${unsolved.length ? ' UNSOLVED: ' + unsolved.join(', ') : ''}`);
 
   // determinism and fuzz: the ball never ends up outside the course or inside an obstacle
   const h = COURSES.COURSES[1].holes[3];

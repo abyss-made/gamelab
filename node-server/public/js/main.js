@@ -1118,7 +1118,7 @@
     if (gameId === "pool") return turnOpt([0, 30, 45, 60]) + stays;
     if (gameId === "golf")
       return (
-        `<label class="field"><span>Course</span><select data-setting="course">${[["coastal", "Coastal Club (6 new holes)"], ["meadow", "Meadow Mini (6 holes)"], ["canyon", "Canyon Run (6 holes)"], ["skyline", "Skyline Gauntlet (6 holes)"], ["harbor", "Harbor Links (6 holes · slopes)"], ["tour", "Playgrid Open (original 18)"]].map(([v, l]) => opt(v, s.course, l)).join("")}</select></label>` +
+        `<label class="field"><span>Course</span><select data-setting="course">${[["coastal", "Coastal Club (6 holes)"], ["gauntlet", "Party Gauntlet (6 holes · obstacles)"], ["meadow", "Meadow Mini (6 holes)"], ["canyon", "Canyon Run (6 holes)"], ["skyline", "Skyline Gauntlet (6 holes)"], ["harbor", "Harbor Links (6 holes · slopes)"], ["tour", "Playgrid Open (original 18)"]].map(([v, l]) => opt(v, s.course, l)).join("")}</select></label>` +
         sel("maxStrokes", "Stroke Limit Per Hole", [6, 8, 10], s.maxStrokes) +
         sel("turnTime", "Turn Timer", [20, 30, 45, 60], s.turnTime, (v) => v + " seconds")
       );

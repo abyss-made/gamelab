@@ -189,8 +189,10 @@ GameUI.golf = (() => {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
+  function shownGates(now){return g.anim&&now-animT0<g.anim.duration*1000?(g.anim.gates||g.hole.gates||[]):(g.hole.gates||[]);}
   function scene(now) {
     const h = g.hole;
+    const party=g.course.id==='gauntlet';
     const lawn = ctx.createLinearGradient(0, 0, 0, g.size.h);
     lawn.addColorStop(0, "#61cbd7");
     lawn.addColorStop(1, "#2396bb");
@@ -203,7 +205,7 @@ GameUI.golf = (() => {
     // fairway with mowing stripes
     poly(ctx, h.poly);
     const green=ctx.createLinearGradient(0,0,g.size.w,g.size.h);green.addColorStop(0,"#8acb59");green.addColorStop(.55,"#62b447");green.addColorStop(1,"#328b43");
-    ctx.fillStyle = material('turf',.35,green);
+    ctx.fillStyle = party?'#58b2dd':material('turf',.35,green);
     ctx.fill();
     ctx.save();
     poly(ctx, h.poly);
@@ -217,7 +219,7 @@ GameUI.golf = (() => {
     for (const z of h.water) {
       const wg = ctx.createLinearGradient(z.x, z.y, z.x + z.w, z.y + z.h);
       wg.addColorStop(0, "#234c7e"); wg.addColorStop(1, "#102a51");
-      ctx.fillStyle = material('water',.3,wg); ctx.fillRect(z.x, z.y, z.w, z.h);
+      ctx.fillStyle = party?'#8bef5f':material('water',.3,wg); ctx.fillRect(z.x, z.y, z.w, z.h);
       ctx.strokeStyle = "#cfeee966"; ctx.lineWidth = 1.5;
       for (let y = z.y + 10; y < z.y + z.h; y += 14) { ctx.beginPath(); ctx.moveTo(z.x + 8, y); ctx.bezierCurveTo(z.x + z.w * 0.3, y - 4, z.x + z.w * 0.6, y + 4, z.x + z.w - 8, y); ctx.stroke(); }
     }
@@ -228,7 +230,7 @@ GameUI.golf = (() => {
     ctx.strokeStyle = "#5b8990";
     ctx.lineWidth = 12;
     ctx.stroke();
-    ctx.strokeStyle = material('stone',.3,'#d7e0d7');
+    ctx.strokeStyle = party?'#64e1df':material('stone',.3,'#d7e0d7');
     ctx.lineWidth = 9;
     ctx.stroke();
     ctx.save();
@@ -241,7 +243,7 @@ GameUI.golf = (() => {
       ctx.save();ctx.translate(2,5);poly(ctx,w);ctx.fillStyle='#1d412c';ctx.shadowColor='#17372988';ctx.shadowBlur=7;ctx.fill();ctx.restore();
       poly(ctx, w);
       const wg=ctx.createLinearGradient(0,0,g.size.w,g.size.h);wg.addColorStop(0,'#dbbd7d');wg.addColorStop(1,'#88643e');
-      ctx.fillStyle = material('wood',.24,wg);
+      ctx.fillStyle = party?'#ef62ae':material('wood',.24,wg);
       ctx.fill();
       ctx.strokeStyle = "#f2d69b";
       ctx.lineWidth = 3;
@@ -260,6 +262,13 @@ GameUI.golf = (() => {
       ctx.arc(b.x, b.y, b.r * 0.45, 0, 7);
       ctx.fillStyle = "#030d17";
       ctx.fill();
+    }
+    // The compatibility renderer uses the same shot-locked gate state as WebGL.
+    for(const gate of shownGates(now)){
+      poly(ctx,gate.poly);ctx.fillStyle=gate.closed?'#ed4e9c':'#4bd6d044';ctx.fill();
+      ctx.strokeStyle=gate.closed?'#ffe46a':'#30a29a';ctx.lineWidth=3;ctx.stroke();
+      const x=gate.poly.reduce((s,p)=>s+p[0],0)/gate.poly.length,y=gate.poly.reduce((s,p)=>s+p[1],0)/gate.poly.length;
+      ctx.fillStyle='#0b2335';ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillText(gate.closed?'×':'↑',x,y+4);
     }
     for (const zone of h.slopes || []) {
       ctx.fillStyle='#cfba6b88';ctx.fillRect(zone.x,zone.y,zone.w,zone.h);
@@ -453,7 +462,7 @@ GameUI.golf = (() => {
       <div class="gf-controls" id="gf-controls"><div class="club-aim"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
         <label class="club-power"><span>Shot power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label><button type="button" class="btn" id="gf-putt">Putt</button><button type="button" class="btn btn-ghost" id="gf-cancel" hidden>Cancel shot</button>
       </div>
-      <div class="club-utility"><button type="button" class="btn btn-ghost btn-small" id="gf-place">Choose tee position</button><small id="gf-place-note" role="status"></small><span class="club-authority">Lowest score wins · ${a.esc('2–6 players')}</span></div>
+      <p class="club-course-note" id="gf-course-note" hidden></p><div class="club-utility"><button type="button" class="btn btn-ghost btn-small" id="gf-place">Choose tee position</button><small id="gf-place-note" role="status"></small><span class="club-authority">Lowest score wins · ${a.esc('2–6 players')}</span></div>
       <details class="club-scorecard" id="gf-score-details"><summary>Course scorecard</summary><div class="gf-card" id="gf-card"></div></details>`;
     root.dataset.ten='golf';
     GameUI.scenes.mount(root,'golf');
@@ -564,6 +573,9 @@ GameUI.golf = (() => {
       .join("");
     root.querySelector("#gf-eyebrow").textContent = `${g.course.name || "Course"} · Hole ${g.holeIndex + 1} / ${g.course.holes}`;
     root.querySelector("#gf-title").textContent = g.hole.name;
+    root.dataset.course=g.course.id;
+    root.querySelector('#gf-course-note').hidden=g.course.id!=='gauntlet';
+    root.querySelector('#gf-course-note').textContent=(g.hole.gates||[]).length?'Gates switch after each putt. Raised gates are open; occupied lanes stay open.':'Bounce pads, tight corners, risky shortcuts. Use Overview to plan your route.';
     const mb = myBall();
     root.querySelector("#gf-score").innerHTML = `<b>PAR ${g.hole.par}</b><span>Stroke <strong>${mb ? mb.strokes : 0}</strong></span>`;
     const st = root.querySelector("#gf-status");

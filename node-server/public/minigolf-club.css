@@ -1,4 +1,8 @@
 /* Mini Golf owns its play surface; the rest of Playgrid keeps its existing layout. */
+.golf-club .club-course-note{margin:0;padding:9px 20px;background:#172d47;color:#dce9b8;font-size:11px;line-height:1.5;border-top:1px solid #47617a}
+.golf-club[data-course=gauntlet] .club-brand{color:#c7fa62}.golf-club[data-course=gauntlet] .club-course h2{color:#fff7e9}
+.golf-club[data-course=gauntlet] .club-cup-marker{background:#382956ed;border-color:#d7c5ff}
+@media(max-width:700px){.golf-club .club-course-note{padding:8px 12px;font-size:10px}}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club){width:100%;max-width:1700px;grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'stage';grid-template-rows:auto auto;gap:8px;padding:8px 14px 18px}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club)>:is(#side,#room-chat){display:none}
 body[data-game=golf] .room[data-phase=game].golf-room-open:has(.golf-club){grid-template-columns:minmax(0,1fr) 260px;grid-template-areas:'bar bar' 'stage side' 'stage chat';grid-template-rows:auto auto 1fr}

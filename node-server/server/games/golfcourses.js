@@ -74,6 +74,18 @@ const COASTAL = { id: 'coastal', name: 'Coastal Club', blurb: 'Island fairways, 
 ] };
 COURSES.push(COASTAL);
 BY_ID.coastal = COASTAL;
+// An original obstacle-arena course. Gates switch between shots, never mid-replay.
+// Every opening has a permanent bypass; no waiting for a clock or impossible seed.
+const GAUNTLET = { id:'gauntlet', name:'Party Gauntlet', blurb:'Switchbacks, bounce gardens and shot-switch gates', holes:[
+  {name:'Ribbon Run',par:4,poly:[[60,60],[640,60],[640,205],[230,205],[230,260],[640,260],[640,380],[60,380],[60,155],[480,155],[480,115],[60,115]],tee:[110,320],cup:[110,85],bumpers:[{x:420,y:320,r:19},{x:560,y:130,r:18}],walls:[rect(325,270,345,325)]},
+  {name:'Bounce Boulevard',par:3,poly:[[60,110],[110,60],[590,60],[640,110],[640,330],[590,380],[110,380],[60,330]],tee:[110,220],cup:[590,220],bumpers:[{x:245,y:145,r:27},{x:245,y:295,r:27},{x:350,y:220,r:29},{x:455,y:145,r:27},{x:455,y:295,r:27}],slopes:[{x:150,y:185,w:60,h:70,ax:155,ay:0}]},
+  {name:'Gatecrasher',par:4,poly:rect(60,60,640,380),tee:[110,220],cup:[590,220],walls:[rect(255,60,275,170),rect(255,270,275,380),rect(425,60,445,170),rect(425,270,445,380)],gates:[{id:'A',phase:0,poly:rect(255,170,275,225)},{id:'B',phase:1,poly:rect(425,215,445,270)}],bumpers:[{x:350,y:110,r:20},{x:350,y:330,r:20}]},
+  {name:'Slime Shortcut',par:4,poly:rect(60,60,640,380),tee:[110,310],cup:[590,120],water:[{x:225,y:140,w:100,h:160},{x:405,y:140,w:95,h:160}],walls:[rect(320,60,340,140),rect(385,300,405,380)],slopes:[{x:350,y:165,w:40,h:110,ax:0,ay:-150}],bumpers:[{x:555,y:295,r:24}]},
+  {name:'Pinch Point',par:4,poly:[[60,60],[250,60],[250,145],[450,145],[450,60],[640,60],[640,380],[450,380],[450,295],[250,295],[250,380],[60,380]],tee:[110,300],cup:[590,130],bumpers:[{x:295,y:195,r:21},{x:405,y:245,r:21}],walls:[rect(170,135,195,240),rect(510,200,535,305)],gates:[{id:'A',phase:0,poly:rect(340,145,360,205)}]},
+  {name:'Victory Lap',par:5,poly:rect(60,60,640,380),tee:[110,320],cup:[590,110],walls:[rect(210,145,230,380),rect(410,60,430,270)],bumpers:[{x:310,y:190,r:25},{x:530,y:310,r:23}],gates:[{id:'A',phase:0,poly:rect(210,60,230,102)},{id:'B',phase:1,poly:rect(410,328,430,380)}],slopes:[{x:465,y:75,w:70,h:65,ax:130,ay:0}]},
+]};
+COURSES.push(GAUNTLET);
+BY_ID.gauntlet = GAUNTLET;
 const TOUR = { id: 'tour', name: 'Playgrid Open (18 holes)', blurb: 'All three courses', holes: ORIGINAL_COURSES.flatMap((c) => c.holes.map((h) => ({ ...h, course: c.name }))) };
 BY_ID.tour = TOUR;
 

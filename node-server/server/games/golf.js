@@ -10,7 +10,7 @@ const COURSES = require('./golfcourses');
 const meta = { id: 'golf', name: 'Mini Golf', minPlayers: 2, maxPlayers: 6, midJoin: false, resetScores: false, scoreLabel: 'wins' };
 
 const TURN_TIMES = [20, 30, 45, 60];
-const COURSE_IDS = ['coastal', 'meadow', 'canyon', 'skyline', 'harbor', 'tour'];
+const COURSE_IDS = ['coastal', 'gauntlet', 'meadow', 'canyon', 'skyline', 'harbor', 'tour'];
 const defaults = { course: 'coastal', maxStrokes: 8, turnTime: 45 };
 
 const BALL_R = 6;
@@ -34,12 +34,23 @@ function sanitizeSettings(s, prev) {
 
 const inRect = (z, x, y) => x >= z.x && x <= z.x + z.w && y >= z.y && y <= z.y + z.h;
 
+// Shot-switch gates are turn-based obstacles, not an unsynchronized client clock.
+// An occupied gate stays open until it can close safely. The chosen state is held
+// for the entire authoritative simulation and is included with its replay.
+function gateStates(hole, shot = 0, players = []) {
+  return (hole.gates || []).map(gate => {
+    const xs=gate.poly.map(p=>p[0]),ys=gate.poly.map(p=>p[1]),margin=BALL_R+1;
+    const occupied=players.some(p=>!p.out&&!p.holed&&p.x>=Math.min(...xs)-margin&&p.x<=Math.max(...xs)+margin&&p.y>=Math.min(...ys)-margin&&p.y<=Math.max(...ys)+margin);
+    return {...gate,closed:(shot+gate.phase)%2===0&&!occupied};
+  });
+}
+
 // Precomputed geometry for a hole (cached by the hole object).
 const geo = new WeakMap();
 function geometry(hole) {
   let g = geo.get(hole);
   if (!g) {
-    const solids = (hole.walls || []);
+    const solids = (hole.walls || []).concat((hole.gates || []).filter(g=>g.closed ?? g.phase===0).map(g=>g.poly));
     g = { walls: P.polyWalls(hole.poly).concat(...solids.map(P.polyWalls)), circles: (hole.bumpers || []).map((b) => ({ x: b.x, y: b.y, r: b.r, rest: 1 })), solids };
     geo.set(hole, g);
   }
@@ -90,7 +101,13 @@ function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[]) {
       if(Math.hypot(b.x-hole.cup[0],b.y-hole.cup[1])<CUP_R*.9&&Math.hypot(b.vx,b.vy)<=CUP_MAX_SPEED){outcomes[i]='cup';b.x=hole.cup[0];b.y=hole.cup[1];return 'gone';}}
   });
   const path=i=>result.frames.map(f=>[f[0],f[1+i*2],f[2+i*2]]);
-  const position=(b,i)=>({id:b.id,x:outcomes[i]==='cup'?hole.cup[0]:Math.round(b.x*10)/10,y:outcomes[i]==='cup'?hole.cup[1]:Math.round(b.y*10)/10,outcome:outcomes[i]});
+  const position=(b,i)=>{
+    let x=outcomes[i]==='cup'?hole.cup[0]:Math.round(b.x*10)/10,y=outcomes[i]==='cup'?hole.cup[1]:Math.round(b.y*10)/10;
+    // Rounding a safe resting point onto an inclusive water/bumper boundary must
+    // not turn it into an illegal start for the following shot.
+    if(outcomes[i]==='rest'&&!onFairway(hole,x,y)&&onFairway(hole,b.x,b.y)){x=b.x;y=b.y;}
+    return{id:b.id,x,y,outcome:outcomes[i]};
+  };
   const frames=path(0);return {...position(balls[0],0),collisions,others:balls.slice(1).map((b,i)=>position(b,i+1)),
     anim:{frames,duration:result.duration,settled:result.settled,lastFrame:frames.at(-1),paths:Object.fromEntries(others.map((b,i)=>[b.id,path(i+1)]))}};
 }
@@ -188,7 +205,8 @@ function finishCourse(st, api, forfeit) {
 
 function putt(st, api, p, angle, power) {
   const course = courseOf(st);
-  const hole = course.holes[st.hole];
+  const definition = course.holes[st.hole];
+  const hole = definition.gates ? {...definition,gates:gateStates(definition,st.shots,st.players)} : definition;
   const others=st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes>0);
   const r = simulatePutt(hole, p.x, p.y, angle, power, others, st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes===0));
   p.placed=true;
@@ -222,7 +240,7 @@ function putt(st, api, p, angle, power) {
     api.sys(`${p.name} reached the ${st.settings.maxStrokes}-stroke limit and picks up.`, 'warn');
   }
   const ms = Math.ceil(r.anim.duration * 1000) + HOLD_MS;
-  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths };
+  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths, ...(hole.gates ? {gates:hole.gates} : {}) };
   st.animUntil = api.now() + ms;
   st.animStart = api.now();
   st.last = { by: p.id, outcome: r.outcome, note, strokes: p.strokes, collisions: r.collisions };
@@ -309,7 +327,7 @@ function view(st, m, now) {
   const hole = course.holes[st.hole];
   const me = st.players.findIndex((p) => p.id === m.id);
   const anim = st.anim && now < st.animUntil ? { ...st.anim, elapsedMs: now - st.animStart } : null;
-  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R };
+  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R, ...(hole.gates ? {gates:gateStates(hole,st.shots,st.players)} : {}) };
   return {
     course: { id: course.id, name: course.name, pars: course.holes.map((h) => h.par), holes: course.holes.length },
     holeIndex: st.hole,
@@ -332,5 +350,5 @@ function view(st, m, now) {
 
 module.exports = {
   meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view,
-  rules: { simulatePutt, onFairway, geometry, BALL_R, CUP_R, MAX_SPEED, MIN_SPEED, CUP_MAX_SPEED, startPosition, teeArea },
+  rules: { simulatePutt, onFairway, geometry, BALL_R, CUP_R, MAX_SPEED, MIN_SPEED, CUP_MAX_SPEED, startPosition, teeArea, gateStates },
 };
