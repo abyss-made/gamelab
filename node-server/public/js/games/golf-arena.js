@@ -31,8 +31,12 @@ window.GolfArena={
  },
  motor(s,m){
   const T=s.T,g=new T.Group();g.position.set(m.x-350,0,m.y-220);s.world.add(g);
-  const beam=s.mesh(new T.BoxGeometry(m.length*2,10,m.r*2),s.mat.pink,g);beam.position.y=7;beam.userData.kind='motor';beam.userData.motor=m.id;
-  for(const side of [-1,1]){const end=s.mesh(new T.CylinderGeometry(m.r,m.r,10,20),s.mat.yellow,g);end.position.set(side*m.length,7,0);for(let x=8;x<m.length;x+=12){const stripe=s.mesh(new T.BoxGeometry(4,.6,m.r*2+.1),s.mat.white,g);stripe.position.set(side*x,12.5,0);stripe.castShadow=false;}}
+  const beam=s.mesh(new T.BoxGeometry(m.length*2,10,m.r*2),s.mat.pink,g);beam.position.y=7;beam.castShadow=false;beam.userData.kind='motor';beam.userData.motor=m.id;
+  for(const side of [-1,1]){const end=s.mesh(new T.CylinderGeometry(m.r,m.r,10,20),s.mat.yellow,g);end.position.set(side*m.length,7,0);end.castShadow=false;for(let x=8;x<m.length;x+=12){const stripe=s.mesh(new T.BoxGeometry(4,.6,m.r*2+.1),s.mat.white,g);stripe.position.set(side*x,12.5,0);stripe.castShadow=false;}}
+  // As with the golf balls, a contact shadow keeps moving mechanisms grounded
+  // without rebuilding the entire arena shadow map on every animation frame.
+  const footprint=new T.Shape();footprint.moveTo(-m.length,-m.r);footprint.lineTo(m.length,-m.r);footprint.absarc(m.length,0,m.r,-Math.PI/2,Math.PI/2,false);footprint.lineTo(-m.length,m.r);footprint.absarc(-m.length,0,m.r,Math.PI/2,Math.PI*1.5,false);
+  const shadow=s.mesh(new T.ShapeGeometry(footprint),new T.MeshBasicMaterial({color:'#082037',transparent:true,opacity:.2,depthWrite:false}),g);shadow.rotation.x=-Math.PI/2;shadow.position.y=.25;shadow.castShadow=false;
   s.cylinder(m.x,m.y,9,9,12,s.mat.navy);s.cylinder(m.x,m.y,5,2,21,s.mat.neon);
   const points=[];for(let n=0;n<=80;n++){const a=n*Math.PI/40;points.push(new T.Vector3(m.x-350+Math.cos(a)*(m.length+m.r+7),.3,m.y-220+Math.sin(a)*(m.length+m.r+7)));}
   const arc=new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineDashedMaterial({color:'#e8efff',dashSize:3,gapSize:6,transparent:true,opacity:.5}));arc.computeLineDistances();s.world.add(arc);
