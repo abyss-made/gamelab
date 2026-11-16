@@ -575,7 +575,7 @@ GameUI.golf = (() => {
     root.querySelector("#gf-title").textContent = g.hole.name;
     root.dataset.course=g.course.id;
     root.querySelector('#gf-course-note').hidden=g.course.id!=='gauntlet';
-    root.querySelector('#gf-course-note').textContent=(g.hole.gates||[]).length?'Gates switch after each putt. Raised gates are open; occupied lanes stay open.':'Bounce pads, tight corners, risky shortcuts. Use Overview to plan your route.';
+    root.querySelector('#gf-course-note').textContent=(g.hole.gates||[]).length?'Gates switch after each putt. Raised gates are open; occupied lanes stay open.':g.hole.water.length?'Slime costs +1 stroke. Take the outer lanes or risk the narrow shortcut.':'Bounce pads, tight corners, risky shortcuts. Use Overview to plan your route.';
     const mb = myBall();
     root.querySelector("#gf-score").innerHTML = `<b>PAR ${g.hole.par}</b><span>Stroke <strong>${mb ? mb.strokes : 0}</strong></span>`;
     const st = root.querySelector("#gf-status");
