@@ -1,0 +1,126 @@
+[
+  {
+    "file": "full-course.mp4",
+    "originalSha256": "fed0545e565b978e86f72af42823e080e7d51e982611cd33c1f72dcb934edcd8",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "448.080000",
+        "size": "48620154"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "448.080000",
+        "size": "10934453"
+      }
+    },
+    "publishedSha256": "3181669b4733a5bc2e1f988aa4a31f916e8a7d42d5c1f2503adfbfd982dbb424",
+    "transformation": "Codec compression only; no frame, gameplay, aspect, timing or image edits"
+  },
+  {
+    "file": "highlight-desktop.mp4",
+    "sourceFile": "full-course.mp4",
+    "sourceSha256": "3181669b4733a5bc2e1f988aa4a31f916e8a7d42d5c1f2503adfbfd982dbb424",
+    "sourceStartSeconds": 205.23420119285583,
+    "timingNote": "Excerpt location selected from actual screenshot/file timestamps; no speed or frame changes",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "15.000000",
+        "size": "467890"
+      }
+    },
+    "publishedSha256": "3fe17ff47f2bba4d507c025a328cc23b6e65df7ac6ed5c62819eeb2576a5c4a0"
+  },
+  {
+    "file": "mobile-course.mp4",
+    "originalSha256": "3b10ad0fa8cd4ba743530ce8d74fbe18131ee8c8ab7a10a4cb804df504903dc3",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "448.760000",
+        "size": "22708289"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "448.760000",
+        "size": "3835157"
+      }
+    },
+    "publishedSha256": "db2b59c64fe3debb884a9726e466c7e3423fd7c54076f717691725ea884c30f8",
+    "transformation": "Codec compression only; no frame, gameplay, aspect, timing or image edits"
+  },
+  {
+    "file": "highlight-mobile.mp4",
+    "sourceFile": "mobile-course.mp4",
+    "sourceSha256": "db2b59c64fe3debb884a9726e466c7e3423fd7c54076f717691725ea884c30f8",
+    "sourceStartSeconds": 205.58888578414917,
+    "timingNote": "Excerpt location selected from actual screenshot/file timestamps; no speed or frame changes",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "15.000000",
+        "size": "187456"
+      }
+    },
+    "publishedSha256": "dfd315e6169eddd58a10f528aef6902f8519b437200d62c78bda0ae634fca038"
+  }
+]

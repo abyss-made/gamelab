@@ -1,0 +1,31 @@
+PASS  /games serves the app page
+PASS  /rooms serves the app page
+PASS  createRoom with game: null succeeds
+PASS  no-game party has no game id, settings or game view
+PASS  party is named after its creator (Alex's Party)
+PASS  no-game party seats the whole group (12)
+PASS  Nova joins the no-game party with a seat
+PASS  Trouble joins the no-game party with a seat
+PASS  Kai joins the no-game party with a seat
+PASS  public list shows the party without a game
+PASS  Start is refused until a game is chosen
+PASS  a public no-game party never counts down to auto start
+PASS  settings and seat limits are ignored without a game
+PASS  two players marked themselves ready
+PASS  readiness can be undone
+PASS  members can suggest a game; votes never auto-select it
+PASS  a 2-seat game is refused for 4 people when spectators are off
+PASS  choosing a game keeps the same party code
+PASS  chess seats two and the others watch
+PASS  the two who were moved wait in the queue
+PASS  the chosen game brings its settings
+PASS  a participant cannot change the game
+PASS  host starts once the minimum is met
+PASS  readiness resets for the next round
+PASS  readiness cannot be set during a match
+PASS  everyone is still in the party after the game
+PASS  createRoom without a game keeps the old Draw & Guess default
+PASS  private no-game party created
+PASS  the person past the seat limit spectates with a clear notice
+
+All party 3.0 checks passed

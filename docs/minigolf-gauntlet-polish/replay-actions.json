@@ -1,0 +1,295 @@
+{
+  "description": "Legal native inputs chosen in a rules-level simulation. The browser harness must independently play and verify them in a normal match.",
+  "actions": [
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 310,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.1083333333333334
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 300,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.033333333333333
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 315,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.175
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 60,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.1083333333333334
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 184.75,
+      "power": 0.55,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.8833333333333333
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 178.5,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.8875
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 320,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 355,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 336.75,
+      "power": 0.25,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 105.75,
+      "power": 0.15,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.31666666666666665
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 15,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 355,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 1,
+      "duration": 2.4
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 6.75,
+      "power": 0.55,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 128.75,
+      "power": 0.08,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.325
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 331.25,
+      "power": 0.55,
+      "outcome": "water",
+      "note": "water",
+      "motorHits": 0,
+      "duration": 0.5666666666666667
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 155,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 1.9958333333333333
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 35,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4166666666666665
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 175,
+      "power": 0.7,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 1.4833333333333334
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 8,
+      "power": 0.55,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.9
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angleDegrees": 335,
+      "power": 0.7,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 180,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 60,
+      "power": 1,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angleDegrees": 350,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 1.2791666666666666
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 220,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 220,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 145,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 1,
+      "duration": 2.4
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 80,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "motorHits": 0,
+      "duration": 3.7541666666666664
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 279,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 2.4
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 358.25,
+      "power": 0.15,
+      "outcome": "cup",
+      "note": null,
+      "motorHits": 0,
+      "duration": 0.42083333333333334
+    }
+  ]
+}

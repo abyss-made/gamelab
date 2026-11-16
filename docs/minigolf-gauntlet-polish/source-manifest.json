@@ -1,0 +1,22 @@
+{
+  "testedSourceCommit": "28225c3994e16e7e98934e21573b835d6a6c6e78",
+  "beforeSourceCommit": "2e0dc0e29ae0e7253c4074666a416640b232323a",
+  "scope": "Final normal browser match, input checks, renderer checks and all 38 package test programs; documentation commits may follow without changing these sources.",
+  "sourceSha256": {
+    "node-server/public/index.html": "e96b2a4ac8bf0b4087bf40a19f233e78abdf10c9d5bf690667529417c055ab85",
+    "node-server/public/js/games/golf-arena.js": "82bdc6e4d8c5c517305b3b9910bd46ee19c1626c4c98c380ce0c714346f0204c",
+    "node-server/public/js/games/golf-motion.js": "fde0aa7231608d289302a2307c81cf4c26c9e33dcbf5c369c41b7ef867127d94",
+    "node-server/public/js/games/golf-scene.js": "995f1b5670a6de6b26d9d2aa1244e75a0ddab000d82d1d04bbc2f3d19b460682",
+    "node-server/public/js/games/golf.js": "d84baf1b31302cb6f10392e4d0f0eacd4acbe473a949193133a9dfadc14fc6df",
+    "node-server/public/js/sound.js": "e943ffcd96329f808ba0b169cd3abd5e78f8080ab875d6845b8dc75f448025b1",
+    "node-server/public/minigolf-club.css": "6e2e02c621d82772472cf52836ab5ca63f9edcc560598138eb2a0b02a9e54b1e",
+    "node-server/server/games/golf.js": "9ca4ad843afa61a9a231608f684a3a886724bb28d6acfac06a6bbc130e2f3be8",
+    "node-server/server/games/golfcourses.js": "1d0b8cab0e077cab84d1c45f0854b62a54754bbe79d474464be2d166af177730",
+    "node-server/server/games/physics.js": "ed0b282a2dbdcece91c5ca73c285e655feff63b1c13f1a863979e58c7c1be0ad",
+    "node-server/test/batch5.js": "ce1f67d4f70d491d03768e70d6cb41e082075642bd6f4227218a994409db9898",
+    "node-server/test/golfgauntlet.js": "a611a32ddc62dcdd7f5ccf4c33baf102de3edf67c12d2dfc8839e92060c666de"
+  },
+  "regressionPrograms": 38,
+  "regressionFailures": 0,
+  "regressionSkips": 0
+}
