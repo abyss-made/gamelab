@@ -1,0 +1,115 @@
+{
+  "nativePngCount": 51,
+  "cases": [
+    {
+      "width": 1440,
+      "camera": "follow",
+      "nativeImages": 6
+    },
+    {
+      "width": 1440,
+      "camera": "overview",
+      "nativeImages": 6
+    },
+    {
+      "width": 390,
+      "camera": "follow",
+      "nativeImages": 6
+    },
+    {
+      "width": 390,
+      "camera": "overview",
+      "nativeImages": 6
+    },
+    {
+      "width": 932,
+      "camera": "follow",
+      "nativeImages": 6
+    },
+    {
+      "width": 932,
+      "camera": "overview",
+      "nativeImages": 6
+    }
+  ],
+  "noOverflow": [
+    1440,
+    390
+  ],
+  "videoPlayback": true,
+  "recordings": [
+    {
+      "file": "full-course.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1440,
+            "height": 900
+          }
+        ],
+        "format": {
+          "duration": "330.800000",
+          "size": "9328636"
+        }
+      }
+    },
+    {
+      "file": "input-1440.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 1440,
+            "height": 900
+          }
+        ],
+        "format": {
+          "duration": "69.720000",
+          "size": "5175877"
+        }
+      }
+    },
+    {
+      "file": "input-390.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 390,
+            "height": 844
+          }
+        ],
+        "format": {
+          "duration": "36.760000",
+          "size": "2120816"
+        }
+      }
+    },
+    {
+      "file": "input-932.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 932,
+            "height": 430
+          }
+        ],
+        "format": {
+          "duration": "49.800000",
+          "size": "2798248"
+        }
+      }
+    }
+  ],
+  "errors": []
+}

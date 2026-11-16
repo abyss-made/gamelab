@@ -1,0 +1,2402 @@
+{
+  "sourceCommit": "0aabc3279864232d69b082107380fb3c0b7c50fc",
+  "mode": "replayed native UI actions",
+  "views": [
+    {
+      "state": "hole-01-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-01-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-01-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-01-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 0,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-02-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 1,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-03-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 2,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-04-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "water-penalty",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 3,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-05-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 4,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-follow",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "hole-06-overview",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "game",
+        "hole": 5,
+        "course": "gauntlet"
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 1440,
+      "height": 900,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    },
+    {
+      "state": "full-course-result",
+      "width": 932,
+      "height": 430,
+      "overflow": 0,
+      "actualState": {
+        "phase": "lobby",
+        "hole": null,
+        "course": null
+      }
+    }
+  ],
+  "shots": [
+    {
+      "hole": 1,
+      "player": "ba00d87cfc40",
+      "angle": 270.0,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 1,
+      "player": "1af22424a79c",
+      "angle": 274.25,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 1,
+      "player": "ba00d87cfc40",
+      "angle": 270.0,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 1,
+      "player": "1af22424a79c",
+      "angle": 323.75,
+      "power": 0.9,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 1,
+      "player": "1af22424a79c",
+      "angle": 315.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 3
+    },
+    {
+      "hole": 1,
+      "player": "ba00d87cfc40",
+      "angle": 323.75,
+      "power": 0.9,
+      "outcome": "rest",
+      "strokes": 3
+    },
+    {
+      "hole": 1,
+      "player": "ba00d87cfc40",
+      "angle": 315.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 4
+    },
+    {
+      "hole": 2,
+      "player": "1af22424a79c",
+      "angle": 1.75,
+      "power": 0.3,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 2,
+      "player": "ba00d87cfc40",
+      "angle": 0.0,
+      "power": 0.3,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 2,
+      "player": "1af22424a79c",
+      "angle": 315.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 2,
+      "player": "ba00d87cfc40",
+      "angle": 38.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 3,
+      "player": "ba00d87cfc40",
+      "angle": 8.75,
+      "power": 0.9,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 3,
+      "player": "1af22424a79c",
+      "angle": 8.75,
+      "power": 0.9,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 3,
+      "player": "1af22424a79c",
+      "angle": 352.75,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 3,
+      "player": "ba00d87cfc40",
+      "angle": 9.75,
+      "power": 0.7,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 3,
+      "player": "1af22424a79c",
+      "angle": 308.75,
+      "power": 0.9,
+      "outcome": "cup",
+      "strokes": 3
+    },
+    {
+      "hole": 4,
+      "player": "1af22424a79c",
+      "angle": 331.25,
+      "power": 0.55,
+      "outcome": "water",
+      "strokes": 2
+    },
+    {
+      "hole": 4,
+      "player": "1af22424a79c",
+      "angle": 340.75,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 3
+    },
+    {
+      "hole": 4,
+      "player": "ba00d87cfc40",
+      "angle": 0.0,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 4,
+      "player": "1af22424a79c",
+      "angle": 45.0,
+      "power": 0.7,
+      "outcome": "rest",
+      "strokes": 4
+    },
+    {
+      "hole": 4,
+      "player": "ba00d87cfc40",
+      "angle": 75.0,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 4,
+      "player": "ba00d87cfc40",
+      "angle": 263.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 3
+    },
+    {
+      "hole": 4,
+      "player": "1af22424a79c",
+      "angle": 354.25,
+      "power": 0.5,
+      "outcome": "cup",
+      "strokes": 5
+    },
+    {
+      "hole": 5,
+      "player": "ba00d87cfc40",
+      "angle": 340.5,
+      "power": 0.9,
+      "outcome": "cup",
+      "strokes": 1
+    },
+    {
+      "hole": 5,
+      "player": "1af22424a79c",
+      "angle": 342.75,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 5,
+      "player": "1af22424a79c",
+      "angle": 323.75,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 2
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 338.75,
+      "power": 0.7,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 6,
+      "player": "ba00d87cfc40",
+      "angle": 336.25,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 1
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 330.0,
+      "power": 0.9,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 6,
+      "player": "ba00d87cfc40",
+      "angle": 285.0,
+      "power": 1,
+      "outcome": "rest",
+      "strokes": 2
+    },
+    {
+      "hole": 6,
+      "player": "ba00d87cfc40",
+      "angle": 45.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 3
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 333.5,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 3
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 0.0,
+      "power": 0.5,
+      "outcome": "rest",
+      "strokes": 4
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 331.5,
+      "power": 0.15,
+      "outcome": "rest",
+      "strokes": 5
+    },
+    {
+      "hole": 6,
+      "player": "1af22424a79c",
+      "angle": 60.0,
+      "power": 1,
+      "outcome": "cup",
+      "strokes": 6
+    }
+  ],
+  "result": {
+    "type": "golf",
+    "course": "Party Gauntlet",
+    "pars": [
+      4,
+      3,
+      4,
+      4,
+      4,
+      5
+    ],
+    "standings": [
+      {
+        "id": "ba00d87cfc40",
+        "name": "ZippyNoodle",
+        "avatar": {
+          "e": 6,
+          "c": 6
+        },
+        "scores": [
+          4,
+          2,
+          2,
+          3,
+          1,
+          3
+        ],
+        "total": 15,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "1af22424a79c",
+        "name": "Nova",
+        "avatar": {
+          "e": 12,
+          "c": 1,
+          "v3": {
+            "v": 3,
+            "id": "h01",
+            "palette": "lime",
+            "expression": "smile",
+            "eyes": "default",
+            "hat": "none",
+            "glasses": "sunglasses",
+            "accessory": "none",
+            "detail": "signature"
+          }
+        },
+        "scores": [
+          3,
+          2,
+          3,
+          5,
+          2,
+          6
+        ],
+        "total": 21,
+        "out": false,
+        "played": 6
+      }
+    ],
+    "winnerId": "ba00d87cfc40",
+    "winners": [
+      "ba00d87cfc40"
+    ],
+    "tie": false,
+    "forfeit": false
+  },
+  "waterPenaltyVerified": true,
+  "gateChecks": [
+    {
+      "hole": 3,
+      "shot": 12,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 3,
+      "shot": 13,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 3,
+      "shot": 14,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 3,
+      "shot": 15,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 3,
+      "shot": 16,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              255,
+              170
+            ],
+            [
+              275,
+              170
+            ],
+            [
+              275,
+              225
+            ],
+            [
+              255,
+              225
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              425,
+              215
+            ],
+            [
+              445,
+              215
+            ],
+            [
+              445,
+              270
+            ],
+            [
+              425,
+              270
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 5,
+      "shot": 24,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 5,
+      "shot": 25,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 5,
+      "shot": 26,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              340,
+              145
+            ],
+            [
+              360,
+              145
+            ],
+            [
+              360,
+              205
+            ],
+            [
+              340,
+              205
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 27,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 28,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 29,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 30,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 31,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 32,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 33,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 34,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "sameForOpponent": true
+    },
+    {
+      "hole": 6,
+      "shot": 35,
+      "lockedReplayGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": true
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": false
+        }
+      ],
+      "nextGates": [
+        {
+          "id": "A",
+          "phase": 0,
+          "poly": [
+            [
+              210,
+              60
+            ],
+            [
+              230,
+              60
+            ],
+            [
+              230,
+              102
+            ],
+            [
+              210,
+              102
+            ]
+          ],
+          "closed": false
+        },
+        {
+          "id": "B",
+          "phase": 1,
+          "poly": [
+            [
+              410,
+              328
+            ],
+            [
+              430,
+              328
+            ],
+            [
+              430,
+              380
+            ],
+            [
+              410,
+              380
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "sameForOpponent": true
+    }
+  ],
+  "errors": []
+}

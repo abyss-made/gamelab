@@ -1,0 +1,72 @@
+reliabilityui: real server on http://localhost:37263, seed 48, Chromium 154.0.8037.57
+
+== invite-join
+PASS  invite-join: Create Party opens a party with a code (B5SZPB)
+PASS  invite-join: the invite link shows the party code before joining
+PASS  invite-join: joining by /r/CODE link, #CODE, a pasted link and a typed lower-case code all reach the same party
+PASS  invite-join: every page lists the same five people (5,5,5,5,5)
+PASS  invite-join: the server has five distinct members
+PASS  invite-join: only the host sees Start Game
+PASS  invite-join: phones have no horizontal overflow in the lobby (0,0)
+PASS  invite-join: five pages joined: every page agrees with the server
+PASS  invite-join: the server logged no handler or loop errors
+      (invite-join: 4361 ms)
+
+== drawguess-live
+PASS  drawguess-live: every page shows the game
+PASS  drawguess-live: turn 1: the drawer's page shows the word
+PASS  drawguess-live: a reload mid-game rejoins as the same member
+PASS  drawguess-live: the reloaded page replays the drawing so far (743 painted samples)
+PASS  drawguess-live: the reloaded page still does not show the word
+PASS  drawguess-live: the reload left no duplicate member
+PASS  drawguess-live: going offline shows Reconnecting to the others and a connection note on the page
+PASS  drawguess-live: coming back online rejoins automatically as the same member
+PASS  drawguess-live: after reload and offline: every page agrees with the server
+PASS  drawguess-live: turn 1: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 2: the drawer's page shows the word
+PASS  drawguess-live: turn 2: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 3: the drawer's page shows the word
+PASS  drawguess-live: turn 3: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: turn 4: the drawer's page shows the word
+PASS  drawguess-live: turn 4: a guesser's page shows the word once they guessed it
+PASS  drawguess-live: over 4 turns no page showed the word to anyone who had not guessed it
+PASS  drawguess-live: each of the four seated players drew once (4 turns)
+PASS  drawguess-live: the podium appears on every page
+PASS  drawguess-live: no page errors during the live game
+PASS  drawguess-live: after the podium: every page agrees with the server
+PASS  drawguess-live: the server logged no handler or loop errors
+      (drawguess-live: 11637 ms)
+
+== fourrow-switch-play
+PASS  fourrow-switch-play: switching to Four in a Row seats two and moves three to watch
+PASS  fourrow-switch-play: the two players the host ticked in "Pick who plays" are the ones seated
+PASS  fourrow-switch-play: everyone moved to watching is told why
+PASS  fourrow-switch-play: game 1: four clicks in a column win for the first player
+PASS  fourrow-switch-play: game 1: every page shows who plays next
+PASS  fourrow-switch-play: four in a row game 1: every page agrees with the server
+PASS  fourrow-switch-play: game 2: four clicks in a column win for the first player
+PASS  fourrow-switch-play: game 2: every page shows who plays next
+PASS  fourrow-switch-play: four in a row game 2: every page agrees with the server
+PASS  fourrow-switch-play: the server logged no handler or loop errors
+      (fourrow-switch-play: 1947 ms)
+
+== no-leaks-across-cycles
+FAIL  no-leaks-across-cycles: Cy: timed out waiting for golf ended
+PASS  no-leaks-across-cycles: the server logged no handler or loop errors
+      artifact: test-artifacts/reliabilityui/no-leaks-across-cycles.json
+      (no-leaks-across-cycles: 15092 ms)
+      screenshots: test-artifacts/reliabilityui
+
+== smoke-21-multi-client
+FAIL  smoke-21-multi-client: Eli: timed out waiting for switched to drawguess
+PASS  smoke-21-multi-client: the server logged no handler or loop errors
+      artifact: test-artifacts/reliabilityui/smoke-21-multi-client.json
+      (smoke-21-multi-client: 8411 ms)
+      screenshots: test-artifacts/reliabilityui
+
+metrics {}
+
+reliabilityui: 43 passed, 2 failed in 74.5 s
+Failures:
+  - no-leaks-across-cycles: Cy: timed out waiting for golf ended
+  - smoke-21-multi-client: Eli: timed out waiting for switched to drawguess

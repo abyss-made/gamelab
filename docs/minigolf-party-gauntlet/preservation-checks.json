@@ -1,0 +1,17 @@
+{
+  "baseline": "cb2973dc858d0db045061671c3c70188336db726",
+  "existingCoursesPreserved": [
+    "meadow",
+    "canyon",
+    "skyline",
+    "harbor",
+    "coastal"
+  ],
+  "originalTourPreserved": true,
+  "sharedPhysicsUnchanged": true,
+  "otherGamesAndBackendUnchanged": true,
+  "changedServerFiles": [
+    "node-server/server/games/golf.js",
+    "node-server/server/games/golfcourses.js"
+  ]
+}

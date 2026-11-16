@@ -1,0 +1,7 @@
+PASS Gauntlet is selectable; Coastal Club remains the default; invalid IDs stay rejected
+PASS Closed gates bounce real shots; raised gates leave an actual playable opening
+PASS Gate closures respect ball clearance, including untouched tee balls; out/holed balls do not block
+PASS Every Gauntlet layout has six safe tees and stable, finite shots in both gate configurations
+PASS Rounding a resting ball at the slime edge preserves a legal next shot position
+PASS A shot carries its locked gate state; the next turn changes gates identically for players and spectators
+golfgauntlet: 6 checks passed

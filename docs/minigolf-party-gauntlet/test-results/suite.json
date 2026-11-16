@@ -1,0 +1,349 @@
+[
+  {
+    "program": "avatarv3",
+    "exitCode": 0,
+    "seconds": 0.04,
+    "passLines": 7,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "avatarui",
+    "exitCode": 0,
+    "seconds": 13.54,
+    "passLines": 44,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "drawguess",
+    "exitCode": 0,
+    "seconds": 2.65,
+    "passLines": 79,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "smoke",
+    "exitCode": 0,
+    "seconds": 2.49,
+    "passLines": 49,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "safety",
+    "exitCode": 0,
+    "seconds": 11.99,
+    "passLines": 24,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "alpha",
+    "exitCode": 0,
+    "seconds": 1.66,
+    "passLines": 48,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "phase1",
+    "exitCode": 0,
+    "seconds": 1.24,
+    "passLines": 17,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "ui",
+    "exitCode": 0,
+    "seconds": 8.53,
+    "passLines": 25,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "phase15",
+    "exitCode": 0,
+    "seconds": 105.02,
+    "passLines": 185,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch2",
+    "exitCode": 0,
+    "seconds": 1.55,
+    "passLines": 108,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch2ui",
+    "exitCode": 0,
+    "seconds": 26.74,
+    "passLines": 73,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch1",
+    "exitCode": 0,
+    "seconds": 1.21,
+    "passLines": 155,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch1ui",
+    "exitCode": 0,
+    "seconds": 17.19,
+    "passLines": 64,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch3",
+    "exitCode": 0,
+    "seconds": 2.04,
+    "passLines": 156,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch3ui",
+    "exitCode": 0,
+    "seconds": 22.93,
+    "passLines": 91,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch4",
+    "exitCode": 0,
+    "seconds": 2.53,
+    "passLines": 179,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch4ui",
+    "exitCode": 0,
+    "seconds": 22.53,
+    "passLines": 136,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch5",
+    "exitCode": 0,
+    "seconds": 30.34,
+    "passLines": 274,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "batch5ui",
+    "exitCode": 0,
+    "seconds": 62.76,
+    "passLines": 136,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "audit",
+    "exitCode": 0,
+    "seconds": 0.79,
+    "passLines": 0,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "qol",
+    "exitCode": 0,
+    "seconds": 122.99,
+    "passLines": 729,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "party",
+    "exitCode": 0,
+    "seconds": 10.71,
+    "passLines": 97,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "partyui",
+    "exitCode": 0,
+    "seconds": 44.13,
+    "passLines": 56,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "party3",
+    "exitCode": 0,
+    "seconds": 1.67,
+    "passLines": 29,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "party3ui",
+    "exitCode": 0,
+    "seconds": 16.11,
+    "passLines": 128,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "phase2",
+    "exitCode": 0,
+    "seconds": 0.5,
+    "passLines": 18,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "phase2ui",
+    "exitCode": 0,
+    "seconds": 13.7,
+    "passLines": 29,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "design31ui",
+    "exitCode": 0,
+    "seconds": 67.62,
+    "passLines": 205,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "reliability",
+    "exitCode": 0,
+    "seconds": 29.29,
+    "passLines": 374,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "reliabilityui",
+    "exitCode": 0,
+    "seconds": 69.7,
+    "passLines": 49,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0,
+    "rerunLog": "reliabilityui-final.log",
+    "initialLog": "reliabilityui-initial.log",
+    "secondAttemptLog": "reliabilityui-second-attempt.log",
+    "testOnlyHeartbeatMs": 5000,
+    "note": "Two-second heartbeat runs failed during game cycling; second failure captured an unintended host transfer. Browser test now uses a five-second heartbeat and explicitly checks that hosting is retained; all existing timing and gameplay assertions remain."
+  },
+  {
+    "program": "keyboardui",
+    "exitCode": 0,
+    "seconds": 5.45,
+    "passLines": 40,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "botsunit",
+    "exitCode": 0,
+    "seconds": 23.04,
+    "passLines": 40,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "bots",
+    "exitCode": 0,
+    "seconds": 135.31,
+    "passLines": 91,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "botsui",
+    "exitCode": 0,
+    "seconds": 5.6,
+    "passLines": 30,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "lexicon",
+    "exitCode": 0,
+    "seconds": 0.19,
+    "passLines": 54,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "experience41",
+    "exitCode": 0,
+    "seconds": 0.18,
+    "passLines": 15,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "golfgauntlet",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "passLines": 6,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  },
+  {
+    "program": "platform",
+    "exitCode": 0,
+    "seconds": 1.98,
+    "passLines": 19,
+    "failLines": 0,
+    "startupError": false,
+    "skipLines": 0
+  }
+]
