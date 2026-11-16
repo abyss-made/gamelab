@@ -73,7 +73,9 @@ class ClubScene{
    const group=new T.Group();this.world.add(group);const panel=this.box(x,z,w,d,27,0,this.mat.pink,group);panel.userData.kind='gate';panel.userData.gate=gate.id;
    this.box(x,z,w+1,d+1,4,27,this.mat.yellow,group);
    const wide=w>d;for(let t=8;t<(wide?w:d);t+=15){const stripe=this.box(wide?Math.min(...xs)+t:x,wide?z:Math.min(...zs)+t,wide?3:w+.3,wide?d+.3:3,20,3,this.mat.white,group);stripe.castShadow=false;}
-   group.position.y=gate.closed?0:55;this.gates.push({id:gate.id,group});
+   // A client reconnecting during a shot must start with that shot's locked pose.
+   const replay=g.anim&&g.anim.elapsedMs<g.anim.duration*1000?g.anim.gates?.find(v=>v.id===gate.id):null;
+   group.position.y=(replay?.closed??gate.closed)?0:55;this.gates.push({id:gate.id,group});
    // Overhead supports sit above ball height; only the panel has a collision footprint.
    this.box(x,z,w+8,d+8,4,88,this.mat.navy);
   }
