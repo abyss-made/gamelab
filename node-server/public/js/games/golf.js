@@ -562,7 +562,7 @@ GameUI.golf = (() => {
     if (!turn) return head;
     const who = turn.id === S.you ? "<b>Your putt!</b> Drag back from your ball and release, or aim and press Putt." : `Waiting for <b>${app.esc(turn.name)}</b> (stroke ${turn.strokes + 1}).`;
     const l = g.last;
-    const extra = l && l.outcome === "water" ? ' <span class="warn-text">Last ball went in the water (+1).</span>' : "";
+    const extra = l && l.outcome === "water" ? ` <span class="warn-text">Last ball went in the ${g.course.id==='gauntlet'?'slime':'water'} (+1).</span>` : "";
     return `${head}<br>${who}${extra}`;
   }
 

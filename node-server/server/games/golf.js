@@ -222,7 +222,7 @@ function putt(st, api, p, angle, power) {
   if (r.outcome === 'water') {
     p.strokes++;
     note = 'water';
-    api.sys(`${p.name}'s ball found the water (+1 stroke).`, 'warn');
+    api.sys(`${p.name}'s ball found the ${course.id==='gauntlet'?'slime':'water'} (+1 stroke).`, 'warn');
   } else {
     p.x = r.x; p.y = r.y;
     if (r.outcome === 'cup') {
