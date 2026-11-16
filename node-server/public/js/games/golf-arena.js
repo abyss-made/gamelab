@@ -44,6 +44,7 @@ window.GolfArena={
  },
  build(s,g){
   const T=s.T,h=g.hole,number=g.holeIndex+1;
+  for(const x of [210,350,490]){const cloud=s.mesh(new T.SphereGeometry(120,16,10),s.mat.cloud);cloud.position.set(x-350,-155,0);cloud.scale.set(1,.22,.8);cloud.castShadow=false;}
   // A stage, sky islands and tiered stands give the hole a setting and depth.
   const sign=this.sign(s,'PLAYGRID',`${String(number).padStart(2,'0')}  /  ${h.name.toUpperCase()}   ·   PAR ${h.par}`,'arenaSign'+number);
   s.box(350,-28,306,10,80,10,s.mat.navy);const face=s.mesh(new T.PlaneGeometry(300,75),sign);face.position.set(0,50,-242);face.castShadow=false;
