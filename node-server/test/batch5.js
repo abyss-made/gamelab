@@ -353,7 +353,7 @@ const toward = (x1, y1, x2, y2) => Math.atan2(y2 - y1, x2 - x1);
 // ---------------- Mini Golf ----------------
 const GR = golf.rules;
 function bfsPath(hole, maxDepth = 7) {
-  let frontier = [{ x: hole.tee[0], y: hole.tee[1], path: [] }];
+  let frontier = [{ x: hole.tee[0], y: hole.tee[1], path: [],motorTime:hole.motorTime||0 }];
   const seen = new Set();
   for (let d = 1; d <= maxDepth; d++) {
     const next = [];
@@ -361,13 +361,13 @@ function bfsPath(hole, maxDepth = 7) {
       for (let a = 0; a < 48; a++) {
         for (const pw of [0.2, 0.4, 0.6, 0.8, 1]) {
           const ang = (a * Math.PI) / 24 + (a % 2 ? 0.02 : 0);
-          const r = GR.simulatePutt(hole, s.x, s.y, ang, pw);
+          const r = GR.simulatePutt(hole, s.x, s.y, ang, pw,[],[],s.motorTime);
           if (r.outcome === 'cup') return s.path.concat([{ angle: ang, power: pw }]);
           if (r.outcome !== 'rest') continue;
-          const k = Math.round(r.x / 30) + ',' + Math.round(r.y / 30);
+          const k = Math.round(r.x / 30) + ',' + Math.round(r.y / 30)+(hole.motors?.length?','+d:'');
           if (seen.has(k)) continue;
           seen.add(k);
-          next.push({ x: r.x, y: r.y, path: s.path.concat([{ angle: ang, power: pw }]) });
+          next.push({ x: r.x, y: r.y, path: s.path.concat([{ angle: ang, power: pw }]),motorTime:r.anim.motion?.end||0 });
         }
       }
     }
@@ -395,8 +395,8 @@ function bfsPath(hole, maxDepth = 7) {
     else {
       lens.push(path.length);
       // replay the path through the real simulation to prove it
-      let x = h.tee[0], y = h.tee[1], res = null;
-      for (const s of path) { res = GR.simulatePutt(h, x, y, s.angle, s.power); x = res.x; y = res.y; }
+      let x = h.tee[0], y = h.tee[1], res = null,motorTime=0;
+      for (const s of path) { res = GR.simulatePutt(h, x, y, s.angle, s.power,[],[],motorTime); x = res.x; y = res.y;motorTime=res.anim.motion?.end||0; }
       if (!res || res.outcome !== 'cup') unsolved.push('replay:' + h.name);
     }
   }

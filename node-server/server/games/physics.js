@@ -78,6 +78,7 @@ const r1 = (v) => Math.round(v * 10) / 10;
  *   frictionAt(ball) -> multiplier for roll+drag (e.g. sand)
  *   afterStep(ball, t) -> 'gone' to remove the ball (pocket, cup, water) or undefined
  *   onWall(ball, speed, t), onBalls(a, b, speed, t): event hooks
+ *   keepAwake(t) -> true while an external mechanism may still move resting balls
  * }
  * Returns { frames, duration, settled, steps } where frames[i] is [t, ...per-ball (x, y) in input order,
  * null,null for gone balls]. Frame 0 is the starting position.
@@ -85,7 +86,7 @@ const r1 = (v) => Math.round(v * 10) / 10;
 function run(world) {
   const {
     balls, walls = [], circles = [], wallRest = 0.8, ballRest = 0.96, roll = 100, drag = 0.3, stopSpeed = 5,
-    maxTime = 20, sampleEvery = 8, collide = false, frictionAt, accelerationAt, afterStep, onWall, onBalls,
+    maxTime = 20, sampleEvery = 8, collide = false, frictionAt, accelerationAt, afterStep, onWall, onBalls, keepAwake,
   } = world;
   const frames = [];
   const snap = (t) => {
@@ -174,7 +175,7 @@ function run(world) {
     }
     for (const b of balls) if (!b.gone && (b.vx || b.vy)) moving = true;
     if (steps % sampleEvery === 0) snap(t);
-    if (!moving) {
+    if (!moving && !(keepAwake && keepAwake(t))) {
       settled = true;
       break;
     }

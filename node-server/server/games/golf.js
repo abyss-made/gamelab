@@ -6,6 +6,7 @@
 //  - A hole ends for a player at the stroke limit (they score the limit). Lowest total over the course wins.
 const P = require('./physics');
 const COURSES = require('./golfcourses');
+const Motion = require('../../public/js/games/golf-motion');
 
 const meta = { id: 'golf', name: 'Mini Golf', minPlayers: 2, maxPlayers: 6, midJoin: false, resetScores: false, scoreLabel: 'wins' };
 
@@ -82,22 +83,27 @@ function restoreClear(st,hole,player,origin){
   const candidates=[origin];
   for(let r=14;r<=84;r+=14)for(let i=0;i<12;i++)candidates.push({x:origin.x+Math.cos(i*Math.PI/6)*r,y:origin.y+Math.sin(i*Math.PI/6)*r});
   for(let y=70;y<380;y+=14)for(let x=70;x<640;x+=14)candidates.push({x,y});
-  const point=candidates.find(pos=>onFairway(hole,pos.x,pos.y)&&st.players.every(other=>other===player||other.out||other.holed||Math.hypot(other.x-pos.x,other.y-pos.y)>=BALL_R*2+1));
+  const point=candidates.find(pos=>onFairway(hole,pos.x,pos.y)&&Motion.clear({...pos,r:BALL_R},hole.motors,hole.motorTime)&&st.players.every(other=>other===player||other.out||other.holed||Math.hypot(other.x-pos.x,other.y-pos.y)>=BALL_R*2+1));
   if(point){player.x=point.x;player.y=point.y;}
 }
 
 // Simulates one putt. Returns { x, y, outcome: 'rest' | 'cup' | 'water', anim }.
-function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[]) {
+function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[], motorTime=hole.motorTime||0) {
   const geometryForHole=geometry(hole);
   const initial=[{id:'shot',x,y},...others];
   const balls=initial.map((p,i)=>({id:p.id,x:p.x,y:p.y,vx:0,vy:0,r:BALL_R,gone:false}));
   const outcomes=balls.map(()=> 'rest');let collisions=0;
+  const motors=hole.motors||[],startTime=motorTime,impacts=[],impactTimes=new Map();
+  const record=(b,t,hit)=>{const key=b.id+':'+hit.type+':'+(hit.obstacleId??'');if(hit.speed<24||t-(impactTimes.get(key)??-1)<.075||impacts.length>=64)return;impactTimes.set(key,t);impacts.push({t:Math.round(t*1000)/1000,x:Math.round(hit.x*10)/10,y:Math.round(hit.y*10)/10,speed:Math.round(hit.speed),type:hit.type,obstacleId:hit.obstacleId??null,ballId:b.id});};
   const speed=MIN_SPEED+(MAX_SPEED-MIN_SPEED)*power;balls[0].vx=Math.cos(angle)*speed;balls[0].vy=Math.sin(angle)*speed;
   const result=P.run({balls,walls:geometryForHole.walls,circles:geometryForHole.circles.concat(protectedBalls.map(p=>({x:p.x,y:p.y,r:BALL_R,rest:.82}))),wallRest:.82,ballRest:.9,roll:120,drag:.45,stopSpeed:6,maxTime:MAX_SIM,sampleEvery:4,collide:true,
-    onBalls:()=>collisions++,
+    onBalls:(a,b,speed,t)=>{collisions++;record(a,t,{type:'ball',x:(a.x+b.x)/2,y:(a.y+b.y)/2,speed});},
+    onWall:(b,speed,t)=>{const index=(hole.bumpers||[]).findIndex(c=>Math.hypot(c.x-b.x,c.y-b.y)<=c.r+BALL_R+1);record(b,t,{type:index<0?'wall':'bumper',obstacleId:index<0?null:index,x:b.x,y:b.y,speed});},
+    keepAwake:t=>motors.length&&t<Motion.RUN_FOR&&balls.some(b=>!b.gone),
     accelerationAt:b=>{const zone=(hole.slopes||[]).find(z=>inRect(z,b.x,b.y));return zone?{x:zone.ax,y:zone.ay}:null;},
     frictionAt:b=>(hole.sand||[]).some(z=>inRect(z,b.x,b.y))?7:1,
-    afterStep:b=>{const i=balls.indexOf(b);if((hole.water||[]).some(z=>inRect(z,b.x,b.y))){outcomes[i]='water';return 'gone';}
+    afterStep:(b,t)=>{for(const m of motors){const hit=Motion.collide(b,m,startTime+Motion.travel(t),Motion.drive(t));if(hit)record(b,t,hit);}
+      const i=balls.indexOf(b);if((hole.water||[]).some(z=>inRect(z,b.x,b.y))){outcomes[i]='water';return 'gone';}
       if(Math.hypot(b.x-hole.cup[0],b.y-hole.cup[1])<CUP_R*.9&&Math.hypot(b.vx,b.vy)<=CUP_MAX_SPEED){outcomes[i]='cup';b.x=hole.cup[0];b.y=hole.cup[1];return 'gone';}}
   });
   const path=i=>result.frames.map(f=>[f[0],f[1+i*2],f[2+i*2]]);
@@ -105,11 +111,12 @@ function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[]) {
     let x=outcomes[i]==='cup'?hole.cup[0]:Math.round(b.x*10)/10,y=outcomes[i]==='cup'?hole.cup[1]:Math.round(b.y*10)/10;
     // Rounding a safe resting point onto an inclusive water/bumper boundary must
     // not turn it into an illegal start for the following shot.
-    if(outcomes[i]==='rest'&&!onFairway(hole,x,y)&&onFairway(hole,b.x,b.y)){x=b.x;y=b.y;}
+    const endTime=startTime+Motion.travel(result.duration),legal=(x,y)=>onFairway(hole,x,y)&&Motion.clear({x,y,r:BALL_R},motors,endTime);
+    if(outcomes[i]==='rest'&&!legal(x,y)&&legal(b.x,b.y)){x=b.x;y=b.y;}
     return{id:b.id,x,y,outcome:outcomes[i]};
   };
   const frames=path(0);return {...position(balls[0],0),collisions,others:balls.slice(1).map((b,i)=>position(b,i+1)),
-    anim:{frames,duration:result.duration,settled:result.settled,lastFrame:frames.at(-1),paths:Object.fromEntries(others.map((b,i)=>[b.id,path(i+1)]))}};
+    anim:{frames,duration:result.duration,settled:result.settled,lastFrame:frames.at(-1),impacts,...(motors.length?{motion:{start:startTime,runFor:Math.min(result.duration,Motion.RUN_FOR),end:startTime+Motion.travel(result.duration)}}:{}),paths:Object.fromEntries(others.map((b,i)=>[b.id,path(i+1)]))}};
 }
 
 const courseOf = (st) => COURSES.BY_ID[st.settings.course] || COURSES.BY_ID.meadow;
@@ -136,6 +143,7 @@ function beginHole(st, api, idx) {
   st.phase = 'play';
   st.anim = null;
   st.animUntil = 0;
+  st.motorTime = 0;
   const occupied=[];
   for (const p of st.players) {
     const pos=startPosition(hole,occupied);occupied.push(pos);
@@ -206,9 +214,11 @@ function finishCourse(st, api, forfeit) {
 function putt(st, api, p, angle, power) {
   const course = courseOf(st);
   const definition = course.holes[st.hole];
-  const hole = definition.gates ? {...definition,gates:gateStates(definition,st.shots,st.players)} : definition;
+  const hole = definition.gates||definition.motors ? {...definition,motorTime:st.motorTime||0,...(definition.gates?{gates:gateStates(definition,st.shots,st.players)}:{})} : definition;
   const others=st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes>0);
   const r = simulatePutt(hole, p.x, p.y, angle, power, others, st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes===0));
+  st.motorTime=r.anim.motion?.end??st.motorTime;
+  const parkedHole=hole.motors?{...hole,motorTime:st.motorTime}:hole;
   p.placed=true;
   for(const moved of r.others){
     const other=others.find(item=>item.id===moved.id);
@@ -231,8 +241,8 @@ function putt(st, api, p, angle, power) {
       api.sys(`${p.name} sank it in ${p.strokes}${p.strokes === 1 ? ' (hole in one!)' : vs <= -1 ? ' (under par)' : vs === 0 ? ' (par)' : ''}.`, 'good');
     }
   }
-  if (r.outcome === 'water') restoreClear(st,hole,p,p.from);
-  for(const moved of r.others.filter(item=>item.outcome==='water')){const other=others.find(item=>item.id===moved.id);restoreClear(st,hole,other,{x:other.x,y:other.y});}
+  if (r.outcome === 'water') restoreClear(st,parkedHole,p,p.from);
+  for(const moved of r.others.filter(item=>item.outcome==='water')){const other=others.find(item=>item.id===moved.id);restoreClear(st,parkedHole,other,{x:other.x,y:other.y});}
   if (!p.holed && p.strokes >= st.settings.maxStrokes) {
     p.holed = true;
     p.strokes = st.settings.maxStrokes;
@@ -240,7 +250,7 @@ function putt(st, api, p, angle, power) {
     api.sys(`${p.name} reached the ${st.settings.maxStrokes}-stroke limit and picks up.`, 'warn');
   }
   const ms = Math.ceil(r.anim.duration * 1000) + HOLD_MS;
-  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths, ...(hole.gates ? {gates:hole.gates} : {}) };
+  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths, impacts:r.anim.impacts.map(e=>({...e,ballId:e.ballId==='shot'?p.id:e.ballId})),sunkIds:[...(r.outcome==='cup'?[p.id]:[]),...r.others.filter(p=>p.outcome==='cup').map(p=>p.id)],...(r.anim.motion?{motion:r.anim.motion}:{}), ...(hole.gates ? {gates:hole.gates} : {}) };
   st.animUntil = api.now() + ms;
   st.animStart = api.now();
   st.last = { by: p.id, outcome: r.outcome, note, strokes: p.strokes, collisions: r.collisions };
@@ -327,7 +337,7 @@ function view(st, m, now) {
   const hole = course.holes[st.hole];
   const me = st.players.findIndex((p) => p.id === m.id);
   const anim = st.anim && now < st.animUntil ? { ...st.anim, elapsedMs: now - st.animStart } : null;
-  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R, ...(hole.gates ? {gates:gateStates(hole,st.shots,st.players)} : {}) };
+  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R, ...(hole.motors?{motors:hole.motors,motorTime:st.motorTime||0}:{}), ...(hole.gates ? {gates:gateStates(hole,st.shots,st.players)} : {}) };
   return {
     course: { id: course.id, name: course.name, pars: course.holes.map((h) => h.par), holes: course.holes.length },
     holeIndex: st.hole,

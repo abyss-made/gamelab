@@ -164,7 +164,7 @@ GameUI.golf = (() => {
     if(scene3d){
       fit();const animating=!!(g.anim&&now-animT0<g.anim.duration*1000);
       const positions=g.players.map(p=>({p,pos:p.out||p.holed&&!(animating&&(g.anim.by===p.id||g.anim.paths?.[p.id]))?null:ballAt(p,now)}));
-      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',canPutt:canPutt(),placing,teeDraft,animating});return;
+      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',canPutt:canPutt(),placing,teeDraft,animating,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
     }
     if(!ctx)return;
     const h = g.hole;
@@ -270,6 +270,9 @@ GameUI.golf = (() => {
       const x=gate.poly.reduce((s,p)=>s+p[0],0)/gate.poly.length,y=gate.poly.reduce((s,p)=>s+p[1],0)/gate.poly.length;
       ctx.fillStyle='#0b2335';ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillText(gate.closed?'×':'↑',x,y+4);
     }
+    const motorTime=GolfMotion.clock(h,g.anim,Math.max(0,(now-animT0)/1000));
+    for(const motor of h.motors||[]){const p=GolfMotion.pose(motor,motorTime);ctx.save();ctx.strokeStyle='#f04d9f';ctx.lineWidth=p.r*2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(p.ax,p.ay);ctx.lineTo(p.bx,p.by);ctx.stroke();ctx.beginPath();ctx.arc(motor.x,motor.y,7,0,7);ctx.fillStyle='#baff45';ctx.fill();ctx.restore();}
+    if(g.anim&&!matchMedia('(prefers-reduced-motion:reduce)').matches){const t=(now-animT0)/1000;for(const e of g.anim.impacts||[]){const age=t-e.t;if(age<0||age>.3)continue;ctx.save();ctx.globalAlpha=1-age/.3;ctx.strokeStyle=e.type==='motor'?'#ffe256':'#effffc';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,3+age*65,0,7);ctx.stroke();ctx.restore();}}
     for (const zone of h.slopes || []) {
       ctx.fillStyle='#cfba6b88';ctx.fillRect(zone.x,zone.y,zone.w,zone.h);
       ctx.save();ctx.beginPath();ctx.rect(zone.x,zone.y,zone.w,zone.h);ctx.clip();ctx.strokeStyle='#fcf3cc99';ctx.lineWidth=2;
@@ -459,7 +462,7 @@ GameUI.golf = (() => {
         <div class="ttt-status" id="gf-status" aria-live="polite"></div>
         <p class="club-input-help" id="gf-input-help">Drag back from your ball. Release to putt.<span> Or set aim and power below.</span></p>
       </div>
-      <div class="gf-controls" id="gf-controls"><div class="club-aim"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost" data-fine="1" aria-label="Aim half a degree right">+</button></div></div>
+      <div class="gf-controls" id="gf-controls"><div class="club-aim" id="gf-aim-controls"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost" data-fine="1" aria-label="Aim half a degree right">+</button></div></div><button type="button" id="gf-fine-toggle" aria-controls="gf-aim-controls" aria-expanded="false" aria-label="Show precise aim controls">Aim</button>
         <label class="club-power"><span>Shot power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label><button type="button" class="btn" id="gf-putt">Putt</button><button type="button" class="btn btn-ghost" id="gf-cancel" hidden>Cancel shot</button>
       </div>
       <p class="club-course-note" id="gf-course-note" hidden></p><div class="club-utility"><button type="button" class="btn btn-ghost btn-small" id="gf-place">Choose tee position</button><small id="gf-place-note" role="status"></small><span class="club-authority">Lowest score wins · ${a.esc('2–6 players')}</span></div>
@@ -467,6 +470,7 @@ GameUI.golf = (() => {
     root.dataset.ten='golf';
     GameUI.scenes.mount(root,'golf');
     stage.appendChild(root);
+    root.querySelector('#gf-fine-toggle').addEventListener('click',e=>{const open=root.classList.toggle('golf-fine-open');e.currentTarget.setAttribute('aria-expanded',String(open));e.currentTarget.setAttribute('aria-label',open?'Hide precise aim controls':'Show precise aim controls');});
     root.querySelector('#gf-scores-toggle').addEventListener('click', () => {
       const panel=root.querySelector('#gf-score-details');panel.open=!panel.open;
       root.querySelector('#gf-scores-toggle').setAttribute('aria-expanded',String(panel.open));
@@ -575,9 +579,12 @@ GameUI.golf = (() => {
     root.querySelector("#gf-title").textContent = g.hole.name;
     root.dataset.course=g.course.id;
     root.querySelector('#gf-course-note').hidden=g.course.id!=='gauntlet';
-    root.querySelector('#gf-course-note').textContent=(g.hole.gates||[]).length?'Gates switch after each putt. Raised gates are open; occupied lanes stay open.':g.hole.water.length?'Slime costs +1 stroke. Take the outer lanes or risk the narrow shortcut.':'Bounce pads, tight corners, risky shortcuts. Use Overview to plan your route.';
+    const motorHint=(g.hole.motors||[]).length?'Sweepers activate for up to 2.4s when you putt. Read the marked swing area. ':'';
+    root.querySelector('#gf-course-note').textContent=motorHint+((g.hole.gates||[]).length?'Raised gates are open. Gates switch after each putt.':g.hole.water.length?'Slime costs +1 stroke. Take the outer lanes or risk the narrow shortcut.':motorHint?'Use the outside lane for a safer route.':'Bounce pads and tight corners. Use Overview to plan your route.');
     const mb = myBall();
-    root.querySelector("#gf-score").innerHTML = `<b>PAR ${g.hole.par}</b><span>Stroke <strong>${mb ? mb.strokes : 0}</strong></span>`;
+    const score=root.querySelector('#gf-score'),previous=score.querySelector('strong')?.textContent;
+    score.innerHTML = `<b>PAR ${g.hole.par}</b><span>Stroke <strong>${mb ? mb.strokes : 0}</strong></span>`;
+    if(previous!==undefined&&previous!==String(mb?.strokes||0))FX.animate(score.querySelector('strong'),[{transform:'translateY(-5px)',opacity:.3},{transform:'none',opacity:1}],180);
     const st = root.querySelector("#gf-status");
     st.innerHTML = statusText();
     st.className = "ttt-status" + (canPutt() ? " mine" : "");

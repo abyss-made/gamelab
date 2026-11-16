@@ -1,4 +1,14 @@
 /* Mini Golf owns its play surface; the rest of Playgrid keeps its existing layout. */
+.golf-club #gf-fine-toggle{display:none}
+@media(max-width:700px){
+ body[data-game=golf] .room .golf-club[data-course=gauntlet] .gf-controls{grid-template-columns:44px minmax(0,1fr) 80px;gap:10px;padding:12px}
+ .golf-club[data-course=gauntlet] #gf-fine-toggle{display:block;min-width:44px;min-height:44px;background:#214a5d;color:#edf9ff;border:1px solid #5c8190;border-radius:8px;font:700 11px system-ui}
+ .golf-club[data-course=gauntlet]:not(.golf-fine-open) .club-aim{display:none}
+ .golf-club[data-course=gauntlet] .club-aim{grid-column:1/-1}
+ body[data-game=golf] .room .golf-club[data-course=gauntlet] .club-arena{height:clamp(402px,calc(100svh - 368px),720px)}
+ .golf-club[data-course=gauntlet] .club-power>span{font-size:10px}
+ .golf-club #gf-fine-toggle:focus-visible{outline:3px solid #c4ff59;outline-offset:3px}
+}
 .golf-club .club-course-note{margin:0;padding:9px 20px;background:#172d47;color:#dce9b8;font-size:11px;line-height:1.5;border-top:1px solid #47617a}
 .golf-club[data-course=gauntlet] .club-brand{color:#c7fa62}.golf-club[data-course=gauntlet] .club-course h2{color:#fff7e9}
 .golf-club[data-course=gauntlet] .club-cup-marker{background:#382956ed;border-color:#d7c5ff}
