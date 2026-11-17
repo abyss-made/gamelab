@@ -153,6 +153,26 @@ class ClubScene{
   const cap=this.bumperCaps.find(c=>c.index===event.obstacleId);if(event.type==='bumper'&&cap)cap.hitAt=now;
   if(event.type==='boost'||event.type==='motor'||event.type==='bumper')for(let i=0;i<5;i++){const m=this.mesh(new T.BoxGeometry(1.8,1.8,1.8),new T.MeshBasicMaterial({color}),this.effects);m.position.set(event.x-350,7,event.y-220);m.castShadow=false;this.particles.push({m,vx:(Math.random()-.5)*45,vy:25+Math.random()*30,vz:(Math.random()-.5)*45,life:.4});}
  }
+ replayEffects(anim,shotTime,receivedShotTime,now){
+  const events=anim.impacts||[];
+  if(this.effectShot!==anim.shot){
+   this.effectShot=anim.shot;this.effectCursor=0;
+   // Skip contacts that predate this client's arrival, not contacts whose
+   // presentation was delayed by a slow frame after a live shot arrived.
+   while(this.effectCursor<events.length&&events[this.effectCursor].t<receivedShotTime-.12)this.effectCursor++;
+  }
+  const pending=[];
+  while(this.effectCursor<events.length&&events[this.effectCursor].t<=shotTime)pending.push(events[this.effectCursor++]);
+  // Bound catch-up work after a stall. Preserve important launch/arm contacts
+  // and the latest other contacts instead of producing a particle/audio storm.
+  const important=pending.filter(e=>e.type==='boost'||e.type==='motor').slice(-2);
+  const chosen=[...important,...pending.filter(e=>!important.includes(e)).slice(-(4-important.length))];
+  for(const e of chosen)this.impact(e,now);
+  if(chosen.length&&!Sound.muted&&now-(this.lastImpactSound||0)>130){
+   const e=important.at(-1)||chosen.at(-1);
+   Sound.play(e.type==='boost'?'golfboost':e.type==='motor'?'golfmotor':e.type==='bumper'?'golfbumper':'golftap');this.lastImpactSound=now;
+  }
+ }
  frame(data){
   if(document.hidden||!this.canvas.getClientRects().length)return;
   const {g,now,positions,aim,power,mine,pulling,placing,teeDraft}=data,T=this.T;if(this.key!==g.course.id+':'+g.holeIndex)this.build(g);this.resize();if(!this.width)return;
@@ -160,7 +180,7 @@ class ClubScene{
   const gates=moving?(g.anim.gates||g.hole.gates||[]):(g.hole.gates||[]);for(const gate of this.gates){const state=gates.find(v=>v.id===gate.id),target=state?.closed?0:55;if(Math.abs(target-gate.group.position.y)>.01){gate.group.position.y=this.reduced.matches?target:gate.group.position.y+(target-gate.group.position.y)*(1-Math.exp(-dt*24));this.sun.shadow.needsUpdate=true;}}
   const shotTime=data.shotTime??((g.anim?.elapsedMs||0)/1000),motorTime=GolfMotion.clock(g.hole,g.anim,shotTime);
   for(const motor of this.motors){motor.group.rotation.y=-GolfMotion.pose(motor.definition,motorTime).angle;}
-  if(g.anim){const events=g.anim.impacts||[];if(this.effectShot!==g.anim.shot){this.effectShot=g.anim.shot;this.effectCursor=0;while(this.effectCursor<events.length&&events[this.effectCursor].t<shotTime-.12)this.effectCursor++;}while(this.effectCursor<events.length&&events[this.effectCursor].t<=shotTime){const e=events[this.effectCursor++];if(shotTime-e.t<.15){this.impact(e,now);if(!Sound.muted&&now-(this.lastImpactSound||0)>130){Sound.play(e.type==='boost'?'golfboost':e.type==='motor'?'golfmotor':e.type==='bumper'?'golfbumper':'golftap');this.lastImpactSound=now;}}}}
+  if(g.anim)this.replayEffects(g.anim,shotTime,data.receivedShotTime??((g.anim.elapsedMs||0)/1000),now);
   for(const pad of this.boostPads)pad.flash.material.opacity=this.reduced.matches||pad.hitAt<0?0:Math.max(0,.65-(now-pad.hitAt)/600);
   const trail=data.trail;this.trailLine.visible=!!(data.showTrail&&trail&&!moving);
   if(trail&&this.trailKey!==trail){this.trailKey=trail;const points=trail.frames.filter(f=>f[1]!==null).map(f=>new T.Vector3(f[1]-350,1,f[2]-220));this.trailLine.geometry.dispose();this.trailLine.geometry=new T.BufferGeometry().setFromPoints(points);this.trailLine.computeLineDistances();}

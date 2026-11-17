@@ -21,6 +21,7 @@ GameUI.golf = (() => {
   let teeDraft = null;
   let animKey = -1;
   let animT0 = 0;
+  let receivedShotTime = 0;
   let busyUntil = 0;
   let holeKey = "";
   let dragging = false;
@@ -167,7 +168,7 @@ GameUI.golf = (() => {
     if(scene3d){
       fit();const animating=!!(g.anim&&now-animT0<g.anim.duration*1000);
       const positions=g.players.map(p=>({p,pos:p.out||p.holed&&!(animating&&(g.anim.by===p.id||g.anim.paths?.[p.id]))?null:ballAt(p,now)}));
-      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',aiming:gesture?.mode==='pull'||gesture?.mode==='aim',canPutt:canPutt(),placing,teeDraft,animating,trail:lastTrail,showTrail,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
+      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',aiming:gesture?.mode==='pull'||gesture?.mode==='aim',canPutt:canPutt(),placing,teeDraft,animating,trail:lastTrail,showTrail,receivedShotTime,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
     }
     if(!ctx)return;
     const h = g.hole;
@@ -642,6 +643,7 @@ GameUI.golf = (() => {
     if (a && a.shot !== animKey) {
       animKey = a.shot;
       animT0 = performance.now() - a.elapsedMs;
+      receivedShotTime = a.elapsedMs / 1000;
       if(a.by===S.you)lastTrail={shot:a.shot,frames:a.frames};
     }
     if (a) busyUntil = Math.max(busyUntil, performance.now() + Math.max(0, g.busyMs));
@@ -673,7 +675,7 @@ GameUI.golf = (() => {
     window.removeEventListener("resize", fit);
     if (clock) clock.stop();
     if (root) root.remove();
-    root = null; canvas = null; ctx = null; g = null; placing = false; teeDraft = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;lastTrail=null;showTrail=false;readyTurn='';
+    root = null; canvas = null; ctx = null; g = null; placing = false; teeDraft = null; animKey = -1; holeKey = ""; loupe = null; decoKey = ""; deco = []; busyUntil = 0; update.aimed = false;lastTrail=null;showTrail=false;readyTurn='';receivedShotTime=0;
   }
 
   function renderLegacyResult(r, state, a) {
