@@ -18,6 +18,9 @@
 .golf-club .club-shot-result{max-width:calc(100% - 32px);width:max-content;text-align:center;font-size:clamp(23px,3.4vw,42px);line-height:1.15;letter-spacing:-.035em}
 .golf-club .club-shot-result[data-style=turbo]{color:#dfff9b}
 .golf-club .club-shot-result[data-style=sweeper]{color:#ffe48a}
+/* The recap already contains the finish label. Keep the transient celebration
+   out of its text and controls as soon as the panel becomes visible. */
+.golf-club .club-arena:has(#gf-between:not([hidden])) .club-shot-result{display:none}
 .golf-club .club-recap-kicker{display:block;margin-bottom:8px;color:#bed0d5;font-size:10px;font-weight:800;letter-spacing:.14em}
 .golf-club #gf-between .club-lead{margin:10px 0 0;color:#d6f69e;font-size:12px;font-weight:700}
 .golf-club #gf-between li{display:flex;align-items:center;justify-content:space-between;gap:15px}
