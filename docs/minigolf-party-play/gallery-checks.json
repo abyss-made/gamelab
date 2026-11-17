@@ -1,0 +1,160 @@
+{
+  "nativeNewPngCount": 52,
+  "cases": [
+    {
+      "width": 1440,
+      "camera": "follow",
+      "nativeBeforeAndAfterImages": 12
+    },
+    {
+      "width": 1440,
+      "camera": "overview",
+      "nativeBeforeAndAfterImages": 12
+    },
+    {
+      "width": 390,
+      "camera": "follow",
+      "nativeBeforeAndAfterImages": 12
+    },
+    {
+      "width": 390,
+      "camera": "overview",
+      "nativeBeforeAndAfterImages": 12
+    }
+  ],
+  "singleHoleNavigation": true,
+  "noOverflow": [
+    1440,
+    390
+  ],
+  "recordings": [
+    {
+      "file": "turbo-desktop.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1440,
+            "height": 900
+          }
+        ],
+        "format": {
+          "duration": "14.960000",
+          "size": "446575"
+        }
+      }
+    },
+    {
+      "file": "turbo-finish-mobile.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 390,
+            "height": 844
+          }
+        ],
+        "format": {
+          "duration": "15.000000",
+          "size": "166711"
+        }
+      }
+    },
+    {
+      "file": "desktop-match.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1440,
+            "height": 900
+          }
+        ],
+        "format": {
+          "duration": "603.000000",
+          "size": "12354217"
+        }
+      }
+    },
+    {
+      "file": "mobile-match.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 390,
+            "height": 844
+          }
+        ],
+        "format": {
+          "duration": "602.680000",
+          "size": "5538941"
+        }
+      }
+    },
+    {
+      "file": "input-1440.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 1440,
+            "height": 900
+          }
+        ],
+        "format": {
+          "duration": "70.200000",
+          "size": "6260465"
+        }
+      }
+    },
+    {
+      "file": "input-390.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 390,
+            "height": 844
+          }
+        ],
+        "format": {
+          "duration": "58.680000",
+          "size": "2931229"
+        }
+      }
+    },
+    {
+      "file": "input-932.webm",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 932,
+            "height": 430
+          }
+        ],
+        "format": {
+          "duration": "65.200000",
+          "size": "3687036"
+        }
+      }
+    }
+  ],
+  "bothMatchVideosPlay": true,
+  "errors": []
+}

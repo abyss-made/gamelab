@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "205eaf26ec11d66dee7192a41a7de02aa9bfd025",
+  "mode": "Native phone UI with WebGL explicitly unavailable",
+  "realTurboShot": true,
+  "sameReplayForOpponent": true,
+  "actualTrailToggle": true,
+  "noOverflow": true,
+  "errors": []
+}

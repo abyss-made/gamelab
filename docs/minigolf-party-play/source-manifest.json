@@ -1,0 +1,30 @@
+{
+  "finalCodeCommit": "be8de37ecb1ffa55aea52e7e437dc83e74336cad",
+  "fullSuiteRendererInputCommit": "205eaf26ec11d66dee7192a41a7de02aa9bfd025",
+  "finalNativeMatchCommit": "be8de37ecb1ffa55aea52e7e437dc83e74336cad",
+  "comparisonBaseline": "85ab293de52f3f1cd8669cdf0e344dd79efa13d0",
+  "postSuiteChange": {
+    "files": [
+      "node-server/public/minigolf-club.css"
+    ],
+    "scope": "Hide the transient finish banner while a hole recap is visible; final native match rechecks both devices. All JavaScript/backend/test sources unchanged."
+  },
+  "sourceSha256": {
+    "node-server/public/index.html": "f77b4f8587e40ad27d1a2a5f26feeeeaee26917de39664159df142eee2b8cc49",
+    "node-server/public/js/games/golf-arena.js": "d6540a91c3e4cf63e3cb2d4ffddfaba661cb6fc0ebc5cb81176629f3e2163a74",
+    "node-server/public/js/games/golf-party.js": "a77a26b0feefa6a3ed9f483c1a456bbb38a398ea2ecb362a48eeacbfe1f4e65c",
+    "node-server/public/js/games/golf-scene.js": "4b0710f92e1c552348cf22137ae2a8ac8ca4e459b606bd2acab2dcabdb8ec2a2",
+    "node-server/public/js/games/golf.js": "903f14ca734f94a3ea26a7e00e472789ae68d430f294c7fb73291ceba41feb77",
+    "node-server/public/js/rules/rules-c.js": "541078141a10243986a46435e4cd11ed0a0b35fb481591d5193aeef1cb3631ae",
+    "node-server/public/js/sound.js": "2b0eec56f6167dafde71e6ba22eb76af2f543f7797a58d9289ddd98c34ee8abe",
+    "node-server/public/minigolf-club.css": "71a87c128e286eee9f96c70db6326537c5dc6698e3d5f15ac4ef2408fa834a90",
+    "node-server/server/games/golf.js": "4563f0ffb0bd735feb6a227760ae82ee2b9438bf6c4d9cde42c9aec3429c3b1b",
+    "node-server/server/games/golfcourses.js": "1ede5ed6d7d05cf478b96563524ed87cb963b19ea3763f4356d7805b508ef65d",
+    "node-server/test/golfgauntlet.js": "88b3c06bfd66cece55abb55681cf59625ee295321b0f274b7ee3e70aef2c1abe"
+  },
+  "regressionPrograms": 38,
+  "failedPrograms": 0,
+  "skippedPrograms": 0,
+  "focusedBrowserFollowupCommit": "be8de37ecb1ffa55aea52e7e437dc83e74336cad",
+  "focusedBrowserFollowupChecks": 140
+}

@@ -1,0 +1,126 @@
+[
+  {
+    "file": "desktop-match.mp4",
+    "originalSha256": "e8c5f4473a6db33d82e8b511b3c802b2039fd503253ebc569b47a71a951b9f64",
+    "publishedSha256": "3668963e6d8e442484397a374557cbb0fdbe1a398e2da64cc6229f7e74b92739",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "603.000000",
+        "size": "62729605"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "603.000000",
+        "size": "12354217"
+      }
+    },
+    "transformation": "Codec compression only; native size, fps and timing retained. No gameplay or image edits."
+  },
+  {
+    "file": "turbo-desktop.mp4",
+    "sourceFile": "desktop-match.mp4",
+    "sourceSha256": "3668963e6d8e442484397a374557cbb0fdbe1a398e2da64cc6229f7e74b92739",
+    "sourceStartSeconds": 36.69343280792236,
+    "selection": "Real-time excerpt selected using recorded native UI-action/file timestamps; no speed, frame or image edits.",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "14.960000",
+        "size": "446575"
+      }
+    },
+    "publishedSha256": "4b5103d8ef708ec313fbfd28d0568dc97817036edfe59370d5dbb1d172da4d76"
+  },
+  {
+    "file": "mobile-match.mp4",
+    "originalSha256": "87bea3d0d4b1cc331d2fb2ccc30ba20e80b85944dea7b7d94ee30d703b8a0067",
+    "publishedSha256": "5698a9c48b41968ebca849f9bcfc6614a2d4db5ac8f7d8a7af665005405b4781",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "602.680000",
+        "size": "32572800"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "602.680000",
+        "size": "5538941"
+      }
+    },
+    "transformation": "Codec compression only; native size, fps and timing retained. No gameplay or image edits."
+  },
+  {
+    "file": "turbo-finish-mobile.mp4",
+    "sourceFile": "mobile-match.mp4",
+    "sourceSha256": "5698a9c48b41968ebca849f9bcfc6614a2d4db5ac8f7d8a7af665005405b4781",
+    "sourceStartSeconds": 587.68,
+    "selection": "Real-time excerpt selected using recorded native UI-action/file timestamps; no speed, frame or image edits.",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "15.000000",
+        "size": "166711"
+      }
+    },
+    "publishedSha256": "f4bf649146225fb4227ce13b88641bc98f17e64895b11a831318202f9f368e9b"
+  }
+]
