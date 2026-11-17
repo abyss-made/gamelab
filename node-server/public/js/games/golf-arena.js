@@ -42,6 +42,22 @@ window.GolfArena={
   const arc=new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineDashedMaterial({color:'#e8efff',dashSize:3,gapSize:6,transparent:true,opacity:.5}));arc.computeLineDistances();s.world.add(arc);
   s.motors.push({definition:m,group:g});
  },
+ boost(s,tile){
+  const T=s.T,x=tile.x+tile.w/2,z=tile.y+tile.h/2;
+  const base=s.box(x,z,tile.w,tile.h,.4,.08,s.mat.navy);base.castShadow=false;base.userData.kind='boost';base.userData.tile=tile.id;
+  const inset=s.box(x,z,tile.w-3,tile.h-3,.15,.5,s.mat.neon);inset.castShadow=false;
+  // The navy chevrons show the exact launch direction. The painted footprint
+  // matches the authoritative center-entry rectangle, without a raised blocker.
+  const arrows=new T.Group();arrows.position.set(x-350,.75,z-220);arrows.rotation.y=-tile.angle;s.world.add(arrows);
+  const along=Math.abs(Math.cos(tile.angle))>.5?tile.w:tile.h,across=Math.abs(Math.cos(tile.angle))>.5?tile.h:tile.w;
+  for(const offset of [-1,0,1]){
+   const shape=new T.Shape(),w=Math.min(6,along/10),h=across*.25;
+   shape.moveTo(-w,-h);shape.lineTo(w,0);shape.lineTo(-w,h);shape.lineTo(-w+3,0);shape.closePath();
+   const mark=s.mesh(new T.ShapeGeometry(shape),s.mat.navy,arrows);mark.rotation.x=-Math.PI/2;mark.position.x=offset*along*.25;mark.castShadow=false;
+  }
+  const flash=s.mesh(new T.PlaneGeometry(tile.w+4,tile.h+4),new T.MeshBasicMaterial({color:'#ecffb8',transparent:true,opacity:0,depthWrite:false}));flash.rotation.x=-Math.PI/2;flash.position.set(x-350,.9,z-220);flash.castShadow=false;
+  s.boostPads.push({id:tile.id,flash,hitAt:-1});
+ },
  build(s,g){
   const T=s.T,h=g.hole,number=g.holeIndex+1;
   for(const x of [210,350,490]){const cloud=s.mesh(new T.SphereGeometry(120,16,10),s.mat.cloud);cloud.position.set(x-350,-155,0);cloud.scale.set(1,.22,.8);cloud.castShadow=false;}

@@ -12,6 +12,20 @@
 .golf-club .club-course-note{margin:0;padding:9px 20px;background:#172d47;color:#dce9b8;font-size:11px;line-height:1.5;border-top:1px solid #47617a}
 .golf-club[data-course=gauntlet] .club-brand{color:#c7fa62}.golf-club[data-course=gauntlet] .club-course h2{color:#fff7e9}
 .golf-club[data-course=gauntlet] .club-cup-marker{background:#382956ed;border-color:#d7c5ff}
+.golf-club #gf-trail{min-height:44px;padding:7px 12px;font-size:11px}
+.golf-club #gf-trail[aria-pressed=true]{color:#dfffad;background:#254d43;border-color:#baff45}
+.golf-club .club-close{color:#d7f398}
+.golf-club .club-shot-result{max-width:calc(100% - 32px);width:max-content;text-align:center;font-size:clamp(23px,3.4vw,42px);line-height:1.15;letter-spacing:-.035em}
+.golf-club .club-shot-result[data-style=turbo]{color:#dfff9b}
+.golf-club .club-shot-result[data-style=sweeper]{color:#ffe48a}
+.golf-club .club-recap-kicker{display:block;margin-bottom:8px;color:#bed0d5;font-size:10px;font-weight:800;letter-spacing:.14em}
+.golf-club #gf-between .club-lead{margin:10px 0 0;color:#d6f69e;font-size:12px;font-weight:700}
+.golf-club #gf-between li{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.golf-club #gf-between li small{display:block;font-size:10px;font-weight:400}
+.golf-club #gf-between li>b{text-align:right;font-size:20px;color:#f2ffd4}
+.golf-club #gf-between li>span{min-width:0;overflow-wrap:anywhere}
+.golf-club #gf-between .club-summary-me{color:#dcffa4}
+.golf-club #gf-between{max-height:calc(100% - 36px);overflow:auto}
 @media(max-width:700px){.golf-club .club-course-note{padding:8px 12px;font-size:10px}}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club){width:100%;max-width:1700px;grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'stage';grid-template-rows:auto auto;gap:8px;padding:8px 14px 18px}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club)>:is(#side,#room-chat){display:none}

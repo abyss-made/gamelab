@@ -36,6 +36,7 @@ window.Sound = (() => {
     golftap: () => tone(220,0,.065,'triangle',.045),
     golfbumper: () => { tone(330,0,.07,'triangle',.045);tone(165,.015,.085,'sine',.03); },
     golfmotor: () => { tone(125,0,.09,'sine',.055);tone(680,0,.05,'triangle',.025); },
+    golfboost: () => { tone(440,0,.1,'triangle',.045);tone(880,.055,.16,'sine',.045); },
   };
 
   return {
