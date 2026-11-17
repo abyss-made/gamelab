@@ -586,8 +586,10 @@ GameUI.golf = (() => {
 
   function paintText() {
     if (!root || !g) return;
+    const rolling=performance.now()<busyUntil&&g.anim;
+    const activeId=rolling?g.anim.by:g.turnId;
     root.querySelector("#gf-players").innerHTML = g.players
-      .map((p, i) => C.playerChip(app, p, { active: p.id === g.turnId, extra: `<span class="gf-dot" style="background:${colorOf(i)}" aria-hidden="true"></span>` + (p.id === g.turnId && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: p.out ? "Out" : p.holed ? `Holed in ${p.strokes}` : `${p.strokes} stroke${p.strokes === 1 ? "" : "s"}` }))
+      .map((p, i) => C.playerChip(app, p, { active: p.id === activeId, extra: `<span class="gf-dot" style="background:${colorOf(i)}" aria-hidden="true"></span>` + (!rolling && p.id === g.turnId && g.timeLeft !== null ? '<span class="fr-timer" data-timer></span>' : ""), sub: p.out ? "Out" : rolling&&(p.id===g.anim.by||g.anim.paths?.[p.id]) ? p.id===g.anim.by?'Ball rolling…':'On the course' : p.holed ? `Holed in ${p.strokes}` : `${p.strokes} stroke${p.strokes === 1 ? "" : "s"}` }))
       .join("");
     root.querySelector("#gf-eyebrow").textContent = `${g.course.name || "Course"} · Hole ${g.holeIndex + 1} / ${g.course.holes}`;
     root.querySelector("#gf-title").textContent = g.hole.name;
@@ -628,7 +630,7 @@ GameUI.golf = (() => {
     g = state.game;
     if (!g) return;
     if(gesture&&(g.turnId!==S.you||g.busyMs>0||g.phase!=='play'))cancelPull();
-    clock.set(g.timeLeft);
+    clock.set(g.busyMs>0?null:g.timeLeft);
     const key = g.course.id + ":" + g.holeIndex;
     if (key !== holeKey) {
       holeKey = key; placing=false;teeDraft=null;lastTrail=null;showTrail=false;readyTurn='';
@@ -657,7 +659,7 @@ GameUI.golf = (() => {
     syncControls();
     clearTimeout(tickT);
     const wait = busyUntil - performance.now();
-    if (wait > 0) tickT = setTimeout(() => { paintText(); syncControls(); }, wait + 30);
+    if (wait > 0) tickT = setTimeout(() => { clock.set(g.phase==='play'?Math.max(0,g.timeLeft-g.busyMs):null);paintText(); syncControls(); }, wait + 30);
   }
 
   function unmount() {
