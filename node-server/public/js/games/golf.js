@@ -640,10 +640,10 @@ GameUI.golf = (() => {
   }
 
   function statusText() {
-    if(!renderReady)return root.dataset.renderer==='error'?'The course could not be displayed. Reload the page to reconnect.':'Preparing the course… Controls unlock when it is visible.';
     const turn = g.players.find((p) => p.id === g.turnId);
     const holeName = app.esc(g.hole.name);
     const head = `Hole ${g.holeIndex + 1}/${g.course.holes}: <b>${holeName}</b> · par ${g.hole.par}`;
+    if(!renderReady)return `${head}<br>${root.dataset.renderer==='error'?'The course could not be displayed. Reload the page to reconnect.':'Preparing the course… Controls unlock when it is visible.'}`;
     if(gesture?.mode==='pull')return `<b>Release to putt</b> · ${power}% power. Escape cancels.`;
     if (performance.now() < busyUntil) return `${head} · ball rolling...`;
     if (g.phase === "between") return `${head} · hole complete`;
