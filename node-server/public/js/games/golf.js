@@ -105,6 +105,7 @@ GameUI.golf = (() => {
     renderLoadT = setTimeout(() => { if (current() && !renderReady) useCompatibilityView('slow'); }, 6000);
     GolfClubScene.create(target, root.querySelector('.club-arena')).then(scene => {
       if (!current()) { scene.dispose(); return; }
+      clearTimeout(renderLoadT);
       scene3d = scene; fit();
       // Unlock only after frame() has displayed the actual current hole.
     }).catch(() => { if (current()) useCompatibilityView('unavailable'); });
