@@ -1,0 +1,90 @@
+{
+  "sourceCommit": "8b1310448a9a6df951821a920fd33f055058e6e8",
+  "mode": "Real rooms and normal controls, with explicit graphics/network fault cases. Not human playtesting.",
+  "checks": [
+    {
+      "case": "loading-and-context-loss",
+      "controlsWaitForVisibleFrame": true,
+      "enterDoesNotBlindPutt": true,
+      "mouseTapAimsWithoutShooting": true,
+      "heldPullCancelledOnLoss": true,
+      "seatAndStrokePreserved": true,
+      "noStale3dDom": true,
+      "focusRestored": true,
+      "actual2dRemainsPlayable": true
+    },
+    {
+      "case": "actual-multiplayer-recap",
+      "realPutts": 7,
+      "firstHoleScores": [
+        3,
+        3
+      ],
+      "touchTapAimsWithoutShooting": true,
+      "recapPersistsOnNextHole": true,
+      "friendCanPuttWhileScoresOpen": true,
+      "recapUnchangedByNewShot": true,
+      "backButtonRestoresCanvasFocus": true,
+      "sameAuthoritativeReplay": true
+    },
+    {
+      "case": "delayed-module",
+      "automaticFallbackPlayable": true,
+      "nativeTouchAimsIn2d": true,
+      "lateRendererDisposed": true,
+      "aimPreservedAfterLateModule": true,
+      "noStale3dDom": true,
+      "noUnintendedStroke": true
+    },
+    {
+      "case": "leave-during-loading",
+      "actualLeaveUi": true,
+      "lateRendererDisposed": true,
+      "noResurrectedGameDom": true
+    }
+  ],
+  "shots": [
+    {
+      "slot": 0,
+      "outcome": "rest",
+      "angle": 310,
+      "power": 1
+    },
+    {
+      "slot": 1,
+      "outcome": "rest",
+      "angle": 315,
+      "power": 1
+    },
+    {
+      "slot": 0,
+      "outcome": "rest",
+      "angle": 35,
+      "power": 0.85
+    },
+    {
+      "slot": 1,
+      "outcome": "rest",
+      "angle": 30,
+      "power": 1
+    },
+    {
+      "slot": 0,
+      "outcome": "cup",
+      "angle": 183,
+      "power": 0.7
+    },
+    {
+      "slot": 1,
+      "outcome": "cup",
+      "angle": 183.25,
+      "power": 0.7
+    }
+  ],
+  "markers": {
+    "desktopTapEpoch": 1794975760.3688126,
+    "contextLossEpoch": 1794975770.973938,
+    "mobileRecapEpoch": 1794975813.401139
+  },
+  "errors": []
+}

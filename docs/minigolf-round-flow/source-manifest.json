@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "8b1310448a9a6df951821a920fd33f055058e6e8",
+  "baseline": "69448c4e38736f259f61d57aa69ecc57d5e8d2d4",
+  "productionFiles": {
+    "node-server/public/index.html": "9969a887b26af819be28eb4ff8840b079b41ebf1a35c960f11e9644d2cbd6da5",
+    "node-server/public/js/games/golf.js": "756299a15a74a2c140772907126825f3c892962da58b3b7edf688252c3534141",
+    "node-server/public/js/rules/rules-c.js": "5c0c844cc7c46221217b5b88df351a936b56ffc81de6d851c013c80c73b16ebf",
+    "node-server/public/minigolf-club.css": "423cd70060d7e560bf8176da0e3b90cdb4c3724736849411bdae553c059cecd8",
+    "node-server/server/games/golf.js": "73ac8c9587f11bfc14a7016aa9c816fbb5af6e77cb87a854524aded0f3e388cf",
+    "node-server/test/golfgauntlet.js": "01d4b0c7bbae052098b084c961106f10708c4b41b5c213ec6afd76553b9d8d53"
+  },
+  "mediaSha256": {
+    "screenshots/actual-trail-1440.png": "26245785de9a24119d87a07bc42fb5cdf44821330cb9954e95865b715a21e9e7",
+    "screenshots/actual-trail-390.png": "782a89a561388a4f2eac9dea0e2bce9672c377fc2d9d3aef10eb7c83c160f6b5",
+    "screenshots/actual-trail-932.png": "7fd648d9ecd2d34e0c4da83202ac5cf41e090dad07ffcab0b83ed8cd9ce6acfd",
+    "screenshots/back-to-course-1440.png": "2b7cab2c3606d8dbc1480dd651b99e1ab5353cbc36186fbd8fe6cb30a9edb181",
+    "screenshots/delayed-load-recovery-390.png": "de17fc605bc7d16f1e0d001e4e6010ba3398855c4978f06596c3097bb29fa9ba",
+    "screenshots/held-pull-1440.png": "24f4c299c85521664e9e4f9fb3dd30660bcec74a6de48d5ff98c4f2c8c16ba65",
+    "screenshots/held-pull-390.png": "3c3735130e399484661e3821729f55c1ba9013095b76ec2952ccada6dff06058",
+    "screenshots/held-pull-932.png": "20ed62c3752c120ddfcf46e5abcbc686e5467ce74ba7a1295362adcf31225da6",
+    "screenshots/left-during-loading-390.png": "48921eebe9ba933ed0aa10dc47f56550c2b8ace6acfb234aa06cadf62d6ae4a3",
+    "screenshots/loading-controls-1440.png": "6db1ea5585614065d395b15d52bf76856f4846534f104ca49e0fd1511abe1fab",
+    "screenshots/opening-1440.png": "775b5e10fee6ba6f5592c4e070a535f4da2d63bfb3c18c231be91b2963f33900",
+    "screenshots/opening-390.png": "53b33cd7cf0e907d4a18a0484bb9faeb667c867978aa33414c454c1d81d9babd",
+    "screenshots/opening-932.png": "63e0a2c1e2601ed15bc282fd1955294418aa605067c5598c908e6c1a36154f17",
+    "screenshots/real-shot-1440.png": "525ce85702bcb41e2083b79e72639614172fcf08bbe0930a46b2af6479f66938",
+    "screenshots/real-shot-390.png": "b62a6893f035c931b086c1980f7db320cd394eb245eaf1a574bc67209f6caa76",
+    "screenshots/real-shot-932.png": "87ec638d91d48466d3b4eb578b9f909a63f3b43d6ea63f99ad91a3d35f22bfa2",
+    "screenshots/recovered-course-1440.png": "1d403f753d8a01151839f448b2062db0781e918ac21440230f0f78a2b81bb213",
+    "screenshots/saved-recap-1440.png": "dc88e89fa438e31f80a91b940b06c88b386756fac76e69aa85d4f3bc519789d1",
+    "screenshots/saved-recap-390.png": "dd05b52dfa01723cdc42678e9cbf601644f6cf2101544d886c254065c826faf7",
+    "screenshots/tap-aim-1440.png": "b6beeb0546240a7f8e5cdadf5a5d71be5d5f1d30e1e5677fd3b5e91081e8408d",
+    "screenshots/tap-aim-390.png": "3167af75ff7111d434bc29ec5521c3643bc61ac7f51a9a6935f4bf5183aebad2",
+    "video/aim-recovery-desktop.mp4": "101f30d4757cc8ffba8254ffd698dcc0ad3a48f0bdedad5efad69a578cc0e6dd",
+    "video/desktop-flow.mp4": "253f517fa4defa4508b55c68c3c0b735ad7e89412c41245fcb182ad71d11b6bf",
+    "video/mobile-flow.mp4": "af59f0786a496471f98c757889cc024a83a6e061ddef25f4357417e6649bbb59",
+    "video/scores-mobile.mp4": "b96a96f48811f65b4c6d2be08d5bd834aa4dbb0cfd68902e39cd3a251b936056"
+  },
+  "screenshotCount": 21,
+  "recordingCount": 4
+}

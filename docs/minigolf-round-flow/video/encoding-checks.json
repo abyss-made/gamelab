@@ -1,0 +1,126 @@
+[
+  {
+    "file": "desktop-flow.mp4",
+    "originalSha256": "6ae1bccd6ac9bc69f57bcbdb2a32f2df07a93244577a0986d9a3fa00f79486b1",
+    "publishedSha256": "253f517fa4defa4508b55c68c3c0b735ad7e89412c41245fcb182ad71d11b6bf",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "68.040000",
+        "size": "4723031"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "68.040000",
+        "size": "1116103"
+      }
+    },
+    "transformation": "Codec compression only; native size, fps and timing retained. Silent browser recording. No gameplay or image edits."
+  },
+  {
+    "file": "aim-recovery-desktop.mp4",
+    "sourceFile": "desktop-flow.mp4",
+    "sourceSha256": "253f517fa4defa4508b55c68c3c0b735ad7e89412c41245fcb182ad71d11b6bf",
+    "sourceStartSeconds": 10.97393798828125,
+    "selection": "15-second real-time excerpt selected using recorded UI-event/file timestamps; no frame, speed or image edits.",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1440,
+          "height": 900,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "14.960000",
+        "size": "323745"
+      }
+    },
+    "publishedSha256": "101f30d4757cc8ffba8254ffd698dcc0ad3a48f0bdedad5efad69a578cc0e6dd"
+  },
+  {
+    "file": "mobile-flow.mp4",
+    "originalSha256": "00633d27b0c481f8b87dfd5e70a649c4a6e58526ab1468894d9d4bb959e297db",
+    "publishedSha256": "af59f0786a496471f98c757889cc024a83a6e061ddef25f4357417e6649bbb59",
+    "originalProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "68.000000",
+        "size": "4885779"
+      }
+    },
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "68.000000",
+        "size": "881802"
+      }
+    },
+    "transformation": "Codec compression only; native size, fps and timing retained. Silent browser recording. No gameplay or image edits."
+  },
+  {
+    "file": "scores-mobile.mp4",
+    "sourceFile": "mobile-flow.mp4",
+    "sourceSha256": "af59f0786a496471f98c757889cc024a83a6e061ddef25f4357417e6649bbb59",
+    "sourceStartSeconds": 49.4011390209198,
+    "selection": "15-second real-time excerpt selected using recorded UI-event/file timestamps; no frame, speed or image edits.",
+    "publishedProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 390,
+          "height": 844,
+          "r_frame_rate": "25/1"
+        }
+      ],
+      "format": {
+        "duration": "14.960000",
+        "size": "148015"
+      }
+    },
+    "publishedSha256": "b96a96f48811f65b4c6d2be08d5bd834aa4dbb0cfd68902e39cd3a251b936056"
+  }
+]

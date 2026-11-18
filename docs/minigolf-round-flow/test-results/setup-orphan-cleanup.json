@@ -1,0 +1,77 @@
+{
+  "reason": "Aborted browser startup tests left their own local app servers listening; only orphaned servers from this suite window and exact repository entry were stopped.",
+  "processes": [
+    {
+      "pid": 4087,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4246,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4266,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4302,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4348,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4466,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4510,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4797,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4876,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4920,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4947,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 4967,
+      "entry": "/workspace/gamelab/node-server/server/index.js",
+      "startedDuringThisSuite": true,
+      "signal": "SIGTERM"
+    }
+  ]
+}

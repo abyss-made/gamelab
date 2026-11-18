@@ -1,0 +1,18 @@
+{
+  "baseline": "69448c4e38736f259f61d57aa69ecc57d5e8d2d4",
+  "sourceCommit": "8b1310448a9a6df951821a920fd33f055058e6e8",
+  "unchangedModules": [
+    "node-server/server/games/physics.js",
+    "node-server/server/games/golfcourses.js",
+    "node-server/public/js/games/golf-motion.js",
+    "node-server/public/js/games/golf-party.js",
+    "node-server/public/js/games/golf-scene.js",
+    "node-server/public/js/games/golf-arena.js"
+  ],
+  "puttsCompared": 94,
+  "players": 6,
+  "holes": 6,
+  "identicalFramesImpactsTurnsScoresAndResults": true,
+  "otherBackendFilesUnchanged": true,
+  "description": "Fake-clock rules replay, not human playtesting."
+}

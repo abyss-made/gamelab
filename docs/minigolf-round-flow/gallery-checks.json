@@ -1,0 +1,133 @@
+{
+  "screenshots": [
+    {
+      "file": "actual-trail-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "actual-trail-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "actual-trail-932.png",
+      "width": 932,
+      "height": 430
+    },
+    {
+      "file": "back-to-course-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "delayed-load-recovery-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "held-pull-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "held-pull-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "held-pull-932.png",
+      "width": 932,
+      "height": 430
+    },
+    {
+      "file": "left-during-loading-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "loading-controls-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "opening-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "opening-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "opening-932.png",
+      "width": 932,
+      "height": 430
+    },
+    {
+      "file": "real-shot-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "real-shot-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "real-shot-932.png",
+      "width": 932,
+      "height": 430
+    },
+    {
+      "file": "recovered-course-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "saved-recap-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "saved-recap-390.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "file": "tap-aim-1440.png",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "tap-aim-390.png",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "videoCount": 4,
+  "checks": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "allImagesAndLinksLoad": true,
+      "noPageOverflow": true,
+      "filtersWork": true,
+      "clipsActuallyPlay": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "allImagesAndLinksLoad": true,
+      "noPageOverflow": true,
+      "filtersWork": true,
+      "clipsActuallyPlay": true
+    }
+  ],
+  "errors": []
+}
