@@ -1,0 +1,201 @@
+{
+  "sourceCommit": "8b1310448a9a6df951821a920fd33f055058e6e8",
+  "reason": "Cloud restart removed browser cache links; repository and Python Playwright require different revisions. Aborted startup tests also left local test servers occupying shared test ports; confirmed orphan servers were drained before retrying. No production source changed for these retries.",
+  "initialBlockedPrograms": [
+    "avatarui",
+    "ui",
+    "phase15",
+    "batch2",
+    "batch2ui",
+    "batch1ui",
+    "batch3",
+    "batch3ui",
+    "batch4ui",
+    "batch5",
+    "batch5ui",
+    "qol",
+    "partyui",
+    "party3ui",
+    "phase2ui",
+    "design31ui"
+  ],
+  "retries": [
+    {
+      "program": "avatarui",
+      "exitCode": 0,
+      "seconds": 12.79,
+      "passLines": 44,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "ui",
+      "exitCode": 0,
+      "seconds": 7.95,
+      "passLines": 25,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "phase15",
+      "exitCode": 0,
+      "seconds": 104.79,
+      "passLines": 185,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch2",
+      "exitCode": 0,
+      "seconds": 1.46,
+      "passLines": 108,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch2ui",
+      "exitCode": 0,
+      "seconds": 54.78,
+      "passLines": 69,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch1ui",
+      "exitCode": 0,
+      "seconds": 17.41,
+      "passLines": 64,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch3",
+      "exitCode": 0,
+      "seconds": 2.11,
+      "passLines": 157,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch3ui",
+      "exitCode": 0,
+      "seconds": 22.04,
+      "passLines": 91,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch4ui",
+      "exitCode": 0,
+      "seconds": 23.56,
+      "passLines": 136,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch5",
+      "exitCode": 0,
+      "seconds": 37.6,
+      "passLines": 274,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "batch5ui",
+      "exitCode": 0,
+      "seconds": 62.32,
+      "passLines": 140,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "qol",
+      "exitCode": 0,
+      "seconds": 124.18,
+      "passLines": 729,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "partyui",
+      "exitCode": 0,
+      "seconds": 44.1,
+      "passLines": 56,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "party3ui",
+      "exitCode": 0,
+      "seconds": 15.85,
+      "passLines": 128,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "phase2ui",
+      "exitCode": 0,
+      "seconds": 13.66,
+      "passLines": 29,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    },
+    {
+      "program": "design31ui",
+      "exitCode": 0,
+      "seconds": 71.81,
+      "passLines": 205,
+      "failLines": 0,
+      "startupError": false,
+      "skipLines": 0,
+      "attempt": 2,
+      "setupRetry": true
+    }
+  ],
+  "archive": "setup-attempt/"
+}

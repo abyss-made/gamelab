@@ -6,11 +6,13 @@
 //  - A hole ends for a player at the stroke limit (they score the limit). Lowest total over the course wins.
 const P = require('./physics');
 const COURSES = require('./golfcourses');
+const Motion = require('../../public/js/games/golf-motion');
+const Party = require('../../public/js/games/golf-party');
 
 const meta = { id: 'golf', name: 'Mini Golf', minPlayers: 2, maxPlayers: 6, midJoin: false, resetScores: false, scoreLabel: 'wins' };
 
 const TURN_TIMES = [20, 30, 45, 60];
-const COURSE_IDS = ['coastal', 'meadow', 'canyon', 'skyline', 'harbor', 'tour'];
+const COURSE_IDS = ['coastal', 'gauntlet', 'meadow', 'canyon', 'skyline', 'harbor', 'tour'];
 const defaults = { course: 'coastal', maxStrokes: 8, turnTime: 45 };
 
 const BALL_R = 6;
@@ -34,12 +36,23 @@ function sanitizeSettings(s, prev) {
 
 const inRect = (z, x, y) => x >= z.x && x <= z.x + z.w && y >= z.y && y <= z.y + z.h;
 
+// Shot-switch gates are turn-based obstacles, not an unsynchronized client clock.
+// An occupied gate stays open until it can close safely. The chosen state is held
+// for the entire authoritative simulation and is included with its replay.
+function gateStates(hole, shot = 0, players = []) {
+  return (hole.gates || []).map(gate => {
+    const xs=gate.poly.map(p=>p[0]),ys=gate.poly.map(p=>p[1]),margin=BALL_R+1;
+    const occupied=players.some(p=>!p.out&&!p.holed&&p.x>=Math.min(...xs)-margin&&p.x<=Math.max(...xs)+margin&&p.y>=Math.min(...ys)-margin&&p.y<=Math.max(...ys)+margin);
+    return {...gate,closed:(shot+gate.phase)%2===0&&!occupied};
+  });
+}
+
 // Precomputed geometry for a hole (cached by the hole object).
 const geo = new WeakMap();
 function geometry(hole) {
   let g = geo.get(hole);
   if (!g) {
-    const solids = (hole.walls || []);
+    const solids = (hole.walls || []).concat((hole.gates || []).filter(g=>g.closed ?? g.phase===0).map(g=>g.poly));
     g = { walls: P.polyWalls(hole.poly).concat(...solids.map(P.polyWalls)), circles: (hole.bumpers || []).map((b) => ({ x: b.x, y: b.y, r: b.r, rest: 1 })), solids };
     geo.set(hole, g);
   }
@@ -71,34 +84,48 @@ function restoreClear(st,hole,player,origin){
   const candidates=[origin];
   for(let r=14;r<=84;r+=14)for(let i=0;i<12;i++)candidates.push({x:origin.x+Math.cos(i*Math.PI/6)*r,y:origin.y+Math.sin(i*Math.PI/6)*r});
   for(let y=70;y<380;y+=14)for(let x=70;x<640;x+=14)candidates.push({x,y});
-  const point=candidates.find(pos=>onFairway(hole,pos.x,pos.y)&&st.players.every(other=>other===player||other.out||other.holed||Math.hypot(other.x-pos.x,other.y-pos.y)>=BALL_R*2+1));
+  const point=candidates.find(pos=>onFairway(hole,pos.x,pos.y)&&Motion.clear({...pos,r:BALL_R},hole.motors,hole.motorTime)&&st.players.every(other=>other===player||other.out||other.holed||Math.hypot(other.x-pos.x,other.y-pos.y)>=BALL_R*2+1));
   if(point){player.x=point.x;player.y=point.y;}
 }
 
 // Simulates one putt. Returns { x, y, outcome: 'rest' | 'cup' | 'water', anim }.
-function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[]) {
+function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[], motorTime=hole.motorTime||0) {
   const geometryForHole=geometry(hole);
   const initial=[{id:'shot',x,y},...others];
   const balls=initial.map((p,i)=>({id:p.id,x:p.x,y:p.y,vx:0,vy:0,r:BALL_R,gone:false}));
   const outcomes=balls.map(()=> 'rest');let collisions=0;
+  const motors=hole.motors||[],startTime=motorTime,impacts=[],impactTimes=new Map();
+  const usedTiles = new Map(balls.map(b => [b.id, new Set()]));
+  const record=(b,t,hit)=>{const key=b.id+':'+hit.type+':'+(hit.obstacleId??'');if(hit.speed<24||t-(impactTimes.get(key)??-1)<.075||impacts.length>=64)return;impactTimes.set(key,t);impacts.push({t:Math.round(t*1000)/1000,x:Math.round(hit.x*10)/10,y:Math.round(hit.y*10)/10,speed:Math.round(hit.speed),type:hit.type,obstacleId:hit.obstacleId??null,ballId:b.id});};
   const speed=MIN_SPEED+(MAX_SPEED-MIN_SPEED)*power;balls[0].vx=Math.cos(angle)*speed;balls[0].vy=Math.sin(angle)*speed;
   const result=P.run({balls,walls:geometryForHole.walls,circles:geometryForHole.circles.concat(protectedBalls.map(p=>({x:p.x,y:p.y,r:BALL_R,rest:.82}))),wallRest:.82,ballRest:.9,roll:120,drag:.45,stopSpeed:6,maxTime:MAX_SIM,sampleEvery:4,collide:true,
-    onBalls:()=>collisions++,
+    onBalls:(a,b,speed,t)=>{collisions++;record(a,t,{type:'ball',x:(a.x+b.x)/2,y:(a.y+b.y)/2,speed});},
+    onWall:(b,speed,t)=>{const index=(hole.bumpers||[]).findIndex(c=>Math.hypot(c.x-b.x,c.y-b.y)<=c.r+BALL_R+1),teeBall=protectedBalls.some(p=>Math.hypot(p.x-b.x,p.y-b.y)<=BALL_R*2+1);record(b,t,{type:index>=0?'bumper':teeBall?'ball':'wall',obstacleId:index<0?null:index,x:b.x,y:b.y,speed});},
+    keepAwake:t=>motors.length&&t<Motion.RUN_FOR&&balls.some(b=>!b.gone),
     accelerationAt:b=>{const zone=(hole.slopes||[]).find(z=>inRect(z,b.x,b.y));return zone?{x:zone.ax,y:zone.ay}:null;},
     frictionAt:b=>(hole.sand||[]).some(z=>inRect(z,b.x,b.y))?7:1,
-    afterStep:b=>{const i=balls.indexOf(b);if((hole.water||[]).some(z=>inRect(z,b.x,b.y))){outcomes[i]='water';return 'gone';}
+    afterStep:(b,t)=>{for(const m of motors){const hit=Motion.collide(b,m,startTime+Motion.travel(t),Motion.drive(t));if(hit)record(b,t,hit);}
+      const launch=Party.boost(b,hole.boosts,usedTiles.get(b.id));if(launch)record(b,t,launch);
+      const i=balls.indexOf(b);if((hole.water||[]).some(z=>inRect(z,b.x,b.y))){outcomes[i]='water';return 'gone';}
       if(Math.hypot(b.x-hole.cup[0],b.y-hole.cup[1])<CUP_R*.9&&Math.hypot(b.vx,b.vy)<=CUP_MAX_SPEED){outcomes[i]='cup';b.x=hole.cup[0];b.y=hole.cup[1];return 'gone';}}
   });
   const path=i=>result.frames.map(f=>[f[0],f[1+i*2],f[2+i*2]]);
-  const position=(b,i)=>({id:b.id,x:outcomes[i]==='cup'?hole.cup[0]:Math.round(b.x*10)/10,y:outcomes[i]==='cup'?hole.cup[1]:Math.round(b.y*10)/10,outcome:outcomes[i]});
+  const position=(b,i)=>{
+    let x=outcomes[i]==='cup'?hole.cup[0]:Math.round(b.x*10)/10,y=outcomes[i]==='cup'?hole.cup[1]:Math.round(b.y*10)/10;
+    // Rounding a safe resting point onto an inclusive water/bumper boundary must
+    // not turn it into an illegal start for the following shot.
+    const endTime=startTime+Motion.travel(result.duration),legal=(x,y)=>onFairway(hole,x,y)&&Motion.clear({x,y,r:BALL_R},motors,endTime);
+    if(outcomes[i]==='rest'&&!legal(x,y)&&legal(b.x,b.y)){x=b.x;y=b.y;}
+    return{id:b.id,x,y,outcome:outcomes[i]};
+  };
   const frames=path(0);return {...position(balls[0],0),collisions,others:balls.slice(1).map((b,i)=>position(b,i+1)),
-    anim:{frames,duration:result.duration,settled:result.settled,lastFrame:frames.at(-1),paths:Object.fromEntries(others.map((b,i)=>[b.id,path(i+1)]))}};
+    anim:{frames,duration:result.duration,settled:result.settled,lastFrame:frames.at(-1),impacts,...(motors.length?{motion:{start:startTime,runFor:Math.min(result.duration,Motion.RUN_FOR),end:startTime+Motion.travel(result.duration)}}:{}),paths:Object.fromEntries(others.map((b,i)=>[b.id,path(i+1)]))}};
 }
 
 const courseOf = (st) => COURSES.BY_ID[st.settings.course] || COURSES.BY_ID.meadow;
 
 function create(settings) {
-  return { settings: { ...settings }, players: [], hole: 0, shots: 0, phase: 'play', turn: -1, anim: null, animUntil: 0, animStart: 0, nextAt: 0, deadline: 0, over: false, last: null, pendingEnd: false };
+  return { settings: { ...settings }, players: [], hole: 0, shots: 0, phase: 'play', turn: -1, anim: null, animUntil: 0, animStart: 0, nextAt: 0, deadline: 0, over: false, last: null, lastHole: null, pendingEnd: false };
 }
 
 const live = (st) => st.players.filter((p) => !p.out);
@@ -114,15 +141,19 @@ function start(st, api) {
 }
 
 function beginHole(st, api, idx) {
+  if (st.phase === 'between') st.lastHole = completedHole(st);
   const hole = courseOf(st).holes[idx];
   st.hole = idx;
   st.phase = 'play';
   st.anim = null;
   st.animUntil = 0;
+  st.motorTime = 0;
+  st.recap = null;
+  st.last = null;
   const occupied=[];
   for (const p of st.players) {
     const pos=startPosition(hole,occupied);occupied.push(pos);
-    p.x=pos.x;p.y=pos.y;p.placed=false;p.from=null;p.strokes=0;p.holed=!!p.out;
+    p.x=pos.x;p.y=pos.y;p.placed=false;p.from=null;p.strokes=0;p.holed=!!p.out;p.finish=null;
   }
   pickNext(st, api);
   api.sys(`Hole ${idx + 1}: ${hole.name} (par ${hole.par}).`, 'accent');
@@ -130,12 +161,18 @@ function beginHole(st, api, idx) {
 }
 
 // Farthest from the cup goes next; at the tee, the honour rotates with the hole number.
-function pickNext(st, api) {
+function pickNext(st, api, afterIndex = null) {
   const hole = courseOf(st).holes[st.hole];
   const cand = st.players.map((p, i) => ({ p, i })).filter((c) => !c.p.out && !c.p.holed);
   if (!cand.length) { st.turn = -1; return; }
   const n = st.players.length;
   cand.sort((a, b) => {
+    // Party turns rotate after every putt, so nobody waits through another
+    // player's whole route. Traditional courses retain farthest-ball honours.
+    if (courseOf(st).id === 'gauntlet' && afterIndex !== null) {
+      const offset = i => (i - afterIndex - 1 + n) % n;
+      return offset(a.i) - offset(b.i);
+    }
     const da = Math.round(Math.hypot(a.p.x - hole.cup[0], a.p.y - hole.cup[1]) * 2);
     const db = Math.round(Math.hypot(b.p.x - hole.cup[0], b.p.y - hole.cup[1]) * 2);
     if (!cand.every(c=>c.p.strokes===0) && da !== db) return db - da;
@@ -154,8 +191,16 @@ function endHole(st, api, ms) {
   // so later holes show "–" rather than a misleading 0.
   for (const p of st.players) if (!p.out) p.scores[st.hole] = p.strokes;
   const hole = courseOf(st).holes[st.hole];
-  st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par }));
+  st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par, finish: p.finish, out: p.out }));
+  st.recap = Party.recap(st.players, st.hole);
   api.changed();
+}
+
+// Keep only the most recent completed hole. No replay frames or private room
+// data are retained, and a new match starts with an empty recap.
+function completedHole(st) {
+  const hole = courseOf(st).holes[st.hole];
+  return { index: st.hole, name: hole.name, par: hole.par, summary: st.summary, recap: st.recap };
 }
 
 function finishCourse(st, api, forfeit) {
@@ -188,15 +233,19 @@ function finishCourse(st, api, forfeit) {
 
 function putt(st, api, p, angle, power) {
   const course = courseOf(st);
-  const hole = course.holes[st.hole];
+  const definition = course.holes[st.hole];
+  const hole = definition.gates||definition.motors ? {...definition,motorTime:st.motorTime||0,...(definition.gates?{gates:gateStates(definition,st.shots,st.players)}:{})} : definition;
   const others=st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes>0);
   const r = simulatePutt(hole, p.x, p.y, angle, power, others, st.players.filter(other=>other!==p&&!other.out&&!other.holed&&other.strokes===0));
+  st.motorTime=r.anim.motion?.end??st.motorTime;
+  const parkedHole=hole.motors?{...hole,motorTime:st.motorTime}:hole;
   p.placed=true;
+  const finishes = {};
   for(const moved of r.others){
     const other=others.find(item=>item.id===moved.id);
     if(moved.outcome==='water')continue; // A collision cannot charge an opponent a water penalty.
     other.x=moved.x;other.y=moved.y;
-    if(moved.outcome==='cup'){other.holed=true;api.sys(`${other.name}'s ball was knocked into the cup!`, 'good');}
+    if(moved.outcome==='cup'){other.holed=true;other.finish=Party.finish(other.strokes,hole.par,r.anim.impacts.filter(e=>e.ballId===other.id));finishes[other.id]=other.finish;api.sys(`${other.name}'s ball was knocked into the cup!`, 'good');}
   }
   p.from = { x: p.x, y: p.y };
   p.strokes++;
@@ -204,17 +253,19 @@ function putt(st, api, p, angle, power) {
   if (r.outcome === 'water') {
     p.strokes++;
     note = 'water';
-    api.sys(`${p.name}'s ball found the water (+1 stroke).`, 'warn');
+    api.sys(`${p.name}'s ball found the ${course.id==='gauntlet'?'slime':'water'} (+1 stroke).`, 'warn');
   } else {
     p.x = r.x; p.y = r.y;
     if (r.outcome === 'cup') {
       p.holed = true;
+      p.finish = Party.finish(p.strokes, hole.par, r.anim.impacts.filter(e=>e.ballId==='shot'));
+      finishes[p.id] = p.finish;
       const vs = p.strokes - hole.par;
       api.sys(`${p.name} sank it in ${p.strokes}${p.strokes === 1 ? ' (hole in one!)' : vs <= -1 ? ' (under par)' : vs === 0 ? ' (par)' : ''}.`, 'good');
     }
   }
-  if (r.outcome === 'water') restoreClear(st,hole,p,p.from);
-  for(const moved of r.others.filter(item=>item.outcome==='water')){const other=others.find(item=>item.id===moved.id);restoreClear(st,hole,other,{x:other.x,y:other.y});}
+  if (r.outcome === 'water') restoreClear(st,parkedHole,p,p.from);
+  for(const moved of r.others.filter(item=>item.outcome==='water')){const other=others.find(item=>item.id===moved.id);restoreClear(st,parkedHole,other,{x:other.x,y:other.y});}
   if (!p.holed && p.strokes >= st.settings.maxStrokes) {
     p.holed = true;
     p.strokes = st.settings.maxStrokes;
@@ -222,14 +273,14 @@ function putt(st, api, p, angle, power) {
     api.sys(`${p.name} reached the ${st.settings.maxStrokes}-stroke limit and picks up.`, 'warn');
   }
   const ms = Math.ceil(r.anim.duration * 1000) + HOLD_MS;
-  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths };
+  st.anim = { shot: ++st.shots, by: p.id, frames: r.anim.frames, duration: r.anim.duration, outcome: r.outcome, from: p.from, paths: r.anim.paths, finishes, impacts:r.anim.impacts.map(e=>({...e,ballId:e.ballId==='shot'?p.id:e.ballId})),sunkIds:[...(r.outcome==='cup'?[p.id]:[]),...r.others.filter(p=>p.outcome==='cup').map(p=>p.id)],...(r.anim.motion?{motion:r.anim.motion}:{}), ...(hole.gates ? {gates:hole.gates} : {}) };
   st.animUntil = api.now() + ms;
   st.animStart = api.now();
-  st.last = { by: p.id, outcome: r.outcome, note, strokes: p.strokes, collisions: r.collisions };
+  st.last = { by: p.id, outcome: r.outcome, note, strokes: p.strokes, collisions: r.collisions, nearCup: r.outcome==='rest'&&!p.holed&&Math.hypot(p.x-hole.cup[0],p.y-hole.cup[1])<30, finish:p.finish };
   if (!active(st).length) {
     endHole(st, api, ms);
   } else {
-    pickNext(st, api);
+    pickNext(st, api, st.players.indexOf(p));
     st.deadline += ms;
   }
   api.changed();
@@ -276,7 +327,7 @@ function dropPlayer(st, api, p, why) {
   if (left.length <= 1) return finishCourse(st, api, true);
   if (st.phase === 'play') {
     if (!active(st).length) return endHole(st, api, Math.max(0, st.animUntil - api.now()));
-    if (st.players[st.turn] === p || st.turn < 0 || st.players[st.turn].holed) pickNext(st, api);
+    if (st.players[st.turn] === p || st.turn < 0 || st.players[st.turn].holed) pickNext(st, api, st.players.indexOf(p));
   }
   api.changed();
 }
@@ -309,10 +360,11 @@ function view(st, m, now) {
   const hole = course.holes[st.hole];
   const me = st.players.findIndex((p) => p.id === m.id);
   const anim = st.anim && now < st.animUntil ? { ...st.anim, elapsedMs: now - st.animStart } : null;
-  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R };
+  const hDef = hole && { name: hole.name, par: hole.par, poly: hole.poly, walls: hole.walls || [], bumpers: hole.bumpers || [], sand: hole.sand || [], water: hole.water || [], slopes: hole.slopes || [], boosts: hole.boosts || [], teeArea: teeArea(hole), tee: hole.tee, cup: hole.cup, cupR: CUP_R, ballR: BALL_R, ...(hole.motors?{motors:hole.motors,motorTime:st.motorTime||0}:{}), ...(hole.gates ? {gates:gateStates(hole,st.shots,st.players)} : {}) };
   return {
     course: { id: course.id, name: course.name, pars: course.holes.map((h) => h.par), holes: course.holes.length },
     holeIndex: st.hole,
+    shotNumber: st.shots,
     hole: hDef,
     size: { w: COURSES.W, h: COURSES.H },
     phase: st.phase,
@@ -324,7 +376,10 @@ function view(st, m, now) {
     last: st.last,
     maxStrokes: st.settings.maxStrokes,
     summary: st.phase === 'between' ? st.summary : null,
-    players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, x: p.x, y: p.y, placed: !!p.placed, strokes: p.strokes, holed: p.holed, scores: p.scores, total: totalOf(p) + (p.scores[st.hole] === null ? p.strokes : 0), out: p.out })),
+    recap: st.phase === 'between' ? st.recap : null,
+    lastHole: st.phase === 'between' && now >= st.animUntil ? completedHole(st) : st.lastHole,
+    turnOrder: course.id === 'gauntlet' ? 'round-robin' : 'farthest',
+    players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, x: p.x, y: p.y, placed: !!p.placed, strokes: p.strokes, holed: p.holed, finish: p.finish, scores: p.scores, total: totalOf(p) + (p.scores[st.hole] === null ? p.strokes : 0), out: p.out })),
     timeLeft: st.deadline && st.phase === 'play' ? Math.max(0, st.deadline - now) : null,
     nextInMs: st.phase === 'between' ? Math.max(0, st.nextAt - now) : null,
   };
@@ -332,5 +387,5 @@ function view(st, m, now) {
 
 module.exports = {
   meta, defaults, sanitizeSettings, create, start, tick, onAction, onLeave, view,
-  rules: { simulatePutt, onFairway, geometry, BALL_R, CUP_R, MAX_SPEED, MIN_SPEED, CUP_MAX_SPEED, startPosition, teeArea },
+  rules: { simulatePutt, onFairway, geometry, BALL_R, CUP_R, MAX_SPEED, MIN_SPEED, CUP_MAX_SPEED, startPosition, teeArea, gateStates },
 };

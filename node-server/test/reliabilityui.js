@@ -389,6 +389,8 @@ def('no-leaks-across-cycles', async () => {
       await host.page.evaluate(() => App.socket.emit('startGame'));
       await waitAll(all, () => App.S.phase === 'game' && document.body.dataset.phase === 'game', null, `${game} started`);
       await srv.passes(1);
+      const hostState=await S(host);
+      if(hostState.hostId!==hostState.you)throw new Error(`${game}: unexpected host transfer during rendering; original host no longer owns End Game`);
       await host.page.click('#end-btn');
       await waitAll(all, () => App.S.phase === 'lobby' && document.body.dataset.phase !== 'game', null, `${game} ended`);
     }
@@ -436,8 +438,14 @@ def('smoke-21-multi-client', async () => {
 
 // ---------------------------------------------------------------------------------------------
 (async () => {
-  // A 2 s heartbeat (default 25 s + 20 s) so a page cut off by offline emulation is noticed quickly.
-  srv = await H.startServer({ env: { HARNESS_PING_MS: '2000' } });
+  // Five software-rendered WebGL contexts can stall longer than the former 2 s
+  // test heartbeat, falsely disconnecting the host during shader compilation.
+  // Two 5 s heartbeats still detect the deliberate offline test within its 15 s
+  // deadline. Production keeps Socket.IO's default 25 s + 20 s. Retain the
+  // override for reproducing short-heartbeat failures without changing assertions.
+  const heartbeat=process.env.HARNESS_PING_MS || '5000';
+  srv = await H.startServer({ env: { HARNESS_PING_MS: heartbeat } });
+  metrics.heartbeat_interval_ms=Number(heartbeat);
   browser = await chromium.launch();
   const chromiumVersion = browser.version();
   console.log(`reliabilityui: real server on ${srv.url}, seed ${srv.seed}, Chromium ${chromiumVersion}`);

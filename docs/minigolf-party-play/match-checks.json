@@ -1,0 +1,2249 @@
+{
+  "sourceCommit": "be8de37ecb1ffa55aea52e7e437dc83e74336cad",
+  "mode": "Normal three-browser six-hole match through native UI controls: desktop/phone 3D, third seat in actual 2D fallback with the Three.js resource explicitly unavailable. Automation is not human feedback.",
+  "captures": [
+    {
+      "file": "hole-01-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "hole-01-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "hole-01-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "hole-01-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "three-player-932.png",
+      "viewport": {
+        "width": 932,
+        "height": 430
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "boost-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "boost-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "learn-from-shot-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "recap-01-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 0
+    },
+    {
+      "file": "hole-02-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "hole-02-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "hole-02-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "hole-02-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "motor-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "motor-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "native-touch-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 1
+    },
+    {
+      "file": "hole-03-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 2
+    },
+    {
+      "file": "hole-03-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 2
+    },
+    {
+      "file": "hole-03-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 2
+    },
+    {
+      "file": "hole-03-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 2
+    },
+    {
+      "file": "hole-04-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "hole-04-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "hole-04-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "hole-04-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "recap-04-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "recap-04-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 3
+    },
+    {
+      "file": "hole-05-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 4
+    },
+    {
+      "file": "hole-05-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 4
+    },
+    {
+      "file": "hole-05-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 4
+    },
+    {
+      "file": "hole-05-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 4
+    },
+    {
+      "file": "recap-05-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 4
+    },
+    {
+      "file": "hole-06-follow-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 5
+    },
+    {
+      "file": "hole-06-overview-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "game",
+      "hole": 5
+    },
+    {
+      "file": "hole-06-follow-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 5
+    },
+    {
+      "file": "hole-06-overview-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "game",
+      "hole": 5
+    },
+    {
+      "file": "recap-06-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "lobby",
+      "hole": null
+    },
+    {
+      "file": "normal-result-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "phase": "lobby",
+      "hole": null
+    },
+    {
+      "file": "normal-result-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "phase": "lobby",
+      "hole": null
+    },
+    {
+      "file": "normal-result-932.png",
+      "viewport": {
+        "width": 932,
+        "height": 430
+      },
+      "phase": "lobby",
+      "hole": null
+    }
+  ],
+  "shots": [
+    {
+      "hole": 1,
+      "slot": 0,
+      "angleDegrees": 9,
+      "power": 0.7,
+      "touch": false,
+      "uiActionEpoch": 1794897225.6934328,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.404,
+          "x": 250.8,
+          "y": 342.3,
+          "speed": 430,
+          "type": "boost",
+          "obstacleId": "ribbon-dash",
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.838,
+          "x": 409.6,
+          "y": 342.7,
+          "speed": 128,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.983,
+          "x": 437,
+          "y": 374,
+          "speed": 205,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 1,
+      "angleDegrees": 315,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897258.0131814,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.417,
+          "x": 237.7,
+          "y": 161,
+          "speed": 296,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.583,
+          "x": 284.1,
+          "y": 199,
+          "speed": 213,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.825,
+          "x": 340.9,
+          "y": 161,
+          "speed": 141,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.225,
+          "x": 410.1,
+          "y": 199,
+          "speed": 76,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 2,
+      "angleDegrees": 305,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897261.14397,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.442,
+          "x": 248.6,
+          "y": 161,
+          "speed": 337,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.588,
+          "x": 281.1,
+          "y": 199,
+          "speed": 246,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.796,
+          "x": 321.1,
+          "y": 161,
+          "speed": 167,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.125,
+          "x": 369.5,
+          "y": 199,
+          "speed": 95,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 0,
+      "angleDegrees": 145,
+      "power": 0.85,
+      "touch": false,
+      "uiActionEpoch": 1794897273.0299597,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.454,
+          "x": 396.5,
+          "y": 374,
+          "speed": 199,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 1,
+      "angleDegrees": 60,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897283.090318,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.063,
+          "x": 490.6,
+          "y": 199,
+          "speed": 465,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.246,
+          "x": 536.3,
+          "y": 133.5,
+          "speed": 281,
+          "type": "bumper",
+          "obstacleId": 1,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.546,
+          "x": 450.2,
+          "y": 66,
+          "speed": 200,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.846,
+          "x": 383.2,
+          "y": 109,
+          "speed": 125,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.413,
+          "x": 301.8,
+          "y": 66,
+          "speed": 51,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 2,
+      "angleDegrees": 30,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897286.315247,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.133,
+          "x": 485.5,
+          "y": 199,
+          "speed": 256,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.517,
+          "x": 634,
+          "y": 128.6,
+          "speed": 335,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.004,
+          "x": 525.1,
+          "y": 66,
+          "speed": 101,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 0,
+      "angleDegrees": 315,
+      "power": 0.85,
+      "touch": false,
+      "uiActionEpoch": 1794897298.2788467,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.283,
+          "x": 265.2,
+          "y": 161,
+          "speed": 279,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.462,
+          "x": 311.9,
+          "y": 199,
+          "speed": 198,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.725,
+          "x": 368.6,
+          "y": 161,
+          "speed": 128,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.188,
+          "x": 437.7,
+          "y": 199,
+          "speed": 61,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 1,
+      "angleDegrees": 178.5,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897308.0590107,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 2,
+      "angleDegrees": 184,
+      "power": 0.7,
+      "touch": false,
+      "uiActionEpoch": 1794897310.3759816,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 0,
+      "angleDegrees": 320,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897320.7761152,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.138,
+          "x": 536.1,
+          "y": 132.2,
+          "speed": 419,
+          "type": "bumper",
+          "obstacleId": 1,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.429,
+          "x": 418.9,
+          "y": 66,
+          "speed": 205,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.717,
+          "x": 325.8,
+          "y": 109,
+          "speed": 134,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.2,
+          "x": 212.8,
+          "y": 66,
+          "speed": 70,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 1,
+      "slot": 0,
+      "angleDegrees": 258.5,
+      "power": 0.03,
+      "touch": false,
+      "uiActionEpoch": 1794897329.945005,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "In the cup!",
+          "score": "In the cup!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 1,
+      "angleDegrees": 320,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897367.4753218,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.446,
+          "x": 259,
+          "y": 66,
+          "speed": 263,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 2,
+      "angleDegrees": 0,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897371.0600383,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.354,
+          "x": 312.3,
+          "y": 224.6,
+          "speed": 187,
+          "type": "motor",
+          "obstacleId": "carousel",
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.892,
+          "x": 438.8,
+          "y": 374,
+          "speed": 204,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 0,
+      "angleDegrees": 345,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897389.3458934,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.713,
+          "x": 422.7,
+          "y": 138.4,
+          "speed": 312,
+          "type": "bumper",
+          "obstacleId": 3,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.879,
+          "x": 379.7,
+          "y": 105.5,
+          "speed": 390,
+          "type": "boost",
+          "obstacleId": "upper-express",
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.787,
+          "x": 627.3,
+          "y": 105.8,
+          "speed": 120,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 1,
+      "angleDegrees": 336.75,
+      "power": 0.25,
+      "touch": true,
+      "uiActionEpoch": 1794897405.380223,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 2,
+      "angleDegrees": 295.75,
+      "power": 0.15,
+      "touch": false,
+      "uiActionEpoch": 1794897408.3175285,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 2,
+      "slot": 0,
+      "angleDegrees": 136.5,
+      "power": 0.15,
+      "touch": false,
+      "uiActionEpoch": 1794897417.7739203,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 2,
+      "angleDegrees": 350,
+      "power": 0.7,
+      "touch": false,
+      "uiActionEpoch": 1794897455.758393,
+      "outcome": "rest",
+      "events": [],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 0,
+      "angleDegrees": 15,
+      "power": 0.7,
+      "touch": false,
+      "uiActionEpoch": 1794897465.8674386,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.504,
+          "x": 275.3,
+          "y": 264,
+          "speed": 59,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 1,
+      "angleDegrees": 0,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897476.3435636,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.525,
+          "x": 340.6,
+          "y": 203.5,
+          "speed": 191,
+          "type": "bumper",
+          "obstacleId": 2,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.592,
+          "x": 364.3,
+          "y": 186.5,
+          "speed": 81,
+          "type": "motor",
+          "obstacleId": "switchyard",
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.729,
+          "x": 360.1,
+          "y": 134,
+          "speed": 293,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 2,
+      "angleDegrees": 23,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897479.5400689,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 0,
+      "angleDegrees": 352,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897488.0236495,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 3,
+      "slot": 1,
+      "angleDegrees": 281.75,
+      "power": 0.25,
+      "touch": false,
+      "uiActionEpoch": 1794897495.3830383,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 0,
+      "angleDegrees": 160,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897535.9832683,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.088,
+          "x": 66,
+          "y": 326.3,
+          "speed": 496,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.383,
+          "x": 174.3,
+          "y": 374,
+          "speed": 145,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.308,
+          "x": 379,
+          "y": 299.5,
+          "speed": 125,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 1,
+      "angleDegrees": 155,
+      "power": 0.85,
+      "touch": false,
+      "uiActionEpoch": 1794897546.1771772,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.067,
+          "x": 66,
+          "y": 307.4,
+          "speed": 419,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.462,
+          "x": 183.2,
+          "y": 374,
+          "speed": 142,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 2,
+      "angleDegrees": 160,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897548.972537,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.121,
+          "x": 66,
+          "y": 348.3,
+          "speed": 485,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.275,
+          "x": 124.1,
+          "y": 374,
+          "speed": 157,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.171,
+          "x": 352.1,
+          "y": 292.8,
+          "speed": 156,
+          "type": "ball",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 0,
+      "angleDegrees": 275,
+      "power": 0.85,
+      "touch": false,
+      "uiActionEpoch": 1794897559.677509,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.513,
+          "x": 360,
+          "y": 66,
+          "speed": 334,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 1,
+      "angleDegrees": 305,
+      "power": 0.55,
+      "touch": false,
+      "uiActionEpoch": 1794897572.9088478,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.158,
+          "x": 386.5,
+          "y": 251.1,
+          "speed": 390,
+          "type": "boost",
+          "obstacleId": "slime-sprint",
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.388,
+          "x": 381.9,
+          "y": 162,
+          "speed": 208,
+          "type": "ball",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.608,
+          "x": 346,
+          "y": 136.1,
+          "speed": 125,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 0.9,
+          "x": 452.5,
+          "y": 66,
+          "speed": 148,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 2,
+      "angleDegrees": 335,
+      "power": 0.08,
+      "touch": false,
+      "uiActionEpoch": 1794897576.435856,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.879,
+          "x": 381.8,
+          "y": 251.9,
+          "speed": 390,
+          "type": "boost",
+          "obstacleId": "slime-sprint",
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.288,
+          "x": 385.8,
+          "y": 102,
+          "speed": 217,
+          "type": "ball",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.542,
+          "x": 422.9,
+          "y": 66,
+          "speed": 109,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.567,
+          "x": 345.7,
+          "y": 66,
+          "speed": 123,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 0,
+      "angleDegrees": 7,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897586.7496924,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 1,
+      "angleDegrees": 357.75,
+      "power": 0.25,
+      "touch": false,
+      "uiActionEpoch": 1794897591.3561032,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 4,
+      "slot": 2,
+      "angleDegrees": 3,
+      "power": 0.55,
+      "touch": false,
+      "uiActionEpoch": 1794897593.175954,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Birdie!",
+          "score": "Birdie!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 1,
+      "angleDegrees": 342.75,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897626.7704523,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.542,
+          "x": 335.9,
+          "y": 208.8,
+          "speed": 216,
+          "type": "bumper",
+          "obstacleId": 2,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.542,
+          "x": 346.3,
+          "y": 206.1,
+          "speed": 106,
+          "type": "motor",
+          "obstacleId": "bridge",
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.733,
+          "x": 305.4,
+          "y": 151,
+          "speed": 283,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.775,
+          "x": 299.8,
+          "y": 159.9,
+          "speed": 258,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.813,
+          "x": 301.8,
+          "y": 151,
+          "speed": 248,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.871,
+          "x": 304.7,
+          "y": 162.4,
+          "speed": 135,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 2,
+      "angleDegrees": 335,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897629.848834,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.479,
+          "x": 332,
+          "y": 219.2,
+          "speed": 354,
+          "type": "bumper",
+          "obstacleId": 2,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.554,
+          "x": 307.5,
+          "y": 205.5,
+          "speed": 356,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.817,
+          "x": 339.9,
+          "y": 289,
+          "speed": 285,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.171,
+          "x": 366.7,
+          "y": 209.1,
+          "speed": 147,
+          "type": "motor",
+          "obstacleId": "bridge",
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.325,
+          "x": 405.7,
+          "y": 228.3,
+          "speed": 85,
+          "type": "bumper",
+          "obstacleId": 1,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 0,
+      "angleDegrees": 343.25,
+      "power": 0.55,
+      "touch": false,
+      "uiActionEpoch": 1794897639.775584,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 1.042,
+          "x": 333.3,
+          "y": 242.5,
+          "speed": 138,
+          "type": "motor",
+          "obstacleId": "bridge",
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.221,
+          "x": 306.4,
+          "y": 206.5,
+          "speed": 169,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.313,
+          "x": 322.8,
+          "y": 226.5,
+          "speed": 217,
+          "type": "motor",
+          "obstacleId": "bridge",
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.375,
+          "x": 310.1,
+          "y": 203.1,
+          "speed": 224,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.425,
+          "x": 322,
+          "y": 218.8,
+          "speed": 162,
+          "type": "motor",
+          "obstacleId": "bridge",
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.713,
+          "x": 369.9,
+          "y": 151,
+          "speed": 170,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 1,
+      "angleDegrees": 351.25,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897649.0595984,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 2,
+      "angleDegrees": 339.25,
+      "power": 0.25,
+      "touch": false,
+      "uiActionEpoch": 1794897651.9923356,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 5,
+      "slot": 0,
+      "angleDegrees": 323.5,
+      "power": 0.4,
+      "touch": false,
+      "uiActionEpoch": 1794897663.7485676,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 2,
+      "angleDegrees": 290,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897702.9276044,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.517,
+          "x": 209.2,
+          "y": 107.9,
+          "speed": 379,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.621,
+          "x": 213.6,
+          "y": 139,
+          "speed": 293,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.763,
+          "x": 218.9,
+          "y": 108,
+          "speed": 209,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.967,
+          "x": 225.2,
+          "y": 139,
+          "speed": 133,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.379,
+          "x": 233.1,
+          "y": 107.1,
+          "speed": 34,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 0,
+      "angleDegrees": 290,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897714.6919706,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.588,
+          "x": 202.5,
+          "y": 66,
+          "speed": 346,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.188,
+          "x": 272.2,
+          "y": 193.4,
+          "speed": 35,
+          "type": "motor",
+          "obstacleId": "finale",
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 1,
+      "angleDegrees": 290,
+      "power": 0.85,
+      "touch": false,
+      "uiActionEpoch": 1794897726.4853096,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.663,
+          "x": 181,
+          "y": 66,
+          "speed": 274,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.058,
+          "x": 213.6,
+          "y": 139,
+          "speed": 148,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.338,
+          "x": 234.6,
+          "y": 109.5,
+          "speed": 61,
+          "type": "ball",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.388,
+          "x": 228.1,
+          "y": 108,
+          "speed": 58,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 2,
+      "angleDegrees": 20,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897729.58767,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.321,
+          "x": 404,
+          "y": 160.5,
+          "speed": 422,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 0.563,
+          "x": 328.5,
+          "y": 194.5,
+          "speed": 247,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "c7b0d5b8658b"
+        },
+        {
+          "t": 1.279,
+          "x": 430.8,
+          "y": 322,
+          "speed": 106,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "c7b0d5b8658b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 0,
+      "angleDegrees": 45,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897739.469619,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.225,
+          "x": 348,
+          "y": 374,
+          "speed": 340,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        },
+        {
+          "t": 1.717,
+          "x": 634,
+          "y": 139.3,
+          "speed": 73,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "982d56bec92b"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 1,
+      "angleDegrees": 20,
+      "power": 0.7,
+      "touch": false,
+      "uiActionEpoch": 1794897749.7133563,
+      "outcome": "rest",
+      "events": [
+        {
+          "t": 0.575,
+          "x": 404,
+          "y": 181.6,
+          "speed": 240,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 1.225,
+          "x": 302.3,
+          "y": 218.6,
+          "speed": 138,
+          "type": "motor",
+          "obstacleId": "finale",
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {},
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 2,
+      "angleDegrees": 300.75,
+      "power": 0.55,
+      "touch": false,
+      "uiActionEpoch": 1794897752.7235522,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "c7b0d5b8658b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 0,
+      "angleDegrees": 204,
+      "power": 0.08,
+      "touch": false,
+      "uiActionEpoch": 1794897762.5622046,
+      "outcome": "cup",
+      "events": [],
+      "finishes": {
+        "982d56bec92b": {
+          "title": "Eagle!",
+          "score": "Eagle!",
+          "style": "clean"
+        }
+      },
+      "turnPassed": true
+    },
+    {
+      "hole": 6,
+      "slot": 1,
+      "angleDegrees": 317.75,
+      "power": 1,
+      "touch": false,
+      "uiActionEpoch": 1794897778.011226,
+      "outcome": "cup",
+      "events": [
+        {
+          "t": 0.013,
+          "x": 408.1,
+          "y": 275.7,
+          "speed": 484,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 0.246,
+          "x": 436.7,
+          "y": 374,
+          "speed": 391,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "3e2a8e1cdaf4"
+        },
+        {
+          "t": 2.092,
+          "x": 539.8,
+          "y": 117,
+          "speed": 350,
+          "type": "boost",
+          "obstacleId": "finish-dash",
+          "ballId": "3e2a8e1cdaf4"
+        }
+      ],
+      "finishes": {
+        "3e2a8e1cdaf4": {
+          "title": "Turbo finish!",
+          "score": "Eagle!",
+          "style": "turbo"
+        }
+      },
+      "turnPassed": true
+    }
+  ],
+  "result": {
+    "type": "golf",
+    "course": "Party Gauntlet",
+    "pars": [
+      4,
+      3,
+      4,
+      4,
+      4,
+      5
+    ],
+    "standings": [
+      {
+        "id": "3e2a8e1cdaf4",
+        "name": "Nova",
+        "avatar": {
+          "e": 18,
+          "c": 3,
+          "v3": {
+            "v": 3,
+            "id": "h01",
+            "palette": "lime",
+            "expression": "smile",
+            "eyes": "default",
+            "hat": "none",
+            "glasses": "sunglasses",
+            "accessory": "none",
+            "detail": "signature"
+          }
+        },
+        "scores": [
+          3,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 15,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "c7b0d5b8658b",
+        "name": "Kai",
+        "avatar": {
+          "e": 20,
+          "c": 7,
+          "v3": {
+            "v": 3,
+            "id": "h01",
+            "palette": "lime",
+            "expression": "smile",
+            "eyes": "default",
+            "hat": "none",
+            "glasses": "sunglasses",
+            "accessory": "none",
+            "detail": "signature"
+          }
+        },
+        "scores": [
+          3,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 15,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "982d56bec92b",
+        "name": "SillyTaco",
+        "avatar": {
+          "e": 18,
+          "c": 6
+        },
+        "scores": [
+          5,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 17,
+        "out": false,
+        "played": 6
+      }
+    ],
+    "winnerId": null,
+    "winners": [
+      "3e2a8e1cdaf4",
+      "c7b0d5b8658b"
+    ],
+    "tie": true,
+    "forfeit": false
+  },
+  "recaps": [
+    {
+      "hole": 1,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 3
+      },
+      "observed": [
+        {
+          "hole": 0,
+          "text": "HOLE 1 COMPLETE\nIn the cup!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nIn the cup!\n5\n+1\nNova\nBirdie!\n3\n-1\nKai\nBirdie!\n3\n-1\nNext hole starting...",
+          "at": 146083.69999999553,
+          "elapsed": 0.5245999999940395,
+          "duration": 0.05416666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 0,
+          "text": "HOLE 1 COMPLETE\nBirdie!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nIn the cup!\n5\n+1\nNova\nBirdie!\n3\n-1\nKai\nBirdie!\n3\n-1\nNext hole starting...",
+          "at": 144759.6000000015,
+          "elapsed": 0.7327000000029802,
+          "duration": 0.05416666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    },
+    {
+      "hole": 2,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "982d56bec92b",
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 2
+      },
+      "observed": [
+        {
+          "hole": 1,
+          "text": "HOLE 2 COMPLETE\nBirdie!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nBirdie!\n2\n-1\nNova\nBirdie!\n2\n-1\nKai\nBirdie!\n2\n-1\nNext hole starting...",
+          "at": 234555.8999999985,
+          "elapsed": 1.4507000000029802,
+          "duration": 0.5916666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 1,
+          "text": "HOLE 2 COMPLETE\nBirdie!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nBirdie!\n2\n-1\nNova\nBirdie!\n2\n-1\nKai\nBirdie!\n2\n-1\nNext hole starting...",
+          "at": 232629.6000000015,
+          "elapsed": 1.0165,
+          "duration": 0.5916666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    },
+    {
+      "hole": 3,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "982d56bec92b",
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 2
+      },
+      "observed": [
+        {
+          "hole": 2,
+          "text": "HOLE 3 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n2\n-2\nNova\nEagle!\n2\n-2\nKai\nEagle!\n2\n-2\nNext hole starting...",
+          "at": 312777.6000000015,
+          "elapsed": 1.5604000000059604,
+          "duration": 0.48333333333333334,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 2,
+          "text": "HOLE 3 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n2\n-2\nNova\nEagle!\n2\n-2\nKai\nEagle!\n2\n-2\nNext hole starting...",
+          "at": 311541.5,
+          "elapsed": 1.444,
+          "duration": 0.48333333333333334,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    },
+    {
+      "hole": 4,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "982d56bec92b",
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 3
+      },
+      "observed": [
+        {
+          "hole": 3,
+          "text": "HOLE 4 COMPLETE\nBirdie!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nBirdie!\n3\n-1\nNova\nBirdie!\n3\n-1\nKai\nBirdie!\n3\n-1\nNext hole starting...",
+          "at": 410256.299999997,
+          "elapsed": 1.3595,
+          "duration": 0.8416666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 3,
+          "text": "HOLE 4 COMPLETE\nBirdie!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nBirdie!\n3\n-1\nNova\nBirdie!\n3\n-1\nKai\nBirdie!\n3\n-1\nNext hole starting...",
+          "at": 408775.700000003,
+          "elapsed": 1.419,
+          "duration": 0.8416666666666667,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    },
+    {
+      "hole": 5,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "982d56bec92b",
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 2
+      },
+      "observed": [
+        {
+          "hole": 4,
+          "text": "HOLE 5 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n2\n-2\nNova\nEagle!\n2\n-2\nKai\nEagle!\n2\n-2\nNext hole starting...",
+          "at": 480926,
+          "elapsed": 1.9515,
+          "duration": 1.0333333333333332,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 4,
+          "text": "HOLE 5 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n2\n-2\nNova\nEagle!\n2\n-2\nKai\nEagle!\n2\n-2\nNext hole starting...",
+          "at": 479419.6000000015,
+          "elapsed": 1.9202999999970198,
+          "duration": 1.0333333333333332,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    },
+    {
+      "hole": 6,
+      "data": {
+        "leaderIds": [
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "982d56bec92b",
+          "3e2a8e1cdaf4",
+          "c7b0d5b8658b"
+        ],
+        "bestHoleStrokes": 3
+      },
+      "observed": [
+        {
+          "hole": 5,
+          "text": "HOLE 6 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n3\n-2\nNova\nTurbo finish!\n3\n-2\nKai\nEagle!\n3\n-2\nFinal results next...",
+          "at": 597264.799999997,
+          "elapsed": 3.1125,
+          "duration": 2.2291666666666665,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 360,
+          "height": 345.5
+        },
+        {
+          "hole": 5,
+          "text": "HOLE 6 COMPLETE\nEagle!\n\nTied at the top \u00b7 every stroke counts\n\nSillyTaco\nEagle!\n3\n-2\nNova\nTurbo finish!\n3\n-2\nKai\nEagle!\n3\n-2\nFinal results next...",
+          "at": 595181.200000003,
+          "elapsed": 2.7773000000044705,
+          "duration": 2.2291666666666665,
+          "rendered": true,
+          "toastSuppressed": true,
+          "width": 336,
+          "height": 345.5
+        }
+      ]
+    }
+  ],
+  "earlyRecapChecks": 5,
+  "rollingActorChecks": 41,
+  "nativeTouch": true,
+  "exactActualTrail": true,
+  "errors": []
+}

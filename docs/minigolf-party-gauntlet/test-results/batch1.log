@@ -1,0 +1,157 @@
+PASS  Tic Tac Toe: exactly 2 active players
+PASS  Tic Tac Toe: out-of-turn move ignored
+PASS  Tic Tac Toe: a spectator cannot move
+PASS  Tic Tac Toe: legal move placed and turn passes
+PASS  Tic Tac Toe: occupied cell rejected
+PASS  Tic Tac Toe: out-of-range / malformed cells rejected
+PASS  Tic Tac Toe: game continues without a line
+PASS  Tic Tac Toe: diagonal win detected
+PASS  Tic Tac Toe: winner scores a win and loser rotates out (winner stays)
+PASS  Tic Tac Toe: win line reported
+PASS  Tic Tac Toe: full board with no line is a draw
+PASS  Tic Tac Toe: draw gives nobody a win
+PASS  Tic Tac Toe: who plays X alternates between rematches
+PASS  Tic Tac Toe: first timeout makes a random legal move
+PASS  Tic Tac Toe: repeated timeouts forfeit
+PASS  Tic Tac Toe: leaving forfeits to the opponent
+PASS  Tic Tac Toe: view is well formed
+PASS  Tic Tac Toe: invalid settings fall back
+PASS  RPS: supports 2 to 16 participants
+PASS  RPS: 2 players -> bracket of 2 with 0 byes and no bye-vs-bye
+PASS  RPS: 2 players: bye holders advance automatically
+PASS  RPS: 2 players: tournament finishes with one champion
+PASS  RPS: 2 players: match wins counted
+PASS  RPS: 3 players -> bracket of 4 with 1 byes and no bye-vs-bye
+PASS  RPS: 3 players: bye holders advance automatically
+PASS  RPS: 3 players: tournament finishes with one champion
+PASS  RPS: 3 players: match wins counted
+PASS  RPS: 4 players -> bracket of 4 with 0 byes and no bye-vs-bye
+PASS  RPS: 4 players: bye holders advance automatically
+PASS  RPS: 4 players: tournament finishes with one champion
+PASS  RPS: 4 players: match wins counted
+PASS  RPS: 5 players -> bracket of 8 with 3 byes and no bye-vs-bye
+PASS  RPS: 5 players: bye holders advance automatically
+PASS  RPS: 5 players: tournament finishes with one champion
+PASS  RPS: 5 players: match wins counted
+PASS  RPS: 7 players -> bracket of 8 with 1 byes and no bye-vs-bye
+PASS  RPS: 7 players: bye holders advance automatically
+PASS  RPS: 7 players: tournament finishes with one champion
+PASS  RPS: 7 players: match wins counted
+PASS  RPS: 8 players -> bracket of 8 with 0 byes and no bye-vs-bye
+PASS  RPS: 8 players: bye holders advance automatically
+PASS  RPS: 8 players: tournament finishes with one champion
+PASS  RPS: 8 players: match wins counted
+PASS  RPS: 9 players -> bracket of 16 with 7 byes and no bye-vs-bye
+PASS  RPS: 9 players: bye holders advance automatically
+PASS  RPS: 9 players: tournament finishes with one champion
+PASS  RPS: 9 players: match wins counted
+PASS  RPS: 16 players -> bracket of 16 with 0 byes and no bye-vs-bye
+PASS  RPS: 16 players: bye holders advance automatically
+PASS  RPS: 16 players: tournament finishes with one champion
+PASS  RPS: 16 players: match wins counted
+PASS  RPS: a pick is final once made
+PASS  RPS: opponent cannot see your pick before it resolves
+PASS  RPS: you can see your own pick
+PASS  RPS: other matches / spectators never receive pending picks
+PASS  RPS: invalid move rejected
+PASS  RPS: throw waits for every live match
+PASS  RPS: paper beats rock and the throw is revealed once all picks are in
+PASS  RPS: reveal includes all resolved throws
+PASS  RPS: a tie is replayed and does not count
+PASS  RPS: best of 3 is not over after one win
+PASS  RPS: best of 3 ends at two wins
+PASS  RPS: a missed pick loses that throw
+PASS  RPS: two missed picks forfeit the match
+PASS  RPS: two idle players cannot stall the tournament
+PASS  RPS: leaving mid-match forfeits to the opponent
+PASS  RPS: last player standing wins if the other leaves
+PASS  RPS: the next throw after a tie is broadcast to clients
+PASS  RPS: a match-deciding throw still carries both picks in the reveal
+PASS  RPS: both semifinals decided
+PASS  RPS: a final between two departed players is resolved without throws and crowns nobody
+PASS  RPS: an eliminated player is never crowned champion by default
+PASS  RPS: a bye holder has no match to pick in
+PASS  Dots & Boxes: 3x3 board has 24 edges
+PASS  Dots & Boxes: out-of-turn edge ignored
+PASS  Dots & Boxes: invalid edges rejected
+PASS  Dots & Boxes: a non-scoring edge passes the turn
+PASS  Dots & Boxes: an already-drawn edge is rejected
+PASS  Dots & Boxes: completing a box scores it and grants another turn
+PASS  Dots & Boxes: lobby score tracks boxes
+PASS  Dots & Boxes: one edge can close two boxes (2 points, extra turn)
+PASS  Dots & Boxes: 2 players, 3x3: all 9 boxes are owned at the end
+PASS  Dots & Boxes: 2 players: winner has the most boxes
+PASS  Dots & Boxes: 3 players, 4x4: all 16 boxes are owned at the end
+PASS  Dots & Boxes: 3 players: winner has the most boxes
+PASS  Dots & Boxes: 4 players, 5x5: all 25 boxes are owned at the end
+PASS  Dots & Boxes: 4 players: winner has the most boxes
+PASS  Dots & Boxes: a timeout draws a random legal edge
+PASS  Dots & Boxes: leaving on your turn skips to the next player and play continues
+PASS  Dots & Boxes: game ends when fewer than 2 players remain
+PASS  Dots & Boxes: view is well formed
+PASS  Word Scramble: bundled word pool loaded
+PASS  Word Scramble: letters are an anagram of a medium-length word and not already solved
+PASS  Word Scramble: the answer is not in the view during play
+PASS  Word Scramble: a wrong guess scores nothing and gets a private notice
+PASS  Word Scramble: malformed guesses ignored
+PASS  Word Scramble: first fast solve earns speed + first bonus (112)
+PASS  Word Scramble: later solves score less (75 < 112)
+PASS  Word Scramble: solving twice does not score twice
+PASS  Word Scramble: lobby score mirrors points
+PASS  Word Scramble: round ends when everyone solved; answer then revealed
+PASS  Word Scramble: next round starts with a different word
+PASS  Word Scramble: solves reset each round
+PASS  Word Scramble: round ends at the deadline
+PASS  Word Scramble: game ends after the configured number of words
+PASS  Word Scramble: winner(s) decided by points
+PASS  Word Scramble: easy words are 4-5 letters
+PASS  Word Scramble: medium words are 6-6 letters
+PASS  Word Scramble: hard words are 7-11 letters
+PASS  Word Scramble: (no anagram pair for this word; skipped)
+PASS  Word Scramble: no repeated words within a game
+PASS  Word Scramble: remaining player wins when the other leaves
+PASS  Word Scramble: invalid settings fall back
+PASS  Trivia: question bank loaded (72 questions, 6 categories)
+PASS  Trivia: every question has 4 distinct choices
+PASS  Trivia: no duplicate questions in the bank
+PASS  Trivia: no answer key in the view while the question is open
+PASS  Trivia: raw question data is not serialized
+PASS  Trivia: others see you locked in but not what you picked
+PASS  Trivia: answers are final
+PASS  Trivia: invalid choices rejected
+PASS  Trivia: question ends when everyone answered
+PASS  Trivia: right answer = base + speed (180)
+PASS  Trivia: slower right answer scores less (147 < 180)
+PASS  Trivia: wrong answer scores 0
+PASS  Trivia: the correct choice is revealed only after the question
+PASS  Trivia: next question follows the reveal
+PASS  Trivia: streak survives into the next question
+PASS  Trivia: unanswered question reveals at the deadline
+PASS  Trivia: missing a question resets the streak
+PASS  Trivia: 10 distinct questions are asked, then the game ends
+PASS  Trivia: the player who answered everything right wins
+PASS  Trivia: category setting limits the question pool
+PASS  Trivia: a small category is topped up without repeats
+PASS  Trivia: remaining player wins a forfeit
+PASS  Trivia: question closes if the last unanswered player leaves
+PASS  Tic Tac Toe (live): 2 seats, extra joiner spectates
+PASS  Tic Tac Toe (live): spectator and out-of-turn moves ignored
+PASS  Tic Tac Toe (live): legal move is broadcast; spectator has no seat
+PASS  rps: switching keeps every room member
+PASS  rps: host can start a game with 4 players
+PASS  RPS (live): you see your own pick
+PASS  RPS (live): nobody else receives your pending pick
+PASS  dotsboxes: switching keeps every room member
+PASS  dotsboxes: host can start a game with 4 players
+PASS  Dots & Boxes (live): state delivered
+PASS  wordscramble: switching keeps every room member
+PASS  wordscramble: host can start a game with 4 players
+PASS  Word Scramble (live): letters but no answer are sent
+PASS  Word Scramble (live): wrong guess notice goes only to the guesser
+PASS  trivia: switching keeps every room member
+PASS  trivia: host can start a game with 4 players
+PASS  Trivia (live): answer key is not sent while the question is open
+PASS  Trivia (live): others see you locked in, not your pick
+PASS  Live room flow completed
+
+All passed

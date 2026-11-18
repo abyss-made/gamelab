@@ -1,0 +1,22 @@
+# Validation
+
+All **38 test programs** in `node-server/package.json` have passing latest records, with zero skipped programs, startup errors or failed assertions in those records. [Latest records](test-results/suite.json) · [Initial full run](test-results/initial-suite.json).
+
+The initial full run passed 37/38. The five-browser reliability program failed on game transitions; an unchanged isolated rerun also failed. The second failure captured an unexpected host transfer and the original host’s now-hidden End Game button. These runs used the test’s forced two-second heartbeat, far shorter than production’s 25-second interval plus 20-second timeout. [Initial log](test-results/reliabilityui-initial.log) · [Second attempt](test-results/reliabilityui-second-attempt.log).
+
+The browser test now uses a five-second heartbeat, retains its existing wait deadlines, and explicitly rejects an unintended host transfer during game cycling. Deliberate offline detection still passes within the existing 15-second deadline. The complete program then passed **49 checks, zero failures**, covering five clients, repeated game cycles, all 20 currently visible games, stable listeners/callbacks and zero leftover animation frames in the lobby. Production connection settings and backend code outside Golf are unchanged. [Successful log](test-results/reliabilityui-final.log).
+
+The other 37 programs passed in the complete run. Only the failing program was repeated after its test-environment correction. Final presentation/feedback changes were additionally checked by the focused Golf tests, all-course renderer checks, and a fresh normal browser match. The initial failures are retained rather than presented as a clean first run.
+
+## Final course and browser verification
+
+- Final feature source: `0aabc3279864232d69b082107380fb3c0b7c50fc`. [Source file hashes](feature-source.json).
+- [Focused Golf checks](golfgauntlet-final.log): six checks, including 960 sampled putts across both gate states, safe six-player tees, real open/closed collisions, occupied-gate protection, replay equality and the water-edge rounding regression.
+- The existing Batch 5 program passed 274 reported checks, including playable routes through all 36 holes, 2,520 sampled Golf putts, Pool physics/rules, Property Tycoon, real multiplayer clients and spectator/reconnect behavior. Its browser counterpart passed 136 reported checks. [Rule log](test-results/batch5.log) · [Browser log](test-results/batch5ui.log).
+- [Renderer fixtures](rendering-checks.json): all 36 course meshes, inverse camera mappings, overview framing, recessed cups/water and finite geometry. A dedicated gate fixture checks the initial pose on a mid-shot reconnect, locked replay poses, next-turn reduced-motion poses and aim traces. These are unit fixtures, not gameplay screenshots.
+- [Final real match](full-course-checks.json): two browser clients, all six holes, **35 actual UI putts**, **12 cup completions**, an intentional **+1 slime penalty**, and a normal **15 / 21** result. No stroke-limit pickups or forfeits. All **17 gate shots** delivered matching replay geometry, next-turn gate states and ball frames to both players. The final capture run replayed the initial verified native actions in a new room and checked every outcome.
+- [Real input checks](input-checks.json): 1440×900, 390×844 and 932×430. Actual lobby picker selection, mouse/CDP touch, tap safety, Escape, cancelled touch, second-finger cancellation, held pulls, one authoritative shot per release, matching opponent frames, chat/scorecard toggles and reconnect identity/stroke preservation. Chromium 154; software-rendered cloud browser. These input examples precede the later slime presentation/feedback and test-heartbeat changes.
+- [Gallery checks](gallery-checks.json): **51 PNGs at native dimensions**, all six gallery combinations, valid evidence links, no horizontal overflow at 1440/390, four recordings with correct native dimensions, and actual video playback. [All screenshots](SCREENSHOTS.md) · [Gallery](index.html).
+- [Preservation checks](preservation-checks.json): all five existing courses and the original 18-hole tour retain their definitions; shared physics, other games, security, logging, health monitoring and shutdown code are unchanged.
+
+No browser page errors were recorded in the final course or input runs. No merge, Render operation or deployment was performed.

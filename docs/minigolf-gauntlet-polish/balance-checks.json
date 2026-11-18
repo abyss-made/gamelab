@@ -1,0 +1,2703 @@
+{
+  "description": "Automated rules-level route agents, with optional aim/power perturbation. These are not real-player observations.",
+  "runs": [
+    {
+      "noise": 0,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 310,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1083333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 300,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.033333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 315,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.175
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 60,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1083333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 184.75,
+          "power": 0.55,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8833333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 178.5,
+          "power": 0.4,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8875
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 320,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 355,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 336.75,
+          "power": 0.25,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 105.75,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.31666666666666665
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 15,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 355,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 6.75,
+          "power": 0.55,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 128.75,
+          "power": 0.08,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.325
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 155,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9958333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 35,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4166666666666665
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 175,
+          "power": 0.7,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.4833333333333334
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 8,
+          "power": 0.55,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.9
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 335,
+          "power": 0.7,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 180,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 60,
+          "power": 1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 350,
+          "power": 0.4,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.2791666666666666
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 220,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 290,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 45,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 165,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4791666666666665
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 357,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 204,
+          "power": 0.08,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.25
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              3,
+              2,
+              2,
+              2,
+              2,
+              3
+            ],
+            "total": 14,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              2,
+              2,
+              2,
+              3
+            ],
+            "total": 14,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": null,
+        "winners": [
+          "p0",
+          "p1"
+        ],
+        "tie": true,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 1502118088,
+      "initialSeed": 48
+    },
+    {
+      "noise": 1.5,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1041666666666665
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 49.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.8833333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 319.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.175
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 315,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.175
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 60,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1083333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 176.5,
+          "power": 0.69,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8125
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 206.75,
+          "power": 0.08,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.35833333333333334
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 319.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 354.5,
+          "power": 0.84,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 335.25,
+          "power": 0.24,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 96,
+          "power": 0.14,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.3625
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 344.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 10.5,
+          "power": 0.71,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 352.75,
+          "power": 0.39,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 31.5,
+          "power": 0.4,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.75
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 154.5,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9958333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 30,
+          "power": 0.84,
+          "outcome": "water",
+          "note": "water",
+          "motorHits": 0,
+          "duration": 1.5916666666666666
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 30,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 3.1916666666666664
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 265,
+          "power": 1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.6833333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 199.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.0208333333333335
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 45,
+          "power": 0.16,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.5166666666666666
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 334.25,
+          "power": 0.69,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 180.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 225,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 357,
+          "power": 0.71,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 306.5,
+          "power": 0.84,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 228.75,
+          "power": 0.26,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.375
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 220.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 220.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 139.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 80.5,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 278.75,
+          "power": 0.39,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 337.75,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.3625
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              4,
+              2,
+              2,
+              2,
+              3,
+              3
+            ],
+            "total": 16,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              3,
+              2,
+              2,
+              5,
+              3,
+              3
+            ],
+            "total": 18,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": "p1",
+        "winners": [
+          "p1"
+        ],
+        "tie": false,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 2273118667,
+      "initialSeed": 49
+    },
+    {
+      "noise": 3,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.095833333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 28.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1708333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 184.5,
+          "power": 0.67,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.1708333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 316.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1916666666666664
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 321.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.3541666666666665
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 281.75,
+          "power": 0.06,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.06666666666666667
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 319.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 354.75,
+          "power": 0.87,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 335.5,
+          "power": 0.22,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 119,
+          "power": 0.18,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.35833333333333334
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 13.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 16.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 13.75,
+          "power": 0.54,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 8.5,
+          "power": 0.58,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.6875
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 156.25,
+          "power": 0.88,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.033333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 35.75,
+          "power": 0.72,
+          "outcome": "water",
+          "note": "water",
+          "motorHits": 0,
+          "duration": 1.7916666666666667
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 35,
+          "power": 0.71,
+          "outcome": "water",
+          "note": "water",
+          "motorHits": 0,
+          "duration": 1.8958333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 36,
+          "power": 0.72,
+          "outcome": "water",
+          "note": "water",
+          "motorHits": 0,
+          "duration": 0.8833333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 34.75,
+          "power": 0.69,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.120833333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 281.25,
+          "power": 0.57,
+          "outcome": "water",
+          "note": "water",
+          "motorHits": 0,
+          "duration": 0.525
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 281,
+          "power": 0.55,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.7249999999999999
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 90.25,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": "limit",
+          "motorHits": 0,
+          "duration": 1.8416666666666666
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 2.75,
+          "power": 0.38,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.0791666666666666
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 336.25,
+          "power": 0.7,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 179,
+          "power": 0.98,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 90.75,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 59.75,
+          "power": 1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 310.25,
+          "power": 0.03,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.0875
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 220.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 289.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 125,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 306.5,
+          "power": 0.53,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 75.5,
+          "power": 0.98,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 324.75,
+          "power": 0.39,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.6333333333333333
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              2,
+              5,
+              2,
+              3
+            ],
+            "total": 17,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              3,
+              2,
+              2,
+              8,
+              3,
+              3
+            ],
+            "total": 21,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": "p1",
+        "winners": [
+          "p1"
+        ],
+        "tie": false,
+        "forfeit": false
+      },
+      "limits": 1,
+      "finalRandomState": 1149074630,
+      "initialSeed": 50
+    },
+    {
+      "noise": 1.5,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1041666666666665
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 50.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9208333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 249.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.2125
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 314.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1708333333333334
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 60,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9666666666666666
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 185.75,
+          "power": 0.55,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.0166666666666666
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 190.25,
+          "power": 0.4,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.6125
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 320.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 355,
+          "power": 0.84,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 342,
+          "power": 0.26,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 98,
+          "power": 0.07,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 95.5,
+          "power": 0.04,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.020833333333333332
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 15.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 355,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 115.5,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 11,
+          "power": 0.41,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 118.5,
+          "power": 0.14,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.4875
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 154.75,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.0083333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 29.75,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.3125
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 330.5,
+          "power": 0.54,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.8375
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 285,
+          "power": 0.55,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.7958333333333334
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 5.25,
+          "power": 0.54,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.05
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 357.25,
+          "power": 0.39,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.9291666666666667
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 334.75,
+          "power": 0.69,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 180,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 60.75,
+          "power": 0.99,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 25,
+          "power": 0.69,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.0083333333333333
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 220,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 220.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 140.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 79.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 3.620833333333333
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 357.5,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 333.25,
+          "power": 0.09,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.39166666666666666
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              3,
+              3,
+              2,
+              3
+            ],
+            "total": 16,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              4,
+              3,
+              2,
+              3,
+              2,
+              3
+            ],
+            "total": 17,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": "p1",
+        "winners": [
+          "p1"
+        ],
+        "tie": false,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 3632461085,
+      "initialSeed": 51
+    },
+    {
+      "noise": 3,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.095833333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 29.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1625
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 182.75,
+          "power": 0.7,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.1333333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 315.75,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.175
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 326.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.0208333333333335
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 178.25,
+          "power": 0.84,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.3875
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 319.75,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 356.25,
+          "power": 0.87,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 35.5,
+          "power": 0.68,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 112.5,
+          "power": 0.27,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 340.75,
+          "power": 0.27,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.45416666666666666
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 344.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 8.75,
+          "power": 0.68,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 204,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 155.25,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 116.25,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 328.75,
+          "power": 0.17,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 124.75,
+          "power": 0.04,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.2125
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 154,
+          "power": 0.87,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.0208333333333335
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 35.5,
+          "power": 0.98,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.55
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 284.5,
+          "power": 0.54,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.775
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 205.5,
+          "power": 0.72,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.4291666666666667
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 356.5,
+          "power": 0.38,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 335.75,
+          "power": 0.67,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 180.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 299,
+          "power": 0.72,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 350,
+          "power": 0.38,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.3708333333333333
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 219.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 295.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 2,
+          "duration": 2.4291666666666667
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 41.25,
+          "power": 0.97,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 313.25,
+          "power": 0.72,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 288.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 2,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 64.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 74.75,
+          "power": 0.04,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.30416666666666664
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              3,
+              3,
+              3,
+              2,
+              2,
+              4
+            ],
+            "total": 17,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              4,
+              3,
+              2,
+              3
+            ],
+            "total": 17,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": null,
+        "winners": [
+          "p0",
+          "p1"
+        ],
+        "tie": true,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 3118943720,
+      "initialSeed": 52
+    },
+    {
+      "noise": 1.5,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.75,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.095833333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 49.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9749999999999999
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 335.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1333333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 314.5,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.154166666666667
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 330,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.183333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 177.25,
+          "power": 0.39,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.3958333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 172.25,
+          "power": 0.24,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8083333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 252.25,
+          "power": 0.03,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.24166666666666667
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 320.5,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 4.5,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 359.5,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 343.5,
+          "power": 0.24,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 218.25,
+          "power": 0.09,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.35833333333333334
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 345.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 9.75,
+          "power": 0.71,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 340,
+          "power": 0.84,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 342.5,
+          "power": 0.4,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 9.25,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.3208333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 154.25,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.0083333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 30.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.470833333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 284.25,
+          "power": 0.54,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.8
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 194.75,
+          "power": 0.99,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.8
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 355.5,
+          "power": 0.39,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8375
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 334.5,
+          "power": 0.71,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 179.25,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 34.75,
+          "power": 1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 60,
+          "power": 0.86,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.7833333333333332
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 219.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 295,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 2,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 39.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 130,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 303.75,
+          "power": 0.56,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 311.75,
+          "power": 0.39,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 308.5,
+          "power": 0.04,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.05
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              2,
+              3,
+              2,
+              3
+            ],
+            "total": 15,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              5,
+              3,
+              3,
+              2,
+              2,
+              4
+            ],
+            "total": 19,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": "p1",
+        "winners": [
+          "p1"
+        ],
+        "tie": false,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 4103878265,
+      "initialSeed": 53
+    },
+    {
+      "noise": 3,
+      "actions": [
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 309.25,
+          "power": 0.98,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.075
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 31,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1458333333333335
+        },
+        {
+          "hole": 1,
+          "playerSlot": 0,
+          "angleDegrees": 182.25,
+          "power": 0.73,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.1
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 315.25,
+          "power": 0.98,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.154166666666667
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 326.5,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.2583333333333333
+        },
+        {
+          "hole": 1,
+          "playerSlot": 1,
+          "angleDegrees": 190,
+          "power": 0.16,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.6041666666666666
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 319.5,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 354.5,
+          "power": 0.86,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 1,
+          "angleDegrees": 341.5,
+          "power": 0.23,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 2,
+          "playerSlot": 0,
+          "angleDegrees": 112,
+          "power": 0.15,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.4083333333333333
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 16,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 355.25,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 164.5,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 294.5,
+          "power": 0.97,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 1,
+          "angleDegrees": 271,
+          "power": 0.25,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 3,
+          "playerSlot": 0,
+          "angleDegrees": 116.75,
+          "power": 0.14,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.5333333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 154.75,
+          "power": 0.83,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.9666666666666666
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 34.75,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.3708333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 291,
+          "power": 0.55,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 1.8166666666666667
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 275,
+          "power": 0.85,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.1041666666666665
+        },
+        {
+          "hole": 4,
+          "playerSlot": 1,
+          "angleDegrees": 1.25,
+          "power": 0.38,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.8083333333333333
+        },
+        {
+          "hole": 4,
+          "playerSlot": 0,
+          "angleDegrees": 162.5,
+          "power": 0.1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.3833333333333333
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 335.5,
+          "power": 0.68,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 180,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 1,
+          "angleDegrees": 59.75,
+          "power": 1,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 5,
+          "playerSlot": 0,
+          "angleDegrees": 351,
+          "power": 0.41,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.9458333333333333
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 220.25,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 291,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 1,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 55,
+          "power": 1,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 45,
+          "power": 0.99,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 78.75,
+          "power": 0.82,
+          "outcome": "rest",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 0,
+          "angleDegrees": 25,
+          "power": 0.27,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 2.4
+        },
+        {
+          "hole": 6,
+          "playerSlot": 1,
+          "angleDegrees": 298.25,
+          "power": 0.17,
+          "outcome": "cup",
+          "note": null,
+          "motorHits": 0,
+          "duration": 0.37083333333333335
+        }
+      ],
+      "result": {
+        "type": "golf",
+        "course": "Party Gauntlet",
+        "pars": [
+          4,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "standings": [
+          {
+            "id": "p0",
+            "name": "Alex",
+            "scores": [
+              3,
+              2,
+              2,
+              3,
+              2,
+              3
+            ],
+            "total": 15,
+            "out": false,
+            "played": 6
+          },
+          {
+            "id": "p1",
+            "name": "Nova",
+            "scores": [
+              3,
+              2,
+              4,
+              3,
+              2,
+              4
+            ],
+            "total": 18,
+            "out": false,
+            "played": 6
+          }
+        ],
+        "winnerId": "p0",
+        "winners": [
+          "p0"
+        ],
+        "tie": false,
+        "forfeit": false
+      },
+      "limits": 0,
+      "finalRandomState": 3523991064,
+      "initialSeed": 54
+    }
+  ]
+}

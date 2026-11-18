@@ -1,0 +1,1612 @@
+{
+  "sourceCommit": "28225c3994e16e7e98934e21573b835d6a6c6e78",
+  "mode": "normal real-browser match, native controls, previously planned legal inputs",
+  "views": [],
+  "shots": [
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angle": 310,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.429,
+          "x": 244,
+          "y": 161,
+          "speed": 318,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.588,
+          "x": 283.8,
+          "y": 199,
+          "speed": 230,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.813,
+          "x": 331.9,
+          "y": 161,
+          "speed": 154,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 1.175,
+          "x": 390.2,
+          "y": 199,
+          "speed": 85,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angle": 300,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 2,
+      "impacts": [
+        {
+          "t": 0.017,
+          "x": 454,
+          "y": 161,
+          "speed": 480,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.117,
+          "x": 480.8,
+          "y": 199,
+          "speed": 366,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.354,
+          "x": 536.3,
+          "y": 133.8,
+          "speed": 251,
+          "type": "bumper",
+          "obstacleId": 1,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.846,
+          "x": 423.5,
+          "y": 66,
+          "speed": 109,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 1.579,
+          "x": 336.6,
+          "y": 109,
+          "speed": 31,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angle": 315,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.417,
+          "x": 237.7,
+          "y": 161,
+          "speed": 296,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.583,
+          "x": 284.1,
+          "y": 199,
+          "speed": 213,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.825,
+          "x": 340.9,
+          "y": 161,
+          "speed": 141,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 1.225,
+          "x": 410.1,
+          "y": 199,
+          "speed": 76,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angle": 60,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 2,
+      "impacts": [
+        {
+          "t": 0.063,
+          "x": 490.6,
+          "y": 199,
+          "speed": 465,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.246,
+          "x": 536.3,
+          "y": 133.5,
+          "speed": 281,
+          "type": "bumper",
+          "obstacleId": 1,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.546,
+          "x": 450.2,
+          "y": 66,
+          "speed": 200,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.846,
+          "x": 383.2,
+          "y": 109,
+          "speed": 125,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 1.413,
+          "x": 301.8,
+          "y": 66,
+          "speed": 51,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angle": 184.75,
+      "power": 0.55,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 3,
+      "impacts": []
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angle": 178.5,
+      "power": 0.4,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 3,
+      "impacts": []
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angle": 320,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.446,
+          "x": 259,
+          "y": 66,
+          "speed": 263,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angle": 355,
+      "power": 0.85,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": []
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angle": 336.75,
+      "power": 0.25,
+      "touch": true,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angle": 105.75,
+      "power": 0.15,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angle": 15,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.342,
+          "x": 275.1,
+          "y": 264,
+          "speed": 106,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 1.792,
+          "x": 634,
+          "y": 199.3,
+          "speed": 99,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angle": 355,
+      "power": 0.85,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.567,
+          "x": 328.9,
+          "y": 186,
+          "speed": 331,
+          "type": "motor",
+          "obstacleId": "switchyard",
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.696,
+          "x": 281,
+          "y": 168.9,
+          "speed": 263,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 1.05,
+          "x": 345.5,
+          "y": 135.6,
+          "speed": 102,
+          "type": "bumper",
+          "obstacleId": 0,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angle": 6.75,
+      "power": 0.55,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angle": 128.75,
+      "power": 0.08,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angle": 331.25,
+      "power": 0.55,
+      "touch": false,
+      "outcome": "water",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angle": 155,
+      "power": 0.85,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 3,
+      "impacts": [
+        {
+          "t": 0.067,
+          "x": 66,
+          "y": 307.4,
+          "speed": 419,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.462,
+          "x": 183.2,
+          "y": 374,
+          "speed": 142,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angle": 35,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.217,
+          "x": 202.6,
+          "y": 374,
+          "speed": 277,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.642,
+          "x": 352.5,
+          "y": 291.8,
+          "speed": 260,
+          "type": "ball",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.738,
+          "x": 380.7,
+          "y": 295.8,
+          "speed": 183,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angle": 175,
+      "power": 0.7,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 4,
+      "impacts": [
+        {
+          "t": 0.058,
+          "x": 346,
+          "y": 101.9,
+          "speed": 391,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angle": 8,
+      "power": 0.55,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angle": 335,
+      "power": 0.7,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 1.417,
+          "x": 396.6,
+          "y": 151,
+          "speed": 49,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angle": 180,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.054,
+          "x": 66,
+          "y": 284,
+          "speed": 540,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angle": 60,
+      "power": 1,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": [
+        {
+          "t": 0.2,
+          "x": 523.7,
+          "y": 374,
+          "speed": 423,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.758,
+          "x": 634,
+          "y": 216.4,
+          "speed": 156,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angle": 350,
+      "power": 0.4,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 2,
+      "impacts": []
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angle": 220,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.067,
+          "x": 66,
+          "y": 280.5,
+          "speed": 410,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        },
+        {
+          "t": 0.908,
+          "x": 275.8,
+          "y": 66,
+          "speed": 176,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angle": 220,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 1,
+      "impacts": [
+        {
+          "t": 0.108,
+          "x": 66,
+          "y": 282.3,
+          "speed": 399,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 1.004,
+          "x": 278,
+          "y": 66,
+          "speed": 160,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angle": 145,
+      "power": 0.85,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 2,
+      "impacts": [
+        {
+          "t": 0.117,
+          "x": 312.4,
+          "y": 171.3,
+          "speed": 328,
+          "type": "motor",
+          "obstacleId": "finale",
+          "ballId": "d946f7928402"
+        },
+        {
+          "t": 0.663,
+          "x": 431.1,
+          "y": 322.1,
+          "speed": 185,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "d946f7928402"
+        }
+      ]
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angle": 80,
+      "power": 1,
+      "touch": false,
+      "outcome": "rest",
+      "strokes": 2,
+      "impacts": [
+        {
+          "t": 0.467,
+          "x": 419.6,
+          "y": 374,
+          "speed": 397,
+          "type": "wall",
+          "obstacleId": null,
+          "ballId": "79b5ee51518d"
+        }
+      ]
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angle": 279,
+      "power": 0.4,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 3,
+      "impacts": []
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angle": 358.25,
+      "power": 0.15,
+      "touch": false,
+      "outcome": "cup",
+      "strokes": 3,
+      "impacts": []
+    }
+  ],
+  "result": {
+    "type": "golf",
+    "course": "Party Gauntlet",
+    "pars": [
+      4,
+      3,
+      4,
+      4,
+      4,
+      5
+    ],
+    "standings": [
+      {
+        "id": "d946f7928402",
+        "name": "SpicyComet",
+        "avatar": {
+          "e": 23,
+          "c": 7
+        },
+        "scores": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          3
+        ],
+        "total": 14,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "79b5ee51518d",
+        "name": "Nova",
+        "avatar": {
+          "e": 16,
+          "c": 1,
+          "v3": {
+            "v": 3,
+            "id": "h01",
+            "palette": "lime",
+            "expression": "smile",
+            "eyes": "default",
+            "hat": "none",
+            "glasses": "sunglasses",
+            "accessory": "none",
+            "detail": "signature"
+          }
+        },
+        "scores": [
+          3,
+          2,
+          2,
+          4,
+          2,
+          3
+        ],
+        "total": 16,
+        "out": false,
+        "played": 6
+      }
+    ],
+    "winnerId": "d946f7928402",
+    "winners": [
+      "d946f7928402"
+    ],
+    "tie": false,
+    "forfeit": false
+  },
+  "slimePenaltyVerified": true,
+  "gateChecks": [
+    {
+      "shot": 11,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 12,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 13,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 14,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 24,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 25,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 26,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 27,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 28,
+      "sameReplayAndNextState": true
+    },
+    {
+      "shot": 29,
+      "sameReplayAndNextState": true
+    }
+  ],
+  "motorChecks": [
+    {
+      "shot": 7,
+      "motion": {
+        "start": 0,
+        "runFor": 2.4,
+        "end": 2.4
+      },
+      "probe": {
+        "shot": 7,
+        "elapsed": 4.419099999999627,
+        "serverElapsed": 0.001,
+        "motorTime": 2.4,
+        "parkedTime": 2.4,
+        "rotors": [
+          {
+            "id": "carousel",
+            "actual": -2.97,
+            "expected": -2.97
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          5.551115123125783e-17,
+          0.5311861979208834,
+          0,
+          0.40255550960696007,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186459,
+          0,
+          -361.0527701490113,
+          384.97823780481207,
+          280.8085185583768,
+          1
+        ],
+        "drawCalls": 184
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 8,
+      "motion": {
+        "start": 2.4,
+        "runFor": 2.4,
+        "end": 4.8
+      },
+      "probe": {
+        "shot": 8,
+        "elapsed": 4.987599999999627,
+        "serverElapsed": 0,
+        "motorTime": 4.8,
+        "parkedTime": 4.8,
+        "rotors": [
+          {
+            "id": "carousel",
+            "actual": -5.49,
+            "expected": -5.49
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          48.496244135400275,
+          384.97823780481207,
+          287.4337139485458,
+          1
+        ],
+        "drawCalls": 137
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 9,
+      "motion": {
+        "start": 4.8,
+        "runFor": 2.4,
+        "end": 7.199999999999999
+      },
+      "probe": {
+        "shot": 9,
+        "elapsed": 1.6468999999994411,
+        "serverElapsed": 0,
+        "motorTime": 6.798598059148908,
+        "parkedTime": 7.199999999999999,
+        "rotors": [
+          {
+            "id": "carousel",
+            "actual": -7.588527962106354,
+            "expected": -7.588527962106354
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          67.28108795659352,
+          384.97823780481207,
+          279.3824131916016,
+          1
+        ],
+        "drawCalls": 153
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 10,
+      "motion": {
+        "start": 7.199999999999999,
+        "runFor": 0.31666666666666665,
+        "end": 7.235047468467563
+      },
+      "probe": {
+        "shot": 10,
+        "elapsed": 1.896,
+        "serverElapsed": 0,
+        "motorTime": 7.235047468467563,
+        "parkedTime": 7.235047468467563,
+        "rotors": [
+          {
+            "id": "carousel",
+            "actual": -8.046799841890941,
+            "expected": -8.046799841890941
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          63.94722985098869,
+          384.97823780481207,
+          280.8085185583768,
+          1
+        ],
+        "drawCalls": 170
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 11,
+      "motion": {
+        "start": 0,
+        "runFor": 2.4,
+        "end": 2.4
+      },
+      "probe": {
+        "shot": 11,
+        "elapsed": 2.9264000000003727,
+        "serverElapsed": 0,
+        "motorTime": 2.4,
+        "parkedTime": 2.4,
+        "rotors": [
+          {
+            "id": "switchyard",
+            "actual": 1.9600000000000002,
+            "expected": 1.9600000000000002
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -377.0813638603278,
+          384.97823780481207,
+          266.5817897289795,
+          1
+        ],
+        "drawCalls": 181
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 12,
+      "motion": {
+        "start": 2.4,
+        "runFor": 2.4,
+        "end": 4.8
+      },
+      "probe": {
+        "shot": 12,
+        "elapsed": 2.2662999999998137,
+        "serverElapsed": 0,
+        "motorTime": 4.7972865651902765,
+        "parkedTime": 4.8,
+        "rotors": [
+          {
+            "id": "switchyard",
+            "actual": 4.117557908671249,
+            "expected": 4.117557908671249
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          0,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -129.36730759125055,
+          384.97823780481207,
+          255.85422991791356,
+          1
+        ],
+        "drawCalls": 175
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 13,
+      "motion": {
+        "start": 4.8,
+        "runFor": 2.4,
+        "end": 7.199999999999999
+      },
+      "probe": {
+        "shot": 13,
+        "elapsed": 1.5515,
+        "serverElapsed": 0,
+        "motorTime": 6.65544945692305,
+        "parkedTime": 7.199999999999999,
+        "rotors": [
+          {
+            "id": "switchyard",
+            "actual": 5.789904511230745,
+            "expected": 5.789904511230745
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          12.019004776030641,
+          384.97823780481207,
+          274.55126369578005,
+          1
+        ],
+        "drawCalls": 168
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 14,
+      "motion": {
+        "start": 7.199999999999999,
+        "runFor": 0.325,
+        "end": 7.237818347743508
+      },
+      "probe": {
+        "shot": 14,
+        "elapsed": 2.721199999999255,
+        "serverElapsed": 0,
+        "motorTime": 7.237818347743508,
+        "parkedTime": 7.237818347743508,
+        "rotors": [
+          {
+            "id": "switchyard",
+            "actual": 6.314036512969157,
+            "expected": 6.314036512969157
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          63.94722985098869,
+          384.97823780481207,
+          280.8085185583768,
+          1
+        ],
+        "drawCalls": 154
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 20,
+      "motion": {
+        "start": 0,
+        "runFor": 2.4,
+        "end": 2.4
+      },
+      "probe": {
+        "shot": 20,
+        "elapsed": 0.08440000000037252,
+        "serverElapsed": 0,
+        "motorTime": 0.0006850986455545494,
+        "parkedTime": 2.4,
+        "rotors": [
+          {
+            "id": "bridge",
+            "actual": -1.100890628239221,
+            "expected": -1.100890628239221
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -356.2514099063449,
+          384.97823780481207,
+          338.85120477636747,
+          1
+        ],
+        "drawCalls": 180
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 21,
+      "motion": {
+        "start": 2.4,
+        "runFor": 2.4,
+        "end": 4.8
+      },
+      "probe": {
+        "shot": 21,
+        "elapsed": 1.3922000000001862,
+        "serverElapsed": 0,
+        "motorTime": 3.976391584710115,
+        "parkedTime": 4.8,
+        "rotors": [
+          {
+            "id": "bridge",
+            "actual": -6.269309060123149,
+            "expected": -6.269309060123149
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          0,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -193.4125726897406,
+          384.97823780481207,
+          317.4066513215364,
+          1
+        ],
+        "drawCalls": 173
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 22,
+      "motion": {
+        "start": 4.8,
+        "runFor": 2.4,
+        "end": 7.199999999999999
+      },
+      "probe": {
+        "shot": 22,
+        "elapsed": 4.373,
+        "serverElapsed": 0,
+        "motorTime": 7.199999999999999,
+        "parkedTime": 7.199999999999999,
+        "rotors": [
+          {
+            "id": "bridge",
+            "actual": -10.459999999999999,
+            "expected": -10.459999999999999
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -59.78477707780809,
+          384.97823780481207,
+          212.57811842836747,
+          1
+        ],
+        "drawCalls": 168
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 23,
+      "motion": {
+        "start": 7.199999999999999,
+        "runFor": 1.2791666666666666,
+        "end": 8.557767771284261
+      },
+      "probe": {
+        "shot": 23,
+        "elapsed": 0.34629999999981376,
+        "serverElapsed": 0,
+        "motorTime": 7.245527945235548,
+        "parkedTime": 8.557767771284261,
+        "rotors": [
+          {
+            "id": "bridge",
+            "actual": -10.519186328806212,
+            "expected": -10.519186328806212
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -38.494066839889285,
+          384.97823780481207,
+          208.82974441395888,
+          1
+        ],
+        "drawCalls": 144
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 24,
+      "motion": {
+        "start": 0,
+        "runFor": 2.4,
+        "end": 2.4
+      },
+      "probe": {
+        "shot": 24,
+        "elapsed": 4.8061000000005585,
+        "serverElapsed": 0,
+        "motorTime": 2.4,
+        "parkedTime": 2.4,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 1.9400000000000002,
+            "expected": 1.9400000000000002
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -365.6641167293909,
+          384.97823780481207,
+          358.7634826872929,
+          1
+        ],
+        "drawCalls": 167
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 25,
+      "motion": {
+        "start": 2.4,
+        "runFor": 2.4,
+        "end": 4.8
+      },
+      "probe": {
+        "shot": 25,
+        "elapsed": 0.2937999999998137,
+        "serverElapsed": 0,
+        "motorTime": 2.428124553998274,
+        "parkedTime": 4.8,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 1.9709370093981013,
+            "expected": 1.9709370093981013
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          5.551115123125783e-17,
+          0.5311861979208834,
+          0,
+          0.40255550960696007,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186459,
+          0,
+          -362.748645199869,
+          384.97823780481207,
+          335.2898751469002,
+          1
+        ],
+        "drawCalls": 170
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 26,
+      "motion": {
+        "start": 4.8,
+        "runFor": 2.4,
+        "end": 7.199999999999999
+      },
+      "probe": {
+        "shot": 26,
+        "elapsed": 4.961400000000372,
+        "serverElapsed": 0,
+        "motorTime": 7.199999999999999,
+        "parkedTime": 7.199999999999999,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 7.22,
+            "expected": 7.22
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          -91.52926004087394,
+          384.97823780481207,
+          203.4934949331592,
+          1
+        ],
+        "drawCalls": 146
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 27,
+      "motion": {
+        "start": 7.199999999999999,
+        "runFor": 2.4,
+        "end": 9.6
+      },
+      "probe": {
+        "shot": 27,
+        "elapsed": 2.6839000000003725,
+        "serverElapsed": 0,
+        "motorTime": 9.6,
+        "parkedTime": 9.6,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 9.860000000000001,
+            "expected": 9.860000000000001
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          1.1912352000489932,
+          384.97823780481207,
+          194.32178728250287,
+          1
+        ],
+        "drawCalls": 131
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 28,
+      "motion": {
+        "start": 9.6,
+        "runFor": 2.4,
+        "end": 12
+      },
+      "probe": {
+        "shot": 28,
+        "elapsed": 0.31559999999962746,
+        "serverElapsed": 0,
+        "motorTime": 9.634702528480505,
+        "parkedTime": 12,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 9.898172781328556,
+            "expected": 9.898172781328556
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          53.703951708603455,
+          384.97823780481207,
+          235.00052423014944,
+          1
+        ],
+        "drawCalls": 129
+      },
+      "sameForOpponent": true
+    },
+    {
+      "shot": 29,
+      "motion": {
+        "start": 12,
+        "runFor": 0.42083333333333334,
+        "end": 12.080116395800367
+      },
+      "probe": {
+        "shot": 29,
+        "elapsed": 0.2838999999994412,
+        "serverElapsed": 0,
+        "motorTime": 12.025426043123733,
+        "parkedTime": 12.080116395800367,
+        "rotors": [
+          {
+            "id": "finale",
+            "actual": 12.527968647436108,
+            "expected": 12.527968647436108
+          }
+        ],
+        "aiming": false,
+        "camera": [
+          0.8472551110134161,
+          2.7755575615628914e-17,
+          0.5311861979208834,
+          0,
+          0.4025555096069602,
+          0.6524374681640519,
+          -0.6420859847565297,
+          0,
+          -0.3465657780951901,
+          0.757842562895277,
+          0.5527809795186458,
+          0,
+          76.22958216786216,
+          384.97823780481207,
+          170.4810075562035,
+          1
+        ],
+        "drawCalls": 90
+      },
+      "sameForOpponent": true
+    }
+  ],
+  "nativeTouchOnMotorHole": true,
+  "reconnect": {
+    "identityPreserved": true,
+    "duringMotion": false,
+    "probe": {
+      "shot": null,
+      "elapsed": 0,
+      "serverElapsed": 0,
+      "motorTime": 2.4,
+      "parkedTime": 2.4,
+      "rotors": [
+        {
+          "id": "carousel",
+          "actual": -2.97,
+          "expected": -2.97
+        }
+      ],
+      "aiming": false,
+      "camera": [
+        0.8472551110134161,
+        2.7755575615628914e-17,
+        0.5311861979208834,
+        0,
+        0.4025555096069602,
+        0.6524374681640519,
+        -0.6420859847565297,
+        0,
+        -0.3465657780951901,
+        0.757842562895277,
+        0.5527809795186458,
+        0,
+        -374.59529092970445,
+        414.5919484051822,
+        302.4091738320981,
+        1
+      ],
+      "drawCalls": 107
+    }
+  },
+  "impactCaptured": true,
+  "errors": []
+}

@@ -1,0 +1,8 @@
+{
+  "sourceCommit": "be8de37ecb1ffa55aea52e7e437dc83e74336cad",
+  "program": "batch5ui",
+  "exitCode": 0,
+  "passedChecks": 140,
+  "failedChecks": 0,
+  "scope": "Focused Pool/Golf/Tycoon browser regression after the final toast/recap CSS correction."
+}

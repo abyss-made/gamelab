@@ -353,7 +353,7 @@ const toward = (x1, y1, x2, y2) => Math.atan2(y2 - y1, x2 - x1);
 // ---------------- Mini Golf ----------------
 const GR = golf.rules;
 function bfsPath(hole, maxDepth = 7) {
-  let frontier = [{ x: hole.tee[0], y: hole.tee[1], path: [] }];
+  let frontier = [{ x: hole.tee[0], y: hole.tee[1], path: [],motorTime:hole.motorTime||0 }];
   const seen = new Set();
   for (let d = 1; d <= maxDepth; d++) {
     const next = [];
@@ -361,13 +361,13 @@ function bfsPath(hole, maxDepth = 7) {
       for (let a = 0; a < 48; a++) {
         for (const pw of [0.2, 0.4, 0.6, 0.8, 1]) {
           const ang = (a * Math.PI) / 24 + (a % 2 ? 0.02 : 0);
-          const r = GR.simulatePutt(hole, s.x, s.y, ang, pw);
+          const r = GR.simulatePutt(hole, s.x, s.y, ang, pw,[],[],s.motorTime);
           if (r.outcome === 'cup') return s.path.concat([{ angle: ang, power: pw }]);
           if (r.outcome !== 'rest') continue;
-          const k = Math.round(r.x / 30) + ',' + Math.round(r.y / 30);
+          const k = Math.round(r.x / 30) + ',' + Math.round(r.y / 30)+(hole.motors?.length?','+d:'');
           if (seen.has(k)) continue;
           seen.add(k);
-          next.push({ x: r.x, y: r.y, path: s.path.concat([{ angle: ang, power: pw }]) });
+          next.push({ x: r.x, y: r.y, path: s.path.concat([{ angle: ang, power: pw }]),motorTime:r.anim.motion?.end||0 });
         }
       }
     }
@@ -378,7 +378,7 @@ function bfsPath(hole, maxDepth = 7) {
 
 (function golfPhysics() {
   const all = COURSES.COURSES.flatMap((c) => c.holes.map((h) => ({ c, h })));
-  ok(COURSES.COURSES.length === 5 && all.length === 30 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: five courses of six holes, original 18-hole tour retained');
+  ok(COURSES.COURSES.length === 6 && all.length === 36 && COURSES.BY_ID.tour.holes.length === 18, 'Golf: six courses of six holes, original 18-hole tour retained');
   ok(new Set(all.map((x) => x.h.name)).size === all.length, 'Golf: every hole has its own name (no copies)');
   ok(all.every(({ h }) => GR.onFairway(h, h.tee[0], h.tee[1]) && GR.onFairway(h, h.cup[0], h.cup[1])), 'Golf: every tee and cup is on the fairway, clear of walls and bumpers');
   ok(all.every(({ h }) => !(h.water || []).some((z) => h.tee[0] >= z.x && h.tee[0] <= z.x + z.w && h.tee[1] >= z.y && h.tee[1] <= z.y + z.h) && !(h.water || []).some((z) => h.cup[0] >= z.x && h.cup[0] <= z.x + z.w && h.cup[1] >= z.y && h.cup[1] <= z.y + z.h)), 'Golf: no tee or cup sits in water');
@@ -395,12 +395,12 @@ function bfsPath(hole, maxDepth = 7) {
     else {
       lens.push(path.length);
       // replay the path through the real simulation to prove it
-      let x = h.tee[0], y = h.tee[1], res = null;
-      for (const s of path) { res = GR.simulatePutt(h, x, y, s.angle, s.power); x = res.x; y = res.y; }
+      let x = h.tee[0], y = h.tee[1], res = null,motorTime=0;
+      for (const s of path) { res = GR.simulatePutt(h, x, y, s.angle, s.power,[],[],motorTime); x = res.x; y = res.y;motorTime=res.anim.motion?.end||0; }
       if (!res || res.outcome !== 'cup') unsolved.push('replay:' + h.name);
     }
   }
-  ok(unsolved.length === 0, `Golf: all 30 holes can be completed (found paths of ${Math.min(...lens)}-${Math.max(...lens)} strokes, replayed through the real physics)${unsolved.length ? ' UNSOLVED: ' + unsolved.join(', ') : ''}`);
+  ok(unsolved.length === 0, `Golf: all 36 holes can be completed (found paths of ${Math.min(...lens)}-${Math.max(...lens)} strokes, replayed through the real physics)${unsolved.length ? ' UNSOLVED: ' + unsolved.join(', ') : ''}`);
 
   // determinism and fuzz: the ball never ends up outside the course or inside an obstacle
   const h = COURSES.COURSES[1].holes[3];

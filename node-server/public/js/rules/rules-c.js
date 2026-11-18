@@ -157,14 +157,14 @@ Object.assign(window.GameRules, {
     players: "2–6 players; extras spectate.",
     flow: [
       "Everyone plays the same holes in order. Each hole shows its par.",
-      "One player putts at a time. The player farthest from the cup goes next; on the tee the honour rotates each hole.",
+      "One player putts at a time. Party Gauntlet rotates turns after every putt, skipping finished players. Other courses play the farthest ball next. The first player rotates each hole.",
       "Optionally choose a free spot in the marked tee square before your first stroke. Aim, set power and putt; all moving ball paths replay identically for everyone.",
       "A hole ends for you when you sink the ball or reach the stroke limit; the hole ends when all players are done.",
       "A scorecard is shown for a few seconds between holes, then the next hole starts automatically.",
     ],
     controls: [
-      "Mouse: drag back from your ball and release to putt. Drag elsewhere to aim without shooting, or adjust Aim and Power and press Putt.",
-      "Touch: drag back from your ball; the distance controls power. Release to putt. A tap, cancelled gesture or second finger never shoots. Sliders and Putt are also available.",
+      "Mouse: click the course to aim without shooting. Drag back from your ball and release to putt, or adjust Aim and Power and press Putt.",
+      "Touch: tap the course to aim. Drag back from your ball; the distance controls power. Release to putt. A tap, cancelled gesture or second finger never shoots. Sliders and Putt are also available.",
       "Keyboard: arrows adjust aim and power (Shift for bigger steps), Enter putts, Escape cancels a held shot.",
     ],
     scoring: [
@@ -173,13 +173,16 @@ Object.assign(window.GameRules, {
       "The winner earns 1 point on the lobby leaderboard; tied leaders each earn 1.",
     ],
     special: [
-      "Balls never collide with each other.",
+      "On-course balls collide. Untouched tee balls are protected. Knocking an opponent into water cannot charge them a penalty; knocking them into the cup finishes their hole.",
       "Water: +1 penalty stroke and the ball returns to where you hit it from.",
       "Sand slows the ball; bumpers bounce it. Harbor slope chevrons show the downhill direction. A stationary on-course ball may be moved by a collision or slope.",
       "The cup only captures a ball that is slow enough; a fast ball rolls over it.",
+      "Party Gauntlet: lime turbo tiles launch a moving ball along their arrows, once per tile per putt. They never slow a faster ball. Sweepers power up during putts for up to 2.4 seconds and then park. Raised gates are open and switch after each putt.",
+      "Your last-shot trail shows your actual previous path on this hole, not a predicted shot. Finish badges celebrate real shots and do not change stroke scoring.",
+      "Open Scores to revisit the last completed hole's scores and finish labels while the next hole continues. Back to course returns to aiming. Controls unlock once the course is visible; a graphics interruption switches to the simpler view without leaving your room.",
     ],
     timer: "Turn Timer: 20, 30, 45 (default) or 60 seconds per putt. On timeout a putt is aimed at the cup for you; two timeouts in a row removes you from the game.",
-    ending: "After the last hole, the lowest total wins; equal totals tie. Courses: Meadow, Canyon or Skyline (6 holes) or Playgrid Open (18). Stroke limit per hole: 6, 8 (default) or 10.",
+    ending: "After the last hole, the lowest total wins; equal totals tie. Coastal Club, Party Gauntlet, Meadow, Canyon, Skyline and Harbor Links have 6 holes; Playgrid Open has 18. Stroke limit per hole: 6, 8 (default) or 10.",
   },
 
   tycoon: {

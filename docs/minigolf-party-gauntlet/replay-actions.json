@@ -1,0 +1,251 @@
+{
+  "sourceFeatureCommit": "f5d7bcbd99495d669917fc534e91108cce066cb7",
+  "description": "Native UI actions from the initial completed two-player match. Used only to replay real controls in a fresh game; never modifies server state.",
+  "actions": [
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 270.0,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 274.25,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 270.0,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 323.75,
+      "power": 0.9,
+      "outcome": "rest"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 315.0,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 323.75,
+      "power": 0.9,
+      "outcome": "rest"
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 315.0,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 1.75,
+      "power": 0.3,
+      "outcome": "rest"
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 0.0,
+      "power": 0.3,
+      "outcome": "rest"
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 315.0,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 38.75,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 8.75,
+      "power": 0.9,
+      "outcome": "rest"
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 8.75,
+      "power": 0.9,
+      "outcome": "rest"
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 352.75,
+      "power": 0.5,
+      "outcome": "rest"
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 9.75,
+      "power": 0.7,
+      "outcome": "cup"
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 308.75,
+      "power": 0.9,
+      "outcome": "cup"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 331.25,
+      "power": 0.55,
+      "outcome": "water"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 340.75,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 0.0,
+      "power": 0.5,
+      "outcome": "rest"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 45.0,
+      "power": 0.7,
+      "outcome": "rest"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 75.0,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 263.75,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 354.25,
+      "power": 0.5,
+      "outcome": "cup"
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angleDegrees": 340.5,
+      "power": 0.9,
+      "outcome": "cup"
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 342.75,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 323.75,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 338.75,
+      "power": 0.7,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 336.25,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 330.0,
+      "power": 0.9,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 285.0,
+      "power": 1,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 45.0,
+      "power": 1,
+      "outcome": "cup"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 333.5,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 0.0,
+      "power": 0.5,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 331.5,
+      "power": 0.15,
+      "outcome": "rest"
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 60.0,
+      "power": 1,
+      "outcome": "cup"
+    }
+  ]
+}

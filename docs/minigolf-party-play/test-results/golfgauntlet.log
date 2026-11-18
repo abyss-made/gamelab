@@ -1,0 +1,18 @@
+PASS Gauntlet is selectable; Coastal Club remains the default; invalid IDs stay rejected
+PASS Closed gates bounce real shots; raised gates leave an actual playable opening
+PASS Gate closures respect ball clearance, including untouched tee balls; out/holed balls do not block
+PASS Every Gauntlet layout has six safe tees and stable, finite shots in both gate configurations
+PASS Rounding a resting ball at the slime edge preserves a legal next shot position
+PASS A shot carries its locked gate state; the next turn changes gates identically for players and spectators
+PASS Moving sweepers collide during the shot, not just between turns
+PASS Motor poses use a shared clock and park at the exact authoritative phase
+PASS All sweeper phases settle safely, and impact payloads stay bounded
+PASS Motor discs keep clear of tees, cups, solid obstacles and other bumpers
+PASS A sweeper can hit a resting opponent during another player’s stroke
+PASS Turbo tiles redirect real paths, preserve faster shots, and fire once per ball per putt
+PASS Turbo artwork footprints stay on safe turf and away from tees and cups
+PASS Party turns rotate after each putt, skip finished players, and cannot be stolen during replay
+PASS Party turns rotate past a departed current player; traditional courses retain farthest-first play
+PASS Finish badges describe real contacts and never award extra scoring points
+PASS Recaps identify actual lead changes and ties without counting departed players
+golfgauntlet: 17 checks passed

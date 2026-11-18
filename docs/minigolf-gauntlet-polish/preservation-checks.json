@@ -1,0 +1,19 @@
+{
+  "baseline": "2e0dc0e29ae0e7253c4074666a416640b232323a",
+  "existingCoursesPreserved": [
+    "meadow",
+    "canyon",
+    "skyline",
+    "harbor",
+    "coastal"
+  ],
+  "originalTourPreserved": true,
+  "legacyPhysicsCases": 120,
+  "identicalFramesDurationsAndFinalBalls": true,
+  "changedServerFiles": [
+    "node-server/server/games/golf.js",
+    "node-server/server/games/golfcourses.js",
+    "node-server/server/games/physics.js"
+  ],
+  "otherGamesAndSecurityLoggingHealthShutdownUnchanged": true
+}

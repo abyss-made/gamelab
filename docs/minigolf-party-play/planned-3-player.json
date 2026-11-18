@@ -1,0 +1,957 @@
+{
+  "description": "Automated rules-level match; planned legal controls, not human observations.",
+  "players": 3,
+  "actions": [
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 9,
+      "power": 0.7,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 1,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 315,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 2,
+      "angleDegrees": 305,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 145,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 60,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 2,
+      "angleDegrees": 30,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 315,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 1,
+      "angleDegrees": 178.5,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 1,
+      "playerSlot": 2,
+      "angleDegrees": 184,
+      "power": 0.7,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 320,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 1,
+      "playerSlot": 0,
+      "angleDegrees": 258.5,
+      "power": 0.03,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "In the cup!",
+        "score": "In the cup!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 320,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 2,
+      "playerSlot": 2,
+      "angleDegrees": 0,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 345,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 1,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 2,
+      "playerSlot": 1,
+      "angleDegrees": 336.75,
+      "power": 0.25,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 2,
+      "playerSlot": 2,
+      "angleDegrees": 295.75,
+      "power": 0.15,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 2,
+      "playerSlot": 0,
+      "angleDegrees": 136.5,
+      "power": 0.15,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 3,
+      "playerSlot": 2,
+      "angleDegrees": 350,
+      "power": 0.7,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 15,
+      "power": 0.7,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 0,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 3,
+      "playerSlot": 2,
+      "angleDegrees": 23,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 3,
+      "playerSlot": 0,
+      "angleDegrees": 352,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 3,
+      "playerSlot": 1,
+      "angleDegrees": 281.75,
+      "power": 0.25,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 160,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 155,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 2,
+      "angleDegrees": 160,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 275,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 305,
+      "power": 0.55,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 1,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 2,
+      "angleDegrees": 335,
+      "power": 0.08,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 1,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 4,
+      "playerSlot": 0,
+      "angleDegrees": 7,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 4,
+      "playerSlot": 1,
+      "angleDegrees": 357.75,
+      "power": 0.25,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 4,
+      "playerSlot": 2,
+      "angleDegrees": 3,
+      "power": 0.55,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Birdie!",
+        "score": "Birdie!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 342.75,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 5,
+      "playerSlot": 2,
+      "angleDegrees": 335,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angleDegrees": 343.25,
+      "power": 0.55,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 3,
+      "finish": null
+    },
+    {
+      "hole": 5,
+      "playerSlot": 1,
+      "angleDegrees": 351.25,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 5,
+      "playerSlot": 2,
+      "angleDegrees": 339.25,
+      "power": 0.25,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 5,
+      "playerSlot": 0,
+      "angleDegrees": 323.5,
+      "power": 0.4,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 6,
+      "playerSlot": 2,
+      "angleDegrees": 290,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 290,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 290,
+      "power": 0.85,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 2,
+      "angleDegrees": 20,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 45,
+      "power": 1,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 20,
+      "power": 0.7,
+      "outcome": "rest",
+      "note": null,
+      "boosts": 0,
+      "motors": 1,
+      "finish": null
+    },
+    {
+      "hole": 6,
+      "playerSlot": 2,
+      "angleDegrees": 300.75,
+      "power": 0.55,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 6,
+      "playerSlot": 0,
+      "angleDegrees": 204,
+      "power": 0.08,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 0,
+      "motors": 0,
+      "finish": {
+        "title": "Eagle!",
+        "score": "Eagle!",
+        "style": "clean"
+      }
+    },
+    {
+      "hole": 6,
+      "playerSlot": 1,
+      "angleDegrees": 317.75,
+      "power": 1,
+      "outcome": "cup",
+      "note": null,
+      "boosts": 1,
+      "motors": 0,
+      "finish": {
+        "title": "Turbo finish!",
+        "score": "Eagle!",
+        "style": "turbo"
+      }
+    }
+  ],
+  "recaps": [
+    {
+      "hole": 1,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 5,
+          "par": 4,
+          "finish": {
+            "title": "In the cup!",
+            "score": "In the cup!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 3,
+          "par": 4,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 3,
+          "par": 4,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 3
+      }
+    },
+    {
+      "hole": 2,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 2,
+          "par": 3,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 2,
+          "par": 3,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 2,
+          "par": 3,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 2
+      }
+    },
+    {
+      "hole": 3,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 2
+      }
+    },
+    {
+      "hole": 4,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 3,
+          "par": 4,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 3,
+          "par": 4,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 3,
+          "par": 4,
+          "finish": {
+            "title": "Birdie!",
+            "score": "Birdie!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 3
+      }
+    },
+    {
+      "hole": 5,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 2,
+          "par": 4,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 2
+      }
+    },
+    {
+      "hole": 6,
+      "summary": [
+        {
+          "id": "p0",
+          "strokes": 3,
+          "par": 5,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        },
+        {
+          "id": "p1",
+          "strokes": 3,
+          "par": 5,
+          "finish": {
+            "title": "Turbo finish!",
+            "score": "Eagle!",
+            "style": "turbo"
+          }
+        },
+        {
+          "id": "p2",
+          "strokes": 3,
+          "par": 5,
+          "finish": {
+            "title": "Eagle!",
+            "score": "Eagle!",
+            "style": "clean"
+          }
+        }
+      ],
+      "recap": {
+        "leaderIds": [
+          "p1",
+          "p2"
+        ],
+        "lead": 2,
+        "changedLeader": false,
+        "bestHoleIds": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "bestHoleStrokes": 3
+      }
+    }
+  ],
+  "result": {
+    "type": "golf",
+    "course": "Party Gauntlet",
+    "pars": [
+      4,
+      3,
+      4,
+      4,
+      4,
+      5
+    ],
+    "standings": [
+      {
+        "id": "p1",
+        "name": "Nova",
+        "scores": [
+          3,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 15,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "p2",
+        "name": "Kai",
+        "scores": [
+          3,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 15,
+        "out": false,
+        "played": 6
+      },
+      {
+        "id": "p0",
+        "name": "Alex",
+        "scores": [
+          5,
+          2,
+          2,
+          3,
+          2,
+          3
+        ],
+        "total": 17,
+        "out": false,
+        "played": 6
+      }
+    ],
+    "winnerId": null,
+    "winners": [
+      "p1",
+      "p2"
+    ],
+    "tie": true,
+    "forfeit": false
+  },
+  "limits": 0
+}

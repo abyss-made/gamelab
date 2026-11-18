@@ -1,4 +1,50 @@
 /* Mini Golf owns its play surface; the rest of Playgrid keeps its existing layout. */
+.golf-club #gf-fine-toggle{display:none}
+@media(max-width:700px){
+ body[data-game=golf] .room .golf-club[data-course=gauntlet] .gf-controls{grid-template-columns:44px minmax(0,1fr) 80px;gap:10px;padding:12px}
+ .golf-club[data-course=gauntlet] #gf-fine-toggle{display:block;min-width:44px;min-height:44px;background:#214a5d;color:#edf9ff;border:1px solid #5c8190;border-radius:8px;font:700 11px system-ui}
+ .golf-club[data-course=gauntlet]:not(.golf-fine-open) .club-aim{display:none}
+ .golf-club[data-course=gauntlet] .club-aim{grid-column:1/-1}
+ body[data-game=golf] .room .golf-club[data-course=gauntlet] .club-arena{height:clamp(402px,calc(100svh - 368px),720px)}
+ .golf-club[data-course=gauntlet] .club-power>span{font-size:10px}
+ .golf-club #gf-fine-toggle:focus-visible{outline:3px solid #c4ff59;outline-offset:3px}
+}
+.golf-club .club-course-note{margin:0;padding:9px 20px;background:#172d47;color:#dce9b8;font-size:11px;line-height:1.5;border-top:1px solid #47617a}
+.golf-club[data-course=gauntlet] .club-brand{color:#c7fa62}.golf-club[data-course=gauntlet] .club-course h2{color:#fff7e9}
+.golf-club[data-course=gauntlet] .club-cup-marker{background:#382956ed;border-color:#d7c5ff}
+.golf-club #gf-trail{min-height:44px;padding:7px 12px;font-size:11px}
+.golf-club #gf-trail[aria-pressed=true]{color:#dfffad;background:#254d43;border-color:#baff45}
+.golf-club .club-close{color:#d7f398}
+.golf-club .club-shot-result{max-width:calc(100% - 32px);width:max-content;text-align:center;font-size:clamp(23px,3.4vw,42px);line-height:1.15;letter-spacing:-.035em}
+.golf-club .club-shot-result[data-style=turbo]{color:#dfff9b}
+.golf-club .club-shot-result[data-style=sweeper]{color:#ffe48a}
+/* The recap already contains the finish label. Keep the transient celebration
+   out of its text and controls as soon as the panel becomes visible. */
+.golf-club .club-arena:has(#gf-between:not([hidden])) .club-shot-result{display:none}
+.golf-club .club-recap-kicker{display:block;margin-bottom:8px;color:#bed0d5;font-size:10px;font-weight:800;letter-spacing:.14em}
+.golf-club #gf-between .club-lead{margin:10px 0 0;color:#d6f69e;font-size:12px;font-weight:700}
+.golf-club #gf-between li{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.golf-club #gf-between li small{display:block;font-size:10px;font-weight:400}
+.golf-club #gf-between li>b{text-align:right;font-size:20px;color:#f2ffd4}
+.golf-club #gf-between li>span{min-width:0;overflow-wrap:anywhere}
+.golf-club #gf-between .club-summary-me{color:#dcffa4}
+.golf-club #gf-between{max-height:calc(100% - 36px);overflow:auto}
+.golf-club .club-last-hole{max-width:650px;margin:12px 0;padding:18px;border:1px solid #476a7a;border-radius:14px;background:#123747;color:#e6f4e7}
+.golf-club .club-last-hole h3{margin:0;font-size:20px;letter-spacing:-.03em;line-height:1.25}
+.golf-club .club-last-hole p{margin:10px 0 0;font-size:12px;line-height:1.5;color:#b8ced3}
+.golf-club .club-last-hole .club-last-standing{color:#d3f69a}
+.golf-club .club-last-hole ul{list-style:none;margin:14px 0 0;padding:0}
+.golf-club .club-last-hole li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #426371}
+.golf-club .club-recap-person{display:flex;align-items:center;gap:10px;min-width:0}
+.golf-club .club-recap-person>span{min-width:0;overflow-wrap:anywhere}
+.golf-club .club-last-hole .avatar{width:30px;height:30px;flex-shrink:0}
+.golf-club .club-last-hole small{display:block;margin-top:3px;color:#b8ced3;font-size:11px;font-weight:400}
+.golf-club .club-last-hole li>b{font-size:24px;text-align:right;color:#ddff9f}
+.golf-club .club-last-hole .club-summary-me{color:#dcffa4}
+.golf-club #gf-score-back{min-height:44px;margin:8px 0;font-size:12px}
+.golf-club #gf-render-note{flex-basis:100%;color:#cce8c9;font-size:11px;line-height:1.5}
+.golf-club .club-arena{scroll-margin-top:72px}
+@media(max-width:700px){.golf-club .club-course-note{padding:8px 12px;font-size:10px}}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club){width:100%;max-width:1700px;grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'stage';grid-template-rows:auto auto;gap:8px;padding:8px 14px 18px}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club)>:is(#side,#room-chat){display:none}
 body[data-game=golf] .room[data-phase=game].golf-room-open:has(.golf-club){grid-template-columns:minmax(0,1fr) 260px;grid-template-areas:'bar bar' 'stage side' 'stage chat';grid-template-rows:auto auto 1fr}
