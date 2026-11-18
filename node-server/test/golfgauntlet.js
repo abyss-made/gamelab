@@ -101,7 +101,7 @@ test('Turbo artwork footprints stay on safe turf and away from tees and cups',()
 function partyRoom(course='gauntlet'){
  let now=1000000;const members=['Alex','Nova','Kai'].map((name,i)=>({id:String(i),name,score:0})),api={now:()=>now,seated:()=>members,member:id=>members.find(m=>m.id===id),sys(){},changed(){},toMember(){},end(){}};
  const st=G.create({...G.defaults,course});G.start(st,api);
- return {st,api,members,ready(){now=st.animUntil+1;},now:()=>now};
+ return {st,api,members,ready(){now=st.animUntil+1;},nextHole(){now=st.nextAt+1;G.tick(st,api,now);},now:()=>now};
 }
 test('Party turns rotate after each putt, skip finished players, and cannot be stolen during replay',()=>{
  const r=partyRoom();
@@ -131,5 +131,28 @@ test('Recaps identify actual lead changes and ties without counting departed pla
  const recap=Party.recap(rows,1);assert.deepEqual(recap.leaderIds,['b']);assert.equal(recap.lead,2);assert(recap.changedLeader);assert.deepEqual(recap.bestHoleIds,['b']);
  rows[0].scores[1]=4;const tied=Party.recap(rows,1);assert.equal(tied.leaderIds.length,2);assert(!tied.changedLeader);assert.equal(tied.lead,0);
  assert(!Party.recap(rows,0).changedLeader);assert.equal(Party.recap([{id:'pending',scores:[null]}],0),null);
+});
+test('The last completed recap survives the next hole without revealing a still-rolling finish',()=>{
+ const r=partyRoom('meadow');assert.equal(G.view(r.st,r.members[0],r.now()).lastHole,null);
+ for(let n=0;n<3;n++){
+  r.ready();const p=r.st.players[r.st.turn],h=C.BY_ID.meadow.holes[0];
+  G.onAction(r.st,r.members[r.st.turn],{type:'putt',angle:Math.atan2(h.cup[1]-p.y,h.cup[0]-p.x),power:.9},r.api);
+  assert(p.holed,'a legal straight putt should complete this verification hole');
+ }
+ assert.equal(r.st.phase,'between');assert.equal(G.view(r.st,r.members[0],r.now()).lastHole,null);
+ r.ready();const completed=JSON.parse(JSON.stringify(G.view(r.st,r.members[0],r.now()).lastHole));
+ assert.equal(completed.index,0);assert.equal(completed.name,'Straight Shot');assert(completed.summary.every(s=>s.strokes===1&&s.finish.title==='Hole in one!'));
+ assert(!JSON.stringify(completed).includes('frames'));r.nextHole();assert.equal(r.st.hole,1);assert.equal(r.st.last,null);
+ assert.deepEqual(G.view(r.st,r.members[0],r.now()).lastHole,completed);
+ G.onAction(r.st,r.members[r.st.turn],{type:'putt',angle:Math.PI,power:.03},r.api);
+ assert.deepEqual(G.view(r.st,{id:'spectator'},r.now()).lastHole,completed);
+ assert.equal(G.create(G.defaults).lastHole,null);
+});
+test('A saved recap records departures on that hole instead of inventing a stroke-limit finish',()=>{
+ const r=partyRoom('meadow'),cup=C.BY_ID.meadow.holes[0].cup;
+ G.onAction(r.st,r.members[0],{type:'putt',angle:0,power:.9},r.api);r.ready();
+ G.onAction(r.st,r.members[1],{type:'putt',angle:Math.PI,power:.03},r.api);G.onLeave(r.st,'1',r.api);r.ready();
+ const p=r.st.players[2];G.onAction(r.st,r.members[2],{type:'putt',angle:Math.atan2(cup[1]-p.y,cup[0]-p.x),power:.9},r.api);r.ready();
+ const row=G.view(r.st,r.members[0],r.now()).lastHole.summary.find(s=>s.id==='1');assert(row.out);assert.equal(row.strokes,1);assert.equal(row.finish,null);
 });
 console.log(`golfgauntlet: ${checks} checks passed`);

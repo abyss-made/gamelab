@@ -29,6 +29,21 @@
 .golf-club #gf-between li>span{min-width:0;overflow-wrap:anywhere}
 .golf-club #gf-between .club-summary-me{color:#dcffa4}
 .golf-club #gf-between{max-height:calc(100% - 36px);overflow:auto}
+.golf-club .club-last-hole{max-width:650px;margin:12px 0;padding:18px;border:1px solid #476a7a;border-radius:14px;background:#123747;color:#e6f4e7}
+.golf-club .club-last-hole h3{margin:0;font-size:20px;letter-spacing:-.03em;line-height:1.25}
+.golf-club .club-last-hole p{margin:10px 0 0;font-size:12px;line-height:1.5;color:#b8ced3}
+.golf-club .club-last-hole .club-last-standing{color:#d3f69a}
+.golf-club .club-last-hole ul{list-style:none;margin:14px 0 0;padding:0}
+.golf-club .club-last-hole li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #426371}
+.golf-club .club-recap-person{display:flex;align-items:center;gap:10px;min-width:0}
+.golf-club .club-recap-person>span{min-width:0;overflow-wrap:anywhere}
+.golf-club .club-last-hole .avatar{width:30px;height:30px;flex-shrink:0}
+.golf-club .club-last-hole small{display:block;margin-top:3px;color:#b8ced3;font-size:11px;font-weight:400}
+.golf-club .club-last-hole li>b{font-size:24px;text-align:right;color:#ddff9f}
+.golf-club .club-last-hole .club-summary-me{color:#dcffa4}
+.golf-club #gf-score-back{min-height:44px;margin:8px 0;font-size:12px}
+.golf-club #gf-render-note{flex-basis:100%;color:#cce8c9;font-size:11px;line-height:1.5}
+.golf-club .club-arena{scroll-margin-top:72px}
 @media(max-width:700px){.golf-club .club-course-note{padding:8px 12px;font-size:10px}}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club){width:100%;max-width:1700px;grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'stage';grid-template-rows:auto auto;gap:8px;padding:8px 14px 18px}
 body[data-game=golf] .room[data-phase=game]:has(.golf-club)>:is(#side,#room-chat){display:none}

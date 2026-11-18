@@ -125,7 +125,7 @@ function simulatePutt(hole, x, y, angle, power, others=[], protectedBalls=[], mo
 const courseOf = (st) => COURSES.BY_ID[st.settings.course] || COURSES.BY_ID.meadow;
 
 function create(settings) {
-  return { settings: { ...settings }, players: [], hole: 0, shots: 0, phase: 'play', turn: -1, anim: null, animUntil: 0, animStart: 0, nextAt: 0, deadline: 0, over: false, last: null, pendingEnd: false };
+  return { settings: { ...settings }, players: [], hole: 0, shots: 0, phase: 'play', turn: -1, anim: null, animUntil: 0, animStart: 0, nextAt: 0, deadline: 0, over: false, last: null, lastHole: null, pendingEnd: false };
 }
 
 const live = (st) => st.players.filter((p) => !p.out);
@@ -141,6 +141,7 @@ function start(st, api) {
 }
 
 function beginHole(st, api, idx) {
+  if (st.phase === 'between') st.lastHole = completedHole(st);
   const hole = courseOf(st).holes[idx];
   st.hole = idx;
   st.phase = 'play';
@@ -148,6 +149,7 @@ function beginHole(st, api, idx) {
   st.animUntil = 0;
   st.motorTime = 0;
   st.recap = null;
+  st.last = null;
   const occupied=[];
   for (const p of st.players) {
     const pos=startPosition(hole,occupied);occupied.push(pos);
@@ -189,9 +191,16 @@ function endHole(st, api, ms) {
   // so later holes show "–" rather than a misleading 0.
   for (const p of st.players) if (!p.out) p.scores[st.hole] = p.strokes;
   const hole = courseOf(st).holes[st.hole];
-  st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par, finish: p.finish }));
+  st.summary = st.players.map((p) => ({ id: p.id, strokes: p.scores[st.hole], par: hole.par, finish: p.finish, out: p.out }));
   st.recap = Party.recap(st.players, st.hole);
   api.changed();
+}
+
+// Keep only the most recent completed hole. No replay frames or private room
+// data are retained, and a new match starts with an empty recap.
+function completedHole(st) {
+  const hole = courseOf(st).holes[st.hole];
+  return { index: st.hole, name: hole.name, par: hole.par, summary: st.summary, recap: st.recap };
 }
 
 function finishCourse(st, api, forfeit) {
@@ -368,6 +377,7 @@ function view(st, m, now) {
     maxStrokes: st.settings.maxStrokes,
     summary: st.phase === 'between' ? st.summary : null,
     recap: st.phase === 'between' ? st.recap : null,
+    lastHole: st.phase === 'between' && now >= st.animUntil ? completedHole(st) : st.lastHole,
     turnOrder: course.id === 'gauntlet' ? 'round-robin' : 'farthest',
     players: st.players.map((p) => ({ id: p.id, name: p.name, avatar: p.avatar, x: p.x, y: p.y, placed: !!p.placed, strokes: p.strokes, holed: p.holed, finish: p.finish, scores: p.scores, total: totalOf(p) + (p.scores[st.hole] === null ? p.strokes : 0), out: p.out })),
     timeLeft: st.deadline && st.phase === 'play' ? Math.max(0, st.deadline - now) : null,

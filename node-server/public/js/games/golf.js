@@ -33,6 +33,11 @@ GameUI.golf = (() => {
   let lastTrail = null;
   let showTrail = false;
   let readyTurn = '';
+  let renderReady = false;
+  let renderGeneration = 0;
+  let renderLoadT = 0;
+  let renderCleanup = null;
+  let renderNotice = '';
 
   const assets=new Map(),patterns=new Map();
   function clubImage(name,ext='png'){
@@ -51,7 +56,59 @@ GameUI.golf = (() => {
   const deg = (r) => ((((r * 180) / Math.PI) % 360) + 360) % 360;
   const colorOf = (i) => COLORS[i % COLORS.length];
   const me = () => (g ? g.players.findIndex((p) => p.id === S.you) : -1);
-  const canPutt = () => g && g.phase === "play" && g.turnId === S.you && performance.now() >= busyUntil && !S.lastResult;
+  const canPutt = () => renderReady && g && g.phase === "play" && g.turnId === S.you && performance.now() >= busyUntil && !S.lastResult;
+
+  function rendererReady(mode) {
+    if (!root || renderReady) return;
+    renderReady = true;
+    clearTimeout(renderLoadT);
+    root.dataset.renderer = mode;
+    canvas.setAttribute('aria-busy', 'false');
+    paintText();
+    syncControls();
+  }
+
+  function useCompatibilityView(reason) {
+    if (!root || !canvas) return;
+    const restoreFocus = document.activeElement === canvas;
+    renderGeneration++;
+    renderReady = false;
+    clearTimeout(renderLoadT);
+    renderCleanup?.(); renderCleanup = null;
+    cancelPull();
+    placing=false;teeDraft=null;
+    const oldScene = scene3d; scene3d = null;
+    if (oldScene) oldScene.dispose();
+    const replacement = canvas.cloneNode(false);
+    replacement.style.width = ''; replacement.style.height = '';
+    replacement.classList.remove('portrait');
+    canvas.replaceWith(replacement); canvas = replacement;
+    ctx = canvas.getContext('2d'); patterns.clear();
+    root.dataset.renderer = ctx ? 'loading' : 'error';
+    renderNotice = !ctx ? '' : reason === 'lost' ? 'You can keep playing in the simpler course view.' : 'A simpler course view is available with the same controls.';
+    root.querySelector('#gf-input-help').textContent = 'Top-down view. Tap to aim, or pull back from your ball to putt.';
+    bindCanvas(); fit();
+    if (restoreFocus) canvas.focus({preventScroll:true});
+    paintText(); syncControls();
+  }
+
+  function prepareRenderer() {
+    const mounted = root, target = canvas, generation = ++renderGeneration;
+    const current = () => root === mounted && generation === renderGeneration;
+    const onLost = event => {
+      event.preventDefault();
+      if (current()) useCompatibilityView('lost');
+    };
+    target.addEventListener('webglcontextlost', onLost);
+    renderCleanup = () => target.removeEventListener('webglcontextlost', onLost);
+    // Network-delayed graphics must not leave a party member unable to play.
+    renderLoadT = setTimeout(() => { if (current() && !renderReady) useCompatibilityView('slow'); }, 6000);
+    GolfClubScene.create(target, root.querySelector('.club-arena')).then(scene => {
+      if (!current()) { scene.dispose(); return; }
+      scene3d = scene; fit();
+      // Unlock only after frame() has displayed the actual current hole.
+    }).catch(() => { if (current()) useCompatibilityView('unavailable'); });
+  }
 
   function size() {
     const rect = canvas.getBoundingClientRect();
@@ -168,7 +225,14 @@ GameUI.golf = (() => {
     if(scene3d){
       fit();const animating=!!(g.anim&&now-animT0<g.anim.duration*1000);
       const positions=g.players.map(p=>({p,pos:p.out||p.holed&&!(animating&&(g.anim.by===p.id||g.anim.paths?.[p.id]))?null:ballAt(p,now)}));
-      scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',aiming:gesture?.mode==='pull'||gesture?.mode==='aim',canPutt:canPutt(),placing,teeDraft,animating,trail:lastTrail,showTrail,receivedShotTime,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});return;
+      try {
+        scene3d.frame({g,now,positions,aim,power,mine:S.you,pulling:gesture?.mode==='pull',aiming:gesture?.mode==='pull'||gesture?.mode==='aim',canPutt:canPutt(),placing,teeDraft,animating,trail:lastTrail,showTrail,receivedShotTime,shotTime:g.anim?Math.max(0,(now-animT0)/1000):0});
+        if(scene3d?.key===holeKey && scene3d.ready)rendererReady('webgl');
+      } catch (error) {
+        console.warn('Mini Golf is switching to its compatibility view.', error);
+        useCompatibilityView('unavailable');
+      }
+      return;
     }
     if(!ctx)return;
     const h = g.hole;
@@ -191,6 +255,7 @@ GameUI.golf = (() => {
       ctx.beginPath(); ctx.arc(lx, ly, R, 0, 7); ctx.strokeStyle = "#f2e8cf"; ctx.lineWidth = 3; ctx.stroke();
     }
     ctx.setTransform(1, 0, 0, 1, 0, 0);
+    rendererReady('2d');
   }
 
   function shownGates(now){return g.anim&&now-animT0<g.anim.duration*1000?(g.anim.gates||g.hole.gates||[]):(g.hole.gates||[]);}
@@ -379,7 +444,7 @@ GameUI.golf = (() => {
     return { x: sx * g.size.w, y: sy * g.size.h };
   }
 
-  const canPlace = () => g && g.phase==='play' && performance.now() >= busyUntil && !S.lastResult && myBall() && !myBall().out && myBall().strokes===0;
+  const canPlace = () => renderReady && g && g.phase==='play' && performance.now() >= busyUntil && !S.lastResult && myBall() && !myBall().out && myBall().strokes===0;
   function courseScreen(x,y,elevation=6){
     if(scene3d)return scene3d.project(x,y,elevation);
     const {rect,rot}=size();return{x:rect.left+(rot?y/g.size.h:x/g.size.w)*rect.width,y:rect.top+(rot?(g.size.w-x)/g.size.w:y/g.size.h)*rect.height};
@@ -417,6 +482,10 @@ GameUI.golf = (() => {
     if(!gesture||gesture.id!==ev.pointerId)return;
     if(ev.type==='pointerup'){
       const fire=gesture.mode==='pull'&&gesture.distance>=12;
+      if(gesture.mode==='aim'&&gesture.distance<12){
+        const point=toCourse(ev),b=myBall();
+        if(b&&Math.hypot(point.x-b.x,point.y-b.y)>=4)aim=Math.atan2(point.y-b.y,point.x-b.x);
+      }
       if(!fire&&gesture.mode==='pull'){aim=gesture.aim;power=gesture.power;}
       gesture=null;dragging=false;loupe=null;root.dataset.gesture='idle';
       if(canvas.hasPointerCapture(ev.pointerId))canvas.releasePointerCapture(ev.pointerId);
@@ -467,17 +536,17 @@ GameUI.golf = (() => {
     root.innerHTML = `<header class="club-hud"><div class="club-course"><span class="club-brand">PLAYGRID GOLF CLUB</span><h2 id="gf-title"></h2><span id="gf-eyebrow"></span></div><div class="gf-score" id="gf-score"></div><div class="club-hud-actions"><button type="button" class="btn btn-ghost" id="gf-scores-toggle" aria-controls="gf-score-details" aria-expanded="false">Scores</button><button type="button" class="btn btn-ghost" id="gf-room-toggle" aria-expanded="false" aria-controls="side room-chat">Room & chat</button></div></header>
       <div class="club-arena">
         <div class="club-camera-controls" role="group" aria-label="Course camera"><button type="button" id="gf-view" aria-pressed="false" aria-label="Show entire hole">Overview</button><button type="button" id="gf-center" aria-label="Follow the current ball">Center</button><button type="button" data-camera-rotate="-1" aria-label="Rotate camera left">↶</button><button type="button" data-camera-rotate="1" aria-label="Rotate camera right">↷</button><button type="button" data-camera-zoom="1" aria-label="Zoom camera in">+</button><button type="button" data-camera-zoom="-1" aria-label="Zoom camera out">−</button></div>
-        <div class="gf-wrap"><canvas id="gf-canvas" class="gf-canvas" tabindex="0" role="application" aria-label="Mini Golf course. Drag back from your ball and release to putt. Drag elsewhere to aim without shooting. Arrow keys fine tune aim and power. Enter putts. Escape cancels a shot." aria-describedby="gf-input-help"></canvas></div>
+        <div class="gf-wrap"><canvas id="gf-canvas" class="gf-canvas" tabindex="0" role="application" aria-busy="true" aria-label="Mini Golf course. Tap the course to aim without shooting. Drag back from your ball and release to putt. Arrow keys fine tune aim and power. Enter putts. Escape cancels a shot." aria-describedby="gf-input-help"></canvas></div>
         <div class="club-standings" id="gf-players" aria-label="Players and strokes"></div>
         <div class="gf-between card" id="gf-between" hidden></div>
         <div class="ttt-status" id="gf-status" aria-live="polite"></div>
-        <p class="club-input-help" id="gf-input-help">Drag back from your ball. Release to putt.<span> Or set aim and power below.</span></p>
+        <p class="club-input-help" id="gf-input-help">Tap to aim, or pull back from your ball to putt.<span> You can also set aim and power below.</span></p>
       </div>
       <div class="gf-controls" id="gf-controls"><div class="club-aim" id="gf-aim-controls"><span>Aim <b id="gf-aim-val"></b></span><div class="pl-fine-row"><button type="button" class="btn btn-ghost" data-fine="-1" aria-label="Aim half a degree left">−</button><input type="range" id="gf-aim" min="0" max="360" step="0.25" aria-label="Aim angle in degrees"><button type="button" class="btn btn-ghost" data-fine="1" aria-label="Aim half a degree right">+</button></div></div><button type="button" id="gf-fine-toggle" aria-controls="gf-aim-controls" aria-expanded="false" aria-label="Show precise aim controls">Aim</button>
         <label class="club-power"><span>Shot power <b id="gf-pow-val"></b></span><input type="range" id="gf-pow" min="3" max="100" step="1" aria-label="Putt power percent"></label><button type="button" class="btn" id="gf-putt">Putt</button><button type="button" class="btn btn-ghost" id="gf-cancel" hidden>Cancel shot</button>
       </div>
-      <p class="club-course-note" id="gf-course-note" hidden></p><div class="club-utility"><button type="button" class="btn btn-ghost btn-small" id="gf-place">Choose tee position</button><button type="button" class="btn btn-ghost btn-small" id="gf-trail" aria-pressed="false" aria-label="Show your actual last-shot trail" disabled>Your last shot</button><small id="gf-place-note" role="status"></small><span class="club-authority">Lowest score wins · ${a.esc('2–6 players')}</span></div>
-      <details class="club-scorecard" id="gf-score-details"><summary>Course scorecard</summary><div class="gf-card" id="gf-card"></div></details>`;
+      <p class="club-course-note" id="gf-course-note" hidden></p><div class="club-utility"><button type="button" class="btn btn-ghost btn-small" id="gf-place">Choose tee position</button><button type="button" class="btn btn-ghost btn-small" id="gf-trail" aria-pressed="false" aria-label="Show your actual last-shot trail" disabled>Your last shot</button><small id="gf-place-note" role="status"></small><small id="gf-render-note" role="status" hidden></small><span class="club-authority">Lowest score wins · ${a.esc('2–6 players')}</span></div>
+      <details class="club-scorecard" id="gf-score-details"><summary>Scores & last hole</summary><section class="club-last-hole" id="gf-last-hole" aria-label="Last completed hole" hidden></section><button type="button" class="btn btn-ghost" id="gf-score-back">Back to course</button><div class="gf-card" id="gf-card"></div></details>`;
     root.dataset.ten='golf';
     GameUI.scenes.mount(root,'golf');
     stage.appendChild(root);
@@ -488,20 +557,18 @@ GameUI.golf = (() => {
       if(panel.open)panel.scrollIntoView({block:'nearest',behavior:'instant'});
     });
     root.querySelector('#gf-score-details').addEventListener('toggle',e=>root.querySelector('#gf-scores-toggle').setAttribute('aria-expanded',String(e.target.open)));
+    root.querySelector('#gf-score-back').addEventListener('click',()=>{
+      root.querySelector('#gf-score-details').open=false;
+      root.querySelector('.club-arena').scrollIntoView({block:'nearest',behavior:'instant'});
+      canvas.focus({preventScroll:true});
+    });
     root.querySelector('#gf-room-toggle').addEventListener('click', e => {
       const open=root.closest('.room').classList.toggle('golf-room-open');e.currentTarget.setAttribute('aria-expanded',String(open));fit();
     });
     root.querySelector('#gf-cancel').addEventListener('click',cancelPull);
     root.querySelector('#gf-trail').addEventListener('click',()=>{showTrail=!showTrail;syncControls();});
     canvas = root.querySelector("#gf-canvas");
-    root.dataset.renderer='loading';const mounted=root;
-    GolfClubScene.create(canvas,root.querySelector('.club-arena')).then(scene=>{
-      if(root!==mounted){scene.dispose();return;}scene3d=scene;root.dataset.renderer='webgl';fit();
-    }).catch(()=>{
-      if(root!==mounted)return;
-      const replacement=canvas.cloneNode(false);canvas.replaceWith(replacement);canvas=replacement;ctx=canvas.getContext('2d');root.dataset.renderer='2d';bindCanvas();fit();
-      root.querySelector('#gf-input-help').textContent='Top-down compatibility view. Drag back from your ball and release to putt.';
-    });
+    renderReady=false;renderNotice='';root.dataset.renderer='loading';prepareRenderer();
     root.querySelector('#gf-view').addEventListener('click',e=>{if(!scene3d)return;scene3d.toggleView();syncCameraControl();});
     root.querySelector('#gf-center').addEventListener('click',()=>{if(scene3d){scene3d.center();syncCameraControl();}});
     root.querySelectorAll('[data-camera-rotate]').forEach(b=>b.addEventListener('click',()=>scene3d?.rotate(Number(b.dataset.cameraRotate)*Math.PI/4)));
@@ -534,7 +601,7 @@ GameUI.golf = (() => {
   function syncControls() {
     if (!root || !g) return;
     const mine = canPutt();
-    const trailButton=root.querySelector('#gf-trail');trailButton.hidden=me()<0;trailButton.disabled=!lastTrail||performance.now()<busyUntil;trailButton.setAttribute('aria-pressed',String(showTrail));trailButton.setAttribute('aria-label',(showTrail?'Hide':'Show')+' your actual last-shot trail');
+    const trailButton=root.querySelector('#gf-trail');trailButton.hidden=me()<0;trailButton.disabled=!renderReady||!lastTrail||performance.now()<busyUntil;trailButton.setAttribute('aria-pressed',String(showTrail));trailButton.setAttribute('aria-label',(showTrail?'Hide':'Show')+' your actual last-shot trail');
     const turnKey=holeKey+':'+(g.shotNumber??g.anim?.shot??0);
     if(mine&&readyTurn!==turnKey){readyTurn=turnKey;if(g.course.id==='gauntlet')FX.animate(root.querySelector('#gf-putt'),[{boxShadow:'0 0 0 0 #c5ff4588'},{boxShadow:'0 0 0 9px #c5ff4500'}],450);}
     root.querySelector('#gf-cancel').hidden=!gesture||gesture.mode!=='pull';
@@ -572,14 +639,15 @@ GameUI.golf = (() => {
   }
 
   function statusText() {
+    if(!renderReady)return root.dataset.renderer==='error'?'The course could not be displayed. Reload the page to reconnect.':'Preparing the course… Controls unlock when it is visible.';
     const turn = g.players.find((p) => p.id === g.turnId);
     const holeName = app.esc(g.hole.name);
     const head = `Hole ${g.holeIndex + 1}/${g.course.holes}: <b>${holeName}</b> · par ${g.hole.par}`;
     if(gesture?.mode==='pull')return `<b>Release to putt</b> · ${power}% power. Escape cancels.`;
-    if (g.phase === "between") return `${head} · hole complete`;
     if (performance.now() < busyUntil) return `${head} · ball rolling...`;
+    if (g.phase === "between") return `${head} · hole complete`;
     if (!turn) return head;
-    const who = turn.id === S.you ? "<b>Your putt!</b> Drag back from your ball and release, or aim and press Putt." : `Waiting for <b>${app.esc(turn.name)}</b> (stroke ${turn.strokes + 1}).`;
+    const who = turn.id === S.you ? "<b>Your putt!</b> Tap the course to aim, or pull back from your ball and release." : `Waiting for <b>${app.esc(turn.name)}</b> (stroke ${turn.strokes + 1}).`;
     const l = g.last;
     const extra = l && l.outcome === "water" ? ` <span class="warn-text">Last ball went in the ${g.course.id==='gauntlet'?'slime':'water'} (+1).</span>` : l?.nearCup ? ' <span class="club-close">So close — right by the cup.</span>' : '';
     return `${head}<br>${who}${extra}`;
@@ -595,6 +663,7 @@ GameUI.golf = (() => {
     root.querySelector("#gf-eyebrow").textContent = `${g.course.name || "Course"} · Hole ${g.holeIndex + 1} / ${g.course.holes}`;
     root.querySelector("#gf-title").textContent = g.hole.name;
     root.dataset.course=g.course.id;
+    const renderNote=root.querySelector('#gf-render-note');renderNote.hidden=!renderNotice;renderNote.textContent=renderNotice;
     root.querySelector('#gf-course-note').hidden=g.course.id!=='gauntlet';
     const motorHint=(g.hole.motors||[]).length?'Sweepers move for up to 2.4s per putt. ':'';
     const boostHint=(g.hole.boosts||[]).length?'Lime turbo tiles launch along the arrows. ':'';
@@ -618,11 +687,27 @@ GameUI.golf = (() => {
       const recap=g.recap,leader=recap?.leaderIds.length===1?g.players.find(p=>p.id===recap.leaderIds[0]):null;
       const lead=leader?`${app.esc(leader.name)} ${recap.changedLeader?'takes the lead':'leads'} · ${recap.lead} ahead`:recap?'Tied at the top · every stroke counts':'';
       bt.hidden = false;
-      bt.innerHTML = `<span class="club-recap-kicker">HOLE ${g.holeIndex + 1} COMPLETE</span><b>${mb?.finish?app.esc(mb.finish.score):'On to the next!'}</b>${lead?`<p class="club-lead">${lead}</p>`:''}<ul>${rows.join("")}</ul><small class="muted">${g.holeIndex + 1 >= g.course.holes ? "Final results next..." : "Next hole starting..."}</small>`;
+      bt.innerHTML = `<span class="club-recap-kicker">HOLE ${g.holeIndex + 1} COMPLETE</span><b>${mb?.finish?app.esc(mb.finish.score):'On to the next!'}</b>${lead?`<p class="club-lead">${lead}</p>`:''}<ul>${rows.join("")}</ul><small class="muted">${g.holeIndex + 1 >= g.course.holes ? "Final results next..." : "Next hole starting… Find this recap in Scores."}</small>`;
     } else {
       bt.hidden = true;
     }
     root.querySelector("#gf-card").innerHTML = scoreCard();
+    paintLastHole();
+  }
+
+  function paintLastHole(){
+    const panel=root.querySelector('#gf-last-hole');
+    const h=g.phase==='between'&&performance.now()>=busyUntil?{index:g.holeIndex,name:g.hole.name,par:g.hole.par,summary:g.summary,recap:g.recap}:g.lastHole;
+    panel.hidden=!h;
+    if(!h){panel.replaceChildren();return;}
+    const rows=(h.summary||[]).map(s=>{
+      const p=g.players.find(p=>p.id===s.id);if(!p||s.strokes===null)return '';
+      const delta=s.strokes-h.par;
+      return `<li class="${p.id===S.you?'club-summary-me':''}"><span class="club-recap-person">${app.avatarHTML(p.avatar)}<span>${app.esc(p.name)}${p.out?' (left)':''}<small>${s.finish?app.esc(s.finish.title):s.out?'Left this hole':s.strokes>=g.maxStrokes?'Stroke limit reached':'Hole score'}</small></span></span><b>${s.strokes}<small>${delta===0?'par':delta>0?'+'+delta:delta}</small></b></li>`;
+    }).join('');
+    const leader=h.recap?.leaderIds.length===1?g.players.find(p=>p.id===h.recap.leaderIds[0]):null;
+    const standing=leader?`${app.esc(leader.name)} led by ${h.recap.lead} after this hole.`:h.recap?'The lead was tied after this hole.':'';
+    panel.innerHTML=`<span class="club-recap-kicker">LAST COMPLETED HOLE · PAR ${h.par}</span><h3>Hole ${h.index+1} · ${app.esc(h.name)}</h3>${standing?`<p class="club-last-standing">${standing}</p>`:''}<ul>${rows}</ul><p>The round keeps moving while you check scores.</p>`;
   }
 
   function update(state) {
@@ -635,6 +720,7 @@ GameUI.golf = (() => {
     const key = g.course.id + ":" + g.holeIndex;
     if (key !== holeKey) {
       holeKey = key; placing=false;teeDraft=null;lastTrail=null;showTrail=false;readyTurn='';
+      renderReady=false;if(root.dataset.renderer!=='error')root.dataset.renderer='loading';canvas.setAttribute('aria-busy','true');
       const b = myBall();
       aim = b ? Math.atan2(g.hole.cup[1] - b.y, g.hole.cup[0] - b.x) : 0;
       animKey = -1;
@@ -667,6 +753,7 @@ GameUI.golf = (() => {
   function unmount() {
     visual.reset();
     gesture=null;dragging=false;
+    renderGeneration++;clearTimeout(renderLoadT);renderCleanup?.();renderCleanup=null;renderReady=false;renderNotice='';
     if(scene3d){scene3d.dispose();scene3d=null;}
     ctx=null;
     root?.closest('.room')?.classList.remove('golf-room-open');
